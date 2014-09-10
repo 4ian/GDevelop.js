@@ -7,7 +7,10 @@
 #include "GDCore/TinyXml/tinyxml.h"
 #include "GDCpp/CppPlatform.h"
 #include "GDCore/PlatformDefinition/Platform.h"
+#include "GDCore/PlatformDefinition/Platform.h"
 #include "GDJS/JsPlatform.h"
+
+#include "GDCore/PlatformDefinition/InitialInstancesContainer.h"
 
 using namespace emscripten;
 using namespace gdjs;
@@ -35,6 +38,26 @@ namespace gd {
 	}
 };
 
+
+class IIFunctor : public gd::InitialInstanceFunctor
+{
+public:
+    IIFunctor() {};
+    virtual ~IIFunctor() {};
+
+    virtual void operator()(gd::InitialInstance * instance) {};
+};
+
+void Test()
+{
+	InitialInstancesContainer container;
+	InitialInstance & instance = container.InsertNewInitialInstance();
+	container.MoveInstancesToLayer("", "AnotherLayer");
+
+	IIFunctor functor;
+	container.IterateOverInstancesWithZOrdering(functor, "AnotherLayer");
+}
+
 /**
  * \brief A class providing helper functions related to projects.
  */
@@ -55,4 +78,5 @@ EMSCRIPTEN_BINDINGS(GD) {
 	  	;
 
     function("initializePlatforms", &InitializePlatforms);
+    function("test", &Test);
 }
