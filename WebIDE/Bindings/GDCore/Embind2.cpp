@@ -239,6 +239,8 @@ EMSCRIPTEN_BINDINGS(gd_InstructionMetadata) {
         .function("setCanHaveSubInstructions", &InstructionMetadata::SetCanHaveSubInstructions)
         .function("getParameter", &InstructionMetadata_GetParameter, allow_raw_pointers())
         .function("getParametersCount", &InstructionMetadata::GetParametersCount)
+        .function("getUsageComplexity", &InstructionMetadata::GetUsageComplexity)
+        .function("isHidden", &InstructionMetadata::IsHidden)
         ;
 }
 

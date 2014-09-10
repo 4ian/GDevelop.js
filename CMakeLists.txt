@@ -63,6 +63,7 @@ add_definitions( -Dlinux )
 add_definitions( -DLINUX )
 add_definitions( -DGD_API= )
 add_definitions( -DGD_CORE_API= )
+add_definitions( -DGD_EXTENSION_API= )
 
 #The target
 ###
