@@ -12,6 +12,8 @@ if(NOT EMSCRIPTEN)
 	error("You're trying to compile the WebIDE without emscripten.")
 endif()
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wno-warn-absolute-paths --bind" )
+SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} --memory-init-file 0" ) #Less efficient, but output a single JS file
+SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -s ASSERTIONS=2" ) #Debug
 
 #Common directories:
 ###
@@ -63,6 +65,7 @@ add_definitions( -Dlinux )
 add_definitions( -DLINUX )
 add_definitions( -DGD_API= )
 add_definitions( -DGD_CORE_API= )
+add_definitions( -DGD_EXTENSION_API= )
 
 #The target
 ###

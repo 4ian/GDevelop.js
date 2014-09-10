@@ -146,7 +146,7 @@ EMSCRIPTEN_BINDINGS(gd_BaseEvent) {
     class_<BaseEvent>("BaseEvent")
         .constructor<>()
         .smart_ptr< boost::shared_ptr<BaseEvent> >("BaseEventSPtr")
-        .function("clone", &BaseEvent::Clone)
+        .function("clone", &BaseEvent::Clone, allow_raw_pointers())
         .function("getType", &BaseEvent::GetType).function("setType", &BaseEvent::SetType)
 	    .function("isExecutable", &BaseEvent::IsExecutable)
 	    .function("canHaveSubEvents", &BaseEvent::CanHaveSubEvents)
@@ -207,7 +207,6 @@ gd::BaseEvent * EventsList_InsertNewEvent(EventsList & l, gd::Project & p, const
 EMSCRIPTEN_BINDINGS(gd_EventsList) {
     class_<EventsList>("EventsList")
         .constructor<>()
-        .function("clone", &EventsList::Clone, allow_raw_pointers())
         .function("insertEvent", &EventsList_InsertEvent, allow_raw_pointers())
         .function("insertNewEvent", &EventsList_InsertNewEvent, allow_raw_pointers())
         .function("insertEvents", &EventsList::InsertEvents)
