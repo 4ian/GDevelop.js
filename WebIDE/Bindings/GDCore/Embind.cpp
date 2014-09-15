@@ -271,6 +271,40 @@ EMSCRIPTEN_BINDINGS(gd_Layer) {
         ;
 }
 
+EMSCRIPTEN_BINDINGS(gd_Resource) {
+    class_<Resource>("Resource")
+        .constructor<>()
+        .function("clone", &Resource::Clone, allow_raw_pointers())
+        .function("getName", &Resource::GetName)
+        .function("setName", &Resource::SetName)
+        .function("getKind", &Resource::GetKind)
+        .function("setKind", &Resource::SetKind)
+        .function("isUserAdded", &Resource::IsUserAdded)
+        .function("setUserAdded", &Resource::SetUserAdded)
+        .function("useFile", &Resource::UseFile)
+        .function("getFile", &Resource::GetFile)
+        .function("setFile", &Resource::SetFile)
+        .function("getAbsoluteFile", &Resource::GetAbsoluteFile)
+        .function("serializeTo", &Resource::SerializeTo)
+        .function("unserializeFrom", &Resource::UnserializeFrom)
+        //Properties, for convenience only:
+        .property("name", &Resource::GetName, &Resource::SetName)
+        .property("kind", &Resource::GetKind, &Resource::SetKind)
+        ;
+}
+
+namespace gd { //Workaround for emscripten not supporting methods returning a reference (objects are returned by copy in JS).
+ImageResource * AsImageResource(gd::Resource * r) { return static_cast<ImageResource *>(r); }
+}
+
+EMSCRIPTEN_BINDINGS(gd_ImageResource) {
+    class_<ImageResource, base<Resource> >("ImageResource")
+        .constructor<>()
+        ;
+
+    function("asImageResource", &AsImageResource, allow_raw_pointers());
+}
+
 namespace gd { //Workaround for emscripten not supporting methods returning a reference (objects are returned by copy in JS).
 gd::VariablesContainer * InitialInstance_GetVariables(gd::InitialInstance & i) { return &i.GetVariables(); }
 }

@@ -55,6 +55,7 @@ EMSCRIPTEN_BINDINGS(gd_SpriteObject) {
         .function("setLoop", &Direction::SetLoop)
         .function("getTimeBetweenFrames", &Direction::GetTimeBetweenFrames)
         .function("setTimeBetweenFrames", &Direction::SetTimeBetweenFrames)
+        .function("swapSprites", &Direction::SwapSprites)
         ;
 
     class_<Animation>("Animation")
