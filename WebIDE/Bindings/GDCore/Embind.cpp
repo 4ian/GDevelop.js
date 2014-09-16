@@ -101,6 +101,7 @@ namespace gd { //Workaround for emscripten not supporting methods returning a re
 gd::Layout * Project_GetLayout(gd::Project & project, const std::string & name) { return &project.GetLayout(name); }
 gd::Layout * Project_GetLayoutAt(gd::Project & project, unsigned int i) { return &project.GetLayout(i); }
 gd::VariablesContainer * Project_GetVariables(gd::Project & project) { return &project.GetVariables(); }
+gd::ResourcesManager * Project_GetResourcesManager(gd::Project & project) { return &project.GetResourcesManager(); }
 gd::Layout * Project_InsertNewLayout(gd::Project & project, const std::string & name, unsigned int pos) { return &project.InsertNewLayout(name, pos); }
 std::vector < std::string > * Project_GetUsedExtensions(gd::Project & project) { return &project.GetUsedExtensions(); }
 }
@@ -138,6 +139,7 @@ EMSCRIPTEN_BINDINGS(gd_Project) {
         .function("getFirstLayout", &Project::GetFirstLayout).function("setFirstLayout", &Project::SetFirstLayout)
 
         .function("getVariables", &Project_GetVariables, allow_raw_pointers())
+        .function("getResourcesManager", &Project_GetResourcesManager, allow_raw_pointers())
 
         .function("validateObjectName", &Project::ValidateObjectName)
 
@@ -270,6 +272,24 @@ EMSCRIPTEN_BINDINGS(gd_Layer) {
         .property("visibility", &Layer::GetVisibility, &Layer::SetVisibility)
         ;
 }
+
+namespace gd { //Workaround for emscripten not supporting methods returning a reference (objects are returned by copy in JS).
+gd::Resource * ResourcesManager_GetResource(gd::ResourcesManager & r, const std::string & n) { return &r.GetResource(n); }
+}
+
+EMSCRIPTEN_BINDINGS(gd_ResourcesManager) {
+    class_<ResourcesManager>("ResourcesManager")
+        .constructor<>()
+        .function("hasResource", &ResourcesManager::HasResource)
+        .function("getResource", &ResourcesManager_GetResource, allow_raw_pointers())
+        .function("addResource", select_overload<bool(const gd::Resource &)>(&ResourcesManager::AddResource))
+        .function("removeResource", &ResourcesManager::RemoveResource)
+        .function("renameResource", &ResourcesManager::RenameResource)
+        .function("moveResourceUpInList", &ResourcesManager::MoveResourceUpInList)
+        .function("moveResourceDownInList", &ResourcesManager::MoveResourceDownInList)
+        ;
+}
+
 
 EMSCRIPTEN_BINDINGS(gd_Resource) {
     class_<Resource>("Resource")

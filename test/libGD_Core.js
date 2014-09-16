@@ -118,7 +118,7 @@ describe('libGD.js', function(){
 			expect(container.getInstancesCount()).to.be(1);
 		});
 
-		after(function() { container.delete(); })
+		after(function() { container.delete(); });
 	});
 
 	describe('gd.InitialInstance', function(){
@@ -243,6 +243,10 @@ describe('libGD.js', function(){
 		after(function() {variable.delete();});
 	});
 
+	describe('gd.Resource', function(){
+		//TODO
+	});
+
 	describe('gd.Object', function(){
 		var project = gd.ProjectHelper.createNewGDJSProject();
 		var layout = project.insertNewLayout("Scene", 0);
@@ -291,7 +295,7 @@ describe('libGD.js', function(){
 			expect(instr.getParameter(2)).to.be("MyValue");
 		});
 
-		after(function() {instr.delete();})
+		after(function() {instr.delete();});
 	});
 
 	describe('gd.BaseEvent', function(){
@@ -320,7 +324,7 @@ describe('libGD.js', function(){
 			expect(evt.getActions().size()).to.be(1);
 		});
 
-		after(function() {evt.delete();})
+		after(function() {evt.delete();});
 	});
 	describe('gd.CommentEvent', function(){
 		var evt = new gd.CommentEvent();
@@ -334,7 +338,62 @@ describe('libGD.js', function(){
 			expect(evt.getComment()).to.be("My nice comment about my events!");
 		});
 
-		after(function() {evt.delete();})
+		after(function() {evt.delete();});
+	});
+
+	describe('gd.SpriteObject', function(){
+
+		var obj = new gd.SpriteObject("MySpriteObject");
+
+		it('can have animations', function(){
+			obj.addAnimation(new gd.Animation());
+			obj.addAnimation(new gd.Animation());
+			expect(obj.getAnimationsCount()).to.be(2);
+			obj.removeAnimation(1);
+			expect(obj.getAnimationsCount()).to.be(1);
+		});
+
+		it('can swap animations', function(){
+			obj.removeAllAnimations();
+			var anim1 = new gd.Animation();
+			var anim2 = new gd.Animation();
+			var sprite1 = new gd.Sprite();
+			var sprite2 = new gd.Sprite();
+
+			sprite1.setImageName("image1");
+			sprite2.setImageName("image2");
+
+			anim1.setDirectionsCount(1);
+			anim2.setDirectionsCount(1);
+			anim1.getDirection(0).addSprite(sprite1);
+			anim2.getDirection(0).addSprite(sprite2);
+
+			obj.addAnimation(anim1);
+			obj.addAnimation(anim2);
+			expect(obj.getAnimation(0).getDirection(0).getSprite(0).getImageName()).to.be("image1");
+			//TODO
+			/*obj.swapAnimations(0, 1);
+			expect(obj.getAnimation(0).getDirection(0).getSprite(0).getImageName()).to.be("image2");*/
+		});
+
+
+		describe('gd.Direction', function() {
+			var direction = new gd.Direction();
+
+			it('can swap sprites', function() {
+				var sprite1 = new gd.Sprite();
+				var sprite2 = new gd.Sprite();
+				sprite1.setImageName("image1");
+				sprite2.setImageName("image2");
+				direction.addSprite(sprite1);
+				direction.addSprite(sprite2);
+
+				expect(direction.getSprite(0).getImageName()).to.be("image1");
+				direction.swapSprites(0, 1);
+				expect(direction.getSprite(0).getImageName()).to.be("image2");
+				direction.swapSprites(1, 0);
+				expect(direction.getSprite(0).getImageName()).to.be("image1");
+			});
+		});
 	});
 });
-

@@ -75,6 +75,7 @@ EMSCRIPTEN_BINDINGS(gd_SpriteObject) {
         .function("removeAnimation", &SpriteObject::RemoveAnimation)
         .function("removeAllAnimations", &SpriteObject::RemoveAllAnimations)
         .function("hasNoAnimations", &SpriteObject::HasNoAnimations)
+        .function("swapAnimations", &SpriteObject::SwapAnimations)
         ;
 
     function("asSpriteObject", &AsSpriteObject, allow_raw_pointers());
