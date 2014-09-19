@@ -9,12 +9,14 @@
  * See Embind.cpp for more information
  */
 #if defined(EMSCRIPTEN)
+#include <string>
 #include <emscripten/bind.h>
 #include <boost/make_shared.hpp>
 #include "GDCore/PlatformDefinition/Platform.h"
 #include "GDCore/PlatformDefinition/Layout.h"
 #include "GDCore/PlatformDefinition/Project.h"
 #include "GDCore/PlatformDefinition/PlatformExtension.h"
+#include "GDCore/IDE/ArbitraryResourceWorker.h"
 #include "GDCore/IDE/AbstractFileSystem.h"
 #include "GDCore/IDE/ProjectResourcesAdder.h"
 #include "GDCore/IDE/EventsRefactorer.h"
@@ -411,6 +413,25 @@ EMSCRIPTEN_BINDINGS(gd_EventsParametersLister) {
     class_<EventsParametersLister, base<ArbitraryEventsWorker> >("EventsParametersLister")
         .constructor<gd::Project &>()
         .function("getParametersAndTypes", &EventsParametersLister::GetParametersAndTypes)
+        ;
+}
+
+struct ArbitraryResourceWorkerWrapper : public wrapper<ArbitraryResourceWorker> {
+    EMSCRIPTEN_WRAPPER(ArbitraryResourceWorkerWrapper);
+    virtual void ExposeImage(std::string & imageName) {
+        imageName = call<std::string>("exposeImage", imageName);
+    }
+    virtual void ExposeShader(std::string & shaderName) {
+        shaderName = call<std::string>("exposeShader", shaderName);
+    }
+    virtual void ExposeFile(std::string & resourceFileName) {
+        resourceFileName = call<std::string>("exposeFile", resourceFileName);
+    }
+};
+
+EMSCRIPTEN_BINDINGS(gd_ArbitraryResourceWorker) {
+    class_<ArbitraryResourceWorker>("ArbitraryResourceWorker")
+        .allow_subclass<ArbitraryResourceWorkerWrapper>("ArbitraryResourceWorkerWrapper")
         ;
 }
 #endif
