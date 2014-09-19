@@ -17,6 +17,7 @@
 #include <emscripten/bind.h>
 #include "GDCore/IDE/Dialogs/ObjectListDialogsHelper.h"
 #include "GDCore/IDE/Dialogs/PropertyDescriptor.h"
+#include "GDCore/IDE/ArbitraryResourceWorker.h"
 #include "GDCore/PlatformDefinition/Layout.h"
 #include "GDCore/PlatformDefinition/Project.h"
 #include "GDCore/PlatformDefinition/Platform.h"
@@ -140,6 +141,7 @@ EMSCRIPTEN_BINDINGS(gd_Project) {
 
         .function("getVariables", &Project_GetVariables, allow_raw_pointers())
         .function("getResourcesManager", &Project_GetResourcesManager, allow_raw_pointers())
+        .function("exposeResources", &Project::ExposeResources)
 
         .function("validateObjectName", &Project::ValidateObjectName)
 
