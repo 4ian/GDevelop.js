@@ -280,6 +280,7 @@ gd::Resource * ResourcesManager_GetResource(gd::ResourcesManager & r, const std:
 EMSCRIPTEN_BINDINGS(gd_ResourcesManager) {
     class_<ResourcesManager>("ResourcesManager")
         .constructor<>()
+        .function("getAllResourcesList", &ResourcesManager::GetAllResourcesList)
         .function("hasResource", &ResourcesManager::HasResource)
         .function("getResource", &ResourcesManager_GetResource, allow_raw_pointers())
         .function("addResource", select_overload<bool(const gd::Resource &)>(&ResourcesManager::AddResource))
