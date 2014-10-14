@@ -1,5 +1,5 @@
 /*
- * Game Develop Core
+ * GDevelop Core
  * Copyright 2008-2014 Florian Rival (Florian.Rival@gmail.com). All rights reserved.
  * This project is released under the GNU Lesser General Public License.
  */
@@ -401,6 +401,8 @@ EMSCRIPTEN_BINDINGS(gd_AbstractFileSystem) {
 EMSCRIPTEN_BINDINGS(gd_ProjectResourcesAdder) {
     class_<ProjectResourcesAdder>("ProjectResourcesAdder")
         .class_function("addAllMissingImages", &ProjectResourcesAdder::AddAllMissingImages)
+        .class_function("getAllUselessResources", &ProjectResourcesAdder::GetAllUselessResources)
+        .class_function("removeAllUselessResources", &ProjectResourcesAdder::RemoveAllUselessResources)
         ;
 }
 

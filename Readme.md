@@ -1,12 +1,12 @@
 libGD.js
 ========
 
-This is a port of some parts of Game Develop to Javascript using Emscripten.
+This is a port of some parts of GDevelop to Javascript using Emscripten.
 
 How to build
 ------------
 
-* Put this repository into a folder called WebIDE at the root of the Game Develop repository.
+* Put this repository into a folder called WebIDE at the root of the GDevelop repository.
 * Launch CMake, choose the emscripten toolchain, and the root of the GD repository for the sources.
 * Go to the folder where the makefile was generated and launch the compilation.
 
