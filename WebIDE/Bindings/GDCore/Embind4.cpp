@@ -90,7 +90,6 @@ EMSCRIPTEN_BINDINGS(gd_std_wrappers) {
     register_map_extra(register_map<std::string, gd::EventMetadata>("MapStringEventMetadata"));
     register_map_extra(register_map<std::string, gd::InstructionMetadata>("MapStringInstructionMetadata"));
     register_map_extra(register_map<std::string, gd::ExpressionMetadata>("MapStringExpressionMetadata"));
-    register_map_extra(register_map<std::string, gd::StrExpressionMetadata>("MapStringStrExpressionMetadata"));
     register_map_extra(register_map<std::string, gd::PropertyDescriptor>("MapStringPropertyDescriptor"));
 
 }

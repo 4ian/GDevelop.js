@@ -396,4 +396,13 @@ describe('libGD.js', function(){
 			});
 		});
 	});
+
+	describe('gd.MetadataProvider', function() {
+		var provider = gd.MetadataProvider;
+
+		it('can return metadata about expressions (even if they do not exist)', function() {
+			expect(provider.hasExpression(gd.JsPlatform.get(), "NotExistingExpression")).to.be(false);
+			expect(provider.getExpressionMetadata(gd.JsPlatform.get(), "NotExistingExpression").getFullName()).to.be("");
+		});
+	});
 });

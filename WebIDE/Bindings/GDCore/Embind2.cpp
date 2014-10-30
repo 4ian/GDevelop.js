@@ -50,15 +50,15 @@ std::map<std::string, gd::EventMetadata > * PlatformExtension_GetAllEvents(Platf
 std::map<std::string, gd::InstructionMetadata > * PlatformExtension_GetAllActions(PlatformExtension & e) { return &e.GetAllActions();};
 std::map<std::string, gd::InstructionMetadata > * PlatformExtension_GetAllConditions(PlatformExtension & e) { return &e.GetAllConditions();};
 std::map<std::string, gd::ExpressionMetadata > * PlatformExtension_GetAllExpressions(PlatformExtension & e) { return &e.GetAllExpressions();};
-std::map<std::string, gd::StrExpressionMetadata > * PlatformExtension_GetAllStrExpressions(PlatformExtension & e) { return &e.GetAllStrExpressions();};
+std::map<std::string, gd::ExpressionMetadata > * PlatformExtension_GetAllStrExpressions(PlatformExtension & e) { return &e.GetAllStrExpressions();};
 std::map<std::string, gd::InstructionMetadata > * PlatformExtension_GetAllActionsForObject(PlatformExtension & e, std::string objectType) { return &e.GetAllActionsForObject(objectType);};
 std::map<std::string, gd::InstructionMetadata > * PlatformExtension_GetAllConditionsForObject(PlatformExtension & e, std::string objectType) { return &e.GetAllConditionsForObject(objectType);};
 std::map<std::string, gd::ExpressionMetadata > * PlatformExtension_GetAllExpressionsForObject(PlatformExtension & e, std::string objectType) { return &e.GetAllExpressionsForObject(objectType);};
-std::map<std::string, gd::StrExpressionMetadata > * PlatformExtension_GetAllStrExpressionsForObject(PlatformExtension & e, std::string objectType) { return &e.GetAllStrExpressionsForObject(objectType);};
+std::map<std::string, gd::ExpressionMetadata > * PlatformExtension_GetAllStrExpressionsForObject(PlatformExtension & e, std::string objectType) { return &e.GetAllStrExpressionsForObject(objectType);};
 std::map<std::string, gd::InstructionMetadata > * PlatformExtension_GetAllActionsForAutomatism(PlatformExtension & e, std::string autoType) { return &e.GetAllActionsForAutomatism(autoType);};
 std::map<std::string, gd::InstructionMetadata > * PlatformExtension_GetAllConditionsForAutomatism(PlatformExtension & e, std::string autoType) { return &e.GetAllConditionsForAutomatism(autoType);};
 std::map<std::string, gd::ExpressionMetadata > * PlatformExtension_GetAllExpressionsForAutomatism(PlatformExtension & e, std::string autoType) { return &e.GetAllExpressionsForAutomatism(autoType);};
-std::map<std::string, gd::StrExpressionMetadata > * PlatformExtension_GetAllStrExpressionsForAutomatism(PlatformExtension & e, std::string autoType) { return &e.GetAllStrExpressionsForAutomatism(autoType);};
+std::map<std::string, gd::ExpressionMetadata > * PlatformExtension_GetAllStrExpressionsForAutomatism(PlatformExtension & e, std::string autoType) { return &e.GetAllStrExpressionsForAutomatism(autoType);};
 }
 
 EMSCRIPTEN_BINDINGS(gd_PlatformExtension) {
@@ -242,6 +242,23 @@ EMSCRIPTEN_BINDINGS(gd_InstructionMetadata) {
         .function("getParametersCount", &InstructionMetadata::GetParametersCount)
         .function("getUsageComplexity", &InstructionMetadata::GetUsageComplexity)
         .function("isHidden", &InstructionMetadata::IsHidden)
+        ;
+}
+
+namespace gd {
+gd::ParameterMetadata * ExpressionMetadata_GetParameter(ExpressionMetadata & em, unsigned int i) { return &em.parameters[i]; }
+size_t ExpressionMetadata_GetParametersCount(const ExpressionMetadata & em) { return em.parameters.size(); }
+}
+
+EMSCRIPTEN_BINDINGS(gd_ExpressionMetadata) {
+    class_<ExpressionMetadata>("ExpressionMetadata")
+        .function("getFullName", &ExpressionMetadata::GetFullName)
+        .function("getDescription", &ExpressionMetadata::GetDescription)
+        .function("getGroup", &ExpressionMetadata::GetGroup)
+        .function("getIconFilename", &ExpressionMetadata::GetIconFilename)
+        .function("isShown", &ExpressionMetadata::IsShown)
+        .function("getParameter", &ExpressionMetadata_GetParameter, allow_raw_pointers())
+        .function("getParametersCount", &ExpressionMetadata_GetParametersCount)
         ;
 }
 
