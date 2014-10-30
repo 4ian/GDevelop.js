@@ -371,9 +371,8 @@ describe('libGD.js', function(){
 			obj.addAnimation(anim1);
 			obj.addAnimation(anim2);
 			expect(obj.getAnimation(0).getDirection(0).getSprite(0).getImageName()).to.be("image1");
-			//TODO
-			/*obj.swapAnimations(0, 1);
-			expect(obj.getAnimation(0).getDirection(0).getSprite(0).getImageName()).to.be("image2");*/
+			obj.swapAnimations(0, 1);
+			expect(obj.getAnimation(0).getDirection(0).getSprite(0).getImageName()).to.be("image2");
 		});
 
 
