@@ -243,8 +243,71 @@ describe('libGD.js', function(){
 		after(function() {variable.delete();});
 	});
 
-	describe('gd.Resource', function(){
-		//TODO
+	describe('gd.ImageResource', function(){
+		it('should have name and file', function() {
+			var resource = new gd.ImageResource();
+			resource.setName("MyResource");
+			resource.setFile("MyFile");
+			expect(resource.getName()).to.be("MyResource");
+			expect(resource.getFile()).to.be("MyFile");
+		});
+	});
+
+	describe('gd.ResourcesManager', function(){
+		var project = gd.ProjectHelper.createNewGDJSProject();
+
+		it('should support adding resources', function() {
+			var resource = new gd.Resource();
+			resource.setName("MyResource");
+			project.getResourcesManager().addResource(resource);
+			var allResources = project.getResourcesManager().getAllResourcesList();
+
+			expect(allResources.size()).to.be(1);
+
+		});
+		it('should support removing resources', function() {
+			var resource = new gd.Resource();
+			resource.setName("MyResource");
+			project.getResourcesManager().addResource(resource);
+			project.getResourcesManager().removeResource("MyResource");
+			var allResources = project.getResourcesManager().getAllResourcesList();
+
+			expect(allResources.size()).to.be(0);
+		});
+	});
+
+	describe('gd.ProjectResourcesAdder', function(){
+		var project = gd.ProjectHelper.createNewGDJSProject();
+
+		it('should support removing useless resources', function() {
+			var resource1 = new gd.ImageResource();
+			resource1.setName("Useless");
+			var resource2 = new gd.ImageResource();
+			resource2.setName("Used");
+			project.getResourcesManager().addResource(resource1);
+			project.getResourcesManager().addResource(resource2);
+
+			//Create an object using a resource
+			var obj = project.insertNewObject(project, "Sprite", "MyObject", 0);
+			var sprite1 = new gd.Sprite();
+			sprite1.setImageName("Used");
+
+			var anim1 = new gd.Animation();
+			anim1.setDirectionsCount(1);
+			anim1.getDirection(0).addSprite(sprite1);
+
+			obj.addAnimation(anim1);
+
+			var allResources = project.getResourcesManager().getAllResourcesList();
+			expect(allResources.size()).to.be(2);
+
+			gd.ProjectResourcesAdder.removeAllUselessResources(project);
+
+			var allResources = project.getResourcesManager().getAllResourcesList();
+			expect(allResources.size()).to.be(1);
+			expect(allResources.get(0)).to.be("Used");
+		});
+
 	});
 
 	describe('gd.Object', function(){
