@@ -466,5 +466,28 @@ describe('libGD.js', function(){
 			expect(provider.hasExpression(gd.JsPlatform.get(), "NotExistingExpression")).to.be(false);
 			expect(provider.getExpressionMetadata(gd.JsPlatform.get(), "NotExistingExpression").getFullName()).to.be("");
 		});
+
+		describe('gd.ObjectMetadata', function() {
+			var objMetadata = provider.getObjectMetadata(gd.JsPlatform.get(), 'Sprite');
+
+			it('can return standard information about Sprite object', function() {
+				expect(objMetadata.getName()).to.be("Sprite");
+				expect(objMetadata.getFullName()).to.be("Sprite");
+				expect(objMetadata.getDescription().length).not.to.be(0);
+				expect(objMetadata.getIconFilename().length).not.to.be(0);
+			});
+		});
+		describe('gd.AutomatismMetadata', function() {
+			var autoMetadata = provider.getAutomatismMetadata(gd.JsPlatform.get(), 'NotExistingAutomatism');
+
+			it('have standard methods to get information', function() {
+				expect(autoMetadata.getFullName).not.to.be(undefined);
+				expect(autoMetadata.getDefaultName).not.to.be(undefined);
+				expect(autoMetadata.getDescription).not.to.be(undefined);
+				expect(autoMetadata.getGroup).not.to.be(undefined);
+				expect(autoMetadata.getIconFilename).not.to.be(undefined);
+			});
+		});
+		//TODO: gd.AutomatismMetadata
 	});
 });
