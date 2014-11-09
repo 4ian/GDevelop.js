@@ -46,6 +46,8 @@ namespace gd { //Workaround for emscripten to directly use gd::PlatformExtension
 PlatformExtension * VectorPlatformExtension_Get(std::vector<boost::shared_ptr<PlatformExtension> > & v, unsigned int i) { return v[i].get(); };
 unsigned int VectorPlatformExtension_Size(const std::vector<boost::shared_ptr<PlatformExtension> > & v) { return v.size(); };
 
+ObjectMetadata * PlatformExtension_GetObjectMetadata(PlatformExtension & e, const std::string & objectType) { return &e.GetObjectMetadata(objectType) };
+AutomatismMetadata * PlatformExtension_GetAutomatismMetadata(PlatformExtension & e, const std::string & autoType) { return &e.GetAutomatismMetadata(autoType) };
 std::map<std::string, gd::EventMetadata > * PlatformExtension_GetAllEvents(PlatformExtension & e) { return &e.GetAllEvents();};
 std::map<std::string, gd::InstructionMetadata > * PlatformExtension_GetAllActions(PlatformExtension & e) { return &e.GetAllActions();};
 std::map<std::string, gd::InstructionMetadata > * PlatformExtension_GetAllConditions(PlatformExtension & e) { return &e.GetAllConditions();};
@@ -79,8 +81,8 @@ EMSCRIPTEN_BINDINGS(gd_PlatformExtension) {
         //Accessing what's inside the extension:
         .function("getExtensionObjectsTypes", &PlatformExtension::GetExtensionObjectsTypes)
         .function("getAutomatismsTypes", &PlatformExtension::GetAutomatismsTypes)
-        .function("getObjectMetadata", &PlatformExtension::GetObjectMetadata)
-        .function("getAutomatismMetadata", &PlatformExtension::GetAutomatismMetadata)
+        .function("getObjectMetadata", &PlatformExtension_GetObjectMetadata, allow_raw_pointers())
+        .function("getAutomatismMetadata", &PlatformExtension_GetAutomatismMetadata, allow_raw_pointers())
         //Actions, conditions and events:
         .function("getAllEvents", &PlatformExtension_GetAllEvents, allow_raw_pointers())
         .function("getAllActions", &PlatformExtension_GetAllActions, allow_raw_pointers())
@@ -95,6 +97,27 @@ EMSCRIPTEN_BINDINGS(gd_PlatformExtension) {
         .function("getAllConditionsForAutomatism", &PlatformExtension_GetAllConditionsForAutomatism, allow_raw_pointers())
         .function("getAllExpressionsForAutomatism", &PlatformExtension_GetAllExpressionsForAutomatism, allow_raw_pointers())
         .function("getAllStrExpressionsForAutomatism", &PlatformExtension_GetAllStrExpressionsForObject, allow_raw_pointers())
+        ;
+}
+
+EMSCRIPTEN_BINDINGS(gd_ObjectMetadata) {
+    class_<ObjectMetadata>("ObjectMetadata")
+        .constructor<>()
+        .function("getName", &ObjectMetadata::GetName)
+        .function("getFullName", &ObjectMetadata::GetFullName)
+        .function("getDescription", &ObjectMetadata::GetDescription)
+        .function("getIconFilename", &ObjectMetadata::GetIconFilename)
+        ;
+}
+
+EMSCRIPTEN_BINDINGS(gd_AutomatismMetadata) {
+    class_<AutomatismMetadata>("AutomatismMetadata")
+        .constructor<>()
+        .function("getFullName", &AutomatismMetadata::GetFullName)
+        .function("getDefaultName", &AutomatismMetadata::GetDefaultName)
+        .function("getDescription", &AutomatismMetadata::GetDescription)
+        .function("getGroup", &AutomatismMetadata::GetGroup)
+        .function("getIconFilename", &AutomatismMetadata::GetIconFilename)
         ;
 }
 
