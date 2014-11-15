@@ -1,8 +1,7 @@
 /**
 
-GDevelop - Tiled Sprite Extension
-Copyright (c) 2012 Victor Levasseur (victorlevasseur01@orange.fr)
-Copyright (c) 2014 Florian Rival (Florian.Rival@gmail.com)
+GDevelop - Text Object Extension
+Copyright (c) 2008-2014 Florian Rival (Florian.Rival@gmail.com)
 
 This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any damages
@@ -34,19 +33,29 @@ freely, subject to the following restrictions:
 #include "GDCore/PlatformDefinition/Layout.h"
 #include "GDCore/PlatformDefinition/Project.h"
 #include "GDCore/PlatformDefinition/Platform.h"
-#include "../../../../../Extensions/TiledSpriteObject/TiledSpriteObject.h"
+#include "../../../../../Extensions/TextObject/TextObject.h"
 
 using namespace emscripten;
 
-EMSCRIPTEN_BINDINGS(gd_TiledSpriteObject) {
-    class_<TiledSpriteObject, base<gd::Object> >("TiledSpriteObject")
+EMSCRIPTEN_BINDINGS(gd_TextObject) {
+    class_<TextObject, base<gd::Object> >("TextObject")
         .constructor<const std::string &>()
-        .function("setTexture", &TiledSpriteObject::SetTexture)
-        .function("getTexture", &TiledSpriteObject::GetTexture)
-        .function("setWidth", &TiledSpriteObject::SetWidth)
-        .function("setHeight", &TiledSpriteObject::SetHeight)
-        .function("getWidth", &TiledSpriteObject::GetWidth)
-        .function("getHeight", &TiledSpriteObject::GetHeight)
+        .function("setString", &TextObject::SetString)
+        .function("getString", &TextObject::GetString)
+        .function("setCharacterSize", &TextObject::SetCharacterSize)
+        .function("getCharacterSize", &TextObject::GetCharacterSize)
+        .function("setFontFilename", &TextObject::SetFontFilename)
+        .function("getFontFilename", &TextObject::GetFontFilename)
+        .function("isBold", &TextObject::IsBold)
+        .function("setBold", &TextObject::SetBold)
+        .function("isItalic", &TextObject::IsItalic)
+        .function("setItalic", &TextObject::SetItalic)
+        .function("isUnderlined", &TextObject::IsUnderlined)
+        .function("setUnderlined", &TextObject::SetUnderlined)
+        .function("setColor", &TextObject::SetColor)
+        .function("getColorR", &TextObject::GetColorR)
+        .function("getColorG", &TextObject::GetColorG)
+        .function("getColorB", &TextObject::GetColorB)
         ;
 }
 #endif

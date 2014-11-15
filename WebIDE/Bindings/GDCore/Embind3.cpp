@@ -33,14 +33,35 @@ SpriteObject * AsSpriteObject(gd::Object * object) { return static_cast<SpriteOb
 gd::Animation * SpriteObject_GetAnimation(gd::SpriteObject & o, unsigned int i) { return &o.GetAnimation(i); }
 gd::Direction * Animation_GetDirection(gd::Animation & a, unsigned int i) { return &a.GetDirection(i); }
 gd::Sprite * Direction_GetSprite(gd::Direction & d, unsigned int i) { return &d.GetSprite(i); }
+gd::Point * Sprite_GetPoint(gd::Sprite & s, const std::string & name) { return &d.GetPoint(name); }
+gd::Point * Sprite_GetOrigin(gd::Sprite & s) { return &d.GetOrigin(); }
+gd::Point * Sprite_GetCenter(gd::Sprite & s) { return &d.GetCenter(); }
 }
 
 EMSCRIPTEN_BINDINGS(gd_SpriteObject) {
+    class_<Sprite>("Point")
+        .constructor<const std::string &>()
+        .function("setName", &Point::SetName)
+        .function("getName", &Point::GetName)
+        .function("setXY", &Point::SetXY)
+        .function("getX", &Point::GetX)
+        .function("setX", &Point::SetX)
+        .function("getY", &Point::GetY)
+        .function("setY", &Point::SetY)
+        ;
+
     class_<Sprite>("Sprite")
         .constructor<>()
         .function("setImageName", &Sprite::SetImageName)
         .function("getImageName", select_overload<std::string &()>(&Sprite::GetImageName))
-        //TODO: Some methods are not exported
+        .function("addPoint", &Sprite::AddPoint)
+        .function("delPoint", &Sprite::DelPoint)
+        .function("getPoint", &Sprite_GetPoint, allow_raw_pointers())
+        .function("hasPoint", &Sprite::HasPoint)
+        .function("getOrigin", &Sprite_GetOrigin, allow_raw_pointers())
+        .function("getCenter", &Sprite_GetCenter, allow_raw_pointers())
+        .function("isDefaultCenterPoint", &Sprite::IsDefaultCenterPoint)
+        .function("setDefaultCenterPoint", &Sprite::SetDefaultCenterPoint)
         ;
 
     class_<Direction>("Direction")
