@@ -20,5 +20,23 @@ describe('libGD.js - GDJS related tests', function(){
 
 		instr.delete();
 	});
+	describe('TextObject', function(){
+		var object = new gd.TextObject("MyTextObject");
+		it("should expose TextObject specific methods", function() {
+			object.setString("Hello");
+			object.setFontFilename("Hello.ttf");
+			object.setCharacterSize(10);
+			object.setBold(true);
+			object.setColor(1,2,3);
+
+			expect(object.getString()).to.be("Hello");
+			expect(object.getFontFilename()).to.be("Hello.ttf");
+			expect(object.getCharacterSize()).to.be(10);
+			expect(object.isBold()).to.be(true);
+			expect(object.getColorR()).to.be(1);
+			expect(object.getColorG()).to.be(2);
+			expect(object.getColorB()).to.be(3);
+		});
+	});
 });
 
