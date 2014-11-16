@@ -33,13 +33,13 @@ SpriteObject * AsSpriteObject(gd::Object * object) { return static_cast<SpriteOb
 gd::Animation * SpriteObject_GetAnimation(gd::SpriteObject & o, unsigned int i) { return &o.GetAnimation(i); }
 gd::Direction * Animation_GetDirection(gd::Animation & a, unsigned int i) { return &a.GetDirection(i); }
 gd::Sprite * Direction_GetSprite(gd::Direction & d, unsigned int i) { return &d.GetSprite(i); }
-gd::Point * Sprite_GetPoint(gd::Sprite & s, const std::string & name) { return &d.GetPoint(name); }
-gd::Point * Sprite_GetOrigin(gd::Sprite & s) { return &d.GetOrigin(); }
-gd::Point * Sprite_GetCenter(gd::Sprite & s) { return &d.GetCenter(); }
+Point * Sprite_GetPoint(gd::Sprite & s, const std::string & name) { return &s.GetPoint(name); }
+Point * Sprite_GetOrigin(gd::Sprite & s) { return &s.GetOrigin(); }
+Point * Sprite_GetCenter(gd::Sprite & s) { return &s.GetCenter(); }
 }
 
 EMSCRIPTEN_BINDINGS(gd_SpriteObject) {
-    class_<Sprite>("Point")
+    class_<Point>("Point")
         .constructor<const std::string &>()
         .function("setName", &Point::SetName)
         .function("getName", &Point::GetName)

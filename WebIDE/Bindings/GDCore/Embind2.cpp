@@ -257,7 +257,7 @@ EMSCRIPTEN_BINDINGS(gd_ExpressionMetadata) {
         .function("getFullName", &ExpressionMetadata::GetFullName)
         .function("getDescription", &ExpressionMetadata::GetDescription)
         .function("getGroup", &ExpressionMetadata::GetGroup)
-        .function("getIconFilename", &ExpressionMetadata::GetIconFilename)
+        .function("getSmallIconFilename", &ExpressionMetadata::GetSmallIconFilename)
         .function("isShown", &ExpressionMetadata::IsShown)
         .function("getParameter", &ExpressionMetadata_GetParameter, allow_raw_pointers())
         .function("getParametersCount", &ExpressionMetadata_GetParametersCount)
