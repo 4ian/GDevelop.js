@@ -29,6 +29,12 @@ describe('libGD.js', function(){
 			expect(project.hasLayoutNamed("Scene")).to.be(false);
 		});
 
+		it("should validate object names", function() {
+			expect(gd.Project.validateObjectName("ThisNameIs_Ok_123")).to.be(true);
+			expect(gd.Project.validateObjectName("ThisName IsNot_Ok_123")).to.be(false);
+			expect(gd.Project.validateObjectName("ThisNameIsNot_Ok!")).to.be(false);
+		});
+
 		after(function() { project.delete(); });
 	});
 
