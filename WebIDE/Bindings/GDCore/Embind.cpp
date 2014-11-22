@@ -143,7 +143,7 @@ EMSCRIPTEN_BINDINGS(gd_Project) {
         .function("getResourcesManager", &Project_GetResourcesManager, allow_raw_pointers())
         .function("exposeResources", &Project::ExposeResources)
 
-        .function("validateObjectName", &Project::ValidateObjectName)
+        .class_function("validateObjectName", &Project::ValidateObjectName)
 
         .function("isDirty", &Project::IsDirty).function("setDirty", &Project::SetDirty)
         .function("serializeTo", &Project::SerializeTo).function("unserializeFrom", &Project::UnserializeFrom)
