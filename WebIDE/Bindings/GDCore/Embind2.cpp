@@ -329,13 +329,32 @@ EMSCRIPTEN_BINDINGS(gd_InstructionSentenceFormatter) {
         .function("getAsFormattedText", &InstructionSentenceFormatter::GetAsFormattedText)
         .function("getFormattingFromType", &InstructionSentenceFormatter::GetFormattingFromType)
         .function("labelFromType", &InstructionSentenceFormatter::LabelFromType)
+        .function("loadTypesFormattingFromConfig", &InstructionSentenceFormatter::LoadTypesFormattingFromConfig)
         ;
 }
-/*
+
 namespace gd {
-gd::ParameterMetadata * EventsRefactorer_ReplaceStringInEvents(gd::Project & project, gd::Layout & layout, gd::EventsList & events,
-    std::string toReplace, std::string newString, bool matchCase, bool inConditions, bool inActions) { return &im.parameters[i]; }
-}*/
+unsigned int VectorPairStringTextFormatting_Size(std::vector< std::pair<std::string, gd::TextFormatting> > & v) { return v.size(); }
+const std::string & VectorPairStringTextFormatting_GetString(std::vector< std::pair<std::string, gd::TextFormatting> > & v, unsigned int i) { return v[i].first; }
+gd::TextFormatting * VectorPairStringTextFormatting_GetTextFormatting(std::vector< std::pair<std::string, gd::TextFormatting> > & v, unsigned int i) { return &v[i].second; }
+}
+
+EMSCRIPTEN_BINDINGS(gd_TextFormatting) {
+    class_<TextFormatting>("TextFormatting")
+        .constructor<>()
+        .function("isBold", &TextFormatting::IsBold)
+        .function("isItalic", &TextFormatting::IsItalic)
+        .function("getColorRed", &TextFormatting::GetColorRed)
+        .function("getColorGreen", &TextFormatting::GetColorGreen)
+        .function("getColorBlue", &TextFormatting::GetColorBlue)
+        ;
+
+    class_< std::vector< std::pair<std::string, gd::TextFormatting> > >("VectorPairStringTextFormatting")
+        .function("size", &VectorPairStringTextFormatting_Size, allow_raw_pointers())
+        .function("getString", &VectorPairStringTextFormatting_GetString, allow_raw_pointers())
+        .function("getTextFormatting", &VectorPairStringTextFormatting_GetTextFormatting, allow_raw_pointers())
+        ;
+}
 
 EMSCRIPTEN_BINDINGS(gd_EventsRefactorer) {
     class_<EventsRefactorer>("EventsRefactorer")

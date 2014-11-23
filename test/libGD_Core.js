@@ -367,6 +367,38 @@ describe('libGD.js', function(){
 		after(function() {instr.delete();});
 	});
 
+	describe("InstructionSentenceFormatter", function() {
+		var instrFormatter = gd.InstructionSentenceFormatter.get();
+		instrFormatter.loadTypesFormattingFromConfig();
+		var action = new gd.Instruction(); //Create a simple instruction
+		action.setType("Delete");
+		action.setParametersCount(2);
+		action.setParameter(0, "MyCharacter");
+
+		it('should translate instructions', function() {
+			var actionSentenceInEnglish = gd.InstructionSentenceFormatter.get().translate(action,
+				gd.MetadataProvider.getActionMetadata(gd.JsPlatform.get(), "Delete"));
+			expect(actionSentenceInEnglish).to.be("Delete object MyCharacter");
+		});
+
+		it('should translate instructions into a vector of text with formatting', function() {
+			var formattedTexts = gd.InstructionSentenceFormatter.get().getAsFormattedText(action,
+				gd.MetadataProvider.getActionMetadata(gd.JsPlatform.get(), "Delete"));
+
+			expect(formattedTexts.size()).to.be(2);
+			expect(formattedTexts.getString(0)).to.be("Delete object ");
+			expect(formattedTexts.getString(1)).to.be("MyCharacter");
+			expect(formattedTexts.getTextFormatting(0).isBold()).to.be(false);
+			expect(formattedTexts.getTextFormatting(1).isBold()).to.be(true);
+		});
+
+		after(function() {
+			instrFormatter.delete();
+			action.delete();
+		});
+	});
+
+
 	describe('gd.BaseEvent', function(){
 		//TODO
 	});
