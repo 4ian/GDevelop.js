@@ -1,7 +1,7 @@
 /*
  * GDevelop Core
  * Copyright 2008-2014 Florian Rival (Florian.Rival@gmail.com). All rights reserved.
- * This project is released under the GNU Lesser General Public License.
+ * This project is released under the MIT License.
  */
 
 /*
@@ -30,6 +30,7 @@
 #include "GDCore/Events/Builtin/CommentEvent.h"
 #include "GDCore/Events/Builtin/ForEachEvent.h"
 #include "GDCore/Events/Builtin/WhileEvent.h"
+#include "GDCore/Events/Builtin/GroupEvent.h"
 #include "GDCore/Events/Builtin/RepeatEvent.h"
 #include "GDCore/Events/EventsCodeGenerator.h"
 #include "GDCore/Events/InstructionMetadata.h"
@@ -128,6 +129,8 @@ EMSCRIPTEN_BINDINGS(gd_Instruction) {
 
 namespace gd { //Workaround for emscripten not supporting methods returning a reference (objects are returned by copy in JS).
 gd::EventsList * BaseEvent_GetSubEvents(BaseEvent & e) { return &e.GetSubEvents(); }
+bool BaseEvent_IsFolded(BaseEvent & e) { return e.folded; }
+void BaseEvent_SetFolded(BaseEvent & e, bool fold) { e.folded = fold; }
 std::vector < gd::Instruction > * StandardEvent_GetConditions(StandardEvent & e) { return &e.GetConditions(); }
 std::vector < gd::Instruction > * StandardEvent_GetActions(StandardEvent & e) { return &e.GetActions(); }
 std::vector < gd::Instruction > * WhileEvent_GetConditions(WhileEvent & e) { return &e.GetConditions(); }
@@ -137,6 +140,7 @@ std::vector < gd::Instruction > * ForEachEvent_GetConditions(ForEachEvent & e) {
 std::vector < gd::Instruction > * ForEachEvent_GetActions(ForEachEvent & e) { return &e.GetActions(); }
 std::vector < gd::Instruction > * RepeatEvent_GetConditions(RepeatEvent & e) { return &e.GetConditions(); }
 std::vector < gd::Instruction > * RepeatEvent_GetActions(RepeatEvent & e) { return &e.GetActions(); }
+std::vector < std::string > * GroupEvent_GetCreationParameters(GrouPevent & e) { return &e.GetCreationParameters(); }
 const std::string & CommentEvent_GetComment(CommentEvent & e) { return e.com1; }
 void CommentEvent_SetComment(CommentEvent & e, const std::string & com) { e.com1 = com; }
 gd::StandardEvent * AsStandardEvent(gd::BaseEvent * e) { return static_cast<gd::StandardEvent*>(e);}
@@ -158,6 +162,8 @@ EMSCRIPTEN_BINDINGS(gd_BaseEvent) {
         .function("getSubEvents", &BaseEvent_GetSubEvents, allow_raw_pointers())
         .function("isDisabled", &BaseEvent::IsDisabled)
         .function("setDisabled", &BaseEvent::SetDisabled)
+        .function("isFolded", &BaseEvent_IsFolded)
+        .function("setFolded", &BaseEvent_SetFolded)
 	    ;
 
     class_<StandardEvent, base<BaseEvent> >("StandardEvent")
@@ -170,6 +176,21 @@ EMSCRIPTEN_BINDINGS(gd_BaseEvent) {
         .constructor<>()
         .function("getComment", &CommentEvent_GetComment)
         .function("setComment", &CommentEvent_SetComment)
+        ;
+
+    class_<GroupEvent, base<BaseEvent> >("GroupEvent")
+        .constructor<>()
+        .function("getName", &GroupEvent::GetName)
+        .function("setName", &GroupEvent::SetName)
+        .function("setBackgroundColor", &GroupEvent::SetBackgroundColor)
+        .function("getBackgroundColorR", &GroupEvent::GetBackgroundColorR)
+        .function("getBackgroundColorG", &GroupEvent::GetBackgroundColorG)
+        .function("getBackgroundColorB", &GroupEvent::GetBackgroundColorB)
+        .function("getSource", &GroupEvent::GetSource)
+        .function("setSource", &GroupEvent::SetSource)
+        .function("getCreationParameters", &GroupEvent_GetCreationParameters, allow_raw_pointers())
+        .function("getCreationTimestamp", &GroupEvent::GetCreationTimestamp)
+        .function("setCreationTimestamp", &GroupEvent::SetCreationTimestamp)
         ;
 
     class_<WhileEvent, base<BaseEvent> >("WhileEvent")
