@@ -140,7 +140,7 @@ std::vector < gd::Instruction > * ForEachEvent_GetConditions(ForEachEvent & e) {
 std::vector < gd::Instruction > * ForEachEvent_GetActions(ForEachEvent & e) { return &e.GetActions(); }
 std::vector < gd::Instruction > * RepeatEvent_GetConditions(RepeatEvent & e) { return &e.GetConditions(); }
 std::vector < gd::Instruction > * RepeatEvent_GetActions(RepeatEvent & e) { return &e.GetActions(); }
-std::vector < std::string > * GroupEvent_GetCreationParameters(GrouPevent & e) { return &e.GetCreationParameters(); }
+std::vector < std::string > * GroupEvent_GetCreationParameters(GroupEvent & e) { return &e.GetCreationParameters(); }
 const std::string & CommentEvent_GetComment(CommentEvent & e) { return e.com1; }
 void CommentEvent_SetComment(CommentEvent & e, const std::string & com) { e.com1 = com; }
 gd::StandardEvent * AsStandardEvent(gd::BaseEvent * e) { return static_cast<gd::StandardEvent*>(e);}

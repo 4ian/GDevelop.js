@@ -81,10 +81,23 @@ class_<std::map<T, U> > register_map_extra(class_<std::map<T, U> > theMap) {
         .function("keys", &internal::MapKeys<MapType>::keys)
         ;
 }
+
+/**
+ * Utility function used to expose extra functions for std::vector.
+ */
+template<typename T>
+class_<std::vector<T> > register_vector_extra(class_<std::vector<T> > theVector) {
+    typedef std::vector<T> VecType;
+
+    void (VecType::*clear)() = &VecType::clear;
+    return theVector
+        .function("clear", clear)
+        ;
+}
 }
 
 EMSCRIPTEN_BINDINGS(gd_std_wrappers) {
-    register_vector<std::string>("VectorString");
+    register_vector_extra(register_vector<std::string>("VectorString"));
     register_set<std::string>("SetString");
     register_map_extra(register_map<std::string, std::string>("MapStringString"));
     register_map_extra(register_map<std::string, gd::EventMetadata>("MapStringEventMetadata"));

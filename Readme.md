@@ -12,7 +12,7 @@ How to build
 
 You may need to do:
 
-    set EMCC_FAST_COMPILER = 0     //on Windows
+    set EMCC_FAST_COMPILER=0       //on Windows
     export EMCC_FAST_COMPILER=0    //on Linux
 
 before starting the compilation.
