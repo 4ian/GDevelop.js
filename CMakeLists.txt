@@ -24,8 +24,6 @@ set(GDCpp_include_dir ${GD_base_dir}/GDCpp)
 set(GDCpp_lib_dir ${GD_base_dir}/Binaries/Output/${CMAKE_BUILD_TYPE}_${CMAKE_SYSTEM_NAME})
 set(GDJS_include_dir ${GD_base_dir}/GDJS)
 set(GDJS_lib_dir ${GD_base_dir}/Binaries/Output/${CMAKE_BUILD_TYPE}_${CMAKE_SYSTEM_NAME}/JsPlatform)
-set(boost_include_dir ${GD_base_dir}/ExtLibs/boost)
-set(sfml_include_dir ${GD_base_dir}/ExtLibs/SFML/include)
 
 #Dependencies on external libraries:
 ###
