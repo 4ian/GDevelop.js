@@ -398,9 +398,40 @@ describe('libGD.js', function(){
 		});
 	});
 
+	describe('gd.BaseEvent (and gd.EmptyEvent)', function(){
+		//Nothing for now.
+	});
 
-	describe('gd.BaseEvent', function(){
-		//TODO
+	describe('gd.GroupEvent', function(){
+		var evt = new gd.GroupEvent();
+
+		it('handle basic properties', function() {
+			evt.setName("MyName");
+			evt.setSource("http://source.url");
+			evt.setCreationTimestamp(150);
+			expect(evt.getName()).to.be("MyName");
+			expect(evt.getSource()).to.be("http://source.url");
+			expect(evt.getCreationTimestamp()).to.be(150);
+		});
+		it('can be folded', function() {
+			expect(evt.isFolded()).to.be(false);
+			evt.setFolded(true);
+			expect(evt.isFolded()).to.be(true);
+		});
+		it('can remember parameters used to create the group from a template event', function() {
+			var parameters = evt.getCreationParameters();
+			parameters.push_back("Param1");
+			parameters.push_back("Param2");
+
+			expect(evt.getCreationParameters().size()).to.be(2);
+			expect(evt.getCreationParameters().get(0)).to.be("Param1");
+			expect(evt.getCreationParameters().get(1)).to.be("Param2");
+
+			parameters.clear();
+			expect(evt.getCreationParameters().size()).to.be(0);
+			parameters.push_back("Param1");
+			expect(evt.getCreationParameters().get(0)).to.be("Param1");
+		});
 	});
 
 	describe('gd.StandardEvent', function(){
