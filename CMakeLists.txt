@@ -11,36 +11,26 @@ ENDIF()
 if(NOT EMSCRIPTEN)
 	error("You're trying to compile the WebIDE without emscripten.")
 endif()
-SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wno-warn-absolute-paths --bind" )
+SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wno-warn-absolute-paths" )
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} --memory-init-file 0" ) #Less efficient, but output a single JS file
-SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -s ASSERTIONS=2" ) #Debug
+SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -s ASSERTIONS=2 -s SAFE_HEAP=1" ) #Debug
 
 #Common directories:
 ###
-set(GD_base_dir ${CMAKE_CURRENT_SOURCE_DIR}/..)
-set(GDCORE_include_dir ${GD_base_dir}/Core)
-set(GDCORE_lib_dir ${GD_base_dir}/Binaries/Output/${CMAKE_BUILD_TYPE}_${CMAKE_SYSTEM_NAME})
 set(GDCpp_include_dir ${GD_base_dir}/GDCpp)
 set(GDCpp_lib_dir ${GD_base_dir}/Binaries/Output/${CMAKE_BUILD_TYPE}_${CMAKE_SYSTEM_NAME})
 set(GDJS_include_dir ${GD_base_dir}/GDJS)
 set(GDJS_lib_dir ${GD_base_dir}/Binaries/Output/${CMAKE_BUILD_TYPE}_${CMAKE_SYSTEM_NAME}/JsPlatform)
 
+set(GDCpp_include_dir ${GDCpp_include_dir} PARENT_SCOPE) #Expose GDCpp directories to extensions for includes.
+set(GDCpp_lib_dir ${GDCpp_lib_dir} PARENT_SCOPE)
+
 #Dependencies on external libraries:
 ###
-include_directories(${boost_include_dir})
 include_directories(${sfml_include_dir})
 include_directories(${GDCORE_include_dir})
 include_directories(${GDCpp_include_dir})
 include_directories(${GDJS_include_dir})
-IF(NOT TARGET GDCore) #Ensure that the build will work even when GDCore is not in the target list.
-link_directories(${GDCORE_lib_dir})
-ENDIF()
-IF(NOT TARGET GDCpp) #Ensure that the build will work even when GDCpp is not in the target list.
-link_directories(${GDCpp_lib_dir})
-ENDIF()
-IF(NOT TARGET GDJS) #Ensure that the build will work even when GDJS is not in the target list.
-link_directories(${GDJS_lib_dir})
-ENDIF()
 
 #Defines
 ###
@@ -68,16 +58,11 @@ add_definitions( -DGD_EXTENSION_API= )
 #The target
 ###
 include_directories(.)
-file(
-        GLOB_RECURSE
-        source_files
-        WebIDE/*
-)
 
 add_library(
         GD
         SHARED
-        ${source_files}
+        "Bindings/Wrapper.cpp"
 )
 set_target_properties(GD PROPERTIES SUFFIX ".raw.js")
 set(LIBRARY_OUTPUT_PATH ${GD_base_dir}/Binaries/Output/WebIDE/${CMAKE_BUILD_TYPE})

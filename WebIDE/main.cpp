@@ -31,7 +31,7 @@ namespace gd {
 		initialized = true;
 		std::cout << "Initializing GDJS platform" << std::endl;
 	    {
-		    boost::shared_ptr<gd::Platform> platform(&JsPlatform::Get());
+		    std::shared_ptr<gd::Platform> platform(&JsPlatform::Get());
 		    gd::PlatformManager::Get()->AddPlatform(platform);
 	    }
 		std::cout << "Platform initialization ended." << std::endl;

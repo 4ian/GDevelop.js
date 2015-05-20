@@ -1,6 +1,10 @@
 {
-  "name": "gdevelop-web-ide",
+  "name": "libGD.js",
   "version": "0.0.1",
+  "author": "Florian Rival <florian.rival@gmail.com> (http://florianrival.com)",
+  "description": "Core of GDevelop, the open-source game creator requiring no programming skills, ported to Javascript",
+  "keywords": ["GDevelop", "game", "creator", "events", "programming", "making", "port"],
+  "license": "MIT",
   "devDependencies": {
     "grunt": "latest",
     "mocha": "~1.18.2",

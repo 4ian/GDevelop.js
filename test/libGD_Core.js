@@ -35,6 +35,12 @@ describe('libGD.js', function(){
 			expect(gd.Project.validateObjectName("ThisNameIsNot_Ok!")).to.be(false);
 		});
 
+		it("should have a list of extensions", function() {
+			expect(project.getUsedExtensions().size()).to.be.a("number");
+			project.getUsedExtensions().clear();
+			expect(project.getUsedExtensions().size()).to.be(0);
+		});
+
 		after(function() { project.delete(); });
 	});
 

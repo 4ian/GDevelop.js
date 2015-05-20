@@ -1,0 +1,96 @@
+/**
+ * IDL file for GDevelop classes bindings.
+ *
+ * Notes:
+ *
+ * WRAPPED_* functions are declared as such to allow the Wrapper.cpp
+ * file to use a macro to do special work on it.
+ * These functions are renamed in the final .js file (so that
+ * `WRAPPED_set` become `set` for example).
+ */
+
+interface ProjectHelper {
+    [Ref] Project STATIC_CreateNewGDJSProject();
+    void STATIC_InitializePlatforms();
+};
+
+interface VectorString {
+	void push_back([Const] DOMString str);
+	void resize(long size);
+	long size();
+	[Const, Ref] DOMString at(long index);
+	void WRAPPED_set(long index, [Const, Ref] DOMString str);
+	void clear();
+};
+
+interface Project {
+    void Project();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetAuthor([Const] DOMString name);
+    [Const, Ref] DOMString GetAuthor();
+    void SetProjectFile([Const] DOMString file);
+	[Const, Ref] DOMString GetProjectFile();
+	void SetDefaultWidth(long width);
+	long GetMainWindowDefaultWidth();
+	void SetDefaultHeight(long height);
+	long GetMainWindowDefaultHeight();
+    long GetMaximumFPS();
+	void SetMaximumFPS(long fps);
+	long GetMinimumFPS();
+	void SetMinimumFPS(long fps);
+	[Const, Ref] VectorString GetUsedExtensions();
+
+	boolean HasLayoutNamed([Const] DOMString name);
+	[Ref] Layout InsertNewLayout([Const] DOMString name, long position);
+	[Ref] Layout GetLayout([Const] DOMString name);
+};
+
+interface Layout {
+    void Layout();
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+};
+
+
+
+interface InitialInstance {
+    void InitialInstance();
+
+    void SetObjectName([Const] DOMString name);
+    [Const, Ref] DOMString GetObjectName();
+
+	float GetX();
+	void SetX(float x);
+	float GetY();
+	void SetY(float y);
+	float GetAngle();
+	void SetAngle(float angle);
+    long GetZOrder();
+    void SetZOrder(long zOrder);
+    [Const, Ref] DOMString GetLayer();
+    void SetLayer([Const] DOMString layer);
+};
+
+interface InitialInstancesContainer {
+    void InitialInstancesContainer();
+
+    long GetInstancesCount();
+
+    void IterateOverInstances([Ref] InitialInstanceFunctor func);
+	void IterateOverInstancesWithZOrdering([Ref] InitialInstanceFunctor func, DOMString layer);
+	void RemoveAllInstancesOnLayer(DOMString layer);
+	boolean SomeInstancesAreOnLayer(DOMString layer);
+
+	[Ref] InitialInstance InsertNewInitialInstance();
+};
+
+interface InitialInstanceFunctor {};
+interface InitialInstanceJSFunctorWrapper {};
+[JSImplementation="InitialInstanceJSFunctorWrapper"]
+interface InitialInstanceJSFunctor {
+	void InitialInstanceJSFunctor();
+
+	void invoke(InitialInstance instance);
+};

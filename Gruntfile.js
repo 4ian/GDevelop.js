@@ -14,7 +14,7 @@ module.exports = function(grunt) {
             separator: ';',
           },
           dist: {
-            src: ['WebIDE/prejs.js', buildDirectory+'libGD.raw.js', 'WebIDE/postjs.js'],
+            src: ['Bindings/prejs.js', buildDirectory+'libGD.raw.js', 'Bindings/glue.js', 'Bindings/postjs.js'],
             dest: buildDirectory+'libGD.js',
           },
         },
