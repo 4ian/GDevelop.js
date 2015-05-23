@@ -13,9 +13,9 @@ describe('libGD.js - GDJS related tests', function(){
 		gd.asRepeatEvent(evt).setRepeatExpression("5+4+3+2+1");
 		var instr = new gd.Instruction();
 		instr.setType("BuiltinCommonInstructions::Once");
-		gd.asRepeatEvent(evt).getConditions().push_back(instr);
+		gd.asRepeatEvent(evt).getConditions().insert(instr, 0);
 
-		var code = gd.GenerateSceneEventsCompleteCode(project, layout, layout.getEvents(), new gd.SetString(), true);
+		var code = gd.EventsCodeGenerator.generateSceneEventsCompleteCode(project, layout, layout.getEvents(), new gd.SetString(), true);
 		expect(code).to.match(/(context.triggerOnce)/);
 
 		instr.delete();

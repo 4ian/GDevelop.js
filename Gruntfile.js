@@ -7,7 +7,7 @@ module.exports = function(grunt) {
                 require: ['expect.js'],
                 bail: true
             },
-            all: ['test/*.js']
+            all: ['test/**/*.js']
         },
         concat: {
           options: {

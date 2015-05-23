@@ -4,7 +4,7 @@
  * node demo.js
  */
 
-var gd = require('./libGD.js');
+var gd = require('../../Binaries/Output/WebIDE/Release/libGD.js');
 var fs = require('fs');
 
 console.log("Here is an example of how to use libGD.js.");

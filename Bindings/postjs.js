@@ -30,17 +30,23 @@ var gd = Module;
                 }
 
                 //Normalize method name
-                newName = removePrefix(uncapitalizeFirstLetter(newName), "WRAPPED_");
+                newName = removePrefix(newName, "MAP_");
+                newName = removePrefix(newName, "WRAPPED_");
+                newName = uncapitalizeFirstLetter(newName);
                 if (newName !== method) {
                     proto[newName] = proto[method];
                     delete proto[method];
                 }
 
                 if (addToObject) {
+                    //TODO: Bind first argument to 0 for static?
                     object[newName] = proto[newName];
                 }
             }
         }
+
+        //Offer a delete method that does what gd.destroy does.
+        proto.delete = function() { gd.destroy(this) };
     }
 
     for(var gdClass in gd) {
@@ -53,5 +59,18 @@ var gd = Module;
         }
     }
 
+    gd.Object = gd.gdObject; //Renaming was done to avoid clashing with javascript Object.
     gd.initializePlatforms = gd.ProjectHelper.prototype.initializePlatforms;
+    gd.asRepeatEvent = function(evt) { return gd.castObject(evt, gd.RepeatEvent); }
+    gd.asWhileEvent = function(evt) { return gd.castObject(evt, gd.WhileEvent); }
+    gd.asForEachEvent = function(evt) { return gd.castObject(evt, gd.ForEachEvent); }
+    gd.asCommentEvent = function(evt) { return gd.castObject(evt, gd.CommentEvent); }
+    gd.asGroupEvent = function(evt) { return gd.castObject(evt, gd.GroupEvent); }
+
+    //Preserve backward compatibility with some alias for methods:
+    gd.VectorString.prototype.get = gd.VectorString.prototype.at;
+    gd.InstructionsList.prototype.push_back = function(e) {
+    	this.insert(e, this.size() - 1);
+    };
+
 })(gd);

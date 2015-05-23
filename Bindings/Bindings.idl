@@ -1,59 +1,326 @@
+/*
+ * libGD.js
+ * Copyright 2015 Florian Rival (Florian.Rival@gmail.com). All rights reserved.
+ * This project is released under the MIT License.
+ */
+
 /**
  * IDL file for GDevelop classes bindings.
  *
  * Notes:
  *
- * WRAPPED_* functions are declared as such to allow the Wrapper.cpp
- * file to use a macro to do special work on it.
+ * WRAPPED_* and STATIC_* functions are declared as such
+ * to allow the Wrapper.cpp file to use a macro to do special work on it.
  * These functions are renamed in the final .js file (so that
  * `WRAPPED_set` become `set` for example).
  */
+
+//Interfaces for some types from
+//the C++ Standard Library:
+
+interface VectorString {
+    void push_back([Const] DOMString str);
+    void resize(unsigned long size);
+    unsigned long size();
+    [Const, Ref] DOMString at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] DOMString str);
+    void clear();
+};
+
+interface MapStringString {
+    //TODO
+};
+
+interface MapStringExpressionMetadata {
+    //TODO
+};
+
+interface MapStringInstructionMetadata {
+    //TODO
+};
+
+interface MapStringEventMetadata {
+    //TODO
+};
+
+interface SetString {
+    void SetString();
+
+    //TODO
+};
 
 interface ProjectHelper {
     [Ref] Project STATIC_CreateNewGDJSProject();
     void STATIC_InitializePlatforms();
 };
 
-interface VectorString {
-	void push_back([Const] DOMString str);
-	void resize(long size);
-	long size();
-	[Const, Ref] DOMString at(long index);
-	void WRAPPED_set(long index, [Const, Ref] DOMString str);
-	void clear();
+interface Platform {
+    //[Value] DOMString GetName();
+    //[Const, Ref] DOMString GetFullName();
+    //[Const, Ref] DOMString GetSubtitle();
+    //[Const, Ref] DOMString GetDescription();
+    boolean IsExtensionLoaded([Const] DOMString name);
+
+    //TODO:
+    //getAllPlatformExtensions
+    //createObject
+};
+
+interface JsPlatform {
+    [Ref] JsPlatform STATIC_Get();
+};
+
+interface PairStringVariable {
+    void PairStringVariable();
+
+    [Const, Ref] DOMString WRAPPED_GetName();
+    [Ref] Variable WRAPPED_GetVariable();
+};
+
+interface Variable {
+    void Variable();
+
+    void SetString([Const] DOMString str);
+    [Const, Ref] DOMString GetString();
+    void SetValue([Const] double val);
+    double GetValue();
+    boolean HasChild([Const] DOMString str);
+    [Ref] Variable GetChild([Const] DOMString str);
+    void RemoveChild([Const] DOMString name);
+    //void GetAllChildren();
+    boolean IsNumber();
+    boolean IsStructure();
+};
+
+interface VariablesContainer {
+    void VariablesContainer();
+
+    boolean Has([Const] DOMString name);
+    [Ref] Variable Get([Const] DOMString name);
+    [Ref] PairStringVariable GetAt(unsigned long index);
+    [Ref] Variable Insert([Const] DOMString name, [Const, Ref] Variable var, unsigned long index);
+    [Ref] Variable InsertNew([Const] DOMString name, unsigned long index);
+    void Remove([Const] DOMString name);
+    void Rename([Const] DOMString oldName, [Const] DOMString newName);
+    void Swap(unsigned long firstIndex, unsigned long secondIndex);
+    unsigned long GetPosition([Const] DOMString name);
+    unsigned long Count();
+    void Clear();
 };
 
 interface Project {
     void Project();
+
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
     void SetAuthor([Const] DOMString name);
     [Const, Ref] DOMString GetAuthor();
     void SetProjectFile([Const] DOMString file);
-	[Const, Ref] DOMString GetProjectFile();
-	void SetDefaultWidth(long width);
-	long GetMainWindowDefaultWidth();
-	void SetDefaultHeight(long height);
-	long GetMainWindowDefaultHeight();
+    [Const, Ref] DOMString GetProjectFile();
+    void SetDefaultWidth(long width);
+    long GetMainWindowDefaultWidth();
+    void SetDefaultHeight(long height);
+    long GetMainWindowDefaultHeight();
     long GetMaximumFPS();
-	void SetMaximumFPS(long fps);
-	long GetMinimumFPS();
-	void SetMinimumFPS(long fps);
-	[Const, Ref] VectorString GetUsedExtensions();
+    void SetMaximumFPS(long fps);
+    long GetMinimumFPS();
+    void SetMinimumFPS(long fps);
 
-	boolean HasLayoutNamed([Const] DOMString name);
-	[Ref] Layout InsertNewLayout([Const] DOMString name, long position);
-	[Ref] Layout GetLayout([Const] DOMString name);
+    [Const, Ref] VectorString GetUsedExtensions();
+    void AddPlatform([Ref] Platform platform);
+    [Ref] Platform GetCurrentPlatform();
+
+    //createObject
+    //createEvent
+
+    boolean HasLayoutNamed([Const] DOMString name);
+    [Ref] Layout GetLayout([Const] DOMString name);
+    [Ref] Layout GetLayoutAt(unsigned long index);
+    unsigned long GetLayoutsCount();
+    [Ref] Layout InsertNewLayout([Const] DOMString name, unsigned long position);
+    void RemoveLayout([Const] DOMString name);
+    void SetFirstLayout([Const] DOMString name);
+    [Const, Ref] DOMString GetFirstLayout();
+
+    [Ref] VariablesContainer GetVariables();
+    [Ref] ResourcesManager GetResourcesManager();
+    //exposeResources
+    boolean STATIC_ValidateObjectName([Const] DOMString name);
+    boolean IsDirty();
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+
+    [Const, Ref] DOMString FREE_GetTypeOfAutomatism([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
+    [Const, Ref] DOMString FREE_GetTypeOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
+    [Value] VectorString FREE_GetAutomatismsOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
+
+    //Inherited from gd::ClassWithObjects
+    [Ref] gdObject InsertNewObject([Ref] Project project, [Const] DOMString type, [Const] DOMString name, unsigned long pos);
+    [Ref] gdObject InsertObject([Const, Ref] gdObject obj, unsigned long pos);
+    boolean HasObjectNamed([Const] DOMString name);
+    [Ref] gdObject GetObject([Const] DOMString name);
+    [Ref] gdObject GetObjectAt(unsigned long pos);
+    void GetObjectPosition([Const] DOMString name);
+    void RemoveObject([Const] DOMString name);
+    void SwapObjects(unsigned long first, unsigned long second);
+    unsigned long GetObjectsCount();
+};
+
+interface Automatism {
+    void Automatism();
+
+    Automatism Clone();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    [Const, Ref] DOMString GetTypeName();
+
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Const, Ref] Project project);
+    [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
+};
+
+interface gdObject {
+    // /!\ We need to call it gdObject to avoid messing up with javascript Object
+    //     global in glue.js!
+    void gdObject([Const] DOMString name);
+
+    gdObject Clone();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetType([Const] DOMString type);
+    [Const, Ref] DOMString GetType();
+
+    [Ref]VariablesContainer GetVariables();
+    [Value] VectorString GetAllAutomatismNames();
+    boolean HasAutomatismNamed([Const] DOMString name);
+    Automatism AddNewAutomatism([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
+    [Ref] Automatism GetAutomatism([Const] DOMString name);
+    void RemoveAutomatism([Const] DOMString name);
+    boolean RenameAutomatism([Const] DOMString oldBame, [Const] DOMString name);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface ObjectGroup {
+    void ObjectGroup();
+
+    [Const, Ref] DOMString GetName();
+    void AddObject([Const] DOMString obj);
+    void RemoveObject([Const] DOMString obj);
+    boolean Find([Const] DOMString obj);
 };
 
 interface Layout {
-    void Layout();
 
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
+    void SetBackgroundColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetBackgroundColorRed();
+    unsigned long GetBackgroundColorGreen();
+    unsigned long GetBackgroundColorBlue();
+    void SetWindowDefaultTitle([Const] DOMString name);
+    [Const, Ref] DOMString GetWindowDefaultTitle();
+    [Ref] InitialInstancesContainer GetInitialInstances();
+    [Ref] VariablesContainer GetVariables();
+    [Ref] EventsList GetEvents();
+
+    void InsertNewLayer([Const] DOMString name, unsigned long position);
+    void InsertLayer([Const, Ref] Layer layer, unsigned long position);
+    [Ref] Layer GetLayer([Const] DOMString name);
+    [Ref] Layer GetLayerAt(unsigned long pos);
+    boolean HasLayerNamed([Const] DOMString name);
+    void RemoveLayer([Const] DOMString name);
+    unsigned long GetLayersCount();
+
+    //Inherited from gd::ClassWithObjects
+    [Ref] gdObject InsertNewObject([Ref] Project project, [Const] DOMString type, [Const] DOMString name, unsigned long pos);
+    [Ref] gdObject InsertObject([Const, Ref] gdObject obj, unsigned long pos);
+    boolean HasObjectNamed([Const] DOMString name);
+    [Ref] gdObject GetObject([Const] DOMString name);
+    [Ref] gdObject GetObjectAt(unsigned long pos);
+    void GetObjectPosition([Const] DOMString name);
+    void RemoveObject([Const] DOMString name);
+    void SwapObjects(unsigned long first, unsigned long second);
+    unsigned long GetObjectsCount();
 };
 
+interface Layer {
+    void Layer();
 
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetVisibility(boolean visible);
+    boolean GetVisibility();
+};
+
+interface ResourcesManager {
+    void ResourcesManager();
+
+    [Value] VectorString GetAllResourcesList();
+    boolean HasResource([Const] DOMString name);
+    void GetResource([Const] DOMString name);
+    void AddResource([Const, Ref] Resource res);
+    void RemoveResource([Const] DOMString name);
+    void RenameResource([Const] DOMString oldName, [Const] DOMString name);
+    void MoveResourceUpInList([Const] DOMString oldName);
+    void MoveResourceDownInList([Const] DOMString oldName);
+};
+
+interface Resource {
+    void Resource();
+
+    Resource Clone();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetKind([Const] DOMString kind);
+    [Const, Ref] DOMString GetKind();
+    boolean IsUserAdded();
+    void SetUserAdded(boolean yes);
+    boolean UseFile();
+    void SetFile([Const] DOMString file);
+    [Const, Ref] DOMString GetFile();
+    [Const, Ref] DOMString GetAbsoluteFile([Const, Ref] Project project);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface ImageResource {
+    void ImageResource();
+
+    //Inherited from ImageResource:
+    Resource Clone();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetKind([Const] DOMString kind);
+    [Const, Ref] DOMString GetKind();
+    boolean IsUserAdded();
+    void SetUserAdded(boolean yes);
+    boolean UseFile();
+    void SetFile([Const] DOMString file);
+    [Const, Ref] DOMString GetFile();
+    [Const, Ref] DOMString GetAbsoluteFile([Const, Ref] Project project);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface PropertyDescriptor {
+    void PropertyDescriptor([Const] DOMString propValue);
+
+    [Ref] PropertyDescriptor SetValue([Const] DOMString value);
+    [Const, Ref] DOMString GetValue();
+    [Ref] PropertyDescriptor SetType([Const] DOMString type);
+    [Const, Ref] DOMString GetType();
+    [Ref] PropertyDescriptor AddExtraInfo([Const] DOMString type);
+    [Value] VectorString GetExtraInfo();
+};
+
+interface MapStringPropertyDescriptor {
+    [Ref] PropertyDescriptor MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] PropertyDescriptor prop);
+    boolean MAP_has([Const] DOMString name);
+};
 
 interface InitialInstance {
     void InitialInstance();
@@ -61,16 +328,31 @@ interface InitialInstance {
     void SetObjectName([Const] DOMString name);
     [Const, Ref] DOMString GetObjectName();
 
-	float GetX();
-	void SetX(float x);
-	float GetY();
-	void SetY(float y);
-	float GetAngle();
-	void SetAngle(float angle);
+    float GetX();
+    void SetX(float x);
+    float GetY();
+    void SetY(float y);
+    float GetAngle();
+    void SetAngle(float angle);
+    boolean IsLocked();
+    void SetLocked(boolean lock);
     long GetZOrder();
     void SetZOrder(long zOrder);
     [Const, Ref] DOMString GetLayer();
     void SetLayer([Const] DOMString layer);
+
+    void SetHasCustomSize(boolean enable);
+    boolean HasCustomSize();
+
+    void SetCustomWidth(float width);
+    float GetCustomWidth();
+    void SetCustomHeight(float height);
+    float GetCustomHeight();
+
+    void UpdateCustomProperty([Const] DOMString name, [Const] DOMString value, [Const, Ref] Project project, [Const, Ref] Layout layout);
+    [Value] MapStringPropertyDescriptor GetCustomProperties([Ref] Project project, [Ref] Layout layout);
+
+    [Ref] VariablesContainer GetVariables();
 };
 
 interface InitialInstancesContainer {
@@ -79,18 +361,525 @@ interface InitialInstancesContainer {
     long GetInstancesCount();
 
     void IterateOverInstances([Ref] InitialInstanceFunctor func);
-	void IterateOverInstancesWithZOrdering([Ref] InitialInstanceFunctor func, DOMString layer);
-	void RemoveAllInstancesOnLayer(DOMString layer);
-	boolean SomeInstancesAreOnLayer(DOMString layer);
+    void IterateOverInstancesWithZOrdering([Ref] InitialInstanceFunctor func, [Const] DOMString layer);
+    void MoveInstancesToLayer([Const] DOMString fromLayer, [Const] DOMString toLayer);
+    void RemoveAllInstancesOnLayer([Const] DOMString layer);
+    void RemoveInitialInstancesOfObject([Const] DOMString obj);
+    void SomeInstancesAreOnLayer([Const] DOMString layer);
+    void RemoveInstance([Const, Ref] InitialInstance inst);
 
-	[Ref] InitialInstance InsertNewInitialInstance();
+    [Ref] InitialInstance InsertNewInitialInstance();
+    [Ref] InitialInstance InsertInitialInstance([Const, Ref] InitialInstance inst);
 };
 
 interface InitialInstanceFunctor {};
 interface InitialInstanceJSFunctorWrapper {};
 [JSImplementation="InitialInstanceJSFunctorWrapper"]
 interface InitialInstanceJSFunctor {
-	void InitialInstanceJSFunctor();
+    void InitialInstanceJSFunctor();
 
-	void invoke(InitialInstance instance);
+    void invoke(InitialInstance instance);
+};
+
+interface SerializerElement {
+};
+
+interface Serializer {
+    [Const, Ref] DOMString STATIC_ToJSON([Const, Ref] SerializerElement element);
+    [Value] SerializerElement STATIC_FromJSON([Const] DOMString json);
+};
+
+interface ObjectListDialogsHelper {
+    void ObjectListDialogsHelper([Const, Ref] Project p, [Const, Ref] Layout l);
+
+    void SetSearchText([Const] DOMString search);
+    void SetAllowedObjectType([Const] DOMString type);
+    void SetGroupsAllowed(boolean enable);
+    [Value] VectorString GetMatchingObjects();
+};
+
+interface InstructionsList {
+    void InstructionsList();
+
+    void Insert([Const, Ref] Instruction instr, unsigned long pos);
+    unsigned long size();
+    [Ref] Instruction Get(unsigned long index);
+    void Remove(unsigned long index);
+    void Clear();
+};
+
+interface Instruction {
+    void Instruction();
+
+    //Clone
+    void SetType([Const] DOMString type);
+    [Const, Ref] DOMString GetType();
+    void SetInverted(boolean inverted);
+    boolean IsInverted();
+    void SetParameter(unsigned long id, [Const] DOMString type);
+    [Const, Ref] DOMString GetParameter(unsigned long id);
+    void SetParametersCount(unsigned long count);
+    unsigned long GetParametersCount();
+    [Ref] InstructionsList GetSubInstructions();
+};
+
+interface VectorPairStringTextFormatting {
+    unsigned long size();
+    [Const, Ref] DOMString WRAPPED_GetString(unsigned long id);
+    [Ref] TextFormatting WRAPPED_GetTextFormatting(unsigned long id);
+};
+
+interface TextFormatting {
+    boolean IsBold();
+    boolean IsItalic();
+    unsigned long GetColorRed();
+    unsigned long GetColorGreen();
+    unsigned long GetColorBlue();
+};
+
+interface InstructionSentenceFormatter {
+    InstructionSentenceFormatter STATIC_Get();
+    [Const, Value] DOMString Translate([Const, Ref] Instruction instr, [Const, Ref] InstructionMetadata metadat);
+    [Value] VectorPairStringTextFormatting GetAsFormattedText([Const, Ref] Instruction instr, [Const, Ref] InstructionMetadata metadat);
+    [Value] TextFormatting GetFormattingFromType([Const] DOMString type);
+    [Const, Ref] DOMString LabelFromType([Const] DOMString type);
+    void LoadTypesFormattingFromConfig();
+};
+
+[NoDelete, Prefix="gdjs::"]
+interface EventsCodeGenerator {
+    [Const] DOMString STATIC_GenerateSceneEventsCompleteCode([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Ref] SetString includes, boolean compilationForRuntime);
+};
+
+interface InstructionMetadata {
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetSentence();
+    [Const, Ref] DOMString GetGroup();
+    [Const, Ref] DOMString GetIconFilename();
+    [Const, Ref] DOMString GetSmallIconFilename();
+    boolean CanHaveSubInstructions();
+    void SetCanHaveSubInstructions();
+    [Const, Ref] ParameterMetadata GetParameter(unsigned long index);
+    unsigned long GetParametersCount();
+    long GetUsageComplexity();
+    boolean IsHidden();
+};
+
+interface ExpressionMetadata {
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetGroup();
+    [Const, Ref] DOMString GetSmallIconFilename();
+    boolean IsShown();
+    [Ref] ParameterMetadata GetParameter(unsigned long id);
+    unsigned long GetParametersCount();
+};
+
+interface ParameterMetadata {
+    [Const, Ref] DOMString GetType();
+    [Const, Ref] DOMString GetExtraInfo();
+    boolean IsOptional();
+    [Const, Ref] DOMString GetDescription();
+    boolean IsCodeOnly();
+    [Const, Ref] DOMString GetDefaultValue();
+    boolean STATIC_IsObject([Const] DOMString param);
+};
+
+interface ObjectMetadata {
+    [Const, Ref] DOMString GetName();
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetIconFilename();
+};
+
+interface AutomatismMetadata {
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetDefaultName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetGroup();
+    [Const, Ref] DOMString GetIconFilename();
+};
+
+interface PlatformExtension {
+
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetAuthor();
+    [Const, Ref] DOMString GetLicense();
+    boolean IsBuiltin();
+    [Const, Ref] DOMString GetNameSpace();
+
+
+    [Value] VectorString GetExtensionObjectsTypes();
+    [Value] VectorString GetAutomatismsTypes();
+    [Ref] ObjectMetadata GetObjectMetadata([Const] DOMString type);
+    [Ref] AutomatismMetadata GetAutomatismMetadata([Const] DOMString type);
+    [Ref] MapStringEventMetadata GetAllEvents();
+    [Ref] MapStringInstructionMetadata GetAllActions();
+    [Ref] MapStringInstructionMetadata GetAllConditions();
+    [Ref] MapStringExpressionMetadata GetAllExpressions();
+    [Ref] MapStringExpressionMetadata GetAllStrExpressions();
+    [Ref] MapStringInstructionMetadata GetAllActionsForObject([Const] DOMString objectType);
+    [Ref] MapStringInstructionMetadata GetAllConditionsForObject([Const] DOMString objectType);
+    [Ref] MapStringExpressionMetadata GetAllExpressionsForObject([Const] DOMString objectType);
+    [Ref] MapStringExpressionMetadata GetAllStrExpressionsForObject([Const] DOMString objectType);
+    [Ref] MapStringInstructionMetadata GetAllActionsForAutomatism([Const] DOMString autoType);
+    [Ref] MapStringInstructionMetadata GetAllConditionsForAutomatism([Const] DOMString autoType);
+    [Ref] MapStringExpressionMetadata GetAllExpressionsForAutomatism([Const] DOMString autoType);
+    [Ref] MapStringExpressionMetadata GetAllStrExpressionsForAutomatism([Const] DOMString autoType);
+};
+
+interface EventsList {
+    void EventsList();
+
+    [Ref] BaseEvent InsertEvent([Const, Ref] BaseEvent event);
+    [Ref] BaseEvent InsertNewEvent([Ref] Project project, [Const] DOMString type, unsigned long pos);
+    void InsertEvents([Const, Ref] EventsList list, unsigned long begin, unsigned long end, unsigned long pos);
+    [Ref] BaseEvent GetEventAt(unsigned long pos);
+    void RemoveEventAt(unsigned long pos);
+    void RemoveEvent([Const, Ref] BaseEvent event);
+    unsigned long GetEventsCount();
+    void Contains([Const, Ref] BaseEvent event, boolean recursive);
+    boolean IsEmpty();
+    void Clear();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+
+interface BaseEvent {
+    void BaseEvent();
+
+    void Clone();
+    [Const, Ref] DOMString GetType();
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+};
+
+interface StandardEvent {
+    void StandardEvent();
+
+    [Ref] InstructionsList GetConditions();
+    [Ref] InstructionsList GetActions();
+
+    //Inherited from BaseEvent:
+    void Clone();
+    [Const, Ref] DOMString GetType();
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+};
+
+interface RepeatEvent {
+    void RepeatEvent();
+
+    [Ref] InstructionsList GetConditions();
+    [Ref] InstructionsList GetActions();
+    void SetRepeatExpression([Const] DOMString expr);
+    [Const, Ref] DOMString GetRepeatExpression();
+
+    //Inherited from BaseEvent:
+    void Clone();
+    [Const, Ref] DOMString GetType();
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+};
+
+interface WhileEvent {
+    void WhileEvent();
+
+    [Ref] InstructionsList GetConditions();
+    [Ref] InstructionsList GetWhileConditions();
+    [Ref] InstructionsList GetActions();
+
+    //Inherited from BaseEvent:
+    void Clone();
+    [Const, Ref] DOMString GetType();
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+};
+
+interface ForEachEvent {
+    void ForEachEvent();
+
+    void SetObjectToPick([Const] DOMString objects);
+    [Const, Ref] DOMString GetObjectToPick();
+    [Ref] InstructionsList GetConditions();
+    [Ref] InstructionsList GetActions();
+
+    //Inherited from BaseEvent:
+    void Clone();
+    [Const, Ref] DOMString GetType();
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+};
+
+interface CommentEvent {
+    void CommentEvent();
+
+    [Const, Ref] DOMString WRAPPED_GetComment();
+    void WRAPPED_SetComment([Const] DOMString type);
+
+    //Inherited from BaseEvent:
+    void Clone();
+    [Const, Ref] DOMString GetType();
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+};
+
+interface GroupEvent {
+    void GroupEvent();
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetBackgroundColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetBackgroundColorR();
+    unsigned long GetBackgroundColorG();
+    unsigned long GetBackgroundColorB();
+    void SetSource([Const] DOMString source);
+    [Const, Ref] DOMString GetSource();
+    [Ref] VectorString GetCreationParameters();
+    unsigned long GetCreationTimestamp();
+    void SetCreationTimestamp(unsigned long ts);
+
+    //Inherited from BaseEvent:
+    void Clone();
+    [Const, Ref] DOMString GetType();
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+};
+
+
+interface EventsRefactorer {
+    void STATIC_RenameObjectInEvents([Const, Ref] Platform platform, [Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString oldName, [Const] DOMString newName);
+    void STATIC_RemoveObjectInEvents([Const, Ref] Platform platform, [Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString name);
+    void STATIC_ReplaceStringInEvents([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString toReplace, [Const] DOMString newString, boolean matchCase, boolean inConditions, boolean inActions);
+};
+
+interface MetadataProvider {
+
+    [Const, Ref] AutomatismMetadata STATIC_GetAutomatismMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] ObjectMetadata STATIC_GetObjectMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] InstructionMetadata STATIC_GetActionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] InstructionMetadata STATIC_GetConditionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetExpressionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetObjectExpressionMetadata([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetAutomatismExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetObjectStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetAutomatismStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    boolean STATIC_HasCondition([Const, Ref] Platform p, [Const] DOMString type);
+    boolean STATIC_HasAction([Const, Ref] Platform p, [Const] DOMString type);
+    boolean STATIC_HasObjectAction([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
+    boolean STATIC_HasObjectCondition([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
+    boolean STATIC_HasAutomatismAction([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    boolean STATIC_HasAutomatismCondition([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    boolean STATIC_HasExpression([Const, Ref] Platform p, [Const] DOMString type);
+    boolean STATIC_HasObjectExpression([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
+    boolean STATIC_HasAutomatismExpression([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    boolean STATIC_HasStrExpression([Const, Ref] Platform p, [Const] DOMString type);
+    boolean STATIC_HasObjectStrExpression([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
+    boolean STATIC_HasAutomatismStrExpression([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+};
+
+/*
+interface AbstractFileSystem {
+};
+
+[JSImplementation="AbstractFileSystem"]
+interface AbstractFileSystemJS {
+    void MkDir([Const] DOMString dir);
+    void DirExists([Const] DOMString dir);
+    void ClearDir([Const] DOMString dir);
+    [Const, Ref] DOMString GetTempDir();
+    [Const, Ref] DOMString FileNameFrom([Const] DOMString dir);
+    [Const, Ref] DOMString DirNameFrom([Const] DOMString dir);
+    //void MakeAbsolute([Const] DOMString dir);
+    //void MakeRelative([Const] DOMString dir);
+    boolean IsAbsolute([Const] DOMString fn);
+    void CopyFile([Const] DOMString src, [Const] DOMString dest);
+    void WriteToFile([Const] DOMString fn, [Const] DOMString content);
+    [Const, Ref] DOMString ReadFile([Const] DOMString fn);
+    [Value] VectorString ReadDir([Const] DOMString dir);
+    boolean FileExists([Const] DOMString fn);
+};*/
+
+interface ProjectResourcesAdder {
+    void STATIC_AddAllMissingImages([Ref] Project project);
+    void STATIC_GetAllUselessResources([Ref] Project project);
+    void STATIC_RemoveAllUselessResources([Ref] Project project);
+};
+
+interface ArbitraryEventsWorker {
+    void Launch([Ref] EventsList events);
+};
+
+interface EventsParametersLister {
+    void EventsParametersLister([Ref] Project project);
+    [Const, Ref] MapStringString GetParametersAndTypes();
+};
+
+interface ArbitraryResourceWorker {
+};
+[JSImplementation="ArbitraryResourceWorker"]
+interface ArbitraryResourceWorkerJS {
+    //TODO: Wrapper?
+
+    //ExposeImage
+    //ExposeShader
+    //ExposeFile
+};
+
+//SpriteObject:
+
+interface Point {
+    void Point([Const] DOMString name);
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetXY(float x, float y);
+    float GetX();
+    void SetX(float x);
+    float GetY();
+    void SetY(float y);
+};
+
+interface Sprite {
+    void Sprite();
+
+    void SetImageName([Const] DOMString name);
+    [Const, Ref] DOMString GetImageName();
+    void AddPoint([Const, Ref] Point point);
+    void DelPoint([Const] DOMString name);
+    [Ref] Point GetPoint([Const] DOMString name);
+    boolean HasPoint([Const] DOMString name);
+    [Ref] Point GetOrigin();
+    [Ref] Point GetCenter();
+    boolean IsDefaultCenterPoint();
+    void SetDefaultCenterPoint(boolean defaultPoint);
+};
+
+interface Direction {
+    void Direction();
+
+    void AddSprite([Const, Ref] Sprite sprite);
+    [Const, Ref] Sprite GetSprite(unsigned long index);
+    unsigned long GetSpritesCount();
+    boolean HasNoSprites();
+    void RemoveSprite(unsigned long index);
+    void RemoveAllSprites();
+    boolean IsLooping();
+    void SetLoop(boolean enable);
+    float GetTimeBetweenFrames();
+    void SetTimeBetweenFrames(float time);
+    void SwapSprites(unsigned long first, unsigned long second);
+};
+
+interface Animation {
+    void Animation();
+
+    void SetDirectionsCount(unsigned long count);
+    unsigned long GetDirectionsCount();
+    [Ref] Direction GetDirection(unsigned long index);
+    void SetDirection([Const, Ref] Direction direction, unsigned long index);
+    boolean HasNoDirections();
+};
+
+interface SpriteObject {
+    void SpriteObject([Const] DOMString name);
+
+    void AddAnimation([Const, Ref] Animation animation);
+    [Ref] Animation GetAnimation(unsigned long index);
+    unsigned long GetAnimationsCount();
+    void RemoveAnimation(unsigned long index);
+    void RemoveAllAnimations();
+    boolean HasNoAnimations();
+    void SwapAnimations(unsigned long first, unsigned long second);
+};
+
+[Prefix="sf::"]
+interface Vector2f {
+    void Vector2f();
+
+    attribute float x;
+    attribute float y;
+};
+
+
+//Extensions bindings:
+
+interface TextObject {
+    void TextObject([Const] DOMString name);
+
+    void SetString([Const] DOMString string);
+    [Const, Ref] DOMString GetString();
+    void SetCharacterSize(float size);
+    float GetCharacterSize();
+    void SetFontFilename([Const] DOMString string);
+    [Const, Ref] DOMString GetFontFilename();
+    boolean IsBold();
+    void SetBold(boolean enable);
+    boolean IsItalic();
+    void SetItalic(boolean enable);
+    boolean IsUnderlined();
+    void SetUnderlined(boolean enable);
+    void SetColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetColorR();
+    unsigned long GetColorG();
+    unsigned long GetColorB();
+};
+
+interface TiledSpriteObject {
+    void TiledSpriteObject([Const] DOMString name);
+
+    void SetTexture([Const] DOMString texture);
+    [Const, Ref] DOMString GetTexture();
+    void SetWidth(float width);
+    float GetWidth();
+    void SetHeight(float height);
+    float GetHeight();
 };
