@@ -5,6 +5,7 @@
  * using Bindings.idl
  */
 
+var debug = false; //If true, add additional checks in bindings files.
 var fs = require('fs');
 var exec = require('child_process').exec;
 
@@ -58,15 +59,34 @@ function patchGlueCppFile(cb) {
 		if (err) cb(err);
 
 		var patchedFile = "";
-		var patchReturnString = false;
+		var insideReturnStringFunction = false;
 		data.toString().split('\n').forEach(function (line) {
 			//When declaring a function returning "[Const, Ref] DOMString"
+			//or "[Const, Value] DOMString"
 			//in the IDL file, the return type is const char*. We are using
 			//std::string in GDevelop and need to call c_str.
-			if (patchReturnString) {
-				line = line
-					.replace(";", ".c_str();")
-					.replace("&", "");
+			if (insideReturnStringFunction) {
+				//[Const, Value] DOMString
+				if (line.indexOf("static char*") !== -1) {
+					line = line
+						.replace("static char*", "static std::string");
+				} else if (line.indexOf(", &temp);") !== -1) {
+					line = line.replace(", &temp);", ", temp.c_str());")
+				//[Const, Ref] DOMString
+				} else {
+					if (debug) {
+						//For debugging, use a temporary useless reference
+						//to check the return type is a reference and not a value.
+						//Could generate false positive.
+						line = line
+							.replace(";", "); return ref.c_str();")
+							.replace("return &", "std::string & ref = const_cast<std::string&>(");
+					} else {
+						line = line
+							.replace(";", ".c_str();")
+							.replace("&", "");
+					}
+				}
 			}
 
 			//Make sure free functions are called properly.
@@ -83,8 +103,26 @@ function patchGlueCppFile(cb) {
 			//Fix calls to operator [] with pointers
 			line = line.replace("self->MAP_set", "(*self)MAP_set");
 
+			//Simulate copy operator with CLONE_type
+			var cloneCallPos = line.indexOf("self->CLONE_");
+			if(cloneCallPos !== -1) {
+				line = line.replace("self->CLONE_", "new ");
+				line = line.replace("()", "(*self)");
+			}
+
+			//Custom function MAPS_keys to get the keys of a map
+			var mapKeyCallPos = line.indexOf("self->MAP_keys");
+			if(mapKeyCallPos !== -1) {
+				line = "temp.clear(); for(auto it = self->begin(); it != self->end();"
+					+ "++it) { temp.push_back(it->first); } return &temp;"
+			}
+
 			patchedFile += line + "\n";
-			patchReturnString = (line.indexOf("const char* EMSCRIPTEN_KEEPALIVE") == 0);
+			if (line.indexOf("const char* EMSCRIPTEN_KEEPALIVE") == 0) {
+				insideReturnStringFunction = true;
+			} else if (line.indexOf("}") == 0) {
+				insideReturnStringFunction = false;
+			}
 		});
 
 		fs.writeFile(file, patchedFile, function(err) {

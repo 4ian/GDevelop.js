@@ -24,14 +24,19 @@ var gd = Module;
                 var addToObject = false;
 
                 //Detect static methods
-                if (method.indexOf("STATIC_") == 0) {
+                if (method.indexOf("STATIC_") === 0) {
                     newName = removePrefix(newName, "STATIC_");
                     addToObject = true;
                 }
 
-                //Normalize method name
+                //Remove prefix used for custom code generation
                 newName = removePrefix(newName, "MAP_");
                 newName = removePrefix(newName, "WRAPPED_");
+                if (newName.indexOf("CLONE_") === 0) {
+                    newName = "clone";
+                }
+
+                //Normalize method name
                 newName = uncapitalizeFirstLetter(newName);
                 if (newName !== method) {
                     proto[newName] = proto[method];
@@ -61,14 +66,17 @@ var gd = Module;
 
     gd.Object = gd.gdObject; //Renaming was done to avoid clashing with javascript Object.
     gd.initializePlatforms = gd.ProjectHelper.prototype.initializePlatforms;
+    gd.asStandardEvent = function(evt) { return gd.castObject(evt, gd.StandardEvent); }
     gd.asRepeatEvent = function(evt) { return gd.castObject(evt, gd.RepeatEvent); }
     gd.asWhileEvent = function(evt) { return gd.castObject(evt, gd.WhileEvent); }
     gd.asForEachEvent = function(evt) { return gd.castObject(evt, gd.ForEachEvent); }
     gd.asCommentEvent = function(evt) { return gd.castObject(evt, gd.CommentEvent); }
     gd.asGroupEvent = function(evt) { return gd.castObject(evt, gd.GroupEvent); }
+    gd.asPlatform = function(evt) { return gd.castObject(evt, gd.Platform); }
 
     //Preserve backward compatibility with some alias for methods:
     gd.VectorString.prototype.get = gd.VectorString.prototype.at;
+    gd.VectorPlatformExtension.prototype.get = gd.VectorPlatformExtension.prototype.at;
     gd.InstructionsList.prototype.push_back = function(e) {
     	this.insert(e, this.size() - 1);
     };

@@ -227,21 +227,21 @@ describe('libGD.js', function(){
 	describe('gd.Variable', function(){
 		var variable = new gd.Variable();
 
-		it('initial value', function(){
+		it('should have initial value', function(){
 			expect(variable.getValue()).to.be(0);
 			expect(variable.isNumber()).to.be(true);
 		});
-		it('value', function(){
+		it('can have a value', function(){
 			variable.setValue(5);
 			expect(variable.getValue()).to.be(5);
 			expect(variable.isNumber()).to.be(true);
 		});
-		it('string', function(){
+		it('can have a string', function(){
 			variable.setString("Hello");
 			expect(variable.getString()).to.be("Hello");
 			expect(variable.isNumber()).to.be(false);
 		});
-		it('structure', function(){
+		it('can be a structure', function(){
 			variable.getChild("FirstChild").setValue(1);
 			variable.getChild("SecondChild").setString("two");
 			expect(variable.hasChild("FirstChild")).to.be(true);
@@ -250,6 +250,23 @@ describe('libGD.js', function(){
 			expect(variable.getChild("SecondChild").getString()).to.be("two");
 			variable.removeChild("FirstChild");
 			expect(variable.hasChild("FirstChild")).to.be(false);
+		});
+		it('can expose its children', function(){
+			variable.getChild("FirstChild").setValue(1);
+
+			var children = variable.getAllChildren();
+			var childrenNames = children.keys();
+			expect(childrenNames.size()).to.be(2);
+
+			children.get(childrenNames.get(0)).setString("one");
+			children.get(childrenNames.get(1)).setValue(2);
+
+			expect(variable.getChild("FirstChild").getString()).to.be("one");
+			expect(variable.getChild("SecondChild").getValue()).to.be(2);
+
+			//Check that children count didn't change
+			expect(childrenNames.size()).to.be(2);
+			var childrenNames = children.keys();
 		});
 
 		after(function() {variable.delete();});
@@ -291,7 +308,7 @@ describe('libGD.js', function(){
 	describe('gd.ProjectResourcesAdder', function(){
 		var project = gd.ProjectHelper.createNewGDJSProject();
 
-		xit('should support removing useless resources', function() {
+		it('should support removing useless resources', function() {
 			var resource1 = new gd.ImageResource();
 			resource1.setName("Useless");
 			var resource2 = new gd.ImageResource();
@@ -308,7 +325,7 @@ describe('libGD.js', function(){
 			anim1.setDirectionsCount(1);
 			anim1.getDirection(0).addSprite(sprite1);
 
-			gd.wrapPointer(obj, gd.SpriteObject).addAnimation(anim1);
+			gd.castObject(obj, gd.SpriteObject).addAnimation(anim1);
 
 			var allResources = project.getResourcesManager().getAllResourcesList();
 			expect(allResources.size()).to.be(2);
@@ -369,6 +386,18 @@ describe('libGD.js', function(){
 			instr.setParameter(2, "MyValue");
 			expect(instr.getParameter(2)).to.be("MyValue");
 		});
+		it('can be cloned', function(){
+			var newInstr = instr.clone();
+			expect(newInstr.getParametersCount()).to.be(3);
+			expect(newInstr.getParameter(1)).to.be("");
+			expect(newInstr.getParameter(2)).to.be("MyValue");
+
+			newInstr.setParameter(2, "MyChangedValue");
+			expect(instr.getParameter(2)).to.be("MyValue");
+			expect(newInstr.getParameter(2)).to.be("MyChangedValue");
+			newInstr.delete();
+			expect(instr.getParameter(2)).to.be("MyValue");
+		});
 
 		after(function() {instr.delete();});
 	});
@@ -397,7 +426,7 @@ describe('libGD.js', function(){
 		action.setParametersCount(2);
 		action.setParameter(0, "MyCharacter");
 
-		xit('should translate instructions', function() {
+		it('should translate instructions', function() {
 			var actionSentenceInEnglish = gd.InstructionSentenceFormatter.get().translate(action,
 				gd.MetadataProvider.getActionMetadata(gd.JsPlatform.get(), "Delete"));
 			expect(actionSentenceInEnglish).to.be("Delete object MyCharacter");
@@ -422,6 +451,30 @@ describe('libGD.js', function(){
 
 	describe('gd.BaseEvent (and gd.EmptyEvent)', function(){
 		//Nothing for now.
+	});
+
+	describe('gd.EventsList', function(){
+		var project = new gd.ProjectHelper.createNewGDJSProject();
+		var list = new gd.EventsList();
+
+		it('can have events', function() {
+			list.insertEvent(new gd.StandardEvent(), 0);
+			var middleEvent = list.insertEvent(new gd.StandardEvent(), 0);
+			list.insertEvent(new gd.StandardEvent(), 0);
+			expect(list.getEventsCount()).to.be(3);
+			expect(list.getEventAt(1).ptr).to.be(middleEvent.ptr);
+		});
+
+		it('can create lots of new events', function() {
+			for(var i = 0;i<500;++i) {
+				var evt = list.insertNewEvent(project, "BuiltinCommonInstructions::Standard", 0);
+				expect(evt.getType()).to.be("BuiltinCommonInstructions::Standard");
+				expect(gd.asStandardEvent(list.getEventAt(0))
+					.getType()).to.be("BuiltinCommonInstructions::Standard");
+				expect(list.getEventAt(0).getType()).to.be("BuiltinCommonInstructions::Standard");
+			}
+		});
+
 	});
 
 	describe('gd.GroupEvent', function(){

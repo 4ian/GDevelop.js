@@ -1,6 +1,8 @@
 #include <string>
 #include <set>
 #include <map>
+#include <utility>
+#include <vector>
 #include <GDCore/PlatformDefinition/Project.h>
 #include <GDCore/PlatformDefinition/Layout.h>
 #include <GDCore/PlatformDefinition/Object.h>
@@ -57,6 +59,7 @@ public:
 
 //Declares typedef for std::vector and templatized types
 typedef std::vector<std::string> VectorString;
+typedef std::vector < std::shared_ptr<gd::PlatformExtension> > VectorPlatformExtension;
 typedef std::pair<std::string, gd::Variable> PairStringVariable;
 typedef std::pair<std::string, TextFormatting> PairStringTextFormatting;
 typedef std::vector<std::pair<std::string, TextFormatting>> VectorPairStringTextFormatting;
@@ -64,12 +67,15 @@ typedef std::map<std::string, std::string> MapStringString;
 typedef std::map<std::string, gd::ExpressionMetadata> MapStringExpressionMetadata;
 typedef std::map<std::string, gd::InstructionMetadata> MapStringInstructionMetadata;
 typedef std::map<std::string, gd::EventMetadata> MapStringEventMetadata;
+typedef std::map<std::string, gd::Variable> MapStringVariable;
 typedef std::map<std::string, gd::PropertyDescriptor> MapStringPropertyDescriptor;
 typedef std::set<std::string> SetString;
+typedef std::string StdString;
 typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 
 //Customize some functions implementation thanks to WRAPPED_* macros
 //The original names will be reconstructed in the js file (see postjs.js)
+#define WRAPPED_at(a) at(a).get()
 #define WRAPPED_set(a, b) at(a) = b
 #define WRAPPED_GetString(i) at(i).first
 #define WRAPPED_GetComment() com1
@@ -78,7 +84,7 @@ typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 #define WRAPPED_GetName() first
 #define WRAPPED_GetVariable() second
 
-#define MAP_get(a) find(a)->second;
+#define MAP_get(a) find(a)->second
 #define MAP_set(key, value) [key] = value
 #define MAP_has(key) find(key) != self->end()
 

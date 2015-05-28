@@ -18,7 +18,13 @@
 //Interfaces for some types from
 //the C++ Standard Library:
 
+interface StdString {
+    void StdString([Const] DOMString str);
+};
+
 interface VectorString {
+    void VectorString();
+
     void push_back([Const] DOMString str);
     void resize(unsigned long size);
     unsigned long size();
@@ -27,20 +33,44 @@ interface VectorString {
     void clear();
 };
 
+interface VectorPlatformExtension {
+    unsigned long size();
+    [Const] PlatformExtension WRAPPED_at(unsigned long index);
+};
+
 interface MapStringString {
-    //TODO
+    [Const, Ref] DOMString MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const] DOMString str);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
+interface MapStringVariable {
+    [Ref] Variable MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] Variable prop);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
 };
 
 interface MapStringExpressionMetadata {
-    //TODO
+    [Ref] ExpressionMetadata MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] ExpressionMetadata prop);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
 };
 
 interface MapStringInstructionMetadata {
-    //TODO
+    [Ref] InstructionMetadata MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] InstructionMetadata prop);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
 };
 
 interface MapStringEventMetadata {
-    //TODO
+    [Ref] EventMetadata MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] EventMetadata prop);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
 };
 
 interface SetString {
@@ -55,14 +85,14 @@ interface ProjectHelper {
 };
 
 interface Platform {
-    //[Value] DOMString GetName();
-    //[Const, Ref] DOMString GetFullName();
-    //[Const, Ref] DOMString GetSubtitle();
-    //[Const, Ref] DOMString GetDescription();
+    [Const, Value] DOMString GetName();
+    [Const, Value] DOMString GetFullName();
+    [Const, Value] DOMString GetSubtitle();
+    [Const, Value] DOMString GetDescription();
     boolean IsExtensionLoaded([Const] DOMString name);
 
+    [Const, Ref] VectorPlatformExtension GetAllPlatformExtensions();
     //TODO:
-    //getAllPlatformExtensions
     //createObject
 };
 
@@ -87,7 +117,7 @@ interface Variable {
     boolean HasChild([Const] DOMString str);
     [Ref] Variable GetChild([Const] DOMString str);
     void RemoveChild([Const] DOMString name);
-    //void GetAllChildren();
+    [Const, Ref] MapStringVariable GetAllChildren();
     boolean IsNumber();
     boolean IsStructure();
 };
@@ -150,8 +180,8 @@ interface Project {
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
 
-    [Const, Ref] DOMString FREE_GetTypeOfAutomatism([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
-    [Const, Ref] DOMString FREE_GetTypeOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
+    [Const, Value] DOMString FREE_GetTypeOfAutomatism([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
+    [Const, Value] DOMString FREE_GetTypeOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
     [Value] VectorString FREE_GetAutomatismsOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
 
     //Inherited from gd::ClassWithObjects
@@ -279,7 +309,7 @@ interface Resource {
     boolean UseFile();
     void SetFile([Const] DOMString file);
     [Const, Ref] DOMString GetFile();
-    [Const, Ref] DOMString GetAbsoluteFile([Const, Ref] Project project);
+    [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
@@ -299,7 +329,7 @@ interface ImageResource {
     boolean UseFile();
     void SetFile([Const] DOMString file);
     [Const, Ref] DOMString GetFile();
-    [Const, Ref] DOMString GetAbsoluteFile([Const, Ref] Project project);
+    [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
@@ -320,6 +350,7 @@ interface MapStringPropertyDescriptor {
     [Ref] PropertyDescriptor MAP_get([Const] DOMString name);
     void MAP_set([Const] DOMString name, [Const, Ref] PropertyDescriptor prop);
     boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
 };
 
 interface InitialInstance {
@@ -372,6 +403,10 @@ interface InitialInstancesContainer {
     [Ref] InitialInstance InsertInitialInstance([Const, Ref] InitialInstance inst);
 };
 
+interface HighestZOrderFinder {
+    void HighestZOrderFinder();
+};
+
 interface InitialInstanceFunctor {};
 interface InitialInstanceJSFunctorWrapper {};
 [JSImplementation="InitialInstanceJSFunctorWrapper"]
@@ -382,10 +417,11 @@ interface InitialInstanceJSFunctor {
 };
 
 interface SerializerElement {
+    void SerializerElement();
 };
 
 interface Serializer {
-    [Const, Ref] DOMString STATIC_ToJSON([Const, Ref] SerializerElement element);
+    [Const, Value] DOMString STATIC_ToJSON([Const, Ref] SerializerElement element);
     [Value] SerializerElement STATIC_FromJSON([Const] DOMString json);
 };
 
@@ -411,7 +447,7 @@ interface InstructionsList {
 interface Instruction {
     void Instruction();
 
-    //Clone
+    Instruction CLONE_Instruction();
     void SetType([Const] DOMString type);
     [Const, Ref] DOMString GetType();
     void SetInverted(boolean inverted);
@@ -442,13 +478,13 @@ interface InstructionSentenceFormatter {
     [Const, Value] DOMString Translate([Const, Ref] Instruction instr, [Const, Ref] InstructionMetadata metadat);
     [Value] VectorPairStringTextFormatting GetAsFormattedText([Const, Ref] Instruction instr, [Const, Ref] InstructionMetadata metadat);
     [Value] TextFormatting GetFormattingFromType([Const] DOMString type);
-    [Const, Ref] DOMString LabelFromType([Const] DOMString type);
+    [Const, Value] DOMString LabelFromType([Const] DOMString type);
     void LoadTypesFormattingFromConfig();
 };
 
 [NoDelete, Prefix="gdjs::"]
 interface EventsCodeGenerator {
-    [Const] DOMString STATIC_GenerateSceneEventsCompleteCode([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Ref] SetString includes, boolean compilationForRuntime);
+    [Const, Value] DOMString STATIC_GenerateSceneEventsCompleteCode([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Ref] SetString includes, boolean compilationForRuntime);
 };
 
 interface InstructionMetadata {
@@ -499,6 +535,12 @@ interface AutomatismMetadata {
     [Const, Ref] DOMString GetDescription();
     [Const, Ref] DOMString GetGroup();
     [Const, Ref] DOMString GetIconFilename();
+};
+
+interface EventMetadata {
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetGroup();
 };
 
 interface PlatformExtension {
@@ -735,19 +777,19 @@ interface AbstractFileSystemJS {
     void MkDir([Const] DOMString dir);
     void DirExists([Const] DOMString dir);
     void ClearDir([Const] DOMString dir);
-    [Const, Ref] DOMString GetTempDir();
-    [Const, Ref] DOMString FileNameFrom([Const] DOMString dir);
-    [Const, Ref] DOMString DirNameFrom([Const] DOMString dir);
+    [Const, Ref] StdString GetTempDir();
+    [Const, Ref] StdString FileNameFrom([Const] DOMString dir);
+    [Const, Ref] StdString DirNameFrom([Const] DOMString dir);
     //void MakeAbsolute([Const] DOMString dir);
     //void MakeRelative([Const] DOMString dir);
     boolean IsAbsolute([Const] DOMString fn);
     void CopyFile([Const] DOMString src, [Const] DOMString dest);
     void WriteToFile([Const] DOMString fn, [Const] DOMString content);
-    [Const, Ref] DOMString ReadFile([Const] DOMString fn);
+    [Const, Ref] StdString ReadFile([Const] DOMString fn);
     [Value] VectorString ReadDir([Const] DOMString dir);
     boolean FileExists([Const] DOMString fn);
-};*/
-
+};
+*/
 interface ProjectResourcesAdder {
     void STATIC_AddAllMissingImages([Ref] Project project);
     void STATIC_GetAllUselessResources([Ref] Project project);
@@ -807,7 +849,7 @@ interface Direction {
     void Direction();
 
     void AddSprite([Const, Ref] Sprite sprite);
-    [Const, Ref] Sprite GetSprite(unsigned long index);
+    [Ref] Sprite GetSprite(unsigned long index);
     unsigned long GetSpritesCount();
     boolean HasNoSprites();
     void RemoveSprite(unsigned long index);
@@ -839,6 +881,24 @@ interface SpriteObject {
     void RemoveAllAnimations();
     boolean HasNoAnimations();
     void SwapAnimations(unsigned long first, unsigned long second);
+
+    //Inherited from gdObject:
+    gdObject Clone();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetType([Const] DOMString type);
+    [Const, Ref] DOMString GetType();
+
+    [Ref]VariablesContainer GetVariables();
+    [Value] VectorString GetAllAutomatismNames();
+    boolean HasAutomatismNamed([Const] DOMString name);
+    Automatism AddNewAutomatism([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
+    [Ref] Automatism GetAutomatism([Const] DOMString name);
+    void RemoveAutomatism([Const] DOMString name);
+    boolean RenameAutomatism([Const] DOMString oldBame, [Const] DOMString name);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 [Prefix="sf::"]
@@ -871,6 +931,24 @@ interface TextObject {
     unsigned long GetColorR();
     unsigned long GetColorG();
     unsigned long GetColorB();
+
+    //Inherited from gdObject:
+    gdObject Clone();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetType([Const] DOMString type);
+    [Const, Ref] DOMString GetType();
+
+    [Ref]VariablesContainer GetVariables();
+    [Value] VectorString GetAllAutomatismNames();
+    boolean HasAutomatismNamed([Const] DOMString name);
+    Automatism AddNewAutomatism([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
+    [Ref] Automatism GetAutomatism([Const] DOMString name);
+    void RemoveAutomatism([Const] DOMString name);
+    boolean RenameAutomatism([Const] DOMString oldBame, [Const] DOMString name);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 interface TiledSpriteObject {
@@ -882,4 +960,22 @@ interface TiledSpriteObject {
     float GetWidth();
     void SetHeight(float height);
     float GetHeight();
+
+    //Inherited from gdObject:
+    gdObject Clone();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetType([Const] DOMString type);
+    [Const, Ref] DOMString GetType();
+
+    [Ref]VariablesContainer GetVariables();
+    [Value] VectorString GetAllAutomatismNames();
+    boolean HasAutomatismNamed([Const] DOMString name);
+    Automatism AddNewAutomatism([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
+    [Ref] Automatism GetAutomatism([Const] DOMString name);
+    void RemoveAutomatism([Const] DOMString name);
+    boolean RenameAutomatism([Const] DOMString oldBame, [Const] DOMString name);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
