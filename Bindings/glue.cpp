@@ -1,16 +1,7 @@
 
 #include <emscripten.h>
 
-class ArbitraryResourceWorkerJS : public ArbitraryResourceWorker {
-public:
-  void __destroy__() {
-    EM_ASM_INT({
-      var self = Module['getCache'](Module['ArbitraryResourceWorkerJS'])[$0];
-      if (!self.hasOwnProperty('__destroy__')) throw 'a JSImplementation must implement all functions, you forgot ArbitraryResourceWorkerJS::__destroy__.';
-      self.__destroy__();
-    }, (int)this);
-  }
-};
+
 
 class InitialInstanceJSFunctor : public InitialInstanceJSFunctorWrapper {
 public:
@@ -258,6 +249,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent_Clone_0(WhileEvent* self) {
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent_GetType_0(WhileEvent* self) {
   return self->GetType().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent_SetType_1(WhileEvent* self, char* arg0) {
+  self->SetType(arg0);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent_IsExecutable_0(WhileEvent* self) {
@@ -533,6 +528,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ForEachEvent_Clone_0(ForEachEvent* sel
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ForEachEvent_GetType_0(ForEachEvent* self) {
   return self->GetType().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ForEachEvent_SetType_1(ForEachEvent* self, char* arg0) {
+  self->SetType(arg0);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ForEachEvent_IsExecutable_0(ForEachEvent* self) {
@@ -829,6 +828,13 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_PairStringVariable___destroy___0(PairS
 
 // ArbitraryResourceWorkerJS
 
+ArbitraryResourceWorkerJS* EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS_ArbitraryResourceWorkerJS_0() {
+  return new ArbitraryResourceWorkerJS();
+}
+
+
+
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(ArbitraryResourceWorkerJS* self) {
   delete self;
 }
@@ -845,6 +851,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_Clone_0(BaseEvent* self) {
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_GetType_0(BaseEvent* self) {
   return self->GetType().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_SetType_1(BaseEvent* self, char* arg0) {
+  self->SetType(arg0);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_IsExecutable_0(BaseEvent* self) {
@@ -1046,6 +1056,10 @@ unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_size_0(Instru
   return self->size();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_WRAPPED_set_2(InstructionsList* self, unsigned int arg0, Instruction* arg1) {
+  self->WRAPPED_set(arg0, *arg1);
+}
+
 Instruction* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_Get_1(InstructionsList* self, unsigned int arg0) {
   return &self->Get(arg0);
 }
@@ -1140,6 +1154,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_RepeatEvent_Clone_0(RepeatEvent* self)
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_RepeatEvent_GetType_0(RepeatEvent* self) {
   return self->GetType().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_RepeatEvent_SetType_1(RepeatEvent* self, char* arg0) {
+  self->SetType(arg0);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_RepeatEvent_IsExecutable_0(RepeatEvent* self) {
@@ -1362,6 +1380,10 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_GroupEvent_GetType_0(GroupEvent
   return self->GetType().c_str();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_GroupEvent_SetType_1(GroupEvent* self, char* arg0) {
+  self->SetType(arg0);
+}
+
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_GroupEvent_IsExecutable_0(GroupEvent* self) {
   return self->IsExecutable();
 }
@@ -1563,10 +1585,81 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension___destroy___0(Platfo
   delete self;
 }
 
+// AbstractFileSystemJS
+
+AbstractFileSystemJS* EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_AbstractFileSystemJS_0() {
+  return new AbstractFileSystemJS();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_MkDir_1(AbstractFileSystemJS* self, char* arg0) {
+  self->MkDir(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_DirExists_1(AbstractFileSystemJS* self, char* arg0) {
+  self->DirExists(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_ClearDir_1(AbstractFileSystemJS* self, char* arg0) {
+  self->ClearDir(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_GetTempDir_0(AbstractFileSystemJS* self) {
+  return self->GetTempDir().c_str();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_FileNameFrom_1(AbstractFileSystemJS* self, char* arg0) {
+  return self->FileNameFrom(arg0).c_str();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_DirNameFrom_1(AbstractFileSystemJS* self, char* arg0) {
+  return self->DirNameFrom(arg0).c_str();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_IsAbsolute_1(AbstractFileSystemJS* self, char* arg0) {
+  return self->IsAbsolute(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_CopyFile_2(AbstractFileSystemJS* self, char* arg0, char* arg1) {
+  self->CopyFile(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_WriteToFile_2(AbstractFileSystemJS* self, char* arg0, char* arg1) {
+  self->WriteToFile(arg0, arg1);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_ReadFile_1(AbstractFileSystemJS* self, char* arg0) {
+  return self->ReadFile(arg0).c_str();
+}
+
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_ReadDir_1(AbstractFileSystemJS* self, char* arg0) {
+  static VectorString temp;
+  return (temp = self->ReadDir(arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS_FileExists_1(AbstractFileSystemJS* self, char* arg0) {
+  return self->FileExists(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystemJS___destroy___0(AbstractFileSystemJS* self) {
+  delete self;
+}
+
 // HighestZOrderFinder
 
 HighestZOrderFinder* EMSCRIPTEN_KEEPALIVE emscripten_bind_HighestZOrderFinder_HighestZOrderFinder_0() {
   return new HighestZOrderFinder();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_HighestZOrderFinder_RestrictSearchToLayer_1(HighestZOrderFinder* self, char* arg0) {
+  self->RestrictSearchToLayer(arg0);
+}
+
+int EMSCRIPTEN_KEEPALIVE emscripten_bind_HighestZOrderFinder_GetHighestZOrder_0(HighestZOrderFinder* self) {
+  return self->GetHighestZOrder();
+}
+
+int EMSCRIPTEN_KEEPALIVE emscripten_bind_HighestZOrderFinder_GetLowestZOrder_0(HighestZOrderFinder* self) {
+  return self->GetLowestZOrder();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_HighestZOrderFinder___destroy___0(HighestZOrderFinder* self) {
@@ -1812,6 +1905,10 @@ ResourcesManager* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetResourcesManag
   return &self->GetResourcesManager();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_ExposeResources_1(Project* self, ArbitraryResourceWorker* arg0) {
+  self->ExposeResources(*arg0);
+}
+
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_STATIC_ValidateObjectName_1(Project* self, char* arg0) {
   return self->STATIC_ValidateObjectName(arg0);
 }
@@ -2035,6 +2132,10 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_GetType_0(CommentE
   return self->GetType().c_str();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_SetType_1(CommentEvent* self, char* arg0) {
+  self->SetType(arg0);
+}
+
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_IsExecutable_0(CommentEvent* self) {
   return self->IsExecutable();
 }
@@ -2118,6 +2219,12 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetDefaultCenterPoint_1(Sprite*
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite___destroy___0(Sprite* self) {
+  delete self;
+}
+
+// AbstractFileSystem
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystem___destroy___0(AbstractFileSystem* self) {
   delete self;
 }
 
@@ -2380,6 +2487,28 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorString_clear_0(VectorString* sel
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorString___destroy___0(VectorString* self) {
+  delete self;
+}
+
+// Exporter
+
+gdjs::Exporter* EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_Exporter_1(AbstractFileSystem* arg0) {
+  return new gdjs::Exporter(*arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportLayoutForPreview_3(gdjs::Exporter* self, Project* arg0, Layout* arg1, char* arg2) {
+  return self->ExportLayoutForPreview(*arg0, *arg1, arg2);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportWholeProject_5(gdjs::Exporter* self, Project* arg0, char* arg1, bool arg2, bool arg3, bool arg4) {
+  return self->ExportWholeProject(*arg0, arg1, arg2, arg3, arg4);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_GetLastError_0(gdjs::Exporter* self) {
+  return self->GetLastError().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter___destroy___0(gdjs::Exporter* self) {
   delete self;
 }
 
@@ -2686,6 +2815,10 @@ const MapStringString* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersList
   return &self->GetParametersAndTypes();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister_Launch_1(EventsParametersLister* self, EventsList* arg0) {
+  self->Launch(*arg0);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister___destroy___0(EventsParametersLister* self) {
   delete self;
 }
@@ -2921,6 +3054,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_Clone_0(StandardEvent* s
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_GetType_0(StandardEvent* self) {
   return self->GetType().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_SetType_1(StandardEvent* self, char* arg0) {
+  self->SetType(arg0);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_IsExecutable_0(StandardEvent* self) {

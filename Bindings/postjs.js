@@ -3,7 +3,7 @@ var gd = Module;
 
 // Make sure that the naming convention for methods of GDevelop
 // classes is camelCase (instead of CamelCase) and rename methods
-// starting by WRAPPED_.
+// with special names (like `WRAPPED_`, `STATIC_`...).
 (function(gd) {
     function uncapitalizeFirstLetter(method) {
         return method.charAt(0).toLowerCase() + method.slice(1);
@@ -73,6 +73,10 @@ var gd = Module;
     gd.asCommentEvent = function(evt) { return gd.castObject(evt, gd.CommentEvent); }
     gd.asGroupEvent = function(evt) { return gd.castObject(evt, gd.GroupEvent); }
     gd.asPlatform = function(evt) { return gd.castObject(evt, gd.Platform); }
+
+    gd.asSpriteObject = function(evt) { return gd.castObject(evt, gd.SpriteObject); }
+    gd.asTiledSpriteObject = function(evt) { return gd.castObject(evt, gd.TiledSpriteObject); }
+    gd.asTextObject = function(evt) { return gd.castObject(evt, gd.TextObject); }
 
     //Preserve backward compatibility with some alias for methods:
     gd.VectorString.prototype.get = gd.VectorString.prototype.at;

@@ -3,18 +3,30 @@
   "version": "0.0.1",
   "author": "Florian Rival <florian.rival@gmail.com> (http://florianrival.com)",
   "description": "Core of GDevelop, the open-source game creator requiring no programming skills, ported to Javascript",
-  "keywords": ["GDevelop", "game", "creator", "events", "programming", "making", "port"],
+  "keywords": [
+    "GDevelop",
+    "game",
+    "creator",
+    "events",
+    "programming",
+    "making",
+    "port"
+  ],
   "license": "MIT",
   "devDependencies": {
-    "grunt": "latest",
-    "mocha": "~1.18.2",
     "expect.js": "~0.3.1",
+    "extend": "^2.0.1",
+    "grunt": "latest",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-compress": "^0.8.0",
+    "grunt-contrib-concat": "^0.4.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-uglify": "^0.4.0",
+    "grunt-mkdir": "^0.1.2",
     "grunt-mocha": "~0.4.10",
     "grunt-mocha-cli": "~1.8.0",
-    "grunt-contrib-copy": "~0.5.0",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-uglify": "^0.4.0",
-    "grunt-contrib-compress": "^0.8.0",
-    "grunt-contrib-concat": "^0.4.0"
+    "grunt-newer": "^1.1.0",
+    "grunt-shell": "^1.1.2",
+    "mocha": "~1.18.2"
   }
 }

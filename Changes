@@ -1,6 +1,3 @@
 Changes:
-InstructionsList
-InitialInstanceFunctor.implement
 gd.EventsCodeGenerator.generateSceneEventsCompleteCode
 [Value]
-Remove delete() for .keys() returned objects?

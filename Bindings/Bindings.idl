@@ -174,7 +174,7 @@ interface Project {
 
     [Ref] VariablesContainer GetVariables();
     [Ref] ResourcesManager GetResourcesManager();
-    //exposeResources
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
     boolean STATIC_ValidateObjectName([Const] DOMString name);
     boolean IsDirty();
     void SerializeTo([Ref] SerializerElement element);
@@ -405,6 +405,10 @@ interface InitialInstancesContainer {
 
 interface HighestZOrderFinder {
     void HighestZOrderFinder();
+
+    void RestrictSearchToLayer([Const] DOMString layer);
+    long GetHighestZOrder();
+    long GetLowestZOrder();
 };
 
 interface InitialInstanceFunctor {};
@@ -439,6 +443,7 @@ interface InstructionsList {
 
     void Insert([Const, Ref] Instruction instr, unsigned long pos);
     unsigned long size();
+    void WRAPPED_set(unsigned long index, [Const, Ref] Instruction instr);
     [Ref] Instruction Get(unsigned long index);
     void Remove(unsigned long index);
     void Clear();
@@ -480,11 +485,6 @@ interface InstructionSentenceFormatter {
     [Value] TextFormatting GetFormattingFromType([Const] DOMString type);
     [Const, Value] DOMString LabelFromType([Const] DOMString type);
     void LoadTypesFormattingFromConfig();
-};
-
-[NoDelete, Prefix="gdjs::"]
-interface EventsCodeGenerator {
-    [Const, Value] DOMString STATIC_GenerateSceneEventsCompleteCode([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Ref] SetString includes, boolean compilationForRuntime);
 };
 
 interface InstructionMetadata {
@@ -597,6 +597,7 @@ interface BaseEvent {
 
     void Clone();
     [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
     boolean IsExecutable();
     boolean CanHaveSubEvents();
     boolean HasSubEvents();
@@ -616,6 +617,7 @@ interface StandardEvent {
     //Inherited from BaseEvent:
     void Clone();
     [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
     boolean IsExecutable();
     boolean CanHaveSubEvents();
     boolean HasSubEvents();
@@ -637,6 +639,7 @@ interface RepeatEvent {
     //Inherited from BaseEvent:
     void Clone();
     [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
     boolean IsExecutable();
     boolean CanHaveSubEvents();
     boolean HasSubEvents();
@@ -657,6 +660,7 @@ interface WhileEvent {
     //Inherited from BaseEvent:
     void Clone();
     [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
     boolean IsExecutable();
     boolean CanHaveSubEvents();
     boolean HasSubEvents();
@@ -678,6 +682,7 @@ interface ForEachEvent {
     //Inherited from BaseEvent:
     void Clone();
     [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
     boolean IsExecutable();
     boolean CanHaveSubEvents();
     boolean HasSubEvents();
@@ -697,6 +702,7 @@ interface CommentEvent {
     //Inherited from BaseEvent:
     void Clone();
     [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
     boolean IsExecutable();
     boolean CanHaveSubEvents();
     boolean HasSubEvents();
@@ -725,6 +731,7 @@ interface GroupEvent {
     //Inherited from BaseEvent:
     void Clone();
     [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
     boolean IsExecutable();
     boolean CanHaveSubEvents();
     boolean HasSubEvents();
@@ -768,28 +775,29 @@ interface MetadataProvider {
     boolean STATIC_HasAutomatismStrExpression([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
 };
 
-/*
 interface AbstractFileSystem {
 };
 
 [JSImplementation="AbstractFileSystem"]
 interface AbstractFileSystemJS {
+    void AbstractFileSystemJS();
+
     void MkDir([Const] DOMString dir);
     void DirExists([Const] DOMString dir);
     void ClearDir([Const] DOMString dir);
-    [Const, Ref] StdString GetTempDir();
-    [Const, Ref] StdString FileNameFrom([Const] DOMString dir);
-    [Const, Ref] StdString DirNameFrom([Const] DOMString dir);
+    [Const, Ref] DOMString GetTempDir();
+    [Const, Ref] DOMString FileNameFrom([Const] DOMString dir);
+    [Const, Ref] DOMString DirNameFrom([Const] DOMString dir);
     //void MakeAbsolute([Const] DOMString dir);
     //void MakeRelative([Const] DOMString dir);
     boolean IsAbsolute([Const] DOMString fn);
     void CopyFile([Const] DOMString src, [Const] DOMString dest);
     void WriteToFile([Const] DOMString fn, [Const] DOMString content);
-    [Const, Ref] StdString ReadFile([Const] DOMString fn);
+    [Const, Ref] DOMString ReadFile([Const] DOMString fn);
     [Value] VectorString ReadDir([Const] DOMString dir);
     boolean FileExists([Const] DOMString fn);
 };
-*/
+
 interface ProjectResourcesAdder {
     void STATIC_AddAllMissingImages([Ref] Project project);
     void STATIC_GetAllUselessResources([Ref] Project project);
@@ -803,17 +811,20 @@ interface ArbitraryEventsWorker {
 interface EventsParametersLister {
     void EventsParametersLister([Ref] Project project);
     [Const, Ref] MapStringString GetParametersAndTypes();
+
+    //Inherited from ArbitraryEventsWorker
+    void Launch([Ref] EventsList events);
 };
 
 interface ArbitraryResourceWorker {
 };
 [JSImplementation="ArbitraryResourceWorker"]
 interface ArbitraryResourceWorkerJS {
-    //TODO: Wrapper?
+    void ArbitraryResourceWorkerJS();
 
-    //ExposeImage
-    //ExposeShader
-    //ExposeFile
+    void ExposeImage([Ref] DOMString image);
+    void ExposeShader([Ref] DOMString shader);
+    void ExposeFile([Ref] DOMString file);
 };
 
 //SpriteObject:
@@ -978,4 +989,21 @@ interface TiledSpriteObject {
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+//GDJS bindings:
+
+[NoDelete, Prefix="gdjs::"]
+interface EventsCodeGenerator {
+    [Const, Value] DOMString STATIC_GenerateSceneEventsCompleteCode([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Ref] SetString includes, boolean compilationForRuntime);
+};
+
+[Prefix="gdjs::"]
+interface Exporter {
+    void Exporter([Ref] AbstractFileSystem fs);
+
+    boolean ExportLayoutForPreview([Ref] Project project, [Ref] Layout layout, [Const] DOMString exportDir);
+    boolean ExportWholeProject([Ref] Project project, [Const] DOMString exportDir,
+        boolean minify, boolean exportForCocoonJS, boolean exportForIntelXDK);
+    [Const, Ref] DOMString GetLastError();
 };

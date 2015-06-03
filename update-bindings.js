@@ -55,11 +55,15 @@ function generateGlueFromBinding(cb) {
  */
 function patchGlueCppFile(cb) {
 	var file = 'Bindings/glue.cpp';
+	var classesToErase = ['ArbitraryResourceWorkerJS', 'AbstractFileSystemJS'];
+	var functionsToErase = ['emscripten_bind_ArbitraryResourceWorkerJS_ExposeImage_1', 'emscripten_bind_ArbitraryResourceWorkerJS_ExposeShader_1', 'emscripten_bind_ArbitraryResourceWorkerJS_ExposeFile_1'];
 	fs.readFile(file, function (err, data) {
 		if (err) cb(err);
 
 		var patchedFile = "";
 		var insideReturnStringFunction = false;
+		var erasingClass = false;
+		var erasingFunction = false;
 		data.toString().split('\n').forEach(function (line) {
 			//When declaring a function returning "[Const, Ref] DOMString"
 			//or "[Const, Value] DOMString"
@@ -117,11 +121,35 @@ function patchGlueCppFile(cb) {
 					+ "++it) { temp.push_back(it->first); } return &temp;"
 			}
 
-			patchedFile += line + "\n";
+			if (line.indexOf("class") === 0) {
+				for(var i = 0;i < classesToErase.length;++i) {
+					if (line.indexOf("class " + classesToErase[i]) === 0) {
+						erasingClass = true;
+					}
+				}
+			}
+			if (line.indexOf("EMSCRIPTEN_KEEPALIVE") !== -1) {
+				for(var i = 0;i < functionsToErase.length;++i) {
+					if (line.indexOf("EMSCRIPTEN_KEEPALIVE " + functionsToErase[i] + "(") !== -1) {
+						erasingFunction = true;
+					}
+				}
+			}
+
+			if (!erasingClass && !erasingFunction)
+				patchedFile += line + "\n";
+
 			if (line.indexOf("const char* EMSCRIPTEN_KEEPALIVE") == 0) {
 				insideReturnStringFunction = true;
 			} else if (line.indexOf("}") == 0) {
 				insideReturnStringFunction = false;
+			}
+
+			if (erasingClass && line.indexOf("};") === 0) {
+				erasingClass = false;
+			}
+			if (erasingFunction && line.indexOf("}") === 0) {
+				erasingFunction = false;
 			}
 		});
 

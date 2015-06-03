@@ -1,4 +1,6 @@
 var gd = require('../../Binaries/Output/WebIDE/Release/libGD.js');
+var path = require('path');
+var extend = require('extend');
 var expect = require('expect.js');
 
 describe('libGD.js', function(){
@@ -337,6 +339,26 @@ describe('libGD.js', function(){
 			expect(allResources.get(0)).to.be("Used");
 		});
 
+		after(function() {project.delete();});
+	});
+
+	describe('gd.ArbitraryResourceWorker', function(){
+		var project = gd.ProjectHelper.createNewGDJSProject();
+		var obj = project.insertNewObject(project, "Sprite", "MyObject", 0);
+		var sprite1 = new gd.Sprite();
+		sprite1.setImageName("Used");
+
+		it('should be called with resources of the project', function() {
+			var worker = extend(new gd.ArbitraryResourceWorkerJS(), {
+				exposeImage: function(image) {
+ 					console.log(image);
+				}
+			})
+
+			project.exposeResources(worker);
+		});
+
+		after(function() {project.delete();});
 	});
 
 	describe('gd.Object', function(){
@@ -410,6 +432,16 @@ describe('libGD.js', function(){
 			list.insert(new gd.Instruction(), 0);
 			expect(list.size()).to.be(1);
 		});
+		it('can modify its instructions', function(){
+			expect(list.get(0).getType()).to.be("");
+
+			var newInstr = new gd.Instruction();
+			newInstr.setType("Type2");
+			list.set(0, newInstr);
+
+			expect(list.get(0).getType()).to.be("Type2");
+			expect(list.size()).to.be(1);
+		});
 		it('should clear its instructions', function(){
 			list.clear();
 			expect(list.size()).to.be(0);
@@ -475,6 +507,50 @@ describe('libGD.js', function(){
 			}
 		});
 
+		after(function() {
+			project.delete();
+			list.delete();
+		});
+	});
+
+	describe('gd.ArbitraryEventsWorker', function() {
+		var project = new gd.ProjectHelper.createNewGDJSProject();
+		var list = new gd.EventsList();
+
+		describe('gd.EventsParametersLister', function() {
+			var evt = new gd.StandardEvent();
+			var actions = evt.getActions();
+			var act = new gd.Instruction();
+			act.setType("Delete");
+			act.setParametersCount(1);
+			act.setParameter(0, "MyObject");
+			actions.push_back(act);
+			evt = list.insertEvent(evt, 0);
+
+			var subEvt = new gd.StandardEvent();
+			var conditions = subEvt.getConditions();
+			var cnd = new gd.Instruction();
+			cnd.setType("PosX");
+			cnd.setParametersCount(3);
+			cnd.setParameter(0, "MyObject");
+			cnd.setParameter(1, "<");
+			cnd.setParameter(2, "300");
+			conditions.push_back(cnd);
+			evt.getSubEvents().insertEvent(subEvt, 0);
+
+			var parametersLister = new gd.EventsParametersLister(project);
+			parametersLister.launch(list);
+
+			//Check that we collected the parameters and their types
+			expect(parametersLister.getParametersAndTypes().keys().size()).to.be(3);
+			expect(parametersLister.getParametersAndTypes().get("MyObject")).to.be("object");
+			expect(parametersLister.getParametersAndTypes().get("300")).to.be("expression");
+		});
+
+		after(function() {
+			project.delete();
+			list.delete();
+		});
 	});
 
 	describe('gd.GroupEvent', function(){
@@ -510,7 +586,6 @@ describe('libGD.js', function(){
 	});
 
 	describe('gd.StandardEvent', function(){
-		//TODO
 		var evt = new gd.StandardEvent();
 
 		it('initial values', function(){
@@ -632,6 +707,31 @@ describe('libGD.js', function(){
 				expect(autoMetadata.getIconFilename).not.to.be(undefined);
 			});
 		});
-		//TODO: gd.AutomatismMetadata
+	});
+
+	describe('gd.Exporter (and gd.AbstractFileSystemJS)', function() {
+		var fs = new gd.AbstractFileSystemJS();
+		var project = new gd.ProjectHelper.createNewGDJSProject();
+		var layout = project.insertNewLayout("Scene", 0);
+
+		it('should export a layout for preview', function(done) {
+			fs.mkDir = fs.clearDir = function() {}
+			fs.getTempDir = function(path) { return "/tmp/"; }
+    		fs.fileNameFrom = function(fullpath) {
+        		return path.basename(fullpath);
+    		}
+    		fs.dirNameFrom = function(fullpath) {
+        		return path.dirname(fullpath);
+    		}
+    		fs.writeToFile = function(path, content) {
+        		expect(content).to.match(/context.startNewFrame/);
+        		done();
+    		}
+
+			var exporter = new gd.Exporter(fs);
+			exporter.exportLayoutForPreview(project, layout, "/path/for/export/");
+			exporter.delete();
+		})
+
 	});
 });

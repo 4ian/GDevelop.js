@@ -470,6 +470,13 @@ WhileEvent.prototype['GetType'] = function() {
   return Pointer_stringify(_emscripten_bind_WhileEvent_GetType_0(self));
 };;
 
+WhileEvent.prototype['SetType'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_WhileEvent_SetType_1(self, arg0);
+};;
+
 WhileEvent.prototype['IsExecutable'] = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_WhileEvent_IsExecutable_0(self));
@@ -889,6 +896,13 @@ ForEachEvent.prototype['Clone'] = function() {
 ForEachEvent.prototype['GetType'] = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ForEachEvent_GetType_0(self));
+};;
+
+ForEachEvent.prototype['SetType'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ForEachEvent_SetType_1(self, arg0);
 };;
 
 ForEachEvent.prototype['IsExecutable'] = function() {
@@ -1354,12 +1368,36 @@ PairStringVariable.prototype['WRAPPED_GetVariable'] = function() {
   _emscripten_bind_PairStringVariable___destroy___0(self);
 };
 // ArbitraryResourceWorkerJS
-function ArbitraryResourceWorkerJS() { throw "cannot construct a ArbitraryResourceWorkerJS, no constructor in IDL" }
+function ArbitraryResourceWorkerJS() {
+  this.ptr = _emscripten_bind_ArbitraryResourceWorkerJS_ArbitraryResourceWorkerJS_0();
+  getCache(ArbitraryResourceWorkerJS)[this.ptr] = this;
+};;
 ArbitraryResourceWorkerJS.prototype = Object.create(ArbitraryResourceWorker.prototype);
 ArbitraryResourceWorkerJS.prototype.constructor = ArbitraryResourceWorkerJS;
 ArbitraryResourceWorkerJS.prototype.__class__ = ArbitraryResourceWorkerJS;
 ArbitraryResourceWorkerJS.__cache__ = {};
 Module['ArbitraryResourceWorkerJS'] = ArbitraryResourceWorkerJS;
+
+ArbitraryResourceWorkerJS.prototype['ExposeImage'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeImage_1(self, arg0);
+};;
+
+ArbitraryResourceWorkerJS.prototype['ExposeShader'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeShader_1(self, arg0);
+};;
+
+ArbitraryResourceWorkerJS.prototype['ExposeFile'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeFile_1(self, arg0);
+};;
 
   ArbitraryResourceWorkerJS.prototype['__destroy__'] = function() {
   var self = this.ptr;
@@ -1384,6 +1422,13 @@ BaseEvent.prototype['Clone'] = function() {
 BaseEvent.prototype['GetType'] = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_BaseEvent_GetType_0(self));
+};;
+
+BaseEvent.prototype['SetType'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_BaseEvent_SetType_1(self, arg0);
 };;
 
 BaseEvent.prototype['IsExecutable'] = function() {
@@ -1717,6 +1762,15 @@ InstructionsList.prototype['size'] = function() {
   return _emscripten_bind_InstructionsList_size_0(self);
 };;
 
+InstructionsList.prototype['WRAPPED_set'] = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  _emscripten_bind_InstructionsList_WRAPPED_set_2(self, arg0, arg1);
+};;
+
 InstructionsList.prototype['Get'] = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
@@ -1856,6 +1910,13 @@ RepeatEvent.prototype['Clone'] = function() {
 RepeatEvent.prototype['GetType'] = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_RepeatEvent_GetType_0(self));
+};;
+
+RepeatEvent.prototype['SetType'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_RepeatEvent_SetType_1(self, arg0);
 };;
 
 RepeatEvent.prototype['IsExecutable'] = function() {
@@ -2196,6 +2257,13 @@ GroupEvent.prototype['GetType'] = function() {
   return Pointer_stringify(_emscripten_bind_GroupEvent_GetType_0(self));
 };;
 
+GroupEvent.prototype['SetType'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_GroupEvent_SetType_1(self, arg0);
+};;
+
 GroupEvent.prototype['IsExecutable'] = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_GroupEvent_IsExecutable_0(self));
@@ -2494,6 +2562,107 @@ PlatformExtension.prototype['GetAllStrExpressionsForAutomatism'] = function(arg0
   var self = this.ptr;
   _emscripten_bind_PlatformExtension___destroy___0(self);
 };
+// AbstractFileSystemJS
+function AbstractFileSystemJS() {
+  this.ptr = _emscripten_bind_AbstractFileSystemJS_AbstractFileSystemJS_0();
+  getCache(AbstractFileSystemJS)[this.ptr] = this;
+};;
+AbstractFileSystemJS.prototype = Object.create(AbstractFileSystem.prototype);
+AbstractFileSystemJS.prototype.constructor = AbstractFileSystemJS;
+AbstractFileSystemJS.prototype.__class__ = AbstractFileSystemJS;
+AbstractFileSystemJS.__cache__ = {};
+Module['AbstractFileSystemJS'] = AbstractFileSystemJS;
+
+AbstractFileSystemJS.prototype['MkDir'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_AbstractFileSystemJS_MkDir_1(self, arg0);
+};;
+
+AbstractFileSystemJS.prototype['DirExists'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_AbstractFileSystemJS_DirExists_1(self, arg0);
+};;
+
+AbstractFileSystemJS.prototype['ClearDir'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_AbstractFileSystemJS_ClearDir_1(self, arg0);
+};;
+
+AbstractFileSystemJS.prototype['GetTempDir'] = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_AbstractFileSystemJS_GetTempDir_0(self));
+};;
+
+AbstractFileSystemJS.prototype['FileNameFrom'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return Pointer_stringify(_emscripten_bind_AbstractFileSystemJS_FileNameFrom_1(self, arg0));
+};;
+
+AbstractFileSystemJS.prototype['DirNameFrom'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return Pointer_stringify(_emscripten_bind_AbstractFileSystemJS_DirNameFrom_1(self, arg0));
+};;
+
+AbstractFileSystemJS.prototype['IsAbsolute'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_AbstractFileSystemJS_IsAbsolute_1(self, arg0));
+};;
+
+AbstractFileSystemJS.prototype['CopyFile'] = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  _emscripten_bind_AbstractFileSystemJS_CopyFile_2(self, arg0, arg1);
+};;
+
+AbstractFileSystemJS.prototype['WriteToFile'] = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  _emscripten_bind_AbstractFileSystemJS_WriteToFile_2(self, arg0, arg1);
+};;
+
+AbstractFileSystemJS.prototype['ReadFile'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return Pointer_stringify(_emscripten_bind_AbstractFileSystemJS_ReadFile_1(self, arg0));
+};;
+
+AbstractFileSystemJS.prototype['ReadDir'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_AbstractFileSystemJS_ReadDir_1(self, arg0), VectorString);
+};;
+
+AbstractFileSystemJS.prototype['FileExists'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_AbstractFileSystemJS_FileExists_1(self, arg0));
+};;
+
+  AbstractFileSystemJS.prototype['__destroy__'] = function() {
+  var self = this.ptr;
+  _emscripten_bind_AbstractFileSystemJS___destroy___0(self);
+};
 // HighestZOrderFinder
 function HighestZOrderFinder() {
   this.ptr = _emscripten_bind_HighestZOrderFinder_HighestZOrderFinder_0();
@@ -2504,6 +2673,23 @@ HighestZOrderFinder.prototype.constructor = HighestZOrderFinder;
 HighestZOrderFinder.prototype.__class__ = HighestZOrderFinder;
 HighestZOrderFinder.__cache__ = {};
 Module['HighestZOrderFinder'] = HighestZOrderFinder;
+
+HighestZOrderFinder.prototype['RestrictSearchToLayer'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_HighestZOrderFinder_RestrictSearchToLayer_1(self, arg0);
+};;
+
+HighestZOrderFinder.prototype['GetHighestZOrder'] = function() {
+  var self = this.ptr;
+  return _emscripten_bind_HighestZOrderFinder_GetHighestZOrder_0(self);
+};;
+
+HighestZOrderFinder.prototype['GetLowestZOrder'] = function() {
+  var self = this.ptr;
+  return _emscripten_bind_HighestZOrderFinder_GetLowestZOrder_0(self);
+};;
 
   HighestZOrderFinder.prototype['__destroy__'] = function() {
   var self = this.ptr;
@@ -2881,6 +3067,13 @@ Project.prototype['GetResourcesManager'] = function() {
   return wrapPointer(_emscripten_bind_Project_GetResourcesManager_0(self), ResourcesManager);
 };;
 
+Project.prototype['ExposeResources'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Project_ExposeResources_1(self, arg0);
+};;
+
 Project.prototype['STATIC_ValidateObjectName'] = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
@@ -3254,6 +3447,13 @@ CommentEvent.prototype['GetType'] = function() {
   return Pointer_stringify(_emscripten_bind_CommentEvent_GetType_0(self));
 };;
 
+CommentEvent.prototype['SetType'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_CommentEvent_SetType_1(self, arg0);
+};;
+
 CommentEvent.prototype['IsExecutable'] = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_CommentEvent_IsExecutable_0(self));
@@ -3378,6 +3578,18 @@ Sprite.prototype['SetDefaultCenterPoint'] = function(arg0) {
   Sprite.prototype['__destroy__'] = function() {
   var self = this.ptr;
   _emscripten_bind_Sprite___destroy___0(self);
+};
+// AbstractFileSystem
+function AbstractFileSystem() { throw "cannot construct a AbstractFileSystem, no constructor in IDL" }
+AbstractFileSystem.prototype = Object.create(WrapperObject.prototype);
+AbstractFileSystem.prototype.constructor = AbstractFileSystem;
+AbstractFileSystem.prototype.__class__ = AbstractFileSystem;
+AbstractFileSystem.__cache__ = {};
+Module['AbstractFileSystem'] = AbstractFileSystem;
+
+  AbstractFileSystem.prototype['__destroy__'] = function() {
+  var self = this.ptr;
+  _emscripten_bind_AbstractFileSystem___destroy___0(self);
 };
 // ArbitraryEventsWorker
 function ArbitraryEventsWorker() { throw "cannot construct a ArbitraryEventsWorker, no constructor in IDL" }
@@ -3828,6 +4040,54 @@ VectorString.prototype['clear'] = function() {
   VectorString.prototype['__destroy__'] = function() {
   var self = this.ptr;
   _emscripten_bind_VectorString___destroy___0(self);
+};
+// Exporter
+function Exporter(arg0) {
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  this.ptr = _emscripten_bind_Exporter_Exporter_1(arg0);
+  getCache(Exporter)[this.ptr] = this;
+};;
+Exporter.prototype = Object.create(WrapperObject.prototype);
+Exporter.prototype.constructor = Exporter;
+Exporter.prototype.__class__ = Exporter;
+Exporter.__cache__ = {};
+Module['Exporter'] = Exporter;
+
+Exporter.prototype['ExportLayoutForPreview'] = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return !!(_emscripten_bind_Exporter_ExportLayoutForPreview_3(self, arg0, arg1, arg2));
+};;
+
+Exporter.prototype['ExportWholeProject'] = function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  return !!(_emscripten_bind_Exporter_ExportWholeProject_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
+Exporter.prototype['GetLastError'] = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Exporter_GetLastError_0(self));
+};;
+
+  Exporter.prototype['__destroy__'] = function() {
+  var self = this.ptr;
+  _emscripten_bind_Exporter___destroy___0(self);
 };
 // MetadataProvider
 function MetadataProvider() { throw "cannot construct a MetadataProvider, no constructor in IDL" }
@@ -4382,6 +4642,13 @@ EventsParametersLister.prototype['GetParametersAndTypes'] = function() {
   return wrapPointer(_emscripten_bind_EventsParametersLister_GetParametersAndTypes_0(self), MapStringString);
 };;
 
+EventsParametersLister.prototype['Launch'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_EventsParametersLister_Launch_1(self, arg0);
+};;
+
   EventsParametersLister.prototype['__destroy__'] = function() {
   var self = this.ptr;
   _emscripten_bind_EventsParametersLister___destroy___0(self);
@@ -4737,6 +5004,13 @@ StandardEvent.prototype['Clone'] = function() {
 StandardEvent.prototype['GetType'] = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_StandardEvent_GetType_0(self));
+};;
+
+StandardEvent.prototype['SetType'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_StandardEvent_SetType_1(self, arg0);
 };;
 
 StandardEvent.prototype['IsExecutable'] = function() {

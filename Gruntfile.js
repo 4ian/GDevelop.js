@@ -1,5 +1,15 @@
 module.exports = function(grunt) {
-    var buildDirectory = "../Binaries/Output/WebIDE/Release/";
+
+    //Sanity checks
+    if (!process.env.EMSCRIPTEN) {
+      console.error("EMSCRIPTEN env. variable is not set");
+      console.log("Please set Emscripten environment by launching `emsdk_env` script");
+    }
+
+    var emscriptenPath = process.env.EMSCRIPTEN;
+    var cmakeToolchainpath = emscriptenPath + "/cmake/Modules/Platform/Emscripten.cmake";
+    var buildOutputPath = "../Binaries/Output/WebIDE/Release/";
+    var buildPath = "../Binaries/embuild";
 
     grunt.initConfig({
         mochacli: {
@@ -14,21 +24,56 @@ module.exports = function(grunt) {
             separator: ';',
           },
           dist: {
-            src: ['Bindings/prejs.js', buildDirectory+'libGD.raw.js', 'Bindings/glue.js', 'Bindings/postjs.js'],
-            dest: buildDirectory+'libGD.js',
+            src: ['Bindings/prejs.js', buildOutputPath+'libGD.raw.js', 'Bindings/glue.js', 'Bindings/postjs.js'],
+            dest: buildOutputPath+'libGD.js',
           },
+        },
+        mkdir: {
+          embuild: {
+            options: {
+              create: [buildPath]
+            }
+          },
+        },
+        shell: {
+            //Launch CMake if needed
+            cmake: {
+                src: [buildPath + "/CMakeCache.txt", "CMakeLists.txt"],
+                command: "cmake ../.. -DCMAKE_TOOLCHAIN_FILE=" + cmakeToolchainpath,
+                options: {
+                    execOptions: {
+                        cwd: buildPath,
+                        env: process.env
+                    }
+                }
+            },
+            //Update glue.cpp and glue.js file using Bindings.idl
+            updateGDBindings: {
+                src: "Bindings/Bindings.idl",
+                command: 'node update-bindings.js',
+            },
+            //Compile GDevelop with emscripten
+            make: {
+                command: 'make -j 4',
+                options: {
+                    execOptions: {
+                        cwd: buildPath,
+                        env: process.env
+                    }
+                }
+            }
         },
         uglify: {
           build: {
             files: [
-                {src: [ buildDirectory+'libGD.js' ], dest:buildDirectory+'libGD.min.js'}
+                {src: [ buildOutputPath+'libGD.js' ], dest:buildOutputPath+'libGD.min.js'}
             ]
           }
         },
         clean: {
           options: { force: true },
           build: {
-            src: [ buildDirectory+'libGD.js', buildDirectory+'libGD.min.js' ]
+            src: [ buildOutputPath+'libGD.js', buildOutputPath+'libGD.min.js' ]
           }
         },
         compress: {
@@ -37,7 +82,7 @@ module.exports = function(grunt) {
               mode: 'gzip'
             },
             files: [
-              {expand: true, src: [buildDirectory+'/libGD.js'], dest: '.', ext: '.js.gz'}
+              {expand: true, src: [buildOutputPath+'/libGD.js'], dest: '.', ext: '.js.gz'}
             ]
           }
         }
@@ -49,6 +94,16 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-compress');
-    grunt.registerTask('build', [ 'clean', 'concat', 'compress' ]);
+    grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-newer');
+    grunt.loadNpmTasks('grunt-mkdir');
+    grunt.registerTask('build', [
+      'clean',
+      'mkdir:embuild',
+      'newer:shell:cmake',
+      'newer:shell:updateGDBindings',
+      'shell:make',
+      'concat', 'compress'
+    ]);
     grunt.registerTask('test', ['mochacli']);
 };
