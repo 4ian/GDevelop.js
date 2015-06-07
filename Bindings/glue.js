@@ -55,20 +55,10 @@ function getClass(obj) {
 Module['getClass'] = getClass;
 
 // Converts a value into a C-style string.
-var ensureString = (function() {
-  var stringCache = {};
-  function ensureString(value) {
-    if (typeof value == 'string') {
-      var cachedVal = stringCache[value];
-      if (cachedVal) return cachedVal;
-      var ret = allocate(intArrayFromString(value), 'i8', ALLOC_STACK);
-      stringCache[value] = ret;
-      return ret;
-    }
-    return value;
-  }
-  return ensureString;
-})();
+function ensureString(value) {
+  if (typeof value == 'string') return allocate(intArrayFromString(value), 'i8', ALLOC_STACK);
+  return value;
+}
 
 
 // ArbitraryResourceWorker
@@ -3502,83 +3492,6 @@ CommentEvent.prototype['SetFolded'] = function(arg0) {
   var self = this.ptr;
   _emscripten_bind_CommentEvent___destroy___0(self);
 };
-// Sprite
-function Sprite() {
-  this.ptr = _emscripten_bind_Sprite_Sprite_0();
-  getCache(Sprite)[this.ptr] = this;
-};;
-Sprite.prototype = Object.create(WrapperObject.prototype);
-Sprite.prototype.constructor = Sprite;
-Sprite.prototype.__class__ = Sprite;
-Sprite.__cache__ = {};
-Module['Sprite'] = Sprite;
-
-Sprite.prototype['SetImageName'] = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Sprite_SetImageName_1(self, arg0);
-};;
-
-Sprite.prototype['GetImageName'] = function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_Sprite_GetImageName_0(self));
-};;
-
-Sprite.prototype['AddPoint'] = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Sprite_AddPoint_1(self, arg0);
-};;
-
-Sprite.prototype['DelPoint'] = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Sprite_DelPoint_1(self, arg0);
-};;
-
-Sprite.prototype['GetPoint'] = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_Sprite_GetPoint_1(self, arg0), Point);
-};;
-
-Sprite.prototype['HasPoint'] = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return !!(_emscripten_bind_Sprite_HasPoint_1(self, arg0));
-};;
-
-Sprite.prototype['GetOrigin'] = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Sprite_GetOrigin_0(self), Point);
-};;
-
-Sprite.prototype['GetCenter'] = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Sprite_GetCenter_0(self), Point);
-};;
-
-Sprite.prototype['IsDefaultCenterPoint'] = function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_Sprite_IsDefaultCenterPoint_0(self));
-};;
-
-Sprite.prototype['SetDefaultCenterPoint'] = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Sprite_SetDefaultCenterPoint_1(self, arg0);
-};;
-
-  Sprite.prototype['__destroy__'] = function() {
-  var self = this.ptr;
-  _emscripten_bind_Sprite___destroy___0(self);
-};
 // AbstractFileSystem
 function AbstractFileSystem() { throw "cannot construct a AbstractFileSystem, no constructor in IDL" }
 AbstractFileSystem.prototype = Object.create(WrapperObject.prototype);
@@ -3681,112 +3594,82 @@ Serializer.prototype['STATIC_FromJSON'] = function(arg0) {
   var self = this.ptr;
   _emscripten_bind_Serializer___destroy___0(self);
 };
-// EventsList
-function EventsList() {
-  this.ptr = _emscripten_bind_EventsList_EventsList_0();
-  getCache(EventsList)[this.ptr] = this;
+// Sprite
+function Sprite() {
+  this.ptr = _emscripten_bind_Sprite_Sprite_0();
+  getCache(Sprite)[this.ptr] = this;
 };;
-EventsList.prototype = Object.create(WrapperObject.prototype);
-EventsList.prototype.constructor = EventsList;
-EventsList.prototype.__class__ = EventsList;
-EventsList.__cache__ = {};
-Module['EventsList'] = EventsList;
+Sprite.prototype = Object.create(WrapperObject.prototype);
+Sprite.prototype.constructor = Sprite;
+Sprite.prototype.__class__ = Sprite;
+Sprite.__cache__ = {};
+Module['Sprite'] = Sprite;
 
-EventsList.prototype['InsertEvent'] = function(arg0) {
+Sprite.prototype['SetImageName'] = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_EventsList_InsertEvent_1(self, arg0), BaseEvent);
+  _emscripten_bind_Sprite_SetImageName_1(self, arg0);
 };;
 
-EventsList.prototype['InsertNewEvent'] = function(arg0, arg1, arg2) {
+Sprite.prototype['GetImageName'] = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Sprite_GetImageName_0(self));
+};;
+
+Sprite.prototype['AddPoint'] = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
-  return wrapPointer(_emscripten_bind_EventsList_InsertNewEvent_3(self, arg0, arg1, arg2), BaseEvent);
+  _emscripten_bind_Sprite_AddPoint_1(self, arg0);
 };;
 
-EventsList.prototype['InsertEvents'] = function(arg0, arg1, arg2, arg3) {
+Sprite.prototype['DelPoint'] = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
-  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  else arg3 = ensureString(arg3);
-  _emscripten_bind_EventsList_InsertEvents_4(self, arg0, arg1, arg2, arg3);
+  _emscripten_bind_Sprite_DelPoint_1(self, arg0);
 };;
 
-EventsList.prototype['GetEventAt'] = function(arg0) {
+Sprite.prototype['GetPoint'] = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_EventsList_GetEventAt_1(self, arg0), BaseEvent);
+  return wrapPointer(_emscripten_bind_Sprite_GetPoint_1(self, arg0), Point);
 };;
 
-EventsList.prototype['RemoveEventAt'] = function(arg0) {
+Sprite.prototype['HasPoint'] = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_EventsList_RemoveEventAt_1(self, arg0);
+  return !!(_emscripten_bind_Sprite_HasPoint_1(self, arg0));
 };;
 
-EventsList.prototype['RemoveEvent'] = function(arg0) {
+Sprite.prototype['GetOrigin'] = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Sprite_GetOrigin_0(self), Point);
+};;
+
+Sprite.prototype['GetCenter'] = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Sprite_GetCenter_0(self), Point);
+};;
+
+Sprite.prototype['IsDefaultCenterPoint'] = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_Sprite_IsDefaultCenterPoint_0(self));
+};;
+
+Sprite.prototype['SetDefaultCenterPoint'] = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_EventsList_RemoveEvent_1(self, arg0);
+  _emscripten_bind_Sprite_SetDefaultCenterPoint_1(self, arg0);
 };;
 
-EventsList.prototype['GetEventsCount'] = function() {
+  Sprite.prototype['__destroy__'] = function() {
   var self = this.ptr;
-  return _emscripten_bind_EventsList_GetEventsCount_0(self);
-};;
-
-EventsList.prototype['Contains'] = function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  _emscripten_bind_EventsList_Contains_2(self, arg0, arg1);
-};;
-
-EventsList.prototype['IsEmpty'] = function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_EventsList_IsEmpty_0(self));
-};;
-
-EventsList.prototype['Clear'] = function() {
-  var self = this.ptr;
-  _emscripten_bind_EventsList_Clear_0(self);
-};;
-
-EventsList.prototype['SerializeTo'] = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_EventsList_SerializeTo_1(self, arg0);
-};;
-
-EventsList.prototype['UnserializeFrom'] = function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  _emscripten_bind_EventsList_UnserializeFrom_2(self, arg0, arg1);
-};;
-
-  EventsList.prototype['__destroy__'] = function() {
-  var self = this.ptr;
-  _emscripten_bind_EventsList___destroy___0(self);
+  _emscripten_bind_Sprite___destroy___0(self);
 };
 // gdObject
 function gdObject(arg0) {
@@ -4323,22 +4206,114 @@ MetadataProvider.prototype['STATIC_HasAutomatismStrExpression'] = function(arg0,
   var self = this.ptr;
   _emscripten_bind_MetadataProvider___destroy___0(self);
 };
-// StdString
-function StdString(arg0) {
+// EventsList
+function EventsList() {
+  this.ptr = _emscripten_bind_EventsList_EventsList_0();
+  getCache(EventsList)[this.ptr] = this;
+};;
+EventsList.prototype = Object.create(WrapperObject.prototype);
+EventsList.prototype.constructor = EventsList;
+EventsList.prototype.__class__ = EventsList;
+EventsList.__cache__ = {};
+Module['EventsList'] = EventsList;
+
+EventsList.prototype['InsertEvent'] = function(arg0, arg1) {
+  var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  this.ptr = _emscripten_bind_StdString_StdString_1(arg0);
-  getCache(StdString)[this.ptr] = this;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return wrapPointer(_emscripten_bind_EventsList_InsertEvent_2(self, arg0, arg1), BaseEvent);
 };;
-StdString.prototype = Object.create(WrapperObject.prototype);
-StdString.prototype.constructor = StdString;
-StdString.prototype.__class__ = StdString;
-StdString.__cache__ = {};
-Module['StdString'] = StdString;
 
-  StdString.prototype['__destroy__'] = function() {
+EventsList.prototype['InsertNewEvent'] = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  _emscripten_bind_StdString___destroy___0(self);
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return wrapPointer(_emscripten_bind_EventsList_InsertNewEvent_3(self, arg0, arg1, arg2), BaseEvent);
+};;
+
+EventsList.prototype['InsertEvents'] = function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  _emscripten_bind_EventsList_InsertEvents_4(self, arg0, arg1, arg2, arg3);
+};;
+
+EventsList.prototype['GetEventAt'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_EventsList_GetEventAt_1(self, arg0), BaseEvent);
+};;
+
+EventsList.prototype['RemoveEventAt'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_EventsList_RemoveEventAt_1(self, arg0);
+};;
+
+EventsList.prototype['RemoveEvent'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_EventsList_RemoveEvent_1(self, arg0);
+};;
+
+EventsList.prototype['GetEventsCount'] = function() {
+  var self = this.ptr;
+  return _emscripten_bind_EventsList_GetEventsCount_0(self);
+};;
+
+EventsList.prototype['Contains'] = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return !!(_emscripten_bind_EventsList_Contains_2(self, arg0, arg1));
+};;
+
+EventsList.prototype['IsEmpty'] = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_EventsList_IsEmpty_0(self));
+};;
+
+EventsList.prototype['Clear'] = function() {
+  var self = this.ptr;
+  _emscripten_bind_EventsList_Clear_0(self);
+};;
+
+EventsList.prototype['SerializeTo'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_EventsList_SerializeTo_1(self, arg0);
+};;
+
+EventsList.prototype['UnserializeFrom'] = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  _emscripten_bind_EventsList_UnserializeFrom_2(self, arg0, arg1);
+};;
+
+  EventsList.prototype['__destroy__'] = function() {
+  var self = this.ptr;
+  _emscripten_bind_EventsList___destroy___0(self);
 };
 // ParameterMetadata
 function ParameterMetadata() { throw "cannot construct a ParameterMetadata, no constructor in IDL" }

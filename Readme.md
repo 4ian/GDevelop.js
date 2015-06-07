@@ -8,13 +8,14 @@ GDevelop is a full featured, cross-platform, open-source game creator software r
 How to build
 ------------
 
-Make sure you have [CMake](http://www.cmake.org/) and [Emscripten](https://github.com/kripken/emscripten) installed (your OS package manager should be able to provide both).
+Make sure you have [CMake](http://www.cmake.org/) and [Emscripten](https://github.com/kripken/emscripten) installed (your OS package manager should be able to provide both). You need Emscripten 1.33.1 at least to avoid [this bug](https://github.com/kripken/emscripten/pull/3479).
 
 * Clone [GDevelop repository](https://github.com/4ian/GD)
 
         git clone https://github.com/4ian/GD.git
 
 * Patch SFML (TODO)
+* Patch WebIDL binder (TODO)
 * Put libGD.js into a folder called `WebIDE` at the root of the GDevelop repository.
 * Launch grunt
 

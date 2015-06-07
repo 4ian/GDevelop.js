@@ -491,10 +491,10 @@ describe('libGD.js', function(){
 
 		it('can have events', function() {
 			list.insertEvent(new gd.StandardEvent(), 0);
-			var middleEvent = list.insertEvent(new gd.StandardEvent(), 0);
-			list.insertEvent(new gd.StandardEvent(), 0);
+			var lastEvent = list.insertEvent(new gd.StandardEvent(), 1);
+			list.insertEvent(new gd.StandardEvent(), 1);
 			expect(list.getEventsCount()).to.be(3);
-			expect(list.getEventAt(1).ptr).to.be(middleEvent.ptr);
+			expect(list.getEventAt(2).ptr).to.be(lastEvent.ptr);
 		});
 
 		it('can create lots of new events', function() {
@@ -505,6 +505,15 @@ describe('libGD.js', function(){
 					.getType()).to.be("BuiltinCommonInstructions::Standard");
 				expect(list.getEventAt(0).getType()).to.be("BuiltinCommonInstructions::Standard");
 			}
+		});
+
+		it('can tell if it contains an event', function() {
+			var parentEvent = list.insertEvent(new gd.StandardEvent(), 0);
+			var subEvent = parentEvent.getSubEvents().insertEvent(new gd.StandardEvent(), 0);
+
+			expect(list.contains(parentEvent, false)).to.be(true);
+			expect(list.contains(subEvent, false)).to.be(false);
+			expect(list.contains(subEvent, true)).to.be(true);
 		});
 
 		after(function() {

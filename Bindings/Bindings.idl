@@ -18,10 +18,6 @@
 //Interfaces for some types from
 //the C++ Standard Library:
 
-interface StdString {
-    void StdString([Const] DOMString str);
-};
-
 interface VectorString {
     void VectorString();
 
@@ -29,7 +25,7 @@ interface VectorString {
     void resize(unsigned long size);
     unsigned long size();
     [Const, Ref] DOMString at(unsigned long index);
-    void WRAPPED_set(unsigned long index, [Const, Ref] DOMString str);
+    void WRAPPED_set(unsigned long index, [Const] DOMString str);
     void clear();
 };
 
@@ -576,14 +572,14 @@ interface PlatformExtension {
 interface EventsList {
     void EventsList();
 
-    [Ref] BaseEvent InsertEvent([Const, Ref] BaseEvent event);
+    [Ref] BaseEvent InsertEvent([Const, Ref] BaseEvent event, unsigned long pos);
     [Ref] BaseEvent InsertNewEvent([Ref] Project project, [Const] DOMString type, unsigned long pos);
     void InsertEvents([Const, Ref] EventsList list, unsigned long begin, unsigned long end, unsigned long pos);
     [Ref] BaseEvent GetEventAt(unsigned long pos);
     void RemoveEventAt(unsigned long pos);
     void RemoveEvent([Const, Ref] BaseEvent event);
     unsigned long GetEventsCount();
-    void Contains([Const, Ref] BaseEvent event, boolean recursive);
+    boolean Contains([Const, Ref] BaseEvent event, boolean recursive);
     boolean IsEmpty();
     void Clear();
 

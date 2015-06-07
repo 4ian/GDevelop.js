@@ -2172,56 +2172,6 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent___destroy___0(CommentEven
   delete self;
 }
 
-// Sprite
-
-Sprite* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_Sprite_0() {
-  return new Sprite();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetImageName_1(Sprite* self, char* arg0) {
-  self->SetImageName(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetImageName_0(Sprite* self) {
-  return self->GetImageName().c_str();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_AddPoint_1(Sprite* self, Point* arg0) {
-  self->AddPoint(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_DelPoint_1(Sprite* self, char* arg0) {
-  self->DelPoint(arg0);
-}
-
-Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetPoint_1(Sprite* self, char* arg0) {
-  return &self->GetPoint(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_HasPoint_1(Sprite* self, char* arg0) {
-  return self->HasPoint(arg0);
-}
-
-Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetOrigin_0(Sprite* self) {
-  return &self->GetOrigin();
-}
-
-Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetCenter_0(Sprite* self) {
-  return &self->GetCenter();
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_IsDefaultCenterPoint_0(Sprite* self) {
-  return self->IsDefaultCenterPoint();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetDefaultCenterPoint_1(Sprite* self, bool arg0) {
-  self->SetDefaultCenterPoint(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite___destroy___0(Sprite* self) {
-  delete self;
-}
-
 // AbstractFileSystem
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystem___destroy___0(AbstractFileSystem* self) {
@@ -2281,61 +2231,53 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Serializer___destroy___0(Serializer* s
   delete self;
 }
 
-// EventsList
+// Sprite
 
-EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_EventsList_0() {
-  return new EventsList();
+Sprite* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_Sprite_0() {
+  return new Sprite();
 }
 
-BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_InsertEvent_1(EventsList* self, BaseEvent* arg0) {
-  return &self->InsertEvent(*arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetImageName_1(Sprite* self, char* arg0) {
+  self->SetImageName(arg0);
 }
 
-BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_InsertNewEvent_3(EventsList* self, Project* arg0, char* arg1, unsigned int arg2) {
-  return &self->InsertNewEvent(*arg0, arg1, arg2);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetImageName_0(Sprite* self) {
+  return self->GetImageName().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_InsertEvents_4(EventsList* self, EventsList* arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3) {
-  self->InsertEvents(*arg0, arg1, arg2, arg3);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_AddPoint_1(Sprite* self, Point* arg0) {
+  self->AddPoint(*arg0);
 }
 
-BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_GetEventAt_1(EventsList* self, unsigned int arg0) {
-  return &self->GetEventAt(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_DelPoint_1(Sprite* self, char* arg0) {
+  self->DelPoint(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_RemoveEventAt_1(EventsList* self, unsigned int arg0) {
-  self->RemoveEventAt(arg0);
+Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetPoint_1(Sprite* self, char* arg0) {
+  return &self->GetPoint(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_RemoveEvent_1(EventsList* self, BaseEvent* arg0) {
-  self->RemoveEvent(*arg0);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_HasPoint_1(Sprite* self, char* arg0) {
+  return self->HasPoint(arg0);
 }
 
-unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_GetEventsCount_0(EventsList* self) {
-  return self->GetEventsCount();
+Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetOrigin_0(Sprite* self) {
+  return &self->GetOrigin();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_Contains_2(EventsList* self, BaseEvent* arg0, bool arg1) {
-  self->Contains(*arg0, arg1);
+Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetCenter_0(Sprite* self) {
+  return &self->GetCenter();
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_IsEmpty_0(EventsList* self) {
-  return self->IsEmpty();
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_IsDefaultCenterPoint_0(Sprite* self) {
+  return self->IsDefaultCenterPoint();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_Clear_0(EventsList* self) {
-  self->Clear();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetDefaultCenterPoint_1(Sprite* self, bool arg0) {
+  self->SetDefaultCenterPoint(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_SerializeTo_1(EventsList* self, SerializerElement* arg0) {
-  self->SerializeTo(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_UnserializeFrom_2(EventsList* self, Project* arg0, SerializerElement* arg1) {
-  self->UnserializeFrom(*arg0, *arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList___destroy___0(EventsList* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite___destroy___0(Sprite* self) {
   delete self;
 }
 
@@ -2479,7 +2421,7 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorString_at_1(VectorString*
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorString_WRAPPED_set_2(VectorString* self, unsigned int arg0, char* arg1) {
-  self->WRAPPED_set(arg0, *arg1);
+  self->WRAPPED_set(arg0, arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorString_clear_0(VectorString* self) {
@@ -2606,13 +2548,61 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider___destroy___0(Metadat
   delete self;
 }
 
-// StdString
+// EventsList
 
-StdString* EMSCRIPTEN_KEEPALIVE emscripten_bind_StdString_StdString_1(char* arg0) {
-  return new StdString(arg0);
+EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_EventsList_0() {
+  return new EventsList();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_StdString___destroy___0(StdString* self) {
+BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_InsertEvent_2(EventsList* self, BaseEvent* arg0, unsigned int arg1) {
+  return &self->InsertEvent(*arg0, arg1);
+}
+
+BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_InsertNewEvent_3(EventsList* self, Project* arg0, char* arg1, unsigned int arg2) {
+  return &self->InsertNewEvent(*arg0, arg1, arg2);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_InsertEvents_4(EventsList* self, EventsList* arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3) {
+  self->InsertEvents(*arg0, arg1, arg2, arg3);
+}
+
+BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_GetEventAt_1(EventsList* self, unsigned int arg0) {
+  return &self->GetEventAt(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_RemoveEventAt_1(EventsList* self, unsigned int arg0) {
+  self->RemoveEventAt(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_RemoveEvent_1(EventsList* self, BaseEvent* arg0) {
+  self->RemoveEvent(*arg0);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_GetEventsCount_0(EventsList* self) {
+  return self->GetEventsCount();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_Contains_2(EventsList* self, BaseEvent* arg0, bool arg1) {
+  return self->Contains(*arg0, arg1);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_IsEmpty_0(EventsList* self) {
+  return self->IsEmpty();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_Clear_0(EventsList* self) {
+  self->Clear();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_SerializeTo_1(EventsList* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_UnserializeFrom_2(EventsList* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList___destroy___0(EventsList* self) {
   delete self;
 }
 
