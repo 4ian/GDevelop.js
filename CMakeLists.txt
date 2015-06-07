@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 cmake_policy(SET CMP0015 NEW)
 
-project(WebIDE)
+project(libGD.js)
 
 #Sanity checks
 IF ("${CMAKE_BUILD_TYPE}" STREQUAL "")
@@ -9,7 +9,7 @@ IF ("${CMAKE_BUILD_TYPE}" STREQUAL "")
 	set(CMAKE_BUILD_TYPE Release)
 ENDIF()
 if(NOT EMSCRIPTEN)
-	error("You're trying to compile the WebIDE without emscripten.")
+	error("You're trying to compile libGD.js without emscripten.")
 endif()
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wno-warn-absolute-paths" )
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} --memory-init-file 0" ) #Less efficient, but output a single JS file
@@ -65,9 +65,9 @@ add_library(
         "Bindings/Wrapper.cpp"
 )
 set_target_properties(GD PROPERTIES SUFFIX ".raw.js")
-set(LIBRARY_OUTPUT_PATH ${GD_base_dir}/Binaries/Output/WebIDE/${CMAKE_BUILD_TYPE})
-set(ARCHIVE_OUTPUT_PATH ${GD_base_dir}/Binaries/Output/WebIDE/${CMAKE_BUILD_TYPE})
-set(RUNTIME_OUTPUT_PATH ${GD_base_dir}/Binaries/Output/WebIDE/${CMAKE_BUILD_TYPE})
+set(LIBRARY_OUTPUT_PATH ${GD_base_dir}/Binaries/Output/libGD.js/${CMAKE_BUILD_TYPE})
+set(ARCHIVE_OUTPUT_PATH ${GD_base_dir}/Binaries/Output/libGD.js/${CMAKE_BUILD_TYPE})
+set(RUNTIME_OUTPUT_PATH ${GD_base_dir}/Binaries/Output/libGD.js/${CMAKE_BUILD_TYPE})
 
 #Linker files
 ###

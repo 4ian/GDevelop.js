@@ -10,16 +10,21 @@ How to build
 
 Make sure you have [CMake](http://www.cmake.org/) and [Emscripten](https://github.com/kripken/emscripten) installed (your OS package manager should be able to provide both). You need Emscripten 1.33.1 at least to avoid [this bug](https://github.com/kripken/emscripten/pull/3479).
 
-* Clone [GDevelop repository](https://github.com/4ian/GD)
+* Clone [GDevelop repository](https://github.com/4ian/GD) and this repository at the root of GD
 
+```shell
         git clone https://github.com/4ian/GD.git
+        cd GD && git clone https://github.com/4ian/libGD.js.git
+```
 
 * Patch SFML (TODO)
 * Patch WebIDL binder (TODO)
-* Put libGD.js into a folder called `WebIDE` at the root of the GDevelop repository.
 * Launch grunt
 
+```shell
+        grunt shell:cmake #The first time only
         grunt build
+```
 
 ### Internal steps for compilation
 

@@ -1,4 +1,6 @@
 /node_modules
 Bindings/parser.out
 Bindings/WebIDLGrammar.pkl
+parser.out
+WebIDLGrammar.pkl
 .cpp.old

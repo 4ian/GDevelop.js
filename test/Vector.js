@@ -1,4 +1,4 @@
-var gd = require('../../Binaries/Output/WebIDE/Release/libGD.js');
+var gd = require('../../Binaries/Output/libGD.js/Release/libGD.js');
 var expect = require('expect.js');
 
 describe('libGD.js - gd.Vector* tests', function(){

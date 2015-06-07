@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 
     var emscriptenPath = process.env.EMSCRIPTEN;
     var cmakeToolchainpath = emscriptenPath + "/cmake/Modules/Platform/Emscripten.cmake";
-    var buildOutputPath = "../Binaries/Output/WebIDE/Release/";
+    var buildOutputPath = "../Binaries/Output/libGD.js/Release/";
     var buildPath = "../Binaries/embuild";
 
     grunt.initConfig({
