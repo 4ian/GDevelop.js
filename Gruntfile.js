@@ -61,7 +61,8 @@ module.exports = function(grunt) {
                 options: {
                     execOptions: {
                         cwd: buildPath,
-                        env: process.env
+                        env: process.env,
+                        maxBuffer: Infinity
                     }
                 }
             },
