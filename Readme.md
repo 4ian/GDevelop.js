@@ -39,6 +39,7 @@ and add just after:
 
 ```shell
     cd libGD.js
+    npm install
     grunt shell:cmake #The first time only
     grunt build
 ```

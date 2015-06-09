@@ -118,9 +118,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-mkdir');
     grunt.registerTask('build', [
       'clean',
-      'string-replace:sfml',
       'mkdir:embuild',
       'newer:shell:cmake',
+      'string-replace:sfml',
       'newer:shell:updateGDBindings',
       'shell:make',
       'concat', 'compress'
