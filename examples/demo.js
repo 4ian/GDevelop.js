@@ -1,11 +1,11 @@
 /**
- * Example of various manipulations using libGD.js
+ * Example of various manipulations using GDevelop.js
  */
 
 var gd = require('../../Binaries/Output/libGD.js/Release/libGD.js');
 var fs = require('fs');
 
-console.log("Here is an example of how to use libGD.js.");
+console.log("Here is an example of how to use GDevelop.js.");
 console.log("*** Initialization of the library:");
 gd.initializePlatforms(); //Mandatory initialization
 console.log("*** Initialization finished, now we create a sample project.");

@@ -1,5 +1,5 @@
-libGD.js
-========
+GDevelop.js
+===========
 
 This is a port of some parts of **[GDevelop]** to Javascript using **[Emscripten]**.
 
@@ -16,7 +16,7 @@ Make sure you have [CMake](http://www.cmake.org/) and [Emscripten](https://githu
 
 ```shell
     git clone https://github.com/4ian/GD.git
-    cd GD && git clone https://github.com/4ian/libGD.js.git
+    cd GD && git clone https://github.com/4ian/GDevelop.js.git
 ```
 
 * Patch WebIDL binder to support returning javascript boolean. Go to path/to/emscripten/tools/webidl_binder.py, search for
@@ -38,7 +38,7 @@ and add just after:
 * Launch the build:
 
 ```shell
-    cd libGD.js
+    cd GDevelop.js
     npm install
     grunt build
 ```
@@ -73,12 +73,12 @@ It also create a compressed `libGD.js.gz` file which is handy for distributing t
 Documentation
 -------------
 
-Refer to [GDevelop documentation](http://4ian.github.io/GD-Documentation/GDCore%20Documentation/) for detailed documentation of the original C++ classes. The file [Bindings.idl](https://github.com/4ian/libGD.js/blob/master/Bindings/Bindings.idl) describes all the classes available in libGD.js.
+Refer to [GDevelop documentation](http://4ian.github.io/GD-Documentation/GDCore%20Documentation/) for detailed documentation of the original C++ classes. The file [Bindings.idl](https://github.com/4ian/GDevelop.js/blob/master/Bindings/Bindings.idl) describes all the classes available in GDevelop.js.
 
 License
 -------
 
-* This library is distributed under the **MIT license**.
+* GDevelop.js is distributed under the **MIT license**.
 * GDevelop is under the MIT license (and GPL v3 license for the GUI).
 
 [GDevelop]: https://github.com/4ian/GD
