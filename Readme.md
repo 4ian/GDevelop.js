@@ -73,7 +73,7 @@ It also create a compressed `libGD.js.gz` file which is handy for distributing t
 Documentation
 -------------
 
-Refer to [GDevelop documentation](http://4ian.github.io/GD-Documentation/GDCore%20Documentation/) for detailed documentation of the original C++ classes. The file Bindings.idl describes all the classes available in libGD.js.
+Refer to [GDevelop documentation](http://4ian.github.io/GD-Documentation/GDCore%20Documentation/) for detailed documentation of the original C++ classes. The file [Bindings.idl](https://github.com/4ian/libGD.js/blob/master/Bindings/Bindings.idl) describes all the classes available in libGD.js.
 
 License
 -------
