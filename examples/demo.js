@@ -1,7 +1,5 @@
 /**
- * Run this file using node.js. Be sure to paste libGD.js in the same folder:
- *
- * node demo.js
+ * Example of various manipulations using libGD.js
  */
 
 var gd = require('../../Binaries/Output/libGD.js/Release/libGD.js');
@@ -18,7 +16,6 @@ console.log(" ");
 var project = gd.ProjectHelper.createNewGDJSProject(); //The project is based on the Javascript platform
 project.setMinimumFPS(20);
 project.setMaximumFPS(20);
-project.customValue = 54;
 project.getVariables().insertNew("Global variable", 0).setValue(10);
 var layout = project.insertNewLayout("Super scene", 0); //"Layout" is a synonym for "Scene".
 layout.setBackgroundColor(125,100,240);
@@ -32,7 +29,7 @@ layout.insertNewObject(project, "Sprite", "MyCharacter", 0);
 var obj = layout.getObject("MyObject");
 obj.setName("Background");
 
-//Adding an animation to a sprite:
+//Add an animation to a sprite:
 var anim = new gd.Animation();
 anim.setDirectionsCount(2);
 gd.asSpriteObject(obj).addAnimation(anim);
@@ -77,12 +74,12 @@ console.log("*** Events displayed as english sentences (Just like in the events 
 
 var condition = standardEvt.getConditions().get(0);
 var conditionSentenceInEnglish = gd.InstructionSentenceFormatter.get().translate(condition,
-	gd.MetadataProvider.getConditionMetadata(gd.JsPlatform.get(), "KeyPressed"));
+    gd.MetadataProvider.getConditionMetadata(gd.JsPlatform.get(), "KeyPressed"));
 console.log("Condition:", conditionSentenceInEnglish);
 
 var action = standardEvt.getActions().get(0);
 var actionSentenceInEnglish = gd.InstructionSentenceFormatter.get().translate(action,
-	gd.MetadataProvider.getActionMetadata(gd.JsPlatform.get(), "Delete"));
+    gd.MetadataProvider.getActionMetadata(gd.JsPlatform.get(), "Delete"));
 console.log("Action:", actionSentenceInEnglish);
 
 //Do automatic refactoring on the events:
@@ -91,11 +88,11 @@ console.log("Action:", actionSentenceInEnglish);
 layout.getObject("MyCharacter").setName("MySuperHero"); //Change the object name...
 instances.renameInstancesOfObject("MyCharacter", "MySuperHero"); //...update the instances on the scene...
 gd.EventsRefactorer.renameObjectInEvents(gd.JsPlatform.get(), project,
-	layout, layout.getEvents(), "MyCharacter", "MySuperHero"); //...and update the events.
+    layout, layout.getEvents(), "MyCharacter", "MySuperHero"); //...and update the events.
 
 console.log("*** The action after renaming MyCharacter to MySuperHero:");
 var actionSentenceInEnglish = gd.InstructionSentenceFormatter.get().translate(standardEvt.getActions().get(0),
-	gd.MetadataProvider.getActionMetadata(gd.JsPlatform.get(), "Delete"));
+    gd.MetadataProvider.getActionMetadata(gd.JsPlatform.get(), "Delete"));
 console.log("Action:", actionSentenceInEnglish);
 
 //Finally, write the game to a file.
@@ -103,30 +100,23 @@ var serializedProject = new gd.SerializerElement();
 project.serializeTo(serializedProject);
 var jsonProject = gd.Serializer.toJSON(serializedProject);
 fs.writeFile('demo-generated-game.json', jsonProject, function (err) {
-  if (err) throw err;
-  console.log('*** JSON file of the generated project saved in "demo-generated-game.json". Open it!');
+    if (err) throw err;
+    console.log('*** JSON file of the generated project saved in "demo-generated-game.json". Open it with GDevelop or GDevApp!');
 
-	var unserializedProject = new gd.SerializerElement();
-	unserializedProject = gd.Serializer.fromJSON(jsonProject);
-	project.unserializeFrom(unserializedProject);
-
-	var serializedProject = new gd.SerializerElement();
-	project.serializeTo(serializedProject);
-	var jsonProject = gd.Serializer.toJSON(serializedProject);
-	fs.writeFile('demo-generated-game2.json', jsonProject, function (err) {
-		if (err) throw err;
-		console.log('*** JSON file of the generated project saved in "demo-generated-game2.json". Open it!');
-	});
+    var project = new gd.ProjectHelper.createNewGDJSProject();
+    var unserializedProject = gd.Serializer.fromJSON(jsonProject);
+    project.unserializeFrom(unserializedProject);
 });
 
 //And also generate the code for the events to demonstrate how events are translated to Javascript!
-var code = gd.GenerateSceneEventsCompleteCode(project, layout, layout.getEvents(), new gd.SetString(), true);
+var code = gd.EventsCodeGenerator.generateSceneEventsCompleteCode(project,
+    layout, layout.getEvents(), new gd.SetString(), true);
 fs.writeFile('demo-generated-code.js', code, function (err) {
   if (err) throw err;
-  console.log('*** Javascript code saved in "demo-generated-code.js". Open it (but it\'s not meant to be read by humans) !');
+  console.log('*** Javascript code saved in "demo-generated-code.js". You can open it, but it\'s not meant to be read by humans! ;)');
 });
 
-//Note that any object from gd created using new operator ("var myObject = new gd.")
+//Note that any object from gd created using new operator ("var myObject = new gd.*")
 //must be deleted. Most of the time, it is not necessary to use new because there are methods for
-//creating the objects (InsertLayout, InsertNewObject...) and everything is contained in the project object:
+//creating the objects (insertLayout, insertNewObject...) and everything is contained in the project object:
 project.delete();

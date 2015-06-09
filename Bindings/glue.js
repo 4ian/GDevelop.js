@@ -3843,7 +3843,16 @@ InitialInstancesContainer.prototype['SomeInstancesAreOnLayer'] = function(arg0) 
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_InitialInstancesContainer_SomeInstancesAreOnLayer_1(self, arg0);
+  return !!(_emscripten_bind_InitialInstancesContainer_SomeInstancesAreOnLayer_1(self, arg0));
+};;
+
+InitialInstancesContainer.prototype['RenameInstancesOfObject'] = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  _emscripten_bind_InitialInstancesContainer_RenameInstancesOfObject_2(self, arg0, arg1);
 };;
 
 InitialInstancesContainer.prototype['RemoveInstance'] = function(arg0) {

@@ -2354,7 +2354,7 @@ InitialInstancesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstances
   return new InitialInstancesContainer();
 }
 
-int EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_GetInstancesCount_0(InitialInstancesContainer* self) {
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_GetInstancesCount_0(InitialInstancesContainer* self) {
   return self->GetInstancesCount();
 }
 
@@ -2378,8 +2378,12 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_RemoveInitia
   self->RemoveInitialInstancesOfObject(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_SomeInstancesAreOnLayer_1(InitialInstancesContainer* self, char* arg0) {
-  self->SomeInstancesAreOnLayer(arg0);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_SomeInstancesAreOnLayer_1(InitialInstancesContainer* self, char* arg0) {
+  return self->SomeInstancesAreOnLayer(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_RenameInstancesOfObject_2(InitialInstancesContainer* self, char* arg0, char* arg1) {
+  self->RenameInstancesOfObject(arg0, arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_RemoveInstance_1(InitialInstancesContainer* self, InitialInstance* arg0) {

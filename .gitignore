@@ -4,3 +4,6 @@ Bindings/WebIDLGrammar.pkl
 parser.out
 WebIDLGrammar.pkl
 .cpp.old
+examples/demo-generated-code.js
+examples/demo-generated-game.json
+**/.DS_Store

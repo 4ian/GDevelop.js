@@ -385,14 +385,15 @@ interface InitialInstance {
 interface InitialInstancesContainer {
     void InitialInstancesContainer();
 
-    long GetInstancesCount();
+    unsigned long GetInstancesCount();
 
     void IterateOverInstances([Ref] InitialInstanceFunctor func);
     void IterateOverInstancesWithZOrdering([Ref] InitialInstanceFunctor func, [Const] DOMString layer);
     void MoveInstancesToLayer([Const] DOMString fromLayer, [Const] DOMString toLayer);
     void RemoveAllInstancesOnLayer([Const] DOMString layer);
     void RemoveInitialInstancesOfObject([Const] DOMString obj);
-    void SomeInstancesAreOnLayer([Const] DOMString layer);
+    boolean SomeInstancesAreOnLayer([Const] DOMString layer);
+    void RenameInstancesOfObject([Const] DOMString oldName, [Const] DOMString newName);
     void RemoveInstance([Const, Ref] InitialInstance inst);
 
     [Ref] InitialInstance InsertNewInitialInstance();

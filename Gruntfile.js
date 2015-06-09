@@ -28,6 +28,24 @@ module.exports = function(grunt) {
             dest: buildOutputPath+'libGD.js',
           },
         },
+        //Patch SFML to consider Emscripten target as Linux.
+        'string-replace': {
+          sfml: {
+            files: {
+              '../ExtLibs/SFML/include/SFML/Config.hpp': '../ExtLibs/SFML/include/SFML/Config.hpp',
+            },
+            options: {
+              replacements: [
+                // place files inline example
+                {
+                  pattern: "#elif defined(__linux__)",
+                  replacement: "#elif defined(EMSCRIPTEN) || defined(__linux__)"
+                }
+              ],
+              saveUnchanged: false
+            }
+          }
+        },
         mkdir: {
           embuild: {
             options: {
@@ -47,7 +65,7 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            //Update glue.cpp and glue.js file using Bindings.idl
+            //Generate glue.cpp and glue.js file using Bindings.idl, and patch them
             updateGDBindings: {
                 src: "Bindings/Bindings.idl",
                 command: 'node update-bindings.js',
@@ -94,11 +112,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-string-replace');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-mkdir');
     grunt.registerTask('build', [
       'clean',
+      'string-replace:sfml',
       'mkdir:embuild',
       'newer:shell:cmake',
       'newer:shell:updateGDBindings',
