@@ -63,6 +63,16 @@ describe('libGD.js', function(){
 			evt.getSubEvents().insertNewEvent(project, "BuiltinCommonInstructions::Standard", 0);
 			expect(evts.getEventAt(0).getSubEvents().getEventsCount()).to.be(1);
 		});
+		it('can have objects', function() {
+			var object = layout.insertNewObject(project, "Sprite", "MyObject", 0);
+			var object2 = layout.insertNewObject(project, "TextObject::Text", "MyObject2", 1);
+
+			expect(layout.getObjectAt(0).ptr).to.be(object.ptr);
+			expect(layout.getObjectAt(1).ptr).to.be(object2.ptr);
+			expect(layout.getObjectAt(0).getType()).to.be("Sprite");
+			expect(layout.getObjectAt(1).getType()).to.be("TextObject::Text");
+		});
+
 		//TODO
 
 		after(function() { project.delete(); });
@@ -76,7 +86,7 @@ describe('libGD.js', function(){
 		});
 		it('adding instances', function() {
 			var instance = container.insertNewInitialInstance();
-			instance.setObjectName("MyObject");
+			instance.setObjectName("MyObject1");
 			instance.setZOrder(10);
 
 			var instance2 = new gd.InitialInstance();
@@ -91,6 +101,20 @@ describe('libGD.js', function(){
 			expect(container.getInstancesCount()).to.be(3);
 		});
 		it('iterating', function() {
+			var i = 0;
+			var functor = new gd.InitialInstanceJSFunctor();
+			functor.invoke = function(instance) {
+				instance = gd.wrapPointer(instance, gd.InitialInstance);
+				expect((i === 0 && instance.getObjectName() === "MyObject1") ||
+					(i === 1 && instance.getObjectName() === "MyObject2") ||
+					(i === 2 && instance.getObjectName() === "MyObject3")).to.be(true);
+				i++;
+			};
+			container.iterateOverInstances(functor);
+		});
+		it('can rename instances', function() {
+			container.renameInstancesOfObject("MyObject1", "MyObject");
+
 			var i = 0;
 			var functor = new gd.InitialInstanceJSFunctor();
 			functor.invoke = function(instance) {
@@ -365,12 +389,12 @@ describe('libGD.js', function(){
 		var project = gd.ProjectHelper.createNewGDJSProject();
 		var layout = project.insertNewLayout("Scene", 0);
 		var object = layout.insertNewObject(project, "Sprite", "MyObject", 0);
+
 		it('properties and initial values', function() {
 			object.setName("TheObject");
 			expect(object.getName()).to.be("TheObject");
 			expect(object.hasAutomatismNamed("DoNotExists")).to.be(false);
 		});
-		//TODO
 
 		after(function() {project.delete();});
 	});
