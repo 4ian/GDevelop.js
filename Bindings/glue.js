@@ -1744,7 +1744,7 @@ InstructionsList.prototype['Insert'] = function(arg0, arg1) {
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
-  _emscripten_bind_InstructionsList_Insert_2(self, arg0, arg1);
+  return wrapPointer(_emscripten_bind_InstructionsList_Insert_2(self, arg0, arg1), Instruction);
 };;
 
 InstructionsList.prototype['size'] = function() {
@@ -1761,6 +1761,13 @@ InstructionsList.prototype['WRAPPED_set'] = function(arg0, arg1) {
   _emscripten_bind_InstructionsList_WRAPPED_set_2(self, arg0, arg1);
 };;
 
+InstructionsList.prototype['Contains'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_InstructionsList_Contains_1(self, arg0));
+};;
+
 InstructionsList.prototype['Get'] = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
@@ -1773,6 +1780,13 @@ InstructionsList.prototype['Remove'] = function(arg0) {
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_InstructionsList_Remove_1(self, arg0);
+};;
+
+InstructionsList.prototype['RemoveAt'] = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_InstructionsList_RemoveAt_1(self, arg0);
 };;
 
 InstructionsList.prototype['Clear'] = function() {

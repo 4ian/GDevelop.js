@@ -438,11 +438,13 @@ interface ObjectListDialogsHelper {
 interface InstructionsList {
     void InstructionsList();
 
-    void Insert([Const, Ref] Instruction instr, unsigned long pos);
+    [Ref] Instruction Insert([Const, Ref] Instruction instr, unsigned long pos);
     unsigned long size();
     void WRAPPED_set(unsigned long index, [Const, Ref] Instruction instr);
+    boolean Contains([Const, Ref] Instruction instr/*, boolean recursive*/); //TODO
     [Ref] Instruction Get(unsigned long index);
-    void Remove(unsigned long index);
+    void Remove([Const, Ref] Instruction instr);
+    void RemoveAt(unsigned long index);
     void Clear();
 };
 

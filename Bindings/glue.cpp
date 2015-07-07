@@ -1048,8 +1048,8 @@ InstructionsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_Instruct
   return new InstructionsList();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_Insert_2(InstructionsList* self, Instruction* arg0, unsigned int arg1) {
-  self->Insert(*arg0, arg1);
+Instruction* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_Insert_2(InstructionsList* self, Instruction* arg0, unsigned int arg1) {
+  return &self->Insert(*arg0, arg1);
 }
 
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_size_0(InstructionsList* self) {
@@ -1060,12 +1060,20 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_WRAPPED_set_2(Instruc
   self->WRAPPED_set(arg0, *arg1);
 }
 
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_Contains_1(InstructionsList* self, Instruction* arg0) {
+  return self->Contains(*arg0);
+}
+
 Instruction* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_Get_1(InstructionsList* self, unsigned int arg0) {
   return &self->Get(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_Remove_1(InstructionsList* self, unsigned int arg0) {
-  self->Remove(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_Remove_1(InstructionsList* self, Instruction* arg0) {
+  self->Remove(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_RemoveAt_1(InstructionsList* self, unsigned int arg0) {
+  self->RemoveAt(arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_Clear_0(InstructionsList* self) {

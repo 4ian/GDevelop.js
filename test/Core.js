@@ -384,20 +384,6 @@ describe('libGD.js', function(){
 
 		after(function() {project.delete();});
 	});
-
-	describe('gd.Object', function(){
-		var project = gd.ProjectHelper.createNewGDJSProject();
-		var layout = project.insertNewLayout("Scene", 0);
-		var object = layout.insertNewObject(project, "Sprite", "MyObject", 0);
-
-		it('properties and initial values', function() {
-			object.setName("TheObject");
-			expect(object.getName()).to.be("TheObject");
-			expect(object.hasAutomatismNamed("DoNotExists")).to.be(false);
-		});
-
-		after(function() {project.delete();});
-	});
 	describe('gd.Automatism', function(){
 		var project = gd.ProjectHelper.createNewGDJSProject();
 		var automatism = new gd.Automatism();
@@ -416,6 +402,36 @@ describe('libGD.js', function(){
 			automatism.delete();
 			project.delete();
 		});
+	});
+
+	describe('gd.Object', function(){
+		var project = gd.ProjectHelper.createNewGDJSProject();
+		var layout = project.insertNewLayout("Scene", 0);
+		var object = layout.insertNewObject(project, "Sprite", "MyObject", 0);
+
+		it('has properties and initial values', function() {
+			object.setName("TheObject");
+			expect(object.getName()).to.be("TheObject");
+			expect(object.hasAutomatismNamed("DoNotExists")).to.be(false);
+		});
+
+		it('can have its type retrieved with gd.getTypeOfObject', function() {
+			expect(gd.getTypeOfObject(project, layout, "TheObject", true)).to.be("Sprite");
+		});
+
+		it('can have automatims', function() {
+			var automatism = object.addNewAutomatism(project, "DraggableAutomatism::Draggable", "Draggable");
+			expect(object.hasAutomatismNamed("Draggable")).to.be(true);
+			expect(object.getAutomatism("Draggable")).to.be(automatism);
+		});
+
+		it('can have its automatims retrieved with gd.getAutomatismsOfObject', function() {
+			var automatisms = gd.getAutomatismsOfObject(project, layout, "TheObject", true);
+			expect(automatisms.size()).to.be(1);
+			expect(automatisms.get(0)).to.be("Draggable");
+		});
+
+		after(function() {project.delete();});
 	});
 
 	describe('gd.Instruction', function(){
@@ -465,6 +481,18 @@ describe('libGD.js', function(){
 
 			expect(list.get(0).getType()).to.be("Type2");
 			expect(list.size()).to.be(1);
+		});
+		it('can remove its instructions', function(){
+			var newInstr = new gd.Instruction();
+			newInstr.setType("Type3");
+			var instruction = list.insert(newInstr, 1);
+			expect(list.get(1).getType()).to.be("Type3");
+			expect(list.size()).to.be(2);
+			expect(list.contains(instruction)).to.be(true);
+
+			list.remove(instruction);
+			expect(list.size()).to.be(1);
+			expect(list.get(0).getType()).to.be("Type2");
 		});
 		it('should clear its instructions', function(){
 			list.clear();

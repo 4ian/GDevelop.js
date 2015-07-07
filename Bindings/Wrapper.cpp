@@ -299,6 +299,7 @@ typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 #define GetAt Get
 #define GetEventAt GetEvent
 #define RemoveEventAt RemoveEvent
+#define RemoveAt Remove
 
 //We don't use prefix in .idl file to workaround a webidl_binder.py bug
 //that can't find in its list of interfaces a class which has a prefix.
