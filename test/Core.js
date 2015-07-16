@@ -419,13 +419,13 @@ describe('libGD.js', function(){
 			expect(gd.getTypeOfObject(project, layout, "TheObject", true)).to.be("Sprite");
 		});
 
-		it('can have automatims', function() {
+		it('can have automatisms', function() {
 			var automatism = object.addNewAutomatism(project, "DraggableAutomatism::Draggable", "Draggable");
 			expect(object.hasAutomatismNamed("Draggable")).to.be(true);
 			expect(object.getAutomatism("Draggable")).to.be(automatism);
 		});
 
-		it('can have its automatims retrieved with gd.getAutomatismsOfObject', function() {
+		it('can have its automatisms retrieved with gd.getAutomatismsOfObject', function() {
 			var automatisms = gd.getAutomatismsOfObject(project, layout, "TheObject", true);
 			expect(automatisms.size()).to.be(1);
 			expect(automatisms.get(0)).to.be("Draggable");
