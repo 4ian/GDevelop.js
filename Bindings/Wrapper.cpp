@@ -55,21 +55,21 @@
  */
 class ArbitraryResourceWorkerJS : public ArbitraryResourceWorker {
 public:
-  void ExposeImage(std::string & arg0) {
+  void ExposeImage(gd::String & arg0) {
     arg0 = (const char*)EM_ASM_INT({
       var self = Module['getCache'](Module['ArbitraryResourceWorkerJS'])[$0];
       if (!self.hasOwnProperty('exposeImage')) throw 'a JSImplementation must implement all functions, you forgot ArbitraryResourceWorkerJS::exposeImage.';
       return ensureString(self.exposeImage(gd.Pointer_stringify($1)));
     }, (int)this, arg0.c_str());
   }
-  void ExposeShader(std::string & arg0) {
+  void ExposeShader(gd::String & arg0) {
     arg0 = (const char*)EM_ASM_INT({
       var self = Module['getCache'](Module['ArbitraryResourceWorkerJS'])[$0];
       if (!self.hasOwnProperty('exposeShader')) throw 'a JSImplementation must implement all functions, you forgot ArbitraryResourceWorkerJS::exposeShader.';
       return ensureString(self.exposeShader(gd.Pointer_stringify($1)));
     }, (int)this, arg0.c_str());
   }
-  void ExposeFile(std::string & arg0) {
+  void ExposeFile(gd::String & arg0) {
     arg0 = (const char*)EM_ASM_INT({
       var self = Module['getCache'](Module['ArbitraryResourceWorkerJS'])[$0];
       if (!self.hasOwnProperty('exposeFile')) throw 'a JSImplementation must implement all functions, you forgot ArbitraryResourceWorkerJS::exposeFile.';
@@ -86,14 +86,14 @@ public:
 class AbstractFileSystemJS : public AbstractFileSystem
 {
 public:
-	virtual void MkDir(const std::string & path) {
+	virtual void MkDir(const gd::String & path) {
 	    EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('mkDir')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::mkDir.';
 	      self.mkDir(gd.Pointer_stringify($1));
 	    }, (int)this, path.c_str());
 	}
-    virtual bool DirExists(const std::string & path) {
+    virtual bool DirExists(const gd::String & path) {
 	    return EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('dirExists')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::dirExists.';
@@ -101,7 +101,7 @@ public:
 	    }, (int)this, path.c_str());
 	}
 
-    virtual bool FileExists(const std::string & path) {
+    virtual bool FileExists(const gd::String & path) {
 	    return EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('fileExists')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::fileExists.';
@@ -109,7 +109,7 @@ public:
 	    }, (int)this, path.c_str());
 	}
 
-    virtual std::string FileNameFrom(const std::string & file) {
+    virtual gd::String FileNameFrom(const gd::String & file) {
 	    return (const char *)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('fileNameFrom')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::fileNameFrom.';
@@ -117,7 +117,7 @@ public:
 	    }, (int)this, file.c_str());
 	}
 
-    virtual std::string DirNameFrom(const std::string & file) {
+    virtual gd::String DirNameFrom(const gd::String & file) {
 	    return (const char *)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('dirNameFrom')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::dirNameFrom.';
@@ -125,7 +125,7 @@ public:
 	    }, (int)this, file.c_str());
 	}
 
-    virtual bool MakeAbsolute(std::string & filename, const std::string & baseDirectory) {
+    virtual bool MakeAbsolute(gd::String & filename, const gd::String & baseDirectory) {
 	    filename = (const char*)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('makeAbsolute')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::makeAbsolute.';
@@ -135,7 +135,7 @@ public:
 	    return true;
 	}
 
-    virtual bool MakeRelative(std::string & filename, const std::string & baseDirectory) {
+    virtual bool MakeRelative(gd::String & filename, const gd::String & baseDirectory) {
     	std::cout << "MakeRelative: " << filename;
 	    filename = (const char*)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
@@ -147,7 +147,7 @@ public:
 	    return true;
 	}
 
-    virtual bool IsAbsolute(const std::string & filename) {
+    virtual bool IsAbsolute(const gd::String & filename) {
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('isAbsolute')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::isAbsolute.';
@@ -155,7 +155,7 @@ public:
 	    }, (int)this, filename.c_str());
 	};
 
-    virtual bool CopyFile(const std::string & file, const std::string & destination) {
+    virtual bool CopyFile(const gd::String & file, const gd::String & destination) {
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('copyFile')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::copyFile.';
@@ -163,7 +163,7 @@ public:
 	    }, (int)this, file.c_str(), destination.c_str());
 	}
 
-    virtual bool ClearDir(const std::string & directory) {
+    virtual bool ClearDir(const gd::String & directory) {
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('clearDir')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::clearDir.';
@@ -171,7 +171,7 @@ public:
 	    }, (int)this, directory.c_str());
 	}
 
-    virtual bool WriteToFile(const std::string & file, const std::string & content) {
+    virtual bool WriteToFile(const gd::String & file, const gd::String & content) {
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('writeToFile')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::writeToFile.';
@@ -179,14 +179,14 @@ public:
 	    }, (int)this, file.c_str(), content.c_str());
 	}
 
-    virtual std::string ReadFile(const std::string & file) {
+    virtual gd::String ReadFile(const gd::String & file) {
 	    return (const char *)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('readFile')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::readFile.';
 	      return ensureString(self.readFile(gd.Pointer_stringify($1)));
 	    }, (int)this, file.c_str());
 	}
-    virtual std::string GetTempDir() {
+    virtual gd::String GetTempDir() {
 	    return (const char *)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('getTempDir')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::getTempDir.';
@@ -194,8 +194,8 @@ public:
 	    }, (int)this);
 	}
 
-    virtual std::vector<std::string> ReadDir(const std::string & path, const std::string & extension = "") {
-	    std::vector<std::string> directories = *(std::vector<std::string>*)EM_ASM_INT({
+    virtual std::vector<gd::String> ReadDir(const gd::String & path, const gd::String & extension = "") {
+	    std::vector<gd::String> directories = *(std::vector<gd::String>*)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('readDir')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::readDir.';
 	      return self.readDir(gd.Pointer_stringify($1), gd.Pointer_stringify($2)).ptr;
@@ -225,19 +225,18 @@ public:
 };
 
 //Declares typedef for std::vector and templatized types
-typedef std::vector<std::string> VectorString;
+typedef std::vector<gd::String> VectorString;
 typedef std::vector < std::shared_ptr<gd::PlatformExtension> > VectorPlatformExtension;
-typedef std::pair<std::string, gd::Variable> PairStringVariable;
-typedef std::pair<std::string, TextFormatting> PairStringTextFormatting;
-typedef std::vector<std::pair<std::string, TextFormatting>> VectorPairStringTextFormatting;
-typedef std::map<std::string, std::string> MapStringString;
-typedef std::map<std::string, gd::ExpressionMetadata> MapStringExpressionMetadata;
-typedef std::map<std::string, gd::InstructionMetadata> MapStringInstructionMetadata;
-typedef std::map<std::string, gd::EventMetadata> MapStringEventMetadata;
-typedef std::map<std::string, gd::Variable> MapStringVariable;
-typedef std::map<std::string, gd::PropertyDescriptor> MapStringPropertyDescriptor;
-typedef std::set<std::string> SetString;
-typedef std::string StdString;
+typedef std::pair<gd::String, gd::Variable> PairStringVariable;
+typedef std::pair<gd::String, TextFormatting> PairStringTextFormatting;
+typedef std::vector<std::pair<gd::String, TextFormatting>> VectorPairStringTextFormatting;
+typedef std::map<gd::String, gd::String> MapStringString;
+typedef std::map<gd::String, gd::ExpressionMetadata> MapStringExpressionMetadata;
+typedef std::map<gd::String, gd::InstructionMetadata> MapStringInstructionMetadata;
+typedef std::map<gd::String, gd::EventMetadata> MapStringEventMetadata;
+typedef std::map<gd::String, gd::Variable> MapStringVariable;
+typedef std::map<gd::String, gd::PropertyDescriptor> MapStringPropertyDescriptor;
+typedef std::set<gd::String> SetString;
 typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 
 //Customize some functions implementation thanks to WRAPPED_* macros
@@ -259,7 +258,7 @@ typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 #define STATIC_InitializePlatforms InitializePlatforms
 #define STATIC_ValidateObjectName ValidateObjectName
 #define STATIC_ToJSON ToJSON
-#define STATIC_FromJSON FromJSON
+#define STATIC_FromJSON(x) FromJSON(gd::String(x))
 #define STATIC_IsObject IsObject
 #define STATIC_Get Get
 #define STATIC_AddAllMissingImages AddAllMissingImages

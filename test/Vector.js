@@ -38,6 +38,15 @@ describe('libGD.js - gd.Vector* tests', function(){
 			expect(vector2.get(0)).to.be("foo");
 			expect(vector.size()).to.be(250);
 		});
+		it("should allow to add UTF8 strings", function() {
+			vector.clear();
+			expect(vector.size()).to.be(0);
+			vector.push_back("Bonjour à tous");
+			vector.push_back("官话");
+			expect(vector.size()).to.be(2);
+			expect(vector.get(0)).to.be("Bonjour à tous");
+			expect(vector.get(1)).to.be("官话");
+		});
 	});
 });
 

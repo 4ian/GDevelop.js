@@ -294,22 +294,22 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent___destroy___0(WhileEvent* s
 // Platform
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Platform_GetName_0(Platform* self) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->GetName(), temp.c_str());
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Platform_GetFullName_0(Platform* self) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->GetFullName(), temp.c_str());
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Platform_GetSubtitle_0(Platform* self) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->GetSubtitle(), temp.c_str());
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Platform_GetDescription_0(Platform* self) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->GetDescription(), temp.c_str());
 }
 
@@ -484,7 +484,7 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetFile_0(Resource* se
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetAbsoluteFile_1(Resource* self, Project* arg0) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
 }
 
@@ -781,7 +781,7 @@ InstructionSentenceFormatter* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSe
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_Translate_2(InstructionSentenceFormatter* self, Instruction* arg0, InstructionMetadata* arg1) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->Translate(*arg0, *arg1), temp.c_str());
 }
 
@@ -796,7 +796,7 @@ TextFormatting* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatte
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_LabelFromType_1(InstructionSentenceFormatter* self, char* arg0) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->LabelFromType(arg0), temp.c_str());
 }
 
@@ -1038,7 +1038,7 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject___destroy___0(TiledS
 // EventsCodeGenerator
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsCodeGenerator_STATIC_GenerateSceneEventsCompleteCode_5(gdjs::EventsCodeGenerator* self, Project* arg0, Layout* arg1, EventsList* arg2, SetString* arg3, bool arg4) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->STATIC_GenerateSceneEventsCompleteCode(*arg0, *arg1, *arg2, *arg3, arg4), temp.c_str());
 }
 
@@ -1934,12 +1934,12 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_UnserializeFrom_1(Project* sel
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_FREE_GetTypeOfAutomatism_3(Project* self, Layout* arg0, char* arg1, bool arg2) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = GetTypeOfAutomatism(*self, *arg0, arg1, arg2), temp.c_str());
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_FREE_GetTypeOfObject_3(Project* self, Layout* arg0, char* arg1, bool arg2) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = GetTypeOfObject(*self, *arg0, arg1, arg2), temp.c_str());
 }
 
@@ -2058,7 +2058,7 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetFile_0(ImageRe
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetAbsoluteFile_1(ImageResource* self, Project* arg0) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
 }
 
@@ -2226,7 +2226,7 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper___destroy___0(
 // Serializer
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Serializer_STATIC_ToJSON_1(Serializer* self, SerializerElement* arg0) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->STATIC_ToJSON(*arg0), temp.c_str());
 }
 
