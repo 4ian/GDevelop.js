@@ -51,12 +51,16 @@ describe('libGD.js', function(){
 		var project = gd.ProjectHelper.createNewGDJSProject();
 		var layout = project.insertNewLayout("Scene", 0);
 
-		it('properties can be read and changed', function(){
+		it('can have a new name', function(){
 			expect(layout.getName()).to.be("Scene");
 			layout.setName("My super layout");
 			expect(layout.getName()).to.be("My super layout");
 		});
-		it('events', function() {
+		it('can have a name with UTF8 characters', function(){
+			layout.setName("Scene with a 官话 name");
+			expect(layout.getName()).to.be("Scene with a 官话 name");
+		});
+		it('can store events', function() {
 			var evts = layout.getEvents();
 			expect(evts.getEventsCount()).to.be(0);
 			var evt = evts.insertNewEvent(project, "BuiltinCommonInstructions::Standard", 0);
@@ -73,8 +77,6 @@ describe('libGD.js', function(){
 			expect(layout.getObjectAt(0).getType()).to.be("Sprite");
 			expect(layout.getObjectAt(1).getType()).to.be("TextObject::Text");
 		});
-
-		//TODO
 
 		after(function() { project.delete(); });
 	});
@@ -677,9 +679,13 @@ describe('libGD.js', function(){
 			expect(evt.canHaveSubEvents()).to.be(false);
 			expect(evt.isExecutable()).to.be(false);
 		});
-		it('comment', function(){
+		it('can have a comment', function(){
 			evt.setComment("My nice comment about my events!");
 			expect(evt.getComment()).to.be("My nice comment about my events!");
+		});
+		it('can have a comment with UTF8 characters', function(){
+			evt.setComment("Hello 官话 world!");
+			expect(evt.getComment()).to.be("Hello 官话 world!");
 		});
 
 		after(function() {evt.delete();});
@@ -777,23 +783,24 @@ describe('libGD.js', function(){
 		var layout = project.insertNewLayout("Scene", 0);
 
 		it('should export a layout for preview', function(done) {
-			fs.mkDir = fs.clearDir = function() {}
-			fs.getTempDir = function(path) { return "/tmp/"; }
+			fs.mkDir = fs.clearDir = function() {};
+			fs.getTempDir = function(path) { return "/tmp/"; };
     		fs.fileNameFrom = function(fullpath) {
         		return path.basename(fullpath);
-    		}
+    		};
     		fs.dirNameFrom = function(fullpath) {
         		return path.dirname(fullpath);
-    		}
+    		};
     		fs.writeToFile = function(path, content) {
+    			//Validate that some code have been generated:
         		expect(content).to.match(/context.startNewFrame/);
         		done();
-    		}
+    		};
 
 			var exporter = new gd.Exporter(fs);
 			exporter.exportLayoutForPreview(project, layout, "/path/for/export/");
 			exporter.delete();
-		})
+		});
 
 	});
 });

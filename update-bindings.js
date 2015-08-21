@@ -73,7 +73,7 @@ function patchGlueCppFile(cb) {
 				//[Const, Value] DOMString
 				if (line.indexOf("static char*") !== -1) {
 					line = line
-						.replace("static char*", "static std::string");
+						.replace("static char*", "static gd::String");
 				} else if (line.indexOf(", &temp);") !== -1) {
 					line = line.replace(", &temp);", ", temp.c_str());")
 				//[Const, Ref] DOMString
@@ -84,7 +84,7 @@ function patchGlueCppFile(cb) {
 						//Could generate false positive.
 						line = line
 							.replace(";", "); return ref.c_str();")
-							.replace("return &", "std::string & ref = const_cast<std::string&>(");
+							.replace("return &", "gd::String & ref = const_cast<gd::String&>(");
 					} else {
 						line = line
 							.replace(";", ".c_str();")

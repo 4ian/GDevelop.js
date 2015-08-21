@@ -304,22 +304,22 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent___destroy___0(WhileEvent* s
 // Platform
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Platform_GetName_0(Platform* self) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->GetName(), temp.c_str());
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Platform_GetFullName_0(Platform* self) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->GetFullName(), temp.c_str());
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Platform_GetSubtitle_0(Platform* self) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->GetSubtitle(), temp.c_str());
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Platform_GetDescription_0(Platform* self) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->GetDescription(), temp.c_str());
 }
 
@@ -494,7 +494,7 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetFile_0(Resource* se
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetAbsoluteFile_1(Resource* self, Project* arg0) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
 }
 
@@ -791,7 +791,7 @@ InstructionSentenceFormatter* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSe
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_Translate_2(InstructionSentenceFormatter* self, Instruction* arg0, InstructionMetadata* arg1) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->Translate(*arg0, *arg1), temp.c_str());
 }
 
@@ -806,7 +806,7 @@ TextFormatting* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatte
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_LabelFromType_1(InstructionSentenceFormatter* self, char* arg0) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->LabelFromType(arg0), temp.c_str());
 }
 
@@ -954,101 +954,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPairStringTextFormatting___destr
   delete self;
 }
 
-// TiledSpriteObject
-
-TiledSpriteObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_TiledSpriteObject_1(char* arg0) {
-  return new TiledSpriteObject(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SetTexture_1(TiledSpriteObject* self, char* arg0) {
-  self->SetTexture(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetTexture_0(TiledSpriteObject* self) {
-  return self->GetTexture().c_str();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SetWidth_1(TiledSpriteObject* self, float arg0) {
-  self->SetWidth(arg0);
-}
-
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetWidth_0(TiledSpriteObject* self) {
-  return self->GetWidth();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SetHeight_1(TiledSpriteObject* self, float arg0) {
-  self->SetHeight(arg0);
-}
-
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetHeight_0(TiledSpriteObject* self) {
-  return self->GetHeight();
-}
-
-gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_Clone_0(TiledSpriteObject* self) {
-  return self->Clone();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SetName_1(TiledSpriteObject* self, char* arg0) {
-  self->SetName(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetName_0(TiledSpriteObject* self) {
-  return self->GetName().c_str();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SetType_1(TiledSpriteObject* self, char* arg0) {
-  self->SetType(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetType_0(TiledSpriteObject* self) {
-  return self->GetType().c_str();
-}
-
-VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetVariables_0(TiledSpriteObject* self) {
-  return &self->GetVariables();
-}
-
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetAllBehaviorNames_0(TiledSpriteObject* self) {
-  static VectorString temp;
-  return (temp = self->GetAllBehaviorNames(), &temp);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_HasBehaviorNamed_1(TiledSpriteObject* self, char* arg0) {
-  return self->HasBehaviorNamed(arg0);
-}
-
-Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_AddNewBehavior_3(TiledSpriteObject* self, Project* arg0, char* arg1, char* arg2) {
-  return self->AddNewBehavior(*arg0, arg1, arg2);
-}
-
-Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetBehavior_1(TiledSpriteObject* self, char* arg0) {
-  return &self->GetBehavior(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_RemoveBehavior_1(TiledSpriteObject* self, char* arg0) {
-  self->RemoveBehavior(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_RenameBehavior_2(TiledSpriteObject* self, char* arg0, char* arg1) {
-  return self->RenameBehavior(arg0, arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SerializeTo_1(TiledSpriteObject* self, SerializerElement* arg0) {
-  self->SerializeTo(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_UnserializeFrom_2(TiledSpriteObject* self, Project* arg0, SerializerElement* arg1) {
-  self->UnserializeFrom(*arg0, *arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject___destroy___0(TiledSpriteObject* self) {
-  delete self;
-}
-
 // EventsCodeGenerator
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsCodeGenerator_STATIC_GenerateSceneEventsCompleteCode_5(gdjs::EventsCodeGenerator* self, Project* arg0, Layout* arg1, EventsList* arg2, SetString* arg3, bool arg4) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->STATIC_GenerateSceneEventsCompleteCode(*arg0, *arg1, *arg2, *arg3, arg4), temp.c_str());
 }
 
@@ -1944,12 +1853,12 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_UnserializeFrom_1(Project* sel
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_FREE_GetTypeOfBehavior_3(Project* self, Layout* arg0, char* arg1, bool arg2) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = GetTypeOfBehavior(*self, *arg0, arg1, arg2), temp.c_str());
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_FREE_GetTypeOfObject_3(Project* self, Layout* arg0, char* arg1, bool arg2) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = GetTypeOfObject(*self, *arg0, arg1, arg2), temp.c_str());
 }
 
@@ -2068,7 +1977,7 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetFile_0(ImageRe
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetAbsoluteFile_1(ImageResource* self, Project* arg0) {
-  static std::string temp;
+  static gd::String temp;
   return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
 }
 
@@ -2125,6 +2034,41 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Layer_GetVisibility_0(Layer* self) {
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layer___destroy___0(Layer* self) {
+  delete self;
+}
+
+// Behavior
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_Behavior_0() {
+  return new Behavior();
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_Clone_0(Behavior* self) {
+  return self->Clone();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_SetName_1(Behavior* self, char* arg0) {
+  self->SetName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_GetName_0(Behavior* self) {
+  return self->GetName().c_str();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_GetTypeName_0(Behavior* self) {
+  return self->GetTypeName().c_str();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_UpdateProperty_3(Behavior* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_GetProperties_1(Behavior* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior___destroy___0(Behavior* self) {
   delete self;
 }
 
@@ -2190,59 +2134,6 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent___destroy___0(CommentEven
   delete self;
 }
 
-// ArbitraryEventsWorker
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryEventsWorker_Launch_1(ArbitraryEventsWorker* self, EventsList* arg0) {
-  self->Launch(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryEventsWorker___destroy___0(ArbitraryEventsWorker* self) {
-  delete self;
-}
-
-// ObjectListDialogsHelper
-
-ObjectListDialogsHelper* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_ObjectListDialogsHelper_2(Project* arg0, Layout* arg1) {
-  return new ObjectListDialogsHelper(*arg0, *arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetSearchText_1(ObjectListDialogsHelper* self, char* arg0) {
-  self->SetSearchText(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetAllowedObjectType_1(ObjectListDialogsHelper* self, char* arg0) {
-  self->SetAllowedObjectType(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetGroupsAllowed_1(ObjectListDialogsHelper* self, bool arg0) {
-  self->SetGroupsAllowed(arg0);
-}
-
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_GetMatchingObjects_0(ObjectListDialogsHelper* self) {
-  static VectorString temp;
-  return (temp = self->GetMatchingObjects(), &temp);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper___destroy___0(ObjectListDialogsHelper* self) {
-  delete self;
-}
-
-// Serializer
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Serializer_STATIC_ToJSON_1(Serializer* self, SerializerElement* arg0) {
-  static std::string temp;
-  return (temp = self->STATIC_ToJSON(*arg0), temp.c_str());
-}
-
-SerializerElement* EMSCRIPTEN_KEEPALIVE emscripten_bind_Serializer_STATIC_FromJSON_1(Serializer* self, char* arg0) {
-  static SerializerElement temp;
-  return (temp = self->STATIC_FromJSON(arg0), &temp);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Serializer___destroy___0(Serializer* self) {
-  delete self;
-}
-
 // Sprite
 
 Sprite* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_Sprite_0() {
@@ -2290,6 +2181,117 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetDefaultCenterPoint_1(Sprite*
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite___destroy___0(Sprite* self) {
+  delete self;
+}
+
+// ArbitraryEventsWorker
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryEventsWorker_Launch_1(ArbitraryEventsWorker* self, EventsList* arg0) {
+  self->Launch(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryEventsWorker___destroy___0(ArbitraryEventsWorker* self) {
+  delete self;
+}
+
+// ObjectListDialogsHelper
+
+ObjectListDialogsHelper* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_ObjectListDialogsHelper_2(Project* arg0, Layout* arg1) {
+  return new ObjectListDialogsHelper(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetSearchText_1(ObjectListDialogsHelper* self, char* arg0) {
+  self->SetSearchText(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetAllowedObjectType_1(ObjectListDialogsHelper* self, char* arg0) {
+  self->SetAllowedObjectType(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetGroupsAllowed_1(ObjectListDialogsHelper* self, bool arg0) {
+  self->SetGroupsAllowed(arg0);
+}
+
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_GetMatchingObjects_0(ObjectListDialogsHelper* self) {
+  static VectorString temp;
+  return (temp = self->GetMatchingObjects(), &temp);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper___destroy___0(ObjectListDialogsHelper* self) {
+  delete self;
+}
+
+// Serializer
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Serializer_STATIC_ToJSON_1(Serializer* self, SerializerElement* arg0) {
+  static gd::String temp;
+  return (temp = self->STATIC_ToJSON(*arg0), temp.c_str());
+}
+
+SerializerElement* EMSCRIPTEN_KEEPALIVE emscripten_bind_Serializer_STATIC_FromJSON_1(Serializer* self, char* arg0) {
+  static SerializerElement temp;
+  return (temp = self->STATIC_FromJSON(arg0), &temp);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Serializer___destroy___0(Serializer* self) {
+  delete self;
+}
+
+// EventsList
+
+EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_EventsList_0() {
+  return new EventsList();
+}
+
+BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_InsertEvent_2(EventsList* self, BaseEvent* arg0, unsigned int arg1) {
+  return &self->InsertEvent(*arg0, arg1);
+}
+
+BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_InsertNewEvent_3(EventsList* self, Project* arg0, char* arg1, unsigned int arg2) {
+  return &self->InsertNewEvent(*arg0, arg1, arg2);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_InsertEvents_4(EventsList* self, EventsList* arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3) {
+  self->InsertEvents(*arg0, arg1, arg2, arg3);
+}
+
+BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_GetEventAt_1(EventsList* self, unsigned int arg0) {
+  return &self->GetEventAt(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_RemoveEventAt_1(EventsList* self, unsigned int arg0) {
+  self->RemoveEventAt(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_RemoveEvent_1(EventsList* self, BaseEvent* arg0) {
+  self->RemoveEvent(*arg0);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_GetEventsCount_0(EventsList* self) {
+  return self->GetEventsCount();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_Contains_2(EventsList* self, BaseEvent* arg0, bool arg1) {
+  return self->Contains(*arg0, arg1);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_IsEmpty_0(EventsList* self) {
+  return self->IsEmpty();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_Clear_0(EventsList* self) {
+  self->Clear();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_SerializeTo_1(EventsList* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_UnserializeFrom_2(EventsList* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList___destroy___0(EventsList* self) {
   delete self;
 }
 
@@ -2564,61 +2566,29 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider___destroy___0(Metadat
   delete self;
 }
 
-// EventsList
+// BehaviorMetadata
 
-EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_EventsList_0() {
-  return new EventsList();
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetFullName_0(BehaviorMetadata* self) {
+  return self->GetFullName().c_str();
 }
 
-BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_InsertEvent_2(EventsList* self, BaseEvent* arg0, unsigned int arg1) {
-  return &self->InsertEvent(*arg0, arg1);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetDefaultName_0(BehaviorMetadata* self) {
+  return self->GetDefaultName().c_str();
 }
 
-BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_InsertNewEvent_3(EventsList* self, Project* arg0, char* arg1, unsigned int arg2) {
-  return &self->InsertNewEvent(*arg0, arg1, arg2);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetDescription_0(BehaviorMetadata* self) {
+  return self->GetDescription().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_InsertEvents_4(EventsList* self, EventsList* arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3) {
-  self->InsertEvents(*arg0, arg1, arg2, arg3);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetGroup_0(BehaviorMetadata* self) {
+  return self->GetGroup().c_str();
 }
 
-BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_GetEventAt_1(EventsList* self, unsigned int arg0) {
-  return &self->GetEventAt(arg0);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetIconFilename_0(BehaviorMetadata* self) {
+  return self->GetIconFilename().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_RemoveEventAt_1(EventsList* self, unsigned int arg0) {
-  self->RemoveEventAt(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_RemoveEvent_1(EventsList* self, BaseEvent* arg0) {
-  self->RemoveEvent(*arg0);
-}
-
-unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_GetEventsCount_0(EventsList* self) {
-  return self->GetEventsCount();
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_Contains_2(EventsList* self, BaseEvent* arg0, bool arg1) {
-  return self->Contains(*arg0, arg1);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_IsEmpty_0(EventsList* self) {
-  return self->IsEmpty();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_Clear_0(EventsList* self) {
-  self->Clear();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_SerializeTo_1(EventsList* self, SerializerElement* arg0) {
-  self->SerializeTo(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList_UnserializeFrom_2(EventsList* self, Project* arg0, SerializerElement* arg1) {
-  self->UnserializeFrom(*arg0, *arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList___destroy___0(EventsList* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata___destroy___0(BehaviorMetadata* self) {
   delete self;
 }
 
@@ -2656,38 +2626,21 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata___destroy___0(Parame
   delete self;
 }
 
-// Behavior
+// EventsParametersLister
 
-Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_Behavior_0() {
-  return new Behavior();
+EventsParametersLister* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister_EventsParametersLister_1(Project* arg0) {
+  return new EventsParametersLister(*arg0);
 }
 
-Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_Clone_0(Behavior* self) {
-  return self->Clone();
+const MapStringString* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister_GetParametersAndTypes_0(EventsParametersLister* self) {
+  return &self->GetParametersAndTypes();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_SetName_1(Behavior* self, char* arg0) {
-  self->SetName(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister_Launch_1(EventsParametersLister* self, EventsList* arg0) {
+  self->Launch(*arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_GetName_0(Behavior* self) {
-  return self->GetName().c_str();
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_GetTypeName_0(Behavior* self) {
-  return self->GetTypeName().c_str();
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_UpdateProperty_3(Behavior* self, char* arg0, char* arg1, Project* arg2) {
-  return self->UpdateProperty(arg0, arg1, *arg2);
-}
-
-MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_GetProperties_1(Behavior* self, Project* arg0) {
-  static MapStringPropertyDescriptor temp;
-  return (temp = self->GetProperties(*arg0), &temp);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior___destroy___0(Behavior* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister___destroy___0(EventsParametersLister* self) {
   delete self;
 }
 
@@ -2811,47 +2764,94 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectMetadata___destroy___0(ObjectMet
   delete self;
 }
 
-// EventsParametersLister
+// TiledSpriteObject
 
-EventsParametersLister* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister_EventsParametersLister_1(Project* arg0) {
-  return new EventsParametersLister(*arg0);
+TiledSpriteObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_TiledSpriteObject_1(char* arg0) {
+  return new TiledSpriteObject(arg0);
 }
 
-const MapStringString* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister_GetParametersAndTypes_0(EventsParametersLister* self) {
-  return &self->GetParametersAndTypes();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SetTexture_1(TiledSpriteObject* self, char* arg0) {
+  self->SetTexture(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister_Launch_1(EventsParametersLister* self, EventsList* arg0) {
-  self->Launch(*arg0);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetTexture_0(TiledSpriteObject* self) {
+  return self->GetTexture().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister___destroy___0(EventsParametersLister* self) {
-  delete self;
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SetWidth_1(TiledSpriteObject* self, float arg0) {
+  self->SetWidth(arg0);
 }
 
-// BehaviorMetadata
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetFullName_0(BehaviorMetadata* self) {
-  return self->GetFullName().c_str();
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetWidth_0(TiledSpriteObject* self) {
+  return self->GetWidth();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetDefaultName_0(BehaviorMetadata* self) {
-  return self->GetDefaultName().c_str();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SetHeight_1(TiledSpriteObject* self, float arg0) {
+  self->SetHeight(arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetDescription_0(BehaviorMetadata* self) {
-  return self->GetDescription().c_str();
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetHeight_0(TiledSpriteObject* self) {
+  return self->GetHeight();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetGroup_0(BehaviorMetadata* self) {
-  return self->GetGroup().c_str();
+gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_Clone_0(TiledSpriteObject* self) {
+  return self->Clone();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetIconFilename_0(BehaviorMetadata* self) {
-  return self->GetIconFilename().c_str();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SetName_1(TiledSpriteObject* self, char* arg0) {
+  self->SetName(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata___destroy___0(BehaviorMetadata* self) {
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetName_0(TiledSpriteObject* self) {
+  return self->GetName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SetType_1(TiledSpriteObject* self, char* arg0) {
+  self->SetType(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetType_0(TiledSpriteObject* self) {
+  return self->GetType().c_str();
+}
+
+VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetVariables_0(TiledSpriteObject* self) {
+  return &self->GetVariables();
+}
+
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetAllBehaviorNames_0(TiledSpriteObject* self) {
+  static VectorString temp;
+  return (temp = self->GetAllBehaviorNames(), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_HasBehaviorNamed_1(TiledSpriteObject* self, char* arg0) {
+  return self->HasBehaviorNamed(arg0);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_AddNewBehavior_3(TiledSpriteObject* self, Project* arg0, char* arg1, char* arg2) {
+  return self->AddNewBehavior(*arg0, arg1, arg2);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetBehavior_1(TiledSpriteObject* self, char* arg0) {
+  return &self->GetBehavior(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_RemoveBehavior_1(TiledSpriteObject* self, char* arg0) {
+  self->RemoveBehavior(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_RenameBehavior_2(TiledSpriteObject* self, char* arg0, char* arg1) {
+  return self->RenameBehavior(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SerializeTo_1(TiledSpriteObject* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_UnserializeFrom_2(TiledSpriteObject* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject___destroy___0(TiledSpriteObject* self) {
   delete self;
 }
 
