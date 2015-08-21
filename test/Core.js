@@ -1,4 +1,5 @@
-var gd = require('../../Binaries/Output/libGD.js/Release/libGD.js');
+var gd = require('../../Binaries/Output/libGD.js/Release/libGD.js')();
+var gd2 = require('../../Binaries/Output/libGD.js/Release/libGD.js')();
 var path = require('path');
 var extend = require('extend');
 var expect = require('expect.js');
@@ -384,22 +385,22 @@ describe('libGD.js', function(){
 
 		after(function() {project.delete();});
 	});
-	describe('gd.Automatism', function(){
+	describe('gd.Behavior', function(){
 		var project = gd.ProjectHelper.createNewGDJSProject();
-		var automatism = new gd.Automatism();
+		var behavior = new gd.Behavior();
 
 		it('properties and initial values', function() {
-			automatism.setName("MyAutomatism");
-			expect(automatism.getName()).to.be("MyAutomatism");
-			expect(automatism.getTypeName()).to.be("");
+			behavior.setName("MyBehavior");
+			expect(behavior.getName()).to.be("MyBehavior");
+			expect(behavior.getTypeName()).to.be("");
 		});
 		it('update a not existing property', function() {
-			expect(automatism.updateProperty("PropertyThatDoesNotExist", "MyValue", project)).to.be(false);
+			expect(behavior.updateProperty("PropertyThatDoesNotExist", "MyValue", project)).to.be(false);
 		});
 		//TODO
 
 		after(function() {
-			automatism.delete();
+			behavior.delete();
 			project.delete();
 		});
 	});
@@ -412,23 +413,23 @@ describe('libGD.js', function(){
 		it('has properties and initial values', function() {
 			object.setName("TheObject");
 			expect(object.getName()).to.be("TheObject");
-			expect(object.hasAutomatismNamed("DoNotExists")).to.be(false);
+			expect(object.hasBehaviorNamed("DoNotExists")).to.be(false);
 		});
 
 		it('can have its type retrieved with gd.getTypeOfObject', function() {
 			expect(gd.getTypeOfObject(project, layout, "TheObject", true)).to.be("Sprite");
 		});
 
-		it('can have automatisms', function() {
-			var automatism = object.addNewAutomatism(project, "DraggableAutomatism::Draggable", "Draggable");
-			expect(object.hasAutomatismNamed("Draggable")).to.be(true);
-			expect(object.getAutomatism("Draggable")).to.be(automatism);
+		it('can have behaviors', function() {
+			var behavior = object.addNewBehavior(project, "DraggableBehavior::Draggable", "Draggable");
+			expect(object.hasBehaviorNamed("Draggable")).to.be(true);
+			expect(object.getBehavior("Draggable")).to.be(behavior);
 		});
 
-		it('can have its automatisms retrieved with gd.getAutomatismsOfObject', function() {
-			var automatisms = gd.getAutomatismsOfObject(project, layout, "TheObject", true);
-			expect(automatisms.size()).to.be(1);
-			expect(automatisms.get(0)).to.be("Draggable");
+		it('can have its behaviors retrieved with gd.getBehaviorsOfObject', function() {
+			var behaviors = gd.getBehaviorsOfObject(project, layout, "TheObject", true);
+			expect(behaviors.size()).to.be(1);
+			expect(behaviors.get(0)).to.be("Draggable");
 		});
 
 		after(function() {project.delete();});
@@ -757,8 +758,8 @@ describe('libGD.js', function(){
 				expect(objMetadata.getIconFilename().length).not.to.be(0);
 			});
 		});
-		describe('gd.AutomatismMetadata', function() {
-			var autoMetadata = provider.getAutomatismMetadata(gd.JsPlatform.get(), 'NotExistingAutomatism');
+		describe('gd.BehaviorMetadata', function() {
+			var autoMetadata = provider.getBehaviorMetadata(gd.JsPlatform.get(), 'NotExistingBehavior');
 
 			it('have standard methods to get information', function() {
 				expect(autoMetadata.getFullName).not.to.be(undefined);

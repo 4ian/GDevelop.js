@@ -1,107 +1,122 @@
-Module = Module || {};
-var gd = Module;
+        /*Emscripten generated-code for Module will be inserted here*/
 
-// Make sure that the naming convention for methods of GDevelop
-// classes is camelCase (instead of CamelCase) and rename methods
-// with special names (like `WRAPPED_`, `STATIC_`...).
-(function(gd) {
-    function uncapitalizeFirstLetter(method) {
-        return method.charAt(0).toLowerCase() + method.slice(1);
-    }
+        return Module;
+    };
 
-    function removePrefix(method, prefix) {
-        if (method.indexOf(prefix) !== 0)
-            return method;
+    // Make sure that the naming convention for methods of GDevelop
+    // classes is camelCase (instead of CamelCase) and rename methods
+    // with special names (like `WRAPPED_`, `STATIC_`...).
+    var adaptNamingConventions = function(gd) {
+        function uncapitalizeFirstLetter(method) {
+            return method.charAt(0).toLowerCase() + method.slice(1);
+        }
 
-        return method.replace(prefix, "");
-    }
+        function removePrefix(method, prefix) {
+            if (method.indexOf(prefix) !== 0)
+                return method;
 
-    function adaptClassMethods(object) {
-        var proto = object.prototype;
-        for (var method in proto) {
-            if (method && proto.hasOwnProperty(method)) {
-                var newName = method;
-                var addToModule = false;
-                var addToObject = false;
+            return method.replace(prefix, "");
+        }
 
-                //Detect static methods
-                if (method.indexOf("STATIC_") === 0) {
-                    newName = removePrefix(newName, "STATIC_");
-                    addToObject = true;
+        function adaptClassMethods(object) {
+            var proto = object.prototype;
+            for (var method in proto) {
+                if (method && proto.hasOwnProperty(method)) {
+                    var newName = method;
+                    var addToModule = false;
+                    var addToObject = false;
+
+                    //Detect static methods
+                    if (method.indexOf("STATIC_") === 0) {
+                        newName = removePrefix(newName, "STATIC_");
+                        addToObject = true;
+                    }
+
+                    //Detect free functions
+                    if (method.indexOf("FREE_") === 0) {
+                        newName = removePrefix(newName, "FREE_");
+                        addToModule = true;
+                    }
+
+                    //Remove prefix used for custom code generation
+                    newName = removePrefix(newName, "MAP_");
+                    newName = removePrefix(newName, "WRAPPED_");
+                    if (newName.indexOf("CLONE_") === 0) {
+                        newName = "clone";
+                    }
+
+                    //Normalize method name
+                    newName = uncapitalizeFirstLetter(newName);
+                    if (newName !== method) {
+                        proto[newName] = proto[method];
+                        delete proto[method];
+                    }
+
+                    if (addToObject) {
+                        object[newName] = proto[newName];
+                    }
+
+                    if (addToModule) {
+                        gd[newName] = (function(fct) {
+                            return function() { //Simulate a free function
+                                if (arguments.length === 0) return fct();
+                                var args = [];
+                                Array.prototype.push.apply(args, arguments);
+                                args.shift();
+
+                                return fct.apply(arguments[0], args);
+                            };
+                        })(proto[newName]);
+                    }
                 }
+            }
 
-                //Detect free functions
-                if (method.indexOf("FREE_") === 0) {
-                    newName = removePrefix(newName, "FREE_");
-                    addToModule = true;
-                }
+            //Offer a delete method that does what gd.destroy does.
+            proto.delete = function() { gd.destroy(this) };
+        }
 
-                //Remove prefix used for custom code generation
-                newName = removePrefix(newName, "MAP_");
-                newName = removePrefix(newName, "WRAPPED_");
-                if (newName.indexOf("CLONE_") === 0) {
-                    newName = "clone";
-                }
+        for(var gdClass in gd) {
+            if (gd.hasOwnProperty(gdClass)) {
+                if (typeof gd[gdClass] !== "function") continue;
+                if (!gd[gdClass].prototype) continue;
+                if (!gd[gdClass].prototype.hasOwnProperty("__class__")) continue;
 
-                //Normalize method name
-                newName = uncapitalizeFirstLetter(newName);
-                if (newName !== method) {
-                    proto[newName] = proto[method];
-                    delete proto[method];
-                }
-
-                if (addToObject) {
-                    object[newName] = proto[newName];
-                }
-
-                if (addToModule) {
-                    gd[newName] = (function(fct) {
-                        return function() { //Simulate a free function
-                            if (arguments.length === 0) return fct();
-                            var args = [];
-                            Array.prototype.push.apply(args, arguments);
-                            args.shift();
-
-                            return fct.apply(arguments[0], args);
-                        };
-                    })(proto[newName]);
-                }
+                adaptClassMethods(gd[gdClass]);
             }
         }
 
-        //Offer a delete method that does what gd.destroy does.
-        proto.delete = function() { gd.destroy(this) };
-    }
+        gd.Object = gd.gdObject; //Renaming was done to avoid clashing with javascript Object.
+        gd.initializePlatforms = gd.ProjectHelper.prototype.initializePlatforms;
 
-    for(var gdClass in gd) {
-        if (gd.hasOwnProperty(gdClass)) {
-            if (typeof gd[gdClass] !== "function") continue;
-            if (!gd[gdClass].prototype) continue;
-            if (!gd[gdClass].prototype.hasOwnProperty("__class__")) continue;
+        //Provide shortcuts for casts:
+        gd.asStandardEvent = function(evt) { return gd.castObject(evt, gd.StandardEvent); }
+        gd.asRepeatEvent = function(evt) { return gd.castObject(evt, gd.RepeatEvent); }
+        gd.asWhileEvent = function(evt) { return gd.castObject(evt, gd.WhileEvent); }
+        gd.asForEachEvent = function(evt) { return gd.castObject(evt, gd.ForEachEvent); }
+        gd.asCommentEvent = function(evt) { return gd.castObject(evt, gd.CommentEvent); }
+        gd.asGroupEvent = function(evt) { return gd.castObject(evt, gd.GroupEvent); }
+        gd.asPlatform = function(evt) { return gd.castObject(evt, gd.Platform); }
 
-            adaptClassMethods(gd[gdClass]);
-        }
-    }
+        gd.asSpriteObject = function(evt) { return gd.castObject(evt, gd.SpriteObject); }
+        gd.asTiledSpriteObject = function(evt) { return gd.castObject(evt, gd.TiledSpriteObject); }
+        gd.asTextObject = function(evt) { return gd.castObject(evt, gd.TextObject); }
 
-    gd.Object = gd.gdObject; //Renaming was done to avoid clashing with javascript Object.
-    gd.initializePlatforms = gd.ProjectHelper.prototype.initializePlatforms;
-    gd.asStandardEvent = function(evt) { return gd.castObject(evt, gd.StandardEvent); }
-    gd.asRepeatEvent = function(evt) { return gd.castObject(evt, gd.RepeatEvent); }
-    gd.asWhileEvent = function(evt) { return gd.castObject(evt, gd.WhileEvent); }
-    gd.asForEachEvent = function(evt) { return gd.castObject(evt, gd.ForEachEvent); }
-    gd.asCommentEvent = function(evt) { return gd.castObject(evt, gd.CommentEvent); }
-    gd.asGroupEvent = function(evt) { return gd.castObject(evt, gd.GroupEvent); }
-    gd.asPlatform = function(evt) { return gd.castObject(evt, gd.Platform); }
+        //Preserve backward compatibility with some alias for methods:
+        gd.VectorString.prototype.get = gd.VectorString.prototype.at;
+        gd.VectorPlatformExtension.prototype.get = gd.VectorPlatformExtension.prototype.at;
+        gd.InstructionsList.prototype.push_back = function(e) {
+            this.insert(e, this.size() - 1);
+        };
 
-    gd.asSpriteObject = function(evt) { return gd.castObject(evt, gd.SpriteObject); }
-    gd.asTiledSpriteObject = function(evt) { return gd.castObject(evt, gd.TiledSpriteObject); }
-    gd.asTextObject = function(evt) { return gd.castObject(evt, gd.TextObject); }
-
-    //Preserve backward compatibility with some alias for methods:
-    gd.VectorString.prototype.get = gd.VectorString.prototype.at;
-    gd.VectorPlatformExtension.prototype.get = gd.VectorPlatformExtension.prototype.at;
-    gd.InstructionsList.prototype.push_back = function(e) {
-    	this.insert(e, this.size() - 1);
+        return gd;
     };
 
-})(gd);
+    //Expose gd module.
+    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+        module.exports = function(options) {
+            return adaptNamingConventions(createModule(options));
+        };
+    } else {
+        window.gd = adaptNamingConventions(createModule());
+    }
+})();

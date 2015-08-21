@@ -8,7 +8,7 @@
 #include <GDCore/PlatformDefinition/Layout.h>
 #include <GDCore/PlatformDefinition/Object.h>
 #include <GDCore/PlatformDefinition/Variable.h>
-#include <GDCore/PlatformDefinition/Automatism.h>
+#include <GDCore/PlatformDefinition/Behavior.h>
 #include <GDCore/PlatformDefinition/VariablesContainer.h>
 #include <GDCore/PlatformDefinition/Platform.h>
 #include <GDCore/PlatformDefinition/InitialInstance.h>
@@ -59,21 +59,21 @@ public:
     arg0 = (const char*)EM_ASM_INT({
       var self = Module['getCache'](Module['ArbitraryResourceWorkerJS'])[$0];
       if (!self.hasOwnProperty('exposeImage')) throw 'a JSImplementation must implement all functions, you forgot ArbitraryResourceWorkerJS::exposeImage.';
-      return ensureString(self.exposeImage(gd.Pointer_stringify($1)));
+      return ensureString(self.exposeImage(Module.Pointer_stringify($1)));
     }, (int)this, arg0.c_str());
   }
   void ExposeShader(std::string & arg0) {
     arg0 = (const char*)EM_ASM_INT({
       var self = Module['getCache'](Module['ArbitraryResourceWorkerJS'])[$0];
       if (!self.hasOwnProperty('exposeShader')) throw 'a JSImplementation must implement all functions, you forgot ArbitraryResourceWorkerJS::exposeShader.';
-      return ensureString(self.exposeShader(gd.Pointer_stringify($1)));
+      return ensureString(self.exposeShader(Module.Pointer_stringify($1)));
     }, (int)this, arg0.c_str());
   }
   void ExposeFile(std::string & arg0) {
     arg0 = (const char*)EM_ASM_INT({
       var self = Module['getCache'](Module['ArbitraryResourceWorkerJS'])[$0];
       if (!self.hasOwnProperty('exposeFile')) throw 'a JSImplementation must implement all functions, you forgot ArbitraryResourceWorkerJS::exposeFile.';
-      return ensureString(self.exposeFile(gd.Pointer_stringify($1)));
+      return ensureString(self.exposeFile(Module.Pointer_stringify($1)));
     }, (int)this, arg0.c_str());
   }
 
@@ -90,14 +90,14 @@ public:
 	    EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('mkDir')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::mkDir.';
-	      self.mkDir(gd.Pointer_stringify($1));
+	      self.mkDir(Module.Pointer_stringify($1));
 	    }, (int)this, path.c_str());
 	}
     virtual bool DirExists(const std::string & path) {
 	    return EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('dirExists')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::dirExists.';
-	      return self.dirExists(gd.Pointer_stringify($1));
+	      return self.dirExists(Module.Pointer_stringify($1));
 	    }, (int)this, path.c_str());
 	}
 
@@ -105,7 +105,7 @@ public:
 	    return EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('fileExists')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::fileExists.';
-	      return self.fileExists(gd.Pointer_stringify($1));
+	      return self.fileExists(Module.Pointer_stringify($1));
 	    }, (int)this, path.c_str());
 	}
 
@@ -113,7 +113,7 @@ public:
 	    return (const char *)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('fileNameFrom')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::fileNameFrom.';
-	      return ensureString(self.fileNameFrom(gd.Pointer_stringify($1)));
+	      return ensureString(self.fileNameFrom(Module.Pointer_stringify($1)));
 	    }, (int)this, file.c_str());
 	}
 
@@ -121,7 +121,7 @@ public:
 	    return (const char *)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('dirNameFrom')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::dirNameFrom.';
-	      return ensureString(self.dirNameFrom(gd.Pointer_stringify($1)));
+	      return ensureString(self.dirNameFrom(Module.Pointer_stringify($1)));
 	    }, (int)this, file.c_str());
 	}
 
@@ -129,7 +129,7 @@ public:
 	    filename = (const char*)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('makeAbsolute')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::makeAbsolute.';
-	      return ensureString(self.makeAbsolute(gd.Pointer_stringify($1), gd.Pointer_stringify($2)));
+	      return ensureString(self.makeAbsolute(Module.Pointer_stringify($1), Module.Pointer_stringify($2)));
 	    }, (int)this, filename.c_str(), baseDirectory.c_str());
 
 	    return true;
@@ -140,7 +140,7 @@ public:
 	    filename = (const char*)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('makeRelative')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::makeRelative.';
-	      return ensureString(self.makeRelative(gd.Pointer_stringify($1), gd.Pointer_stringify($2)));
+	      return ensureString(self.makeRelative(Module.Pointer_stringify($1), Module.Pointer_stringify($2)));
 	    }, (int)this, filename.c_str(), baseDirectory.c_str());
     	std::cout << " => Result: " << filename << std::endl;
 
@@ -151,7 +151,7 @@ public:
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('isAbsolute')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::isAbsolute.';
-	      return self.isAbsolute(gd.Pointer_stringify($1));
+	      return self.isAbsolute(Module.Pointer_stringify($1));
 	    }, (int)this, filename.c_str());
 	};
 
@@ -159,7 +159,7 @@ public:
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('copyFile')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::copyFile.';
-	      return self.copyFile(gd.Pointer_stringify($1), gd.Pointer_stringify($2));
+	      return self.copyFile(Module.Pointer_stringify($1), Module.Pointer_stringify($2));
 	    }, (int)this, file.c_str(), destination.c_str());
 	}
 
@@ -167,7 +167,7 @@ public:
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('clearDir')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::clearDir.';
-	      return self.clearDir(gd.Pointer_stringify($1));
+	      return self.clearDir(Module.Pointer_stringify($1));
 	    }, (int)this, directory.c_str());
 	}
 
@@ -175,7 +175,7 @@ public:
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('writeToFile')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::writeToFile.';
-	      return self.writeToFile(gd.Pointer_stringify($1), gd.Pointer_stringify($2));
+	      return self.writeToFile(Module.Pointer_stringify($1), Module.Pointer_stringify($2));
 	    }, (int)this, file.c_str(), content.c_str());
 	}
 
@@ -183,7 +183,7 @@ public:
 	    return (const char *)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('readFile')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::readFile.';
-	      return ensureString(self.readFile(gd.Pointer_stringify($1)));
+	      return ensureString(self.readFile(Module.Pointer_stringify($1)));
 	    }, (int)this, file.c_str());
 	}
     virtual std::string GetTempDir() {
@@ -198,7 +198,7 @@ public:
 	    std::vector<std::string> directories = *(std::vector<std::string>*)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('readDir')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::readDir.';
-	      return self.readDir(gd.Pointer_stringify($1), gd.Pointer_stringify($2)).ptr;
+	      return self.readDir(Module.Pointer_stringify($1), Module.Pointer_stringify($2)).ptr;
 	    }, (int)this, path.c_str(), extension.c_str());
 
 	    std::cout << "ReadDir Files:" << std::endl;
@@ -269,27 +269,27 @@ typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 #define STATIC_HasAction HasAction
 #define STATIC_HasObjectAction HasObjectAction
 #define STATIC_HasObjectCondition HasObjectCondition
-#define STATIC_HasAutomatismAction HasAutomatismAction
-#define STATIC_HasAutomatismCondition HasAutomatismCondition
+#define STATIC_HasBehaviorAction HasBehaviorAction
+#define STATIC_HasBehaviorCondition HasBehaviorCondition
 #define STATIC_HasExpression HasExpression
 #define STATIC_HasObjectExpression HasObjectExpression
-#define STATIC_HasAutomatismExpression HasAutomatismExpression
+#define STATIC_HasBehaviorExpression HasBehaviorExpression
 #define STATIC_HasStrExpression HasStrExpression
 #define STATIC_HasObjectStrExpression HasObjectStrExpression
-#define STATIC_HasAutomatismStrExpression HasAutomatismStrExpression
+#define STATIC_HasBehaviorStrExpression HasBehaviorStrExpression
 #define STATIC_RenameObjectInEvents RenameObjectInEvents
 #define STATIC_RemoveObjectInEvents RemoveObjectInEvents
 #define STATIC_ReplaceStringInEvents ReplaceStringInEvents
-#define STATIC_GetAutomatismMetadata GetAutomatismMetadata
+#define STATIC_GetBehaviorMetadata GetBehaviorMetadata
 #define STATIC_GetObjectMetadata GetObjectMetadata
 #define STATIC_GetActionMetadata GetActionMetadata
 #define STATIC_GetConditionMetadata GetConditionMetadata
 #define STATIC_GetExpressionMetadata GetExpressionMetadata
 #define STATIC_GetObjectExpressionMetadata GetObjectExpressionMetadata
-#define STATIC_GetAutomatismExpressionMetadata GetAutomatismExpressionMetadata
+#define STATIC_GetBehaviorExpressionMetadata GetBehaviorExpressionMetadata
 #define STATIC_GetStrExpressionMetadata GetStrExpressionMetadata
 #define STATIC_GetObjectStrExpressionMetadata GetObjectStrExpressionMetadata
-#define STATIC_GetAutomatismStrExpressionMetadata GetAutomatismStrExpressionMetadata
+#define STATIC_GetBehaviorStrExpressionMetadata GetBehaviorStrExpressionMetadata
 #define STATIC_GenerateSceneEventsCompleteCode GenerateSceneEventsCompleteCode
 
 //We postfix some methods with "At" as Javascript does not support overloading

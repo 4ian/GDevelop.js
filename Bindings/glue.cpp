@@ -9,14 +9,14 @@ public:
     EM_ASM_INT({
       var self = Module['getCache'](Module['InitialInstanceJSFunctor'])[$0];
       if (!self.hasOwnProperty('invoke')) throw 'a JSImplementation must implement all functions, you forgot InitialInstanceJSFunctor::invoke.';
-      self.invoke($1);
+      self['invoke']($1);
     }, (int)this, (int)arg0);
   }
   void __destroy__() {
     EM_ASM_INT({
       var self = Module['getCache'](Module['InitialInstanceJSFunctor'])[$0];
       if (!self.hasOwnProperty('__destroy__')) throw 'a JSImplementation must implement all functions, you forgot InitialInstanceJSFunctor::__destroy__.';
-      self.__destroy__();
+      self['__destroy__']();
     }, (int)this);
   }
 };
@@ -38,7 +38,23 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorker___destroy___0(
   delete self;
 }
 
+// InitialInstanceJSFunctorWrapper
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstanceJSFunctorWrapper___destroy___0(InitialInstanceJSFunctorWrapper* self) {
+  delete self;
+}
+
+// AbstractFileSystem
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystem___destroy___0(AbstractFileSystem* self) {
+  delete self;
+}
+
 // Layout
+
+Layout* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_Layout_0() {
+  return new Layout();
+}
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SetName_1(Layout* self, char* arg0) {
   self->SetName(arg0);
@@ -216,12 +232,6 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer_STATIC_ReplaceStringI
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer___destroy___0(EventsRefactorer* self) {
-  delete self;
-}
-
-// InitialInstanceJSFunctorWrapper
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstanceJSFunctorWrapper___destroy___0(InitialInstanceJSFunctorWrapper* self) {
   delete self;
 }
 
@@ -657,29 +667,29 @@ VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_GetVariabl
   return &self->GetVariables();
 }
 
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_GetAllAutomatismNames_0(SpriteObject* self) {
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_GetAllBehaviorNames_0(SpriteObject* self) {
   static VectorString temp;
-  return (temp = self->GetAllAutomatismNames(), &temp);
+  return (temp = self->GetAllBehaviorNames(), &temp);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_HasAutomatismNamed_1(SpriteObject* self, char* arg0) {
-  return self->HasAutomatismNamed(arg0);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_HasBehaviorNamed_1(SpriteObject* self, char* arg0) {
+  return self->HasBehaviorNamed(arg0);
 }
 
-Automatism* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_AddNewAutomatism_3(SpriteObject* self, Project* arg0, char* arg1, char* arg2) {
-  return self->AddNewAutomatism(*arg0, arg1, arg2);
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_AddNewBehavior_3(SpriteObject* self, Project* arg0, char* arg1, char* arg2) {
+  return self->AddNewBehavior(*arg0, arg1, arg2);
 }
 
-Automatism* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_GetAutomatism_1(SpriteObject* self, char* arg0) {
-  return &self->GetAutomatism(arg0);
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_GetBehavior_1(SpriteObject* self, char* arg0) {
+  return &self->GetBehavior(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_RemoveAutomatism_1(SpriteObject* self, char* arg0) {
-  self->RemoveAutomatism(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_RemoveBehavior_1(SpriteObject* self, char* arg0) {
+  self->RemoveBehavior(arg0);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_RenameAutomatism_2(SpriteObject* self, char* arg0, char* arg1) {
-  return self->RenameAutomatism(arg0, arg1);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_RenameBehavior_2(SpriteObject* self, char* arg0, char* arg1) {
+  return self->RenameBehavior(arg0, arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_SerializeTo_1(SpriteObject* self, SerializerElement* arg0) {
@@ -998,29 +1008,29 @@ VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetVa
   return &self->GetVariables();
 }
 
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetAllAutomatismNames_0(TiledSpriteObject* self) {
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetAllBehaviorNames_0(TiledSpriteObject* self) {
   static VectorString temp;
-  return (temp = self->GetAllAutomatismNames(), &temp);
+  return (temp = self->GetAllBehaviorNames(), &temp);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_HasAutomatismNamed_1(TiledSpriteObject* self, char* arg0) {
-  return self->HasAutomatismNamed(arg0);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_HasBehaviorNamed_1(TiledSpriteObject* self, char* arg0) {
+  return self->HasBehaviorNamed(arg0);
 }
 
-Automatism* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_AddNewAutomatism_3(TiledSpriteObject* self, Project* arg0, char* arg1, char* arg2) {
-  return self->AddNewAutomatism(*arg0, arg1, arg2);
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_AddNewBehavior_3(TiledSpriteObject* self, Project* arg0, char* arg1, char* arg2) {
+  return self->AddNewBehavior(*arg0, arg1, arg2);
 }
 
-Automatism* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetAutomatism_1(TiledSpriteObject* self, char* arg0) {
-  return &self->GetAutomatism(arg0);
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetBehavior_1(TiledSpriteObject* self, char* arg0) {
+  return &self->GetBehavior(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_RemoveAutomatism_1(TiledSpriteObject* self, char* arg0) {
-  self->RemoveAutomatism(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_RemoveBehavior_1(TiledSpriteObject* self, char* arg0) {
+  self->RemoveBehavior(arg0);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_RenameAutomatism_2(TiledSpriteObject* self, char* arg0, char* arg1) {
-  return self->RenameAutomatism(arg0, arg1);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_RenameBehavior_2(TiledSpriteObject* self, char* arg0, char* arg1) {
+  return self->RenameBehavior(arg0, arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SerializeTo_1(TiledSpriteObject* self, SerializerElement* arg0) {
@@ -1524,17 +1534,17 @@ VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetExtensio
   return (temp = self->GetExtensionObjectsTypes(), &temp);
 }
 
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetAutomatismsTypes_0(PlatformExtension* self) {
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetBehaviorsTypes_0(PlatformExtension* self) {
   static VectorString temp;
-  return (temp = self->GetAutomatismsTypes(), &temp);
+  return (temp = self->GetBehaviorsTypes(), &temp);
 }
 
 ObjectMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetObjectMetadata_1(PlatformExtension* self, char* arg0) {
   return &self->GetObjectMetadata(arg0);
 }
 
-AutomatismMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetAutomatismMetadata_1(PlatformExtension* self, char* arg0) {
-  return &self->GetAutomatismMetadata(arg0);
+BehaviorMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetBehaviorMetadata_1(PlatformExtension* self, char* arg0) {
+  return &self->GetBehaviorMetadata(arg0);
 }
 
 MapStringEventMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetAllEvents_0(PlatformExtension* self) {
@@ -1573,20 +1583,20 @@ MapStringExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtens
   return &self->GetAllStrExpressionsForObject(arg0);
 }
 
-MapStringInstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetAllActionsForAutomatism_1(PlatformExtension* self, char* arg0) {
-  return &self->GetAllActionsForAutomatism(arg0);
+MapStringInstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetAllActionsForBehavior_1(PlatformExtension* self, char* arg0) {
+  return &self->GetAllActionsForBehavior(arg0);
 }
 
-MapStringInstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetAllConditionsForAutomatism_1(PlatformExtension* self, char* arg0) {
-  return &self->GetAllConditionsForAutomatism(arg0);
+MapStringInstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetAllConditionsForBehavior_1(PlatformExtension* self, char* arg0) {
+  return &self->GetAllConditionsForBehavior(arg0);
 }
 
-MapStringExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetAllExpressionsForAutomatism_1(PlatformExtension* self, char* arg0) {
-  return &self->GetAllExpressionsForAutomatism(arg0);
+MapStringExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetAllExpressionsForBehavior_1(PlatformExtension* self, char* arg0) {
+  return &self->GetAllExpressionsForBehavior(arg0);
 }
 
-MapStringExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetAllStrExpressionsForAutomatism_1(PlatformExtension* self, char* arg0) {
-  return &self->GetAllStrExpressionsForAutomatism(arg0);
+MapStringExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetAllStrExpressionsForBehavior_1(PlatformExtension* self, char* arg0) {
+  return &self->GetAllStrExpressionsForBehavior(arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension___destroy___0(PlatformExtension* self) {
@@ -1933,9 +1943,9 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_UnserializeFrom_1(Project* sel
   self->UnserializeFrom(*arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_FREE_GetTypeOfAutomatism_3(Project* self, Layout* arg0, char* arg1, bool arg2) {
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_FREE_GetTypeOfBehavior_3(Project* self, Layout* arg0, char* arg1, bool arg2) {
   static std::string temp;
-  return (temp = GetTypeOfAutomatism(*self, *arg0, arg1, arg2), temp.c_str());
+  return (temp = GetTypeOfBehavior(*self, *arg0, arg1, arg2), temp.c_str());
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_FREE_GetTypeOfObject_3(Project* self, Layout* arg0, char* arg1, bool arg2) {
@@ -1943,9 +1953,9 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_FREE_GetTypeOfObject_3(
   return (temp = GetTypeOfObject(*self, *arg0, arg1, arg2), temp.c_str());
 }
 
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_FREE_GetAutomatismsOfObject_3(Project* self, Layout* arg0, char* arg1, bool arg2) {
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_FREE_GetBehaviorsOfObject_3(Project* self, Layout* arg0, char* arg1, bool arg2) {
   static VectorString temp;
-  return (temp = GetAutomatismsOfObject(*self, *arg0, arg1, arg2), &temp);
+  return (temp = GetBehaviorsOfObject(*self, *arg0, arg1, arg2), &temp);
 }
 
 gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_InsertNewObject_4(Project* self, Project* arg0, char* arg1, char* arg2, unsigned int arg3) {
@@ -2180,12 +2190,6 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent___destroy___0(CommentEven
   delete self;
 }
 
-// AbstractFileSystem
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystem___destroy___0(AbstractFileSystem* self) {
-  delete self;
-}
-
 // ArbitraryEventsWorker
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryEventsWorker_Launch_1(ArbitraryEventsWorker* self, EventsList* arg0) {
@@ -2319,29 +2323,29 @@ VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_GetVariables_0
   return &self->GetVariables();
 }
 
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_GetAllAutomatismNames_0(gdObject* self) {
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_GetAllBehaviorNames_0(gdObject* self) {
   static VectorString temp;
-  return (temp = self->GetAllAutomatismNames(), &temp);
+  return (temp = self->GetAllBehaviorNames(), &temp);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_HasAutomatismNamed_1(gdObject* self, char* arg0) {
-  return self->HasAutomatismNamed(arg0);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_HasBehaviorNamed_1(gdObject* self, char* arg0) {
+  return self->HasBehaviorNamed(arg0);
 }
 
-Automatism* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_AddNewAutomatism_3(gdObject* self, Project* arg0, char* arg1, char* arg2) {
-  return self->AddNewAutomatism(*arg0, arg1, arg2);
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_AddNewBehavior_3(gdObject* self, Project* arg0, char* arg1, char* arg2) {
+  return self->AddNewBehavior(*arg0, arg1, arg2);
 }
 
-Automatism* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_GetAutomatism_1(gdObject* self, char* arg0) {
-  return &self->GetAutomatism(arg0);
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_GetBehavior_1(gdObject* self, char* arg0) {
+  return &self->GetBehavior(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_RemoveAutomatism_1(gdObject* self, char* arg0) {
-  self->RemoveAutomatism(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_RemoveBehavior_1(gdObject* self, char* arg0) {
+  self->RemoveBehavior(arg0);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_RenameAutomatism_2(gdObject* self, char* arg0, char* arg1) {
-  return self->RenameAutomatism(arg0, arg1);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_RenameBehavior_2(gdObject* self, char* arg0, char* arg1) {
+  return self->RenameBehavior(arg0, arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_SerializeTo_1(gdObject* self, SerializerElement* arg0) {
@@ -2468,8 +2472,8 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter___destroy___0(gdjs::Exporter*
 
 // MetadataProvider
 
-const AutomatismMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_GetAutomatismMetadata_2(MetadataProvider* self, Platform* arg0, char* arg1) {
-  return &self->STATIC_GetAutomatismMetadata(*arg0, arg1);
+const BehaviorMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_GetBehaviorMetadata_2(MetadataProvider* self, Platform* arg0, char* arg1) {
+  return &self->STATIC_GetBehaviorMetadata(*arg0, arg1);
 }
 
 const ObjectMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_GetObjectMetadata_2(MetadataProvider* self, Platform* arg0, char* arg1) {
@@ -2492,8 +2496,8 @@ const ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_
   return &self->STATIC_GetObjectExpressionMetadata(*arg0, arg1, arg2);
 }
 
-const ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_GetAutomatismExpressionMetadata_3(MetadataProvider* self, Platform* arg0, char* arg1, char* arg2) {
-  return &self->STATIC_GetAutomatismExpressionMetadata(*arg0, arg1, arg2);
+const ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_GetBehaviorExpressionMetadata_3(MetadataProvider* self, Platform* arg0, char* arg1, char* arg2) {
+  return &self->STATIC_GetBehaviorExpressionMetadata(*arg0, arg1, arg2);
 }
 
 const ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_GetStrExpressionMetadata_2(MetadataProvider* self, Platform* arg0, char* arg1) {
@@ -2504,8 +2508,8 @@ const ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_
   return &self->STATIC_GetObjectStrExpressionMetadata(*arg0, arg1, arg2);
 }
 
-const ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_GetAutomatismStrExpressionMetadata_3(MetadataProvider* self, Platform* arg0, char* arg1, char* arg2) {
-  return &self->STATIC_GetAutomatismStrExpressionMetadata(*arg0, arg1, arg2);
+const ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_GetBehaviorStrExpressionMetadata_3(MetadataProvider* self, Platform* arg0, char* arg1, char* arg2) {
+  return &self->STATIC_GetBehaviorStrExpressionMetadata(*arg0, arg1, arg2);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasCondition_2(MetadataProvider* self, Platform* arg0, char* arg1) {
@@ -2524,12 +2528,12 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasObjectCondi
   return self->STATIC_HasObjectCondition(*arg0, arg1, arg2);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasAutomatismAction_3(MetadataProvider* self, Platform* arg0, char* arg1, char* arg2) {
-  return self->STATIC_HasAutomatismAction(*arg0, arg1, arg2);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasBehaviorAction_3(MetadataProvider* self, Platform* arg0, char* arg1, char* arg2) {
+  return self->STATIC_HasBehaviorAction(*arg0, arg1, arg2);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasAutomatismCondition_3(MetadataProvider* self, Platform* arg0, char* arg1, char* arg2) {
-  return self->STATIC_HasAutomatismCondition(*arg0, arg1, arg2);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasBehaviorCondition_3(MetadataProvider* self, Platform* arg0, char* arg1, char* arg2) {
+  return self->STATIC_HasBehaviorCondition(*arg0, arg1, arg2);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasExpression_2(MetadataProvider* self, Platform* arg0, char* arg1) {
@@ -2540,8 +2544,8 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasObjectExpre
   return self->STATIC_HasObjectExpression(*arg0, arg1, arg2);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasAutomatismExpression_3(MetadataProvider* self, Platform* arg0, char* arg1, char* arg2) {
-  return self->STATIC_HasAutomatismExpression(*arg0, arg1, arg2);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasBehaviorExpression_3(MetadataProvider* self, Platform* arg0, char* arg1, char* arg2) {
+  return self->STATIC_HasBehaviorExpression(*arg0, arg1, arg2);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasStrExpression_2(MetadataProvider* self, Platform* arg0, char* arg1) {
@@ -2552,8 +2556,8 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasObjectStrEx
   return self->STATIC_HasObjectStrExpression(*arg0, arg1, arg2);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasAutomatismStrExpression_3(MetadataProvider* self, Platform* arg0, char* arg1, char* arg2) {
-  return self->STATIC_HasAutomatismStrExpression(*arg0, arg1, arg2);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasBehaviorStrExpression_3(MetadataProvider* self, Platform* arg0, char* arg1, char* arg2) {
+  return self->STATIC_HasBehaviorStrExpression(*arg0, arg1, arg2);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider___destroy___0(MetadataProvider* self) {
@@ -2652,38 +2656,38 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata___destroy___0(Parame
   delete self;
 }
 
-// Automatism
+// Behavior
 
-Automatism* EMSCRIPTEN_KEEPALIVE emscripten_bind_Automatism_Automatism_0() {
-  return new Automatism();
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_Behavior_0() {
+  return new Behavior();
 }
 
-Automatism* EMSCRIPTEN_KEEPALIVE emscripten_bind_Automatism_Clone_0(Automatism* self) {
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_Clone_0(Behavior* self) {
   return self->Clone();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Automatism_SetName_1(Automatism* self, char* arg0) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_SetName_1(Behavior* self, char* arg0) {
   self->SetName(arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Automatism_GetName_0(Automatism* self) {
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_GetName_0(Behavior* self) {
   return self->GetName().c_str();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Automatism_GetTypeName_0(Automatism* self) {
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_GetTypeName_0(Behavior* self) {
   return self->GetTypeName().c_str();
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Automatism_UpdateProperty_3(Automatism* self, char* arg0, char* arg1, Project* arg2) {
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_UpdateProperty_3(Behavior* self, char* arg0, char* arg1, Project* arg2) {
   return self->UpdateProperty(arg0, arg1, *arg2);
 }
 
-MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_Automatism_GetProperties_1(Automatism* self, Project* arg0) {
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_GetProperties_1(Behavior* self, Project* arg0) {
   static MapStringPropertyDescriptor temp;
   return (temp = self->GetProperties(*arg0), &temp);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Automatism___destroy___0(Automatism* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior___destroy___0(Behavior* self) {
   delete self;
 }
 
@@ -2825,29 +2829,29 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister___destroy___0(E
   delete self;
 }
 
-// AutomatismMetadata
+// BehaviorMetadata
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AutomatismMetadata_GetFullName_0(AutomatismMetadata* self) {
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetFullName_0(BehaviorMetadata* self) {
   return self->GetFullName().c_str();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AutomatismMetadata_GetDefaultName_0(AutomatismMetadata* self) {
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetDefaultName_0(BehaviorMetadata* self) {
   return self->GetDefaultName().c_str();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AutomatismMetadata_GetDescription_0(AutomatismMetadata* self) {
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetDescription_0(BehaviorMetadata* self) {
   return self->GetDescription().c_str();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AutomatismMetadata_GetGroup_0(AutomatismMetadata* self) {
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetGroup_0(BehaviorMetadata* self) {
   return self->GetGroup().c_str();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AutomatismMetadata_GetIconFilename_0(AutomatismMetadata* self) {
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_GetIconFilename_0(BehaviorMetadata* self) {
   return self->GetIconFilename().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AutomatismMetadata___destroy___0(AutomatismMetadata* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata___destroy___0(BehaviorMetadata* self) {
   delete self;
 }
 
@@ -2999,29 +3003,29 @@ VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetVariables
   return &self->GetVariables();
 }
 
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetAllAutomatismNames_0(TextObject* self) {
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetAllBehaviorNames_0(TextObject* self) {
   static VectorString temp;
-  return (temp = self->GetAllAutomatismNames(), &temp);
+  return (temp = self->GetAllBehaviorNames(), &temp);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_HasAutomatismNamed_1(TextObject* self, char* arg0) {
-  return self->HasAutomatismNamed(arg0);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_HasBehaviorNamed_1(TextObject* self, char* arg0) {
+  return self->HasBehaviorNamed(arg0);
 }
 
-Automatism* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_AddNewAutomatism_3(TextObject* self, Project* arg0, char* arg1, char* arg2) {
-  return self->AddNewAutomatism(*arg0, arg1, arg2);
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_AddNewBehavior_3(TextObject* self, Project* arg0, char* arg1, char* arg2) {
+  return self->AddNewBehavior(*arg0, arg1, arg2);
 }
 
-Automatism* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetAutomatism_1(TextObject* self, char* arg0) {
-  return &self->GetAutomatism(arg0);
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetBehavior_1(TextObject* self, char* arg0) {
+  return &self->GetBehavior(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_RemoveAutomatism_1(TextObject* self, char* arg0) {
-  self->RemoveAutomatism(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_RemoveBehavior_1(TextObject* self, char* arg0) {
+  self->RemoveBehavior(arg0);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_RenameAutomatism_2(TextObject* self, char* arg0, char* arg1) {
-  return self->RenameAutomatism(arg0, arg1);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_RenameBehavior_2(TextObject* self, char* arg0, char* arg1) {
+  return self->RenameBehavior(arg0, arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_SerializeTo_1(TextObject* self, SerializerElement* arg0) {

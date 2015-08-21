@@ -176,9 +176,9 @@ interface Project {
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
 
-    [Const, Value] DOMString FREE_GetTypeOfAutomatism([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
+    [Const, Value] DOMString FREE_GetTypeOfBehavior([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
     [Const, Value] DOMString FREE_GetTypeOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
-    [Value] VectorString FREE_GetAutomatismsOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
+    [Value] VectorString FREE_GetBehaviorsOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
 
     //Inherited from gd::ClassWithObjects
     [Ref] gdObject InsertNewObject([Ref] Project project, [Const] DOMString type, [Const] DOMString name, unsigned long pos);
@@ -192,10 +192,10 @@ interface Project {
     unsigned long GetObjectsCount();
 };
 
-interface Automatism {
-    void Automatism();
+interface Behavior {
+    void Behavior();
 
-    Automatism Clone();
+    Behavior Clone();
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
     [Const, Ref] DOMString GetTypeName();
@@ -216,12 +216,12 @@ interface gdObject {
     [Const, Ref] DOMString GetType();
 
     [Ref]VariablesContainer GetVariables();
-    [Value] VectorString GetAllAutomatismNames();
-    boolean HasAutomatismNamed([Const] DOMString name);
-    Automatism AddNewAutomatism([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
-    [Ref] Automatism GetAutomatism([Const] DOMString name);
-    void RemoveAutomatism([Const] DOMString name);
-    boolean RenameAutomatism([Const] DOMString oldBame, [Const] DOMString name);
+    [Value] VectorString GetAllBehaviorNames();
+    boolean HasBehaviorNamed([Const] DOMString name);
+    Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
+    [Ref] Behavior GetBehavior([Const] DOMString name);
+    void RemoveBehavior([Const] DOMString name);
+    boolean RenameBehavior([Const] DOMString oldBame, [Const] DOMString name);
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
@@ -237,6 +237,7 @@ interface ObjectGroup {
 };
 
 interface Layout {
+    void Layout();
 
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
@@ -528,7 +529,7 @@ interface ObjectMetadata {
     [Const, Ref] DOMString GetIconFilename();
 };
 
-interface AutomatismMetadata {
+interface BehaviorMetadata {
     [Const, Ref] DOMString GetFullName();
     [Const, Ref] DOMString GetDefaultName();
     [Const, Ref] DOMString GetDescription();
@@ -554,9 +555,9 @@ interface PlatformExtension {
 
 
     [Value] VectorString GetExtensionObjectsTypes();
-    [Value] VectorString GetAutomatismsTypes();
+    [Value] VectorString GetBehaviorsTypes();
     [Ref] ObjectMetadata GetObjectMetadata([Const] DOMString type);
-    [Ref] AutomatismMetadata GetAutomatismMetadata([Const] DOMString type);
+    [Ref] BehaviorMetadata GetBehaviorMetadata([Const] DOMString type);
     [Ref] MapStringEventMetadata GetAllEvents();
     [Ref] MapStringInstructionMetadata GetAllActions();
     [Ref] MapStringInstructionMetadata GetAllConditions();
@@ -566,10 +567,10 @@ interface PlatformExtension {
     [Ref] MapStringInstructionMetadata GetAllConditionsForObject([Const] DOMString objectType);
     [Ref] MapStringExpressionMetadata GetAllExpressionsForObject([Const] DOMString objectType);
     [Ref] MapStringExpressionMetadata GetAllStrExpressionsForObject([Const] DOMString objectType);
-    [Ref] MapStringInstructionMetadata GetAllActionsForAutomatism([Const] DOMString autoType);
-    [Ref] MapStringInstructionMetadata GetAllConditionsForAutomatism([Const] DOMString autoType);
-    [Ref] MapStringExpressionMetadata GetAllExpressionsForAutomatism([Const] DOMString autoType);
-    [Ref] MapStringExpressionMetadata GetAllStrExpressionsForAutomatism([Const] DOMString autoType);
+    [Ref] MapStringInstructionMetadata GetAllActionsForBehavior([Const] DOMString autoType);
+    [Ref] MapStringInstructionMetadata GetAllConditionsForBehavior([Const] DOMString autoType);
+    [Ref] MapStringExpressionMetadata GetAllExpressionsForBehavior([Const] DOMString autoType);
+    [Ref] MapStringExpressionMetadata GetAllStrExpressionsForBehavior([Const] DOMString autoType);
 };
 
 interface EventsList {
@@ -750,28 +751,28 @@ interface EventsRefactorer {
 
 interface MetadataProvider {
 
-    [Const, Ref] AutomatismMetadata STATIC_GetAutomatismMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] BehaviorMetadata STATIC_GetBehaviorMetadata([Const, Ref] Platform p, [Const] DOMString type);
     [Const, Ref] ObjectMetadata STATIC_GetObjectMetadata([Const, Ref] Platform p, [Const] DOMString type);
     [Const, Ref] InstructionMetadata STATIC_GetActionMetadata([Const, Ref] Platform p, [Const] DOMString type);
     [Const, Ref] InstructionMetadata STATIC_GetConditionMetadata([Const, Ref] Platform p, [Const] DOMString type);
     [Const, Ref] ExpressionMetadata STATIC_GetExpressionMetadata([Const, Ref] Platform p, [Const] DOMString type);
     [Const, Ref] ExpressionMetadata STATIC_GetObjectExpressionMetadata([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
-    [Const, Ref] ExpressionMetadata STATIC_GetAutomatismExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetBehaviorExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
     [Const, Ref] ExpressionMetadata STATIC_GetStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString type);
     [Const, Ref] ExpressionMetadata STATIC_GetObjectStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
-    [Const, Ref] ExpressionMetadata STATIC_GetAutomatismStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetBehaviorStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
     boolean STATIC_HasCondition([Const, Ref] Platform p, [Const] DOMString type);
     boolean STATIC_HasAction([Const, Ref] Platform p, [Const] DOMString type);
     boolean STATIC_HasObjectAction([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
     boolean STATIC_HasObjectCondition([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
-    boolean STATIC_HasAutomatismAction([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
-    boolean STATIC_HasAutomatismCondition([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    boolean STATIC_HasBehaviorAction([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    boolean STATIC_HasBehaviorCondition([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
     boolean STATIC_HasExpression([Const, Ref] Platform p, [Const] DOMString type);
     boolean STATIC_HasObjectExpression([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
-    boolean STATIC_HasAutomatismExpression([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    boolean STATIC_HasBehaviorExpression([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
     boolean STATIC_HasStrExpression([Const, Ref] Platform p, [Const] DOMString type);
     boolean STATIC_HasObjectStrExpression([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
-    boolean STATIC_HasAutomatismStrExpression([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    boolean STATIC_HasBehaviorStrExpression([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
 };
 
 interface AbstractFileSystem {
@@ -900,12 +901,12 @@ interface SpriteObject {
     [Const, Ref] DOMString GetType();
 
     [Ref]VariablesContainer GetVariables();
-    [Value] VectorString GetAllAutomatismNames();
-    boolean HasAutomatismNamed([Const] DOMString name);
-    Automatism AddNewAutomatism([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
-    [Ref] Automatism GetAutomatism([Const] DOMString name);
-    void RemoveAutomatism([Const] DOMString name);
-    boolean RenameAutomatism([Const] DOMString oldBame, [Const] DOMString name);
+    [Value] VectorString GetAllBehaviorNames();
+    boolean HasBehaviorNamed([Const] DOMString name);
+    Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
+    [Ref] Behavior GetBehavior([Const] DOMString name);
+    void RemoveBehavior([Const] DOMString name);
+    boolean RenameBehavior([Const] DOMString oldBame, [Const] DOMString name);
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
@@ -950,12 +951,12 @@ interface TextObject {
     [Const, Ref] DOMString GetType();
 
     [Ref]VariablesContainer GetVariables();
-    [Value] VectorString GetAllAutomatismNames();
-    boolean HasAutomatismNamed([Const] DOMString name);
-    Automatism AddNewAutomatism([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
-    [Ref] Automatism GetAutomatism([Const] DOMString name);
-    void RemoveAutomatism([Const] DOMString name);
-    boolean RenameAutomatism([Const] DOMString oldBame, [Const] DOMString name);
+    [Value] VectorString GetAllBehaviorNames();
+    boolean HasBehaviorNamed([Const] DOMString name);
+    Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
+    [Ref] Behavior GetBehavior([Const] DOMString name);
+    void RemoveBehavior([Const] DOMString name);
+    boolean RenameBehavior([Const] DOMString oldBame, [Const] DOMString name);
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
@@ -979,12 +980,12 @@ interface TiledSpriteObject {
     [Const, Ref] DOMString GetType();
 
     [Ref]VariablesContainer GetVariables();
-    [Value] VectorString GetAllAutomatismNames();
-    boolean HasAutomatismNamed([Const] DOMString name);
-    Automatism AddNewAutomatism([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
-    [Ref] Automatism GetAutomatism([Const] DOMString name);
-    void RemoveAutomatism([Const] DOMString name);
-    boolean RenameAutomatism([Const] DOMString oldBame, [Const] DOMString name);
+    [Value] VectorString GetAllBehaviorNames();
+    boolean HasBehaviorNamed([Const] DOMString name);
+    Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
+    [Ref] Behavior GetBehavior([Const] DOMString name);
+    void RemoveBehavior([Const] DOMString name);
+    boolean RenameBehavior([Const] DOMString oldBame, [Const] DOMString name);
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);

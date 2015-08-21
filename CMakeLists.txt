@@ -74,9 +74,9 @@ set(RUNTIME_OUTPUT_PATH ${GD_base_dir}/Binaries/Output/libGD.js/${CMAKE_BUILD_TY
 
 target_link_libraries(GD GDCore)
 target_link_libraries(GD GDJS)
-target_link_libraries(GD PlatformAutomatism)
-target_link_libraries(GD DestroyOutsideAutomatism)
+target_link_libraries(GD PlatformBehavior)
+target_link_libraries(GD DestroyOutsideBehavior)
 target_link_libraries(GD TiledSpriteObject)
-target_link_libraries(GD DraggableAutomatism)
-target_link_libraries(GD TopDownMovementAutomatism)
+target_link_libraries(GD DraggableBehavior)
+target_link_libraries(GD TopDownMovementBehavior)
 target_link_libraries(GD TextObject)

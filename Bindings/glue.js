@@ -54,9 +54,59 @@ function getClass(obj) {
 }
 Module['getClass'] = getClass;
 
-// Converts a value into a C-style string.
+// Converts a value into a C-style string, storing it in temporary space
+
+var ensureStringCache = {
+  buffer: 0,  // the main buffer of temporary storage
+  size: 0,   // the size of buffer
+  pos: 0,    // the next free offset in buffer
+  temps: [], // extra allocations
+  needed: 0, // the total size we need next time
+
+  prepare: function() {
+    if (this.needed) {
+      // clear the temps
+      for (var i = 0; i < this.temps.length; i++) {
+        Module['_free'](this.temps[i]);
+      }
+      this.temps.length = 0;
+      // prepare to allocate a bigger buffer
+      Module['_free'](this.buffer);
+      this.buffer = 0;
+      this.size += this.needed;
+      // clean up
+      this.needed = 0;
+    }
+    if (!this.buffer) { // happens first time, or when we need to grow
+      this.size += 100; // heuristic, avoid many small grow events
+      this.buffer = Module['_malloc'](this.size);
+      assert(this.buffer);
+    }
+    this.pos = 0;
+  },
+  alloc: function(value) {
+    assert(this.buffer);
+    var array = intArrayFromString(value);
+    var len = array.length;
+    var ret;
+    if (this.pos + len >= this.size) {
+      // we failed to allocate in the buffer, this time around :(
+      assert(len > 0); // null terminator, at least
+      this.needed += len;
+      ret = Module['_malloc'](len);
+      this.temps.push(ret);
+    } else {
+      // we can allocate in the buffer
+      ret = this.buffer + this.pos;
+      this.pos += len;
+    }
+    writeArrayToMemory(array, ret);
+    return ret;
+  },
+};
+
 function ensureString(value) {
-  if (typeof value == 'string') return allocate(intArrayFromString(value), 'i8', ALLOC_STACK);
+  if (typeof value === 'string') return ensureStringCache.alloc(value);
   return value;
 }
 
@@ -69,206 +119,230 @@ ArbitraryResourceWorker.prototype.__class__ = ArbitraryResourceWorker;
 ArbitraryResourceWorker.__cache__ = {};
 Module['ArbitraryResourceWorker'] = ArbitraryResourceWorker;
 
-  ArbitraryResourceWorker.prototype['__destroy__'] = function() {
+  ArbitraryResourceWorker.prototype['__destroy__'] = ArbitraryResourceWorker.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ArbitraryResourceWorker___destroy___0(self);
 };
+// InitialInstanceJSFunctorWrapper
+function InitialInstanceJSFunctorWrapper() { throw "cannot construct a InitialInstanceJSFunctorWrapper, no constructor in IDL" }
+InitialInstanceJSFunctorWrapper.prototype = Object.create(WrapperObject.prototype);
+InitialInstanceJSFunctorWrapper.prototype.constructor = InitialInstanceJSFunctorWrapper;
+InitialInstanceJSFunctorWrapper.prototype.__class__ = InitialInstanceJSFunctorWrapper;
+InitialInstanceJSFunctorWrapper.__cache__ = {};
+Module['InitialInstanceJSFunctorWrapper'] = InitialInstanceJSFunctorWrapper;
+
+  InitialInstanceJSFunctorWrapper.prototype['__destroy__'] = InitialInstanceJSFunctorWrapper.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_InitialInstanceJSFunctorWrapper___destroy___0(self);
+};
+// AbstractFileSystem
+function AbstractFileSystem() { throw "cannot construct a AbstractFileSystem, no constructor in IDL" }
+AbstractFileSystem.prototype = Object.create(WrapperObject.prototype);
+AbstractFileSystem.prototype.constructor = AbstractFileSystem;
+AbstractFileSystem.prototype.__class__ = AbstractFileSystem;
+AbstractFileSystem.__cache__ = {};
+Module['AbstractFileSystem'] = AbstractFileSystem;
+
+  AbstractFileSystem.prototype['__destroy__'] = AbstractFileSystem.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_AbstractFileSystem___destroy___0(self);
+};
 // Layout
-function Layout() { throw "cannot construct a Layout, no constructor in IDL" }
+function Layout() {
+  this.ptr = _emscripten_bind_Layout_Layout_0();
+  getCache(Layout)[this.ptr] = this;
+};;
 Layout.prototype = Object.create(WrapperObject.prototype);
 Layout.prototype.constructor = Layout;
 Layout.prototype.__class__ = Layout;
 Layout.__cache__ = {};
 Module['Layout'] = Layout;
 
-Layout.prototype['SetName'] = function(arg0) {
+Layout.prototype['SetName'] = Layout.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Layout_SetName_1(self, arg0);
 };;
 
-Layout.prototype['GetName'] = function() {
+Layout.prototype['GetName'] = Layout.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Layout_GetName_0(self));
 };;
 
-Layout.prototype['SetBackgroundColor'] = function(arg0, arg1, arg2) {
+Layout.prototype['SetBackgroundColor'] = Layout.prototype.SetBackgroundColor = function(arg0, arg1, arg2) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   _emscripten_bind_Layout_SetBackgroundColor_3(self, arg0, arg1, arg2);
 };;
 
-Layout.prototype['GetBackgroundColorRed'] = function() {
+Layout.prototype['GetBackgroundColorRed'] = Layout.prototype.GetBackgroundColorRed = function() {
   var self = this.ptr;
   return _emscripten_bind_Layout_GetBackgroundColorRed_0(self);
 };;
 
-Layout.prototype['GetBackgroundColorGreen'] = function() {
+Layout.prototype['GetBackgroundColorGreen'] = Layout.prototype.GetBackgroundColorGreen = function() {
   var self = this.ptr;
   return _emscripten_bind_Layout_GetBackgroundColorGreen_0(self);
 };;
 
-Layout.prototype['GetBackgroundColorBlue'] = function() {
+Layout.prototype['GetBackgroundColorBlue'] = Layout.prototype.GetBackgroundColorBlue = function() {
   var self = this.ptr;
   return _emscripten_bind_Layout_GetBackgroundColorBlue_0(self);
 };;
 
-Layout.prototype['SetWindowDefaultTitle'] = function(arg0) {
+Layout.prototype['SetWindowDefaultTitle'] = Layout.prototype.SetWindowDefaultTitle = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Layout_SetWindowDefaultTitle_1(self, arg0);
 };;
 
-Layout.prototype['GetWindowDefaultTitle'] = function() {
+Layout.prototype['GetWindowDefaultTitle'] = Layout.prototype.GetWindowDefaultTitle = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Layout_GetWindowDefaultTitle_0(self));
 };;
 
-Layout.prototype['GetInitialInstances'] = function() {
+Layout.prototype['GetInitialInstances'] = Layout.prototype.GetInitialInstances = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Layout_GetInitialInstances_0(self), InitialInstancesContainer);
 };;
 
-Layout.prototype['GetVariables'] = function() {
+Layout.prototype['GetVariables'] = Layout.prototype.GetVariables = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Layout_GetVariables_0(self), VariablesContainer);
 };;
 
-Layout.prototype['GetEvents'] = function() {
+Layout.prototype['GetEvents'] = Layout.prototype.GetEvents = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Layout_GetEvents_0(self), EventsList);
 };;
 
-Layout.prototype['InsertNewLayer'] = function(arg0, arg1) {
+Layout.prototype['InsertNewLayer'] = Layout.prototype.InsertNewLayer = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_Layout_InsertNewLayer_2(self, arg0, arg1);
 };;
 
-Layout.prototype['InsertLayer'] = function(arg0, arg1) {
+Layout.prototype['InsertLayer'] = Layout.prototype.InsertLayer = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_Layout_InsertLayer_2(self, arg0, arg1);
 };;
 
-Layout.prototype['GetLayer'] = function(arg0) {
+Layout.prototype['GetLayer'] = Layout.prototype.GetLayer = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Layout_GetLayer_1(self, arg0), Layer);
 };;
 
-Layout.prototype['GetLayerAt'] = function(arg0) {
+Layout.prototype['GetLayerAt'] = Layout.prototype.GetLayerAt = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Layout_GetLayerAt_1(self, arg0), Layer);
 };;
 
-Layout.prototype['HasLayerNamed'] = function(arg0) {
+Layout.prototype['HasLayerNamed'] = Layout.prototype.HasLayerNamed = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Layout_HasLayerNamed_1(self, arg0));
 };;
 
-Layout.prototype['RemoveLayer'] = function(arg0) {
+Layout.prototype['RemoveLayer'] = Layout.prototype.RemoveLayer = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Layout_RemoveLayer_1(self, arg0);
 };;
 
-Layout.prototype['GetLayersCount'] = function() {
+Layout.prototype['GetLayersCount'] = Layout.prototype.GetLayersCount = function() {
   var self = this.ptr;
   return _emscripten_bind_Layout_GetLayersCount_0(self);
 };;
 
-Layout.prototype['InsertNewObject'] = function(arg0, arg1, arg2, arg3) {
+Layout.prototype['InsertNewObject'] = Layout.prototype.InsertNewObject = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  else arg3 = ensureString(arg3);
   return wrapPointer(_emscripten_bind_Layout_InsertNewObject_4(self, arg0, arg1, arg2, arg3), gdObject);
 };;
 
-Layout.prototype['InsertObject'] = function(arg0, arg1) {
+Layout.prototype['InsertObject'] = Layout.prototype.InsertObject = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_Layout_InsertObject_2(self, arg0, arg1), gdObject);
 };;
 
-Layout.prototype['HasObjectNamed'] = function(arg0) {
+Layout.prototype['HasObjectNamed'] = Layout.prototype.HasObjectNamed = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Layout_HasObjectNamed_1(self, arg0));
 };;
 
-Layout.prototype['GetObject'] = function(arg0) {
+Layout.prototype['GetObject'] = Layout.prototype.GetObject = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Layout_GetObject_1(self, arg0), gdObject);
 };;
 
-Layout.prototype['GetObjectAt'] = function(arg0) {
+Layout.prototype['GetObjectAt'] = Layout.prototype.GetObjectAt = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Layout_GetObjectAt_1(self, arg0), gdObject);
 };;
 
-Layout.prototype['GetObjectPosition'] = function(arg0) {
+Layout.prototype['GetObjectPosition'] = Layout.prototype.GetObjectPosition = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Layout_GetObjectPosition_1(self, arg0);
 };;
 
-Layout.prototype['RemoveObject'] = function(arg0) {
+Layout.prototype['RemoveObject'] = Layout.prototype.RemoveObject = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Layout_RemoveObject_1(self, arg0);
 };;
 
-Layout.prototype['SwapObjects'] = function(arg0, arg1) {
+Layout.prototype['SwapObjects'] = Layout.prototype.SwapObjects = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_Layout_SwapObjects_2(self, arg0, arg1);
 };;
 
-Layout.prototype['GetObjectsCount'] = function() {
+Layout.prototype['GetObjectsCount'] = Layout.prototype.GetObjectsCount = function() {
   var self = this.ptr;
   return _emscripten_bind_Layout_GetObjectsCount_0(self);
 };;
 
-  Layout.prototype['__destroy__'] = function() {
+  Layout.prototype['__destroy__'] = Layout.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Layout___destroy___0(self);
 };
@@ -280,35 +354,37 @@ MapStringEventMetadata.prototype.__class__ = MapStringEventMetadata;
 MapStringEventMetadata.__cache__ = {};
 Module['MapStringEventMetadata'] = MapStringEventMetadata;
 
-MapStringEventMetadata.prototype['MAP_get'] = function(arg0) {
+MapStringEventMetadata.prototype['MAP_get'] = MapStringEventMetadata.prototype.MAP_get = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_MapStringEventMetadata_MAP_get_1(self, arg0), EventMetadata);
 };;
 
-MapStringEventMetadata.prototype['MAP_set'] = function(arg0, arg1) {
+MapStringEventMetadata.prototype['MAP_set'] = MapStringEventMetadata.prototype.MAP_set = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_MapStringEventMetadata_MAP_set_2(self, arg0, arg1);
 };;
 
-MapStringEventMetadata.prototype['MAP_has'] = function(arg0) {
+MapStringEventMetadata.prototype['MAP_has'] = MapStringEventMetadata.prototype.MAP_has = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_MapStringEventMetadata_MAP_has_1(self, arg0));
 };;
 
-MapStringEventMetadata.prototype['MAP_keys'] = function() {
+MapStringEventMetadata.prototype['MAP_keys'] = MapStringEventMetadata.prototype.MAP_keys = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_MapStringEventMetadata_MAP_keys_0(self), VectorString);
 };;
 
-  MapStringEventMetadata.prototype['__destroy__'] = function() {
+  MapStringEventMetadata.prototype['__destroy__'] = MapStringEventMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_MapStringEventMetadata___destroy___0(self);
 };
@@ -323,27 +399,25 @@ Vector2f.prototype.__class__ = Vector2f;
 Vector2f.__cache__ = {};
 Module['Vector2f'] = Vector2f;
 
-  Vector2f.prototype['get_x']= function() {
+  Vector2f.prototype['get_x'] = Vector2f.prototype.get_x = function() {
   var self = this.ptr;
   return _emscripten_bind_Vector2f_get_x_0(self);
 };
-    Vector2f.prototype['set_x']= function(arg0) {
+    Vector2f.prototype['set_x'] = Vector2f.prototype.set_x = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Vector2f_set_x_1(self, arg0);
 };
-  Vector2f.prototype['get_y']= function() {
+  Vector2f.prototype['get_y'] = Vector2f.prototype.get_y = function() {
   var self = this.ptr;
   return _emscripten_bind_Vector2f_get_y_0(self);
 };
-    Vector2f.prototype['set_y']= function(arg0) {
+    Vector2f.prototype['set_y'] = Vector2f.prototype.set_y = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Vector2f_set_y_1(self, arg0);
 };
-  Vector2f.prototype['__destroy__'] = function() {
+  Vector2f.prototype['__destroy__'] = Vector2f.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Vector2f___destroy___0(self);
 };
@@ -355,16 +429,13 @@ EventsRefactorer.prototype.__class__ = EventsRefactorer;
 EventsRefactorer.__cache__ = {};
 Module['EventsRefactorer'] = EventsRefactorer;
 
-EventsRefactorer.prototype['STATIC_RenameObjectInEvents'] = function(arg0, arg1, arg2, arg3, arg4, arg5) {
+EventsRefactorer.prototype['STATIC_RenameObjectInEvents'] = EventsRefactorer.prototype.STATIC_RenameObjectInEvents = function(arg0, arg1, arg2, arg3, arg4, arg5) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  else arg3 = ensureString(arg3);
   if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
   else arg4 = ensureString(arg4);
   if (arg5 && typeof arg5 === 'object') arg5 = arg5.ptr;
@@ -372,57 +443,37 @@ EventsRefactorer.prototype['STATIC_RenameObjectInEvents'] = function(arg0, arg1,
   _emscripten_bind_EventsRefactorer_STATIC_RenameObjectInEvents_6(self, arg0, arg1, arg2, arg3, arg4, arg5);
 };;
 
-EventsRefactorer.prototype['STATIC_RemoveObjectInEvents'] = function(arg0, arg1, arg2, arg3, arg4) {
+EventsRefactorer.prototype['STATIC_RemoveObjectInEvents'] = EventsRefactorer.prototype.STATIC_RemoveObjectInEvents = function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  else arg3 = ensureString(arg3);
   if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
   else arg4 = ensureString(arg4);
   _emscripten_bind_EventsRefactorer_STATIC_RemoveObjectInEvents_5(self, arg0, arg1, arg2, arg3, arg4);
 };;
 
-EventsRefactorer.prototype['STATIC_ReplaceStringInEvents'] = function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
+EventsRefactorer.prototype['STATIC_ReplaceStringInEvents'] = EventsRefactorer.prototype.STATIC_ReplaceStringInEvents = function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
   else arg3 = ensureString(arg3);
   if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
   else arg4 = ensureString(arg4);
   if (arg5 && typeof arg5 === 'object') arg5 = arg5.ptr;
-  else arg5 = ensureString(arg5);
   if (arg6 && typeof arg6 === 'object') arg6 = arg6.ptr;
-  else arg6 = ensureString(arg6);
   if (arg7 && typeof arg7 === 'object') arg7 = arg7.ptr;
-  else arg7 = ensureString(arg7);
   _emscripten_bind_EventsRefactorer_STATIC_ReplaceStringInEvents_8(self, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 };;
 
-  EventsRefactorer.prototype['__destroy__'] = function() {
+  EventsRefactorer.prototype['__destroy__'] = EventsRefactorer.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_EventsRefactorer___destroy___0(self);
-};
-// InitialInstanceJSFunctorWrapper
-function InitialInstanceJSFunctorWrapper() { throw "cannot construct a InitialInstanceJSFunctorWrapper, no constructor in IDL" }
-InitialInstanceJSFunctorWrapper.prototype = Object.create(WrapperObject.prototype);
-InitialInstanceJSFunctorWrapper.prototype.constructor = InitialInstanceJSFunctorWrapper;
-InitialInstanceJSFunctorWrapper.prototype.__class__ = InitialInstanceJSFunctorWrapper;
-InitialInstanceJSFunctorWrapper.__cache__ = {};
-Module['InitialInstanceJSFunctorWrapper'] = InitialInstanceJSFunctorWrapper;
-
-  InitialInstanceJSFunctorWrapper.prototype['__destroy__'] = function() {
-  var self = this.ptr;
-  _emscripten_bind_InitialInstanceJSFunctorWrapper___destroy___0(self);
 };
 // WhileEvent
 function WhileEvent() {
@@ -435,83 +486,82 @@ WhileEvent.prototype.__class__ = WhileEvent;
 WhileEvent.__cache__ = {};
 Module['WhileEvent'] = WhileEvent;
 
-WhileEvent.prototype['GetConditions'] = function() {
+WhileEvent.prototype['GetConditions'] = WhileEvent.prototype.GetConditions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_WhileEvent_GetConditions_0(self), InstructionsList);
 };;
 
-WhileEvent.prototype['GetWhileConditions'] = function() {
+WhileEvent.prototype['GetWhileConditions'] = WhileEvent.prototype.GetWhileConditions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_WhileEvent_GetWhileConditions_0(self), InstructionsList);
 };;
 
-WhileEvent.prototype['GetActions'] = function() {
+WhileEvent.prototype['GetActions'] = WhileEvent.prototype.GetActions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_WhileEvent_GetActions_0(self), InstructionsList);
 };;
 
-WhileEvent.prototype['Clone'] = function() {
+WhileEvent.prototype['Clone'] = WhileEvent.prototype.Clone = function() {
   var self = this.ptr;
   _emscripten_bind_WhileEvent_Clone_0(self);
 };;
 
-WhileEvent.prototype['GetType'] = function() {
+WhileEvent.prototype['GetType'] = WhileEvent.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_WhileEvent_GetType_0(self));
 };;
 
-WhileEvent.prototype['SetType'] = function(arg0) {
+WhileEvent.prototype['SetType'] = WhileEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_WhileEvent_SetType_1(self, arg0);
 };;
 
-WhileEvent.prototype['IsExecutable'] = function() {
+WhileEvent.prototype['IsExecutable'] = WhileEvent.prototype.IsExecutable = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_WhileEvent_IsExecutable_0(self));
 };;
 
-WhileEvent.prototype['CanHaveSubEvents'] = function() {
+WhileEvent.prototype['CanHaveSubEvents'] = WhileEvent.prototype.CanHaveSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_WhileEvent_CanHaveSubEvents_0(self));
 };;
 
-WhileEvent.prototype['HasSubEvents'] = function() {
+WhileEvent.prototype['HasSubEvents'] = WhileEvent.prototype.HasSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_WhileEvent_HasSubEvents_0(self));
 };;
 
-WhileEvent.prototype['GetSubEvents'] = function() {
+WhileEvent.prototype['GetSubEvents'] = WhileEvent.prototype.GetSubEvents = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_WhileEvent_GetSubEvents_0(self), EventsList);
 };;
 
-WhileEvent.prototype['IsDisabled'] = function() {
+WhileEvent.prototype['IsDisabled'] = WhileEvent.prototype.IsDisabled = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_WhileEvent_IsDisabled_0(self));
 };;
 
-WhileEvent.prototype['SetDisabled'] = function(arg0) {
+WhileEvent.prototype['SetDisabled'] = WhileEvent.prototype.SetDisabled = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_WhileEvent_SetDisabled_1(self, arg0);
 };;
 
-WhileEvent.prototype['IsFolded'] = function() {
+WhileEvent.prototype['IsFolded'] = WhileEvent.prototype.IsFolded = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_WhileEvent_IsFolded_0(self));
 };;
 
-WhileEvent.prototype['SetFolded'] = function(arg0) {
+WhileEvent.prototype['SetFolded'] = WhileEvent.prototype.SetFolded = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_WhileEvent_SetFolded_1(self, arg0);
 };;
 
-  WhileEvent.prototype['__destroy__'] = function() {
+  WhileEvent.prototype['__destroy__'] = WhileEvent.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_WhileEvent___destroy___0(self);
 };
@@ -523,39 +573,40 @@ Platform.prototype.__class__ = Platform;
 Platform.__cache__ = {};
 Module['Platform'] = Platform;
 
-Platform.prototype['GetName'] = function() {
+Platform.prototype['GetName'] = Platform.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Platform_GetName_0(self));
 };;
 
-Platform.prototype['GetFullName'] = function() {
+Platform.prototype['GetFullName'] = Platform.prototype.GetFullName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Platform_GetFullName_0(self));
 };;
 
-Platform.prototype['GetSubtitle'] = function() {
+Platform.prototype['GetSubtitle'] = Platform.prototype.GetSubtitle = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Platform_GetSubtitle_0(self));
 };;
 
-Platform.prototype['GetDescription'] = function() {
+Platform.prototype['GetDescription'] = Platform.prototype.GetDescription = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Platform_GetDescription_0(self));
 };;
 
-Platform.prototype['IsExtensionLoaded'] = function(arg0) {
+Platform.prototype['IsExtensionLoaded'] = Platform.prototype.IsExtensionLoaded = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Platform_IsExtensionLoaded_1(self, arg0));
 };;
 
-Platform.prototype['GetAllPlatformExtensions'] = function() {
+Platform.prototype['GetAllPlatformExtensions'] = Platform.prototype.GetAllPlatformExtensions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Platform_GetAllPlatformExtensions_0(self), VectorPlatformExtension);
 };;
 
-  Platform.prototype['__destroy__'] = function() {
+  Platform.prototype['__destroy__'] = Platform.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Platform___destroy___0(self);
 };
@@ -567,17 +618,17 @@ ProjectHelper.prototype.__class__ = ProjectHelper;
 ProjectHelper.__cache__ = {};
 Module['ProjectHelper'] = ProjectHelper;
 
-ProjectHelper.prototype['STATIC_CreateNewGDJSProject'] = function() {
+ProjectHelper.prototype['STATIC_CreateNewGDJSProject'] = ProjectHelper.prototype.STATIC_CreateNewGDJSProject = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_ProjectHelper_STATIC_CreateNewGDJSProject_0(self), Project);
 };;
 
-ProjectHelper.prototype['STATIC_InitializePlatforms'] = function() {
+ProjectHelper.prototype['STATIC_InitializePlatforms'] = ProjectHelper.prototype.STATIC_InitializePlatforms = function() {
   var self = this.ptr;
   _emscripten_bind_ProjectHelper_STATIC_InitializePlatforms_0(self);
 };;
 
-  ProjectHelper.prototype['__destroy__'] = function() {
+  ProjectHelper.prototype['__destroy__'] = ProjectHelper.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ProjectHelper___destroy___0(self);
 };
@@ -592,40 +643,36 @@ Animation.prototype.__class__ = Animation;
 Animation.__cache__ = {};
 Module['Animation'] = Animation;
 
-Animation.prototype['SetDirectionsCount'] = function(arg0) {
+Animation.prototype['SetDirectionsCount'] = Animation.prototype.SetDirectionsCount = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Animation_SetDirectionsCount_1(self, arg0);
 };;
 
-Animation.prototype['GetDirectionsCount'] = function() {
+Animation.prototype['GetDirectionsCount'] = Animation.prototype.GetDirectionsCount = function() {
   var self = this.ptr;
   return _emscripten_bind_Animation_GetDirectionsCount_0(self);
 };;
 
-Animation.prototype['GetDirection'] = function(arg0) {
+Animation.prototype['GetDirection'] = Animation.prototype.GetDirection = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Animation_GetDirection_1(self, arg0), Direction);
 };;
 
-Animation.prototype['SetDirection'] = function(arg0, arg1) {
+Animation.prototype['SetDirection'] = Animation.prototype.SetDirection = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_Animation_SetDirection_2(self, arg0, arg1);
 };;
 
-Animation.prototype['HasNoDirections'] = function() {
+Animation.prototype['HasNoDirections'] = Animation.prototype.HasNoDirections = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Animation_HasNoDirections_0(self));
 };;
 
-  Animation.prototype['__destroy__'] = function() {
+  Animation.prototype['__destroy__'] = Animation.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Animation___destroy___0(self);
 };
@@ -640,56 +687,58 @@ VariablesContainer.prototype.__class__ = VariablesContainer;
 VariablesContainer.__cache__ = {};
 Module['VariablesContainer'] = VariablesContainer;
 
-VariablesContainer.prototype['Has'] = function(arg0) {
+VariablesContainer.prototype['Has'] = VariablesContainer.prototype.Has = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_VariablesContainer_Has_1(self, arg0));
 };;
 
-VariablesContainer.prototype['Get'] = function(arg0) {
+VariablesContainer.prototype['Get'] = VariablesContainer.prototype.Get = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_VariablesContainer_Get_1(self, arg0), Variable);
 };;
 
-VariablesContainer.prototype['GetAt'] = function(arg0) {
+VariablesContainer.prototype['GetAt'] = VariablesContainer.prototype.GetAt = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_VariablesContainer_GetAt_1(self, arg0), PairStringVariable);
 };;
 
-VariablesContainer.prototype['Insert'] = function(arg0, arg1, arg2) {
+VariablesContainer.prototype['Insert'] = VariablesContainer.prototype.Insert = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   return wrapPointer(_emscripten_bind_VariablesContainer_Insert_3(self, arg0, arg1, arg2), Variable);
 };;
 
-VariablesContainer.prototype['InsertNew'] = function(arg0, arg1) {
+VariablesContainer.prototype['InsertNew'] = VariablesContainer.prototype.InsertNew = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_VariablesContainer_InsertNew_2(self, arg0, arg1), Variable);
 };;
 
-VariablesContainer.prototype['Remove'] = function(arg0) {
+VariablesContainer.prototype['Remove'] = VariablesContainer.prototype.Remove = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_VariablesContainer_Remove_1(self, arg0);
 };;
 
-VariablesContainer.prototype['Rename'] = function(arg0, arg1) {
+VariablesContainer.prototype['Rename'] = VariablesContainer.prototype.Rename = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -697,33 +746,32 @@ VariablesContainer.prototype['Rename'] = function(arg0, arg1) {
   _emscripten_bind_VariablesContainer_Rename_2(self, arg0, arg1);
 };;
 
-VariablesContainer.prototype['Swap'] = function(arg0, arg1) {
+VariablesContainer.prototype['Swap'] = VariablesContainer.prototype.Swap = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_VariablesContainer_Swap_2(self, arg0, arg1);
 };;
 
-VariablesContainer.prototype['GetPosition'] = function(arg0) {
+VariablesContainer.prototype['GetPosition'] = VariablesContainer.prototype.GetPosition = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return _emscripten_bind_VariablesContainer_GetPosition_1(self, arg0);
 };;
 
-VariablesContainer.prototype['Count'] = function() {
+VariablesContainer.prototype['Count'] = VariablesContainer.prototype.Count = function() {
   var self = this.ptr;
   return _emscripten_bind_VariablesContainer_Count_0(self);
 };;
 
-VariablesContainer.prototype['Clear'] = function() {
+VariablesContainer.prototype['Clear'] = VariablesContainer.prototype.Clear = function() {
   var self = this.ptr;
   _emscripten_bind_VariablesContainer_Clear_0(self);
 };;
 
-  VariablesContainer.prototype['__destroy__'] = function() {
+  VariablesContainer.prototype['__destroy__'] = VariablesContainer.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_VariablesContainer___destroy___0(self);
 };
@@ -735,19 +783,18 @@ VectorPlatformExtension.prototype.__class__ = VectorPlatformExtension;
 VectorPlatformExtension.__cache__ = {};
 Module['VectorPlatformExtension'] = VectorPlatformExtension;
 
-VectorPlatformExtension.prototype['size'] = function() {
+VectorPlatformExtension.prototype['size'] = VectorPlatformExtension.prototype.size = function() {
   var self = this.ptr;
   return _emscripten_bind_VectorPlatformExtension_size_0(self);
 };;
 
-VectorPlatformExtension.prototype['WRAPPED_at'] = function(arg0) {
+VectorPlatformExtension.prototype['WRAPPED_at'] = VectorPlatformExtension.prototype.WRAPPED_at = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_VectorPlatformExtension_WRAPPED_at_1(self, arg0), PlatformExtension);
 };;
 
-  VectorPlatformExtension.prototype['__destroy__'] = function() {
+  VectorPlatformExtension.prototype['__destroy__'] = VectorPlatformExtension.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_VectorPlatformExtension___destroy___0(self);
 };
@@ -762,86 +809,85 @@ Resource.prototype.__class__ = Resource;
 Resource.__cache__ = {};
 Module['Resource'] = Resource;
 
-Resource.prototype['Clone'] = function() {
+Resource.prototype['Clone'] = Resource.prototype.Clone = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Resource_Clone_0(self), Resource);
 };;
 
-Resource.prototype['SetName'] = function(arg0) {
+Resource.prototype['SetName'] = Resource.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Resource_SetName_1(self, arg0);
 };;
 
-Resource.prototype['GetName'] = function() {
+Resource.prototype['GetName'] = Resource.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Resource_GetName_0(self));
 };;
 
-Resource.prototype['SetKind'] = function(arg0) {
+Resource.prototype['SetKind'] = Resource.prototype.SetKind = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Resource_SetKind_1(self, arg0);
 };;
 
-Resource.prototype['GetKind'] = function() {
+Resource.prototype['GetKind'] = Resource.prototype.GetKind = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Resource_GetKind_0(self));
 };;
 
-Resource.prototype['IsUserAdded'] = function() {
+Resource.prototype['IsUserAdded'] = Resource.prototype.IsUserAdded = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Resource_IsUserAdded_0(self));
 };;
 
-Resource.prototype['SetUserAdded'] = function(arg0) {
+Resource.prototype['SetUserAdded'] = Resource.prototype.SetUserAdded = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Resource_SetUserAdded_1(self, arg0);
 };;
 
-Resource.prototype['UseFile'] = function() {
+Resource.prototype['UseFile'] = Resource.prototype.UseFile = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Resource_UseFile_0(self));
 };;
 
-Resource.prototype['SetFile'] = function(arg0) {
+Resource.prototype['SetFile'] = Resource.prototype.SetFile = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Resource_SetFile_1(self, arg0);
 };;
 
-Resource.prototype['GetFile'] = function() {
+Resource.prototype['GetFile'] = Resource.prototype.GetFile = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Resource_GetFile_0(self));
 };;
 
-Resource.prototype['GetAbsoluteFile'] = function(arg0) {
+Resource.prototype['GetAbsoluteFile'] = Resource.prototype.GetAbsoluteFile = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_Resource_GetAbsoluteFile_1(self, arg0));
 };;
 
-Resource.prototype['SerializeTo'] = function(arg0) {
+Resource.prototype['SerializeTo'] = Resource.prototype.SerializeTo = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Resource_SerializeTo_1(self, arg0);
 };;
 
-Resource.prototype['UnserializeFrom'] = function(arg0) {
+Resource.prototype['UnserializeFrom'] = Resource.prototype.UnserializeFrom = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Resource_UnserializeFrom_1(self, arg0);
 };;
 
-  Resource.prototype['__destroy__'] = function() {
+  Resource.prototype['__destroy__'] = Resource.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Resource___destroy___0(self);
 };
@@ -856,90 +902,90 @@ ForEachEvent.prototype.__class__ = ForEachEvent;
 ForEachEvent.__cache__ = {};
 Module['ForEachEvent'] = ForEachEvent;
 
-ForEachEvent.prototype['SetObjectToPick'] = function(arg0) {
+ForEachEvent.prototype['SetObjectToPick'] = ForEachEvent.prototype.SetObjectToPick = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ForEachEvent_SetObjectToPick_1(self, arg0);
 };;
 
-ForEachEvent.prototype['GetObjectToPick'] = function() {
+ForEachEvent.prototype['GetObjectToPick'] = ForEachEvent.prototype.GetObjectToPick = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ForEachEvent_GetObjectToPick_0(self));
 };;
 
-ForEachEvent.prototype['GetConditions'] = function() {
+ForEachEvent.prototype['GetConditions'] = ForEachEvent.prototype.GetConditions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_ForEachEvent_GetConditions_0(self), InstructionsList);
 };;
 
-ForEachEvent.prototype['GetActions'] = function() {
+ForEachEvent.prototype['GetActions'] = ForEachEvent.prototype.GetActions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_ForEachEvent_GetActions_0(self), InstructionsList);
 };;
 
-ForEachEvent.prototype['Clone'] = function() {
+ForEachEvent.prototype['Clone'] = ForEachEvent.prototype.Clone = function() {
   var self = this.ptr;
   _emscripten_bind_ForEachEvent_Clone_0(self);
 };;
 
-ForEachEvent.prototype['GetType'] = function() {
+ForEachEvent.prototype['GetType'] = ForEachEvent.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ForEachEvent_GetType_0(self));
 };;
 
-ForEachEvent.prototype['SetType'] = function(arg0) {
+ForEachEvent.prototype['SetType'] = ForEachEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ForEachEvent_SetType_1(self, arg0);
 };;
 
-ForEachEvent.prototype['IsExecutable'] = function() {
+ForEachEvent.prototype['IsExecutable'] = ForEachEvent.prototype.IsExecutable = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_ForEachEvent_IsExecutable_0(self));
 };;
 
-ForEachEvent.prototype['CanHaveSubEvents'] = function() {
+ForEachEvent.prototype['CanHaveSubEvents'] = ForEachEvent.prototype.CanHaveSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_ForEachEvent_CanHaveSubEvents_0(self));
 };;
 
-ForEachEvent.prototype['HasSubEvents'] = function() {
+ForEachEvent.prototype['HasSubEvents'] = ForEachEvent.prototype.HasSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_ForEachEvent_HasSubEvents_0(self));
 };;
 
-ForEachEvent.prototype['GetSubEvents'] = function() {
+ForEachEvent.prototype['GetSubEvents'] = ForEachEvent.prototype.GetSubEvents = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_ForEachEvent_GetSubEvents_0(self), EventsList);
 };;
 
-ForEachEvent.prototype['IsDisabled'] = function() {
+ForEachEvent.prototype['IsDisabled'] = ForEachEvent.prototype.IsDisabled = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_ForEachEvent_IsDisabled_0(self));
 };;
 
-ForEachEvent.prototype['SetDisabled'] = function(arg0) {
+ForEachEvent.prototype['SetDisabled'] = ForEachEvent.prototype.SetDisabled = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_ForEachEvent_SetDisabled_1(self, arg0);
 };;
 
-ForEachEvent.prototype['IsFolded'] = function() {
+ForEachEvent.prototype['IsFolded'] = ForEachEvent.prototype.IsFolded = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_ForEachEvent_IsFolded_0(self));
 };;
 
-ForEachEvent.prototype['SetFolded'] = function(arg0) {
+ForEachEvent.prototype['SetFolded'] = ForEachEvent.prototype.SetFolded = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_ForEachEvent_SetFolded_1(self, arg0);
 };;
 
-  ForEachEvent.prototype['__destroy__'] = function() {
+  ForEachEvent.prototype['__destroy__'] = ForEachEvent.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ForEachEvent___destroy___0(self);
 };
@@ -951,7 +997,7 @@ VoidPtr.prototype.__class__ = VoidPtr;
 VoidPtr.__cache__ = {};
 Module['VoidPtr'] = VoidPtr;
 
-  VoidPtr.prototype['__destroy__'] = function() {
+  VoidPtr.prototype['__destroy__'] = VoidPtr.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_VoidPtr___destroy___0(self);
 };
@@ -963,40 +1009,43 @@ MapStringPropertyDescriptor.prototype.__class__ = MapStringPropertyDescriptor;
 MapStringPropertyDescriptor.__cache__ = {};
 Module['MapStringPropertyDescriptor'] = MapStringPropertyDescriptor;
 
-MapStringPropertyDescriptor.prototype['MAP_get'] = function(arg0) {
+MapStringPropertyDescriptor.prototype['MAP_get'] = MapStringPropertyDescriptor.prototype.MAP_get = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_MapStringPropertyDescriptor_MAP_get_1(self, arg0), PropertyDescriptor);
 };;
 
-MapStringPropertyDescriptor.prototype['MAP_set'] = function(arg0, arg1) {
+MapStringPropertyDescriptor.prototype['MAP_set'] = MapStringPropertyDescriptor.prototype.MAP_set = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_MapStringPropertyDescriptor_MAP_set_2(self, arg0, arg1);
 };;
 
-MapStringPropertyDescriptor.prototype['MAP_has'] = function(arg0) {
+MapStringPropertyDescriptor.prototype['MAP_has'] = MapStringPropertyDescriptor.prototype.MAP_has = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_MapStringPropertyDescriptor_MAP_has_1(self, arg0));
 };;
 
-MapStringPropertyDescriptor.prototype['MAP_keys'] = function() {
+MapStringPropertyDescriptor.prototype['MAP_keys'] = MapStringPropertyDescriptor.prototype.MAP_keys = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_MapStringPropertyDescriptor_MAP_keys_0(self), VectorString);
 };;
 
-  MapStringPropertyDescriptor.prototype['__destroy__'] = function() {
+  MapStringPropertyDescriptor.prototype['__destroy__'] = MapStringPropertyDescriptor.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_MapStringPropertyDescriptor___destroy___0(self);
 };
 // SpriteObject
 function SpriteObject(arg0) {
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_SpriteObject_SpriteObject_1(arg0);
@@ -1008,148 +1057,146 @@ SpriteObject.prototype.__class__ = SpriteObject;
 SpriteObject.__cache__ = {};
 Module['SpriteObject'] = SpriteObject;
 
-SpriteObject.prototype['AddAnimation'] = function(arg0) {
+SpriteObject.prototype['AddAnimation'] = SpriteObject.prototype.AddAnimation = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_SpriteObject_AddAnimation_1(self, arg0);
 };;
 
-SpriteObject.prototype['GetAnimation'] = function(arg0) {
+SpriteObject.prototype['GetAnimation'] = SpriteObject.prototype.GetAnimation = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_SpriteObject_GetAnimation_1(self, arg0), Animation);
 };;
 
-SpriteObject.prototype['GetAnimationsCount'] = function() {
+SpriteObject.prototype['GetAnimationsCount'] = SpriteObject.prototype.GetAnimationsCount = function() {
   var self = this.ptr;
   return _emscripten_bind_SpriteObject_GetAnimationsCount_0(self);
 };;
 
-SpriteObject.prototype['RemoveAnimation'] = function(arg0) {
+SpriteObject.prototype['RemoveAnimation'] = SpriteObject.prototype.RemoveAnimation = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_SpriteObject_RemoveAnimation_1(self, arg0);
 };;
 
-SpriteObject.prototype['RemoveAllAnimations'] = function() {
+SpriteObject.prototype['RemoveAllAnimations'] = SpriteObject.prototype.RemoveAllAnimations = function() {
   var self = this.ptr;
   _emscripten_bind_SpriteObject_RemoveAllAnimations_0(self);
 };;
 
-SpriteObject.prototype['HasNoAnimations'] = function() {
+SpriteObject.prototype['HasNoAnimations'] = SpriteObject.prototype.HasNoAnimations = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_SpriteObject_HasNoAnimations_0(self));
 };;
 
-SpriteObject.prototype['SwapAnimations'] = function(arg0, arg1) {
+SpriteObject.prototype['SwapAnimations'] = SpriteObject.prototype.SwapAnimations = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_SpriteObject_SwapAnimations_2(self, arg0, arg1);
 };;
 
-SpriteObject.prototype['Clone'] = function() {
+SpriteObject.prototype['Clone'] = SpriteObject.prototype.Clone = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_SpriteObject_Clone_0(self), gdObject);
 };;
 
-SpriteObject.prototype['SetName'] = function(arg0) {
+SpriteObject.prototype['SetName'] = SpriteObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_SpriteObject_SetName_1(self, arg0);
 };;
 
-SpriteObject.prototype['GetName'] = function() {
+SpriteObject.prototype['GetName'] = SpriteObject.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_SpriteObject_GetName_0(self));
 };;
 
-SpriteObject.prototype['SetType'] = function(arg0) {
+SpriteObject.prototype['SetType'] = SpriteObject.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_SpriteObject_SetType_1(self, arg0);
 };;
 
-SpriteObject.prototype['GetType'] = function() {
+SpriteObject.prototype['GetType'] = SpriteObject.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_SpriteObject_GetType_0(self));
 };;
 
-SpriteObject.prototype['GetVariables'] = function() {
+SpriteObject.prototype['GetVariables'] = SpriteObject.prototype.GetVariables = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_SpriteObject_GetVariables_0(self), VariablesContainer);
 };;
 
-SpriteObject.prototype['GetAllAutomatismNames'] = function() {
+SpriteObject.prototype['GetAllBehaviorNames'] = SpriteObject.prototype.GetAllBehaviorNames = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_SpriteObject_GetAllAutomatismNames_0(self), VectorString);
+  return wrapPointer(_emscripten_bind_SpriteObject_GetAllBehaviorNames_0(self), VectorString);
 };;
 
-SpriteObject.prototype['HasAutomatismNamed'] = function(arg0) {
+SpriteObject.prototype['HasBehaviorNamed'] = SpriteObject.prototype.HasBehaviorNamed = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return !!(_emscripten_bind_SpriteObject_HasAutomatismNamed_1(self, arg0));
+  return !!(_emscripten_bind_SpriteObject_HasBehaviorNamed_1(self, arg0));
 };;
 
-SpriteObject.prototype['AddNewAutomatism'] = function(arg0, arg1, arg2) {
+SpriteObject.prototype['AddNewBehavior'] = SpriteObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return wrapPointer(_emscripten_bind_SpriteObject_AddNewAutomatism_3(self, arg0, arg1, arg2), Automatism);
+  return wrapPointer(_emscripten_bind_SpriteObject_AddNewBehavior_3(self, arg0, arg1, arg2), Behavior);
 };;
 
-SpriteObject.prototype['GetAutomatism'] = function(arg0) {
+SpriteObject.prototype['GetBehavior'] = SpriteObject.prototype.GetBehavior = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_SpriteObject_GetAutomatism_1(self, arg0), Automatism);
+  return wrapPointer(_emscripten_bind_SpriteObject_GetBehavior_1(self, arg0), Behavior);
 };;
 
-SpriteObject.prototype['RemoveAutomatism'] = function(arg0) {
+SpriteObject.prototype['RemoveBehavior'] = SpriteObject.prototype.RemoveBehavior = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_SpriteObject_RemoveAutomatism_1(self, arg0);
+  _emscripten_bind_SpriteObject_RemoveBehavior_1(self, arg0);
 };;
 
-SpriteObject.prototype['RenameAutomatism'] = function(arg0, arg1) {
+SpriteObject.prototype['RenameBehavior'] = SpriteObject.prototype.RenameBehavior = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
-  return !!(_emscripten_bind_SpriteObject_RenameAutomatism_2(self, arg0, arg1));
+  return !!(_emscripten_bind_SpriteObject_RenameBehavior_2(self, arg0, arg1));
 };;
 
-SpriteObject.prototype['SerializeTo'] = function(arg0) {
+SpriteObject.prototype['SerializeTo'] = SpriteObject.prototype.SerializeTo = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_SpriteObject_SerializeTo_1(self, arg0);
 };;
 
-SpriteObject.prototype['UnserializeFrom'] = function(arg0, arg1) {
+SpriteObject.prototype['UnserializeFrom'] = SpriteObject.prototype.UnserializeFrom = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_SpriteObject_UnserializeFrom_2(self, arg0, arg1);
 };;
 
-  SpriteObject.prototype['__destroy__'] = function() {
+  SpriteObject.prototype['__destroy__'] = SpriteObject.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_SpriteObject___destroy___0(self);
 };
@@ -1164,33 +1211,36 @@ ObjectGroup.prototype.__class__ = ObjectGroup;
 ObjectGroup.__cache__ = {};
 Module['ObjectGroup'] = ObjectGroup;
 
-ObjectGroup.prototype['GetName'] = function() {
+ObjectGroup.prototype['GetName'] = ObjectGroup.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ObjectGroup_GetName_0(self));
 };;
 
-ObjectGroup.prototype['AddObject'] = function(arg0) {
+ObjectGroup.prototype['AddObject'] = ObjectGroup.prototype.AddObject = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ObjectGroup_AddObject_1(self, arg0);
 };;
 
-ObjectGroup.prototype['RemoveObject'] = function(arg0) {
+ObjectGroup.prototype['RemoveObject'] = ObjectGroup.prototype.RemoveObject = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ObjectGroup_RemoveObject_1(self, arg0);
 };;
 
-ObjectGroup.prototype['Find'] = function(arg0) {
+ObjectGroup.prototype['Find'] = ObjectGroup.prototype.Find = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_ObjectGroup_Find_1(self, arg0));
 };;
 
-  ObjectGroup.prototype['__destroy__'] = function() {
+  ObjectGroup.prototype['__destroy__'] = ObjectGroup.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ObjectGroup___destroy___0(self);
 };
@@ -1205,76 +1255,69 @@ Direction.prototype.__class__ = Direction;
 Direction.__cache__ = {};
 Module['Direction'] = Direction;
 
-Direction.prototype['AddSprite'] = function(arg0) {
+Direction.prototype['AddSprite'] = Direction.prototype.AddSprite = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Direction_AddSprite_1(self, arg0);
 };;
 
-Direction.prototype['GetSprite'] = function(arg0) {
+Direction.prototype['GetSprite'] = Direction.prototype.GetSprite = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Direction_GetSprite_1(self, arg0), Sprite);
 };;
 
-Direction.prototype['GetSpritesCount'] = function() {
+Direction.prototype['GetSpritesCount'] = Direction.prototype.GetSpritesCount = function() {
   var self = this.ptr;
   return _emscripten_bind_Direction_GetSpritesCount_0(self);
 };;
 
-Direction.prototype['HasNoSprites'] = function() {
+Direction.prototype['HasNoSprites'] = Direction.prototype.HasNoSprites = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Direction_HasNoSprites_0(self));
 };;
 
-Direction.prototype['RemoveSprite'] = function(arg0) {
+Direction.prototype['RemoveSprite'] = Direction.prototype.RemoveSprite = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Direction_RemoveSprite_1(self, arg0);
 };;
 
-Direction.prototype['RemoveAllSprites'] = function() {
+Direction.prototype['RemoveAllSprites'] = Direction.prototype.RemoveAllSprites = function() {
   var self = this.ptr;
   _emscripten_bind_Direction_RemoveAllSprites_0(self);
 };;
 
-Direction.prototype['IsLooping'] = function() {
+Direction.prototype['IsLooping'] = Direction.prototype.IsLooping = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Direction_IsLooping_0(self));
 };;
 
-Direction.prototype['SetLoop'] = function(arg0) {
+Direction.prototype['SetLoop'] = Direction.prototype.SetLoop = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Direction_SetLoop_1(self, arg0);
 };;
 
-Direction.prototype['GetTimeBetweenFrames'] = function() {
+Direction.prototype['GetTimeBetweenFrames'] = Direction.prototype.GetTimeBetweenFrames = function() {
   var self = this.ptr;
   return _emscripten_bind_Direction_GetTimeBetweenFrames_0(self);
 };;
 
-Direction.prototype['SetTimeBetweenFrames'] = function(arg0) {
+Direction.prototype['SetTimeBetweenFrames'] = Direction.prototype.SetTimeBetweenFrames = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Direction_SetTimeBetweenFrames_1(self, arg0);
 };;
 
-Direction.prototype['SwapSprites'] = function(arg0, arg1) {
+Direction.prototype['SwapSprites'] = Direction.prototype.SwapSprites = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_Direction_SwapSprites_2(self, arg0, arg1);
 };;
 
-  Direction.prototype['__destroy__'] = function() {
+  Direction.prototype['__destroy__'] = Direction.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Direction___destroy___0(self);
 };
@@ -1286,49 +1329,47 @@ InstructionSentenceFormatter.prototype.__class__ = InstructionSentenceFormatter;
 InstructionSentenceFormatter.__cache__ = {};
 Module['InstructionSentenceFormatter'] = InstructionSentenceFormatter;
 
-InstructionSentenceFormatter.prototype['STATIC_Get'] = function() {
+InstructionSentenceFormatter.prototype['STATIC_Get'] = InstructionSentenceFormatter.prototype.STATIC_Get = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_InstructionSentenceFormatter_STATIC_Get_0(self), InstructionSentenceFormatter);
 };;
 
-InstructionSentenceFormatter.prototype['Translate'] = function(arg0, arg1) {
+InstructionSentenceFormatter.prototype['Translate'] = InstructionSentenceFormatter.prototype.Translate = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   return Pointer_stringify(_emscripten_bind_InstructionSentenceFormatter_Translate_2(self, arg0, arg1));
 };;
 
-InstructionSentenceFormatter.prototype['GetAsFormattedText'] = function(arg0, arg1) {
+InstructionSentenceFormatter.prototype['GetAsFormattedText'] = InstructionSentenceFormatter.prototype.GetAsFormattedText = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_InstructionSentenceFormatter_GetAsFormattedText_2(self, arg0, arg1), VectorPairStringTextFormatting);
 };;
 
-InstructionSentenceFormatter.prototype['GetFormattingFromType'] = function(arg0) {
+InstructionSentenceFormatter.prototype['GetFormattingFromType'] = InstructionSentenceFormatter.prototype.GetFormattingFromType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_InstructionSentenceFormatter_GetFormattingFromType_1(self, arg0), TextFormatting);
 };;
 
-InstructionSentenceFormatter.prototype['LabelFromType'] = function(arg0) {
+InstructionSentenceFormatter.prototype['LabelFromType'] = InstructionSentenceFormatter.prototype.LabelFromType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_InstructionSentenceFormatter_LabelFromType_1(self, arg0));
 };;
 
-InstructionSentenceFormatter.prototype['LoadTypesFormattingFromConfig'] = function() {
+InstructionSentenceFormatter.prototype['LoadTypesFormattingFromConfig'] = InstructionSentenceFormatter.prototype.LoadTypesFormattingFromConfig = function() {
   var self = this.ptr;
   _emscripten_bind_InstructionSentenceFormatter_LoadTypesFormattingFromConfig_0(self);
 };;
 
-  InstructionSentenceFormatter.prototype['__destroy__'] = function() {
+  InstructionSentenceFormatter.prototype['__destroy__'] = InstructionSentenceFormatter.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_InstructionSentenceFormatter___destroy___0(self);
 };
@@ -1343,17 +1384,17 @@ PairStringVariable.prototype.__class__ = PairStringVariable;
 PairStringVariable.__cache__ = {};
 Module['PairStringVariable'] = PairStringVariable;
 
-PairStringVariable.prototype['WRAPPED_GetName'] = function() {
+PairStringVariable.prototype['WRAPPED_GetName'] = PairStringVariable.prototype.WRAPPED_GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_PairStringVariable_WRAPPED_GetName_0(self));
 };;
 
-PairStringVariable.prototype['WRAPPED_GetVariable'] = function() {
+PairStringVariable.prototype['WRAPPED_GetVariable'] = PairStringVariable.prototype.WRAPPED_GetVariable = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_PairStringVariable_WRAPPED_GetVariable_0(self), Variable);
 };;
 
-  PairStringVariable.prototype['__destroy__'] = function() {
+  PairStringVariable.prototype['__destroy__'] = PairStringVariable.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_PairStringVariable___destroy___0(self);
 };
@@ -1368,28 +1409,31 @@ ArbitraryResourceWorkerJS.prototype.__class__ = ArbitraryResourceWorkerJS;
 ArbitraryResourceWorkerJS.__cache__ = {};
 Module['ArbitraryResourceWorkerJS'] = ArbitraryResourceWorkerJS;
 
-ArbitraryResourceWorkerJS.prototype['ExposeImage'] = function(arg0) {
+ArbitraryResourceWorkerJS.prototype['ExposeImage'] = ArbitraryResourceWorkerJS.prototype.ExposeImage = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ArbitraryResourceWorkerJS_ExposeImage_1(self, arg0);
 };;
 
-ArbitraryResourceWorkerJS.prototype['ExposeShader'] = function(arg0) {
+ArbitraryResourceWorkerJS.prototype['ExposeShader'] = ArbitraryResourceWorkerJS.prototype.ExposeShader = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ArbitraryResourceWorkerJS_ExposeShader_1(self, arg0);
 };;
 
-ArbitraryResourceWorkerJS.prototype['ExposeFile'] = function(arg0) {
+ArbitraryResourceWorkerJS.prototype['ExposeFile'] = ArbitraryResourceWorkerJS.prototype.ExposeFile = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ArbitraryResourceWorkerJS_ExposeFile_1(self, arg0);
 };;
 
-  ArbitraryResourceWorkerJS.prototype['__destroy__'] = function() {
+  ArbitraryResourceWorkerJS.prototype['__destroy__'] = ArbitraryResourceWorkerJS.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(self);
 };
@@ -1404,68 +1448,67 @@ BaseEvent.prototype.__class__ = BaseEvent;
 BaseEvent.__cache__ = {};
 Module['BaseEvent'] = BaseEvent;
 
-BaseEvent.prototype['Clone'] = function() {
+BaseEvent.prototype['Clone'] = BaseEvent.prototype.Clone = function() {
   var self = this.ptr;
   _emscripten_bind_BaseEvent_Clone_0(self);
 };;
 
-BaseEvent.prototype['GetType'] = function() {
+BaseEvent.prototype['GetType'] = BaseEvent.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_BaseEvent_GetType_0(self));
 };;
 
-BaseEvent.prototype['SetType'] = function(arg0) {
+BaseEvent.prototype['SetType'] = BaseEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_BaseEvent_SetType_1(self, arg0);
 };;
 
-BaseEvent.prototype['IsExecutable'] = function() {
+BaseEvent.prototype['IsExecutable'] = BaseEvent.prototype.IsExecutable = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_BaseEvent_IsExecutable_0(self));
 };;
 
-BaseEvent.prototype['CanHaveSubEvents'] = function() {
+BaseEvent.prototype['CanHaveSubEvents'] = BaseEvent.prototype.CanHaveSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_BaseEvent_CanHaveSubEvents_0(self));
 };;
 
-BaseEvent.prototype['HasSubEvents'] = function() {
+BaseEvent.prototype['HasSubEvents'] = BaseEvent.prototype.HasSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_BaseEvent_HasSubEvents_0(self));
 };;
 
-BaseEvent.prototype['GetSubEvents'] = function() {
+BaseEvent.prototype['GetSubEvents'] = BaseEvent.prototype.GetSubEvents = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_BaseEvent_GetSubEvents_0(self), EventsList);
 };;
 
-BaseEvent.prototype['IsDisabled'] = function() {
+BaseEvent.prototype['IsDisabled'] = BaseEvent.prototype.IsDisabled = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_BaseEvent_IsDisabled_0(self));
 };;
 
-BaseEvent.prototype['SetDisabled'] = function(arg0) {
+BaseEvent.prototype['SetDisabled'] = BaseEvent.prototype.SetDisabled = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_BaseEvent_SetDisabled_1(self, arg0);
 };;
 
-BaseEvent.prototype['IsFolded'] = function() {
+BaseEvent.prototype['IsFolded'] = BaseEvent.prototype.IsFolded = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_BaseEvent_IsFolded_0(self));
 };;
 
-BaseEvent.prototype['SetFolded'] = function(arg0) {
+BaseEvent.prototype['SetFolded'] = BaseEvent.prototype.SetFolded = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_BaseEvent_SetFolded_1(self, arg0);
 };;
 
-  BaseEvent.prototype['__destroy__'] = function() {
+  BaseEvent.prototype['__destroy__'] = BaseEvent.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_BaseEvent___destroy___0(self);
 };
@@ -1480,7 +1523,7 @@ SerializerElement.prototype.__class__ = SerializerElement;
 SerializerElement.__cache__ = {};
 Module['SerializerElement'] = SerializerElement;
 
-  SerializerElement.prototype['__destroy__'] = function() {
+  SerializerElement.prototype['__destroy__'] = SerializerElement.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_SerializerElement___destroy___0(self);
 };
@@ -1492,35 +1535,37 @@ MapStringExpressionMetadata.prototype.__class__ = MapStringExpressionMetadata;
 MapStringExpressionMetadata.__cache__ = {};
 Module['MapStringExpressionMetadata'] = MapStringExpressionMetadata;
 
-MapStringExpressionMetadata.prototype['MAP_get'] = function(arg0) {
+MapStringExpressionMetadata.prototype['MAP_get'] = MapStringExpressionMetadata.prototype.MAP_get = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_MapStringExpressionMetadata_MAP_get_1(self, arg0), ExpressionMetadata);
 };;
 
-MapStringExpressionMetadata.prototype['MAP_set'] = function(arg0, arg1) {
+MapStringExpressionMetadata.prototype['MAP_set'] = MapStringExpressionMetadata.prototype.MAP_set = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_MapStringExpressionMetadata_MAP_set_2(self, arg0, arg1);
 };;
 
-MapStringExpressionMetadata.prototype['MAP_has'] = function(arg0) {
+MapStringExpressionMetadata.prototype['MAP_has'] = MapStringExpressionMetadata.prototype.MAP_has = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_MapStringExpressionMetadata_MAP_has_1(self, arg0));
 };;
 
-MapStringExpressionMetadata.prototype['MAP_keys'] = function() {
+MapStringExpressionMetadata.prototype['MAP_keys'] = MapStringExpressionMetadata.prototype.MAP_keys = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_MapStringExpressionMetadata_MAP_keys_0(self), VectorString);
 };;
 
-  MapStringExpressionMetadata.prototype['__destroy__'] = function() {
+  MapStringExpressionMetadata.prototype['__destroy__'] = MapStringExpressionMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_MapStringExpressionMetadata___destroy___0(self);
 };
@@ -1532,31 +1577,30 @@ VectorPairStringTextFormatting.prototype.__class__ = VectorPairStringTextFormatt
 VectorPairStringTextFormatting.__cache__ = {};
 Module['VectorPairStringTextFormatting'] = VectorPairStringTextFormatting;
 
-VectorPairStringTextFormatting.prototype['size'] = function() {
+VectorPairStringTextFormatting.prototype['size'] = VectorPairStringTextFormatting.prototype.size = function() {
   var self = this.ptr;
   return _emscripten_bind_VectorPairStringTextFormatting_size_0(self);
 };;
 
-VectorPairStringTextFormatting.prototype['WRAPPED_GetString'] = function(arg0) {
+VectorPairStringTextFormatting.prototype['WRAPPED_GetString'] = VectorPairStringTextFormatting.prototype.WRAPPED_GetString = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_VectorPairStringTextFormatting_WRAPPED_GetString_1(self, arg0));
 };;
 
-VectorPairStringTextFormatting.prototype['WRAPPED_GetTextFormatting'] = function(arg0) {
+VectorPairStringTextFormatting.prototype['WRAPPED_GetTextFormatting'] = VectorPairStringTextFormatting.prototype.WRAPPED_GetTextFormatting = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_VectorPairStringTextFormatting_WRAPPED_GetTextFormatting_1(self, arg0), TextFormatting);
 };;
 
-  VectorPairStringTextFormatting.prototype['__destroy__'] = function() {
+  VectorPairStringTextFormatting.prototype['__destroy__'] = VectorPairStringTextFormatting.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_VectorPairStringTextFormatting___destroy___0(self);
 };
 // TiledSpriteObject
 function TiledSpriteObject(arg0) {
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_TiledSpriteObject_TiledSpriteObject_1(arg0);
@@ -1568,139 +1612,141 @@ TiledSpriteObject.prototype.__class__ = TiledSpriteObject;
 TiledSpriteObject.__cache__ = {};
 Module['TiledSpriteObject'] = TiledSpriteObject;
 
-TiledSpriteObject.prototype['SetTexture'] = function(arg0) {
+TiledSpriteObject.prototype['SetTexture'] = TiledSpriteObject.prototype.SetTexture = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TiledSpriteObject_SetTexture_1(self, arg0);
 };;
 
-TiledSpriteObject.prototype['GetTexture'] = function() {
+TiledSpriteObject.prototype['GetTexture'] = TiledSpriteObject.prototype.GetTexture = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_TiledSpriteObject_GetTexture_0(self));
 };;
 
-TiledSpriteObject.prototype['SetWidth'] = function(arg0) {
+TiledSpriteObject.prototype['SetWidth'] = TiledSpriteObject.prototype.SetWidth = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_TiledSpriteObject_SetWidth_1(self, arg0);
 };;
 
-TiledSpriteObject.prototype['GetWidth'] = function() {
+TiledSpriteObject.prototype['GetWidth'] = TiledSpriteObject.prototype.GetWidth = function() {
   var self = this.ptr;
   return _emscripten_bind_TiledSpriteObject_GetWidth_0(self);
 };;
 
-TiledSpriteObject.prototype['SetHeight'] = function(arg0) {
+TiledSpriteObject.prototype['SetHeight'] = TiledSpriteObject.prototype.SetHeight = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_TiledSpriteObject_SetHeight_1(self, arg0);
 };;
 
-TiledSpriteObject.prototype['GetHeight'] = function() {
+TiledSpriteObject.prototype['GetHeight'] = TiledSpriteObject.prototype.GetHeight = function() {
   var self = this.ptr;
   return _emscripten_bind_TiledSpriteObject_GetHeight_0(self);
 };;
 
-TiledSpriteObject.prototype['Clone'] = function() {
+TiledSpriteObject.prototype['Clone'] = TiledSpriteObject.prototype.Clone = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_TiledSpriteObject_Clone_0(self), gdObject);
 };;
 
-TiledSpriteObject.prototype['SetName'] = function(arg0) {
+TiledSpriteObject.prototype['SetName'] = TiledSpriteObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TiledSpriteObject_SetName_1(self, arg0);
 };;
 
-TiledSpriteObject.prototype['GetName'] = function() {
+TiledSpriteObject.prototype['GetName'] = TiledSpriteObject.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_TiledSpriteObject_GetName_0(self));
 };;
 
-TiledSpriteObject.prototype['SetType'] = function(arg0) {
+TiledSpriteObject.prototype['SetType'] = TiledSpriteObject.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TiledSpriteObject_SetType_1(self, arg0);
 };;
 
-TiledSpriteObject.prototype['GetType'] = function() {
+TiledSpriteObject.prototype['GetType'] = TiledSpriteObject.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_TiledSpriteObject_GetType_0(self));
 };;
 
-TiledSpriteObject.prototype['GetVariables'] = function() {
+TiledSpriteObject.prototype['GetVariables'] = TiledSpriteObject.prototype.GetVariables = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_TiledSpriteObject_GetVariables_0(self), VariablesContainer);
 };;
 
-TiledSpriteObject.prototype['GetAllAutomatismNames'] = function() {
+TiledSpriteObject.prototype['GetAllBehaviorNames'] = TiledSpriteObject.prototype.GetAllBehaviorNames = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_TiledSpriteObject_GetAllAutomatismNames_0(self), VectorString);
+  return wrapPointer(_emscripten_bind_TiledSpriteObject_GetAllBehaviorNames_0(self), VectorString);
 };;
 
-TiledSpriteObject.prototype['HasAutomatismNamed'] = function(arg0) {
+TiledSpriteObject.prototype['HasBehaviorNamed'] = TiledSpriteObject.prototype.HasBehaviorNamed = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return !!(_emscripten_bind_TiledSpriteObject_HasAutomatismNamed_1(self, arg0));
+  return !!(_emscripten_bind_TiledSpriteObject_HasBehaviorNamed_1(self, arg0));
 };;
 
-TiledSpriteObject.prototype['AddNewAutomatism'] = function(arg0, arg1, arg2) {
+TiledSpriteObject.prototype['AddNewBehavior'] = TiledSpriteObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return wrapPointer(_emscripten_bind_TiledSpriteObject_AddNewAutomatism_3(self, arg0, arg1, arg2), Automatism);
+  return wrapPointer(_emscripten_bind_TiledSpriteObject_AddNewBehavior_3(self, arg0, arg1, arg2), Behavior);
 };;
 
-TiledSpriteObject.prototype['GetAutomatism'] = function(arg0) {
+TiledSpriteObject.prototype['GetBehavior'] = TiledSpriteObject.prototype.GetBehavior = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_TiledSpriteObject_GetAutomatism_1(self, arg0), Automatism);
+  return wrapPointer(_emscripten_bind_TiledSpriteObject_GetBehavior_1(self, arg0), Behavior);
 };;
 
-TiledSpriteObject.prototype['RemoveAutomatism'] = function(arg0) {
+TiledSpriteObject.prototype['RemoveBehavior'] = TiledSpriteObject.prototype.RemoveBehavior = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_TiledSpriteObject_RemoveAutomatism_1(self, arg0);
+  _emscripten_bind_TiledSpriteObject_RemoveBehavior_1(self, arg0);
 };;
 
-TiledSpriteObject.prototype['RenameAutomatism'] = function(arg0, arg1) {
+TiledSpriteObject.prototype['RenameBehavior'] = TiledSpriteObject.prototype.RenameBehavior = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
-  return !!(_emscripten_bind_TiledSpriteObject_RenameAutomatism_2(self, arg0, arg1));
+  return !!(_emscripten_bind_TiledSpriteObject_RenameBehavior_2(self, arg0, arg1));
 };;
 
-TiledSpriteObject.prototype['SerializeTo'] = function(arg0) {
+TiledSpriteObject.prototype['SerializeTo'] = TiledSpriteObject.prototype.SerializeTo = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_TiledSpriteObject_SerializeTo_1(self, arg0);
 };;
 
-TiledSpriteObject.prototype['UnserializeFrom'] = function(arg0, arg1) {
+TiledSpriteObject.prototype['UnserializeFrom'] = TiledSpriteObject.prototype.UnserializeFrom = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_TiledSpriteObject_UnserializeFrom_2(self, arg0, arg1);
 };;
 
-  TiledSpriteObject.prototype['__destroy__'] = function() {
+  TiledSpriteObject.prototype['__destroy__'] = TiledSpriteObject.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_TiledSpriteObject___destroy___0(self);
 };
@@ -1712,18 +1758,13 @@ EventsCodeGenerator.prototype.__class__ = EventsCodeGenerator;
 EventsCodeGenerator.__cache__ = {};
 Module['EventsCodeGenerator'] = EventsCodeGenerator;
 
-EventsCodeGenerator.prototype['STATIC_GenerateSceneEventsCompleteCode'] = function(arg0, arg1, arg2, arg3, arg4) {
+EventsCodeGenerator.prototype['STATIC_GenerateSceneEventsCompleteCode'] = EventsCodeGenerator.prototype.STATIC_GenerateSceneEventsCompleteCode = function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  else arg3 = ensureString(arg3);
   if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
-  else arg4 = ensureString(arg4);
   return Pointer_stringify(_emscripten_bind_EventsCodeGenerator_STATIC_GenerateSceneEventsCompleteCode_5(self, arg0, arg1, arg2, arg3, arg4));
 };;
 
@@ -1738,63 +1779,55 @@ InstructionsList.prototype.__class__ = InstructionsList;
 InstructionsList.__cache__ = {};
 Module['InstructionsList'] = InstructionsList;
 
-InstructionsList.prototype['Insert'] = function(arg0, arg1) {
+InstructionsList.prototype['Insert'] = InstructionsList.prototype.Insert = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_InstructionsList_Insert_2(self, arg0, arg1), Instruction);
 };;
 
-InstructionsList.prototype['size'] = function() {
+InstructionsList.prototype['size'] = InstructionsList.prototype.size = function() {
   var self = this.ptr;
   return _emscripten_bind_InstructionsList_size_0(self);
 };;
 
-InstructionsList.prototype['WRAPPED_set'] = function(arg0, arg1) {
+InstructionsList.prototype['WRAPPED_set'] = InstructionsList.prototype.WRAPPED_set = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_InstructionsList_WRAPPED_set_2(self, arg0, arg1);
 };;
 
-InstructionsList.prototype['Contains'] = function(arg0) {
+InstructionsList.prototype['Contains'] = InstructionsList.prototype.Contains = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_InstructionsList_Contains_1(self, arg0));
 };;
 
-InstructionsList.prototype['Get'] = function(arg0) {
+InstructionsList.prototype['Get'] = InstructionsList.prototype.Get = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_InstructionsList_Get_1(self, arg0), Instruction);
 };;
 
-InstructionsList.prototype['Remove'] = function(arg0) {
+InstructionsList.prototype['Remove'] = InstructionsList.prototype.Remove = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InstructionsList_Remove_1(self, arg0);
 };;
 
-InstructionsList.prototype['RemoveAt'] = function(arg0) {
+InstructionsList.prototype['RemoveAt'] = InstructionsList.prototype.RemoveAt = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InstructionsList_RemoveAt_1(self, arg0);
 };;
 
-InstructionsList.prototype['Clear'] = function() {
+InstructionsList.prototype['Clear'] = InstructionsList.prototype.Clear = function() {
   var self = this.ptr;
   _emscripten_bind_InstructionsList_Clear_0(self);
 };;
 
-  InstructionsList.prototype['__destroy__'] = function() {
+  InstructionsList.prototype['__destroy__'] = InstructionsList.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_InstructionsList___destroy___0(self);
 };
@@ -1809,67 +1842,70 @@ Variable.prototype.__class__ = Variable;
 Variable.__cache__ = {};
 Module['Variable'] = Variable;
 
-Variable.prototype['SetString'] = function(arg0) {
+Variable.prototype['SetString'] = Variable.prototype.SetString = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Variable_SetString_1(self, arg0);
 };;
 
-Variable.prototype['GetString'] = function() {
+Variable.prototype['GetString'] = Variable.prototype.GetString = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Variable_GetString_0(self));
 };;
 
-Variable.prototype['SetValue'] = function(arg0) {
+Variable.prototype['SetValue'] = Variable.prototype.SetValue = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Variable_SetValue_1(self, arg0);
 };;
 
-Variable.prototype['GetValue'] = function() {
+Variable.prototype['GetValue'] = Variable.prototype.GetValue = function() {
   var self = this.ptr;
   return _emscripten_bind_Variable_GetValue_0(self);
 };;
 
-Variable.prototype['HasChild'] = function(arg0) {
+Variable.prototype['HasChild'] = Variable.prototype.HasChild = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Variable_HasChild_1(self, arg0));
 };;
 
-Variable.prototype['GetChild'] = function(arg0) {
+Variable.prototype['GetChild'] = Variable.prototype.GetChild = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Variable_GetChild_1(self, arg0), Variable);
 };;
 
-Variable.prototype['RemoveChild'] = function(arg0) {
+Variable.prototype['RemoveChild'] = Variable.prototype.RemoveChild = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Variable_RemoveChild_1(self, arg0);
 };;
 
-Variable.prototype['GetAllChildren'] = function() {
+Variable.prototype['GetAllChildren'] = Variable.prototype.GetAllChildren = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Variable_GetAllChildren_0(self), MapStringVariable);
 };;
 
-Variable.prototype['IsNumber'] = function() {
+Variable.prototype['IsNumber'] = Variable.prototype.IsNumber = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Variable_IsNumber_0(self));
 };;
 
-Variable.prototype['IsStructure'] = function() {
+Variable.prototype['IsStructure'] = Variable.prototype.IsStructure = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Variable_IsStructure_0(self));
 };;
 
-  Variable.prototype['__destroy__'] = function() {
+  Variable.prototype['__destroy__'] = Variable.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Variable___destroy___0(self);
 };
@@ -1884,90 +1920,90 @@ RepeatEvent.prototype.__class__ = RepeatEvent;
 RepeatEvent.__cache__ = {};
 Module['RepeatEvent'] = RepeatEvent;
 
-RepeatEvent.prototype['GetConditions'] = function() {
+RepeatEvent.prototype['GetConditions'] = RepeatEvent.prototype.GetConditions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_RepeatEvent_GetConditions_0(self), InstructionsList);
 };;
 
-RepeatEvent.prototype['GetActions'] = function() {
+RepeatEvent.prototype['GetActions'] = RepeatEvent.prototype.GetActions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_RepeatEvent_GetActions_0(self), InstructionsList);
 };;
 
-RepeatEvent.prototype['SetRepeatExpression'] = function(arg0) {
+RepeatEvent.prototype['SetRepeatExpression'] = RepeatEvent.prototype.SetRepeatExpression = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_RepeatEvent_SetRepeatExpression_1(self, arg0);
 };;
 
-RepeatEvent.prototype['GetRepeatExpression'] = function() {
+RepeatEvent.prototype['GetRepeatExpression'] = RepeatEvent.prototype.GetRepeatExpression = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_RepeatEvent_GetRepeatExpression_0(self));
 };;
 
-RepeatEvent.prototype['Clone'] = function() {
+RepeatEvent.prototype['Clone'] = RepeatEvent.prototype.Clone = function() {
   var self = this.ptr;
   _emscripten_bind_RepeatEvent_Clone_0(self);
 };;
 
-RepeatEvent.prototype['GetType'] = function() {
+RepeatEvent.prototype['GetType'] = RepeatEvent.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_RepeatEvent_GetType_0(self));
 };;
 
-RepeatEvent.prototype['SetType'] = function(arg0) {
+RepeatEvent.prototype['SetType'] = RepeatEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_RepeatEvent_SetType_1(self, arg0);
 };;
 
-RepeatEvent.prototype['IsExecutable'] = function() {
+RepeatEvent.prototype['IsExecutable'] = RepeatEvent.prototype.IsExecutable = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_RepeatEvent_IsExecutable_0(self));
 };;
 
-RepeatEvent.prototype['CanHaveSubEvents'] = function() {
+RepeatEvent.prototype['CanHaveSubEvents'] = RepeatEvent.prototype.CanHaveSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_RepeatEvent_CanHaveSubEvents_0(self));
 };;
 
-RepeatEvent.prototype['HasSubEvents'] = function() {
+RepeatEvent.prototype['HasSubEvents'] = RepeatEvent.prototype.HasSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_RepeatEvent_HasSubEvents_0(self));
 };;
 
-RepeatEvent.prototype['GetSubEvents'] = function() {
+RepeatEvent.prototype['GetSubEvents'] = RepeatEvent.prototype.GetSubEvents = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_RepeatEvent_GetSubEvents_0(self), EventsList);
 };;
 
-RepeatEvent.prototype['IsDisabled'] = function() {
+RepeatEvent.prototype['IsDisabled'] = RepeatEvent.prototype.IsDisabled = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_RepeatEvent_IsDisabled_0(self));
 };;
 
-RepeatEvent.prototype['SetDisabled'] = function(arg0) {
+RepeatEvent.prototype['SetDisabled'] = RepeatEvent.prototype.SetDisabled = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_RepeatEvent_SetDisabled_1(self, arg0);
 };;
 
-RepeatEvent.prototype['IsFolded'] = function() {
+RepeatEvent.prototype['IsFolded'] = RepeatEvent.prototype.IsFolded = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_RepeatEvent_IsFolded_0(self));
 };;
 
-RepeatEvent.prototype['SetFolded'] = function(arg0) {
+RepeatEvent.prototype['SetFolded'] = RepeatEvent.prototype.SetFolded = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_RepeatEvent_SetFolded_1(self, arg0);
 };;
 
-  RepeatEvent.prototype['__destroy__'] = function() {
+  RepeatEvent.prototype['__destroy__'] = RepeatEvent.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_RepeatEvent___destroy___0(self);
 };
@@ -1979,35 +2015,37 @@ MapStringInstructionMetadata.prototype.__class__ = MapStringInstructionMetadata;
 MapStringInstructionMetadata.__cache__ = {};
 Module['MapStringInstructionMetadata'] = MapStringInstructionMetadata;
 
-MapStringInstructionMetadata.prototype['MAP_get'] = function(arg0) {
+MapStringInstructionMetadata.prototype['MAP_get'] = MapStringInstructionMetadata.prototype.MAP_get = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_MapStringInstructionMetadata_MAP_get_1(self, arg0), InstructionMetadata);
 };;
 
-MapStringInstructionMetadata.prototype['MAP_set'] = function(arg0, arg1) {
+MapStringInstructionMetadata.prototype['MAP_set'] = MapStringInstructionMetadata.prototype.MAP_set = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_MapStringInstructionMetadata_MAP_set_2(self, arg0, arg1);
 };;
 
-MapStringInstructionMetadata.prototype['MAP_has'] = function(arg0) {
+MapStringInstructionMetadata.prototype['MAP_has'] = MapStringInstructionMetadata.prototype.MAP_has = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_MapStringInstructionMetadata_MAP_has_1(self, arg0));
 };;
 
-MapStringInstructionMetadata.prototype['MAP_keys'] = function() {
+MapStringInstructionMetadata.prototype['MAP_keys'] = MapStringInstructionMetadata.prototype.MAP_keys = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_MapStringInstructionMetadata_MAP_keys_0(self), VectorString);
 };;
 
-  MapStringInstructionMetadata.prototype['__destroy__'] = function() {
+  MapStringInstructionMetadata.prototype['__destroy__'] = MapStringInstructionMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_MapStringInstructionMetadata___destroy___0(self);
 };
@@ -2022,154 +2060,145 @@ InitialInstance.prototype.__class__ = InitialInstance;
 InitialInstance.__cache__ = {};
 Module['InitialInstance'] = InitialInstance;
 
-InitialInstance.prototype['SetObjectName'] = function(arg0) {
+InitialInstance.prototype['SetObjectName'] = InitialInstance.prototype.SetObjectName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstance_SetObjectName_1(self, arg0);
 };;
 
-InitialInstance.prototype['GetObjectName'] = function() {
+InitialInstance.prototype['GetObjectName'] = InitialInstance.prototype.GetObjectName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_InitialInstance_GetObjectName_0(self));
 };;
 
-InitialInstance.prototype['GetX'] = function() {
+InitialInstance.prototype['GetX'] = InitialInstance.prototype.GetX = function() {
   var self = this.ptr;
   return _emscripten_bind_InitialInstance_GetX_0(self);
 };;
 
-InitialInstance.prototype['SetX'] = function(arg0) {
+InitialInstance.prototype['SetX'] = InitialInstance.prototype.SetX = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstance_SetX_1(self, arg0);
 };;
 
-InitialInstance.prototype['GetY'] = function() {
+InitialInstance.prototype['GetY'] = InitialInstance.prototype.GetY = function() {
   var self = this.ptr;
   return _emscripten_bind_InitialInstance_GetY_0(self);
 };;
 
-InitialInstance.prototype['SetY'] = function(arg0) {
+InitialInstance.prototype['SetY'] = InitialInstance.prototype.SetY = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstance_SetY_1(self, arg0);
 };;
 
-InitialInstance.prototype['GetAngle'] = function() {
+InitialInstance.prototype['GetAngle'] = InitialInstance.prototype.GetAngle = function() {
   var self = this.ptr;
   return _emscripten_bind_InitialInstance_GetAngle_0(self);
 };;
 
-InitialInstance.prototype['SetAngle'] = function(arg0) {
+InitialInstance.prototype['SetAngle'] = InitialInstance.prototype.SetAngle = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstance_SetAngle_1(self, arg0);
 };;
 
-InitialInstance.prototype['IsLocked'] = function() {
+InitialInstance.prototype['IsLocked'] = InitialInstance.prototype.IsLocked = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_InitialInstance_IsLocked_0(self));
 };;
 
-InitialInstance.prototype['SetLocked'] = function(arg0) {
+InitialInstance.prototype['SetLocked'] = InitialInstance.prototype.SetLocked = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstance_SetLocked_1(self, arg0);
 };;
 
-InitialInstance.prototype['GetZOrder'] = function() {
+InitialInstance.prototype['GetZOrder'] = InitialInstance.prototype.GetZOrder = function() {
   var self = this.ptr;
   return _emscripten_bind_InitialInstance_GetZOrder_0(self);
 };;
 
-InitialInstance.prototype['SetZOrder'] = function(arg0) {
+InitialInstance.prototype['SetZOrder'] = InitialInstance.prototype.SetZOrder = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstance_SetZOrder_1(self, arg0);
 };;
 
-InitialInstance.prototype['GetLayer'] = function() {
+InitialInstance.prototype['GetLayer'] = InitialInstance.prototype.GetLayer = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_InitialInstance_GetLayer_0(self));
 };;
 
-InitialInstance.prototype['SetLayer'] = function(arg0) {
+InitialInstance.prototype['SetLayer'] = InitialInstance.prototype.SetLayer = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstance_SetLayer_1(self, arg0);
 };;
 
-InitialInstance.prototype['SetHasCustomSize'] = function(arg0) {
+InitialInstance.prototype['SetHasCustomSize'] = InitialInstance.prototype.SetHasCustomSize = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstance_SetHasCustomSize_1(self, arg0);
 };;
 
-InitialInstance.prototype['HasCustomSize'] = function() {
+InitialInstance.prototype['HasCustomSize'] = InitialInstance.prototype.HasCustomSize = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_InitialInstance_HasCustomSize_0(self));
 };;
 
-InitialInstance.prototype['SetCustomWidth'] = function(arg0) {
+InitialInstance.prototype['SetCustomWidth'] = InitialInstance.prototype.SetCustomWidth = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstance_SetCustomWidth_1(self, arg0);
 };;
 
-InitialInstance.prototype['GetCustomWidth'] = function() {
+InitialInstance.prototype['GetCustomWidth'] = InitialInstance.prototype.GetCustomWidth = function() {
   var self = this.ptr;
   return _emscripten_bind_InitialInstance_GetCustomWidth_0(self);
 };;
 
-InitialInstance.prototype['SetCustomHeight'] = function(arg0) {
+InitialInstance.prototype['SetCustomHeight'] = InitialInstance.prototype.SetCustomHeight = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstance_SetCustomHeight_1(self, arg0);
 };;
 
-InitialInstance.prototype['GetCustomHeight'] = function() {
+InitialInstance.prototype['GetCustomHeight'] = InitialInstance.prototype.GetCustomHeight = function() {
   var self = this.ptr;
   return _emscripten_bind_InitialInstance_GetCustomHeight_0(self);
 };;
 
-InitialInstance.prototype['UpdateCustomProperty'] = function(arg0, arg1, arg2, arg3) {
+InitialInstance.prototype['UpdateCustomProperty'] = InitialInstance.prototype.UpdateCustomProperty = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  else arg3 = ensureString(arg3);
   _emscripten_bind_InitialInstance_UpdateCustomProperty_4(self, arg0, arg1, arg2, arg3);
 };;
 
-InitialInstance.prototype['GetCustomProperties'] = function(arg0, arg1) {
+InitialInstance.prototype['GetCustomProperties'] = InitialInstance.prototype.GetCustomProperties = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_InitialInstance_GetCustomProperties_2(self, arg0, arg1), MapStringPropertyDescriptor);
 };;
 
-InitialInstance.prototype['GetVariables'] = function() {
+InitialInstance.prototype['GetVariables'] = InitialInstance.prototype.GetVariables = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_InitialInstance_GetVariables_0(self), VariablesContainer);
 };;
 
-  InitialInstance.prototype['__destroy__'] = function() {
+  InitialInstance.prototype['__destroy__'] = InitialInstance.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_InitialInstance___destroy___0(self);
 };
@@ -2184,135 +2213,132 @@ GroupEvent.prototype.__class__ = GroupEvent;
 GroupEvent.__cache__ = {};
 Module['GroupEvent'] = GroupEvent;
 
-GroupEvent.prototype['SetName'] = function(arg0) {
+GroupEvent.prototype['SetName'] = GroupEvent.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_GroupEvent_SetName_1(self, arg0);
 };;
 
-GroupEvent.prototype['GetName'] = function() {
+GroupEvent.prototype['GetName'] = GroupEvent.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_GroupEvent_GetName_0(self));
 };;
 
-GroupEvent.prototype['SetBackgroundColor'] = function(arg0, arg1, arg2) {
+GroupEvent.prototype['SetBackgroundColor'] = GroupEvent.prototype.SetBackgroundColor = function(arg0, arg1, arg2) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   _emscripten_bind_GroupEvent_SetBackgroundColor_3(self, arg0, arg1, arg2);
 };;
 
-GroupEvent.prototype['GetBackgroundColorR'] = function() {
+GroupEvent.prototype['GetBackgroundColorR'] = GroupEvent.prototype.GetBackgroundColorR = function() {
   var self = this.ptr;
   return _emscripten_bind_GroupEvent_GetBackgroundColorR_0(self);
 };;
 
-GroupEvent.prototype['GetBackgroundColorG'] = function() {
+GroupEvent.prototype['GetBackgroundColorG'] = GroupEvent.prototype.GetBackgroundColorG = function() {
   var self = this.ptr;
   return _emscripten_bind_GroupEvent_GetBackgroundColorG_0(self);
 };;
 
-GroupEvent.prototype['GetBackgroundColorB'] = function() {
+GroupEvent.prototype['GetBackgroundColorB'] = GroupEvent.prototype.GetBackgroundColorB = function() {
   var self = this.ptr;
   return _emscripten_bind_GroupEvent_GetBackgroundColorB_0(self);
 };;
 
-GroupEvent.prototype['SetSource'] = function(arg0) {
+GroupEvent.prototype['SetSource'] = GroupEvent.prototype.SetSource = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_GroupEvent_SetSource_1(self, arg0);
 };;
 
-GroupEvent.prototype['GetSource'] = function() {
+GroupEvent.prototype['GetSource'] = GroupEvent.prototype.GetSource = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_GroupEvent_GetSource_0(self));
 };;
 
-GroupEvent.prototype['GetCreationParameters'] = function() {
+GroupEvent.prototype['GetCreationParameters'] = GroupEvent.prototype.GetCreationParameters = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_GroupEvent_GetCreationParameters_0(self), VectorString);
 };;
 
-GroupEvent.prototype['GetCreationTimestamp'] = function() {
+GroupEvent.prototype['GetCreationTimestamp'] = GroupEvent.prototype.GetCreationTimestamp = function() {
   var self = this.ptr;
   return _emscripten_bind_GroupEvent_GetCreationTimestamp_0(self);
 };;
 
-GroupEvent.prototype['SetCreationTimestamp'] = function(arg0) {
+GroupEvent.prototype['SetCreationTimestamp'] = GroupEvent.prototype.SetCreationTimestamp = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_GroupEvent_SetCreationTimestamp_1(self, arg0);
 };;
 
-GroupEvent.prototype['Clone'] = function() {
+GroupEvent.prototype['Clone'] = GroupEvent.prototype.Clone = function() {
   var self = this.ptr;
   _emscripten_bind_GroupEvent_Clone_0(self);
 };;
 
-GroupEvent.prototype['GetType'] = function() {
+GroupEvent.prototype['GetType'] = GroupEvent.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_GroupEvent_GetType_0(self));
 };;
 
-GroupEvent.prototype['SetType'] = function(arg0) {
+GroupEvent.prototype['SetType'] = GroupEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_GroupEvent_SetType_1(self, arg0);
 };;
 
-GroupEvent.prototype['IsExecutable'] = function() {
+GroupEvent.prototype['IsExecutable'] = GroupEvent.prototype.IsExecutable = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_GroupEvent_IsExecutable_0(self));
 };;
 
-GroupEvent.prototype['CanHaveSubEvents'] = function() {
+GroupEvent.prototype['CanHaveSubEvents'] = GroupEvent.prototype.CanHaveSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_GroupEvent_CanHaveSubEvents_0(self));
 };;
 
-GroupEvent.prototype['HasSubEvents'] = function() {
+GroupEvent.prototype['HasSubEvents'] = GroupEvent.prototype.HasSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_GroupEvent_HasSubEvents_0(self));
 };;
 
-GroupEvent.prototype['GetSubEvents'] = function() {
+GroupEvent.prototype['GetSubEvents'] = GroupEvent.prototype.GetSubEvents = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_GroupEvent_GetSubEvents_0(self), EventsList);
 };;
 
-GroupEvent.prototype['IsDisabled'] = function() {
+GroupEvent.prototype['IsDisabled'] = GroupEvent.prototype.IsDisabled = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_GroupEvent_IsDisabled_0(self));
 };;
 
-GroupEvent.prototype['SetDisabled'] = function(arg0) {
+GroupEvent.prototype['SetDisabled'] = GroupEvent.prototype.SetDisabled = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_GroupEvent_SetDisabled_1(self, arg0);
 };;
 
-GroupEvent.prototype['IsFolded'] = function() {
+GroupEvent.prototype['IsFolded'] = GroupEvent.prototype.IsFolded = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_GroupEvent_IsFolded_0(self));
 };;
 
-GroupEvent.prototype['SetFolded'] = function(arg0) {
+GroupEvent.prototype['SetFolded'] = GroupEvent.prototype.SetFolded = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_GroupEvent_SetFolded_1(self, arg0);
 };;
 
-  GroupEvent.prototype['__destroy__'] = function() {
+  GroupEvent.prototype['__destroy__'] = GroupEvent.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_GroupEvent___destroy___0(self);
 };
@@ -2324,22 +2350,22 @@ EventMetadata.prototype.__class__ = EventMetadata;
 EventMetadata.__cache__ = {};
 Module['EventMetadata'] = EventMetadata;
 
-EventMetadata.prototype['GetFullName'] = function() {
+EventMetadata.prototype['GetFullName'] = EventMetadata.prototype.GetFullName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_EventMetadata_GetFullName_0(self));
 };;
 
-EventMetadata.prototype['GetDescription'] = function() {
+EventMetadata.prototype['GetDescription'] = EventMetadata.prototype.GetDescription = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_EventMetadata_GetDescription_0(self));
 };;
 
-EventMetadata.prototype['GetGroup'] = function() {
+EventMetadata.prototype['GetGroup'] = EventMetadata.prototype.GetGroup = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_EventMetadata_GetGroup_0(self));
 };;
 
-  EventMetadata.prototype['__destroy__'] = function() {
+  EventMetadata.prototype['__destroy__'] = EventMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_EventMetadata___destroy___0(self);
 };
@@ -2354,41 +2380,44 @@ ResourcesManager.prototype.__class__ = ResourcesManager;
 ResourcesManager.__cache__ = {};
 Module['ResourcesManager'] = ResourcesManager;
 
-ResourcesManager.prototype['GetAllResourcesList'] = function() {
+ResourcesManager.prototype['GetAllResourcesList'] = ResourcesManager.prototype.GetAllResourcesList = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_ResourcesManager_GetAllResourcesList_0(self), VectorString);
 };;
 
-ResourcesManager.prototype['HasResource'] = function(arg0) {
+ResourcesManager.prototype['HasResource'] = ResourcesManager.prototype.HasResource = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_ResourcesManager_HasResource_1(self, arg0));
 };;
 
-ResourcesManager.prototype['GetResource'] = function(arg0) {
+ResourcesManager.prototype['GetResource'] = ResourcesManager.prototype.GetResource = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ResourcesManager_GetResource_1(self, arg0);
 };;
 
-ResourcesManager.prototype['AddResource'] = function(arg0) {
+ResourcesManager.prototype['AddResource'] = ResourcesManager.prototype.AddResource = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_ResourcesManager_AddResource_1(self, arg0);
 };;
 
-ResourcesManager.prototype['RemoveResource'] = function(arg0) {
+ResourcesManager.prototype['RemoveResource'] = ResourcesManager.prototype.RemoveResource = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ResourcesManager_RemoveResource_1(self, arg0);
 };;
 
-ResourcesManager.prototype['RenameResource'] = function(arg0, arg1) {
+ResourcesManager.prototype['RenameResource'] = ResourcesManager.prototype.RenameResource = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -2396,21 +2425,23 @@ ResourcesManager.prototype['RenameResource'] = function(arg0, arg1) {
   _emscripten_bind_ResourcesManager_RenameResource_2(self, arg0, arg1);
 };;
 
-ResourcesManager.prototype['MoveResourceUpInList'] = function(arg0) {
+ResourcesManager.prototype['MoveResourceUpInList'] = ResourcesManager.prototype.MoveResourceUpInList = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ResourcesManager_MoveResourceUpInList_1(self, arg0);
 };;
 
-ResourcesManager.prototype['MoveResourceDownInList'] = function(arg0) {
+ResourcesManager.prototype['MoveResourceDownInList'] = ResourcesManager.prototype.MoveResourceDownInList = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ResourcesManager_MoveResourceDownInList_1(self, arg0);
 };;
 
-  ResourcesManager.prototype['__destroy__'] = function() {
+  ResourcesManager.prototype['__destroy__'] = ResourcesManager.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ResourcesManager___destroy___0(self);
 };
@@ -2422,147 +2453,157 @@ PlatformExtension.prototype.__class__ = PlatformExtension;
 PlatformExtension.__cache__ = {};
 Module['PlatformExtension'] = PlatformExtension;
 
-PlatformExtension.prototype['GetFullName'] = function() {
+PlatformExtension.prototype['GetFullName'] = PlatformExtension.prototype.GetFullName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_PlatformExtension_GetFullName_0(self));
 };;
 
-PlatformExtension.prototype['GetName'] = function() {
+PlatformExtension.prototype['GetName'] = PlatformExtension.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_PlatformExtension_GetName_0(self));
 };;
 
-PlatformExtension.prototype['GetDescription'] = function() {
+PlatformExtension.prototype['GetDescription'] = PlatformExtension.prototype.GetDescription = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_PlatformExtension_GetDescription_0(self));
 };;
 
-PlatformExtension.prototype['GetAuthor'] = function() {
+PlatformExtension.prototype['GetAuthor'] = PlatformExtension.prototype.GetAuthor = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_PlatformExtension_GetAuthor_0(self));
 };;
 
-PlatformExtension.prototype['GetLicense'] = function() {
+PlatformExtension.prototype['GetLicense'] = PlatformExtension.prototype.GetLicense = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_PlatformExtension_GetLicense_0(self));
 };;
 
-PlatformExtension.prototype['IsBuiltin'] = function() {
+PlatformExtension.prototype['IsBuiltin'] = PlatformExtension.prototype.IsBuiltin = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_PlatformExtension_IsBuiltin_0(self));
 };;
 
-PlatformExtension.prototype['GetNameSpace'] = function() {
+PlatformExtension.prototype['GetNameSpace'] = PlatformExtension.prototype.GetNameSpace = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_PlatformExtension_GetNameSpace_0(self));
 };;
 
-PlatformExtension.prototype['GetExtensionObjectsTypes'] = function() {
+PlatformExtension.prototype['GetExtensionObjectsTypes'] = PlatformExtension.prototype.GetExtensionObjectsTypes = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_PlatformExtension_GetExtensionObjectsTypes_0(self), VectorString);
 };;
 
-PlatformExtension.prototype['GetAutomatismsTypes'] = function() {
+PlatformExtension.prototype['GetBehaviorsTypes'] = PlatformExtension.prototype.GetBehaviorsTypes = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_PlatformExtension_GetAutomatismsTypes_0(self), VectorString);
+  return wrapPointer(_emscripten_bind_PlatformExtension_GetBehaviorsTypes_0(self), VectorString);
 };;
 
-PlatformExtension.prototype['GetObjectMetadata'] = function(arg0) {
+PlatformExtension.prototype['GetObjectMetadata'] = PlatformExtension.prototype.GetObjectMetadata = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetObjectMetadata_1(self, arg0), ObjectMetadata);
 };;
 
-PlatformExtension.prototype['GetAutomatismMetadata'] = function(arg0) {
+PlatformExtension.prototype['GetBehaviorMetadata'] = PlatformExtension.prototype.GetBehaviorMetadata = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_PlatformExtension_GetAutomatismMetadata_1(self, arg0), AutomatismMetadata);
+  return wrapPointer(_emscripten_bind_PlatformExtension_GetBehaviorMetadata_1(self, arg0), BehaviorMetadata);
 };;
 
-PlatformExtension.prototype['GetAllEvents'] = function() {
+PlatformExtension.prototype['GetAllEvents'] = PlatformExtension.prototype.GetAllEvents = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllEvents_0(self), MapStringEventMetadata);
 };;
 
-PlatformExtension.prototype['GetAllActions'] = function() {
+PlatformExtension.prototype['GetAllActions'] = PlatformExtension.prototype.GetAllActions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllActions_0(self), MapStringInstructionMetadata);
 };;
 
-PlatformExtension.prototype['GetAllConditions'] = function() {
+PlatformExtension.prototype['GetAllConditions'] = PlatformExtension.prototype.GetAllConditions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllConditions_0(self), MapStringInstructionMetadata);
 };;
 
-PlatformExtension.prototype['GetAllExpressions'] = function() {
+PlatformExtension.prototype['GetAllExpressions'] = PlatformExtension.prototype.GetAllExpressions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllExpressions_0(self), MapStringExpressionMetadata);
 };;
 
-PlatformExtension.prototype['GetAllStrExpressions'] = function() {
+PlatformExtension.prototype['GetAllStrExpressions'] = PlatformExtension.prototype.GetAllStrExpressions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllStrExpressions_0(self), MapStringExpressionMetadata);
 };;
 
-PlatformExtension.prototype['GetAllActionsForObject'] = function(arg0) {
+PlatformExtension.prototype['GetAllActionsForObject'] = PlatformExtension.prototype.GetAllActionsForObject = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllActionsForObject_1(self, arg0), MapStringInstructionMetadata);
 };;
 
-PlatformExtension.prototype['GetAllConditionsForObject'] = function(arg0) {
+PlatformExtension.prototype['GetAllConditionsForObject'] = PlatformExtension.prototype.GetAllConditionsForObject = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllConditionsForObject_1(self, arg0), MapStringInstructionMetadata);
 };;
 
-PlatformExtension.prototype['GetAllExpressionsForObject'] = function(arg0) {
+PlatformExtension.prototype['GetAllExpressionsForObject'] = PlatformExtension.prototype.GetAllExpressionsForObject = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllExpressionsForObject_1(self, arg0), MapStringExpressionMetadata);
 };;
 
-PlatformExtension.prototype['GetAllStrExpressionsForObject'] = function(arg0) {
+PlatformExtension.prototype['GetAllStrExpressionsForObject'] = PlatformExtension.prototype.GetAllStrExpressionsForObject = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllStrExpressionsForObject_1(self, arg0), MapStringExpressionMetadata);
 };;
 
-PlatformExtension.prototype['GetAllActionsForAutomatism'] = function(arg0) {
+PlatformExtension.prototype['GetAllActionsForBehavior'] = PlatformExtension.prototype.GetAllActionsForBehavior = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_PlatformExtension_GetAllActionsForAutomatism_1(self, arg0), MapStringInstructionMetadata);
+  return wrapPointer(_emscripten_bind_PlatformExtension_GetAllActionsForBehavior_1(self, arg0), MapStringInstructionMetadata);
 };;
 
-PlatformExtension.prototype['GetAllConditionsForAutomatism'] = function(arg0) {
+PlatformExtension.prototype['GetAllConditionsForBehavior'] = PlatformExtension.prototype.GetAllConditionsForBehavior = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_PlatformExtension_GetAllConditionsForAutomatism_1(self, arg0), MapStringInstructionMetadata);
+  return wrapPointer(_emscripten_bind_PlatformExtension_GetAllConditionsForBehavior_1(self, arg0), MapStringInstructionMetadata);
 };;
 
-PlatformExtension.prototype['GetAllExpressionsForAutomatism'] = function(arg0) {
+PlatformExtension.prototype['GetAllExpressionsForBehavior'] = PlatformExtension.prototype.GetAllExpressionsForBehavior = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_PlatformExtension_GetAllExpressionsForAutomatism_1(self, arg0), MapStringExpressionMetadata);
+  return wrapPointer(_emscripten_bind_PlatformExtension_GetAllExpressionsForBehavior_1(self, arg0), MapStringExpressionMetadata);
 };;
 
-PlatformExtension.prototype['GetAllStrExpressionsForAutomatism'] = function(arg0) {
+PlatformExtension.prototype['GetAllStrExpressionsForBehavior'] = PlatformExtension.prototype.GetAllStrExpressionsForBehavior = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_PlatformExtension_GetAllStrExpressionsForAutomatism_1(self, arg0), MapStringExpressionMetadata);
+  return wrapPointer(_emscripten_bind_PlatformExtension_GetAllStrExpressionsForBehavior_1(self, arg0), MapStringExpressionMetadata);
 };;
 
-  PlatformExtension.prototype['__destroy__'] = function() {
+  PlatformExtension.prototype['__destroy__'] = PlatformExtension.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_PlatformExtension___destroy___0(self);
 };
@@ -2577,55 +2618,62 @@ AbstractFileSystemJS.prototype.__class__ = AbstractFileSystemJS;
 AbstractFileSystemJS.__cache__ = {};
 Module['AbstractFileSystemJS'] = AbstractFileSystemJS;
 
-AbstractFileSystemJS.prototype['MkDir'] = function(arg0) {
+AbstractFileSystemJS.prototype['MkDir'] = AbstractFileSystemJS.prototype.MkDir = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_AbstractFileSystemJS_MkDir_1(self, arg0);
 };;
 
-AbstractFileSystemJS.prototype['DirExists'] = function(arg0) {
+AbstractFileSystemJS.prototype['DirExists'] = AbstractFileSystemJS.prototype.DirExists = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_AbstractFileSystemJS_DirExists_1(self, arg0);
 };;
 
-AbstractFileSystemJS.prototype['ClearDir'] = function(arg0) {
+AbstractFileSystemJS.prototype['ClearDir'] = AbstractFileSystemJS.prototype.ClearDir = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_AbstractFileSystemJS_ClearDir_1(self, arg0);
 };;
 
-AbstractFileSystemJS.prototype['GetTempDir'] = function() {
+AbstractFileSystemJS.prototype['GetTempDir'] = AbstractFileSystemJS.prototype.GetTempDir = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_AbstractFileSystemJS_GetTempDir_0(self));
 };;
 
-AbstractFileSystemJS.prototype['FileNameFrom'] = function(arg0) {
+AbstractFileSystemJS.prototype['FileNameFrom'] = AbstractFileSystemJS.prototype.FileNameFrom = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_AbstractFileSystemJS_FileNameFrom_1(self, arg0));
 };;
 
-AbstractFileSystemJS.prototype['DirNameFrom'] = function(arg0) {
+AbstractFileSystemJS.prototype['DirNameFrom'] = AbstractFileSystemJS.prototype.DirNameFrom = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_AbstractFileSystemJS_DirNameFrom_1(self, arg0));
 };;
 
-AbstractFileSystemJS.prototype['IsAbsolute'] = function(arg0) {
+AbstractFileSystemJS.prototype['IsAbsolute'] = AbstractFileSystemJS.prototype.IsAbsolute = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_AbstractFileSystemJS_IsAbsolute_1(self, arg0));
 };;
 
-AbstractFileSystemJS.prototype['CopyFile'] = function(arg0, arg1) {
+AbstractFileSystemJS.prototype['CopyFile'] = AbstractFileSystemJS.prototype.CopyFile = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -2633,8 +2681,9 @@ AbstractFileSystemJS.prototype['CopyFile'] = function(arg0, arg1) {
   _emscripten_bind_AbstractFileSystemJS_CopyFile_2(self, arg0, arg1);
 };;
 
-AbstractFileSystemJS.prototype['WriteToFile'] = function(arg0, arg1) {
+AbstractFileSystemJS.prototype['WriteToFile'] = AbstractFileSystemJS.prototype.WriteToFile = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -2642,28 +2691,31 @@ AbstractFileSystemJS.prototype['WriteToFile'] = function(arg0, arg1) {
   _emscripten_bind_AbstractFileSystemJS_WriteToFile_2(self, arg0, arg1);
 };;
 
-AbstractFileSystemJS.prototype['ReadFile'] = function(arg0) {
+AbstractFileSystemJS.prototype['ReadFile'] = AbstractFileSystemJS.prototype.ReadFile = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_AbstractFileSystemJS_ReadFile_1(self, arg0));
 };;
 
-AbstractFileSystemJS.prototype['ReadDir'] = function(arg0) {
+AbstractFileSystemJS.prototype['ReadDir'] = AbstractFileSystemJS.prototype.ReadDir = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_AbstractFileSystemJS_ReadDir_1(self, arg0), VectorString);
 };;
 
-AbstractFileSystemJS.prototype['FileExists'] = function(arg0) {
+AbstractFileSystemJS.prototype['FileExists'] = AbstractFileSystemJS.prototype.FileExists = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_AbstractFileSystemJS_FileExists_1(self, arg0));
 };;
 
-  AbstractFileSystemJS.prototype['__destroy__'] = function() {
+  AbstractFileSystemJS.prototype['__destroy__'] = AbstractFileSystemJS.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_AbstractFileSystemJS___destroy___0(self);
 };
@@ -2678,24 +2730,25 @@ HighestZOrderFinder.prototype.__class__ = HighestZOrderFinder;
 HighestZOrderFinder.__cache__ = {};
 Module['HighestZOrderFinder'] = HighestZOrderFinder;
 
-HighestZOrderFinder.prototype['RestrictSearchToLayer'] = function(arg0) {
+HighestZOrderFinder.prototype['RestrictSearchToLayer'] = HighestZOrderFinder.prototype.RestrictSearchToLayer = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_HighestZOrderFinder_RestrictSearchToLayer_1(self, arg0);
 };;
 
-HighestZOrderFinder.prototype['GetHighestZOrder'] = function() {
+HighestZOrderFinder.prototype['GetHighestZOrder'] = HighestZOrderFinder.prototype.GetHighestZOrder = function() {
   var self = this.ptr;
   return _emscripten_bind_HighestZOrderFinder_GetHighestZOrder_0(self);
 };;
 
-HighestZOrderFinder.prototype['GetLowestZOrder'] = function() {
+HighestZOrderFinder.prototype['GetLowestZOrder'] = HighestZOrderFinder.prototype.GetLowestZOrder = function() {
   var self = this.ptr;
   return _emscripten_bind_HighestZOrderFinder_GetLowestZOrder_0(self);
 };;
 
-  HighestZOrderFinder.prototype['__destroy__'] = function() {
+  HighestZOrderFinder.prototype['__destroy__'] = HighestZOrderFinder.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_HighestZOrderFinder___destroy___0(self);
 };
@@ -2707,7 +2760,7 @@ InitialInstanceFunctor.prototype.__class__ = InitialInstanceFunctor;
 InitialInstanceFunctor.__cache__ = {};
 Module['InitialInstanceFunctor'] = InitialInstanceFunctor;
 
-  InitialInstanceFunctor.prototype['__destroy__'] = function() {
+  InitialInstanceFunctor.prototype['__destroy__'] = InitialInstanceFunctor.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_InitialInstanceFunctor___destroy___0(self);
 };
@@ -2722,7 +2775,7 @@ SetString.prototype.__class__ = SetString;
 SetString.__cache__ = {};
 Module['SetString'] = SetString;
 
-  SetString.prototype['__destroy__'] = function() {
+  SetString.prototype['__destroy__'] = SetString.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_SetString___destroy___0(self);
 };
@@ -2737,69 +2790,67 @@ Instruction.prototype.__class__ = Instruction;
 Instruction.__cache__ = {};
 Module['Instruction'] = Instruction;
 
-Instruction.prototype['CLONE_Instruction'] = function() {
+Instruction.prototype['CLONE_Instruction'] = Instruction.prototype.CLONE_Instruction = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Instruction_CLONE_Instruction_0(self), Instruction);
 };;
 
-Instruction.prototype['SetType'] = function(arg0) {
+Instruction.prototype['SetType'] = Instruction.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Instruction_SetType_1(self, arg0);
 };;
 
-Instruction.prototype['GetType'] = function() {
+Instruction.prototype['GetType'] = Instruction.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Instruction_GetType_0(self));
 };;
 
-Instruction.prototype['SetInverted'] = function(arg0) {
+Instruction.prototype['SetInverted'] = Instruction.prototype.SetInverted = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Instruction_SetInverted_1(self, arg0);
 };;
 
-Instruction.prototype['IsInverted'] = function() {
+Instruction.prototype['IsInverted'] = Instruction.prototype.IsInverted = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Instruction_IsInverted_0(self));
 };;
 
-Instruction.prototype['SetParameter'] = function(arg0, arg1) {
+Instruction.prototype['SetParameter'] = Instruction.prototype.SetParameter = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   _emscripten_bind_Instruction_SetParameter_2(self, arg0, arg1);
 };;
 
-Instruction.prototype['GetParameter'] = function(arg0) {
+Instruction.prototype['GetParameter'] = Instruction.prototype.GetParameter = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_Instruction_GetParameter_1(self, arg0));
 };;
 
-Instruction.prototype['SetParametersCount'] = function(arg0) {
+Instruction.prototype['SetParametersCount'] = Instruction.prototype.SetParametersCount = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Instruction_SetParametersCount_1(self, arg0);
 };;
 
-Instruction.prototype['GetParametersCount'] = function() {
+Instruction.prototype['GetParametersCount'] = Instruction.prototype.GetParametersCount = function() {
   var self = this.ptr;
   return _emscripten_bind_Instruction_GetParametersCount_0(self);
 };;
 
-Instruction.prototype['GetSubInstructions'] = function() {
+Instruction.prototype['GetSubInstructions'] = Instruction.prototype.GetSubInstructions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Instruction_GetSubInstructions_0(self), InstructionsList);
 };;
 
-  Instruction.prototype['__destroy__'] = function() {
+  Instruction.prototype['__destroy__'] = Instruction.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Instruction___destroy___0(self);
 };
@@ -2811,17 +2862,18 @@ JsPlatform.prototype.__class__ = JsPlatform;
 JsPlatform.__cache__ = {};
 Module['JsPlatform'] = JsPlatform;
 
-JsPlatform.prototype['STATIC_Get'] = function() {
+JsPlatform.prototype['STATIC_Get'] = JsPlatform.prototype.STATIC_Get = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_JsPlatform_STATIC_Get_0(self), JsPlatform);
 };;
 
-  JsPlatform.prototype['__destroy__'] = function() {
+  JsPlatform.prototype['__destroy__'] = JsPlatform.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_JsPlatform___destroy___0(self);
 };
 // PropertyDescriptor
 function PropertyDescriptor(arg0) {
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_PropertyDescriptor_PropertyDescriptor_1(arg0);
@@ -2833,43 +2885,46 @@ PropertyDescriptor.prototype.__class__ = PropertyDescriptor;
 PropertyDescriptor.__cache__ = {};
 Module['PropertyDescriptor'] = PropertyDescriptor;
 
-PropertyDescriptor.prototype['SetValue'] = function(arg0) {
+PropertyDescriptor.prototype['SetValue'] = PropertyDescriptor.prototype.SetValue = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PropertyDescriptor_SetValue_1(self, arg0), PropertyDescriptor);
 };;
 
-PropertyDescriptor.prototype['GetValue'] = function() {
+PropertyDescriptor.prototype['GetValue'] = PropertyDescriptor.prototype.GetValue = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_PropertyDescriptor_GetValue_0(self));
 };;
 
-PropertyDescriptor.prototype['SetType'] = function(arg0) {
+PropertyDescriptor.prototype['SetType'] = PropertyDescriptor.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PropertyDescriptor_SetType_1(self, arg0), PropertyDescriptor);
 };;
 
-PropertyDescriptor.prototype['GetType'] = function() {
+PropertyDescriptor.prototype['GetType'] = PropertyDescriptor.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_PropertyDescriptor_GetType_0(self));
 };;
 
-PropertyDescriptor.prototype['AddExtraInfo'] = function(arg0) {
+PropertyDescriptor.prototype['AddExtraInfo'] = PropertyDescriptor.prototype.AddExtraInfo = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PropertyDescriptor_AddExtraInfo_1(self, arg0), PropertyDescriptor);
 };;
 
-PropertyDescriptor.prototype['GetExtraInfo'] = function() {
+PropertyDescriptor.prototype['GetExtraInfo'] = PropertyDescriptor.prototype.GetExtraInfo = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_PropertyDescriptor_GetExtraInfo_0(self), VectorString);
 };;
 
-  PropertyDescriptor.prototype['__destroy__'] = function() {
+  PropertyDescriptor.prototype['__destroy__'] = PropertyDescriptor.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_PropertyDescriptor___destroy___0(self);
 };
@@ -2884,14 +2939,13 @@ InitialInstanceJSFunctor.prototype.__class__ = InitialInstanceJSFunctor;
 InitialInstanceJSFunctor.__cache__ = {};
 Module['InitialInstanceJSFunctor'] = InitialInstanceJSFunctor;
 
-InitialInstanceJSFunctor.prototype['invoke'] = function(arg0) {
+InitialInstanceJSFunctor.prototype['invoke'] = InitialInstanceJSFunctor.prototype.invoke = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstanceJSFunctor_invoke_1(self, arg0);
 };;
 
-  InitialInstanceJSFunctor.prototype['__destroy__'] = function() {
+  InitialInstanceJSFunctor.prototype['__destroy__'] = InitialInstanceJSFunctor.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_InitialInstanceJSFunctor___destroy___0(self);
 };
@@ -2906,309 +2960,303 @@ Project.prototype.__class__ = Project;
 Project.__cache__ = {};
 Module['Project'] = Project;
 
-Project.prototype['SetName'] = function(arg0) {
+Project.prototype['SetName'] = Project.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetName_1(self, arg0);
 };;
 
-Project.prototype['GetName'] = function() {
+Project.prototype['GetName'] = Project.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Project_GetName_0(self));
 };;
 
-Project.prototype['SetAuthor'] = function(arg0) {
+Project.prototype['SetAuthor'] = Project.prototype.SetAuthor = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetAuthor_1(self, arg0);
 };;
 
-Project.prototype['GetAuthor'] = function() {
+Project.prototype['GetAuthor'] = Project.prototype.GetAuthor = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Project_GetAuthor_0(self));
 };;
 
-Project.prototype['SetProjectFile'] = function(arg0) {
+Project.prototype['SetProjectFile'] = Project.prototype.SetProjectFile = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetProjectFile_1(self, arg0);
 };;
 
-Project.prototype['GetProjectFile'] = function() {
+Project.prototype['GetProjectFile'] = Project.prototype.GetProjectFile = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Project_GetProjectFile_0(self));
 };;
 
-Project.prototype['SetDefaultWidth'] = function(arg0) {
+Project.prototype['SetDefaultWidth'] = Project.prototype.SetDefaultWidth = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetDefaultWidth_1(self, arg0);
 };;
 
-Project.prototype['GetMainWindowDefaultWidth'] = function() {
+Project.prototype['GetMainWindowDefaultWidth'] = Project.prototype.GetMainWindowDefaultWidth = function() {
   var self = this.ptr;
   return _emscripten_bind_Project_GetMainWindowDefaultWidth_0(self);
 };;
 
-Project.prototype['SetDefaultHeight'] = function(arg0) {
+Project.prototype['SetDefaultHeight'] = Project.prototype.SetDefaultHeight = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetDefaultHeight_1(self, arg0);
 };;
 
-Project.prototype['GetMainWindowDefaultHeight'] = function() {
+Project.prototype['GetMainWindowDefaultHeight'] = Project.prototype.GetMainWindowDefaultHeight = function() {
   var self = this.ptr;
   return _emscripten_bind_Project_GetMainWindowDefaultHeight_0(self);
 };;
 
-Project.prototype['GetMaximumFPS'] = function() {
+Project.prototype['GetMaximumFPS'] = Project.prototype.GetMaximumFPS = function() {
   var self = this.ptr;
   return _emscripten_bind_Project_GetMaximumFPS_0(self);
 };;
 
-Project.prototype['SetMaximumFPS'] = function(arg0) {
+Project.prototype['SetMaximumFPS'] = Project.prototype.SetMaximumFPS = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetMaximumFPS_1(self, arg0);
 };;
 
-Project.prototype['GetMinimumFPS'] = function() {
+Project.prototype['GetMinimumFPS'] = Project.prototype.GetMinimumFPS = function() {
   var self = this.ptr;
   return _emscripten_bind_Project_GetMinimumFPS_0(self);
 };;
 
-Project.prototype['SetMinimumFPS'] = function(arg0) {
+Project.prototype['SetMinimumFPS'] = Project.prototype.SetMinimumFPS = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetMinimumFPS_1(self, arg0);
 };;
 
-Project.prototype['GetUsedExtensions'] = function() {
+Project.prototype['GetUsedExtensions'] = Project.prototype.GetUsedExtensions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Project_GetUsedExtensions_0(self), VectorString);
 };;
 
-Project.prototype['AddPlatform'] = function(arg0) {
+Project.prototype['AddPlatform'] = Project.prototype.AddPlatform = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Project_AddPlatform_1(self, arg0);
 };;
 
-Project.prototype['GetCurrentPlatform'] = function() {
+Project.prototype['GetCurrentPlatform'] = Project.prototype.GetCurrentPlatform = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Project_GetCurrentPlatform_0(self), Platform);
 };;
 
-Project.prototype['HasLayoutNamed'] = function(arg0) {
+Project.prototype['HasLayoutNamed'] = Project.prototype.HasLayoutNamed = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Project_HasLayoutNamed_1(self, arg0));
 };;
 
-Project.prototype['GetLayout'] = function(arg0) {
+Project.prototype['GetLayout'] = Project.prototype.GetLayout = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Project_GetLayout_1(self, arg0), Layout);
 };;
 
-Project.prototype['GetLayoutAt'] = function(arg0) {
+Project.prototype['GetLayoutAt'] = Project.prototype.GetLayoutAt = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Project_GetLayoutAt_1(self, arg0), Layout);
 };;
 
-Project.prototype['GetLayoutsCount'] = function() {
+Project.prototype['GetLayoutsCount'] = Project.prototype.GetLayoutsCount = function() {
   var self = this.ptr;
   return _emscripten_bind_Project_GetLayoutsCount_0(self);
 };;
 
-Project.prototype['InsertNewLayout'] = function(arg0, arg1) {
+Project.prototype['InsertNewLayout'] = Project.prototype.InsertNewLayout = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_Project_InsertNewLayout_2(self, arg0, arg1), Layout);
 };;
 
-Project.prototype['RemoveLayout'] = function(arg0) {
+Project.prototype['RemoveLayout'] = Project.prototype.RemoveLayout = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_RemoveLayout_1(self, arg0);
 };;
 
-Project.prototype['SetFirstLayout'] = function(arg0) {
+Project.prototype['SetFirstLayout'] = Project.prototype.SetFirstLayout = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetFirstLayout_1(self, arg0);
 };;
 
-Project.prototype['GetFirstLayout'] = function() {
+Project.prototype['GetFirstLayout'] = Project.prototype.GetFirstLayout = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Project_GetFirstLayout_0(self));
 };;
 
-Project.prototype['GetVariables'] = function() {
+Project.prototype['GetVariables'] = Project.prototype.GetVariables = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Project_GetVariables_0(self), VariablesContainer);
 };;
 
-Project.prototype['GetResourcesManager'] = function() {
+Project.prototype['GetResourcesManager'] = Project.prototype.GetResourcesManager = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Project_GetResourcesManager_0(self), ResourcesManager);
 };;
 
-Project.prototype['ExposeResources'] = function(arg0) {
+Project.prototype['ExposeResources'] = Project.prototype.ExposeResources = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Project_ExposeResources_1(self, arg0);
 };;
 
-Project.prototype['STATIC_ValidateObjectName'] = function(arg0) {
+Project.prototype['STATIC_ValidateObjectName'] = Project.prototype.STATIC_ValidateObjectName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Project_STATIC_ValidateObjectName_1(self, arg0));
 };;
 
-Project.prototype['IsDirty'] = function() {
+Project.prototype['IsDirty'] = Project.prototype.IsDirty = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Project_IsDirty_0(self));
 };;
 
-Project.prototype['SerializeTo'] = function(arg0) {
+Project.prototype['SerializeTo'] = Project.prototype.SerializeTo = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SerializeTo_1(self, arg0);
 };;
 
-Project.prototype['UnserializeFrom'] = function(arg0) {
+Project.prototype['UnserializeFrom'] = Project.prototype.UnserializeFrom = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Project_UnserializeFrom_1(self, arg0);
 };;
 
-Project.prototype['FREE_GetTypeOfAutomatism'] = function(arg0, arg1, arg2) {
+Project.prototype['FREE_GetTypeOfBehavior'] = Project.prototype.FREE_GetTypeOfBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
-  return Pointer_stringify(_emscripten_bind_Project_FREE_GetTypeOfAutomatism_3(self, arg0, arg1, arg2));
+  return Pointer_stringify(_emscripten_bind_Project_FREE_GetTypeOfBehavior_3(self, arg0, arg1, arg2));
 };;
 
-Project.prototype['FREE_GetTypeOfObject'] = function(arg0, arg1, arg2) {
+Project.prototype['FREE_GetTypeOfObject'] = Project.prototype.FREE_GetTypeOfObject = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   return Pointer_stringify(_emscripten_bind_Project_FREE_GetTypeOfObject_3(self, arg0, arg1, arg2));
 };;
 
-Project.prototype['FREE_GetAutomatismsOfObject'] = function(arg0, arg1, arg2) {
+Project.prototype['FREE_GetBehaviorsOfObject'] = Project.prototype.FREE_GetBehaviorsOfObject = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
-  return wrapPointer(_emscripten_bind_Project_FREE_GetAutomatismsOfObject_3(self, arg0, arg1, arg2), VectorString);
+  return wrapPointer(_emscripten_bind_Project_FREE_GetBehaviorsOfObject_3(self, arg0, arg1, arg2), VectorString);
 };;
 
-Project.prototype['InsertNewObject'] = function(arg0, arg1, arg2, arg3) {
+Project.prototype['InsertNewObject'] = Project.prototype.InsertNewObject = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  else arg3 = ensureString(arg3);
   return wrapPointer(_emscripten_bind_Project_InsertNewObject_4(self, arg0, arg1, arg2, arg3), gdObject);
 };;
 
-Project.prototype['InsertObject'] = function(arg0, arg1) {
+Project.prototype['InsertObject'] = Project.prototype.InsertObject = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_Project_InsertObject_2(self, arg0, arg1), gdObject);
 };;
 
-Project.prototype['HasObjectNamed'] = function(arg0) {
+Project.prototype['HasObjectNamed'] = Project.prototype.HasObjectNamed = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Project_HasObjectNamed_1(self, arg0));
 };;
 
-Project.prototype['GetObject'] = function(arg0) {
+Project.prototype['GetObject'] = Project.prototype.GetObject = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Project_GetObject_1(self, arg0), gdObject);
 };;
 
-Project.prototype['GetObjectAt'] = function(arg0) {
+Project.prototype['GetObjectAt'] = Project.prototype.GetObjectAt = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Project_GetObjectAt_1(self, arg0), gdObject);
 };;
 
-Project.prototype['GetObjectPosition'] = function(arg0) {
+Project.prototype['GetObjectPosition'] = Project.prototype.GetObjectPosition = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_GetObjectPosition_1(self, arg0);
 };;
 
-Project.prototype['RemoveObject'] = function(arg0) {
+Project.prototype['RemoveObject'] = Project.prototype.RemoveObject = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_RemoveObject_1(self, arg0);
 };;
 
-Project.prototype['SwapObjects'] = function(arg0, arg1) {
+Project.prototype['SwapObjects'] = Project.prototype.SwapObjects = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_Project_SwapObjects_2(self, arg0, arg1);
 };;
 
-Project.prototype['GetObjectsCount'] = function() {
+Project.prototype['GetObjectsCount'] = Project.prototype.GetObjectsCount = function() {
   var self = this.ptr;
   return _emscripten_bind_Project_GetObjectsCount_0(self);
 };;
 
-  Project.prototype['__destroy__'] = function() {
+  Project.prototype['__destroy__'] = Project.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Project___destroy___0(self);
 };
@@ -3220,35 +3268,37 @@ MapStringVariable.prototype.__class__ = MapStringVariable;
 MapStringVariable.__cache__ = {};
 Module['MapStringVariable'] = MapStringVariable;
 
-MapStringVariable.prototype['MAP_get'] = function(arg0) {
+MapStringVariable.prototype['MAP_get'] = MapStringVariable.prototype.MAP_get = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_MapStringVariable_MAP_get_1(self, arg0), Variable);
 };;
 
-MapStringVariable.prototype['MAP_set'] = function(arg0, arg1) {
+MapStringVariable.prototype['MAP_set'] = MapStringVariable.prototype.MAP_set = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_MapStringVariable_MAP_set_2(self, arg0, arg1);
 };;
 
-MapStringVariable.prototype['MAP_has'] = function(arg0) {
+MapStringVariable.prototype['MAP_has'] = MapStringVariable.prototype.MAP_has = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_MapStringVariable_MAP_has_1(self, arg0));
 };;
 
-MapStringVariable.prototype['MAP_keys'] = function() {
+MapStringVariable.prototype['MAP_keys'] = MapStringVariable.prototype.MAP_keys = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_MapStringVariable_MAP_keys_0(self), VectorString);
 };;
 
-  MapStringVariable.prototype['__destroy__'] = function() {
+  MapStringVariable.prototype['__destroy__'] = MapStringVariable.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_MapStringVariable___destroy___0(self);
 };
@@ -3263,86 +3313,85 @@ ImageResource.prototype.__class__ = ImageResource;
 ImageResource.__cache__ = {};
 Module['ImageResource'] = ImageResource;
 
-ImageResource.prototype['Clone'] = function() {
+ImageResource.prototype['Clone'] = ImageResource.prototype.Clone = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_ImageResource_Clone_0(self), Resource);
 };;
 
-ImageResource.prototype['SetName'] = function(arg0) {
+ImageResource.prototype['SetName'] = ImageResource.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ImageResource_SetName_1(self, arg0);
 };;
 
-ImageResource.prototype['GetName'] = function() {
+ImageResource.prototype['GetName'] = ImageResource.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ImageResource_GetName_0(self));
 };;
 
-ImageResource.prototype['SetKind'] = function(arg0) {
+ImageResource.prototype['SetKind'] = ImageResource.prototype.SetKind = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ImageResource_SetKind_1(self, arg0);
 };;
 
-ImageResource.prototype['GetKind'] = function() {
+ImageResource.prototype['GetKind'] = ImageResource.prototype.GetKind = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ImageResource_GetKind_0(self));
 };;
 
-ImageResource.prototype['IsUserAdded'] = function() {
+ImageResource.prototype['IsUserAdded'] = ImageResource.prototype.IsUserAdded = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_ImageResource_IsUserAdded_0(self));
 };;
 
-ImageResource.prototype['SetUserAdded'] = function(arg0) {
+ImageResource.prototype['SetUserAdded'] = ImageResource.prototype.SetUserAdded = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_ImageResource_SetUserAdded_1(self, arg0);
 };;
 
-ImageResource.prototype['UseFile'] = function() {
+ImageResource.prototype['UseFile'] = ImageResource.prototype.UseFile = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_ImageResource_UseFile_0(self));
 };;
 
-ImageResource.prototype['SetFile'] = function(arg0) {
+ImageResource.prototype['SetFile'] = ImageResource.prototype.SetFile = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ImageResource_SetFile_1(self, arg0);
 };;
 
-ImageResource.prototype['GetFile'] = function() {
+ImageResource.prototype['GetFile'] = ImageResource.prototype.GetFile = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ImageResource_GetFile_0(self));
 };;
 
-ImageResource.prototype['GetAbsoluteFile'] = function(arg0) {
+ImageResource.prototype['GetAbsoluteFile'] = ImageResource.prototype.GetAbsoluteFile = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_ImageResource_GetAbsoluteFile_1(self, arg0));
 };;
 
-ImageResource.prototype['SerializeTo'] = function(arg0) {
+ImageResource.prototype['SerializeTo'] = ImageResource.prototype.SerializeTo = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_ImageResource_SerializeTo_1(self, arg0);
 };;
 
-ImageResource.prototype['UnserializeFrom'] = function(arg0) {
+ImageResource.prototype['UnserializeFrom'] = ImageResource.prototype.UnserializeFrom = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_ImageResource_UnserializeFrom_1(self, arg0);
 };;
 
-  ImageResource.prototype['__destroy__'] = function() {
+  ImageResource.prototype['__destroy__'] = ImageResource.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ImageResource___destroy___0(self);
 };
@@ -3354,28 +3403,25 @@ ProjectResourcesAdder.prototype.__class__ = ProjectResourcesAdder;
 ProjectResourcesAdder.__cache__ = {};
 Module['ProjectResourcesAdder'] = ProjectResourcesAdder;
 
-ProjectResourcesAdder.prototype['STATIC_AddAllMissingImages'] = function(arg0) {
+ProjectResourcesAdder.prototype['STATIC_AddAllMissingImages'] = ProjectResourcesAdder.prototype.STATIC_AddAllMissingImages = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_ProjectResourcesAdder_STATIC_AddAllMissingImages_1(self, arg0);
 };;
 
-ProjectResourcesAdder.prototype['STATIC_GetAllUselessResources'] = function(arg0) {
+ProjectResourcesAdder.prototype['STATIC_GetAllUselessResources'] = ProjectResourcesAdder.prototype.STATIC_GetAllUselessResources = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessResources_1(self, arg0);
 };;
 
-ProjectResourcesAdder.prototype['STATIC_RemoveAllUselessResources'] = function(arg0) {
+ProjectResourcesAdder.prototype['STATIC_RemoveAllUselessResources'] = ProjectResourcesAdder.prototype.STATIC_RemoveAllUselessResources = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUselessResources_1(self, arg0);
 };;
 
-  ProjectResourcesAdder.prototype['__destroy__'] = function() {
+  ProjectResourcesAdder.prototype['__destroy__'] = ProjectResourcesAdder.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ProjectResourcesAdder___destroy___0(self);
 };
@@ -3390,31 +3436,31 @@ Layer.prototype.__class__ = Layer;
 Layer.__cache__ = {};
 Module['Layer'] = Layer;
 
-Layer.prototype['SetName'] = function(arg0) {
+Layer.prototype['SetName'] = Layer.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Layer_SetName_1(self, arg0);
 };;
 
-Layer.prototype['GetName'] = function() {
+Layer.prototype['GetName'] = Layer.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Layer_GetName_0(self));
 };;
 
-Layer.prototype['SetVisibility'] = function(arg0) {
+Layer.prototype['SetVisibility'] = Layer.prototype.SetVisibility = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Layer_SetVisibility_1(self, arg0);
 };;
 
-Layer.prototype['GetVisibility'] = function() {
+Layer.prototype['GetVisibility'] = Layer.prototype.GetVisibility = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Layer_GetVisibility_0(self));
 };;
 
-  Layer.prototype['__destroy__'] = function() {
+  Layer.prototype['__destroy__'] = Layer.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Layer___destroy___0(self);
 };
@@ -3429,94 +3475,82 @@ CommentEvent.prototype.__class__ = CommentEvent;
 CommentEvent.__cache__ = {};
 Module['CommentEvent'] = CommentEvent;
 
-CommentEvent.prototype['WRAPPED_GetComment'] = function() {
+CommentEvent.prototype['WRAPPED_GetComment'] = CommentEvent.prototype.WRAPPED_GetComment = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_CommentEvent_WRAPPED_GetComment_0(self));
 };;
 
-CommentEvent.prototype['WRAPPED_SetComment'] = function(arg0) {
+CommentEvent.prototype['WRAPPED_SetComment'] = CommentEvent.prototype.WRAPPED_SetComment = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_CommentEvent_WRAPPED_SetComment_1(self, arg0);
 };;
 
-CommentEvent.prototype['Clone'] = function() {
+CommentEvent.prototype['Clone'] = CommentEvent.prototype.Clone = function() {
   var self = this.ptr;
   _emscripten_bind_CommentEvent_Clone_0(self);
 };;
 
-CommentEvent.prototype['GetType'] = function() {
+CommentEvent.prototype['GetType'] = CommentEvent.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_CommentEvent_GetType_0(self));
 };;
 
-CommentEvent.prototype['SetType'] = function(arg0) {
+CommentEvent.prototype['SetType'] = CommentEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_CommentEvent_SetType_1(self, arg0);
 };;
 
-CommentEvent.prototype['IsExecutable'] = function() {
+CommentEvent.prototype['IsExecutable'] = CommentEvent.prototype.IsExecutable = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_CommentEvent_IsExecutable_0(self));
 };;
 
-CommentEvent.prototype['CanHaveSubEvents'] = function() {
+CommentEvent.prototype['CanHaveSubEvents'] = CommentEvent.prototype.CanHaveSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_CommentEvent_CanHaveSubEvents_0(self));
 };;
 
-CommentEvent.prototype['HasSubEvents'] = function() {
+CommentEvent.prototype['HasSubEvents'] = CommentEvent.prototype.HasSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_CommentEvent_HasSubEvents_0(self));
 };;
 
-CommentEvent.prototype['GetSubEvents'] = function() {
+CommentEvent.prototype['GetSubEvents'] = CommentEvent.prototype.GetSubEvents = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_CommentEvent_GetSubEvents_0(self), EventsList);
 };;
 
-CommentEvent.prototype['IsDisabled'] = function() {
+CommentEvent.prototype['IsDisabled'] = CommentEvent.prototype.IsDisabled = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_CommentEvent_IsDisabled_0(self));
 };;
 
-CommentEvent.prototype['SetDisabled'] = function(arg0) {
+CommentEvent.prototype['SetDisabled'] = CommentEvent.prototype.SetDisabled = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_CommentEvent_SetDisabled_1(self, arg0);
 };;
 
-CommentEvent.prototype['IsFolded'] = function() {
+CommentEvent.prototype['IsFolded'] = CommentEvent.prototype.IsFolded = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_CommentEvent_IsFolded_0(self));
 };;
 
-CommentEvent.prototype['SetFolded'] = function(arg0) {
+CommentEvent.prototype['SetFolded'] = CommentEvent.prototype.SetFolded = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_CommentEvent_SetFolded_1(self, arg0);
 };;
 
-  CommentEvent.prototype['__destroy__'] = function() {
+  CommentEvent.prototype['__destroy__'] = CommentEvent.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_CommentEvent___destroy___0(self);
-};
-// AbstractFileSystem
-function AbstractFileSystem() { throw "cannot construct a AbstractFileSystem, no constructor in IDL" }
-AbstractFileSystem.prototype = Object.create(WrapperObject.prototype);
-AbstractFileSystem.prototype.constructor = AbstractFileSystem;
-AbstractFileSystem.prototype.__class__ = AbstractFileSystem;
-AbstractFileSystem.__cache__ = {};
-Module['AbstractFileSystem'] = AbstractFileSystem;
-
-  AbstractFileSystem.prototype['__destroy__'] = function() {
-  var self = this.ptr;
-  _emscripten_bind_AbstractFileSystem___destroy___0(self);
 };
 // ArbitraryEventsWorker
 function ArbitraryEventsWorker() { throw "cannot construct a ArbitraryEventsWorker, no constructor in IDL" }
@@ -3526,23 +3560,20 @@ ArbitraryEventsWorker.prototype.__class__ = ArbitraryEventsWorker;
 ArbitraryEventsWorker.__cache__ = {};
 Module['ArbitraryEventsWorker'] = ArbitraryEventsWorker;
 
-ArbitraryEventsWorker.prototype['Launch'] = function(arg0) {
+ArbitraryEventsWorker.prototype['Launch'] = ArbitraryEventsWorker.prototype.Launch = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_ArbitraryEventsWorker_Launch_1(self, arg0);
 };;
 
-  ArbitraryEventsWorker.prototype['__destroy__'] = function() {
+  ArbitraryEventsWorker.prototype['__destroy__'] = ArbitraryEventsWorker.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ArbitraryEventsWorker___destroy___0(self);
 };
 // ObjectListDialogsHelper
 function ObjectListDialogsHelper(arg0, arg1) {
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   this.ptr = _emscripten_bind_ObjectListDialogsHelper_ObjectListDialogsHelper_2(arg0, arg1);
   getCache(ObjectListDialogsHelper)[this.ptr] = this;
 };;
@@ -3552,33 +3583,34 @@ ObjectListDialogsHelper.prototype.__class__ = ObjectListDialogsHelper;
 ObjectListDialogsHelper.__cache__ = {};
 Module['ObjectListDialogsHelper'] = ObjectListDialogsHelper;
 
-ObjectListDialogsHelper.prototype['SetSearchText'] = function(arg0) {
+ObjectListDialogsHelper.prototype['SetSearchText'] = ObjectListDialogsHelper.prototype.SetSearchText = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ObjectListDialogsHelper_SetSearchText_1(self, arg0);
 };;
 
-ObjectListDialogsHelper.prototype['SetAllowedObjectType'] = function(arg0) {
+ObjectListDialogsHelper.prototype['SetAllowedObjectType'] = ObjectListDialogsHelper.prototype.SetAllowedObjectType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ObjectListDialogsHelper_SetAllowedObjectType_1(self, arg0);
 };;
 
-ObjectListDialogsHelper.prototype['SetGroupsAllowed'] = function(arg0) {
+ObjectListDialogsHelper.prototype['SetGroupsAllowed'] = ObjectListDialogsHelper.prototype.SetGroupsAllowed = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_ObjectListDialogsHelper_SetGroupsAllowed_1(self, arg0);
 };;
 
-ObjectListDialogsHelper.prototype['GetMatchingObjects'] = function() {
+ObjectListDialogsHelper.prototype['GetMatchingObjects'] = ObjectListDialogsHelper.prototype.GetMatchingObjects = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_ObjectListDialogsHelper_GetMatchingObjects_0(self), VectorString);
 };;
 
-  ObjectListDialogsHelper.prototype['__destroy__'] = function() {
+  ObjectListDialogsHelper.prototype['__destroy__'] = ObjectListDialogsHelper.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ObjectListDialogsHelper___destroy___0(self);
 };
@@ -3590,21 +3622,21 @@ Serializer.prototype.__class__ = Serializer;
 Serializer.__cache__ = {};
 Module['Serializer'] = Serializer;
 
-Serializer.prototype['STATIC_ToJSON'] = function(arg0) {
+Serializer.prototype['STATIC_ToJSON'] = Serializer.prototype.STATIC_ToJSON = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_Serializer_STATIC_ToJSON_1(self, arg0));
 };;
 
-Serializer.prototype['STATIC_FromJSON'] = function(arg0) {
+Serializer.prototype['STATIC_FromJSON'] = Serializer.prototype.STATIC_FromJSON = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Serializer_STATIC_FromJSON_1(self, arg0), SerializerElement);
 };;
 
-  Serializer.prototype['__destroy__'] = function() {
+  Serializer.prototype['__destroy__'] = Serializer.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Serializer___destroy___0(self);
 };
@@ -3619,74 +3651,77 @@ Sprite.prototype.__class__ = Sprite;
 Sprite.__cache__ = {};
 Module['Sprite'] = Sprite;
 
-Sprite.prototype['SetImageName'] = function(arg0) {
+Sprite.prototype['SetImageName'] = Sprite.prototype.SetImageName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Sprite_SetImageName_1(self, arg0);
 };;
 
-Sprite.prototype['GetImageName'] = function() {
+Sprite.prototype['GetImageName'] = Sprite.prototype.GetImageName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Sprite_GetImageName_0(self));
 };;
 
-Sprite.prototype['AddPoint'] = function(arg0) {
+Sprite.prototype['AddPoint'] = Sprite.prototype.AddPoint = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Sprite_AddPoint_1(self, arg0);
 };;
 
-Sprite.prototype['DelPoint'] = function(arg0) {
+Sprite.prototype['DelPoint'] = Sprite.prototype.DelPoint = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Sprite_DelPoint_1(self, arg0);
 };;
 
-Sprite.prototype['GetPoint'] = function(arg0) {
+Sprite.prototype['GetPoint'] = Sprite.prototype.GetPoint = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Sprite_GetPoint_1(self, arg0), Point);
 };;
 
-Sprite.prototype['HasPoint'] = function(arg0) {
+Sprite.prototype['HasPoint'] = Sprite.prototype.HasPoint = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Sprite_HasPoint_1(self, arg0));
 };;
 
-Sprite.prototype['GetOrigin'] = function() {
+Sprite.prototype['GetOrigin'] = Sprite.prototype.GetOrigin = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Sprite_GetOrigin_0(self), Point);
 };;
 
-Sprite.prototype['GetCenter'] = function() {
+Sprite.prototype['GetCenter'] = Sprite.prototype.GetCenter = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Sprite_GetCenter_0(self), Point);
 };;
 
-Sprite.prototype['IsDefaultCenterPoint'] = function() {
+Sprite.prototype['IsDefaultCenterPoint'] = Sprite.prototype.IsDefaultCenterPoint = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Sprite_IsDefaultCenterPoint_0(self));
 };;
 
-Sprite.prototype['SetDefaultCenterPoint'] = function(arg0) {
+Sprite.prototype['SetDefaultCenterPoint'] = Sprite.prototype.SetDefaultCenterPoint = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Sprite_SetDefaultCenterPoint_1(self, arg0);
 };;
 
-  Sprite.prototype['__destroy__'] = function() {
+  Sprite.prototype['__destroy__'] = Sprite.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Sprite___destroy___0(self);
 };
 // gdObject
 function gdObject(arg0) {
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_gdObject_gdObject_1(arg0);
@@ -3698,103 +3733,106 @@ gdObject.prototype.__class__ = gdObject;
 gdObject.__cache__ = {};
 Module['gdObject'] = gdObject;
 
-gdObject.prototype['Clone'] = function() {
+gdObject.prototype['Clone'] = gdObject.prototype.Clone = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_gdObject_Clone_0(self), gdObject);
 };;
 
-gdObject.prototype['SetName'] = function(arg0) {
+gdObject.prototype['SetName'] = gdObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_gdObject_SetName_1(self, arg0);
 };;
 
-gdObject.prototype['GetName'] = function() {
+gdObject.prototype['GetName'] = gdObject.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_gdObject_GetName_0(self));
 };;
 
-gdObject.prototype['SetType'] = function(arg0) {
+gdObject.prototype['SetType'] = gdObject.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_gdObject_SetType_1(self, arg0);
 };;
 
-gdObject.prototype['GetType'] = function() {
+gdObject.prototype['GetType'] = gdObject.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_gdObject_GetType_0(self));
 };;
 
-gdObject.prototype['GetVariables'] = function() {
+gdObject.prototype['GetVariables'] = gdObject.prototype.GetVariables = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_gdObject_GetVariables_0(self), VariablesContainer);
 };;
 
-gdObject.prototype['GetAllAutomatismNames'] = function() {
+gdObject.prototype['GetAllBehaviorNames'] = gdObject.prototype.GetAllBehaviorNames = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_gdObject_GetAllAutomatismNames_0(self), VectorString);
+  return wrapPointer(_emscripten_bind_gdObject_GetAllBehaviorNames_0(self), VectorString);
 };;
 
-gdObject.prototype['HasAutomatismNamed'] = function(arg0) {
+gdObject.prototype['HasBehaviorNamed'] = gdObject.prototype.HasBehaviorNamed = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return !!(_emscripten_bind_gdObject_HasAutomatismNamed_1(self, arg0));
+  return !!(_emscripten_bind_gdObject_HasBehaviorNamed_1(self, arg0));
 };;
 
-gdObject.prototype['AddNewAutomatism'] = function(arg0, arg1, arg2) {
+gdObject.prototype['AddNewBehavior'] = gdObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return wrapPointer(_emscripten_bind_gdObject_AddNewAutomatism_3(self, arg0, arg1, arg2), Automatism);
+  return wrapPointer(_emscripten_bind_gdObject_AddNewBehavior_3(self, arg0, arg1, arg2), Behavior);
 };;
 
-gdObject.prototype['GetAutomatism'] = function(arg0) {
+gdObject.prototype['GetBehavior'] = gdObject.prototype.GetBehavior = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_gdObject_GetAutomatism_1(self, arg0), Automatism);
+  return wrapPointer(_emscripten_bind_gdObject_GetBehavior_1(self, arg0), Behavior);
 };;
 
-gdObject.prototype['RemoveAutomatism'] = function(arg0) {
+gdObject.prototype['RemoveBehavior'] = gdObject.prototype.RemoveBehavior = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_gdObject_RemoveAutomatism_1(self, arg0);
+  _emscripten_bind_gdObject_RemoveBehavior_1(self, arg0);
 };;
 
-gdObject.prototype['RenameAutomatism'] = function(arg0, arg1) {
+gdObject.prototype['RenameBehavior'] = gdObject.prototype.RenameBehavior = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
-  return !!(_emscripten_bind_gdObject_RenameAutomatism_2(self, arg0, arg1));
+  return !!(_emscripten_bind_gdObject_RenameBehavior_2(self, arg0, arg1));
 };;
 
-gdObject.prototype['SerializeTo'] = function(arg0) {
+gdObject.prototype['SerializeTo'] = gdObject.prototype.SerializeTo = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_gdObject_SerializeTo_1(self, arg0);
 };;
 
-gdObject.prototype['UnserializeFrom'] = function(arg0, arg1) {
+gdObject.prototype['UnserializeFrom'] = gdObject.prototype.UnserializeFrom = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_gdObject_UnserializeFrom_2(self, arg0, arg1);
 };;
 
-  gdObject.prototype['__destroy__'] = function() {
+  gdObject.prototype['__destroy__'] = gdObject.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_gdObject___destroy___0(self);
 };
@@ -3809,29 +3847,29 @@ InitialInstancesContainer.prototype.__class__ = InitialInstancesContainer;
 InitialInstancesContainer.__cache__ = {};
 Module['InitialInstancesContainer'] = InitialInstancesContainer;
 
-InitialInstancesContainer.prototype['GetInstancesCount'] = function() {
+InitialInstancesContainer.prototype['GetInstancesCount'] = InitialInstancesContainer.prototype.GetInstancesCount = function() {
   var self = this.ptr;
   return _emscripten_bind_InitialInstancesContainer_GetInstancesCount_0(self);
 };;
 
-InitialInstancesContainer.prototype['IterateOverInstances'] = function(arg0) {
+InitialInstancesContainer.prototype['IterateOverInstances'] = InitialInstancesContainer.prototype.IterateOverInstances = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstancesContainer_IterateOverInstances_1(self, arg0);
 };;
 
-InitialInstancesContainer.prototype['IterateOverInstancesWithZOrdering'] = function(arg0, arg1) {
+InitialInstancesContainer.prototype['IterateOverInstancesWithZOrdering'] = InitialInstancesContainer.prototype.IterateOverInstancesWithZOrdering = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   _emscripten_bind_InitialInstancesContainer_IterateOverInstancesWithZOrdering_2(self, arg0, arg1);
 };;
 
-InitialInstancesContainer.prototype['MoveInstancesToLayer'] = function(arg0, arg1) {
+InitialInstancesContainer.prototype['MoveInstancesToLayer'] = InitialInstancesContainer.prototype.MoveInstancesToLayer = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -3839,29 +3877,33 @@ InitialInstancesContainer.prototype['MoveInstancesToLayer'] = function(arg0, arg
   _emscripten_bind_InitialInstancesContainer_MoveInstancesToLayer_2(self, arg0, arg1);
 };;
 
-InitialInstancesContainer.prototype['RemoveAllInstancesOnLayer'] = function(arg0) {
+InitialInstancesContainer.prototype['RemoveAllInstancesOnLayer'] = InitialInstancesContainer.prototype.RemoveAllInstancesOnLayer = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstancesContainer_RemoveAllInstancesOnLayer_1(self, arg0);
 };;
 
-InitialInstancesContainer.prototype['RemoveInitialInstancesOfObject'] = function(arg0) {
+InitialInstancesContainer.prototype['RemoveInitialInstancesOfObject'] = InitialInstancesContainer.prototype.RemoveInitialInstancesOfObject = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstancesContainer_RemoveInitialInstancesOfObject_1(self, arg0);
 };;
 
-InitialInstancesContainer.prototype['SomeInstancesAreOnLayer'] = function(arg0) {
+InitialInstancesContainer.prototype['SomeInstancesAreOnLayer'] = InitialInstancesContainer.prototype.SomeInstancesAreOnLayer = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_InitialInstancesContainer_SomeInstancesAreOnLayer_1(self, arg0));
 };;
 
-InitialInstancesContainer.prototype['RenameInstancesOfObject'] = function(arg0, arg1) {
+InitialInstancesContainer.prototype['RenameInstancesOfObject'] = InitialInstancesContainer.prototype.RenameInstancesOfObject = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -3869,26 +3911,24 @@ InitialInstancesContainer.prototype['RenameInstancesOfObject'] = function(arg0, 
   _emscripten_bind_InitialInstancesContainer_RenameInstancesOfObject_2(self, arg0, arg1);
 };;
 
-InitialInstancesContainer.prototype['RemoveInstance'] = function(arg0) {
+InitialInstancesContainer.prototype['RemoveInstance'] = InitialInstancesContainer.prototype.RemoveInstance = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstancesContainer_RemoveInstance_1(self, arg0);
 };;
 
-InitialInstancesContainer.prototype['InsertNewInitialInstance'] = function() {
+InitialInstancesContainer.prototype['InsertNewInitialInstance'] = InitialInstancesContainer.prototype.InsertNewInitialInstance = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_InitialInstancesContainer_InsertNewInitialInstance_0(self), InitialInstance);
 };;
 
-InitialInstancesContainer.prototype['InsertInitialInstance'] = function(arg0) {
+InitialInstancesContainer.prototype['InsertInitialInstance'] = InitialInstancesContainer.prototype.InsertInitialInstance = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_InitialInstancesContainer_InsertInitialInstance_1(self, arg0), InitialInstance);
 };;
 
-  InitialInstancesContainer.prototype['__destroy__'] = function() {
+  InitialInstancesContainer.prototype['__destroy__'] = InitialInstancesContainer.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_InitialInstancesContainer___destroy___0(self);
 };
@@ -3903,54 +3943,52 @@ VectorString.prototype.__class__ = VectorString;
 VectorString.__cache__ = {};
 Module['VectorString'] = VectorString;
 
-VectorString.prototype['push_back'] = function(arg0) {
+VectorString.prototype['push_back'] = VectorString.prototype.push_back = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_VectorString_push_back_1(self, arg0);
 };;
 
-VectorString.prototype['resize'] = function(arg0) {
+VectorString.prototype['resize'] = VectorString.prototype.resize = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_VectorString_resize_1(self, arg0);
 };;
 
-VectorString.prototype['size'] = function() {
+VectorString.prototype['size'] = VectorString.prototype.size = function() {
   var self = this.ptr;
   return _emscripten_bind_VectorString_size_0(self);
 };;
 
-VectorString.prototype['at'] = function(arg0) {
+VectorString.prototype['at'] = VectorString.prototype.at = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_VectorString_at_1(self, arg0));
 };;
 
-VectorString.prototype['WRAPPED_set'] = function(arg0, arg1) {
+VectorString.prototype['WRAPPED_set'] = VectorString.prototype.WRAPPED_set = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   _emscripten_bind_VectorString_WRAPPED_set_2(self, arg0, arg1);
 };;
 
-VectorString.prototype['clear'] = function() {
+VectorString.prototype['clear'] = VectorString.prototype.clear = function() {
   var self = this.ptr;
   _emscripten_bind_VectorString_clear_0(self);
 };;
 
-  VectorString.prototype['__destroy__'] = function() {
+  VectorString.prototype['__destroy__'] = VectorString.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_VectorString___destroy___0(self);
 };
 // Exporter
 function Exporter(arg0) {
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_Exporter_Exporter_1(arg0);
   getCache(Exporter)[this.ptr] = this;
 };;
@@ -3960,38 +3998,34 @@ Exporter.prototype.__class__ = Exporter;
 Exporter.__cache__ = {};
 Module['Exporter'] = Exporter;
 
-Exporter.prototype['ExportLayoutForPreview'] = function(arg0, arg1, arg2) {
+Exporter.prototype['ExportLayoutForPreview'] = Exporter.prototype.ExportLayoutForPreview = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
   return !!(_emscripten_bind_Exporter_ExportLayoutForPreview_3(self, arg0, arg1, arg2));
 };;
 
-Exporter.prototype['ExportWholeProject'] = function(arg0, arg1, arg2, arg3, arg4) {
+Exporter.prototype['ExportWholeProject'] = Exporter.prototype.ExportWholeProject = function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  else arg3 = ensureString(arg3);
   if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
-  else arg4 = ensureString(arg4);
   return !!(_emscripten_bind_Exporter_ExportWholeProject_5(self, arg0, arg1, arg2, arg3, arg4));
 };;
 
-Exporter.prototype['GetLastError'] = function() {
+Exporter.prototype['GetLastError'] = Exporter.prototype.GetLastError = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Exporter_GetLastError_0(self));
 };;
 
-  Exporter.prototype['__destroy__'] = function() {
+  Exporter.prototype['__destroy__'] = Exporter.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Exporter___destroy___0(self);
 };
@@ -4003,55 +4037,55 @@ MetadataProvider.prototype.__class__ = MetadataProvider;
 MetadataProvider.__cache__ = {};
 Module['MetadataProvider'] = MetadataProvider;
 
-MetadataProvider.prototype['STATIC_GetAutomatismMetadata'] = function(arg0, arg1) {
+MetadataProvider.prototype['STATIC_GetBehaviorMetadata'] = MetadataProvider.prototype.STATIC_GetBehaviorMetadata = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
-  return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetAutomatismMetadata_2(self, arg0, arg1), AutomatismMetadata);
+  return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetBehaviorMetadata_2(self, arg0, arg1), BehaviorMetadata);
 };;
 
-MetadataProvider.prototype['STATIC_GetObjectMetadata'] = function(arg0, arg1) {
+MetadataProvider.prototype['STATIC_GetObjectMetadata'] = MetadataProvider.prototype.STATIC_GetObjectMetadata = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetObjectMetadata_2(self, arg0, arg1), ObjectMetadata);
 };;
 
-MetadataProvider.prototype['STATIC_GetActionMetadata'] = function(arg0, arg1) {
+MetadataProvider.prototype['STATIC_GetActionMetadata'] = MetadataProvider.prototype.STATIC_GetActionMetadata = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetActionMetadata_2(self, arg0, arg1), InstructionMetadata);
 };;
 
-MetadataProvider.prototype['STATIC_GetConditionMetadata'] = function(arg0, arg1) {
+MetadataProvider.prototype['STATIC_GetConditionMetadata'] = MetadataProvider.prototype.STATIC_GetConditionMetadata = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetConditionMetadata_2(self, arg0, arg1), InstructionMetadata);
 };;
 
-MetadataProvider.prototype['STATIC_GetExpressionMetadata'] = function(arg0, arg1) {
+MetadataProvider.prototype['STATIC_GetExpressionMetadata'] = MetadataProvider.prototype.STATIC_GetExpressionMetadata = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetExpressionMetadata_2(self, arg0, arg1), ExpressionMetadata);
 };;
 
-MetadataProvider.prototype['STATIC_GetObjectExpressionMetadata'] = function(arg0, arg1, arg2) {
+MetadataProvider.prototype['STATIC_GetObjectExpressionMetadata'] = MetadataProvider.prototype.STATIC_GetObjectExpressionMetadata = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -4059,30 +4093,30 @@ MetadataProvider.prototype['STATIC_GetObjectExpressionMetadata'] = function(arg0
   return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetObjectExpressionMetadata_3(self, arg0, arg1, arg2), ExpressionMetadata);
 };;
 
-MetadataProvider.prototype['STATIC_GetAutomatismExpressionMetadata'] = function(arg0, arg1, arg2) {
+MetadataProvider.prototype['STATIC_GetBehaviorExpressionMetadata'] = MetadataProvider.prototype.STATIC_GetBehaviorExpressionMetadata = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetAutomatismExpressionMetadata_3(self, arg0, arg1, arg2), ExpressionMetadata);
+  return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetBehaviorExpressionMetadata_3(self, arg0, arg1, arg2), ExpressionMetadata);
 };;
 
-MetadataProvider.prototype['STATIC_GetStrExpressionMetadata'] = function(arg0, arg1) {
+MetadataProvider.prototype['STATIC_GetStrExpressionMetadata'] = MetadataProvider.prototype.STATIC_GetStrExpressionMetadata = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetStrExpressionMetadata_2(self, arg0, arg1), ExpressionMetadata);
 };;
 
-MetadataProvider.prototype['STATIC_GetObjectStrExpressionMetadata'] = function(arg0, arg1, arg2) {
+MetadataProvider.prototype['STATIC_GetObjectStrExpressionMetadata'] = MetadataProvider.prototype.STATIC_GetObjectStrExpressionMetadata = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -4090,39 +4124,39 @@ MetadataProvider.prototype['STATIC_GetObjectStrExpressionMetadata'] = function(a
   return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetObjectStrExpressionMetadata_3(self, arg0, arg1, arg2), ExpressionMetadata);
 };;
 
-MetadataProvider.prototype['STATIC_GetAutomatismStrExpressionMetadata'] = function(arg0, arg1, arg2) {
+MetadataProvider.prototype['STATIC_GetBehaviorStrExpressionMetadata'] = MetadataProvider.prototype.STATIC_GetBehaviorStrExpressionMetadata = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetAutomatismStrExpressionMetadata_3(self, arg0, arg1, arg2), ExpressionMetadata);
+  return wrapPointer(_emscripten_bind_MetadataProvider_STATIC_GetBehaviorStrExpressionMetadata_3(self, arg0, arg1, arg2), ExpressionMetadata);
 };;
 
-MetadataProvider.prototype['STATIC_HasCondition'] = function(arg0, arg1) {
+MetadataProvider.prototype['STATIC_HasCondition'] = MetadataProvider.prototype.STATIC_HasCondition = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   return !!(_emscripten_bind_MetadataProvider_STATIC_HasCondition_2(self, arg0, arg1));
 };;
 
-MetadataProvider.prototype['STATIC_HasAction'] = function(arg0, arg1) {
+MetadataProvider.prototype['STATIC_HasAction'] = MetadataProvider.prototype.STATIC_HasAction = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   return !!(_emscripten_bind_MetadataProvider_STATIC_HasAction_2(self, arg0, arg1));
 };;
 
-MetadataProvider.prototype['STATIC_HasObjectAction'] = function(arg0, arg1, arg2) {
+MetadataProvider.prototype['STATIC_HasObjectAction'] = MetadataProvider.prototype.STATIC_HasObjectAction = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -4130,10 +4164,10 @@ MetadataProvider.prototype['STATIC_HasObjectAction'] = function(arg0, arg1, arg2
   return !!(_emscripten_bind_MetadataProvider_STATIC_HasObjectAction_3(self, arg0, arg1, arg2));
 };;
 
-MetadataProvider.prototype['STATIC_HasObjectCondition'] = function(arg0, arg1, arg2) {
+MetadataProvider.prototype['STATIC_HasObjectCondition'] = MetadataProvider.prototype.STATIC_HasObjectCondition = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -4141,41 +4175,41 @@ MetadataProvider.prototype['STATIC_HasObjectCondition'] = function(arg0, arg1, a
   return !!(_emscripten_bind_MetadataProvider_STATIC_HasObjectCondition_3(self, arg0, arg1, arg2));
 };;
 
-MetadataProvider.prototype['STATIC_HasAutomatismAction'] = function(arg0, arg1, arg2) {
+MetadataProvider.prototype['STATIC_HasBehaviorAction'] = MetadataProvider.prototype.STATIC_HasBehaviorAction = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return !!(_emscripten_bind_MetadataProvider_STATIC_HasAutomatismAction_3(self, arg0, arg1, arg2));
+  return !!(_emscripten_bind_MetadataProvider_STATIC_HasBehaviorAction_3(self, arg0, arg1, arg2));
 };;
 
-MetadataProvider.prototype['STATIC_HasAutomatismCondition'] = function(arg0, arg1, arg2) {
+MetadataProvider.prototype['STATIC_HasBehaviorCondition'] = MetadataProvider.prototype.STATIC_HasBehaviorCondition = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return !!(_emscripten_bind_MetadataProvider_STATIC_HasAutomatismCondition_3(self, arg0, arg1, arg2));
+  return !!(_emscripten_bind_MetadataProvider_STATIC_HasBehaviorCondition_3(self, arg0, arg1, arg2));
 };;
 
-MetadataProvider.prototype['STATIC_HasExpression'] = function(arg0, arg1) {
+MetadataProvider.prototype['STATIC_HasExpression'] = MetadataProvider.prototype.STATIC_HasExpression = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   return !!(_emscripten_bind_MetadataProvider_STATIC_HasExpression_2(self, arg0, arg1));
 };;
 
-MetadataProvider.prototype['STATIC_HasObjectExpression'] = function(arg0, arg1, arg2) {
+MetadataProvider.prototype['STATIC_HasObjectExpression'] = MetadataProvider.prototype.STATIC_HasObjectExpression = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -4183,30 +4217,30 @@ MetadataProvider.prototype['STATIC_HasObjectExpression'] = function(arg0, arg1, 
   return !!(_emscripten_bind_MetadataProvider_STATIC_HasObjectExpression_3(self, arg0, arg1, arg2));
 };;
 
-MetadataProvider.prototype['STATIC_HasAutomatismExpression'] = function(arg0, arg1, arg2) {
+MetadataProvider.prototype['STATIC_HasBehaviorExpression'] = MetadataProvider.prototype.STATIC_HasBehaviorExpression = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return !!(_emscripten_bind_MetadataProvider_STATIC_HasAutomatismExpression_3(self, arg0, arg1, arg2));
+  return !!(_emscripten_bind_MetadataProvider_STATIC_HasBehaviorExpression_3(self, arg0, arg1, arg2));
 };;
 
-MetadataProvider.prototype['STATIC_HasStrExpression'] = function(arg0, arg1) {
+MetadataProvider.prototype['STATIC_HasStrExpression'] = MetadataProvider.prototype.STATIC_HasStrExpression = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   return !!(_emscripten_bind_MetadataProvider_STATIC_HasStrExpression_2(self, arg0, arg1));
 };;
 
-MetadataProvider.prototype['STATIC_HasObjectStrExpression'] = function(arg0, arg1, arg2) {
+MetadataProvider.prototype['STATIC_HasObjectStrExpression'] = MetadataProvider.prototype.STATIC_HasObjectStrExpression = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -4214,18 +4248,18 @@ MetadataProvider.prototype['STATIC_HasObjectStrExpression'] = function(arg0, arg
   return !!(_emscripten_bind_MetadataProvider_STATIC_HasObjectStrExpression_3(self, arg0, arg1, arg2));
 };;
 
-MetadataProvider.prototype['STATIC_HasAutomatismStrExpression'] = function(arg0, arg1, arg2) {
+MetadataProvider.prototype['STATIC_HasBehaviorStrExpression'] = MetadataProvider.prototype.STATIC_HasBehaviorStrExpression = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return !!(_emscripten_bind_MetadataProvider_STATIC_HasAutomatismStrExpression_3(self, arg0, arg1, arg2));
+  return !!(_emscripten_bind_MetadataProvider_STATIC_HasBehaviorStrExpression_3(self, arg0, arg1, arg2));
 };;
 
-  MetadataProvider.prototype['__destroy__'] = function() {
+  MetadataProvider.prototype['__destroy__'] = MetadataProvider.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_MetadataProvider___destroy___0(self);
 };
@@ -4240,101 +4274,86 @@ EventsList.prototype.__class__ = EventsList;
 EventsList.__cache__ = {};
 Module['EventsList'] = EventsList;
 
-EventsList.prototype['InsertEvent'] = function(arg0, arg1) {
+EventsList.prototype['InsertEvent'] = EventsList.prototype.InsertEvent = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   return wrapPointer(_emscripten_bind_EventsList_InsertEvent_2(self, arg0, arg1), BaseEvent);
 };;
 
-EventsList.prototype['InsertNewEvent'] = function(arg0, arg1, arg2) {
+EventsList.prototype['InsertNewEvent'] = EventsList.prototype.InsertNewEvent = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   return wrapPointer(_emscripten_bind_EventsList_InsertNewEvent_3(self, arg0, arg1, arg2), BaseEvent);
 };;
 
-EventsList.prototype['InsertEvents'] = function(arg0, arg1, arg2, arg3) {
+EventsList.prototype['InsertEvents'] = EventsList.prototype.InsertEvents = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  else arg3 = ensureString(arg3);
   _emscripten_bind_EventsList_InsertEvents_4(self, arg0, arg1, arg2, arg3);
 };;
 
-EventsList.prototype['GetEventAt'] = function(arg0) {
+EventsList.prototype['GetEventAt'] = EventsList.prototype.GetEventAt = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_EventsList_GetEventAt_1(self, arg0), BaseEvent);
 };;
 
-EventsList.prototype['RemoveEventAt'] = function(arg0) {
+EventsList.prototype['RemoveEventAt'] = EventsList.prototype.RemoveEventAt = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_EventsList_RemoveEventAt_1(self, arg0);
 };;
 
-EventsList.prototype['RemoveEvent'] = function(arg0) {
+EventsList.prototype['RemoveEvent'] = EventsList.prototype.RemoveEvent = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_EventsList_RemoveEvent_1(self, arg0);
 };;
 
-EventsList.prototype['GetEventsCount'] = function() {
+EventsList.prototype['GetEventsCount'] = EventsList.prototype.GetEventsCount = function() {
   var self = this.ptr;
   return _emscripten_bind_EventsList_GetEventsCount_0(self);
 };;
 
-EventsList.prototype['Contains'] = function(arg0, arg1) {
+EventsList.prototype['Contains'] = EventsList.prototype.Contains = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   return !!(_emscripten_bind_EventsList_Contains_2(self, arg0, arg1));
 };;
 
-EventsList.prototype['IsEmpty'] = function() {
+EventsList.prototype['IsEmpty'] = EventsList.prototype.IsEmpty = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_EventsList_IsEmpty_0(self));
 };;
 
-EventsList.prototype['Clear'] = function() {
+EventsList.prototype['Clear'] = EventsList.prototype.Clear = function() {
   var self = this.ptr;
   _emscripten_bind_EventsList_Clear_0(self);
 };;
 
-EventsList.prototype['SerializeTo'] = function(arg0) {
+EventsList.prototype['SerializeTo'] = EventsList.prototype.SerializeTo = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_EventsList_SerializeTo_1(self, arg0);
 };;
 
-EventsList.prototype['UnserializeFrom'] = function(arg0, arg1) {
+EventsList.prototype['UnserializeFrom'] = EventsList.prototype.UnserializeFrom = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_EventsList_UnserializeFrom_2(self, arg0, arg1);
 };;
 
-  EventsList.prototype['__destroy__'] = function() {
+  EventsList.prototype['__destroy__'] = EventsList.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_EventsList___destroy___0(self);
 };
@@ -4346,101 +4365,102 @@ ParameterMetadata.prototype.__class__ = ParameterMetadata;
 ParameterMetadata.__cache__ = {};
 Module['ParameterMetadata'] = ParameterMetadata;
 
-ParameterMetadata.prototype['GetType'] = function() {
+ParameterMetadata.prototype['GetType'] = ParameterMetadata.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ParameterMetadata_GetType_0(self));
 };;
 
-ParameterMetadata.prototype['GetExtraInfo'] = function() {
+ParameterMetadata.prototype['GetExtraInfo'] = ParameterMetadata.prototype.GetExtraInfo = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ParameterMetadata_GetExtraInfo_0(self));
 };;
 
-ParameterMetadata.prototype['IsOptional'] = function() {
+ParameterMetadata.prototype['IsOptional'] = ParameterMetadata.prototype.IsOptional = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_ParameterMetadata_IsOptional_0(self));
 };;
 
-ParameterMetadata.prototype['GetDescription'] = function() {
+ParameterMetadata.prototype['GetDescription'] = ParameterMetadata.prototype.GetDescription = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ParameterMetadata_GetDescription_0(self));
 };;
 
-ParameterMetadata.prototype['IsCodeOnly'] = function() {
+ParameterMetadata.prototype['IsCodeOnly'] = ParameterMetadata.prototype.IsCodeOnly = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_ParameterMetadata_IsCodeOnly_0(self));
 };;
 
-ParameterMetadata.prototype['GetDefaultValue'] = function() {
+ParameterMetadata.prototype['GetDefaultValue'] = ParameterMetadata.prototype.GetDefaultValue = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ParameterMetadata_GetDefaultValue_0(self));
 };;
 
-ParameterMetadata.prototype['STATIC_IsObject'] = function(arg0) {
+ParameterMetadata.prototype['STATIC_IsObject'] = ParameterMetadata.prototype.STATIC_IsObject = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_ParameterMetadata_STATIC_IsObject_1(self, arg0));
 };;
 
-  ParameterMetadata.prototype['__destroy__'] = function() {
+  ParameterMetadata.prototype['__destroy__'] = ParameterMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ParameterMetadata___destroy___0(self);
 };
-// Automatism
-function Automatism() {
-  this.ptr = _emscripten_bind_Automatism_Automatism_0();
-  getCache(Automatism)[this.ptr] = this;
+// Behavior
+function Behavior() {
+  this.ptr = _emscripten_bind_Behavior_Behavior_0();
+  getCache(Behavior)[this.ptr] = this;
 };;
-Automatism.prototype = Object.create(WrapperObject.prototype);
-Automatism.prototype.constructor = Automatism;
-Automatism.prototype.__class__ = Automatism;
-Automatism.__cache__ = {};
-Module['Automatism'] = Automatism;
+Behavior.prototype = Object.create(WrapperObject.prototype);
+Behavior.prototype.constructor = Behavior;
+Behavior.prototype.__class__ = Behavior;
+Behavior.__cache__ = {};
+Module['Behavior'] = Behavior;
 
-Automatism.prototype['Clone'] = function() {
+Behavior.prototype['Clone'] = Behavior.prototype.Clone = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Automatism_Clone_0(self), Automatism);
+  return wrapPointer(_emscripten_bind_Behavior_Clone_0(self), Behavior);
 };;
 
-Automatism.prototype['SetName'] = function(arg0) {
+Behavior.prototype['SetName'] = Behavior.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_Automatism_SetName_1(self, arg0);
+  _emscripten_bind_Behavior_SetName_1(self, arg0);
 };;
 
-Automatism.prototype['GetName'] = function() {
+Behavior.prototype['GetName'] = Behavior.prototype.GetName = function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_Automatism_GetName_0(self));
+  return Pointer_stringify(_emscripten_bind_Behavior_GetName_0(self));
 };;
 
-Automatism.prototype['GetTypeName'] = function() {
+Behavior.prototype['GetTypeName'] = Behavior.prototype.GetTypeName = function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_Automatism_GetTypeName_0(self));
+  return Pointer_stringify(_emscripten_bind_Behavior_GetTypeName_0(self));
 };;
 
-Automatism.prototype['UpdateProperty'] = function(arg0, arg1, arg2) {
+Behavior.prototype['UpdateProperty'] = Behavior.prototype.UpdateProperty = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
-  return !!(_emscripten_bind_Automatism_UpdateProperty_3(self, arg0, arg1, arg2));
+  return !!(_emscripten_bind_Behavior_UpdateProperty_3(self, arg0, arg1, arg2));
 };;
 
-Automatism.prototype['GetProperties'] = function(arg0) {
+Behavior.prototype['GetProperties'] = Behavior.prototype.GetProperties = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_Automatism_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+  return wrapPointer(_emscripten_bind_Behavior_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
 };;
 
-  Automatism.prototype['__destroy__'] = function() {
+  Behavior.prototype['__destroy__'] = Behavior.prototype.__destroy__ = function() {
   var self = this.ptr;
-  _emscripten_bind_Automatism___destroy___0(self);
+  _emscripten_bind_Behavior___destroy___0(self);
 };
 // TextFormatting
 function TextFormatting() { throw "cannot construct a TextFormatting, no constructor in IDL" }
@@ -4450,37 +4470,38 @@ TextFormatting.prototype.__class__ = TextFormatting;
 TextFormatting.__cache__ = {};
 Module['TextFormatting'] = TextFormatting;
 
-TextFormatting.prototype['IsBold'] = function() {
+TextFormatting.prototype['IsBold'] = TextFormatting.prototype.IsBold = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_TextFormatting_IsBold_0(self));
 };;
 
-TextFormatting.prototype['IsItalic'] = function() {
+TextFormatting.prototype['IsItalic'] = TextFormatting.prototype.IsItalic = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_TextFormatting_IsItalic_0(self));
 };;
 
-TextFormatting.prototype['GetColorRed'] = function() {
+TextFormatting.prototype['GetColorRed'] = TextFormatting.prototype.GetColorRed = function() {
   var self = this.ptr;
   return _emscripten_bind_TextFormatting_GetColorRed_0(self);
 };;
 
-TextFormatting.prototype['GetColorGreen'] = function() {
+TextFormatting.prototype['GetColorGreen'] = TextFormatting.prototype.GetColorGreen = function() {
   var self = this.ptr;
   return _emscripten_bind_TextFormatting_GetColorGreen_0(self);
 };;
 
-TextFormatting.prototype['GetColorBlue'] = function() {
+TextFormatting.prototype['GetColorBlue'] = TextFormatting.prototype.GetColorBlue = function() {
   var self = this.ptr;
   return _emscripten_bind_TextFormatting_GetColorBlue_0(self);
 };;
 
-  TextFormatting.prototype['__destroy__'] = function() {
+  TextFormatting.prototype['__destroy__'] = TextFormatting.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_TextFormatting___destroy___0(self);
 };
 // Point
 function Point(arg0) {
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_Point_Point_1(arg0);
@@ -4492,52 +4513,49 @@ Point.prototype.__class__ = Point;
 Point.__cache__ = {};
 Module['Point'] = Point;
 
-Point.prototype['SetName'] = function(arg0) {
+Point.prototype['SetName'] = Point.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Point_SetName_1(self, arg0);
 };;
 
-Point.prototype['GetName'] = function() {
+Point.prototype['GetName'] = Point.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Point_GetName_0(self));
 };;
 
-Point.prototype['SetXY'] = function(arg0, arg1) {
+Point.prototype['SetXY'] = Point.prototype.SetXY = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_Point_SetXY_2(self, arg0, arg1);
 };;
 
-Point.prototype['GetX'] = function() {
+Point.prototype['GetX'] = Point.prototype.GetX = function() {
   var self = this.ptr;
   return _emscripten_bind_Point_GetX_0(self);
 };;
 
-Point.prototype['SetX'] = function(arg0) {
+Point.prototype['SetX'] = Point.prototype.SetX = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Point_SetX_1(self, arg0);
 };;
 
-Point.prototype['GetY'] = function() {
+Point.prototype['GetY'] = Point.prototype.GetY = function() {
   var self = this.ptr;
   return _emscripten_bind_Point_GetY_0(self);
 };;
 
-Point.prototype['SetY'] = function(arg0) {
+Point.prototype['SetY'] = Point.prototype.SetY = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_Point_SetY_1(self, arg0);
 };;
 
-  Point.prototype['__destroy__'] = function() {
+  Point.prototype['__destroy__'] = Point.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Point___destroy___0(self);
 };
@@ -4549,44 +4567,43 @@ ExpressionMetadata.prototype.__class__ = ExpressionMetadata;
 ExpressionMetadata.__cache__ = {};
 Module['ExpressionMetadata'] = ExpressionMetadata;
 
-ExpressionMetadata.prototype['GetFullName'] = function() {
+ExpressionMetadata.prototype['GetFullName'] = ExpressionMetadata.prototype.GetFullName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ExpressionMetadata_GetFullName_0(self));
 };;
 
-ExpressionMetadata.prototype['GetDescription'] = function() {
+ExpressionMetadata.prototype['GetDescription'] = ExpressionMetadata.prototype.GetDescription = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ExpressionMetadata_GetDescription_0(self));
 };;
 
-ExpressionMetadata.prototype['GetGroup'] = function() {
+ExpressionMetadata.prototype['GetGroup'] = ExpressionMetadata.prototype.GetGroup = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ExpressionMetadata_GetGroup_0(self));
 };;
 
-ExpressionMetadata.prototype['GetSmallIconFilename'] = function() {
+ExpressionMetadata.prototype['GetSmallIconFilename'] = ExpressionMetadata.prototype.GetSmallIconFilename = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ExpressionMetadata_GetSmallIconFilename_0(self));
 };;
 
-ExpressionMetadata.prototype['IsShown'] = function() {
+ExpressionMetadata.prototype['IsShown'] = ExpressionMetadata.prototype.IsShown = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_ExpressionMetadata_IsShown_0(self));
 };;
 
-ExpressionMetadata.prototype['GetParameter'] = function(arg0) {
+ExpressionMetadata.prototype['GetParameter'] = ExpressionMetadata.prototype.GetParameter = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_ExpressionMetadata_GetParameter_1(self, arg0), ParameterMetadata);
 };;
 
-ExpressionMetadata.prototype['GetParametersCount'] = function() {
+ExpressionMetadata.prototype['GetParametersCount'] = ExpressionMetadata.prototype.GetParametersCount = function() {
   var self = this.ptr;
   return _emscripten_bind_ExpressionMetadata_GetParametersCount_0(self);
 };;
 
-  ExpressionMetadata.prototype['__destroy__'] = function() {
+  ExpressionMetadata.prototype['__destroy__'] = ExpressionMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ExpressionMetadata___destroy___0(self);
 };
@@ -4598,34 +4615,33 @@ ObjectMetadata.prototype.__class__ = ObjectMetadata;
 ObjectMetadata.__cache__ = {};
 Module['ObjectMetadata'] = ObjectMetadata;
 
-ObjectMetadata.prototype['GetName'] = function() {
+ObjectMetadata.prototype['GetName'] = ObjectMetadata.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ObjectMetadata_GetName_0(self));
 };;
 
-ObjectMetadata.prototype['GetFullName'] = function() {
+ObjectMetadata.prototype['GetFullName'] = ObjectMetadata.prototype.GetFullName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ObjectMetadata_GetFullName_0(self));
 };;
 
-ObjectMetadata.prototype['GetDescription'] = function() {
+ObjectMetadata.prototype['GetDescription'] = ObjectMetadata.prototype.GetDescription = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ObjectMetadata_GetDescription_0(self));
 };;
 
-ObjectMetadata.prototype['GetIconFilename'] = function() {
+ObjectMetadata.prototype['GetIconFilename'] = ObjectMetadata.prototype.GetIconFilename = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ObjectMetadata_GetIconFilename_0(self));
 };;
 
-  ObjectMetadata.prototype['__destroy__'] = function() {
+  ObjectMetadata.prototype['__destroy__'] = ObjectMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ObjectMetadata___destroy___0(self);
 };
 // EventsParametersLister
 function EventsParametersLister(arg0) {
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_EventsParametersLister_EventsParametersLister_1(arg0);
   getCache(EventsParametersLister)[this.ptr] = this;
 };;
@@ -4635,58 +4651,57 @@ EventsParametersLister.prototype.__class__ = EventsParametersLister;
 EventsParametersLister.__cache__ = {};
 Module['EventsParametersLister'] = EventsParametersLister;
 
-EventsParametersLister.prototype['GetParametersAndTypes'] = function() {
+EventsParametersLister.prototype['GetParametersAndTypes'] = EventsParametersLister.prototype.GetParametersAndTypes = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_EventsParametersLister_GetParametersAndTypes_0(self), MapStringString);
 };;
 
-EventsParametersLister.prototype['Launch'] = function(arg0) {
+EventsParametersLister.prototype['Launch'] = EventsParametersLister.prototype.Launch = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_EventsParametersLister_Launch_1(self, arg0);
 };;
 
-  EventsParametersLister.prototype['__destroy__'] = function() {
+  EventsParametersLister.prototype['__destroy__'] = EventsParametersLister.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_EventsParametersLister___destroy___0(self);
 };
-// AutomatismMetadata
-function AutomatismMetadata() { throw "cannot construct a AutomatismMetadata, no constructor in IDL" }
-AutomatismMetadata.prototype = Object.create(WrapperObject.prototype);
-AutomatismMetadata.prototype.constructor = AutomatismMetadata;
-AutomatismMetadata.prototype.__class__ = AutomatismMetadata;
-AutomatismMetadata.__cache__ = {};
-Module['AutomatismMetadata'] = AutomatismMetadata;
+// BehaviorMetadata
+function BehaviorMetadata() { throw "cannot construct a BehaviorMetadata, no constructor in IDL" }
+BehaviorMetadata.prototype = Object.create(WrapperObject.prototype);
+BehaviorMetadata.prototype.constructor = BehaviorMetadata;
+BehaviorMetadata.prototype.__class__ = BehaviorMetadata;
+BehaviorMetadata.__cache__ = {};
+Module['BehaviorMetadata'] = BehaviorMetadata;
 
-AutomatismMetadata.prototype['GetFullName'] = function() {
+BehaviorMetadata.prototype['GetFullName'] = BehaviorMetadata.prototype.GetFullName = function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_AutomatismMetadata_GetFullName_0(self));
+  return Pointer_stringify(_emscripten_bind_BehaviorMetadata_GetFullName_0(self));
 };;
 
-AutomatismMetadata.prototype['GetDefaultName'] = function() {
+BehaviorMetadata.prototype['GetDefaultName'] = BehaviorMetadata.prototype.GetDefaultName = function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_AutomatismMetadata_GetDefaultName_0(self));
+  return Pointer_stringify(_emscripten_bind_BehaviorMetadata_GetDefaultName_0(self));
 };;
 
-AutomatismMetadata.prototype['GetDescription'] = function() {
+BehaviorMetadata.prototype['GetDescription'] = BehaviorMetadata.prototype.GetDescription = function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_AutomatismMetadata_GetDescription_0(self));
+  return Pointer_stringify(_emscripten_bind_BehaviorMetadata_GetDescription_0(self));
 };;
 
-AutomatismMetadata.prototype['GetGroup'] = function() {
+BehaviorMetadata.prototype['GetGroup'] = BehaviorMetadata.prototype.GetGroup = function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_AutomatismMetadata_GetGroup_0(self));
+  return Pointer_stringify(_emscripten_bind_BehaviorMetadata_GetGroup_0(self));
 };;
 
-AutomatismMetadata.prototype['GetIconFilename'] = function() {
+BehaviorMetadata.prototype['GetIconFilename'] = BehaviorMetadata.prototype.GetIconFilename = function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_AutomatismMetadata_GetIconFilename_0(self));
+  return Pointer_stringify(_emscripten_bind_BehaviorMetadata_GetIconFilename_0(self));
 };;
 
-  AutomatismMetadata.prototype['__destroy__'] = function() {
+  BehaviorMetadata.prototype['__destroy__'] = BehaviorMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
-  _emscripten_bind_AutomatismMetadata___destroy___0(self);
+  _emscripten_bind_BehaviorMetadata___destroy___0(self);
 };
 // InstructionMetadata
 function InstructionMetadata() { throw "cannot construct a InstructionMetadata, no constructor in IDL" }
@@ -4696,74 +4711,74 @@ InstructionMetadata.prototype.__class__ = InstructionMetadata;
 InstructionMetadata.__cache__ = {};
 Module['InstructionMetadata'] = InstructionMetadata;
 
-InstructionMetadata.prototype['GetFullName'] = function() {
+InstructionMetadata.prototype['GetFullName'] = InstructionMetadata.prototype.GetFullName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_InstructionMetadata_GetFullName_0(self));
 };;
 
-InstructionMetadata.prototype['GetDescription'] = function() {
+InstructionMetadata.prototype['GetDescription'] = InstructionMetadata.prototype.GetDescription = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_InstructionMetadata_GetDescription_0(self));
 };;
 
-InstructionMetadata.prototype['GetSentence'] = function() {
+InstructionMetadata.prototype['GetSentence'] = InstructionMetadata.prototype.GetSentence = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_InstructionMetadata_GetSentence_0(self));
 };;
 
-InstructionMetadata.prototype['GetGroup'] = function() {
+InstructionMetadata.prototype['GetGroup'] = InstructionMetadata.prototype.GetGroup = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_InstructionMetadata_GetGroup_0(self));
 };;
 
-InstructionMetadata.prototype['GetIconFilename'] = function() {
+InstructionMetadata.prototype['GetIconFilename'] = InstructionMetadata.prototype.GetIconFilename = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_InstructionMetadata_GetIconFilename_0(self));
 };;
 
-InstructionMetadata.prototype['GetSmallIconFilename'] = function() {
+InstructionMetadata.prototype['GetSmallIconFilename'] = InstructionMetadata.prototype.GetSmallIconFilename = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_InstructionMetadata_GetSmallIconFilename_0(self));
 };;
 
-InstructionMetadata.prototype['CanHaveSubInstructions'] = function() {
+InstructionMetadata.prototype['CanHaveSubInstructions'] = InstructionMetadata.prototype.CanHaveSubInstructions = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_InstructionMetadata_CanHaveSubInstructions_0(self));
 };;
 
-InstructionMetadata.prototype['SetCanHaveSubInstructions'] = function() {
+InstructionMetadata.prototype['SetCanHaveSubInstructions'] = InstructionMetadata.prototype.SetCanHaveSubInstructions = function() {
   var self = this.ptr;
   _emscripten_bind_InstructionMetadata_SetCanHaveSubInstructions_0(self);
 };;
 
-InstructionMetadata.prototype['GetParameter'] = function(arg0) {
+InstructionMetadata.prototype['GetParameter'] = InstructionMetadata.prototype.GetParameter = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_InstructionMetadata_GetParameter_1(self, arg0), ParameterMetadata);
 };;
 
-InstructionMetadata.prototype['GetParametersCount'] = function() {
+InstructionMetadata.prototype['GetParametersCount'] = InstructionMetadata.prototype.GetParametersCount = function() {
   var self = this.ptr;
   return _emscripten_bind_InstructionMetadata_GetParametersCount_0(self);
 };;
 
-InstructionMetadata.prototype['GetUsageComplexity'] = function() {
+InstructionMetadata.prototype['GetUsageComplexity'] = InstructionMetadata.prototype.GetUsageComplexity = function() {
   var self = this.ptr;
   return _emscripten_bind_InstructionMetadata_GetUsageComplexity_0(self);
 };;
 
-InstructionMetadata.prototype['IsHidden'] = function() {
+InstructionMetadata.prototype['IsHidden'] = InstructionMetadata.prototype.IsHidden = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_InstructionMetadata_IsHidden_0(self));
 };;
 
-  InstructionMetadata.prototype['__destroy__'] = function() {
+  InstructionMetadata.prototype['__destroy__'] = InstructionMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_InstructionMetadata___destroy___0(self);
 };
 // TextObject
 function TextObject(arg0) {
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_TextObject_TextObject_1(arg0);
@@ -4775,201 +4790,199 @@ TextObject.prototype.__class__ = TextObject;
 TextObject.__cache__ = {};
 Module['TextObject'] = TextObject;
 
-TextObject.prototype['SetString'] = function(arg0) {
+TextObject.prototype['SetString'] = TextObject.prototype.SetString = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SetString_1(self, arg0);
 };;
 
-TextObject.prototype['GetString'] = function() {
+TextObject.prototype['GetString'] = TextObject.prototype.GetString = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_TextObject_GetString_0(self));
 };;
 
-TextObject.prototype['SetCharacterSize'] = function(arg0) {
+TextObject.prototype['SetCharacterSize'] = TextObject.prototype.SetCharacterSize = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SetCharacterSize_1(self, arg0);
 };;
 
-TextObject.prototype['GetCharacterSize'] = function() {
+TextObject.prototype['GetCharacterSize'] = TextObject.prototype.GetCharacterSize = function() {
   var self = this.ptr;
   return _emscripten_bind_TextObject_GetCharacterSize_0(self);
 };;
 
-TextObject.prototype['SetFontFilename'] = function(arg0) {
+TextObject.prototype['SetFontFilename'] = TextObject.prototype.SetFontFilename = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SetFontFilename_1(self, arg0);
 };;
 
-TextObject.prototype['GetFontFilename'] = function() {
+TextObject.prototype['GetFontFilename'] = TextObject.prototype.GetFontFilename = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_TextObject_GetFontFilename_0(self));
 };;
 
-TextObject.prototype['IsBold'] = function() {
+TextObject.prototype['IsBold'] = TextObject.prototype.IsBold = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_TextObject_IsBold_0(self));
 };;
 
-TextObject.prototype['SetBold'] = function(arg0) {
+TextObject.prototype['SetBold'] = TextObject.prototype.SetBold = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SetBold_1(self, arg0);
 };;
 
-TextObject.prototype['IsItalic'] = function() {
+TextObject.prototype['IsItalic'] = TextObject.prototype.IsItalic = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_TextObject_IsItalic_0(self));
 };;
 
-TextObject.prototype['SetItalic'] = function(arg0) {
+TextObject.prototype['SetItalic'] = TextObject.prototype.SetItalic = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SetItalic_1(self, arg0);
 };;
 
-TextObject.prototype['IsUnderlined'] = function() {
+TextObject.prototype['IsUnderlined'] = TextObject.prototype.IsUnderlined = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_TextObject_IsUnderlined_0(self));
 };;
 
-TextObject.prototype['SetUnderlined'] = function(arg0) {
+TextObject.prototype['SetUnderlined'] = TextObject.prototype.SetUnderlined = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SetUnderlined_1(self, arg0);
 };;
 
-TextObject.prototype['SetColor'] = function(arg0, arg1, arg2) {
+TextObject.prototype['SetColor'] = TextObject.prototype.SetColor = function(arg0, arg1, arg2) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
   _emscripten_bind_TextObject_SetColor_3(self, arg0, arg1, arg2);
 };;
 
-TextObject.prototype['GetColorR'] = function() {
+TextObject.prototype['GetColorR'] = TextObject.prototype.GetColorR = function() {
   var self = this.ptr;
   return _emscripten_bind_TextObject_GetColorR_0(self);
 };;
 
-TextObject.prototype['GetColorG'] = function() {
+TextObject.prototype['GetColorG'] = TextObject.prototype.GetColorG = function() {
   var self = this.ptr;
   return _emscripten_bind_TextObject_GetColorG_0(self);
 };;
 
-TextObject.prototype['GetColorB'] = function() {
+TextObject.prototype['GetColorB'] = TextObject.prototype.GetColorB = function() {
   var self = this.ptr;
   return _emscripten_bind_TextObject_GetColorB_0(self);
 };;
 
-TextObject.prototype['Clone'] = function() {
+TextObject.prototype['Clone'] = TextObject.prototype.Clone = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_TextObject_Clone_0(self), gdObject);
 };;
 
-TextObject.prototype['SetName'] = function(arg0) {
+TextObject.prototype['SetName'] = TextObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SetName_1(self, arg0);
 };;
 
-TextObject.prototype['GetName'] = function() {
+TextObject.prototype['GetName'] = TextObject.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_TextObject_GetName_0(self));
 };;
 
-TextObject.prototype['SetType'] = function(arg0) {
+TextObject.prototype['SetType'] = TextObject.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SetType_1(self, arg0);
 };;
 
-TextObject.prototype['GetType'] = function() {
+TextObject.prototype['GetType'] = TextObject.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_TextObject_GetType_0(self));
 };;
 
-TextObject.prototype['GetVariables'] = function() {
+TextObject.prototype['GetVariables'] = TextObject.prototype.GetVariables = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_TextObject_GetVariables_0(self), VariablesContainer);
 };;
 
-TextObject.prototype['GetAllAutomatismNames'] = function() {
+TextObject.prototype['GetAllBehaviorNames'] = TextObject.prototype.GetAllBehaviorNames = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_TextObject_GetAllAutomatismNames_0(self), VectorString);
+  return wrapPointer(_emscripten_bind_TextObject_GetAllBehaviorNames_0(self), VectorString);
 };;
 
-TextObject.prototype['HasAutomatismNamed'] = function(arg0) {
+TextObject.prototype['HasBehaviorNamed'] = TextObject.prototype.HasBehaviorNamed = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return !!(_emscripten_bind_TextObject_HasAutomatismNamed_1(self, arg0));
+  return !!(_emscripten_bind_TextObject_HasBehaviorNamed_1(self, arg0));
 };;
 
-TextObject.prototype['AddNewAutomatism'] = function(arg0, arg1, arg2) {
+TextObject.prototype['AddNewBehavior'] = TextObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return wrapPointer(_emscripten_bind_TextObject_AddNewAutomatism_3(self, arg0, arg1, arg2), Automatism);
+  return wrapPointer(_emscripten_bind_TextObject_AddNewBehavior_3(self, arg0, arg1, arg2), Behavior);
 };;
 
-TextObject.prototype['GetAutomatism'] = function(arg0) {
+TextObject.prototype['GetBehavior'] = TextObject.prototype.GetBehavior = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_TextObject_GetAutomatism_1(self, arg0), Automatism);
+  return wrapPointer(_emscripten_bind_TextObject_GetBehavior_1(self, arg0), Behavior);
 };;
 
-TextObject.prototype['RemoveAutomatism'] = function(arg0) {
+TextObject.prototype['RemoveBehavior'] = TextObject.prototype.RemoveBehavior = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_TextObject_RemoveAutomatism_1(self, arg0);
+  _emscripten_bind_TextObject_RemoveBehavior_1(self, arg0);
 };;
 
-TextObject.prototype['RenameAutomatism'] = function(arg0, arg1) {
+TextObject.prototype['RenameBehavior'] = TextObject.prototype.RenameBehavior = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
-  return !!(_emscripten_bind_TextObject_RenameAutomatism_2(self, arg0, arg1));
+  return !!(_emscripten_bind_TextObject_RenameBehavior_2(self, arg0, arg1));
 };;
 
-TextObject.prototype['SerializeTo'] = function(arg0) {
+TextObject.prototype['SerializeTo'] = TextObject.prototype.SerializeTo = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SerializeTo_1(self, arg0);
 };;
 
-TextObject.prototype['UnserializeFrom'] = function(arg0, arg1) {
+TextObject.prototype['UnserializeFrom'] = TextObject.prototype.UnserializeFrom = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
   _emscripten_bind_TextObject_UnserializeFrom_2(self, arg0, arg1);
 };;
 
-  TextObject.prototype['__destroy__'] = function() {
+  TextObject.prototype['__destroy__'] = TextObject.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_TextObject___destroy___0(self);
 };
@@ -4984,78 +4997,77 @@ StandardEvent.prototype.__class__ = StandardEvent;
 StandardEvent.__cache__ = {};
 Module['StandardEvent'] = StandardEvent;
 
-StandardEvent.prototype['GetConditions'] = function() {
+StandardEvent.prototype['GetConditions'] = StandardEvent.prototype.GetConditions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_StandardEvent_GetConditions_0(self), InstructionsList);
 };;
 
-StandardEvent.prototype['GetActions'] = function() {
+StandardEvent.prototype['GetActions'] = StandardEvent.prototype.GetActions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_StandardEvent_GetActions_0(self), InstructionsList);
 };;
 
-StandardEvent.prototype['Clone'] = function() {
+StandardEvent.prototype['Clone'] = StandardEvent.prototype.Clone = function() {
   var self = this.ptr;
   _emscripten_bind_StandardEvent_Clone_0(self);
 };;
 
-StandardEvent.prototype['GetType'] = function() {
+StandardEvent.prototype['GetType'] = StandardEvent.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_StandardEvent_GetType_0(self));
 };;
 
-StandardEvent.prototype['SetType'] = function(arg0) {
+StandardEvent.prototype['SetType'] = StandardEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_StandardEvent_SetType_1(self, arg0);
 };;
 
-StandardEvent.prototype['IsExecutable'] = function() {
+StandardEvent.prototype['IsExecutable'] = StandardEvent.prototype.IsExecutable = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_StandardEvent_IsExecutable_0(self));
 };;
 
-StandardEvent.prototype['CanHaveSubEvents'] = function() {
+StandardEvent.prototype['CanHaveSubEvents'] = StandardEvent.prototype.CanHaveSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_StandardEvent_CanHaveSubEvents_0(self));
 };;
 
-StandardEvent.prototype['HasSubEvents'] = function() {
+StandardEvent.prototype['HasSubEvents'] = StandardEvent.prototype.HasSubEvents = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_StandardEvent_HasSubEvents_0(self));
 };;
 
-StandardEvent.prototype['GetSubEvents'] = function() {
+StandardEvent.prototype['GetSubEvents'] = StandardEvent.prototype.GetSubEvents = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_StandardEvent_GetSubEvents_0(self), EventsList);
 };;
 
-StandardEvent.prototype['IsDisabled'] = function() {
+StandardEvent.prototype['IsDisabled'] = StandardEvent.prototype.IsDisabled = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_StandardEvent_IsDisabled_0(self));
 };;
 
-StandardEvent.prototype['SetDisabled'] = function(arg0) {
+StandardEvent.prototype['SetDisabled'] = StandardEvent.prototype.SetDisabled = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_StandardEvent_SetDisabled_1(self, arg0);
 };;
 
-StandardEvent.prototype['IsFolded'] = function() {
+StandardEvent.prototype['IsFolded'] = StandardEvent.prototype.IsFolded = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_StandardEvent_IsFolded_0(self));
 };;
 
-StandardEvent.prototype['SetFolded'] = function(arg0) {
+StandardEvent.prototype['SetFolded'] = StandardEvent.prototype.SetFolded = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
   _emscripten_bind_StandardEvent_SetFolded_1(self, arg0);
 };;
 
-  StandardEvent.prototype['__destroy__'] = function() {
+  StandardEvent.prototype['__destroy__'] = StandardEvent.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_StandardEvent___destroy___0(self);
 };
@@ -5067,15 +5079,17 @@ MapStringString.prototype.__class__ = MapStringString;
 MapStringString.__cache__ = {};
 Module['MapStringString'] = MapStringString;
 
-MapStringString.prototype['MAP_get'] = function(arg0) {
+MapStringString.prototype['MAP_get'] = MapStringString.prototype.MAP_get = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_MapStringString_MAP_get_1(self, arg0));
 };;
 
-MapStringString.prototype['MAP_set'] = function(arg0, arg1) {
+MapStringString.prototype['MAP_set'] = MapStringString.prototype.MAP_set = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -5083,19 +5097,20 @@ MapStringString.prototype['MAP_set'] = function(arg0, arg1) {
   _emscripten_bind_MapStringString_MAP_set_2(self, arg0, arg1);
 };;
 
-MapStringString.prototype['MAP_has'] = function(arg0) {
+MapStringString.prototype['MAP_has'] = MapStringString.prototype.MAP_has = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_MapStringString_MAP_has_1(self, arg0));
 };;
 
-MapStringString.prototype['MAP_keys'] = function() {
+MapStringString.prototype['MAP_keys'] = MapStringString.prototype.MAP_keys = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_MapStringString_MAP_keys_0(self), VectorString);
 };;
 
-  MapStringString.prototype['__destroy__'] = function() {
+  MapStringString.prototype['__destroy__'] = MapStringString.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_MapStringString___destroy___0(self);
 };
