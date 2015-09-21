@@ -171,6 +171,14 @@ public:
 	    }, (int)this, directory.c_str());
 	}
 
+	virtual bool CopyDir(const gd::String & source, const gd::String & destination) {
+	    return (bool)EM_ASM_INT({
+	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
+	      if (!self.hasOwnProperty('copyDir')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::copyDir.';
+	      return self.copyDir(Module.Pointer_stringify($1), Module.Pointer_stringify($2));
+	    }, (int)this, source.c_str(), destination.c_str());
+	}
+
     virtual bool WriteToFile(const gd::String & file, const gd::String & content) {
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
