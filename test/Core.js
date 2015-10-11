@@ -803,4 +803,21 @@ describe('libGD.js', function(){
 		});
 
 	});
+
+	describe('gd.Serializer', function() {
+		it('shoudl serialize a Text Object', function() {
+			var obj = new gd.TextObject("testObject");
+			obj.setType("TextObject::Text");
+			obj.setName("testObject");
+			obj.setString("Text of the object, with 官话 characters");
+
+			var serializedObject = new gd.SerializerElement();
+			obj.serializeTo(serializedObject);
+			var jsonObject = gd.Serializer.toJSON(serializedObject);
+			serializedObject.delete();
+			obj.delete();
+
+			expect(jsonObject).to.be('{"bold": false,"italic": false,"name": "testObject","smoothed": true,"type": "TextObject::Text","underlined": false,"variables": [],"behaviors": [],"string": "Text of the object, with 官话 characters","font": "","characterSize": 20,"color": {"b": 255,"g": 255,"r": 255}}')
+		});
+	})
 });

@@ -4,7 +4,7 @@ var expect = require('expect.js');
 describe('libGD.js - gd.Vector* tests', function(){
 
 	describe('gd.VectorString', function(){
-		var vector = new gd.VectorString;
+		var vector = new gd.VectorString();
 		it("should allow to add strings", function() {
 			expect(vector.size()).to.be(0);
 			vector.push_back("Hello world");
@@ -24,7 +24,7 @@ describe('libGD.js - gd.Vector* tests', function(){
 			expect(vector.get(34)).to.be("Hello world #34");
 		});
 		it("can change a string at a specified index", function() {
-			var vector2 = new gd.VectorString;
+			var vector2 = new gd.VectorString();
 			vector2.push_back("foo");
 			vector2.push_back("bar");
 			expect(vector2.size()).to.be(2);
