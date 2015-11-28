@@ -909,6 +909,42 @@ SerializerElement* EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_Serial
   return new SerializerElement();
 }
 
+const SerializerValue* EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_GetValue_0(SerializerElement* self) {
+  return &self->GetValue();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_WRAPPED_SetBool_1(SerializerElement* self, bool arg0) {
+  self->WRAPPED_SetBool(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_WRAPPED_SetString_1(SerializerElement* self, char* arg0) {
+  self->WRAPPED_SetString(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_WRAPPED_SetInt_1(SerializerElement* self, int arg0) {
+  self->WRAPPED_SetInt(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_WRAPPED_SetDouble_1(SerializerElement* self, float arg0) {
+  self->WRAPPED_SetDouble(arg0);
+}
+
+SerializerElement* EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_AddChild_1(SerializerElement* self, char* arg0) {
+  return &self->AddChild(arg0);
+}
+
+SerializerElement* EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_GetChild_1(SerializerElement* self, char* arg0) {
+  return &self->GetChild(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_WRAPPED_SetChild_2(SerializerElement* self, char* arg0, SerializerElement* arg1) {
+  self->WRAPPED_SetChild(arg0, *arg1);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_HasChild_1(SerializerElement* self, char* arg0) {
+  return self->HasChild(arg0);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement___destroy___0(SerializerElement* self) {
   delete self;
 }
@@ -1999,12 +2035,12 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_AddAllMis
   self->STATIC_AddAllMissingImages(*arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessResources_1(ProjectResourcesAdder* self, Project* arg0) {
-  self->STATIC_GetAllUselessResources(*arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessImages_1(ProjectResourcesAdder* self, Project* arg0) {
+  self->STATIC_GetAllUselessImages(*arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUselessResources_1(ProjectResourcesAdder* self, Project* arg0) {
-  self->STATIC_RemoveAllUselessResources(*arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUselessImages_1(ProjectResourcesAdder* self, Project* arg0) {
+  self->STATIC_RemoveAllUselessImages(*arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder___destroy___0(ProjectResourcesAdder* self) {
@@ -2134,53 +2170,26 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent___destroy___0(CommentEven
   delete self;
 }
 
-// Sprite
+// SerializerValue
 
-Sprite* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_Sprite_0() {
-  return new Sprite();
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerValue_GetBool_0(SerializerValue* self) {
+  return self->GetBool();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetImageName_1(Sprite* self, char* arg0) {
-  self->SetImageName(arg0);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerValue_GetString_0(SerializerValue* self) {
+  static gd::String temp;
+  return (temp = self->GetString(), temp.c_str());
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetImageName_0(Sprite* self) {
-  return self->GetImageName().c_str();
+int EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerValue_GetInt_0(SerializerValue* self) {
+  return self->GetInt();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_AddPoint_1(Sprite* self, Point* arg0) {
-  self->AddPoint(*arg0);
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerValue_GetDouble_0(SerializerValue* self) {
+  return self->GetDouble();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_DelPoint_1(Sprite* self, char* arg0) {
-  self->DelPoint(arg0);
-}
-
-Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetPoint_1(Sprite* self, char* arg0) {
-  return &self->GetPoint(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_HasPoint_1(Sprite* self, char* arg0) {
-  return self->HasPoint(arg0);
-}
-
-Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetOrigin_0(Sprite* self) {
-  return &self->GetOrigin();
-}
-
-Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetCenter_0(Sprite* self) {
-  return &self->GetCenter();
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_IsDefaultCenterPoint_0(Sprite* self) {
-  return self->IsDefaultCenterPoint();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetDefaultCenterPoint_1(Sprite* self, bool arg0) {
-  self->SetDefaultCenterPoint(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite___destroy___0(Sprite* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerValue___destroy___0(SerializerValue* self) {
   delete self;
 }
 
@@ -2761,6 +2770,56 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectMetadata_GetIconFilename_
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectMetadata___destroy___0(ObjectMetadata* self) {
+  delete self;
+}
+
+// Sprite
+
+Sprite* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_Sprite_0() {
+  return new Sprite();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetImageName_1(Sprite* self, char* arg0) {
+  self->SetImageName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetImageName_0(Sprite* self) {
+  return self->GetImageName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_AddPoint_1(Sprite* self, Point* arg0) {
+  self->AddPoint(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_DelPoint_1(Sprite* self, char* arg0) {
+  self->DelPoint(arg0);
+}
+
+Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetPoint_1(Sprite* self, char* arg0) {
+  return &self->GetPoint(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_HasPoint_1(Sprite* self, char* arg0) {
+  return self->HasPoint(arg0);
+}
+
+Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetOrigin_0(Sprite* self) {
+  return &self->GetOrigin();
+}
+
+Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetCenter_0(Sprite* self) {
+  return &self->GetCenter();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_IsDefaultCenterPoint_0(Sprite* self) {
+  return self->IsDefaultCenterPoint();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetDefaultCenterPoint_1(Sprite* self, bool arg0) {
+  self->SetDefaultCenterPoint(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite___destroy___0(Sprite* self) {
   delete self;
 }
 

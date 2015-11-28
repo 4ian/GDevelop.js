@@ -1523,6 +1523,70 @@ SerializerElement.prototype.__class__ = SerializerElement;
 SerializerElement.__cache__ = {};
 Module['SerializerElement'] = SerializerElement;
 
+SerializerElement.prototype['GetValue'] = SerializerElement.prototype.GetValue = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_SerializerElement_GetValue_0(self), SerializerValue);
+};;
+
+SerializerElement.prototype['WRAPPED_SetBool'] = SerializerElement.prototype.WRAPPED_SetBool = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_SerializerElement_WRAPPED_SetBool_1(self, arg0);
+};;
+
+SerializerElement.prototype['WRAPPED_SetString'] = SerializerElement.prototype.WRAPPED_SetString = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_SerializerElement_WRAPPED_SetString_1(self, arg0);
+};;
+
+SerializerElement.prototype['WRAPPED_SetInt'] = SerializerElement.prototype.WRAPPED_SetInt = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_SerializerElement_WRAPPED_SetInt_1(self, arg0);
+};;
+
+SerializerElement.prototype['WRAPPED_SetDouble'] = SerializerElement.prototype.WRAPPED_SetDouble = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_SerializerElement_WRAPPED_SetDouble_1(self, arg0);
+};;
+
+SerializerElement.prototype['AddChild'] = SerializerElement.prototype.AddChild = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_SerializerElement_AddChild_1(self, arg0), SerializerElement);
+};;
+
+SerializerElement.prototype['GetChild'] = SerializerElement.prototype.GetChild = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_SerializerElement_GetChild_1(self, arg0), SerializerElement);
+};;
+
+SerializerElement.prototype['WRAPPED_SetChild'] = SerializerElement.prototype.WRAPPED_SetChild = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_SerializerElement_WRAPPED_SetChild_2(self, arg0, arg1);
+};;
+
+SerializerElement.prototype['HasChild'] = SerializerElement.prototype.HasChild = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_SerializerElement_HasChild_1(self, arg0));
+};;
+
   SerializerElement.prototype['__destroy__'] = SerializerElement.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_SerializerElement___destroy___0(self);
@@ -3455,84 +3519,37 @@ CommentEvent.prototype['SetFolded'] = CommentEvent.prototype.SetFolded = functio
   var self = this.ptr;
   _emscripten_bind_CommentEvent___destroy___0(self);
 };
-// Sprite
-function Sprite() {
-  this.ptr = _emscripten_bind_Sprite_Sprite_0();
-  getCache(Sprite)[this.ptr] = this;
-};;
-Sprite.prototype = Object.create(WrapperObject.prototype);
-Sprite.prototype.constructor = Sprite;
-Sprite.prototype.__class__ = Sprite;
-Sprite.__cache__ = {};
-Module['Sprite'] = Sprite;
+// SerializerValue
+function SerializerValue() { throw "cannot construct a SerializerValue, no constructor in IDL" }
+SerializerValue.prototype = Object.create(WrapperObject.prototype);
+SerializerValue.prototype.constructor = SerializerValue;
+SerializerValue.prototype.__class__ = SerializerValue;
+SerializerValue.__cache__ = {};
+Module['SerializerValue'] = SerializerValue;
 
-Sprite.prototype['SetImageName'] = Sprite.prototype.SetImageName = function(arg0) {
+SerializerValue.prototype['GetBool'] = SerializerValue.prototype.GetBool = function() {
   var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Sprite_SetImageName_1(self, arg0);
+  return !!(_emscripten_bind_SerializerValue_GetBool_0(self));
 };;
 
-Sprite.prototype['GetImageName'] = Sprite.prototype.GetImageName = function() {
+SerializerValue.prototype['GetString'] = SerializerValue.prototype.GetString = function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_Sprite_GetImageName_0(self));
+  return Pointer_stringify(_emscripten_bind_SerializerValue_GetString_0(self));
 };;
 
-Sprite.prototype['AddPoint'] = Sprite.prototype.AddPoint = function(arg0) {
+SerializerValue.prototype['GetInt'] = SerializerValue.prototype.GetInt = function() {
   var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Sprite_AddPoint_1(self, arg0);
+  return _emscripten_bind_SerializerValue_GetInt_0(self);
 };;
 
-Sprite.prototype['DelPoint'] = Sprite.prototype.DelPoint = function(arg0) {
+SerializerValue.prototype['GetDouble'] = SerializerValue.prototype.GetDouble = function() {
   var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Sprite_DelPoint_1(self, arg0);
+  return _emscripten_bind_SerializerValue_GetDouble_0(self);
 };;
 
-Sprite.prototype['GetPoint'] = Sprite.prototype.GetPoint = function(arg0) {
+  SerializerValue.prototype['__destroy__'] = SerializerValue.prototype.__destroy__ = function() {
   var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_Sprite_GetPoint_1(self, arg0), Point);
-};;
-
-Sprite.prototype['HasPoint'] = Sprite.prototype.HasPoint = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return !!(_emscripten_bind_Sprite_HasPoint_1(self, arg0));
-};;
-
-Sprite.prototype['GetOrigin'] = Sprite.prototype.GetOrigin = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Sprite_GetOrigin_0(self), Point);
-};;
-
-Sprite.prototype['GetCenter'] = Sprite.prototype.GetCenter = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Sprite_GetCenter_0(self), Point);
-};;
-
-Sprite.prototype['IsDefaultCenterPoint'] = Sprite.prototype.IsDefaultCenterPoint = function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_Sprite_IsDefaultCenterPoint_0(self));
-};;
-
-Sprite.prototype['SetDefaultCenterPoint'] = Sprite.prototype.SetDefaultCenterPoint = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Sprite_SetDefaultCenterPoint_1(self, arg0);
-};;
-
-  Sprite.prototype['__destroy__'] = Sprite.prototype.__destroy__ = function() {
-  var self = this.ptr;
-  _emscripten_bind_Sprite___destroy___0(self);
+  _emscripten_bind_SerializerValue___destroy___0(self);
 };
 // ArbitraryEventsWorker
 function ArbitraryEventsWorker() { throw "cannot construct a ArbitraryEventsWorker, no constructor in IDL" }
@@ -4550,6 +4567,85 @@ ObjectMetadata.prototype['GetIconFilename'] = ObjectMetadata.prototype.GetIconFi
   ObjectMetadata.prototype['__destroy__'] = ObjectMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ObjectMetadata___destroy___0(self);
+};
+// Sprite
+function Sprite() {
+  this.ptr = _emscripten_bind_Sprite_Sprite_0();
+  getCache(Sprite)[this.ptr] = this;
+};;
+Sprite.prototype = Object.create(WrapperObject.prototype);
+Sprite.prototype.constructor = Sprite;
+Sprite.prototype.__class__ = Sprite;
+Sprite.__cache__ = {};
+Module['Sprite'] = Sprite;
+
+Sprite.prototype['SetImageName'] = Sprite.prototype.SetImageName = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Sprite_SetImageName_1(self, arg0);
+};;
+
+Sprite.prototype['GetImageName'] = Sprite.prototype.GetImageName = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Sprite_GetImageName_0(self));
+};;
+
+Sprite.prototype['AddPoint'] = Sprite.prototype.AddPoint = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Sprite_AddPoint_1(self, arg0);
+};;
+
+Sprite.prototype['DelPoint'] = Sprite.prototype.DelPoint = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Sprite_DelPoint_1(self, arg0);
+};;
+
+Sprite.prototype['GetPoint'] = Sprite.prototype.GetPoint = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_Sprite_GetPoint_1(self, arg0), Point);
+};;
+
+Sprite.prototype['HasPoint'] = Sprite.prototype.HasPoint = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_Sprite_HasPoint_1(self, arg0));
+};;
+
+Sprite.prototype['GetOrigin'] = Sprite.prototype.GetOrigin = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Sprite_GetOrigin_0(self), Point);
+};;
+
+Sprite.prototype['GetCenter'] = Sprite.prototype.GetCenter = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Sprite_GetCenter_0(self), Point);
+};;
+
+Sprite.prototype['IsDefaultCenterPoint'] = Sprite.prototype.IsDefaultCenterPoint = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_Sprite_IsDefaultCenterPoint_0(self));
+};;
+
+Sprite.prototype['SetDefaultCenterPoint'] = Sprite.prototype.SetDefaultCenterPoint = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Sprite_SetDefaultCenterPoint_1(self, arg0);
+};;
+
+  Sprite.prototype['__destroy__'] = Sprite.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_Sprite___destroy___0(self);
 };
 // TiledSpriteObject
 function TiledSpriteObject(arg0) {

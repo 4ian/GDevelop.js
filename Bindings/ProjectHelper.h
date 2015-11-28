@@ -1,14 +1,14 @@
-#include "GDCore/PlatformDefinition/Project.h"
-#include "GDCore/PlatformDefinition/Layout.h"
-#include "GDCore/PlatformDefinition/Project.h"
-#include "GDCore/PlatformDefinition/Platform.h"
+#include "GDCore/Project/Project.h"
+#include "GDCore/Project/Layout.h"
+#include "GDCore/Project/Project.h"
+#include "GDCore/Extensions/Platform.h"
 #include "GDCore/IDE/PlatformManager.h"
 #include "GDCore/TinyXml/tinyxml.h"
 #include "GDCore/Tools/VersionWrapper.h"
-#include "GDCore/PlatformDefinition/Platform.h"
-#include "GDCore/PlatformDefinition/Platform.h"
-#include "GDCore/PlatformDefinition/InitialInstancesContainer.h"
-#include "GDJS/JsPlatform.h"
+#include "GDCore/Extensions/Platform.h"
+#include "GDCore/Extensions/Platform.h"
+#include "GDCore/Project/InitialInstancesContainer.h"
+#include "GDJS/Extensions/JsPlatform.h"
 
 using namespace gdjs;
 using namespace gd;

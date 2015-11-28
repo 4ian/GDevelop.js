@@ -280,19 +280,6 @@ interface Layer {
     boolean GetVisibility();
 };
 
-interface ResourcesManager {
-    void ResourcesManager();
-
-    [Value] VectorString GetAllResourcesList();
-    boolean HasResource([Const] DOMString name);
-    void GetResource([Const] DOMString name);
-    void AddResource([Const, Ref] Resource res);
-    void RemoveResource([Const] DOMString name);
-    void RenameResource([Const] DOMString oldName, [Const] DOMString name);
-    void MoveResourceUpInList([Const] DOMString oldName);
-    void MoveResourceDownInList([Const] DOMString oldName);
-};
-
 interface Resource {
     void Resource();
 
@@ -310,6 +297,19 @@ interface Resource {
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface ResourcesManager {
+    void ResourcesManager();
+
+    [Value] VectorString GetAllResourcesList();
+    boolean HasResource([Const] DOMString name);
+    [Const, Ref] Resource GetResource([Const] DOMString name);
+    boolean AddResource([Const, Ref] Resource res);
+    void RemoveResource([Const] DOMString name);
+    void RenameResource([Const] DOMString oldName, [Const] DOMString name);
+    boolean MoveResourceUpInList([Const] DOMString oldName);
+    boolean MoveResourceDownInList([Const] DOMString oldName);
 };
 
 interface ImageResource {
@@ -418,8 +418,26 @@ interface InitialInstanceJSFunctor {
     void invoke(InitialInstance instance);
 };
 
+interface SerializerValue {
+    boolean GetBool();
+    [Const, Value] DOMString GetString();
+    long GetInt();
+    float GetDouble();
+};
+
 interface SerializerElement {
     void SerializerElement();
+
+    [Const, Ref] SerializerValue GetValue();
+    void WRAPPED_SetBool(boolean value);
+    void WRAPPED_SetString([Const] DOMString value);
+    void WRAPPED_SetInt(long value);
+    void WRAPPED_SetDouble(float value);
+
+    [Ref] SerializerElement AddChild([Const] DOMString str);
+    [Ref] SerializerElement GetChild([Const] DOMString str);
+    void WRAPPED_SetChild([Const] DOMString str, [Const, Ref] SerializerElement element);
+    boolean HasChild([Const] DOMString str);
 };
 
 interface Serializer {

@@ -12,6 +12,12 @@ How to build
 
 Make sure you have [CMake](http://www.cmake.org/) and [Emscripten](https://github.com/kripken/emscripten) installed (your OS package manager should be able to provide both). You need Emscripten 1.33.1 at least to avoid [this bug](https://github.com/kripken/emscripten/pull/3479).
 
+* Make sure you have Node.js installed and grunt:
+
+```shell
+    npm install -g grunt-cli
+```
+
 * Clone [GDevelop repository](https://github.com/4ian/GD) and this repository at the root of GD repository:
 
 ```shell
@@ -62,10 +68,10 @@ The demo generate a json file that can be opened with [GDevelop] or [GDevApp]!
 
 The grunt *build* task:
 
- * create `Binaries/embuild` directory, 
+ * create `Binaries/embuild` directory,
  * patch SFML `Config.hpp` file to make Emscripten recognized as a linux target,
- * launch CMake inside to compile GDevelop with *Emscripten toolchain file*, 
- * update the glue.cpp and glue.js from Bindings.idl using *Emscripten WebIDL Binder*, 
+ * launch CMake inside to compile GDevelop with *Emscripten toolchain file*,
+ * update the glue.cpp and glue.js from Bindings.idl using *Emscripten WebIDL Binder*,
  * launch the compilation with *make* and wrap the generated `libGD.js.raw` into the final `libGD.js` file.
 
 It also create a compressed `libGD.js.gz` file which is handy for distributing the library pre-compressed to web browsers.

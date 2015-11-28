@@ -804,8 +804,50 @@ describe('libGD.js', function(){
 
 	});
 
+	describe('gd.SerializerElement', function() {
+		it('should support operations on its value', function() {
+			var element = new gd.SerializerElement();
+			element.setString('aaa');
+			expect(element.getValue().getString()).to.be('aaa');
+
+			element.setInt(123);
+			expect(element.getValue().getInt()).to.be(123);
+
+			element.setDouble(123.456);
+			expect(element.getValue().getDouble()).to.be(123.456);
+		});
+		it('should cast values from a type to another', function() {
+			var element = new gd.SerializerElement();
+			element.setString('123');
+			expect(element.getValue().getString()).to.be('123');
+			expect(element.getValue().getInt()).to.be(123);
+			expect(element.getValue().getDouble()).to.be(123.0);
+
+			element.setString('true');
+			expect(element.getValue().getBool()).to.be(true);
+			element.setBool(false);
+			expect(element.getValue().getBool()).to.be(false);
+		});
+		it('should support operations on its children', function() {
+			var element = new gd.SerializerElement();
+
+			expect(element.hasChild("Missing")).to.be(false);
+			var child1 = element.addChild("Child1");
+			expect(element.hasChild("Child1")).to.be(true);
+			expect(element.getChild("Child1").ptr).to.be(child1.ptr);
+
+			var child2 = new gd.SerializerElement();
+			child2.addChild("subChild").setString("Hello world!");
+			element.addChild("Child2");
+			element.setChild("Child2", child2);
+
+			expect(element.getChild("Child2").getChild('subChild')
+				.getValue().getString()).to.be("Hello world!");
+		});
+	});
+
 	describe('gd.Serializer', function() {
-		it('shoudl serialize a Text Object', function() {
+		it('should serialize a Text Object', function() {
 			var obj = new gd.TextObject("testObject");
 			obj.setType("TextObject::Text");
 			obj.setName("testObject");
