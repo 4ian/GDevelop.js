@@ -14,6 +14,8 @@ describe('libGD.js', function(){
 		it('properties can be read and changed', function(){
 			project.setName("My super project");
 			expect(project.getName()).to.be("My super project");
+			project.setPackageName("com.test.package");
+			expect(project.getPackageName()).to.be("com.test.package");
 			project.setAuthor("Me");
 			expect(project.getAuthor()).to.be("Me");
 			project.setMaximumFPS(15);
@@ -157,6 +159,10 @@ describe('libGD.js', function(){
 		it('removing instances on a layer', function() {
 			container.removeAllInstancesOnLayer("YetAnotherLayer");
 			expect(container.getInstancesCount()).to.be(1);
+		});
+		it('can be serialized', function() {
+			expect(container.serializeTo).to.not.be(undefined);
+			expect(container.unserializeFrom).to.not.be(undefined);
 		});
 
 		after(function() { container.delete(); });
@@ -359,7 +365,7 @@ describe('libGD.js', function(){
 			var allResources = project.getResourcesManager().getAllResourcesList();
 			expect(allResources.size()).to.be(2);
 
-			gd.ProjectResourcesAdder.removeAllUselessResources(project);
+			gd.ProjectResourcesAdder.removeAllUselessImages(project);
 
 			var allResources = project.getResourcesManager().getAllResourcesList();
 			expect(allResources.size()).to.be(1);

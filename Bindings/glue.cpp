@@ -447,66 +447,46 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPlatformExtension___destroy___0(
   delete self;
 }
 
-// Resource
+// ResourcesManager
 
-Resource* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_Resource_0() {
-  return new Resource();
+ResourcesManager* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_ResourcesManager_0() {
+  return new ResourcesManager();
 }
 
-Resource* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_Clone_0(Resource* self) {
-  return self->Clone();
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_GetAllResourcesList_0(ResourcesManager* self) {
+  static VectorString temp;
+  return (temp = self->GetAllResourcesList(), &temp);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SetName_1(Resource* self, char* arg0) {
-  self->SetName(arg0);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_HasResource_1(ResourcesManager* self, char* arg0) {
+  return self->HasResource(arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetName_0(Resource* self) {
-  return self->GetName().c_str();
+const Resource* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_GetResource_1(ResourcesManager* self, char* arg0) {
+  return &self->GetResource(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SetKind_1(Resource* self, char* arg0) {
-  self->SetKind(arg0);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_AddResource_1(ResourcesManager* self, Resource* arg0) {
+  return self->AddResource(*arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetKind_0(Resource* self) {
-  return self->GetKind().c_str();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_RemoveResource_1(ResourcesManager* self, char* arg0) {
+  self->RemoveResource(arg0);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_IsUserAdded_0(Resource* self) {
-  return self->IsUserAdded();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_RenameResource_2(ResourcesManager* self, char* arg0, char* arg1) {
+  self->RenameResource(arg0, arg1);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SetUserAdded_1(Resource* self, bool arg0) {
-  self->SetUserAdded(arg0);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_MoveResourceUpInList_1(ResourcesManager* self, char* arg0) {
+  return self->MoveResourceUpInList(arg0);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_UseFile_0(Resource* self) {
-  return self->UseFile();
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_MoveResourceDownInList_1(ResourcesManager* self, char* arg0) {
+  return self->MoveResourceDownInList(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SetFile_1(Resource* self, char* arg0) {
-  self->SetFile(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetFile_0(Resource* self) {
-  return self->GetFile().c_str();
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetAbsoluteFile_1(Resource* self, Project* arg0) {
-  static gd::String temp;
-  return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SerializeTo_1(Resource* self, SerializerElement* arg0) {
-  self->SerializeTo(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_UnserializeFrom_1(Resource* self, SerializerElement* arg0) {
-  self->UnserializeFrom(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource___destroy___0(Resource* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager___destroy___0(ResourcesManager* self) {
   delete self;
 }
 
@@ -1401,46 +1381,66 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventMetadata___destroy___0(EventMetad
   delete self;
 }
 
-// ResourcesManager
+// Resource
 
-ResourcesManager* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_ResourcesManager_0() {
-  return new ResourcesManager();
+Resource* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_Resource_0() {
+  return new Resource();
 }
 
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_GetAllResourcesList_0(ResourcesManager* self) {
-  static VectorString temp;
-  return (temp = self->GetAllResourcesList(), &temp);
+Resource* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_Clone_0(Resource* self) {
+  return self->Clone();
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_HasResource_1(ResourcesManager* self, char* arg0) {
-  return self->HasResource(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SetName_1(Resource* self, char* arg0) {
+  self->SetName(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_GetResource_1(ResourcesManager* self, char* arg0) {
-  self->GetResource(arg0);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetName_0(Resource* self) {
+  return self->GetName().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_AddResource_1(ResourcesManager* self, Resource* arg0) {
-  self->AddResource(*arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SetKind_1(Resource* self, char* arg0) {
+  self->SetKind(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_RemoveResource_1(ResourcesManager* self, char* arg0) {
-  self->RemoveResource(arg0);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetKind_0(Resource* self) {
+  return self->GetKind().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_RenameResource_2(ResourcesManager* self, char* arg0, char* arg1) {
-  self->RenameResource(arg0, arg1);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_IsUserAdded_0(Resource* self) {
+  return self->IsUserAdded();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_MoveResourceUpInList_1(ResourcesManager* self, char* arg0) {
-  self->MoveResourceUpInList(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SetUserAdded_1(Resource* self, bool arg0) {
+  self->SetUserAdded(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_MoveResourceDownInList_1(ResourcesManager* self, char* arg0) {
-  self->MoveResourceDownInList(arg0);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_UseFile_0(Resource* self) {
+  return self->UseFile();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager___destroy___0(ResourcesManager* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SetFile_1(Resource* self, char* arg0) {
+  self->SetFile(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetFile_0(Resource* self) {
+  return self->GetFile().c_str();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetAbsoluteFile_1(Resource* self, Project* arg0) {
+  static gd::String temp;
+  return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SerializeTo_1(Resource* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_UnserializeFrom_1(Resource* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource___destroy___0(Resource* self) {
   delete self;
 }
 
@@ -1774,6 +1774,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetAuthor_1(Project* self, cha
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetAuthor_0(Project* self) {
   return self->GetAuthor().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetPackageName_1(Project* self, char* arg0) {
+  self->SetPackageName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetPackageName_0(Project* self) {
+  return self->GetPackageName().c_str();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetProjectFile_1(Project* self, char* arg0) {
@@ -2419,6 +2427,14 @@ InitialInstance* EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_
 
 InitialInstance* EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_InsertInitialInstance_1(InitialInstancesContainer* self, InitialInstance* arg0) {
   return &self->InsertInitialInstance(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_SerializeTo_1(InitialInstancesContainer* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_UnserializeFrom_1(InitialInstancesContainer* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer___destroy___0(InitialInstancesContainer* self) {

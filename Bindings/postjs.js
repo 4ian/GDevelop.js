@@ -120,3 +120,4 @@
         window.gd = adaptNamingConventions(createModule());
     }
 })();
+//# sourceMappingURL=libGD.raw.js.map;

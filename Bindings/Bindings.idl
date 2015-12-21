@@ -141,6 +141,8 @@ interface Project {
     [Const, Ref] DOMString GetName();
     void SetAuthor([Const] DOMString name);
     [Const, Ref] DOMString GetAuthor();
+    void SetPackageName([Const] DOMString name);
+    [Const, Ref] DOMString GetPackageName();
     void SetProjectFile([Const] DOMString file);
     [Const, Ref] DOMString GetProjectFile();
     void SetDefaultWidth(long width);
@@ -399,6 +401,9 @@ interface InitialInstancesContainer {
 
     [Ref] InitialInstance InsertNewInitialInstance();
     [Ref] InitialInstance InsertInitialInstance([Const, Ref] InitialInstance inst);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
 };
 
 interface HighestZOrderFinder {
@@ -818,8 +823,8 @@ interface AbstractFileSystemJS {
 
 interface ProjectResourcesAdder {
     void STATIC_AddAllMissingImages([Ref] Project project);
-    void STATIC_GetAllUselessResources([Ref] Project project);
-    void STATIC_RemoveAllUselessResources([Ref] Project project);
+    void STATIC_GetAllUselessImages([Ref] Project project);
+    void STATIC_RemoveAllUselessImages([Ref] Project project);
 };
 
 interface ArbitraryEventsWorker {

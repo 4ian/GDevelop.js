@@ -798,98 +798,81 @@ VectorPlatformExtension.prototype['WRAPPED_at'] = VectorPlatformExtension.protot
   var self = this.ptr;
   _emscripten_bind_VectorPlatformExtension___destroy___0(self);
 };
-// Resource
-function Resource() {
-  this.ptr = _emscripten_bind_Resource_Resource_0();
-  getCache(Resource)[this.ptr] = this;
+// ResourcesManager
+function ResourcesManager() {
+  this.ptr = _emscripten_bind_ResourcesManager_ResourcesManager_0();
+  getCache(ResourcesManager)[this.ptr] = this;
 };;
-Resource.prototype = Object.create(WrapperObject.prototype);
-Resource.prototype.constructor = Resource;
-Resource.prototype.__class__ = Resource;
-Resource.__cache__ = {};
-Module['Resource'] = Resource;
+ResourcesManager.prototype = Object.create(WrapperObject.prototype);
+ResourcesManager.prototype.constructor = ResourcesManager;
+ResourcesManager.prototype.__class__ = ResourcesManager;
+ResourcesManager.__cache__ = {};
+Module['ResourcesManager'] = ResourcesManager;
 
-Resource.prototype['Clone'] = Resource.prototype.Clone = function() {
+ResourcesManager.prototype['GetAllResourcesList'] = ResourcesManager.prototype.GetAllResourcesList = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Resource_Clone_0(self), Resource);
+  return wrapPointer(_emscripten_bind_ResourcesManager_GetAllResourcesList_0(self), VectorString);
 };;
 
-Resource.prototype['SetName'] = Resource.prototype.SetName = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Resource_SetName_1(self, arg0);
-};;
-
-Resource.prototype['GetName'] = Resource.prototype.GetName = function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_Resource_GetName_0(self));
-};;
-
-Resource.prototype['SetKind'] = Resource.prototype.SetKind = function(arg0) {
+ResourcesManager.prototype['HasResource'] = ResourcesManager.prototype.HasResource = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_Resource_SetKind_1(self, arg0);
+  return !!(_emscripten_bind_ResourcesManager_HasResource_1(self, arg0));
 };;
 
-Resource.prototype['GetKind'] = Resource.prototype.GetKind = function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_Resource_GetKind_0(self));
-};;
-
-Resource.prototype['IsUserAdded'] = Resource.prototype.IsUserAdded = function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_Resource_IsUserAdded_0(self));
-};;
-
-Resource.prototype['SetUserAdded'] = Resource.prototype.SetUserAdded = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Resource_SetUserAdded_1(self, arg0);
-};;
-
-Resource.prototype['UseFile'] = Resource.prototype.UseFile = function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_Resource_UseFile_0(self));
-};;
-
-Resource.prototype['SetFile'] = Resource.prototype.SetFile = function(arg0) {
+ResourcesManager.prototype['GetResource'] = ResourcesManager.prototype.GetResource = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_Resource_SetFile_1(self, arg0);
+  return wrapPointer(_emscripten_bind_ResourcesManager_GetResource_1(self, arg0), Resource);
 };;
 
-Resource.prototype['GetFile'] = Resource.prototype.GetFile = function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_Resource_GetFile_0(self));
-};;
-
-Resource.prototype['GetAbsoluteFile'] = Resource.prototype.GetAbsoluteFile = function(arg0) {
+ResourcesManager.prototype['AddResource'] = ResourcesManager.prototype.AddResource = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return Pointer_stringify(_emscripten_bind_Resource_GetAbsoluteFile_1(self, arg0));
+  return !!(_emscripten_bind_ResourcesManager_AddResource_1(self, arg0));
 };;
 
-Resource.prototype['SerializeTo'] = Resource.prototype.SerializeTo = function(arg0) {
+ResourcesManager.prototype['RemoveResource'] = ResourcesManager.prototype.RemoveResource = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Resource_SerializeTo_1(self, arg0);
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ResourcesManager_RemoveResource_1(self, arg0);
 };;
 
-Resource.prototype['UnserializeFrom'] = Resource.prototype.UnserializeFrom = function(arg0) {
+ResourcesManager.prototype['RenameResource'] = ResourcesManager.prototype.RenameResource = function(arg0, arg1) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Resource_UnserializeFrom_1(self, arg0);
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  _emscripten_bind_ResourcesManager_RenameResource_2(self, arg0, arg1);
 };;
 
-  Resource.prototype['__destroy__'] = Resource.prototype.__destroy__ = function() {
+ResourcesManager.prototype['MoveResourceUpInList'] = ResourcesManager.prototype.MoveResourceUpInList = function(arg0) {
   var self = this.ptr;
-  _emscripten_bind_Resource___destroy___0(self);
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_ResourcesManager_MoveResourceUpInList_1(self, arg0));
+};;
+
+ResourcesManager.prototype['MoveResourceDownInList'] = ResourcesManager.prototype.MoveResourceDownInList = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_ResourcesManager_MoveResourceDownInList_1(self, arg0));
+};;
+
+  ResourcesManager.prototype['__destroy__'] = ResourcesManager.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_ResourcesManager___destroy___0(self);
 };
 // ForEachEvent
 function ForEachEvent() {
@@ -2281,81 +2264,98 @@ EventMetadata.prototype['GetGroup'] = EventMetadata.prototype.GetGroup = functio
   var self = this.ptr;
   _emscripten_bind_EventMetadata___destroy___0(self);
 };
-// ResourcesManager
-function ResourcesManager() {
-  this.ptr = _emscripten_bind_ResourcesManager_ResourcesManager_0();
-  getCache(ResourcesManager)[this.ptr] = this;
+// Resource
+function Resource() {
+  this.ptr = _emscripten_bind_Resource_Resource_0();
+  getCache(Resource)[this.ptr] = this;
 };;
-ResourcesManager.prototype = Object.create(WrapperObject.prototype);
-ResourcesManager.prototype.constructor = ResourcesManager;
-ResourcesManager.prototype.__class__ = ResourcesManager;
-ResourcesManager.__cache__ = {};
-Module['ResourcesManager'] = ResourcesManager;
+Resource.prototype = Object.create(WrapperObject.prototype);
+Resource.prototype.constructor = Resource;
+Resource.prototype.__class__ = Resource;
+Resource.__cache__ = {};
+Module['Resource'] = Resource;
 
-ResourcesManager.prototype['GetAllResourcesList'] = ResourcesManager.prototype.GetAllResourcesList = function() {
+Resource.prototype['Clone'] = Resource.prototype.Clone = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_ResourcesManager_GetAllResourcesList_0(self), VectorString);
+  return wrapPointer(_emscripten_bind_Resource_Clone_0(self), Resource);
 };;
 
-ResourcesManager.prototype['HasResource'] = ResourcesManager.prototype.HasResource = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return !!(_emscripten_bind_ResourcesManager_HasResource_1(self, arg0));
-};;
-
-ResourcesManager.prototype['GetResource'] = ResourcesManager.prototype.GetResource = function(arg0) {
+Resource.prototype['SetName'] = Resource.prototype.SetName = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_ResourcesManager_GetResource_1(self, arg0);
+  _emscripten_bind_Resource_SetName_1(self, arg0);
 };;
 
-ResourcesManager.prototype['AddResource'] = ResourcesManager.prototype.AddResource = function(arg0) {
+Resource.prototype['GetName'] = Resource.prototype.GetName = function() {
   var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ResourcesManager_AddResource_1(self, arg0);
+  return Pointer_stringify(_emscripten_bind_Resource_GetName_0(self));
 };;
 
-ResourcesManager.prototype['RemoveResource'] = ResourcesManager.prototype.RemoveResource = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_ResourcesManager_RemoveResource_1(self, arg0);
-};;
-
-ResourcesManager.prototype['RenameResource'] = ResourcesManager.prototype.RenameResource = function(arg0, arg1) {
+Resource.prototype['SetKind'] = Resource.prototype.SetKind = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  _emscripten_bind_ResourcesManager_RenameResource_2(self, arg0, arg1);
+  _emscripten_bind_Resource_SetKind_1(self, arg0);
 };;
 
-ResourcesManager.prototype['MoveResourceUpInList'] = ResourcesManager.prototype.MoveResourceUpInList = function(arg0) {
+Resource.prototype['GetKind'] = Resource.prototype.GetKind = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Resource_GetKind_0(self));
+};;
+
+Resource.prototype['IsUserAdded'] = Resource.prototype.IsUserAdded = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_Resource_IsUserAdded_0(self));
+};;
+
+Resource.prototype['SetUserAdded'] = Resource.prototype.SetUserAdded = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Resource_SetUserAdded_1(self, arg0);
+};;
+
+Resource.prototype['UseFile'] = Resource.prototype.UseFile = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_Resource_UseFile_0(self));
+};;
+
+Resource.prototype['SetFile'] = Resource.prototype.SetFile = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_ResourcesManager_MoveResourceUpInList_1(self, arg0);
+  _emscripten_bind_Resource_SetFile_1(self, arg0);
 };;
 
-ResourcesManager.prototype['MoveResourceDownInList'] = ResourcesManager.prototype.MoveResourceDownInList = function(arg0) {
+Resource.prototype['GetFile'] = Resource.prototype.GetFile = function() {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  return Pointer_stringify(_emscripten_bind_Resource_GetFile_0(self));
+};;
+
+Resource.prototype['GetAbsoluteFile'] = Resource.prototype.GetAbsoluteFile = function(arg0) {
+  var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_ResourcesManager_MoveResourceDownInList_1(self, arg0);
+  return Pointer_stringify(_emscripten_bind_Resource_GetAbsoluteFile_1(self, arg0));
 };;
 
-  ResourcesManager.prototype['__destroy__'] = ResourcesManager.prototype.__destroy__ = function() {
+Resource.prototype['SerializeTo'] = Resource.prototype.SerializeTo = function(arg0) {
   var self = this.ptr;
-  _emscripten_bind_ResourcesManager___destroy___0(self);
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Resource_SerializeTo_1(self, arg0);
+};;
+
+Resource.prototype['UnserializeFrom'] = Resource.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Resource_UnserializeFrom_1(self, arg0);
+};;
+
+  Resource.prototype['__destroy__'] = Resource.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_Resource___destroy___0(self);
 };
 // PlatformExtension
 function PlatformExtension() { throw "cannot construct a PlatformExtension, no constructor in IDL" }
@@ -2898,6 +2898,19 @@ Project.prototype['GetAuthor'] = Project.prototype.GetAuthor = function() {
   return Pointer_stringify(_emscripten_bind_Project_GetAuthor_0(self));
 };;
 
+Project.prototype['SetPackageName'] = Project.prototype.SetPackageName = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Project_SetPackageName_1(self, arg0);
+};;
+
+Project.prototype['GetPackageName'] = Project.prototype.GetPackageName = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Project_GetPackageName_0(self));
+};;
+
 Project.prototype['SetProjectFile'] = Project.prototype.SetProjectFile = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
@@ -3321,16 +3334,16 @@ ProjectResourcesAdder.prototype['STATIC_AddAllMissingImages'] = ProjectResources
   _emscripten_bind_ProjectResourcesAdder_STATIC_AddAllMissingImages_1(self, arg0);
 };;
 
-ProjectResourcesAdder.prototype['STATIC_GetAllUselessResources'] = ProjectResourcesAdder.prototype.STATIC_GetAllUselessResources = function(arg0) {
+ProjectResourcesAdder.prototype['STATIC_GetAllUselessImages'] = ProjectResourcesAdder.prototype.STATIC_GetAllUselessImages = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessResources_1(self, arg0);
+  _emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessImages_1(self, arg0);
 };;
 
-ProjectResourcesAdder.prototype['STATIC_RemoveAllUselessResources'] = ProjectResourcesAdder.prototype.STATIC_RemoveAllUselessResources = function(arg0) {
+ProjectResourcesAdder.prototype['STATIC_RemoveAllUselessImages'] = ProjectResourcesAdder.prototype.STATIC_RemoveAllUselessImages = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUselessResources_1(self, arg0);
+  _emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUselessImages_1(self, arg0);
 };;
 
   ProjectResourcesAdder.prototype['__destroy__'] = ProjectResourcesAdder.prototype.__destroy__ = function() {
@@ -3940,6 +3953,18 @@ InitialInstancesContainer.prototype['InsertInitialInstance'] = InitialInstancesC
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   return wrapPointer(_emscripten_bind_InitialInstancesContainer_InsertInitialInstance_1(self, arg0), InitialInstance);
+};;
+
+InitialInstancesContainer.prototype['SerializeTo'] = InitialInstancesContainer.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_InitialInstancesContainer_SerializeTo_1(self, arg0);
+};;
+
+InitialInstancesContainer.prototype['UnserializeFrom'] = InitialInstancesContainer.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_InitialInstancesContainer_UnserializeFrom_1(self, arg0);
 };;
 
   InitialInstancesContainer.prototype['__destroy__'] = InitialInstancesContainer.prototype.__destroy__ = function() {
