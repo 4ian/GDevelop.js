@@ -38,5 +38,20 @@ describe('libGD.js - GDJS related tests', function(){
 			expect(object.getColorB()).to.be(3);
 		});
 	});
+	describe('TiledSpriteObject', function(){
+		var object = new gd.TiledSpriteObject("MyTiledSpriteObject");
+		it("should expose TiledSpriteObject specific methods", function() {
+			object.setTexture("MyImageName");
+			expect(object.getTexture()).to.be("MyImageName");
+		});
+	});
+	describe('AdMobObject', function(){
+		var project = gd.ProjectHelper.createNewGDJSProject();
+		var object = new gd.AdMobObject("MyAdMobObject");
+		it("should expose AdMobObject properties", function() {
+			var props = object.getProperties(project);
+			expect(props.has("Testing mode")).to.be(true);
+			expect(props.get("Testing mode").getValue()).to.be("true");
+		});
+	});
 });
-

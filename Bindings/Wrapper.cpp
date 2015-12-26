@@ -42,6 +42,7 @@
 
 #include "../../Extensions/TiledSpriteObject/TiledSpriteObject.h"
 #include "../../Extensions/TextObject/TextObject.h"
+#include "../../Extensions/AdMobObject/AdMobObject.h"
 
 #include <GDJS/Events/CodeGeneration/EventsCodeGenerator.h>
 #include <GDJS/IDE/Exporter.h>
