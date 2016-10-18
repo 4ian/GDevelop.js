@@ -11,6 +11,15 @@ describe('libGD.js - gd.Vector* tests', function(){
 			expect(vector.size()).to.be(1);
 			expect(vector.get(0)).to.be("Hello world");
 		});
+		it("can be converted to a JS array", function() {
+			vector.push_back("Hello world 2");
+			vector.push_back("Hello world 3");
+			var array = vector.toJSArray();
+			expect(Array.isArray(array)).to.be(true);
+			expect(array.length).to.be(3);
+			expect(array[0]).to.be("Hello world");
+			expect(array[1]).to.be("Hello world 2");
+		});
 		it("can be cleared", function() {
 			vector.clear();
 			expect(vector.size()).to.be(0);
@@ -49,4 +58,3 @@ describe('libGD.js - gd.Vector* tests', function(){
 		});
 	});
 });
-

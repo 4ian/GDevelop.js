@@ -101,6 +101,15 @@
         gd.asTiledSpriteObject = function(evt) { return gd.castObject(evt, gd.TiledSpriteObject); }
         gd.asTextObject = function(evt) { return gd.castObject(evt, gd.TextObject); }
 
+        //Convenience methods:
+        gd.VectorString.prototype.toJSArray = function() {
+            var arr = [];
+            for(var i = 0;i < this.size(); ++i) {
+                arr.push(this.at(i));
+            }
+            return arr;
+        }
+
         //Preserve backward compatibility with some alias for methods:
         gd.VectorString.prototype.get = gd.VectorString.prototype.at;
         gd.VectorPlatformExtension.prototype.get = gd.VectorPlatformExtension.prototype.at;

@@ -164,11 +164,28 @@ interface Project {
     boolean HasLayoutNamed([Const] DOMString name);
     [Ref] Layout GetLayout([Const] DOMString name);
     [Ref] Layout GetLayoutAt(unsigned long index);
+    void SwapLayouts(unsigned long first, unsigned long second);
     unsigned long GetLayoutsCount();
     [Ref] Layout InsertNewLayout([Const] DOMString name, unsigned long position);
     void RemoveLayout([Const] DOMString name);
     void SetFirstLayout([Const] DOMString name);
     [Const, Ref] DOMString GetFirstLayout();
+
+    boolean HasExternalEventsNamed([Const] DOMString name);
+    [Ref] ExternalEvents GetExternalEvents([Const] DOMString name);
+    [Ref] ExternalEvents GetExternalEventsAt(unsigned long index);
+    void SwapExternalEvents(unsigned long first, unsigned long second);
+    unsigned long GetExternalEventsCount();
+    [Ref] ExternalEvents InsertNewExternalEvents([Const] DOMString name, unsigned long position);
+    void RemoveExternalEvents([Const] DOMString name);
+
+    boolean HasExternalLayoutNamed([Const] DOMString name);
+    [Ref] ExternalLayout GetExternalLayout([Const] DOMString name);
+    [Ref] ExternalLayout GetExternalLayoutAt(unsigned long index);
+    void SwapExternalLayouts(unsigned long first, unsigned long second);
+    unsigned long GetExternalLayoutsCount();
+    [Ref] ExternalLayout InsertNewExternalLayout([Const] DOMString name, unsigned long position);
+    void RemoveExternalLayout([Const] DOMString name);
 
     [Ref] VariablesContainer GetVariables();
     [Ref] ResourcesManager GetResourcesManager();
@@ -271,6 +288,33 @@ interface Layout {
     void RemoveObject([Const] DOMString name);
     void SwapObjects(unsigned long first, unsigned long second);
     unsigned long GetObjectsCount();
+};
+
+interface ExternalEvents {
+    void ExternalEvents();
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+
+    [Const, Ref] DOMString GetAssociatedLayout();
+    void SetAssociatedLayout([Const] DOMString name);
+
+    [Ref] EventsList GetEvents();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface ExternalLayout {
+    void ExternalLayout();
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+
+    [Ref] InitialInstancesContainer GetInitialInstances();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
 };
 
 interface Layer {
@@ -1050,8 +1094,8 @@ interface EventsCodeGenerator {
 interface Exporter {
     void Exporter([Ref] AbstractFileSystem fs);
 
-    boolean ExportLayoutForPreview([Ref] Project project, [Ref] Layout layout, [Const] DOMString exportDir);
-    boolean ExportWholeProject([Ref] Project project, [Const] DOMString exportDir,
-        boolean minify, boolean exportForCocoonJS, boolean exportForIntelXDK);
+    boolean ExportLayoutForPixiPreview([Ref] Project project, [Ref] Layout layout, [Const] DOMString exportDir);
+    boolean ExportWholePixiProject([Ref] Project project, [Const] DOMString exportDir,
+        boolean minify, boolean exportForCordova);
     [Const, Ref] DOMString GetLastError();
 };

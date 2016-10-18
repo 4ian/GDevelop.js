@@ -2398,6 +2398,51 @@ EventMetadata.prototype['GetGroup'] = EventMetadata.prototype.GetGroup = functio
   var self = this.ptr;
   _emscripten_bind_EventMetadata___destroy___0(self);
 };
+// ExternalLayout
+function ExternalLayout() {
+  this.ptr = _emscripten_bind_ExternalLayout_ExternalLayout_0();
+  getCache(ExternalLayout)[this.ptr] = this;
+};;
+ExternalLayout.prototype = Object.create(WrapperObject.prototype);
+ExternalLayout.prototype.constructor = ExternalLayout;
+ExternalLayout.prototype.__class__ = ExternalLayout;
+ExternalLayout.__cache__ = {};
+Module['ExternalLayout'] = ExternalLayout;
+
+ExternalLayout.prototype['SetName'] = ExternalLayout.prototype.SetName = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ExternalLayout_SetName_1(self, arg0);
+};;
+
+ExternalLayout.prototype['GetName'] = ExternalLayout.prototype.GetName = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_ExternalLayout_GetName_0(self));
+};;
+
+ExternalLayout.prototype['GetInitialInstances'] = ExternalLayout.prototype.GetInitialInstances = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ExternalLayout_GetInitialInstances_0(self), InitialInstancesContainer);
+};;
+
+ExternalLayout.prototype['SerializeTo'] = ExternalLayout.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ExternalLayout_SerializeTo_1(self, arg0);
+};;
+
+ExternalLayout.prototype['UnserializeFrom'] = ExternalLayout.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ExternalLayout_UnserializeFrom_1(self, arg0);
+};;
+
+  ExternalLayout.prototype['__destroy__'] = ExternalLayout.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_ExternalLayout___destroy___0(self);
+};
 // Resource
 function Resource() {
   this.ptr = _emscripten_bind_Resource_Resource_0();
@@ -3140,6 +3185,13 @@ Project.prototype['GetLayoutAt'] = Project.prototype.GetLayoutAt = function(arg0
   return wrapPointer(_emscripten_bind_Project_GetLayoutAt_1(self, arg0), Layout);
 };;
 
+Project.prototype['SwapLayouts'] = Project.prototype.SwapLayouts = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Project_SwapLayouts_2(self, arg0, arg1);
+};;
+
 Project.prototype['GetLayoutsCount'] = Project.prototype.GetLayoutsCount = function() {
   var self = this.ptr;
   return _emscripten_bind_Project_GetLayoutsCount_0(self);
@@ -3173,6 +3225,108 @@ Project.prototype['SetFirstLayout'] = Project.prototype.SetFirstLayout = functio
 Project.prototype['GetFirstLayout'] = Project.prototype.GetFirstLayout = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Project_GetFirstLayout_0(self));
+};;
+
+Project.prototype['HasExternalEventsNamed'] = Project.prototype.HasExternalEventsNamed = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_Project_HasExternalEventsNamed_1(self, arg0));
+};;
+
+Project.prototype['GetExternalEvents'] = Project.prototype.GetExternalEvents = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_Project_GetExternalEvents_1(self, arg0), ExternalEvents);
+};;
+
+Project.prototype['GetExternalEventsAt'] = Project.prototype.GetExternalEventsAt = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_Project_GetExternalEventsAt_1(self, arg0), ExternalEvents);
+};;
+
+Project.prototype['SwapExternalEvents'] = Project.prototype.SwapExternalEvents = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Project_SwapExternalEvents_2(self, arg0, arg1);
+};;
+
+Project.prototype['GetExternalEventsCount'] = Project.prototype.GetExternalEventsCount = function() {
+  var self = this.ptr;
+  return _emscripten_bind_Project_GetExternalEventsCount_0(self);
+};;
+
+Project.prototype['InsertNewExternalEvents'] = Project.prototype.InsertNewExternalEvents = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  return wrapPointer(_emscripten_bind_Project_InsertNewExternalEvents_2(self, arg0, arg1), ExternalEvents);
+};;
+
+Project.prototype['RemoveExternalEvents'] = Project.prototype.RemoveExternalEvents = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Project_RemoveExternalEvents_1(self, arg0);
+};;
+
+Project.prototype['HasExternalLayoutNamed'] = Project.prototype.HasExternalLayoutNamed = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_Project_HasExternalLayoutNamed_1(self, arg0));
+};;
+
+Project.prototype['GetExternalLayout'] = Project.prototype.GetExternalLayout = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_Project_GetExternalLayout_1(self, arg0), ExternalLayout);
+};;
+
+Project.prototype['GetExternalLayoutAt'] = Project.prototype.GetExternalLayoutAt = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_Project_GetExternalLayoutAt_1(self, arg0), ExternalLayout);
+};;
+
+Project.prototype['SwapExternalLayouts'] = Project.prototype.SwapExternalLayouts = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Project_SwapExternalLayouts_2(self, arg0, arg1);
+};;
+
+Project.prototype['GetExternalLayoutsCount'] = Project.prototype.GetExternalLayoutsCount = function() {
+  var self = this.ptr;
+  return _emscripten_bind_Project_GetExternalLayoutsCount_0(self);
+};;
+
+Project.prototype['InsertNewExternalLayout'] = Project.prototype.InsertNewExternalLayout = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  return wrapPointer(_emscripten_bind_Project_InsertNewExternalLayout_2(self, arg0, arg1), ExternalLayout);
+};;
+
+Project.prototype['RemoveExternalLayout'] = Project.prototype.RemoveExternalLayout = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Project_RemoveExternalLayout_1(self, arg0);
 };;
 
 Project.prototype['GetVariables'] = Project.prototype.GetVariables = function() {
@@ -4171,17 +4325,17 @@ Exporter.prototype.__class__ = Exporter;
 Exporter.__cache__ = {};
 Module['Exporter'] = Exporter;
 
-Exporter.prototype['ExportLayoutForPreview'] = Exporter.prototype.ExportLayoutForPreview = function(arg0, arg1, arg2) {
+Exporter.prototype['ExportLayoutForPixiPreview'] = Exporter.prototype.ExportLayoutForPixiPreview = function(arg0, arg1, arg2) {
   var self = this.ptr;
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return !!(_emscripten_bind_Exporter_ExportLayoutForPreview_3(self, arg0, arg1, arg2));
+  return !!(_emscripten_bind_Exporter_ExportLayoutForPixiPreview_3(self, arg0, arg1, arg2));
 };;
 
-Exporter.prototype['ExportWholeProject'] = Exporter.prototype.ExportWholeProject = function(arg0, arg1, arg2, arg3, arg4) {
+Exporter.prototype['ExportWholePixiProject'] = Exporter.prototype.ExportWholePixiProject = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
@@ -4189,8 +4343,7 @@ Exporter.prototype['ExportWholeProject'] = Exporter.prototype.ExportWholeProject
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
-  return !!(_emscripten_bind_Exporter_ExportWholeProject_5(self, arg0, arg1, arg2, arg3, arg4));
+  return !!(_emscripten_bind_Exporter_ExportWholePixiProject_4(self, arg0, arg1, arg2, arg3));
 };;
 
 Exporter.prototype['GetLastError'] = Exporter.prototype.GetLastError = function() {
@@ -4549,6 +4702,91 @@ EventsParametersLister.prototype['Launch'] = EventsParametersLister.prototype.La
   EventsParametersLister.prototype['__destroy__'] = EventsParametersLister.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_EventsParametersLister___destroy___0(self);
+};
+// StandardEvent
+function StandardEvent() {
+  this.ptr = _emscripten_bind_StandardEvent_StandardEvent_0();
+  getCache(StandardEvent)[this.ptr] = this;
+};;
+StandardEvent.prototype = Object.create(WrapperObject.prototype);
+StandardEvent.prototype.constructor = StandardEvent;
+StandardEvent.prototype.__class__ = StandardEvent;
+StandardEvent.__cache__ = {};
+Module['StandardEvent'] = StandardEvent;
+
+StandardEvent.prototype['GetConditions'] = StandardEvent.prototype.GetConditions = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_StandardEvent_GetConditions_0(self), InstructionsList);
+};;
+
+StandardEvent.prototype['GetActions'] = StandardEvent.prototype.GetActions = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_StandardEvent_GetActions_0(self), InstructionsList);
+};;
+
+StandardEvent.prototype['Clone'] = StandardEvent.prototype.Clone = function() {
+  var self = this.ptr;
+  _emscripten_bind_StandardEvent_Clone_0(self);
+};;
+
+StandardEvent.prototype['GetType'] = StandardEvent.prototype.GetType = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_StandardEvent_GetType_0(self));
+};;
+
+StandardEvent.prototype['SetType'] = StandardEvent.prototype.SetType = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_StandardEvent_SetType_1(self, arg0);
+};;
+
+StandardEvent.prototype['IsExecutable'] = StandardEvent.prototype.IsExecutable = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_StandardEvent_IsExecutable_0(self));
+};;
+
+StandardEvent.prototype['CanHaveSubEvents'] = StandardEvent.prototype.CanHaveSubEvents = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_StandardEvent_CanHaveSubEvents_0(self));
+};;
+
+StandardEvent.prototype['HasSubEvents'] = StandardEvent.prototype.HasSubEvents = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_StandardEvent_HasSubEvents_0(self));
+};;
+
+StandardEvent.prototype['GetSubEvents'] = StandardEvent.prototype.GetSubEvents = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_StandardEvent_GetSubEvents_0(self), EventsList);
+};;
+
+StandardEvent.prototype['IsDisabled'] = StandardEvent.prototype.IsDisabled = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_StandardEvent_IsDisabled_0(self));
+};;
+
+StandardEvent.prototype['SetDisabled'] = StandardEvent.prototype.SetDisabled = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_StandardEvent_SetDisabled_1(self, arg0);
+};;
+
+StandardEvent.prototype['IsFolded'] = StandardEvent.prototype.IsFolded = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_StandardEvent_IsFolded_0(self));
+};;
+
+StandardEvent.prototype['SetFolded'] = StandardEvent.prototype.SetFolded = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_StandardEvent_SetFolded_1(self, arg0);
+};;
+
+  StandardEvent.prototype['__destroy__'] = StandardEvent.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_StandardEvent___destroy___0(self);
 };
 // TextFormatting
 function TextFormatting() { throw "cannot construct a TextFormatting, no constructor in IDL" }
@@ -5241,90 +5479,64 @@ TextObject.prototype['UnserializeFrom'] = TextObject.prototype.UnserializeFrom =
   var self = this.ptr;
   _emscripten_bind_TextObject___destroy___0(self);
 };
-// StandardEvent
-function StandardEvent() {
-  this.ptr = _emscripten_bind_StandardEvent_StandardEvent_0();
-  getCache(StandardEvent)[this.ptr] = this;
+// ExternalEvents
+function ExternalEvents() {
+  this.ptr = _emscripten_bind_ExternalEvents_ExternalEvents_0();
+  getCache(ExternalEvents)[this.ptr] = this;
 };;
-StandardEvent.prototype = Object.create(WrapperObject.prototype);
-StandardEvent.prototype.constructor = StandardEvent;
-StandardEvent.prototype.__class__ = StandardEvent;
-StandardEvent.__cache__ = {};
-Module['StandardEvent'] = StandardEvent;
+ExternalEvents.prototype = Object.create(WrapperObject.prototype);
+ExternalEvents.prototype.constructor = ExternalEvents;
+ExternalEvents.prototype.__class__ = ExternalEvents;
+ExternalEvents.__cache__ = {};
+Module['ExternalEvents'] = ExternalEvents;
 
-StandardEvent.prototype['GetConditions'] = StandardEvent.prototype.GetConditions = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_StandardEvent_GetConditions_0(self), InstructionsList);
-};;
-
-StandardEvent.prototype['GetActions'] = StandardEvent.prototype.GetActions = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_StandardEvent_GetActions_0(self), InstructionsList);
-};;
-
-StandardEvent.prototype['Clone'] = StandardEvent.prototype.Clone = function() {
-  var self = this.ptr;
-  _emscripten_bind_StandardEvent_Clone_0(self);
-};;
-
-StandardEvent.prototype['GetType'] = StandardEvent.prototype.GetType = function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_StandardEvent_GetType_0(self));
-};;
-
-StandardEvent.prototype['SetType'] = StandardEvent.prototype.SetType = function(arg0) {
+ExternalEvents.prototype['SetName'] = ExternalEvents.prototype.SetName = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_StandardEvent_SetType_1(self, arg0);
+  _emscripten_bind_ExternalEvents_SetName_1(self, arg0);
 };;
 
-StandardEvent.prototype['IsExecutable'] = StandardEvent.prototype.IsExecutable = function() {
+ExternalEvents.prototype['GetName'] = ExternalEvents.prototype.GetName = function() {
   var self = this.ptr;
-  return !!(_emscripten_bind_StandardEvent_IsExecutable_0(self));
+  return Pointer_stringify(_emscripten_bind_ExternalEvents_GetName_0(self));
 };;
 
-StandardEvent.prototype['CanHaveSubEvents'] = StandardEvent.prototype.CanHaveSubEvents = function() {
+ExternalEvents.prototype['GetAssociatedLayout'] = ExternalEvents.prototype.GetAssociatedLayout = function() {
   var self = this.ptr;
-  return !!(_emscripten_bind_StandardEvent_CanHaveSubEvents_0(self));
+  return Pointer_stringify(_emscripten_bind_ExternalEvents_GetAssociatedLayout_0(self));
 };;
 
-StandardEvent.prototype['HasSubEvents'] = StandardEvent.prototype.HasSubEvents = function() {
+ExternalEvents.prototype['SetAssociatedLayout'] = ExternalEvents.prototype.SetAssociatedLayout = function(arg0) {
   var self = this.ptr;
-  return !!(_emscripten_bind_StandardEvent_HasSubEvents_0(self));
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ExternalEvents_SetAssociatedLayout_1(self, arg0);
 };;
 
-StandardEvent.prototype['GetSubEvents'] = StandardEvent.prototype.GetSubEvents = function() {
+ExternalEvents.prototype['GetEvents'] = ExternalEvents.prototype.GetEvents = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_StandardEvent_GetSubEvents_0(self), EventsList);
+  return wrapPointer(_emscripten_bind_ExternalEvents_GetEvents_0(self), EventsList);
 };;
 
-StandardEvent.prototype['IsDisabled'] = StandardEvent.prototype.IsDisabled = function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_StandardEvent_IsDisabled_0(self));
-};;
-
-StandardEvent.prototype['SetDisabled'] = StandardEvent.prototype.SetDisabled = function(arg0) {
+ExternalEvents.prototype['SerializeTo'] = ExternalEvents.prototype.SerializeTo = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_StandardEvent_SetDisabled_1(self, arg0);
+  _emscripten_bind_ExternalEvents_SerializeTo_1(self, arg0);
 };;
 
-StandardEvent.prototype['IsFolded'] = StandardEvent.prototype.IsFolded = function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_StandardEvent_IsFolded_0(self));
-};;
-
-StandardEvent.prototype['SetFolded'] = StandardEvent.prototype.SetFolded = function(arg0) {
+ExternalEvents.prototype['UnserializeFrom'] = ExternalEvents.prototype.UnserializeFrom = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_StandardEvent_SetFolded_1(self, arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_ExternalEvents_UnserializeFrom_2(self, arg0, arg1);
 };;
 
-  StandardEvent.prototype['__destroy__'] = StandardEvent.prototype.__destroy__ = function() {
+  ExternalEvents.prototype['__destroy__'] = ExternalEvents.prototype.__destroy__ = function() {
   var self = this.ptr;
-  _emscripten_bind_StandardEvent___destroy___0(self);
+  _emscripten_bind_ExternalEvents___destroy___0(self);
 };
 // MapStringString
 function MapStringString() { throw "cannot construct a MapStringString, no constructor in IDL" }

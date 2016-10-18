@@ -11,7 +11,7 @@ describe('libGD.js', function(){
 
 		var project = gd.ProjectHelper.createNewGDJSProject();
 
-		it('properties can be read and changed', function(){
+		it('has properties that can be read and changed', function(){
 			project.setName("My super project");
 			expect(project.getName()).to.be("My super project");
 			project.setPackageName("com.test.package");
@@ -23,7 +23,8 @@ describe('libGD.js', function(){
 			project.setMinimumFPS(15);
 			expect(project.getMinimumFPS()).to.be(15);
 		});
-		it('layouts management is ok', function(){
+
+		it('handles layouts', function(){
 			expect(project.hasLayoutNamed("Scene")).to.be(false);
 
 			project.insertNewLayout("Scene", 0);
@@ -32,6 +33,28 @@ describe('libGD.js', function(){
 
 			project.removeLayout("Scene");
 			expect(project.hasLayoutNamed("Scene")).to.be(false);
+		});
+
+		it('handles external events', function(){
+			expect(project.hasExternalEventsNamed("My events")).to.be(false);
+
+			project.insertNewExternalEvents("My events", 0);
+			expect(project.hasExternalEventsNamed("My events")).to.be(true);
+			expect(project.getExternalEvents("My events").getName()).to.be("My events");
+
+			project.removeExternalEvents("My events");
+			expect(project.hasExternalEventsNamed("My events")).to.be(false);
+		});
+
+		it('handles external layouts', function(){
+			expect(project.hasExternalLayoutNamed("My layout")).to.be(false);
+
+			project.insertNewExternalLayout("My layout", 0);
+			expect(project.hasExternalLayoutNamed("My layout")).to.be(true);
+			expect(project.getExternalLayout("My layout").getName()).to.be("My layout");
+
+			project.removeExternalLayout("My layout");
+			expect(project.hasExternalLayoutNamed("My layout")).to.be(false);
 		});
 
 		it("should validate object names", function() {
@@ -804,7 +827,7 @@ describe('libGD.js', function(){
     		};
 
 			var exporter = new gd.Exporter(fs);
-			exporter.exportLayoutForPreview(project, layout, "/path/for/export/");
+			exporter.exportLayoutForPixiPreview(project, layout, "/path/for/export/");
 			exporter.delete();
 		});
 

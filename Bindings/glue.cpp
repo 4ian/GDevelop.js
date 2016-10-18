@@ -1457,6 +1457,36 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventMetadata___destroy___0(EventMetad
   delete self;
 }
 
+// ExternalLayout
+
+ExternalLayout* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_ExternalLayout_0() {
+  return new ExternalLayout();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_SetName_1(ExternalLayout* self, char* arg0) {
+  self->SetName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetName_0(ExternalLayout* self) {
+  return self->GetName().c_str();
+}
+
+InitialInstancesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetInitialInstances_0(ExternalLayout* self) {
+  return &self->GetInitialInstances();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_SerializeTo_1(ExternalLayout* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_UnserializeFrom_1(ExternalLayout* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout___destroy___0(ExternalLayout* self) {
+  delete self;
+}
+
 // Resource
 
 Resource* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_Resource_0() {
@@ -1924,6 +1954,10 @@ Layout* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetLayoutAt_1(Project* self
   return &self->GetLayoutAt(arg0);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SwapLayouts_2(Project* self, unsigned int arg0, unsigned int arg1) {
+  self->SwapLayouts(arg0, arg1);
+}
+
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetLayoutsCount_0(Project* self) {
   return self->GetLayoutsCount();
 }
@@ -1942,6 +1976,62 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetFirstLayout_1(Project* self
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetFirstLayout_0(Project* self) {
   return self->GetFirstLayout().c_str();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_HasExternalEventsNamed_1(Project* self, char* arg0) {
+  return self->HasExternalEventsNamed(arg0);
+}
+
+ExternalEvents* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetExternalEvents_1(Project* self, char* arg0) {
+  return &self->GetExternalEvents(arg0);
+}
+
+ExternalEvents* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetExternalEventsAt_1(Project* self, unsigned int arg0) {
+  return &self->GetExternalEventsAt(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SwapExternalEvents_2(Project* self, unsigned int arg0, unsigned int arg1) {
+  self->SwapExternalEvents(arg0, arg1);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetExternalEventsCount_0(Project* self) {
+  return self->GetExternalEventsCount();
+}
+
+ExternalEvents* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_InsertNewExternalEvents_2(Project* self, char* arg0, unsigned int arg1) {
+  return &self->InsertNewExternalEvents(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_RemoveExternalEvents_1(Project* self, char* arg0) {
+  self->RemoveExternalEvents(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_HasExternalLayoutNamed_1(Project* self, char* arg0) {
+  return self->HasExternalLayoutNamed(arg0);
+}
+
+ExternalLayout* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetExternalLayout_1(Project* self, char* arg0) {
+  return &self->GetExternalLayout(arg0);
+}
+
+ExternalLayout* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetExternalLayoutAt_1(Project* self, unsigned int arg0) {
+  return &self->GetExternalLayoutAt(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SwapExternalLayouts_2(Project* self, unsigned int arg0, unsigned int arg1) {
+  self->SwapExternalLayouts(arg0, arg1);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetExternalLayoutsCount_0(Project* self) {
+  return self->GetExternalLayoutsCount();
+}
+
+ExternalLayout* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_InsertNewExternalLayout_2(Project* self, char* arg0, unsigned int arg1) {
+  return &self->InsertNewExternalLayout(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_RemoveExternalLayout_1(Project* self, char* arg0) {
+  self->RemoveExternalLayout(arg0);
 }
 
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetVariables_0(Project* self) {
@@ -2557,12 +2647,12 @@ gdjs::Exporter* EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_Exporter_1(Abstrac
   return new gdjs::Exporter(*arg0);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportLayoutForPreview_3(gdjs::Exporter* self, Project* arg0, Layout* arg1, char* arg2) {
-  return self->ExportLayoutForPreview(*arg0, *arg1, arg2);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportLayoutForPixiPreview_3(gdjs::Exporter* self, Project* arg0, Layout* arg1, char* arg2) {
+  return self->ExportLayoutForPixiPreview(*arg0, *arg1, arg2);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportWholeProject_5(gdjs::Exporter* self, Project* arg0, char* arg1, bool arg2, bool arg3, bool arg4) {
-  return self->ExportWholeProject(*arg0, arg1, arg2, arg3, arg4);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportWholePixiProject_4(gdjs::Exporter* self, Project* arg0, char* arg1, bool arg2, bool arg3) {
+  return self->ExportWholePixiProject(*arg0, arg1, arg2, arg3);
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_GetLastError_0(gdjs::Exporter* self) {
@@ -2742,6 +2832,68 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister_Launch_1(Events
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister___destroy___0(EventsParametersLister* self) {
+  delete self;
+}
+
+// StandardEvent
+
+StandardEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_StandardEvent_0() {
+  return new StandardEvent();
+}
+
+InstructionsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_GetConditions_0(StandardEvent* self) {
+  return &self->GetConditions();
+}
+
+InstructionsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_GetActions_0(StandardEvent* self) {
+  return &self->GetActions();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_Clone_0(StandardEvent* self) {
+  self->Clone();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_GetType_0(StandardEvent* self) {
+  return self->GetType().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_SetType_1(StandardEvent* self, char* arg0) {
+  self->SetType(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_IsExecutable_0(StandardEvent* self) {
+  return self->IsExecutable();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_CanHaveSubEvents_0(StandardEvent* self) {
+  return self->CanHaveSubEvents();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_HasSubEvents_0(StandardEvent* self) {
+  return self->HasSubEvents();
+}
+
+EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_GetSubEvents_0(StandardEvent* self) {
+  return &self->GetSubEvents();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_IsDisabled_0(StandardEvent* self) {
+  return self->IsDisabled();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_SetDisabled_1(StandardEvent* self, bool arg0) {
+  self->SetDisabled(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_IsFolded_0(StandardEvent* self) {
+  return self->IsFolded();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_SetFolded_1(StandardEvent* self, bool arg0) {
+  self->SetFolded(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent___destroy___0(StandardEvent* self) {
   delete self;
 }
 
@@ -3191,65 +3343,41 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject___destroy___0(TextObject* s
   delete self;
 }
 
-// StandardEvent
+// ExternalEvents
 
-StandardEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_StandardEvent_0() {
-  return new StandardEvent();
+ExternalEvents* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalEvents_ExternalEvents_0() {
+  return new ExternalEvents();
 }
 
-InstructionsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_GetConditions_0(StandardEvent* self) {
-  return &self->GetConditions();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalEvents_SetName_1(ExternalEvents* self, char* arg0) {
+  self->SetName(arg0);
 }
 
-InstructionsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_GetActions_0(StandardEvent* self) {
-  return &self->GetActions();
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalEvents_GetName_0(ExternalEvents* self) {
+  return self->GetName().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_Clone_0(StandardEvent* self) {
-  self->Clone();
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalEvents_GetAssociatedLayout_0(ExternalEvents* self) {
+  return self->GetAssociatedLayout().c_str();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_GetType_0(StandardEvent* self) {
-  return self->GetType().c_str();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalEvents_SetAssociatedLayout_1(ExternalEvents* self, char* arg0) {
+  self->SetAssociatedLayout(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_SetType_1(StandardEvent* self, char* arg0) {
-  self->SetType(arg0);
+EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalEvents_GetEvents_0(ExternalEvents* self) {
+  return &self->GetEvents();
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_IsExecutable_0(StandardEvent* self) {
-  return self->IsExecutable();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalEvents_SerializeTo_1(ExternalEvents* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_CanHaveSubEvents_0(StandardEvent* self) {
-  return self->CanHaveSubEvents();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalEvents_UnserializeFrom_2(ExternalEvents* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_HasSubEvents_0(StandardEvent* self) {
-  return self->HasSubEvents();
-}
-
-EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_GetSubEvents_0(StandardEvent* self) {
-  return &self->GetSubEvents();
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_IsDisabled_0(StandardEvent* self) {
-  return self->IsDisabled();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_SetDisabled_1(StandardEvent* self, bool arg0) {
-  self->SetDisabled(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_IsFolded_0(StandardEvent* self) {
-  return self->IsFolded();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_SetFolded_1(StandardEvent* self, bool arg0) {
-  self->SetFolded(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent___destroy___0(StandardEvent* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalEvents___destroy___0(ExternalEvents* self) {
   delete self;
 }
 

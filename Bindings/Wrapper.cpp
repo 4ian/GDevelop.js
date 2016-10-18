@@ -13,6 +13,8 @@
 #include <GDCore/Extensions/Platform.h>
 #include <GDCore/Project/InitialInstance.h>
 #include <GDCore/Project/InitialInstancesContainer.h>
+#include <GDCore/Project/ExternalLayout.h>
+#include <GDCore/Project/ExternalEvents.h>
 #include <GDCore/Serialization/SerializerElement.h>
 #include <GDCore/Serialization/Serializer.h>
 
@@ -225,8 +227,8 @@ class InitialInstanceJSFunctorWrapper : public gd::InitialInstanceFunctor {
 public:
     InitialInstanceJSFunctorWrapper() {};
 
-    virtual void operator()(gd::InitialInstance * instance) {
-    	invoke(instance);
+    virtual void operator()(gd::InitialInstance & instance) {
+    	invoke(&instance);
     };
 
     virtual void invoke(gd::InitialInstance * instance) {
@@ -307,6 +309,8 @@ typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 
 //We postfix some methods with "At" as Javascript does not support overloading
 #define GetLayoutAt GetLayout
+#define GetExternalEventsAt GetExternalEvents
+#define GetExternalLayoutAt GetExternalLayout
 #define GetLayerAt GetLayer
 #define GetObjectAt GetObject
 #define GetAt Get
