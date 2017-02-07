@@ -375,6 +375,14 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Animation_HasNoDirections_0(Animation*
   return self->HasNoDirections();
 }
 
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Animation_UseMultipleDirections_0(Animation* self) {
+  return self->UseMultipleDirections();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Animation_SetUseMultipleDirections_1(Animation* self, bool arg0) {
+  self->SetUseMultipleDirections(arg0);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Animation___destroy___0(Animation* self) {
   delete self;
 }
@@ -623,10 +631,6 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_SwapAnimations_2(SpriteOb
   self->SwapAnimations(arg0, arg1);
 }
 
-gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_Clone_0(SpriteObject* self) {
-  return self->Clone();
-}
-
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_SetName_1(SpriteObject* self, char* arg0) {
   self->SetName(arg0);
 }
@@ -697,10 +701,6 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UpdateProperty_3(AdMobObje
 MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetProperties_1(AdMobObject* self, Project* arg0) {
   static MapStringPropertyDescriptor temp;
   return (temp = self->GetProperties(*arg0), &temp);
-}
-
-gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_Clone_0(AdMobObject* self) {
-  return self->Clone();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_SetName_1(AdMobObject* self, char* arg0) {
@@ -2484,10 +2484,6 @@ gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_gdObject_1(char* arg0) {
   return new gdObject(arg0);
 }
 
-gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_Clone_0(gdObject* self) {
-  return self->Clone();
-}
-
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_SetName_1(gdObject* self, char* arg0) {
   self->SetName(arg0);
 }
@@ -3097,10 +3093,6 @@ float EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetHeight_0(TiledSp
   return self->GetHeight();
 }
 
-gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_Clone_0(TiledSpriteObject* self) {
-  return self->Clone();
-}
-
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_SetName_1(TiledSpriteObject* self, char* arg0) {
   self->SetName(arg0);
 }
@@ -3280,10 +3272,6 @@ unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetColorG_0(TextObj
 
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetColorB_0(TextObject* self) {
   return self->GetColorB();
-}
-
-gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_Clone_0(TextObject* self) {
-  return self->Clone();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_SetName_1(TextObject* self, char* arg0) {

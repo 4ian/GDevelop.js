@@ -228,7 +228,6 @@ interface gdObject {
     //     global in glue.js!
     void gdObject([Const] DOMString name);
 
-    gdObject Clone();
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
     void SetType([Const] DOMString type);
@@ -947,6 +946,9 @@ interface Animation {
     [Ref] Direction GetDirection(unsigned long index);
     void SetDirection([Const, Ref] Direction direction, unsigned long index);
     boolean HasNoDirections();
+
+    boolean UseMultipleDirections();
+    void SetUseMultipleDirections(boolean enable);
 };
 
 interface SpriteObject {
@@ -961,7 +963,6 @@ interface SpriteObject {
     void SwapAnimations(unsigned long first, unsigned long second);
 
     //Inherited from gdObject:
-    gdObject Clone();
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
     void SetType([Const] DOMString type);
@@ -1011,7 +1012,6 @@ interface TextObject {
     unsigned long GetColorB();
 
     //Inherited from gdObject:
-    gdObject Clone();
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
     void SetType([Const] DOMString type);
@@ -1040,7 +1040,6 @@ interface TiledSpriteObject {
     float GetHeight();
 
     //Inherited from gdObject:
-    gdObject Clone();
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
     void SetType([Const] DOMString type);
@@ -1065,7 +1064,6 @@ interface AdMobObject {
     [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
 
     //Inherited from gdObject:
-    gdObject Clone();
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
     void SetType([Const] DOMString type);

@@ -672,6 +672,17 @@ Animation.prototype['HasNoDirections'] = Animation.prototype.HasNoDirections = f
   return !!(_emscripten_bind_Animation_HasNoDirections_0(self));
 };;
 
+Animation.prototype['UseMultipleDirections'] = Animation.prototype.UseMultipleDirections = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_Animation_UseMultipleDirections_0(self));
+};;
+
+Animation.prototype['SetUseMultipleDirections'] = Animation.prototype.SetUseMultipleDirections = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Animation_SetUseMultipleDirections_1(self, arg0);
+};;
+
   Animation.prototype['__destroy__'] = Animation.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Animation___destroy___0(self);
@@ -1080,11 +1091,6 @@ SpriteObject.prototype['SwapAnimations'] = SpriteObject.prototype.SwapAnimations
   _emscripten_bind_SpriteObject_SwapAnimations_2(self, arg0, arg1);
 };;
 
-SpriteObject.prototype['Clone'] = SpriteObject.prototype.Clone = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_SpriteObject_Clone_0(self), gdObject);
-};;
-
 SpriteObject.prototype['SetName'] = SpriteObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
@@ -1212,11 +1218,6 @@ AdMobObject.prototype['GetProperties'] = AdMobObject.prototype.GetProperties = f
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   return wrapPointer(_emscripten_bind_AdMobObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
-};;
-
-AdMobObject.prototype['Clone'] = AdMobObject.prototype.Clone = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_AdMobObject_Clone_0(self), gdObject);
 };;
 
 AdMobObject.prototype['SetName'] = AdMobObject.prototype.SetName = function(arg0) {
@@ -4048,11 +4049,6 @@ gdObject.prototype.__class__ = gdObject;
 gdObject.__cache__ = {};
 Module['gdObject'] = gdObject;
 
-gdObject.prototype['Clone'] = gdObject.prototype.Clone = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_gdObject_Clone_0(self), gdObject);
-};;
-
 gdObject.prototype['SetName'] = gdObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
@@ -5093,11 +5089,6 @@ TiledSpriteObject.prototype['GetHeight'] = TiledSpriteObject.prototype.GetHeight
   return _emscripten_bind_TiledSpriteObject_GetHeight_0(self);
 };;
 
-TiledSpriteObject.prototype['Clone'] = TiledSpriteObject.prototype.Clone = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_TiledSpriteObject_Clone_0(self), gdObject);
-};;
-
 TiledSpriteObject.prototype['SetName'] = TiledSpriteObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
@@ -5374,11 +5365,6 @@ TextObject.prototype['GetColorG'] = TextObject.prototype.GetColorG = function() 
 TextObject.prototype['GetColorB'] = TextObject.prototype.GetColorB = function() {
   var self = this.ptr;
   return _emscripten_bind_TextObject_GetColorB_0(self);
-};;
-
-TextObject.prototype['Clone'] = TextObject.prototype.Clone = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_TextObject_Clone_0(self), gdObject);
 };;
 
 TextObject.prototype['SetName'] = TextObject.prototype.SetName = function(arg0) {
