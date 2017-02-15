@@ -310,6 +310,9 @@ interface ExternalLayout {
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
 
+    void SetAssociatedLayout([Const] DOMString name);
+    [Const, Ref] DOMString GetAssociatedLayout();
+
     [Ref] InitialInstancesContainer GetInitialInstances();
 
     void SerializeTo([Ref] SerializerElement element);
@@ -1055,6 +1058,18 @@ interface TiledSpriteObject {
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface PanelSpriteObject {
+    void PanelSpriteObject([Const] DOMString name);
+
+    void SetTexture([Const] DOMString texture);
+    [Const, Ref] DOMString GetTexture();
+
+    void SetWidth(float width);
+    float GetWidth();
+    void SetHeight(float height);
+    float GetHeight();
 };
 
 interface AdMobObject {

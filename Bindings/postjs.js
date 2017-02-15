@@ -99,6 +99,7 @@
 
         gd.asSpriteObject = function(evt) { return gd.castObject(evt, gd.SpriteObject); }
         gd.asTiledSpriteObject = function(evt) { return gd.castObject(evt, gd.TiledSpriteObject); }
+        gd.asPanelSpriteObject = function(evt) { return gd.castObject(evt, gd.PanelSpriteObject); }
         gd.asTextObject = function(evt) { return gd.castObject(evt, gd.TextObject); }
 
         //Convenience methods:

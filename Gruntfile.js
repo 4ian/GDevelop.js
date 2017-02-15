@@ -57,7 +57,7 @@ module.exports = function(grunt) {
             //Launch CMake if needed
             cmake: {
                 src: [buildPath + "/CMakeCache.txt", "CMakeLists.txt"],
-                command: "cmake ../.. -DCMAKE_TOOLCHAIN_FILE=" + cmakeToolchainpath,
+                command: "cmake ../.. -DCMAKE_TOOLCHAIN_FILE=" + cmakeToolchainpath + " -DFULL_VERSION_NUMBER=FALSE",
                 options: {
                     execOptions: {
                         cwd: buildPath,

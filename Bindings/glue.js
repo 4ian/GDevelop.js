@@ -1189,134 +1189,58 @@ SpriteObject.prototype['UnserializeFrom'] = SpriteObject.prototype.UnserializeFr
   var self = this.ptr;
   _emscripten_bind_SpriteObject___destroy___0(self);
 };
-// AdMobObject
-function AdMobObject(arg0) {
+// PanelSpriteObject
+function PanelSpriteObject(arg0) {
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  this.ptr = _emscripten_bind_AdMobObject_AdMobObject_1(arg0);
-  getCache(AdMobObject)[this.ptr] = this;
+  this.ptr = _emscripten_bind_PanelSpriteObject_PanelSpriteObject_1(arg0);
+  getCache(PanelSpriteObject)[this.ptr] = this;
 };;
-AdMobObject.prototype = Object.create(WrapperObject.prototype);
-AdMobObject.prototype.constructor = AdMobObject;
-AdMobObject.prototype.__class__ = AdMobObject;
-AdMobObject.__cache__ = {};
-Module['AdMobObject'] = AdMobObject;
+PanelSpriteObject.prototype = Object.create(WrapperObject.prototype);
+PanelSpriteObject.prototype.constructor = PanelSpriteObject;
+PanelSpriteObject.prototype.__class__ = PanelSpriteObject;
+PanelSpriteObject.__cache__ = {};
+Module['PanelSpriteObject'] = PanelSpriteObject;
 
-AdMobObject.prototype['UpdateProperty'] = AdMobObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  return !!(_emscripten_bind_AdMobObject_UpdateProperty_3(self, arg0, arg1, arg2));
-};;
-
-AdMobObject.prototype['GetProperties'] = AdMobObject.prototype.GetProperties = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return wrapPointer(_emscripten_bind_AdMobObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
-};;
-
-AdMobObject.prototype['SetName'] = AdMobObject.prototype.SetName = function(arg0) {
+PanelSpriteObject.prototype['SetTexture'] = PanelSpriteObject.prototype.SetTexture = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_AdMobObject_SetName_1(self, arg0);
+  _emscripten_bind_PanelSpriteObject_SetTexture_1(self, arg0);
 };;
 
-AdMobObject.prototype['GetName'] = AdMobObject.prototype.GetName = function() {
+PanelSpriteObject.prototype['GetTexture'] = PanelSpriteObject.prototype.GetTexture = function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_AdMobObject_GetName_0(self));
+  return Pointer_stringify(_emscripten_bind_PanelSpriteObject_GetTexture_0(self));
 };;
 
-AdMobObject.prototype['SetType'] = AdMobObject.prototype.SetType = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_AdMobObject_SetType_1(self, arg0);
-};;
-
-AdMobObject.prototype['GetType'] = AdMobObject.prototype.GetType = function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_AdMobObject_GetType_0(self));
-};;
-
-AdMobObject.prototype['GetVariables'] = AdMobObject.prototype.GetVariables = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_AdMobObject_GetVariables_0(self), VariablesContainer);
-};;
-
-AdMobObject.prototype['GetAllBehaviorNames'] = AdMobObject.prototype.GetAllBehaviorNames = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_AdMobObject_GetAllBehaviorNames_0(self), VectorString);
-};;
-
-AdMobObject.prototype['HasBehaviorNamed'] = AdMobObject.prototype.HasBehaviorNamed = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return !!(_emscripten_bind_AdMobObject_HasBehaviorNamed_1(self, arg0));
-};;
-
-AdMobObject.prototype['AddNewBehavior'] = AdMobObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
-  return wrapPointer(_emscripten_bind_AdMobObject_AddNewBehavior_3(self, arg0, arg1, arg2), Behavior);
-};;
-
-AdMobObject.prototype['GetBehavior'] = AdMobObject.prototype.GetBehavior = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_AdMobObject_GetBehavior_1(self, arg0), Behavior);
-};;
-
-AdMobObject.prototype['RemoveBehavior'] = AdMobObject.prototype.RemoveBehavior = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_AdMobObject_RemoveBehavior_1(self, arg0);
-};;
-
-AdMobObject.prototype['RenameBehavior'] = AdMobObject.prototype.RenameBehavior = function(arg0, arg1) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  return !!(_emscripten_bind_AdMobObject_RenameBehavior_2(self, arg0, arg1));
-};;
-
-AdMobObject.prototype['SerializeTo'] = AdMobObject.prototype.SerializeTo = function(arg0) {
+PanelSpriteObject.prototype['SetWidth'] = PanelSpriteObject.prototype.SetWidth = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_AdMobObject_SerializeTo_1(self, arg0);
+  _emscripten_bind_PanelSpriteObject_SetWidth_1(self, arg0);
 };;
 
-AdMobObject.prototype['UnserializeFrom'] = AdMobObject.prototype.UnserializeFrom = function(arg0, arg1) {
+PanelSpriteObject.prototype['GetWidth'] = PanelSpriteObject.prototype.GetWidth = function() {
+  var self = this.ptr;
+  return _emscripten_bind_PanelSpriteObject_GetWidth_0(self);
+};;
+
+PanelSpriteObject.prototype['SetHeight'] = PanelSpriteObject.prototype.SetHeight = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_AdMobObject_UnserializeFrom_2(self, arg0, arg1);
+  _emscripten_bind_PanelSpriteObject_SetHeight_1(self, arg0);
 };;
 
-  AdMobObject.prototype['__destroy__'] = AdMobObject.prototype.__destroy__ = function() {
+PanelSpriteObject.prototype['GetHeight'] = PanelSpriteObject.prototype.GetHeight = function() {
   var self = this.ptr;
-  _emscripten_bind_AdMobObject___destroy___0(self);
+  return _emscripten_bind_PanelSpriteObject_GetHeight_0(self);
+};;
+
+  PanelSpriteObject.prototype['__destroy__'] = PanelSpriteObject.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_PanelSpriteObject___destroy___0(self);
 };
 // ObjectGroup
 function ObjectGroup() {
@@ -1554,6 +1478,135 @@ ArbitraryResourceWorkerJS.prototype['ExposeFile'] = ArbitraryResourceWorkerJS.pr
   ArbitraryResourceWorkerJS.prototype['__destroy__'] = ArbitraryResourceWorkerJS.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(self);
+};
+// AdMobObject
+function AdMobObject(arg0) {
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  this.ptr = _emscripten_bind_AdMobObject_AdMobObject_1(arg0);
+  getCache(AdMobObject)[this.ptr] = this;
+};;
+AdMobObject.prototype = Object.create(WrapperObject.prototype);
+AdMobObject.prototype.constructor = AdMobObject;
+AdMobObject.prototype.__class__ = AdMobObject;
+AdMobObject.__cache__ = {};
+Module['AdMobObject'] = AdMobObject;
+
+AdMobObject.prototype['UpdateProperty'] = AdMobObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_AdMobObject_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+AdMobObject.prototype['GetProperties'] = AdMobObject.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_AdMobObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+AdMobObject.prototype['SetName'] = AdMobObject.prototype.SetName = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_AdMobObject_SetName_1(self, arg0);
+};;
+
+AdMobObject.prototype['GetName'] = AdMobObject.prototype.GetName = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_AdMobObject_GetName_0(self));
+};;
+
+AdMobObject.prototype['SetType'] = AdMobObject.prototype.SetType = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_AdMobObject_SetType_1(self, arg0);
+};;
+
+AdMobObject.prototype['GetType'] = AdMobObject.prototype.GetType = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_AdMobObject_GetType_0(self));
+};;
+
+AdMobObject.prototype['GetVariables'] = AdMobObject.prototype.GetVariables = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_AdMobObject_GetVariables_0(self), VariablesContainer);
+};;
+
+AdMobObject.prototype['GetAllBehaviorNames'] = AdMobObject.prototype.GetAllBehaviorNames = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_AdMobObject_GetAllBehaviorNames_0(self), VectorString);
+};;
+
+AdMobObject.prototype['HasBehaviorNamed'] = AdMobObject.prototype.HasBehaviorNamed = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_AdMobObject_HasBehaviorNamed_1(self, arg0));
+};;
+
+AdMobObject.prototype['AddNewBehavior'] = AdMobObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return wrapPointer(_emscripten_bind_AdMobObject_AddNewBehavior_3(self, arg0, arg1, arg2), Behavior);
+};;
+
+AdMobObject.prototype['GetBehavior'] = AdMobObject.prototype.GetBehavior = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_AdMobObject_GetBehavior_1(self, arg0), Behavior);
+};;
+
+AdMobObject.prototype['RemoveBehavior'] = AdMobObject.prototype.RemoveBehavior = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_AdMobObject_RemoveBehavior_1(self, arg0);
+};;
+
+AdMobObject.prototype['RenameBehavior'] = AdMobObject.prototype.RenameBehavior = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return !!(_emscripten_bind_AdMobObject_RenameBehavior_2(self, arg0, arg1));
+};;
+
+AdMobObject.prototype['SerializeTo'] = AdMobObject.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_AdMobObject_SerializeTo_1(self, arg0);
+};;
+
+AdMobObject.prototype['UnserializeFrom'] = AdMobObject.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_AdMobObject_UnserializeFrom_2(self, arg0, arg1);
+};;
+
+  AdMobObject.prototype['__destroy__'] = AdMobObject.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_AdMobObject___destroy___0(self);
 };
 // BaseEvent
 function BaseEvent() {
@@ -2421,6 +2474,19 @@ ExternalLayout.prototype['SetName'] = ExternalLayout.prototype.SetName = functio
 ExternalLayout.prototype['GetName'] = ExternalLayout.prototype.GetName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ExternalLayout_GetName_0(self));
+};;
+
+ExternalLayout.prototype['SetAssociatedLayout'] = ExternalLayout.prototype.SetAssociatedLayout = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ExternalLayout_SetAssociatedLayout_1(self, arg0);
+};;
+
+ExternalLayout.prototype['GetAssociatedLayout'] = ExternalLayout.prototype.GetAssociatedLayout = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_ExternalLayout_GetAssociatedLayout_0(self));
 };;
 
 ExternalLayout.prototype['GetInitialInstances'] = ExternalLayout.prototype.GetInitialInstances = function() {
