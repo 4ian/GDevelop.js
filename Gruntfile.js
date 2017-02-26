@@ -28,24 +28,6 @@ module.exports = function(grunt) {
             dest: buildOutputPath+'libGD.js',
           },
         },
-        //Patch SFML to consider Emscripten target as Linux.
-        'string-replace': {
-          sfml: {
-            files: {
-              '../ExtLibs/SFML/include/SFML/Config.hpp': '../ExtLibs/SFML/include/SFML/Config.hpp',
-            },
-            options: {
-              replacements: [
-                // place files inline example
-                {
-                  pattern: "#elif defined(__linux__)",
-                  replacement: "#elif defined(EMSCRIPTEN) || defined(__linux__)"
-                }
-              ],
-              saveUnchanged: false
-            }
-          }
-        },
         mkdir: {
           embuild: {
             options: {
@@ -121,7 +103,6 @@ module.exports = function(grunt) {
       'clean',
       'mkdir:embuild',
       'newer:shell:cmake',
-      'string-replace:sfml',
       'newer:shell:updateGDBindings',
       'shell:make',
       'concat', 'compress'

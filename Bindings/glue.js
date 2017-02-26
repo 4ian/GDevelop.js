@@ -1117,6 +1117,44 @@ SpriteObject.prototype['GetType'] = SpriteObject.prototype.GetType = function() 
   return Pointer_stringify(_emscripten_bind_SpriteObject_GetType_0(self));
 };;
 
+SpriteObject.prototype['GetProperties'] = SpriteObject.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_SpriteObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+SpriteObject.prototype['UpdateProperty'] = SpriteObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_SpriteObject_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+SpriteObject.prototype['GetInitialInstanceProperties'] = SpriteObject.prototype.GetInitialInstanceProperties = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return wrapPointer(_emscripten_bind_SpriteObject_GetInitialInstanceProperties_3(self, arg0, arg1, arg2), MapStringPropertyDescriptor);
+};;
+
+SpriteObject.prototype['UpdateInitialInstanceProperty'] = SpriteObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return !!(_emscripten_bind_SpriteObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
 SpriteObject.prototype['GetVariables'] = SpriteObject.prototype.GetVariables = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_SpriteObject_GetVariables_0(self), VariablesContainer);
@@ -1236,6 +1274,138 @@ PanelSpriteObject.prototype['SetHeight'] = PanelSpriteObject.prototype.SetHeight
 PanelSpriteObject.prototype['GetHeight'] = PanelSpriteObject.prototype.GetHeight = function() {
   var self = this.ptr;
   return _emscripten_bind_PanelSpriteObject_GetHeight_0(self);
+};;
+
+PanelSpriteObject.prototype['SetName'] = PanelSpriteObject.prototype.SetName = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_PanelSpriteObject_SetName_1(self, arg0);
+};;
+
+PanelSpriteObject.prototype['GetName'] = PanelSpriteObject.prototype.GetName = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_PanelSpriteObject_GetName_0(self));
+};;
+
+PanelSpriteObject.prototype['SetType'] = PanelSpriteObject.prototype.SetType = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_PanelSpriteObject_SetType_1(self, arg0);
+};;
+
+PanelSpriteObject.prototype['GetType'] = PanelSpriteObject.prototype.GetType = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_PanelSpriteObject_GetType_0(self));
+};;
+
+PanelSpriteObject.prototype['GetProperties'] = PanelSpriteObject.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_PanelSpriteObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+PanelSpriteObject.prototype['UpdateProperty'] = PanelSpriteObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_PanelSpriteObject_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+PanelSpriteObject.prototype['GetInitialInstanceProperties'] = PanelSpriteObject.prototype.GetInitialInstanceProperties = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return wrapPointer(_emscripten_bind_PanelSpriteObject_GetInitialInstanceProperties_3(self, arg0, arg1, arg2), MapStringPropertyDescriptor);
+};;
+
+PanelSpriteObject.prototype['UpdateInitialInstanceProperty'] = PanelSpriteObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return !!(_emscripten_bind_PanelSpriteObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
+PanelSpriteObject.prototype['GetVariables'] = PanelSpriteObject.prototype.GetVariables = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_PanelSpriteObject_GetVariables_0(self), VariablesContainer);
+};;
+
+PanelSpriteObject.prototype['GetAllBehaviorNames'] = PanelSpriteObject.prototype.GetAllBehaviorNames = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_PanelSpriteObject_GetAllBehaviorNames_0(self), VectorString);
+};;
+
+PanelSpriteObject.prototype['HasBehaviorNamed'] = PanelSpriteObject.prototype.HasBehaviorNamed = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_PanelSpriteObject_HasBehaviorNamed_1(self, arg0));
+};;
+
+PanelSpriteObject.prototype['AddNewBehavior'] = PanelSpriteObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return wrapPointer(_emscripten_bind_PanelSpriteObject_AddNewBehavior_3(self, arg0, arg1, arg2), Behavior);
+};;
+
+PanelSpriteObject.prototype['GetBehavior'] = PanelSpriteObject.prototype.GetBehavior = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_PanelSpriteObject_GetBehavior_1(self, arg0), Behavior);
+};;
+
+PanelSpriteObject.prototype['RemoveBehavior'] = PanelSpriteObject.prototype.RemoveBehavior = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_PanelSpriteObject_RemoveBehavior_1(self, arg0);
+};;
+
+PanelSpriteObject.prototype['RenameBehavior'] = PanelSpriteObject.prototype.RenameBehavior = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return !!(_emscripten_bind_PanelSpriteObject_RenameBehavior_2(self, arg0, arg1));
+};;
+
+PanelSpriteObject.prototype['SerializeTo'] = PanelSpriteObject.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_PanelSpriteObject_SerializeTo_1(self, arg0);
+};;
+
+PanelSpriteObject.prototype['UnserializeFrom'] = PanelSpriteObject.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_PanelSpriteObject_UnserializeFrom_2(self, arg0, arg1);
 };;
 
   PanelSpriteObject.prototype['__destroy__'] = PanelSpriteObject.prototype.__destroy__ = function() {
@@ -1493,23 +1663,6 @@ AdMobObject.prototype.__class__ = AdMobObject;
 AdMobObject.__cache__ = {};
 Module['AdMobObject'] = AdMobObject;
 
-AdMobObject.prototype['UpdateProperty'] = AdMobObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  return !!(_emscripten_bind_AdMobObject_UpdateProperty_3(self, arg0, arg1, arg2));
-};;
-
-AdMobObject.prototype['GetProperties'] = AdMobObject.prototype.GetProperties = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return wrapPointer(_emscripten_bind_AdMobObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
-};;
-
 AdMobObject.prototype['SetName'] = AdMobObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
@@ -1534,6 +1687,44 @@ AdMobObject.prototype['SetType'] = AdMobObject.prototype.SetType = function(arg0
 AdMobObject.prototype['GetType'] = AdMobObject.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_AdMobObject_GetType_0(self));
+};;
+
+AdMobObject.prototype['GetProperties'] = AdMobObject.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_AdMobObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+AdMobObject.prototype['UpdateProperty'] = AdMobObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_AdMobObject_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+AdMobObject.prototype['GetInitialInstanceProperties'] = AdMobObject.prototype.GetInitialInstanceProperties = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return wrapPointer(_emscripten_bind_AdMobObject_GetInitialInstanceProperties_3(self, arg0, arg1, arg2), MapStringPropertyDescriptor);
+};;
+
+AdMobObject.prototype['UpdateInitialInstanceProperty'] = AdMobObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return !!(_emscripten_bind_AdMobObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
 };;
 
 AdMobObject.prototype['GetVariables'] = AdMobObject.prototype.GetVariables = function() {
@@ -4141,6 +4332,44 @@ gdObject.prototype['GetType'] = gdObject.prototype.GetType = function() {
   return Pointer_stringify(_emscripten_bind_gdObject_GetType_0(self));
 };;
 
+gdObject.prototype['GetProperties'] = gdObject.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_gdObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+gdObject.prototype['UpdateProperty'] = gdObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_gdObject_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+gdObject.prototype['GetInitialInstanceProperties'] = gdObject.prototype.GetInitialInstanceProperties = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return wrapPointer(_emscripten_bind_gdObject_GetInitialInstanceProperties_3(self, arg0, arg1, arg2), MapStringPropertyDescriptor);
+};;
+
+gdObject.prototype['UpdateInitialInstanceProperty'] = gdObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return !!(_emscripten_bind_gdObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
 gdObject.prototype['GetVariables'] = gdObject.prototype.GetVariables = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_gdObject_GetVariables_0(self), VariablesContainer);
@@ -5181,6 +5410,44 @@ TiledSpriteObject.prototype['GetType'] = TiledSpriteObject.prototype.GetType = f
   return Pointer_stringify(_emscripten_bind_TiledSpriteObject_GetType_0(self));
 };;
 
+TiledSpriteObject.prototype['GetProperties'] = TiledSpriteObject.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_TiledSpriteObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+TiledSpriteObject.prototype['UpdateProperty'] = TiledSpriteObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_TiledSpriteObject_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+TiledSpriteObject.prototype['GetInitialInstanceProperties'] = TiledSpriteObject.prototype.GetInitialInstanceProperties = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return wrapPointer(_emscripten_bind_TiledSpriteObject_GetInitialInstanceProperties_3(self, arg0, arg1, arg2), MapStringPropertyDescriptor);
+};;
+
+TiledSpriteObject.prototype['UpdateInitialInstanceProperty'] = TiledSpriteObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return !!(_emscripten_bind_TiledSpriteObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
 TiledSpriteObject.prototype['GetVariables'] = TiledSpriteObject.prototype.GetVariables = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_TiledSpriteObject_GetVariables_0(self), VariablesContainer);
@@ -5457,6 +5724,44 @@ TextObject.prototype['SetType'] = TextObject.prototype.SetType = function(arg0) 
 TextObject.prototype['GetType'] = TextObject.prototype.GetType = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_TextObject_GetType_0(self));
+};;
+
+TextObject.prototype['GetProperties'] = TextObject.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_TextObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+TextObject.prototype['UpdateProperty'] = TextObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_TextObject_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+TextObject.prototype['GetInitialInstanceProperties'] = TextObject.prototype.GetInitialInstanceProperties = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return wrapPointer(_emscripten_bind_TextObject_GetInitialInstanceProperties_3(self, arg0, arg1, arg2), MapStringPropertyDescriptor);
+};;
+
+TextObject.prototype['UpdateInitialInstanceProperty'] = TextObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return !!(_emscripten_bind_TextObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
 };;
 
 TextObject.prototype['GetVariables'] = TextObject.prototype.GetVariables = function() {

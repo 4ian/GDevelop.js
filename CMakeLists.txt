@@ -14,7 +14,7 @@ endif()
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} --memory-init-file 0" ) #Less efficient, but output a single JS file
 # SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -s ASSERTIONS=2 -s SAFE_HEAP=1" ) #Debug
 # SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -g4 -s DEMANGLE_SUPPORT=1" ) #Debug
-SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -O3" ) #Debug
+SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -O3" ) #Release
 
 #Common directories:
 ###

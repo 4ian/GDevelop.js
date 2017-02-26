@@ -647,6 +647,24 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_GetType_0(SpriteOb
   return self->GetType().c_str();
 }
 
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_GetProperties_1(SpriteObject* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_UpdateProperty_3(SpriteObject* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_GetInitialInstanceProperties_3(SpriteObject* self, InitialInstance* arg0, Project* arg1, Layout* arg2) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_UpdateInitialInstanceProperty_5(SpriteObject* self, InitialInstance* arg0, char* arg1, char* arg2, Project* arg3, Layout* arg4) {
+  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_GetVariables_0(SpriteObject* self) {
   return &self->GetVariables();
 }
@@ -716,6 +734,77 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetHeight_1(PanelSpr
 
 float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetHeight_0(PanelSpriteObject* self) {
   return self->GetHeight();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetName_1(PanelSpriteObject* self, char* arg0) {
+  self->SetName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetName_0(PanelSpriteObject* self) {
+  return self->GetName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetType_1(PanelSpriteObject* self, char* arg0) {
+  self->SetType(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetType_0(PanelSpriteObject* self) {
+  return self->GetType().c_str();
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetProperties_1(PanelSpriteObject* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_UpdateProperty_3(PanelSpriteObject* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetInitialInstanceProperties_3(PanelSpriteObject* self, InitialInstance* arg0, Project* arg1, Layout* arg2) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_UpdateInitialInstanceProperty_5(PanelSpriteObject* self, InitialInstance* arg0, char* arg1, char* arg2, Project* arg3, Layout* arg4) {
+  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
+VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetVariables_0(PanelSpriteObject* self) {
+  return &self->GetVariables();
+}
+
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetAllBehaviorNames_0(PanelSpriteObject* self) {
+  static VectorString temp;
+  return (temp = self->GetAllBehaviorNames(), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_HasBehaviorNamed_1(PanelSpriteObject* self, char* arg0) {
+  return self->HasBehaviorNamed(arg0);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_AddNewBehavior_3(PanelSpriteObject* self, Project* arg0, char* arg1, char* arg2) {
+  return self->AddNewBehavior(*arg0, arg1, arg2);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetBehavior_1(PanelSpriteObject* self, char* arg0) {
+  return &self->GetBehavior(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_RemoveBehavior_1(PanelSpriteObject* self, char* arg0) {
+  self->RemoveBehavior(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_RenameBehavior_2(PanelSpriteObject* self, char* arg0, char* arg1) {
+  return self->RenameBehavior(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SerializeTo_1(PanelSpriteObject* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_UnserializeFrom_2(PanelSpriteObject* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject___destroy___0(PanelSpriteObject* self) {
@@ -873,15 +962,6 @@ AdMobObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_AdMobObject_1(char
   return new AdMobObject(arg0);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UpdateProperty_3(AdMobObject* self, char* arg0, char* arg1, Project* arg2) {
-  return self->UpdateProperty(arg0, arg1, *arg2);
-}
-
-MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetProperties_1(AdMobObject* self, Project* arg0) {
-  static MapStringPropertyDescriptor temp;
-  return (temp = self->GetProperties(*arg0), &temp);
-}
-
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_SetName_1(AdMobObject* self, char* arg0) {
   self->SetName(arg0);
 }
@@ -896,6 +976,24 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_SetType_1(AdMobObject* sel
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetType_0(AdMobObject* self) {
   return self->GetType().c_str();
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetProperties_1(AdMobObject* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UpdateProperty_3(AdMobObject* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetInitialInstanceProperties_3(AdMobObject* self, InitialInstance* arg0, Project* arg1, Layout* arg2) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UpdateInitialInstanceProperty_5(AdMobObject* self, InitialInstance* arg0, char* arg1, char* arg2, Project* arg3, Layout* arg4) {
+  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
 }
 
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetVariables_0(AdMobObject* self) {
@@ -2542,6 +2640,24 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_GetType_0(gdObject* se
   return self->GetType().c_str();
 }
 
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_GetProperties_1(gdObject* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_UpdateProperty_3(gdObject* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_GetInitialInstanceProperties_3(gdObject* self, InitialInstance* arg0, Project* arg1, Layout* arg2) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_UpdateInitialInstanceProperty_5(gdObject* self, InitialInstance* arg0, char* arg1, char* arg2, Project* arg3, Layout* arg4) {
+  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_GetVariables_0(gdObject* self) {
   return &self->GetVariables();
 }
@@ -3151,6 +3267,24 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetType_0(Til
   return self->GetType().c_str();
 }
 
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetProperties_1(TiledSpriteObject* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_UpdateProperty_3(TiledSpriteObject* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetInitialInstanceProperties_3(TiledSpriteObject* self, InitialInstance* arg0, Project* arg1, Layout* arg2) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_UpdateInitialInstanceProperty_5(TiledSpriteObject* self, InitialInstance* arg0, char* arg1, char* arg2, Project* arg3, Layout* arg4) {
+  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetVariables_0(TiledSpriteObject* self) {
   return &self->GetVariables();
 }
@@ -3330,6 +3464,24 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_SetType_1(TextObject* self,
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetType_0(TextObject* self) {
   return self->GetType().c_str();
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetProperties_1(TextObject* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_UpdateProperty_3(TextObject* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetInitialInstanceProperties_3(TextObject* self, InitialInstance* arg0, Project* arg1, Layout* arg2) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_UpdateInitialInstanceProperty_5(TextObject* self, InitialInstance* arg0, char* arg1, char* arg2, Project* arg3, Layout* arg4) {
+  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
 }
 
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetVariables_0(TextObject* self) {
