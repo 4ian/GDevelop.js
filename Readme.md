@@ -64,6 +64,12 @@ Or launch example:
 
 The demo generate a json file that can be opened with [GDevelop] or [GDevApp]!
 
+### Memory profiler
+
+You can also build a version with the Emscripten memory profiler (added at the bottom of the web page):
+
+    grunt build:with-profiler
+
 ### About the internal steps of compilation
 
 The grunt *build* task:

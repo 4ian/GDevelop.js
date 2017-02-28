@@ -1,15 +1,20 @@
 module.exports = function(grunt) {
-
-    //Sanity checks
-    if (!process.env.EMSCRIPTEN) {
-      console.error("EMSCRIPTEN env. variable is not set");
-      console.log("Please set Emscripten environment by launching `emsdk_env` script");
-    }
-
     var emscriptenPath = process.env.EMSCRIPTEN;
+    var emscriptenMemoryProfiler = emscriptenPath + "/src/memoryprofiler.js";
     var cmakeToolchainpath = emscriptenPath + "/cmake/Modules/Platform/Emscripten.cmake";
     var buildOutputPath = "../Binaries/Output/libGD.js/Release/";
     var buildPath = "../Binaries/embuild";
+
+    //Sanity checks
+    var fs = require('fs');
+    if (!process.env.EMSCRIPTEN) {
+      console.error("🔴 EMSCRIPTEN env. variable is not set");
+      console.log("⚠️ Please set Emscripten environment by launching `emsdk_env` script");
+    }
+    if (!fs.existsSync(emscriptenMemoryProfiler)) {
+      console.error("🔴 Unable to find memoryprofiler.js inside Emscripten sources");
+      console.log("⚠️ Building with profiler (build:with-profiler task) won't work");
+    }
 
     grunt.initConfig({
         mochacli: {
@@ -23,8 +28,12 @@ module.exports = function(grunt) {
           options: {
             separator: ';',
           },
-          dist: {
+          'without-profiler': {
             src: ['Bindings/prejs.js', buildOutputPath+'libGD.raw.js', 'Bindings/glue.js', 'Bindings/postjs.js'],
+            dest: buildOutputPath+'libGD.js',
+          },
+          'with-profiler': {
+            src: ['Bindings/prejs.js', buildOutputPath+'libGD.raw.js', 'Bindings/glue.js', emscriptenMemoryProfiler, 'Bindings/postjs.js'],
             dest: buildOutputPath+'libGD.js',
           },
         },
@@ -99,13 +108,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-mkdir');
-    grunt.registerTask('build', [
+    grunt.registerTask('build:raw', [
       'clean',
       'mkdir:embuild',
       'newer:shell:cmake',
       'newer:shell:updateGDBindings',
       'shell:make',
-      'concat', 'compress'
     ]);
+    grunt.registerTask('build', ['build:raw', 'concat:without-profiler', 'compress']);
+    grunt.registerTask('build:with-profiler', ['build:raw', 'concat:with-profiler', 'compress']);
     grunt.registerTask('test', ['mochacli']);
 };
