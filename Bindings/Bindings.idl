@@ -282,6 +282,7 @@ interface Layout {
     boolean HasLayerNamed([Const] DOMString name);
     void RemoveLayer([Const] DOMString name);
     unsigned long GetLayersCount();
+    void SwapLayers(unsigned long firstLayerIndex, unsigned long secondLayerIndex);
 
     //Inherited from gd::ClassWithObjects
     [Ref] gdObject InsertNewObject([Ref] Project project, [Const] DOMString type, [Const] DOMString name, unsigned long pos);

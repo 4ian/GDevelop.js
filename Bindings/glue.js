@@ -273,6 +273,13 @@ Layout.prototype['GetLayersCount'] = Layout.prototype.GetLayersCount = function(
   return _emscripten_bind_Layout_GetLayersCount_0(self);
 };;
 
+Layout.prototype['SwapLayers'] = Layout.prototype.SwapLayers = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Layout_SwapLayers_2(self, arg0, arg1);
+};;
+
 Layout.prototype['InsertNewObject'] = Layout.prototype.InsertNewObject = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
   ensureStringCache.prepare();

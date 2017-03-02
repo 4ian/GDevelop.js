@@ -111,6 +111,37 @@
             return arr;
         }
 
+        // Add gd.Serializer.fromJSObject which is much faster than manually parsing
+        // JSON with gd.Serializer.fromJSON.
+        gd.Serializer._fromJSObject = function(object, element) {
+            if (typeof object === 'number') {
+                element.setDouble(object);
+            } else if (typeof object === 'string') {
+                element.setString(object);
+            } else if (typeof object === 'boolean') {
+                element.setBool(object);
+            } else if (Array.isArray(object)) {
+                for(var i = 0;i<object.length;++i) {
+                    var item = element.addChild("");
+                    gd.Serializer._fromJSObject(object[i], item);
+                }
+            } else {
+                for(var childName in object) {
+                    if (object.hasOwnProperty(childName)) {
+                        var child = element.addChild(childName);
+                        gd.Serializer._fromJSObject(object[childName], child);
+                    }
+                }
+            }
+        };
+
+        gd.Serializer.fromJSObject = function(object) {
+            var element = new gd.SerializerElement();
+            if (object) gd.Serializer._fromJSObject(object, element);
+
+            return element;
+        };
+
         //Preserve backward compatibility with some alias for methods:
         gd.VectorString.prototype.get = gd.VectorString.prototype.at;
         gd.VectorPlatformExtension.prototype.get = gd.VectorPlatformExtension.prototype.at;

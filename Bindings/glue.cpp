@@ -128,6 +128,10 @@ unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetLayersCount_0(Layout
   return self->GetLayersCount();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SwapLayers_2(Layout* self, unsigned int arg0, unsigned int arg1) {
+  self->SwapLayers(arg0, arg1);
+}
+
 gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertNewObject_4(Layout* self, Project* arg0, char* arg1, char* arg2, unsigned int arg3) {
   return &self->InsertNewObject(*arg0, arg1, arg2, arg3);
 }
