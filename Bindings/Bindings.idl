@@ -440,6 +440,7 @@ interface InitialInstance {
 
 interface InitialInstancesContainer {
     void InitialInstancesContainer();
+    InitialInstancesContainer Clone();
 
     unsigned long GetInstancesCount();
 

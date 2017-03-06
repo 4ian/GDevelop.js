@@ -108,6 +108,7 @@ describe('libGD.js', function(){
 
 	describe('gd.InitialInstancesContainer', function(){
 		var container = new gd.InitialInstancesContainer();
+		var containerCopy = null;
 
 		it('initial state', function(){
 			expect(container.getInstancesCount()).to.be(0);
@@ -174,6 +175,18 @@ describe('libGD.js', function(){
 				expect(instance.getObjectName()).to.be("MyObject3");
 			};
 			container.iterateOverInstancesWithZOrdering(functor, "YetAnotherLayer");
+		});
+		it('can be cloned', function() {
+			containerCopy = container.clone();
+			expect(containerCopy.getInstancesCount()).to.be(3);
+
+			var instance = containerCopy.insertNewInitialInstance();
+			instance.setObjectName("MyObject4");
+			expect(containerCopy.getInstancesCount()).to.be(4);
+			expect(container.getInstancesCount()).to.be(3);
+
+			containerCopy.delete();
+			containerCopy = null;
 		});
 		it('removing instances', function() {
 			container.removeInitialInstancesOfObject("MyObject");

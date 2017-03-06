@@ -4460,6 +4460,11 @@ InitialInstancesContainer.prototype.__class__ = InitialInstancesContainer;
 InitialInstancesContainer.__cache__ = {};
 Module['InitialInstancesContainer'] = InitialInstancesContainer;
 
+InitialInstancesContainer.prototype['Clone'] = InitialInstancesContainer.prototype.Clone = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_InitialInstancesContainer_Clone_0(self), InitialInstancesContainer);
+};;
+
 InitialInstancesContainer.prototype['GetInstancesCount'] = InitialInstancesContainer.prototype.GetInstancesCount = function() {
   var self = this.ptr;
   return _emscripten_bind_InitialInstancesContainer_GetInstancesCount_0(self);

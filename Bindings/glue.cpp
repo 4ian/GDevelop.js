@@ -2709,6 +2709,10 @@ InitialInstancesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstances
   return new InitialInstancesContainer();
 }
 
+InitialInstancesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_Clone_0(InitialInstancesContainer* self) {
+  return self->Clone();
+}
+
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_GetInstancesCount_0(InitialInstancesContainer* self) {
   return self->GetInstancesCount();
 }
