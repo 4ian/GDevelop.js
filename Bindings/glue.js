@@ -761,7 +761,7 @@ VariablesContainer.prototype['Rename'] = VariablesContainer.prototype.Rename = f
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
-  _emscripten_bind_VariablesContainer_Rename_2(self, arg0, arg1);
+  return !!(_emscripten_bind_VariablesContainer_Rename_2(self, arg0, arg1));
 };;
 
 VariablesContainer.prototype['Swap'] = VariablesContainer.prototype.Swap = function(arg0, arg1) {
@@ -787,6 +787,18 @@ VariablesContainer.prototype['Count'] = VariablesContainer.prototype.Count = fun
 VariablesContainer.prototype['Clear'] = VariablesContainer.prototype.Clear = function() {
   var self = this.ptr;
   _emscripten_bind_VariablesContainer_Clear_0(self);
+};;
+
+VariablesContainer.prototype['SerializeTo'] = VariablesContainer.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VariablesContainer_SerializeTo_1(self, arg0);
+};;
+
+VariablesContainer.prototype['UnserializeFrom'] = VariablesContainer.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VariablesContainer_UnserializeFrom_1(self, arg0);
 };;
 
   VariablesContainer.prototype['__destroy__'] = VariablesContainer.prototype.__destroy__ = function() {
@@ -2169,6 +2181,16 @@ Variable.prototype['RemoveChild'] = Variable.prototype.RemoveChild = function(ar
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Variable_RemoveChild_1(self, arg0);
+};;
+
+Variable.prototype['RenameChild'] = Variable.prototype.RenameChild = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return !!(_emscripten_bind_Variable_RenameChild_2(self, arg0, arg1));
 };;
 
 Variable.prototype['GetAllChildren'] = Variable.prototype.GetAllChildren = function() {

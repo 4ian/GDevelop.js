@@ -421,8 +421,8 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_Remove_1(VariablesC
   self->Remove(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_Rename_2(VariablesContainer* self, char* arg0, char* arg1) {
-  self->Rename(arg0, arg1);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_Rename_2(VariablesContainer* self, char* arg0, char* arg1) {
+  return self->Rename(arg0, arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_Swap_2(VariablesContainer* self, unsigned int arg0, unsigned int arg1) {
@@ -439,6 +439,14 @@ unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_Count_0(Var
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_Clear_0(VariablesContainer* self) {
   self->Clear();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_SerializeTo_1(VariablesContainer* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_UnserializeFrom_1(VariablesContainer* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer___destroy___0(VariablesContainer* self) {
@@ -1263,6 +1271,10 @@ Variable* EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_GetChild_1(Variable* sel
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_RemoveChild_1(Variable* self, char* arg0) {
   self->RemoveChild(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_RenameChild_2(Variable* self, char* arg0, char* arg1) {
+  return self->RenameChild(arg0, arg1);
 }
 
 const MapStringVariable* EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_GetAllChildren_0(Variable* self) {

@@ -113,6 +113,7 @@ interface Variable {
     boolean HasChild([Const] DOMString str);
     [Ref] Variable GetChild([Const] DOMString str);
     void RemoveChild([Const] DOMString name);
+    boolean RenameChild([Const] DOMString oldName, [Const] DOMString newName);
     [Const, Ref] MapStringVariable GetAllChildren();
     boolean IsNumber();
     boolean IsStructure();
@@ -127,11 +128,14 @@ interface VariablesContainer {
     [Ref] Variable Insert([Const] DOMString name, [Const, Ref] Variable var, unsigned long index);
     [Ref] Variable InsertNew([Const] DOMString name, unsigned long index);
     void Remove([Const] DOMString name);
-    void Rename([Const] DOMString oldName, [Const] DOMString newName);
+    boolean Rename([Const] DOMString oldName, [Const] DOMString newName);
     void Swap(unsigned long firstIndex, unsigned long secondIndex);
     unsigned long GetPosition([Const] DOMString name);
     unsigned long Count();
     void Clear();
+    
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
 };
 
 interface Project {
