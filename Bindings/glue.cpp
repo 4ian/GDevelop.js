@@ -937,6 +937,87 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter___destroy
   delete self;
 }
 
+// TextEntryObject
+
+TextEntryObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_TextEntryObject_1(char* arg0) {
+  return new TextEntryObject(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_SetName_1(TextEntryObject* self, char* arg0) {
+  self->SetName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetName_0(TextEntryObject* self) {
+  return self->GetName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_SetType_1(TextEntryObject* self, char* arg0) {
+  self->SetType(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetType_0(TextEntryObject* self) {
+  return self->GetType().c_str();
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetProperties_1(TextEntryObject* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_UpdateProperty_3(TextEntryObject* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetInitialInstanceProperties_3(TextEntryObject* self, InitialInstance* arg0, Project* arg1, Layout* arg2) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_UpdateInitialInstanceProperty_5(TextEntryObject* self, InitialInstance* arg0, char* arg1, char* arg2, Project* arg3, Layout* arg4) {
+  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
+VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetVariables_0(TextEntryObject* self) {
+  return &self->GetVariables();
+}
+
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetAllBehaviorNames_0(TextEntryObject* self) {
+  static VectorString temp;
+  return (temp = self->GetAllBehaviorNames(), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_HasBehaviorNamed_1(TextEntryObject* self, char* arg0) {
+  return self->HasBehaviorNamed(arg0);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_AddNewBehavior_3(TextEntryObject* self, Project* arg0, char* arg1, char* arg2) {
+  return self->AddNewBehavior(*arg0, arg1, arg2);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetBehavior_1(TextEntryObject* self, char* arg0) {
+  return &self->GetBehavior(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_RemoveBehavior_1(TextEntryObject* self, char* arg0) {
+  self->RemoveBehavior(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_RenameBehavior_2(TextEntryObject* self, char* arg0, char* arg1) {
+  return self->RenameBehavior(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_SerializeTo_1(TextEntryObject* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_UnserializeFrom_2(TextEntryObject* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject___destroy___0(TextEntryObject* self) {
+  delete self;
+}
+
 // PairStringVariable
 
 PairStringVariable* EMSCRIPTEN_KEEPALIVE emscripten_bind_PairStringVariable_PairStringVariable_0() {
@@ -1169,6 +1250,99 @@ temp.clear(); for(auto it = self->begin(); it != self->end();++it) { temp.push_b
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringExpressionMetadata___destroy___0(MapStringExpressionMetadata* self) {
+  delete self;
+}
+
+// ShapePainterObject
+
+ShapePainterObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_ShapePainterObject_1(char* arg0) {
+  return new ShapePainterObject(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_SetCoordinatesAbsolute_0(ShapePainterObject* self) {
+  self->SetCoordinatesAbsolute();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_SetCoordinatesRelative_0(ShapePainterObject* self) {
+  self->SetCoordinatesRelative();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_AreCoordinatesAbsolute_0(ShapePainterObject* self) {
+  return self->AreCoordinatesAbsolute();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_SetName_1(ShapePainterObject* self, char* arg0) {
+  self->SetName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetName_0(ShapePainterObject* self) {
+  return self->GetName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_SetType_1(ShapePainterObject* self, char* arg0) {
+  self->SetType(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetType_0(ShapePainterObject* self) {
+  return self->GetType().c_str();
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetProperties_1(ShapePainterObject* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_UpdateProperty_3(ShapePainterObject* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetInitialInstanceProperties_3(ShapePainterObject* self, InitialInstance* arg0, Project* arg1, Layout* arg2) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_UpdateInitialInstanceProperty_5(ShapePainterObject* self, InitialInstance* arg0, char* arg1, char* arg2, Project* arg3, Layout* arg4) {
+  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
+VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetVariables_0(ShapePainterObject* self) {
+  return &self->GetVariables();
+}
+
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetAllBehaviorNames_0(ShapePainterObject* self) {
+  static VectorString temp;
+  return (temp = self->GetAllBehaviorNames(), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_HasBehaviorNamed_1(ShapePainterObject* self, char* arg0) {
+  return self->HasBehaviorNamed(arg0);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_AddNewBehavior_3(ShapePainterObject* self, Project* arg0, char* arg1, char* arg2) {
+  return self->AddNewBehavior(*arg0, arg1, arg2);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetBehavior_1(ShapePainterObject* self, char* arg0) {
+  return &self->GetBehavior(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_RemoveBehavior_1(ShapePainterObject* self, char* arg0) {
+  self->RemoveBehavior(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_RenameBehavior_2(ShapePainterObject* self, char* arg0, char* arg1) {
+  return self->RenameBehavior(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_SerializeTo_1(ShapePainterObject* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_UnserializeFrom_2(ShapePainterObject* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject___destroy___0(ShapePainterObject* self) {
   delete self;
 }
 

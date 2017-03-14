@@ -46,6 +46,8 @@
 #include "../../Extensions/TextObject/TextObject.h"
 #include "../../Extensions/AdMobObject/AdMobObject.h"
 #include "../../Extensions/PanelSpriteObject/PanelSpriteObject.h"
+#include "../../Extensions/PrimitiveDrawing/ShapePainterObject.h"
+#include "../../Extensions/TextEntryObject/TextEntryObject.h"
 
 #include <GDJS/Events/CodeGeneration/EventsCodeGenerator.h>
 #include <GDJS/IDE/Exporter.h>

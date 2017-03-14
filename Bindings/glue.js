@@ -1604,6 +1604,156 @@ InstructionSentenceFormatter.prototype['LoadTypesFormattingFromConfig'] = Instru
   var self = this.ptr;
   _emscripten_bind_InstructionSentenceFormatter___destroy___0(self);
 };
+// TextEntryObject
+function TextEntryObject(arg0) {
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  this.ptr = _emscripten_bind_TextEntryObject_TextEntryObject_1(arg0);
+  getCache(TextEntryObject)[this.ptr] = this;
+};;
+TextEntryObject.prototype = Object.create(WrapperObject.prototype);
+TextEntryObject.prototype.constructor = TextEntryObject;
+TextEntryObject.prototype.__class__ = TextEntryObject;
+TextEntryObject.__cache__ = {};
+Module['TextEntryObject'] = TextEntryObject;
+
+TextEntryObject.prototype['SetName'] = TextEntryObject.prototype.SetName = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_TextEntryObject_SetName_1(self, arg0);
+};;
+
+TextEntryObject.prototype['GetName'] = TextEntryObject.prototype.GetName = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_TextEntryObject_GetName_0(self));
+};;
+
+TextEntryObject.prototype['SetType'] = TextEntryObject.prototype.SetType = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_TextEntryObject_SetType_1(self, arg0);
+};;
+
+TextEntryObject.prototype['GetType'] = TextEntryObject.prototype.GetType = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_TextEntryObject_GetType_0(self));
+};;
+
+TextEntryObject.prototype['GetProperties'] = TextEntryObject.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_TextEntryObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+TextEntryObject.prototype['UpdateProperty'] = TextEntryObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_TextEntryObject_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+TextEntryObject.prototype['GetInitialInstanceProperties'] = TextEntryObject.prototype.GetInitialInstanceProperties = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return wrapPointer(_emscripten_bind_TextEntryObject_GetInitialInstanceProperties_3(self, arg0, arg1, arg2), MapStringPropertyDescriptor);
+};;
+
+TextEntryObject.prototype['UpdateInitialInstanceProperty'] = TextEntryObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return !!(_emscripten_bind_TextEntryObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
+TextEntryObject.prototype['GetVariables'] = TextEntryObject.prototype.GetVariables = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_TextEntryObject_GetVariables_0(self), VariablesContainer);
+};;
+
+TextEntryObject.prototype['GetAllBehaviorNames'] = TextEntryObject.prototype.GetAllBehaviorNames = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_TextEntryObject_GetAllBehaviorNames_0(self), VectorString);
+};;
+
+TextEntryObject.prototype['HasBehaviorNamed'] = TextEntryObject.prototype.HasBehaviorNamed = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_TextEntryObject_HasBehaviorNamed_1(self, arg0));
+};;
+
+TextEntryObject.prototype['AddNewBehavior'] = TextEntryObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return wrapPointer(_emscripten_bind_TextEntryObject_AddNewBehavior_3(self, arg0, arg1, arg2), Behavior);
+};;
+
+TextEntryObject.prototype['GetBehavior'] = TextEntryObject.prototype.GetBehavior = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_TextEntryObject_GetBehavior_1(self, arg0), Behavior);
+};;
+
+TextEntryObject.prototype['RemoveBehavior'] = TextEntryObject.prototype.RemoveBehavior = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_TextEntryObject_RemoveBehavior_1(self, arg0);
+};;
+
+TextEntryObject.prototype['RenameBehavior'] = TextEntryObject.prototype.RenameBehavior = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return !!(_emscripten_bind_TextEntryObject_RenameBehavior_2(self, arg0, arg1));
+};;
+
+TextEntryObject.prototype['SerializeTo'] = TextEntryObject.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_TextEntryObject_SerializeTo_1(self, arg0);
+};;
+
+TextEntryObject.prototype['UnserializeFrom'] = TextEntryObject.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_TextEntryObject_UnserializeFrom_2(self, arg0, arg1);
+};;
+
+  TextEntryObject.prototype['__destroy__'] = TextEntryObject.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_TextEntryObject___destroy___0(self);
+};
 // PairStringVariable
 function PairStringVariable() {
   this.ptr = _emscripten_bind_PairStringVariable_PairStringVariable_0();
@@ -2013,6 +2163,171 @@ MapStringExpressionMetadata.prototype['MAP_keys'] = MapStringExpressionMetadata.
   MapStringExpressionMetadata.prototype['__destroy__'] = MapStringExpressionMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_MapStringExpressionMetadata___destroy___0(self);
+};
+// ShapePainterObject
+function ShapePainterObject(arg0) {
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  this.ptr = _emscripten_bind_ShapePainterObject_ShapePainterObject_1(arg0);
+  getCache(ShapePainterObject)[this.ptr] = this;
+};;
+ShapePainterObject.prototype = Object.create(WrapperObject.prototype);
+ShapePainterObject.prototype.constructor = ShapePainterObject;
+ShapePainterObject.prototype.__class__ = ShapePainterObject;
+ShapePainterObject.__cache__ = {};
+Module['ShapePainterObject'] = ShapePainterObject;
+
+ShapePainterObject.prototype['SetCoordinatesAbsolute'] = ShapePainterObject.prototype.SetCoordinatesAbsolute = function() {
+  var self = this.ptr;
+  _emscripten_bind_ShapePainterObject_SetCoordinatesAbsolute_0(self);
+};;
+
+ShapePainterObject.prototype['SetCoordinatesRelative'] = ShapePainterObject.prototype.SetCoordinatesRelative = function() {
+  var self = this.ptr;
+  _emscripten_bind_ShapePainterObject_SetCoordinatesRelative_0(self);
+};;
+
+ShapePainterObject.prototype['AreCoordinatesAbsolute'] = ShapePainterObject.prototype.AreCoordinatesAbsolute = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_ShapePainterObject_AreCoordinatesAbsolute_0(self));
+};;
+
+ShapePainterObject.prototype['SetName'] = ShapePainterObject.prototype.SetName = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ShapePainterObject_SetName_1(self, arg0);
+};;
+
+ShapePainterObject.prototype['GetName'] = ShapePainterObject.prototype.GetName = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_ShapePainterObject_GetName_0(self));
+};;
+
+ShapePainterObject.prototype['SetType'] = ShapePainterObject.prototype.SetType = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ShapePainterObject_SetType_1(self, arg0);
+};;
+
+ShapePainterObject.prototype['GetType'] = ShapePainterObject.prototype.GetType = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_ShapePainterObject_GetType_0(self));
+};;
+
+ShapePainterObject.prototype['GetProperties'] = ShapePainterObject.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_ShapePainterObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+ShapePainterObject.prototype['UpdateProperty'] = ShapePainterObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_ShapePainterObject_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+ShapePainterObject.prototype['GetInitialInstanceProperties'] = ShapePainterObject.prototype.GetInitialInstanceProperties = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return wrapPointer(_emscripten_bind_ShapePainterObject_GetInitialInstanceProperties_3(self, arg0, arg1, arg2), MapStringPropertyDescriptor);
+};;
+
+ShapePainterObject.prototype['UpdateInitialInstanceProperty'] = ShapePainterObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return !!(_emscripten_bind_ShapePainterObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
+ShapePainterObject.prototype['GetVariables'] = ShapePainterObject.prototype.GetVariables = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ShapePainterObject_GetVariables_0(self), VariablesContainer);
+};;
+
+ShapePainterObject.prototype['GetAllBehaviorNames'] = ShapePainterObject.prototype.GetAllBehaviorNames = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ShapePainterObject_GetAllBehaviorNames_0(self), VectorString);
+};;
+
+ShapePainterObject.prototype['HasBehaviorNamed'] = ShapePainterObject.prototype.HasBehaviorNamed = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_ShapePainterObject_HasBehaviorNamed_1(self, arg0));
+};;
+
+ShapePainterObject.prototype['AddNewBehavior'] = ShapePainterObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return wrapPointer(_emscripten_bind_ShapePainterObject_AddNewBehavior_3(self, arg0, arg1, arg2), Behavior);
+};;
+
+ShapePainterObject.prototype['GetBehavior'] = ShapePainterObject.prototype.GetBehavior = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ShapePainterObject_GetBehavior_1(self, arg0), Behavior);
+};;
+
+ShapePainterObject.prototype['RemoveBehavior'] = ShapePainterObject.prototype.RemoveBehavior = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ShapePainterObject_RemoveBehavior_1(self, arg0);
+};;
+
+ShapePainterObject.prototype['RenameBehavior'] = ShapePainterObject.prototype.RenameBehavior = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return !!(_emscripten_bind_ShapePainterObject_RenameBehavior_2(self, arg0, arg1));
+};;
+
+ShapePainterObject.prototype['SerializeTo'] = ShapePainterObject.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ShapePainterObject_SerializeTo_1(self, arg0);
+};;
+
+ShapePainterObject.prototype['UnserializeFrom'] = ShapePainterObject.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_ShapePainterObject_UnserializeFrom_2(self, arg0, arg1);
+};;
+
+  ShapePainterObject.prototype['__destroy__'] = ShapePainterObject.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_ShapePainterObject___destroy___0(self);
 };
 // VectorPairStringTextFormatting
 function VectorPairStringTextFormatting() { throw "cannot construct a VectorPairStringTextFormatting, no constructor in IDL" }

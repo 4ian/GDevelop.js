@@ -45,6 +45,20 @@ describe('libGD.js - GDJS related tests', function(){
 			expect(object.getTexture()).to.be("MyImageName");
 		});
 	});
+	describe('ShapePainterObject', function(){
+		var object = new gd.ShapePainterObject("MyShapePainterObject");
+		it("should expose ShapePainterObject specific methods", function() {
+			object.setCoordinatesAbsolute();
+			expect(object.areCoordinatesAbsolute()).to.be(true);
+			object.setCoordinatesRelative();
+			expect(object.areCoordinatesAbsolute()).to.be(false);
+		});
+	});
+	describe('TextEntryObject', function(){
+		it("should expose TextEntryObject", function() {
+			var object = new gd.TextEntryObject("MyTextEntryObject");
+		});
+	});
 	describe('AdMobObject', function(){
 		var project = gd.ProjectHelper.createNewGDJSProject();
 		var object = new gd.AdMobObject("MyAdMobObject");
