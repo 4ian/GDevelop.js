@@ -280,6 +280,11 @@ Layout.prototype['SwapLayers'] = Layout.prototype.SwapLayers = function(arg0, ar
   _emscripten_bind_Layout_SwapLayers_2(self, arg0, arg1);
 };;
 
+Layout.prototype['GetAssociatedLayoutEditorCanvasOptions'] = Layout.prototype.GetAssociatedLayoutEditorCanvasOptions = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Layout_GetAssociatedLayoutEditorCanvasOptions_0(self), LayoutEditorCanvasOptions);
+};;
+
 Layout.prototype['InsertNewObject'] = Layout.prototype.InsertNewObject = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
   ensureStringCache.prepare();
@@ -1014,6 +1019,33 @@ Module['VoidPtr'] = VoidPtr;
   var self = this.ptr;
   _emscripten_bind_VoidPtr___destroy___0(self);
 };
+// LayoutEditorCanvasOptions
+function LayoutEditorCanvasOptions() {
+  this.ptr = _emscripten_bind_LayoutEditorCanvasOptions_LayoutEditorCanvasOptions_0();
+  getCache(LayoutEditorCanvasOptions)[this.ptr] = this;
+};;
+LayoutEditorCanvasOptions.prototype = Object.create(WrapperObject.prototype);
+LayoutEditorCanvasOptions.prototype.constructor = LayoutEditorCanvasOptions;
+LayoutEditorCanvasOptions.prototype.__class__ = LayoutEditorCanvasOptions;
+LayoutEditorCanvasOptions.__cache__ = {};
+Module['LayoutEditorCanvasOptions'] = LayoutEditorCanvasOptions;
+
+LayoutEditorCanvasOptions.prototype['SerializeTo'] = LayoutEditorCanvasOptions.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_LayoutEditorCanvasOptions_SerializeTo_1(self, arg0);
+};;
+
+LayoutEditorCanvasOptions.prototype['UnserializeFrom'] = LayoutEditorCanvasOptions.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_LayoutEditorCanvasOptions_UnserializeFrom_1(self, arg0);
+};;
+
+  LayoutEditorCanvasOptions.prototype['__destroy__'] = LayoutEditorCanvasOptions.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_LayoutEditorCanvasOptions___destroy___0(self);
+};
 // MapStringPropertyDescriptor
 function MapStringPropertyDescriptor() { throw "cannot construct a MapStringPropertyDescriptor, no constructor in IDL" }
 MapStringPropertyDescriptor.prototype = Object.create(WrapperObject.prototype);
@@ -1259,6 +1291,61 @@ PanelSpriteObject.prototype.constructor = PanelSpriteObject;
 PanelSpriteObject.prototype.__class__ = PanelSpriteObject;
 PanelSpriteObject.__cache__ = {};
 Module['PanelSpriteObject'] = PanelSpriteObject;
+
+PanelSpriteObject.prototype['GetLeftMargin'] = PanelSpriteObject.prototype.GetLeftMargin = function() {
+  var self = this.ptr;
+  return _emscripten_bind_PanelSpriteObject_GetLeftMargin_0(self);
+};;
+
+PanelSpriteObject.prototype['SetLeftMargin'] = PanelSpriteObject.prototype.SetLeftMargin = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_PanelSpriteObject_SetLeftMargin_1(self, arg0);
+};;
+
+PanelSpriteObject.prototype['GetTopMargin'] = PanelSpriteObject.prototype.GetTopMargin = function() {
+  var self = this.ptr;
+  return _emscripten_bind_PanelSpriteObject_GetTopMargin_0(self);
+};;
+
+PanelSpriteObject.prototype['SetTopMargin'] = PanelSpriteObject.prototype.SetTopMargin = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_PanelSpriteObject_SetTopMargin_1(self, arg0);
+};;
+
+PanelSpriteObject.prototype['GetRightMargin'] = PanelSpriteObject.prototype.GetRightMargin = function() {
+  var self = this.ptr;
+  return _emscripten_bind_PanelSpriteObject_GetRightMargin_0(self);
+};;
+
+PanelSpriteObject.prototype['SetRightMargin'] = PanelSpriteObject.prototype.SetRightMargin = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_PanelSpriteObject_SetRightMargin_1(self, arg0);
+};;
+
+PanelSpriteObject.prototype['GetBottomMargin'] = PanelSpriteObject.prototype.GetBottomMargin = function() {
+  var self = this.ptr;
+  return _emscripten_bind_PanelSpriteObject_GetBottomMargin_0(self);
+};;
+
+PanelSpriteObject.prototype['SetBottomMargin'] = PanelSpriteObject.prototype.SetBottomMargin = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_PanelSpriteObject_SetBottomMargin_1(self, arg0);
+};;
+
+PanelSpriteObject.prototype['IsTiled'] = PanelSpriteObject.prototype.IsTiled = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_PanelSpriteObject_IsTiled_0(self));
+};;
+
+PanelSpriteObject.prototype['SetTiled'] = PanelSpriteObject.prototype.SetTiled = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_PanelSpriteObject_SetTiled_1(self, arg0);
+};;
 
 PanelSpriteObject.prototype['SetTexture'] = PanelSpriteObject.prototype.SetTexture = function(arg0) {
   var self = this.ptr;
@@ -2811,6 +2898,22 @@ InitialInstance.prototype['GetCustomProperties'] = InitialInstance.prototype.Get
   return wrapPointer(_emscripten_bind_InitialInstance_GetCustomProperties_2(self, arg0, arg1), MapStringPropertyDescriptor);
 };;
 
+InitialInstance.prototype['GetRawFloatProperty'] = InitialInstance.prototype.GetRawFloatProperty = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return _emscripten_bind_InitialInstance_GetRawFloatProperty_1(self, arg0);
+};;
+
+InitialInstance.prototype['GetRawStringProperty'] = InitialInstance.prototype.GetRawStringProperty = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return Pointer_stringify(_emscripten_bind_InitialInstance_GetRawStringProperty_1(self, arg0));
+};;
+
 InitialInstance.prototype['GetVariables'] = InitialInstance.prototype.GetVariables = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_InitialInstance_GetVariables_0(self), VariablesContainer);
@@ -3027,6 +3130,11 @@ ExternalLayout.prototype['GetAssociatedLayout'] = ExternalLayout.prototype.GetAs
 ExternalLayout.prototype['GetInitialInstances'] = ExternalLayout.prototype.GetInitialInstances = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_ExternalLayout_GetInitialInstances_0(self), InitialInstancesContainer);
+};;
+
+ExternalLayout.prototype['GetAssociatedSettings'] = ExternalLayout.prototype.GetAssociatedSettings = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ExternalLayout_GetAssociatedSettings_0(self), LayoutEditorCanvasOptions);
 };;
 
 ExternalLayout.prototype['SerializeTo'] = ExternalLayout.prototype.SerializeTo = function(arg0) {
@@ -4127,6 +4235,17 @@ ImageResource.prototype.constructor = ImageResource;
 ImageResource.prototype.__class__ = ImageResource;
 ImageResource.__cache__ = {};
 Module['ImageResource'] = ImageResource;
+
+ImageResource.prototype['IsSmooth'] = ImageResource.prototype.IsSmooth = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_ImageResource_IsSmooth_0(self));
+};;
+
+ImageResource.prototype['SetSmooth'] = ImageResource.prototype.SetSmooth = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ImageResource_SetSmooth_1(self, arg0);
+};;
 
 ImageResource.prototype['Clone'] = ImageResource.prototype.Clone = function() {
   var self = this.ptr;

@@ -132,6 +132,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SwapLayers_2(Layout* self, unsi
   self->SwapLayers(arg0, arg1);
 }
 
+LayoutEditorCanvasOptions* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetAssociatedLayoutEditorCanvasOptions_0(Layout* self) {
+  return &self->GetAssociatedLayoutEditorCanvasOptions();
+}
+
 gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertNewObject_4(Layout* self, Project* arg0, char* arg1, char* arg2, unsigned int arg3) {
   return &self->InsertNewObject(*arg0, arg1, arg2, arg3);
 }
@@ -586,6 +590,24 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VoidPtr___destroy___0(void** self) {
   delete self;
 }
 
+// LayoutEditorCanvasOptions
+
+LayoutEditorCanvasOptions* EMSCRIPTEN_KEEPALIVE emscripten_bind_LayoutEditorCanvasOptions_LayoutEditorCanvasOptions_0() {
+  return new LayoutEditorCanvasOptions();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LayoutEditorCanvasOptions_SerializeTo_1(LayoutEditorCanvasOptions* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LayoutEditorCanvasOptions_UnserializeFrom_1(LayoutEditorCanvasOptions* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LayoutEditorCanvasOptions___destroy___0(LayoutEditorCanvasOptions* self) {
+  delete self;
+}
+
 // MapStringPropertyDescriptor
 
 PropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringPropertyDescriptor_MAP_get_1(MapStringPropertyDescriptor* self, char* arg0) {
@@ -722,6 +744,46 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject___destroy___0(SpriteObjec
 
 PanelSpriteObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_PanelSpriteObject_1(char* arg0) {
   return new PanelSpriteObject(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetLeftMargin_0(PanelSpriteObject* self) {
+  return self->GetLeftMargin();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetLeftMargin_1(PanelSpriteObject* self, float arg0) {
+  self->SetLeftMargin(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetTopMargin_0(PanelSpriteObject* self) {
+  return self->GetTopMargin();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetTopMargin_1(PanelSpriteObject* self, float arg0) {
+  self->SetTopMargin(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetRightMargin_0(PanelSpriteObject* self) {
+  return self->GetRightMargin();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetRightMargin_1(PanelSpriteObject* self, float arg0) {
+  self->SetRightMargin(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetBottomMargin_0(PanelSpriteObject* self) {
+  return self->GetBottomMargin();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetBottomMargin_1(PanelSpriteObject* self, float arg0) {
+  self->SetBottomMargin(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_IsTiled_0(PanelSpriteObject* self) {
+  return self->IsTiled();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetTiled_1(PanelSpriteObject* self, bool arg0) {
+  self->SetTiled(arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetTexture_1(PanelSpriteObject* self, char* arg0) {
@@ -1655,6 +1717,14 @@ MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstanc
   return (temp = self->GetCustomProperties(*arg0, *arg1), &temp);
 }
 
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstance_GetRawFloatProperty_1(InitialInstance* self, char* arg0) {
+  return self->GetRawFloatProperty(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstance_GetRawStringProperty_1(InitialInstance* self, char* arg0) {
+  return self->GetRawStringProperty(arg0).c_str();
+}
+
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstance_GetVariables_0(InitialInstance* self) {
   return &self->GetVariables();
 }
@@ -1803,6 +1873,10 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetAssociatedLay
 
 InitialInstancesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetInitialInstances_0(ExternalLayout* self) {
   return &self->GetInitialInstances();
+}
+
+LayoutEditorCanvasOptions* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetAssociatedSettings_0(ExternalLayout* self) {
+  return &self->GetAssociatedSettings();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_SerializeTo_1(ExternalLayout* self, SerializerElement* arg0) {
@@ -2474,6 +2548,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringVariable___destroy___0(MapStr
 
 ImageResource* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_ImageResource_0() {
   return new ImageResource();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_IsSmooth_0(ImageResource* self) {
+  return self->IsSmooth();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_SetSmooth_1(ImageResource* self, bool arg0) {
+  self->SetSmooth(arg0);
 }
 
 Resource* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_Clone_0(ImageResource* self) {

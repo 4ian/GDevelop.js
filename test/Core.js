@@ -232,10 +232,11 @@ describe('libGD.js', function(){
 			initialInstance.setCustomHeight(30);
 			expect(initialInstance.getCustomHeight()).to.be(30);
 		});
-		it('custom properties', function(){
+		it('Sprite object custom properties', function(){
 			initialInstance.updateCustomProperty("Animation", "2", project, layout);
 			expect(initialInstance.getCustomProperties(project, layout).get("Animation").getValue()).
 				to.be("2");
+			expect(initialInstance.getRawFloatProperty("animation")).to.be(2);
 		});
 
 		after(function(){ project.delete(); });

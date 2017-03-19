@@ -20,6 +20,7 @@
 
 #include <GDCore/IDE/Dialogs/PropertyDescriptor.h>
 #include <GDCore/IDE/Dialogs/ObjectListDialogsHelper.h>
+#include <GDCore/IDE/Dialogs/LayoutEditorCanvas/LayoutEditorCanvasOptions.h>
 #include <GDCore/IDE/Events/TextFormatting.h>
 #include <GDCore/IDE/Events/InstructionSentenceFormatter.h>
 #include <GDCore/IDE/Events/EventsRefactorer.h>

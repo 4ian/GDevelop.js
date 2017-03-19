@@ -102,6 +102,8 @@
         gd.asPanelSpriteObject = function(evt) { return gd.castObject(evt, gd.PanelSpriteObject); }
         gd.asTextObject = function(evt) { return gd.castObject(evt, gd.TextObject); }
 
+        gd.asImageResource = function(evt) { return gd.castObject(evt, gd.ImageResource); }
+
         //Convenience methods:
         gd.VectorString.prototype.toJSArray = function() {
             var arr = [];
