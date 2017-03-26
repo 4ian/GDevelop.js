@@ -12,6 +12,9 @@
     "making",
     "port"
   ],
+  "scripts": {
+    "build": "grunt build"
+  },
   "license": "MIT",
   "devDependencies": {
     "expect.js": "~0.3.1",

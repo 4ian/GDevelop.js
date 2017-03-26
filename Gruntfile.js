@@ -5,6 +5,12 @@ module.exports = function(grunt) {
     var buildOutputPath = "../Binaries/Output/libGD.js/Release/";
     var buildPath = "../Binaries/embuild";
 
+    var isWin = /^win/.test(process.platform);
+    var cmakeBinary = isWin ? "\"C:\\Program Files (x86)\\CMake\\bin\\cmake\"" : "cmake";
+    var cmakeArgs = isWin ? "-G \"MinGW Makefiles\"" : "";
+
+    var makeBinary = isWin ? "mingw32-make" : "make";
+
     //Sanity checks
     var fs = require('fs');
     if (!process.env.EMSCRIPTEN) {
@@ -48,7 +54,7 @@ module.exports = function(grunt) {
             //Launch CMake if needed
             cmake: {
                 src: [buildPath + "/CMakeCache.txt", "CMakeLists.txt"],
-                command: "cmake ../.. -DCMAKE_TOOLCHAIN_FILE=" + cmakeToolchainpath + " -DFULL_VERSION_NUMBER=FALSE",
+                command: cmakeBinary + " " + cmakeArgs + " ../.. -DCMAKE_TOOLCHAIN_FILE=\"" + cmakeToolchainpath + "\" -DFULL_VERSION_NUMBER=FALSE",
                 options: {
                     execOptions: {
                         cwd: buildPath,
@@ -64,7 +70,7 @@ module.exports = function(grunt) {
             },
             //Compile GDevelop with emscripten
             make: {
-                command: 'make -j 4',
+                command: makeBinary + ' -j 4',
                 options: {
                     execOptions: {
                         cwd: buildPath,
