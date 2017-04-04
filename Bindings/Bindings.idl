@@ -288,7 +288,7 @@ interface Layout {
     unsigned long GetLayersCount();
     void SwapLayers(unsigned long firstLayerIndex, unsigned long secondLayerIndex);
 
-    [Ref] LayoutEditorCanvasOptions GetAssociatedLayoutEditorCanvasOptions();
+    [Ref] LayoutEditorCanvasOptions GetAssociatedSettings();
 
     //Inherited from gd::ClassWithObjects
     [Ref] gdObject InsertNewObject([Ref] Project project, [Const] DOMString type, [Const] DOMString name, unsigned long pos);

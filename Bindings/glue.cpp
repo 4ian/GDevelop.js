@@ -132,8 +132,8 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SwapLayers_2(Layout* self, unsi
   self->SwapLayers(arg0, arg1);
 }
 
-LayoutEditorCanvasOptions* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetAssociatedLayoutEditorCanvasOptions_0(Layout* self) {
-  return &self->GetAssociatedLayoutEditorCanvasOptions();
+LayoutEditorCanvasOptions* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetAssociatedSettings_0(Layout* self) {
+  return &self->GetAssociatedSettings();
 }
 
 gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertNewObject_4(Layout* self, Project* arg0, char* arg1, char* arg2, unsigned int arg3) {
@@ -454,28 +454,6 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_UnserializeFrom_1(V
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer___destroy___0(VariablesContainer* self) {
-  delete self;
-}
-
-// Exporter
-
-gdjs::Exporter* EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_Exporter_1(AbstractFileSystem* arg0) {
-  return new gdjs::Exporter(*arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportLayoutForPixiPreview_3(gdjs::Exporter* self, Project* arg0, Layout* arg1, char* arg2) {
-  return self->ExportLayoutForPixiPreview(*arg0, *arg1, arg2);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportWholePixiProject_4(gdjs::Exporter* self, Project* arg0, char* arg1, bool arg2, bool arg3) {
-  return self->ExportWholePixiProject(*arg0, arg1, arg2, arg3);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_GetLastError_0(gdjs::Exporter* self) {
-  return self->GetLastError().c_str();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter___destroy___0(gdjs::Exporter* self) {
   delete self;
 }
 
@@ -1133,53 +1111,84 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS___destroy___
   delete self;
 }
 
-// Sprite
+// AdMobObject
 
-Sprite* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_Sprite_0() {
-  return new Sprite();
+AdMobObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_AdMobObject_1(char* arg0) {
+  return new AdMobObject(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetImageName_1(Sprite* self, char* arg0) {
-  self->SetImageName(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_SetName_1(AdMobObject* self, char* arg0) {
+  self->SetName(arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetImageName_0(Sprite* self) {
-  return self->GetImageName().c_str();
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetName_0(AdMobObject* self) {
+  return self->GetName().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_AddPoint_1(Sprite* self, Point* arg0) {
-  self->AddPoint(*arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_SetType_1(AdMobObject* self, char* arg0) {
+  self->SetType(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_DelPoint_1(Sprite* self, char* arg0) {
-  self->DelPoint(arg0);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetType_0(AdMobObject* self) {
+  return self->GetType().c_str();
 }
 
-Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetPoint_1(Sprite* self, char* arg0) {
-  return &self->GetPoint(arg0);
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetProperties_1(AdMobObject* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_HasPoint_1(Sprite* self, char* arg0) {
-  return self->HasPoint(arg0);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UpdateProperty_3(AdMobObject* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
 }
 
-Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetOrigin_0(Sprite* self) {
-  return &self->GetOrigin();
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetInitialInstanceProperties_3(AdMobObject* self, InitialInstance* arg0, Project* arg1, Layout* arg2) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
 }
 
-Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetCenter_0(Sprite* self) {
-  return &self->GetCenter();
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UpdateInitialInstanceProperty_5(AdMobObject* self, InitialInstance* arg0, char* arg1, char* arg2, Project* arg3, Layout* arg4) {
+  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_IsDefaultCenterPoint_0(Sprite* self) {
-  return self->IsDefaultCenterPoint();
+VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetVariables_0(AdMobObject* self) {
+  return &self->GetVariables();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetDefaultCenterPoint_1(Sprite* self, bool arg0) {
-  self->SetDefaultCenterPoint(arg0);
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetAllBehaviorNames_0(AdMobObject* self) {
+  static VectorString temp;
+  return (temp = self->GetAllBehaviorNames(), &temp);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite___destroy___0(Sprite* self) {
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_HasBehaviorNamed_1(AdMobObject* self, char* arg0) {
+  return self->HasBehaviorNamed(arg0);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_AddNewBehavior_3(AdMobObject* self, Project* arg0, char* arg1, char* arg2) {
+  return self->AddNewBehavior(*arg0, arg1, arg2);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetBehavior_1(AdMobObject* self, char* arg0) {
+  return &self->GetBehavior(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_RemoveBehavior_1(AdMobObject* self, char* arg0) {
+  self->RemoveBehavior(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_RenameBehavior_2(AdMobObject* self, char* arg0, char* arg1) {
+  return self->RenameBehavior(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_SerializeTo_1(AdMobObject* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UnserializeFrom_2(AdMobObject* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject___destroy___0(AdMobObject* self) {
   delete self;
 }
 
@@ -2807,87 +2816,6 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper___destroy___0(
   delete self;
 }
 
-// AdMobObject
-
-AdMobObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_AdMobObject_1(char* arg0) {
-  return new AdMobObject(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_SetName_1(AdMobObject* self, char* arg0) {
-  self->SetName(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetName_0(AdMobObject* self) {
-  return self->GetName().c_str();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_SetType_1(AdMobObject* self, char* arg0) {
-  self->SetType(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetType_0(AdMobObject* self) {
-  return self->GetType().c_str();
-}
-
-MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetProperties_1(AdMobObject* self, Project* arg0) {
-  static MapStringPropertyDescriptor temp;
-  return (temp = self->GetProperties(*arg0), &temp);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UpdateProperty_3(AdMobObject* self, char* arg0, char* arg1, Project* arg2) {
-  return self->UpdateProperty(arg0, arg1, *arg2);
-}
-
-MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetInitialInstanceProperties_3(AdMobObject* self, InitialInstance* arg0, Project* arg1, Layout* arg2) {
-  static MapStringPropertyDescriptor temp;
-  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UpdateInitialInstanceProperty_5(AdMobObject* self, InitialInstance* arg0, char* arg1, char* arg2, Project* arg3, Layout* arg4) {
-  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
-}
-
-VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetVariables_0(AdMobObject* self) {
-  return &self->GetVariables();
-}
-
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetAllBehaviorNames_0(AdMobObject* self) {
-  static VectorString temp;
-  return (temp = self->GetAllBehaviorNames(), &temp);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_HasBehaviorNamed_1(AdMobObject* self, char* arg0) {
-  return self->HasBehaviorNamed(arg0);
-}
-
-Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_AddNewBehavior_3(AdMobObject* self, Project* arg0, char* arg1, char* arg2) {
-  return self->AddNewBehavior(*arg0, arg1, arg2);
-}
-
-Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetBehavior_1(AdMobObject* self, char* arg0) {
-  return &self->GetBehavior(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_RemoveBehavior_1(AdMobObject* self, char* arg0) {
-  self->RemoveBehavior(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_RenameBehavior_2(AdMobObject* self, char* arg0, char* arg1) {
-  return self->RenameBehavior(arg0, arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_SerializeTo_1(AdMobObject* self, SerializerElement* arg0) {
-  self->SerializeTo(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UnserializeFrom_2(AdMobObject* self, Project* arg0, SerializerElement* arg1) {
-  self->UnserializeFrom(*arg0, *arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject___destroy___0(AdMobObject* self) {
-  delete self;
-}
-
 // Serializer
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Serializer_STATIC_ToJSON_1(Serializer* self, SerializerElement* arg0) {
@@ -3140,6 +3068,28 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorString_clear_0(VectorString* sel
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorString___destroy___0(VectorString* self) {
+  delete self;
+}
+
+// Exporter
+
+gdjs::Exporter* EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_Exporter_1(AbstractFileSystem* arg0) {
+  return new gdjs::Exporter(*arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportLayoutForPixiPreview_3(gdjs::Exporter* self, Project* arg0, Layout* arg1, char* arg2) {
+  return self->ExportLayoutForPixiPreview(*arg0, *arg1, arg2);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportWholePixiProject_4(gdjs::Exporter* self, Project* arg0, char* arg1, bool arg2, bool arg3) {
+  return self->ExportWholePixiProject(*arg0, arg1, arg2, arg3);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_GetLastError_0(gdjs::Exporter* self) {
+  return self->GetLastError().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter___destroy___0(gdjs::Exporter* self) {
   delete self;
 }
 
@@ -3494,6 +3444,56 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectMetadata_GetIconFilename_
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectMetadata___destroy___0(ObjectMetadata* self) {
+  delete self;
+}
+
+// Sprite
+
+Sprite* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_Sprite_0() {
+  return new Sprite();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetImageName_1(Sprite* self, char* arg0) {
+  self->SetImageName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetImageName_0(Sprite* self) {
+  return self->GetImageName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_AddPoint_1(Sprite* self, Point* arg0) {
+  self->AddPoint(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_DelPoint_1(Sprite* self, char* arg0) {
+  self->DelPoint(arg0);
+}
+
+Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetPoint_1(Sprite* self, char* arg0) {
+  return &self->GetPoint(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_HasPoint_1(Sprite* self, char* arg0) {
+  return self->HasPoint(arg0);
+}
+
+Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetOrigin_0(Sprite* self) {
+  return &self->GetOrigin();
+}
+
+Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetCenter_0(Sprite* self) {
+  return &self->GetCenter();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_IsDefaultCenterPoint_0(Sprite* self) {
+  return self->IsDefaultCenterPoint();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetDefaultCenterPoint_1(Sprite* self, bool arg0) {
+  self->SetDefaultCenterPoint(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite___destroy___0(Sprite* self) {
   delete self;
 }
 
