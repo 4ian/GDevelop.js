@@ -280,6 +280,18 @@ Layout.prototype['SwapLayers'] = Layout.prototype.SwapLayers = function(arg0, ar
   _emscripten_bind_Layout_SwapLayers_2(self, arg0, arg1);
 };;
 
+Layout.prototype['SerializeLayersTo'] = Layout.prototype.SerializeLayersTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Layout_SerializeLayersTo_1(self, arg0);
+};;
+
+Layout.prototype['UnserializeLayersFrom'] = Layout.prototype.UnserializeLayersFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Layout_UnserializeLayersFrom_1(self, arg0);
+};;
+
 Layout.prototype['GetAssociatedSettings'] = Layout.prototype.GetAssociatedSettings = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Layout_GetAssociatedSettings_0(self), LayoutEditorCanvasOptions);

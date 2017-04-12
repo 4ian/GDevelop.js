@@ -287,6 +287,8 @@ interface Layout {
     void RemoveLayer([Const] DOMString name);
     unsigned long GetLayersCount();
     void SwapLayers(unsigned long firstLayerIndex, unsigned long secondLayerIndex);
+    void SerializeLayersTo([Ref] SerializerElement element);
+    void UnserializeLayersFrom([Const, Ref] SerializerElement element);
 
     [Ref] LayoutEditorCanvasOptions GetAssociatedSettings();
 

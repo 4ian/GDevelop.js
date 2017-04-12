@@ -132,6 +132,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SwapLayers_2(Layout* self, unsi
   self->SwapLayers(arg0, arg1);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SerializeLayersTo_1(Layout* self, SerializerElement* arg0) {
+  self->SerializeLayersTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_UnserializeLayersFrom_1(Layout* self, SerializerElement* arg0) {
+  self->UnserializeLayersFrom(*arg0);
+}
+
 LayoutEditorCanvasOptions* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetAssociatedSettings_0(Layout* self) {
   return &self->GetAssociatedSettings();
 }
