@@ -2931,6 +2931,18 @@ InitialInstance.prototype['GetVariables'] = InitialInstance.prototype.GetVariabl
   return wrapPointer(_emscripten_bind_InitialInstance_GetVariables_0(self), VariablesContainer);
 };;
 
+InitialInstance.prototype['SerializeTo'] = InitialInstance.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_InitialInstance_SerializeTo_1(self, arg0);
+};;
+
+InitialInstance.prototype['UnserializeFrom'] = InitialInstance.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_InitialInstance_UnserializeFrom_1(self, arg0);
+};;
+
   InitialInstance.prototype['__destroy__'] = InitialInstance.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_InitialInstance___destroy___0(self);

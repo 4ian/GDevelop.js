@@ -1737,6 +1737,14 @@ VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstance_GetVari
   return &self->GetVariables();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstance_SerializeTo_1(InitialInstance* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstance_UnserializeFrom_1(InitialInstance* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstance___destroy___0(InitialInstance* self) {
   delete self;
 }

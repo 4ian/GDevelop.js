@@ -450,6 +450,9 @@ interface InitialInstance {
     [Const, Ref] DOMString GetRawStringProperty([Const] DOMString name);
 
     [Ref] VariablesContainer GetVariables();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
 };
 
 interface InitialInstancesContainer {

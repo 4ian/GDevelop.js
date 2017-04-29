@@ -238,6 +238,26 @@ describe('libGD.js', function(){
 				to.be("2");
 			expect(initialInstance.getRawFloatProperty("animation")).to.be(2);
 		});
+		it('can be serialized', function() {
+			expect(initialInstance.serializeTo).to.not.be(undefined);
+			expect(initialInstance.unserializeFrom).to.not.be(undefined);
+
+			var element = new gd.SerializerElement();
+			initialInstance.serializeTo(element);
+
+			var initialInstance2 = layout.getInitialInstances().insertNewInitialInstance();
+			initialInstance2.unserializeFrom(element);
+			expect(initialInstance2.getObjectName()).to.be("MySpriteObject");
+			expect(initialInstance2.getX()).to.be(150);
+			expect(initialInstance2.getY()).to.be(140);
+			expect(initialInstance2.getAngle()).to.be(45);
+			expect(initialInstance2.getZOrder()).to.be(12);
+			expect(initialInstance2.getLayer()).to.be("MyLayer");
+			expect(initialInstance2.isLocked()).to.be(true);
+			expect(initialInstance2.hasCustomSize()).to.be(true);
+			expect(initialInstance2.getCustomWidth()).to.be(34);
+			expect(initialInstance2.getCustomHeight()).to.be(30);
+		})
 
 		after(function(){ project.delete(); });
 	});
