@@ -3089,8 +3089,8 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorString___destroy___0(VectorStrin
 
 // Exporter
 
-gdjs::Exporter* EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_Exporter_1(AbstractFileSystem* arg0) {
-  return new gdjs::Exporter(*arg0);
+gdjs::Exporter* EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_Exporter_2(AbstractFileSystem* arg0, char* arg1) {
+  return new gdjs::Exporter(*arg0, arg1);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportLayoutForPixiPreview_3(gdjs::Exporter* self, Project* arg0, Layout* arg1, char* arg2) {

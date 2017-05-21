@@ -1256,7 +1256,7 @@ interface EventsCodeGenerator {
 
 [Prefix="gdjs::"]
 interface Exporter {
-    void Exporter([Ref] AbstractFileSystem fs);
+    void Exporter([Ref] AbstractFileSystem fs, [Const] DOMString gdjsRoot);
 
     boolean ExportLayoutForPixiPreview([Ref] Project project, [Ref] Layout layout, [Const] DOMString exportDir);
     boolean ExportWholePixiProject([Ref] Project project, [Const] DOMString exportDir,

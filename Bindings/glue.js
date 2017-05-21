@@ -5097,9 +5097,12 @@ VectorString.prototype['clear'] = VectorString.prototype.clear = function() {
   _emscripten_bind_VectorString___destroy___0(self);
 };
 // Exporter
-function Exporter(arg0) {
+function Exporter(arg0, arg1) {
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  this.ptr = _emscripten_bind_Exporter_Exporter_1(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  this.ptr = _emscripten_bind_Exporter_Exporter_2(arg0, arg1);
   getCache(Exporter)[this.ptr] = this;
 };;
 Exporter.prototype = Object.create(WrapperObject.prototype);
