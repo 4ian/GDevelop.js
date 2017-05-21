@@ -143,13 +143,11 @@ public:
 	}
 
     virtual bool MakeRelative(gd::String & filename, const gd::String & baseDirectory) {
-    	std::cout << "MakeRelative: " << filename;
 	    filename = (const char*)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('makeRelative')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::makeRelative.';
 	      return ensureString(self.makeRelative(Module.Pointer_stringify($1), Module.Pointer_stringify($2)));
 	    }, (int)this, filename.c_str(), baseDirectory.c_str());
-    	std::cout << " => Result: " << filename << std::endl;
 
 	    return true;
 	}
@@ -216,10 +214,6 @@ public:
 	      return self.readDir(Module.Pointer_stringify($1), Module.Pointer_stringify($2)).ptr;
 	    }, (int)this, path.c_str(), extension.c_str());
 
-	    std::cout << "ReadDir Files:" << std::endl;
-	    for(auto it : directories) {
-	    	std::cout << it << std::endl;
-	    }
 	    return directories;
 	}
 
