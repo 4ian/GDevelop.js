@@ -14,7 +14,9 @@ endif()
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} --memory-init-file 0" ) #Less efficient, but output a single JS file
 # SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -s ASSERTIONS=2 -s SAFE_HEAP=1" ) #Debug
 # SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -g4 -s DEMANGLE_SUPPORT=1" ) #Debug
-SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -O3 -s ALLOW_MEMORY_GROWTH=1" ) #Release
+SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -O3 -s ALLOW_MEMORY_GROWTH=1 -s ASM_JS=2" ) #Release
+# Note: "-s ASM_JS=2" results in 2x faster library (noticeable on operations like export)
+# on Chrome (see https://github.com/kripken/emscripten/wiki/Chrome-Perf-Issues)
 
 #Common directories:
 ###
