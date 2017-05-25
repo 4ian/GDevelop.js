@@ -3097,6 +3097,10 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportLayoutForPixiPreview_3(
   return self->ExportLayoutForPixiPreview(*arg0, *arg1, arg2);
 }
 
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportExternalLayoutForPixiPreview_4(gdjs::Exporter* self, Project* arg0, Layout* arg1, ExternalLayout* arg2, char* arg3) {
+  return self->ExportExternalLayoutForPixiPreview(*arg0, *arg1, *arg2, arg3);
+}
+
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportWholePixiProject_4(gdjs::Exporter* self, Project* arg0, char* arg1, bool arg2, bool arg3) {
   return self->ExportWholePixiProject(*arg0, arg1, arg2, arg3);
 }

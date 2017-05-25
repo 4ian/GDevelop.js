@@ -5121,6 +5121,17 @@ Exporter.prototype['ExportLayoutForPixiPreview'] = Exporter.prototype.ExportLayo
   return !!(_emscripten_bind_Exporter_ExportLayoutForPixiPreview_3(self, arg0, arg1, arg2));
 };;
 
+Exporter.prototype['ExportExternalLayoutForPixiPreview'] = Exporter.prototype.ExportExternalLayoutForPixiPreview = function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  return !!(_emscripten_bind_Exporter_ExportExternalLayoutForPixiPreview_4(self, arg0, arg1, arg2, arg3));
+};;
+
 Exporter.prototype['ExportWholePixiProject'] = Exporter.prototype.ExportWholePixiProject = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
   ensureStringCache.prepare();
