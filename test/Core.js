@@ -7,6 +7,14 @@ var expect = require('expect.js');
 describe('libGD.js', function(){
 	gd.initializePlatforms();
 
+	describe('gd.VersionWrapper', function(){
+		it('can return the version number of the library', function() {
+			expect(gd.VersionWrapper.major()).to.be.a("number");
+			expect(gd.VersionWrapper.minor()).to.be.a("number");
+			expect(gd.VersionWrapper.fullString()).to.be.a("string");
+		});
+	});
+
 	describe('gd.Project', function(){
 
 		var project = gd.ProjectHelper.createNewGDJSProject();

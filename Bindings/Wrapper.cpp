@@ -304,6 +304,15 @@ typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 #define STATIC_GetObjectStrExpressionMetadata GetObjectStrExpressionMetadata
 #define STATIC_GetBehaviorStrExpressionMetadata GetBehaviorStrExpressionMetadata
 #define STATIC_GenerateSceneEventsCompleteCode GenerateSceneEventsCompleteCode
+#define STATIC_Major Major
+#define STATIC_Minor Minor
+#define STATIC_Build Build
+#define STATIC_Revision Revision
+#define STATIC_FullString FullString
+#define STATIC_Status Status
+#define STATIC_Year Year
+#define STATIC_Month Month
+#define STATIC_Date Date
 
 //We postfix some methods with "At" as Javascript does not support overloading
 #define GetLayoutAt GetLayout

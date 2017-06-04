@@ -2350,6 +2350,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetMinimumFPS_1(Project* self,
   self->SetMinimumFPS(arg0);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetLastCompilationDirectory_1(Project* self, char* arg0) {
+  self->SetLastCompilationDirectory(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetLastCompilationDirectory_0(Project* self) {
+  return self->GetLastCompilationDirectory().c_str();
+}
+
 const VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetUsedExtensions_0(Project* self) {
   return &self->GetUsedExtensions();
 }
@@ -2805,30 +2813,50 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryEventsWorker___destroy___0(Ar
   delete self;
 }
 
-// ObjectListDialogsHelper
+// VersionWrapper
 
-ObjectListDialogsHelper* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_ObjectListDialogsHelper_2(Project* arg0, Layout* arg1) {
-  return new ObjectListDialogsHelper(*arg0, *arg1);
+int EMSCRIPTEN_KEEPALIVE emscripten_bind_VersionWrapper_STATIC_Major_0(VersionWrapper* self) {
+  return self->STATIC_Major();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetSearchText_1(ObjectListDialogsHelper* self, char* arg0) {
-  self->SetSearchText(arg0);
+int EMSCRIPTEN_KEEPALIVE emscripten_bind_VersionWrapper_STATIC_Minor_0(VersionWrapper* self) {
+  return self->STATIC_Minor();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetAllowedObjectType_1(ObjectListDialogsHelper* self, char* arg0) {
-  self->SetAllowedObjectType(arg0);
+int EMSCRIPTEN_KEEPALIVE emscripten_bind_VersionWrapper_STATIC_Build_0(VersionWrapper* self) {
+  return self->STATIC_Build();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetGroupsAllowed_1(ObjectListDialogsHelper* self, bool arg0) {
-  self->SetGroupsAllowed(arg0);
+int EMSCRIPTEN_KEEPALIVE emscripten_bind_VersionWrapper_STATIC_Revision_0(VersionWrapper* self) {
+  return self->STATIC_Revision();
 }
 
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_GetMatchingObjects_0(ObjectListDialogsHelper* self) {
-  static VectorString temp;
-  return (temp = self->GetMatchingObjects(), &temp);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VersionWrapper_STATIC_FullString_0(VersionWrapper* self) {
+  static gd::String temp;
+  return (temp = self->STATIC_FullString(), temp.c_str());
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper___destroy___0(ObjectListDialogsHelper* self) {
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VersionWrapper_STATIC_Status_0(VersionWrapper* self) {
+  static gd::String temp;
+  return (temp = self->STATIC_Status(), temp.c_str());
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VersionWrapper_STATIC_Year_0(VersionWrapper* self) {
+  static gd::String temp;
+  return (temp = self->STATIC_Year(), temp.c_str());
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VersionWrapper_STATIC_Month_0(VersionWrapper* self) {
+  static gd::String temp;
+  return (temp = self->STATIC_Month(), temp.c_str());
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VersionWrapper_STATIC_Date_0(VersionWrapper* self) {
+  static gd::String temp;
+  return (temp = self->STATIC_Date(), temp.c_str());
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VersionWrapper___destroy___0(VersionWrapper* self) {
   delete self;
 }
 
@@ -3879,6 +3907,33 @@ temp.clear(); for(auto it = self->begin(); it != self->end();++it) { temp.push_b
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString___destroy___0(MapStringString* self) {
+  delete self;
+}
+
+// ObjectListDialogsHelper
+
+ObjectListDialogsHelper* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_ObjectListDialogsHelper_2(Project* arg0, Layout* arg1) {
+  return new ObjectListDialogsHelper(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetSearchText_1(ObjectListDialogsHelper* self, char* arg0) {
+  self->SetSearchText(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetAllowedObjectType_1(ObjectListDialogsHelper* self, char* arg0) {
+  self->SetAllowedObjectType(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetGroupsAllowed_1(ObjectListDialogsHelper* self, bool arg0) {
+  self->SetGroupsAllowed(arg0);
+}
+
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_GetMatchingObjects_0(ObjectListDialogsHelper* self) {
+  static VectorString temp;
+  return (temp = self->GetMatchingObjects(), &temp);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper___destroy___0(ObjectListDialogsHelper* self) {
   delete self;
 }
 

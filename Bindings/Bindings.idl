@@ -80,6 +80,19 @@ interface ProjectHelper {
     void STATIC_InitializePlatforms();
 };
 
+interface VersionWrapper {
+    long STATIC_Major();
+    long STATIC_Minor();
+    long STATIC_Build();
+    long STATIC_Revision();
+
+    [Const, Value] DOMString STATIC_FullString();
+    [Const, Value] DOMString STATIC_Status();
+    [Const, Value] DOMString STATIC_Year();
+    [Const, Value] DOMString STATIC_Month();
+    [Const, Value] DOMString STATIC_Date();
+};
+
 interface Platform {
     [Const, Value] DOMString GetName();
     [Const, Value] DOMString GetFullName();
@@ -157,6 +170,9 @@ interface Project {
     void SetMaximumFPS(long fps);
     long GetMinimumFPS();
     void SetMinimumFPS(long fps);
+
+    void SetLastCompilationDirectory([Const] DOMString path);
+    [Const, Ref] DOMString GetLastCompilationDirectory();
 
     [Const, Ref] VectorString GetUsedExtensions();
     void AddPlatform([Ref] Platform platform);

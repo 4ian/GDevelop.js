@@ -3881,6 +3881,19 @@ Project.prototype['SetMinimumFPS'] = Project.prototype.SetMinimumFPS = function(
   _emscripten_bind_Project_SetMinimumFPS_1(self, arg0);
 };;
 
+Project.prototype['SetLastCompilationDirectory'] = Project.prototype.SetLastCompilationDirectory = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Project_SetLastCompilationDirectory_1(self, arg0);
+};;
+
+Project.prototype['GetLastCompilationDirectory'] = Project.prototype.GetLastCompilationDirectory = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Project_GetLastCompilationDirectory_0(self));
+};;
+
 Project.prototype['GetUsedExtensions'] = Project.prototype.GetUsedExtensions = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Project_GetUsedExtensions_0(self), VectorString);
@@ -4615,49 +4628,62 @@ ArbitraryEventsWorker.prototype['Launch'] = ArbitraryEventsWorker.prototype.Laun
   var self = this.ptr;
   _emscripten_bind_ArbitraryEventsWorker___destroy___0(self);
 };
-// ObjectListDialogsHelper
-function ObjectListDialogsHelper(arg0, arg1) {
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  this.ptr = _emscripten_bind_ObjectListDialogsHelper_ObjectListDialogsHelper_2(arg0, arg1);
-  getCache(ObjectListDialogsHelper)[this.ptr] = this;
-};;
-ObjectListDialogsHelper.prototype = Object.create(WrapperObject.prototype);
-ObjectListDialogsHelper.prototype.constructor = ObjectListDialogsHelper;
-ObjectListDialogsHelper.prototype.__class__ = ObjectListDialogsHelper;
-ObjectListDialogsHelper.__cache__ = {};
-Module['ObjectListDialogsHelper'] = ObjectListDialogsHelper;
+// VersionWrapper
+function VersionWrapper() { throw "cannot construct a VersionWrapper, no constructor in IDL" }
+VersionWrapper.prototype = Object.create(WrapperObject.prototype);
+VersionWrapper.prototype.constructor = VersionWrapper;
+VersionWrapper.prototype.__class__ = VersionWrapper;
+VersionWrapper.__cache__ = {};
+Module['VersionWrapper'] = VersionWrapper;
 
-ObjectListDialogsHelper.prototype['SetSearchText'] = ObjectListDialogsHelper.prototype.SetSearchText = function(arg0) {
+VersionWrapper.prototype['STATIC_Major'] = VersionWrapper.prototype.STATIC_Major = function() {
   var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_ObjectListDialogsHelper_SetSearchText_1(self, arg0);
+  return _emscripten_bind_VersionWrapper_STATIC_Major_0(self);
 };;
 
-ObjectListDialogsHelper.prototype['SetAllowedObjectType'] = ObjectListDialogsHelper.prototype.SetAllowedObjectType = function(arg0) {
+VersionWrapper.prototype['STATIC_Minor'] = VersionWrapper.prototype.STATIC_Minor = function() {
   var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_ObjectListDialogsHelper_SetAllowedObjectType_1(self, arg0);
+  return _emscripten_bind_VersionWrapper_STATIC_Minor_0(self);
 };;
 
-ObjectListDialogsHelper.prototype['SetGroupsAllowed'] = ObjectListDialogsHelper.prototype.SetGroupsAllowed = function(arg0) {
+VersionWrapper.prototype['STATIC_Build'] = VersionWrapper.prototype.STATIC_Build = function() {
   var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ObjectListDialogsHelper_SetGroupsAllowed_1(self, arg0);
+  return _emscripten_bind_VersionWrapper_STATIC_Build_0(self);
 };;
 
-ObjectListDialogsHelper.prototype['GetMatchingObjects'] = ObjectListDialogsHelper.prototype.GetMatchingObjects = function() {
+VersionWrapper.prototype['STATIC_Revision'] = VersionWrapper.prototype.STATIC_Revision = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_ObjectListDialogsHelper_GetMatchingObjects_0(self), VectorString);
+  return _emscripten_bind_VersionWrapper_STATIC_Revision_0(self);
 };;
 
-  ObjectListDialogsHelper.prototype['__destroy__'] = ObjectListDialogsHelper.prototype.__destroy__ = function() {
+VersionWrapper.prototype['STATIC_FullString'] = VersionWrapper.prototype.STATIC_FullString = function() {
   var self = this.ptr;
-  _emscripten_bind_ObjectListDialogsHelper___destroy___0(self);
+  return Pointer_stringify(_emscripten_bind_VersionWrapper_STATIC_FullString_0(self));
+};;
+
+VersionWrapper.prototype['STATIC_Status'] = VersionWrapper.prototype.STATIC_Status = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VersionWrapper_STATIC_Status_0(self));
+};;
+
+VersionWrapper.prototype['STATIC_Year'] = VersionWrapper.prototype.STATIC_Year = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VersionWrapper_STATIC_Year_0(self));
+};;
+
+VersionWrapper.prototype['STATIC_Month'] = VersionWrapper.prototype.STATIC_Month = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VersionWrapper_STATIC_Month_0(self));
+};;
+
+VersionWrapper.prototype['STATIC_Date'] = VersionWrapper.prototype.STATIC_Date = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VersionWrapper_STATIC_Date_0(self));
+};;
+
+  VersionWrapper.prototype['__destroy__'] = VersionWrapper.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_VersionWrapper___destroy___0(self);
 };
 // Serializer
 function Serializer() { throw "cannot construct a Serializer, no constructor in IDL" }
@@ -6443,6 +6469,50 @@ MapStringString.prototype['MAP_keys'] = MapStringString.prototype.MAP_keys = fun
   MapStringString.prototype['__destroy__'] = MapStringString.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_MapStringString___destroy___0(self);
+};
+// ObjectListDialogsHelper
+function ObjectListDialogsHelper(arg0, arg1) {
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  this.ptr = _emscripten_bind_ObjectListDialogsHelper_ObjectListDialogsHelper_2(arg0, arg1);
+  getCache(ObjectListDialogsHelper)[this.ptr] = this;
+};;
+ObjectListDialogsHelper.prototype = Object.create(WrapperObject.prototype);
+ObjectListDialogsHelper.prototype.constructor = ObjectListDialogsHelper;
+ObjectListDialogsHelper.prototype.__class__ = ObjectListDialogsHelper;
+ObjectListDialogsHelper.__cache__ = {};
+Module['ObjectListDialogsHelper'] = ObjectListDialogsHelper;
+
+ObjectListDialogsHelper.prototype['SetSearchText'] = ObjectListDialogsHelper.prototype.SetSearchText = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ObjectListDialogsHelper_SetSearchText_1(self, arg0);
+};;
+
+ObjectListDialogsHelper.prototype['SetAllowedObjectType'] = ObjectListDialogsHelper.prototype.SetAllowedObjectType = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ObjectListDialogsHelper_SetAllowedObjectType_1(self, arg0);
+};;
+
+ObjectListDialogsHelper.prototype['SetGroupsAllowed'] = ObjectListDialogsHelper.prototype.SetGroupsAllowed = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ObjectListDialogsHelper_SetGroupsAllowed_1(self, arg0);
+};;
+
+ObjectListDialogsHelper.prototype['GetMatchingObjects'] = ObjectListDialogsHelper.prototype.GetMatchingObjects = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ObjectListDialogsHelper_GetMatchingObjects_0(self), VectorString);
+};;
+
+  ObjectListDialogsHelper.prototype['__destroy__'] = ObjectListDialogsHelper.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_ObjectListDialogsHelper___destroy___0(self);
 };
 (function() {
   function setupEnums() {
