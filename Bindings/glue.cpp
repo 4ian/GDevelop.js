@@ -132,6 +132,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SwapLayers_2(Layout* self, unsi
   self->SwapLayers(arg0, arg1);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_MoveLayer_2(Layout* self, unsigned int arg0, unsigned int arg1) {
+  self->MoveLayer(arg0, arg1);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SerializeLayersTo_1(Layout* self, SerializerElement* arg0) {
   self->SerializeLayersTo(*arg0);
 }

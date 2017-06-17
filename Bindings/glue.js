@@ -280,6 +280,13 @@ Layout.prototype['SwapLayers'] = Layout.prototype.SwapLayers = function(arg0, ar
   _emscripten_bind_Layout_SwapLayers_2(self, arg0, arg1);
 };;
 
+Layout.prototype['MoveLayer'] = Layout.prototype.MoveLayer = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Layout_MoveLayer_2(self, arg0, arg1);
+};;
+
 Layout.prototype['SerializeLayersTo'] = Layout.prototype.SerializeLayersTo = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;

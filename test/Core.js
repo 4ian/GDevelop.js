@@ -11,6 +11,8 @@ describe('libGD.js', function(){
 		it('can return the version number of the library', function() {
 			expect(gd.VersionWrapper.major()).to.be.a("number");
 			expect(gd.VersionWrapper.minor()).to.be.a("number");
+			expect(gd.VersionWrapper.build()).to.be.a("number");
+			expect(gd.VersionWrapper.revision()).to.be.a("number");
 			expect(gd.VersionWrapper.fullString()).to.be.a("string");
 		});
 	});
