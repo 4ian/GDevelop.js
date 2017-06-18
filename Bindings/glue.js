@@ -795,6 +795,13 @@ VariablesContainer.prototype['Swap'] = VariablesContainer.prototype.Swap = funct
   _emscripten_bind_VariablesContainer_Swap_2(self, arg0, arg1);
 };;
 
+VariablesContainer.prototype['Move'] = VariablesContainer.prototype.Move = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_VariablesContainer_Move_2(self, arg0, arg1);
+};;
+
 VariablesContainer.prototype['GetPosition'] = VariablesContainer.prototype.GetPosition = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();

@@ -445,6 +445,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_Swap_2(VariablesCon
   self->Swap(arg0, arg1);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_Move_2(VariablesContainer* self, unsigned int arg0, unsigned int arg1) {
+  self->Move(arg0, arg1);
+}
+
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_GetPosition_1(VariablesContainer* self, char* arg0) {
   return self->GetPosition(arg0);
 }

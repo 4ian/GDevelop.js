@@ -308,7 +308,7 @@ describe('libGD.js', function(){
 			expect(container.get("NewName").getString()).to.be("String of SecondVariable");
 			container.delete();
 		});
-		it('can reorganize variables', function(){
+		it('can swap variables', function(){
 			var container = new gd.VariablesContainer();
 
 			container.insertNew("Variable", 0).setValue(4);
@@ -322,6 +322,31 @@ describe('libGD.js', function(){
 			expect(container.getAt(0).getName()).to.be("ThirdVariable");
 			expect(container.getAt(2).getName()).to.be("Variable");
 			expect(container.getAt(2).getVariable().getValue()).to.be(4);
+
+			container.delete();
+		});
+		it('can move variables', function(){
+			var container = new gd.VariablesContainer();
+
+			container.insertNew("Variable", 0).setValue(4);
+			container.insertNew("SecondVariable", 1).setString("String of SecondVariable");
+			container.insertNew("ThirdVariable", 2).getChild("Child1").setValue(7);
+
+			container.move(1, 2);
+			expect(container.getAt(0).getName()).to.be("Variable");
+			expect(container.getAt(1).getName()).to.be("ThirdVariable");
+			expect(container.getAt(2).getName()).to.be("SecondVariable");
+
+			container.move(1, 9999);
+			expect(container.getAt(0).getName()).to.be("Variable");
+			expect(container.getAt(1).getName()).to.be("ThirdVariable");
+			expect(container.getAt(2).getName()).to.be("SecondVariable");
+
+			container.move(2, 0);
+			expect(container.getAt(0).getName()).to.be("SecondVariable");
+			expect(container.getAt(1).getName()).to.be("Variable");
+			expect(container.getAt(2).getName()).to.be("ThirdVariable");
+
 			container.delete();
 		});
 	});
