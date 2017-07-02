@@ -310,6 +310,9 @@ interface Layout {
 
     [Ref] LayoutEditorCanvasOptions GetAssociatedSettings();
 
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+
     //Inherited from gd::ClassWithObjects
     [Ref] gdObject InsertNewObject([Ref] Project project, [Const] DOMString type, [Const] DOMString name, unsigned long pos);
     [Ref] gdObject InsertObject([Const, Ref] gdObject obj, unsigned long pos);
@@ -399,6 +402,26 @@ interface ImageResource {
 
     boolean IsSmooth();
     void SetSmooth(boolean enable);
+
+    //Inherited from Resource:
+    Resource Clone();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetKind([Const] DOMString kind);
+    [Const, Ref] DOMString GetKind();
+    boolean IsUserAdded();
+    void SetUserAdded(boolean yes);
+    boolean UseFile();
+    void SetFile([Const] DOMString file);
+    [Const, Ref] DOMString GetFile();
+    [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface AudioResource {
+    void AudioResource();
 
     //Inherited from Resource:
     Resource Clone();
@@ -989,10 +1012,14 @@ interface Direction {
     float GetTimeBetweenFrames();
     void SetTimeBetweenFrames(float time);
     void SwapSprites(unsigned long first, unsigned long second);
+    void MoveSprite(unsigned long oldIndex, unsigned long newIndex);
 };
 
 interface Animation {
     void Animation();
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
 
     void SetDirectionsCount(unsigned long count);
     unsigned long GetDirectionsCount();
@@ -1014,6 +1041,7 @@ interface SpriteObject {
     void RemoveAllAnimations();
     boolean HasNoAnimations();
     void SwapAnimations(unsigned long first, unsigned long second);
+    void MoveAnimation(unsigned long oldIndex, unsigned long newIndex);
 
     //Inherited from gdObject:
     void SetName([Const] DOMString name);

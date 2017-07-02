@@ -147,6 +147,39 @@ Module['AbstractFileSystem'] = AbstractFileSystem;
   var self = this.ptr;
   _emscripten_bind_AbstractFileSystem___destroy___0(self);
 };
+// Vector2f
+function Vector2f() {
+  this.ptr = _emscripten_bind_Vector2f_Vector2f_0();
+  getCache(Vector2f)[this.ptr] = this;
+};;
+Vector2f.prototype = Object.create(WrapperObject.prototype);
+Vector2f.prototype.constructor = Vector2f;
+Vector2f.prototype.__class__ = Vector2f;
+Vector2f.__cache__ = {};
+Module['Vector2f'] = Vector2f;
+
+  Vector2f.prototype['get_x'] = Vector2f.prototype.get_x = function() {
+  var self = this.ptr;
+  return _emscripten_bind_Vector2f_get_x_0(self);
+};
+    Vector2f.prototype['set_x'] = Vector2f.prototype.set_x = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Vector2f_set_x_1(self, arg0);
+};
+  Vector2f.prototype['get_y'] = Vector2f.prototype.get_y = function() {
+  var self = this.ptr;
+  return _emscripten_bind_Vector2f_get_y_0(self);
+};
+    Vector2f.prototype['set_y'] = Vector2f.prototype.set_y = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Vector2f_set_y_1(self, arg0);
+};
+  Vector2f.prototype['__destroy__'] = Vector2f.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_Vector2f___destroy___0(self);
+};
 // Layout
 function Layout() {
   this.ptr = _emscripten_bind_Layout_Layout_0();
@@ -304,6 +337,19 @@ Layout.prototype['GetAssociatedSettings'] = Layout.prototype.GetAssociatedSettin
   return wrapPointer(_emscripten_bind_Layout_GetAssociatedSettings_0(self), LayoutEditorCanvasOptions);
 };;
 
+Layout.prototype['SerializeTo'] = Layout.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Layout_SerializeTo_1(self, arg0);
+};;
+
+Layout.prototype['UnserializeFrom'] = Layout.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Layout_UnserializeFrom_2(self, arg0, arg1);
+};;
+
 Layout.prototype['InsertNewObject'] = Layout.prototype.InsertNewObject = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
   ensureStringCache.prepare();
@@ -419,38 +465,35 @@ MapStringEventMetadata.prototype['MAP_keys'] = MapStringEventMetadata.prototype.
   var self = this.ptr;
   _emscripten_bind_MapStringEventMetadata___destroy___0(self);
 };
-// Vector2f
-function Vector2f() {
-  this.ptr = _emscripten_bind_Vector2f_Vector2f_0();
-  getCache(Vector2f)[this.ptr] = this;
-};;
-Vector2f.prototype = Object.create(WrapperObject.prototype);
-Vector2f.prototype.constructor = Vector2f;
-Vector2f.prototype.__class__ = Vector2f;
-Vector2f.__cache__ = {};
-Module['Vector2f'] = Vector2f;
+// ProjectResourcesAdder
+function ProjectResourcesAdder() { throw "cannot construct a ProjectResourcesAdder, no constructor in IDL" }
+ProjectResourcesAdder.prototype = Object.create(WrapperObject.prototype);
+ProjectResourcesAdder.prototype.constructor = ProjectResourcesAdder;
+ProjectResourcesAdder.prototype.__class__ = ProjectResourcesAdder;
+ProjectResourcesAdder.__cache__ = {};
+Module['ProjectResourcesAdder'] = ProjectResourcesAdder;
 
-  Vector2f.prototype['get_x'] = Vector2f.prototype.get_x = function() {
-  var self = this.ptr;
-  return _emscripten_bind_Vector2f_get_x_0(self);
-};
-    Vector2f.prototype['set_x'] = Vector2f.prototype.set_x = function(arg0) {
+ProjectResourcesAdder.prototype['STATIC_AddAllMissingImages'] = ProjectResourcesAdder.prototype.STATIC_AddAllMissingImages = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Vector2f_set_x_1(self, arg0);
-};
-  Vector2f.prototype['get_y'] = Vector2f.prototype.get_y = function() {
-  var self = this.ptr;
-  return _emscripten_bind_Vector2f_get_y_0(self);
-};
-    Vector2f.prototype['set_y'] = Vector2f.prototype.set_y = function(arg0) {
+  _emscripten_bind_ProjectResourcesAdder_STATIC_AddAllMissingImages_1(self, arg0);
+};;
+
+ProjectResourcesAdder.prototype['STATIC_GetAllUselessImages'] = ProjectResourcesAdder.prototype.STATIC_GetAllUselessImages = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Vector2f_set_y_1(self, arg0);
-};
-  Vector2f.prototype['__destroy__'] = Vector2f.prototype.__destroy__ = function() {
+  _emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessImages_1(self, arg0);
+};;
+
+ProjectResourcesAdder.prototype['STATIC_RemoveAllUselessImages'] = ProjectResourcesAdder.prototype.STATIC_RemoveAllUselessImages = function(arg0) {
   var self = this.ptr;
-  _emscripten_bind_Vector2f___destroy___0(self);
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUselessImages_1(self, arg0);
+};;
+
+  ProjectResourcesAdder.prototype['__destroy__'] = ProjectResourcesAdder.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_ProjectResourcesAdder___destroy___0(self);
 };
 // EventsRefactorer
 function EventsRefactorer() { throw "cannot construct a EventsRefactorer, no constructor in IDL" }
@@ -673,6 +716,19 @@ Animation.prototype.constructor = Animation;
 Animation.prototype.__class__ = Animation;
 Animation.__cache__ = {};
 Module['Animation'] = Animation;
+
+Animation.prototype['SetName'] = Animation.prototype.SetName = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Animation_SetName_1(self, arg0);
+};;
+
+Animation.prototype['GetName'] = Animation.prototype.GetName = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Animation_GetName_0(self));
+};;
 
 Animation.prototype['SetDirectionsCount'] = Animation.prototype.SetDirectionsCount = function(arg0) {
   var self = this.ptr;
@@ -1168,6 +1224,13 @@ SpriteObject.prototype['SwapAnimations'] = SpriteObject.prototype.SwapAnimations
   _emscripten_bind_SpriteObject_SwapAnimations_2(self, arg0, arg1);
 };;
 
+SpriteObject.prototype['MoveAnimation'] = SpriteObject.prototype.MoveAnimation = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_SpriteObject_MoveAnimation_2(self, arg0, arg1);
+};;
+
 SpriteObject.prototype['SetName'] = SpriteObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
@@ -1661,61 +1724,109 @@ Direction.prototype['SwapSprites'] = Direction.prototype.SwapSprites = function(
   _emscripten_bind_Direction_SwapSprites_2(self, arg0, arg1);
 };;
 
+Direction.prototype['MoveSprite'] = Direction.prototype.MoveSprite = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Direction_MoveSprite_2(self, arg0, arg1);
+};;
+
   Direction.prototype['__destroy__'] = Direction.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Direction___destroy___0(self);
 };
-// InstructionSentenceFormatter
-function InstructionSentenceFormatter() { throw "cannot construct a InstructionSentenceFormatter, no constructor in IDL" }
-InstructionSentenceFormatter.prototype = Object.create(WrapperObject.prototype);
-InstructionSentenceFormatter.prototype.constructor = InstructionSentenceFormatter;
-InstructionSentenceFormatter.prototype.__class__ = InstructionSentenceFormatter;
-InstructionSentenceFormatter.__cache__ = {};
-Module['InstructionSentenceFormatter'] = InstructionSentenceFormatter;
+// AudioResource
+function AudioResource() {
+  this.ptr = _emscripten_bind_AudioResource_AudioResource_0();
+  getCache(AudioResource)[this.ptr] = this;
+};;
+AudioResource.prototype = Object.create(WrapperObject.prototype);
+AudioResource.prototype.constructor = AudioResource;
+AudioResource.prototype.__class__ = AudioResource;
+AudioResource.__cache__ = {};
+Module['AudioResource'] = AudioResource;
 
-InstructionSentenceFormatter.prototype['STATIC_Get'] = InstructionSentenceFormatter.prototype.STATIC_Get = function() {
+AudioResource.prototype['Clone'] = AudioResource.prototype.Clone = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_InstructionSentenceFormatter_STATIC_Get_0(self), InstructionSentenceFormatter);
+  return wrapPointer(_emscripten_bind_AudioResource_Clone_0(self), Resource);
 };;
 
-InstructionSentenceFormatter.prototype['Translate'] = InstructionSentenceFormatter.prototype.Translate = function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  return Pointer_stringify(_emscripten_bind_InstructionSentenceFormatter_Translate_2(self, arg0, arg1));
-};;
-
-InstructionSentenceFormatter.prototype['GetAsFormattedText'] = InstructionSentenceFormatter.prototype.GetAsFormattedText = function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  return wrapPointer(_emscripten_bind_InstructionSentenceFormatter_GetAsFormattedText_2(self, arg0, arg1), VectorPairStringTextFormatting);
-};;
-
-InstructionSentenceFormatter.prototype['GetFormattingFromType'] = InstructionSentenceFormatter.prototype.GetFormattingFromType = function(arg0) {
+AudioResource.prototype['SetName'] = AudioResource.prototype.SetName = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_InstructionSentenceFormatter_GetFormattingFromType_1(self, arg0), TextFormatting);
+  _emscripten_bind_AudioResource_SetName_1(self, arg0);
 };;
 
-InstructionSentenceFormatter.prototype['LabelFromType'] = InstructionSentenceFormatter.prototype.LabelFromType = function(arg0) {
+AudioResource.prototype['GetName'] = AudioResource.prototype.GetName = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_AudioResource_GetName_0(self));
+};;
+
+AudioResource.prototype['SetKind'] = AudioResource.prototype.SetKind = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return Pointer_stringify(_emscripten_bind_InstructionSentenceFormatter_LabelFromType_1(self, arg0));
+  _emscripten_bind_AudioResource_SetKind_1(self, arg0);
 };;
 
-InstructionSentenceFormatter.prototype['LoadTypesFormattingFromConfig'] = InstructionSentenceFormatter.prototype.LoadTypesFormattingFromConfig = function() {
+AudioResource.prototype['GetKind'] = AudioResource.prototype.GetKind = function() {
   var self = this.ptr;
-  _emscripten_bind_InstructionSentenceFormatter_LoadTypesFormattingFromConfig_0(self);
+  return Pointer_stringify(_emscripten_bind_AudioResource_GetKind_0(self));
 };;
 
-  InstructionSentenceFormatter.prototype['__destroy__'] = InstructionSentenceFormatter.prototype.__destroy__ = function() {
+AudioResource.prototype['IsUserAdded'] = AudioResource.prototype.IsUserAdded = function() {
   var self = this.ptr;
-  _emscripten_bind_InstructionSentenceFormatter___destroy___0(self);
+  return !!(_emscripten_bind_AudioResource_IsUserAdded_0(self));
+};;
+
+AudioResource.prototype['SetUserAdded'] = AudioResource.prototype.SetUserAdded = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_AudioResource_SetUserAdded_1(self, arg0);
+};;
+
+AudioResource.prototype['UseFile'] = AudioResource.prototype.UseFile = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_AudioResource_UseFile_0(self));
+};;
+
+AudioResource.prototype['SetFile'] = AudioResource.prototype.SetFile = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_AudioResource_SetFile_1(self, arg0);
+};;
+
+AudioResource.prototype['GetFile'] = AudioResource.prototype.GetFile = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_AudioResource_GetFile_0(self));
+};;
+
+AudioResource.prototype['GetAbsoluteFile'] = AudioResource.prototype.GetAbsoluteFile = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return Pointer_stringify(_emscripten_bind_AudioResource_GetAbsoluteFile_1(self, arg0));
+};;
+
+AudioResource.prototype['SerializeTo'] = AudioResource.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_AudioResource_SerializeTo_1(self, arg0);
+};;
+
+AudioResource.prototype['UnserializeFrom'] = AudioResource.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_AudioResource_UnserializeFrom_1(self, arg0);
+};;
+
+  AudioResource.prototype['__destroy__'] = AudioResource.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_AudioResource___destroy___0(self);
 };
 // TextEntryObject
 function TextEntryObject(arg0) {
@@ -4380,35 +4491,57 @@ ImageResource.prototype['UnserializeFrom'] = ImageResource.prototype.Unserialize
   var self = this.ptr;
   _emscripten_bind_ImageResource___destroy___0(self);
 };
-// ProjectResourcesAdder
-function ProjectResourcesAdder() { throw "cannot construct a ProjectResourcesAdder, no constructor in IDL" }
-ProjectResourcesAdder.prototype = Object.create(WrapperObject.prototype);
-ProjectResourcesAdder.prototype.constructor = ProjectResourcesAdder;
-ProjectResourcesAdder.prototype.__class__ = ProjectResourcesAdder;
-ProjectResourcesAdder.__cache__ = {};
-Module['ProjectResourcesAdder'] = ProjectResourcesAdder;
+// InstructionSentenceFormatter
+function InstructionSentenceFormatter() { throw "cannot construct a InstructionSentenceFormatter, no constructor in IDL" }
+InstructionSentenceFormatter.prototype = Object.create(WrapperObject.prototype);
+InstructionSentenceFormatter.prototype.constructor = InstructionSentenceFormatter;
+InstructionSentenceFormatter.prototype.__class__ = InstructionSentenceFormatter;
+InstructionSentenceFormatter.__cache__ = {};
+Module['InstructionSentenceFormatter'] = InstructionSentenceFormatter;
 
-ProjectResourcesAdder.prototype['STATIC_AddAllMissingImages'] = ProjectResourcesAdder.prototype.STATIC_AddAllMissingImages = function(arg0) {
+InstructionSentenceFormatter.prototype['STATIC_Get'] = InstructionSentenceFormatter.prototype.STATIC_Get = function() {
   var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ProjectResourcesAdder_STATIC_AddAllMissingImages_1(self, arg0);
+  return wrapPointer(_emscripten_bind_InstructionSentenceFormatter_STATIC_Get_0(self), InstructionSentenceFormatter);
 };;
 
-ProjectResourcesAdder.prototype['STATIC_GetAllUselessImages'] = ProjectResourcesAdder.prototype.STATIC_GetAllUselessImages = function(arg0) {
+InstructionSentenceFormatter.prototype['Translate'] = InstructionSentenceFormatter.prototype.Translate = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessImages_1(self, arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  return Pointer_stringify(_emscripten_bind_InstructionSentenceFormatter_Translate_2(self, arg0, arg1));
 };;
 
-ProjectResourcesAdder.prototype['STATIC_RemoveAllUselessImages'] = ProjectResourcesAdder.prototype.STATIC_RemoveAllUselessImages = function(arg0) {
+InstructionSentenceFormatter.prototype['GetAsFormattedText'] = InstructionSentenceFormatter.prototype.GetAsFormattedText = function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUselessImages_1(self, arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  return wrapPointer(_emscripten_bind_InstructionSentenceFormatter_GetAsFormattedText_2(self, arg0, arg1), VectorPairStringTextFormatting);
 };;
 
-  ProjectResourcesAdder.prototype['__destroy__'] = ProjectResourcesAdder.prototype.__destroy__ = function() {
+InstructionSentenceFormatter.prototype['GetFormattingFromType'] = InstructionSentenceFormatter.prototype.GetFormattingFromType = function(arg0) {
   var self = this.ptr;
-  _emscripten_bind_ProjectResourcesAdder___destroy___0(self);
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_InstructionSentenceFormatter_GetFormattingFromType_1(self, arg0), TextFormatting);
+};;
+
+InstructionSentenceFormatter.prototype['LabelFromType'] = InstructionSentenceFormatter.prototype.LabelFromType = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return Pointer_stringify(_emscripten_bind_InstructionSentenceFormatter_LabelFromType_1(self, arg0));
+};;
+
+InstructionSentenceFormatter.prototype['LoadTypesFormattingFromConfig'] = InstructionSentenceFormatter.prototype.LoadTypesFormattingFromConfig = function() {
+  var self = this.ptr;
+  _emscripten_bind_InstructionSentenceFormatter_LoadTypesFormattingFromConfig_0(self);
+};;
+
+  InstructionSentenceFormatter.prototype['__destroy__'] = InstructionSentenceFormatter.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_InstructionSentenceFormatter___destroy___0(self);
 };
 // Layer
 function Layer() {

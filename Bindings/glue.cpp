@@ -50,6 +50,32 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystem___destroy___0(Abstr
   delete self;
 }
 
+// Vector2f
+
+sf::Vector2f* EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_Vector2f_0() {
+  return new sf::Vector2f();
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_get_x_0(sf::Vector2f* self) {
+  return self->x;
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_set_x_1(sf::Vector2f* self, float arg0) {
+  self->x = arg0;
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_get_y_0(sf::Vector2f* self) {
+  return self->y;
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_set_y_1(sf::Vector2f* self, float arg0) {
+  self->y = arg0;
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f___destroy___0(sf::Vector2f* self) {
+  delete self;
+}
+
 // Layout
 
 Layout* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_Layout_0() {
@@ -148,6 +174,14 @@ LayoutEditorCanvasOptions* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetAssoci
   return &self->GetAssociatedSettings();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SerializeTo_1(Layout* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_UnserializeFrom_2(Layout* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
 gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertNewObject_4(Layout* self, Project* arg0, char* arg1, char* arg2, unsigned int arg3) {
   return &self->InsertNewObject(*arg0, arg1, arg2, arg3);
 }
@@ -211,29 +245,21 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringEventMetadata___destroy___0(M
   delete self;
 }
 
-// Vector2f
+// ProjectResourcesAdder
 
-sf::Vector2f* EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_Vector2f_0() {
-  return new sf::Vector2f();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_AddAllMissingImages_1(ProjectResourcesAdder* self, Project* arg0) {
+  self->STATIC_AddAllMissingImages(*arg0);
 }
 
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_get_x_0(sf::Vector2f* self) {
-  return self->x;
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessImages_1(ProjectResourcesAdder* self, Project* arg0) {
+  self->STATIC_GetAllUselessImages(*arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_set_x_1(sf::Vector2f* self, float arg0) {
-  self->x = arg0;
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUselessImages_1(ProjectResourcesAdder* self, Project* arg0) {
+  self->STATIC_RemoveAllUselessImages(*arg0);
 }
 
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_get_y_0(sf::Vector2f* self) {
-  return self->y;
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_set_y_1(sf::Vector2f* self, float arg0) {
-  self->y = arg0;
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f___destroy___0(sf::Vector2f* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder___destroy___0(ProjectResourcesAdder* self) {
   delete self;
 }
 
@@ -373,6 +399,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper___destroy___0(ProjectHel
 
 Animation* EMSCRIPTEN_KEEPALIVE emscripten_bind_Animation_Animation_0() {
   return new Animation();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Animation_SetName_1(Animation* self, char* arg0) {
+  self->SetName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Animation_GetName_0(Animation* self) {
+  return self->GetName().c_str();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Animation_SetDirectionsCount_1(Animation* self, unsigned int arg0) {
@@ -681,6 +715,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_SwapAnimations_2(SpriteOb
   self->SwapAnimations(arg0, arg1);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_MoveAnimation_2(SpriteObject* self, unsigned int arg0, unsigned int arg1) {
+  self->MoveAnimation(arg0, arg1);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_SetName_1(SpriteObject* self, char* arg0) {
   self->SetName(arg0);
 }
@@ -977,41 +1015,74 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Direction_SwapSprites_2(Direction* sel
   self->SwapSprites(arg0, arg1);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Direction_MoveSprite_2(Direction* self, unsigned int arg0, unsigned int arg1) {
+  self->MoveSprite(arg0, arg1);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Direction___destroy___0(Direction* self) {
   delete self;
 }
 
-// InstructionSentenceFormatter
+// AudioResource
 
-InstructionSentenceFormatter* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_STATIC_Get_0(InstructionSentenceFormatter* self) {
-  return self->STATIC_Get();
+AudioResource* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_AudioResource_0() {
+  return new AudioResource();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_Translate_2(InstructionSentenceFormatter* self, Instruction* arg0, InstructionMetadata* arg1) {
+Resource* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_Clone_0(AudioResource* self) {
+  return self->Clone();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_SetName_1(AudioResource* self, char* arg0) {
+  self->SetName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_GetName_0(AudioResource* self) {
+  return self->GetName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_SetKind_1(AudioResource* self, char* arg0) {
+  self->SetKind(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_GetKind_0(AudioResource* self) {
+  return self->GetKind().c_str();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_IsUserAdded_0(AudioResource* self) {
+  return self->IsUserAdded();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_SetUserAdded_1(AudioResource* self, bool arg0) {
+  self->SetUserAdded(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_UseFile_0(AudioResource* self) {
+  return self->UseFile();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_SetFile_1(AudioResource* self, char* arg0) {
+  self->SetFile(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_GetFile_0(AudioResource* self) {
+  return self->GetFile().c_str();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_GetAbsoluteFile_1(AudioResource* self, Project* arg0) {
   static gd::String temp;
-  return (temp = self->Translate(*arg0, *arg1), temp.c_str());
+  return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
 }
 
-VectorPairStringTextFormatting* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_GetAsFormattedText_2(InstructionSentenceFormatter* self, Instruction* arg0, InstructionMetadata* arg1) {
-  static VectorPairStringTextFormatting temp;
-  return (temp = self->GetAsFormattedText(*arg0, *arg1), &temp);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_SerializeTo_1(AudioResource* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
 }
 
-TextFormatting* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_GetFormattingFromType_1(InstructionSentenceFormatter* self, char* arg0) {
-  static TextFormatting temp;
-  return (temp = self->GetFormattingFromType(arg0), &temp);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_UnserializeFrom_1(AudioResource* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_LabelFromType_1(InstructionSentenceFormatter* self, char* arg0) {
-  static gd::String temp;
-  return (temp = self->LabelFromType(arg0), temp.c_str());
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_LoadTypesFormattingFromConfig_0(InstructionSentenceFormatter* self) {
-  self->LoadTypesFormattingFromConfig();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter___destroy___0(InstructionSentenceFormatter* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource___destroy___0(AudioResource* self) {
   delete self;
 }
 
@@ -2647,21 +2718,37 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource___destroy___0(ImageResou
   delete self;
 }
 
-// ProjectResourcesAdder
+// InstructionSentenceFormatter
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_AddAllMissingImages_1(ProjectResourcesAdder* self, Project* arg0) {
-  self->STATIC_AddAllMissingImages(*arg0);
+InstructionSentenceFormatter* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_STATIC_Get_0(InstructionSentenceFormatter* self) {
+  return self->STATIC_Get();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessImages_1(ProjectResourcesAdder* self, Project* arg0) {
-  self->STATIC_GetAllUselessImages(*arg0);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_Translate_2(InstructionSentenceFormatter* self, Instruction* arg0, InstructionMetadata* arg1) {
+  static gd::String temp;
+  return (temp = self->Translate(*arg0, *arg1), temp.c_str());
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUselessImages_1(ProjectResourcesAdder* self, Project* arg0) {
-  self->STATIC_RemoveAllUselessImages(*arg0);
+VectorPairStringTextFormatting* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_GetAsFormattedText_2(InstructionSentenceFormatter* self, Instruction* arg0, InstructionMetadata* arg1) {
+  static VectorPairStringTextFormatting temp;
+  return (temp = self->GetAsFormattedText(*arg0, *arg1), &temp);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder___destroy___0(ProjectResourcesAdder* self) {
+TextFormatting* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_GetFormattingFromType_1(InstructionSentenceFormatter* self, char* arg0) {
+  static TextFormatting temp;
+  return (temp = self->GetFormattingFromType(arg0), &temp);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_LabelFromType_1(InstructionSentenceFormatter* self, char* arg0) {
+  static gd::String temp;
+  return (temp = self->LabelFromType(arg0), temp.c_str());
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter_LoadTypesFormattingFromConfig_0(InstructionSentenceFormatter* self) {
+  self->LoadTypesFormattingFromConfig();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionSentenceFormatter___destroy___0(InstructionSentenceFormatter* self) {
   delete self;
 }
 

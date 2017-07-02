@@ -825,9 +825,8 @@ describe('libGD.js', function(){
 
 
 		describe('gd.Direction', function() {
-			var direction = new gd.Direction();
-
 			it('can swap sprites', function() {
+				var direction = new gd.Direction();
 				var sprite1 = new gd.Sprite();
 				var sprite2 = new gd.Sprite();
 				sprite1.setImageName("image1");
@@ -840,6 +839,37 @@ describe('libGD.js', function(){
 				expect(direction.getSprite(0).getImageName()).to.be("image2");
 				direction.swapSprites(1, 0);
 				expect(direction.getSprite(0).getImageName()).to.be("image1");
+			});
+
+			it('can move sprites', function() {
+				var direction = new gd.Direction();
+				var sprite1 = new gd.Sprite();
+				var sprite2 = new gd.Sprite();
+				var sprite3 = new gd.Sprite();
+				sprite1.setImageName("image1");
+				sprite2.setImageName("image2");
+				sprite3.setImageName("image3");
+				direction.addSprite(sprite1);
+				direction.addSprite(sprite2);
+				direction.addSprite(sprite3);
+
+				expect(direction.getSprite(0).getImageName()).to.be("image1");
+				direction.moveSprite(0, 2);
+				expect(direction.getSprite(0).getImageName()).to.be("image2");
+				expect(direction.getSprite(1).getImageName()).to.be("image3");
+				expect(direction.getSprite(2).getImageName()).to.be("image1");
+				direction.swapSprites(1, 1);
+				expect(direction.getSprite(0).getImageName()).to.be("image2");
+				expect(direction.getSprite(1).getImageName()).to.be("image3");
+				expect(direction.getSprite(2).getImageName()).to.be("image1");
+				direction.swapSprites(1, 0);
+				expect(direction.getSprite(0).getImageName()).to.be("image3");
+				expect(direction.getSprite(1).getImageName()).to.be("image2");
+				expect(direction.getSprite(2).getImageName()).to.be("image1");
+				direction.swapSprites(999, 998);
+				expect(direction.getSprite(0).getImageName()).to.be("image3");
+				expect(direction.getSprite(1).getImageName()).to.be("image2");
+				expect(direction.getSprite(2).getImageName()).to.be("image1");
 			});
 		});
 	});
