@@ -1198,6 +1198,28 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS___destroy___
   delete self;
 }
 
+// WholeProjectRefactorer
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_WholeProjectRefactorer_STATIC_ObjectRenamedInLayout_4(WholeProjectRefactorer* self, Project* arg0, Layout* arg1, char* arg2, char* arg3) {
+  self->STATIC_ObjectRenamedInLayout(*arg0, *arg1, arg2, arg3);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_WholeProjectRefactorer_STATIC_ObjectRemovedInLayout_4(WholeProjectRefactorer* self, Project* arg0, Layout* arg1, char* arg2, bool arg3) {
+  self->STATIC_ObjectRemovedInLayout(*arg0, *arg1, arg2, arg3);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_WholeProjectRefactorer_STATIC_GlobalObjectRenamed_3(WholeProjectRefactorer* self, Project* arg0, char* arg1, char* arg2) {
+  self->STATIC_GlobalObjectRenamed(*arg0, arg1, arg2);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_WholeProjectRefactorer_STATIC_GlobalObjectRemoved_3(WholeProjectRefactorer* self, Project* arg0, char* arg1, bool arg2) {
+  self->STATIC_GlobalObjectRemoved(*arg0, arg1, arg2);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_WholeProjectRefactorer___destroy___0(WholeProjectRefactorer* self) {
+  delete self;
+}
+
 // AdMobObject
 
 AdMobObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_AdMobObject_1(char* arg0) {

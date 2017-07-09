@@ -24,6 +24,7 @@
 #include <GDCore/IDE/Events/TextFormatting.h>
 #include <GDCore/IDE/Events/InstructionSentenceFormatter.h>
 #include <GDCore/IDE/Events/EventsRefactorer.h>
+#include <GDCore/IDE/WholeProjectRefactorer.h>
 #include <GDCore/IDE/Project/ProjectResourcesAdder.h>
 #include <GDCore/IDE/AbstractFileSystem.h>
 #include <GDCore/IDE/Project/ArbitraryResourceWorker.h>
@@ -313,6 +314,10 @@ typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 #define STATIC_Year Year
 #define STATIC_Month Month
 #define STATIC_Date Date
+#define STATIC_ObjectRenamedInLayout ObjectRenamedInLayout
+#define STATIC_ObjectRemovedInLayout ObjectRemovedInLayout
+#define STATIC_GlobalObjectRenamed GlobalObjectRenamed
+#define STATIC_GlobalObjectRemoved GlobalObjectRemoved
 
 //We postfix some methods with "At" as Javascript does not support overloading
 #define GetLayoutAt GetLayout

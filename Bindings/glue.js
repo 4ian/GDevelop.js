@@ -2042,6 +2042,62 @@ ArbitraryResourceWorkerJS.prototype['ExposeFile'] = ArbitraryResourceWorkerJS.pr
   var self = this.ptr;
   _emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(self);
 };
+// WholeProjectRefactorer
+function WholeProjectRefactorer() { throw "cannot construct a WholeProjectRefactorer, no constructor in IDL" }
+WholeProjectRefactorer.prototype = Object.create(WrapperObject.prototype);
+WholeProjectRefactorer.prototype.constructor = WholeProjectRefactorer;
+WholeProjectRefactorer.prototype.__class__ = WholeProjectRefactorer;
+WholeProjectRefactorer.__cache__ = {};
+Module['WholeProjectRefactorer'] = WholeProjectRefactorer;
+
+WholeProjectRefactorer.prototype['STATIC_ObjectRenamedInLayout'] = WholeProjectRefactorer.prototype.STATIC_ObjectRenamedInLayout = function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  _emscripten_bind_WholeProjectRefactorer_STATIC_ObjectRenamedInLayout_4(self, arg0, arg1, arg2, arg3);
+};;
+
+WholeProjectRefactorer.prototype['STATIC_ObjectRemovedInLayout'] = WholeProjectRefactorer.prototype.STATIC_ObjectRemovedInLayout = function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  _emscripten_bind_WholeProjectRefactorer_STATIC_ObjectRemovedInLayout_4(self, arg0, arg1, arg2, arg3);
+};;
+
+WholeProjectRefactorer.prototype['STATIC_GlobalObjectRenamed'] = WholeProjectRefactorer.prototype.STATIC_GlobalObjectRenamed = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  _emscripten_bind_WholeProjectRefactorer_STATIC_GlobalObjectRenamed_3(self, arg0, arg1, arg2);
+};;
+
+WholeProjectRefactorer.prototype['STATIC_GlobalObjectRemoved'] = WholeProjectRefactorer.prototype.STATIC_GlobalObjectRemoved = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  _emscripten_bind_WholeProjectRefactorer_STATIC_GlobalObjectRemoved_3(self, arg0, arg1, arg2);
+};;
+
+  WholeProjectRefactorer.prototype['__destroy__'] = WholeProjectRefactorer.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_WholeProjectRefactorer___destroy___0(self);
+};
 // AdMobObject
 function AdMobObject(arg0) {
   ensureStringCache.prepare();

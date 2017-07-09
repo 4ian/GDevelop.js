@@ -884,6 +884,13 @@ interface EventsRefactorer {
     void STATIC_ReplaceStringInEvents([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString toReplace, [Const] DOMString newString, boolean matchCase, boolean inConditions, boolean inActions);
 };
 
+interface WholeProjectRefactorer {
+    void STATIC_ObjectRenamedInLayout([Ref] Project project, [Ref] Layout layout, [Const] DOMString oldName, [Const] DOMString newName);
+    void STATIC_ObjectRemovedInLayout([Ref] Project project, [Ref] Layout layout, [Const] DOMString objectName, boolean removeEventsAndGroups);
+    void STATIC_GlobalObjectRenamed([Ref] Project project, [Const] DOMString oldName, [Const] DOMString newName);
+    void STATIC_GlobalObjectRemoved([Ref] Project project, [Const] DOMString objectName, boolean removeEventsAndGroups);
+};
+
 interface MetadataProvider {
 
     [Const, Ref] BehaviorMetadata STATIC_GetBehaviorMetadata([Const, Ref] Platform p, [Const] DOMString type);
