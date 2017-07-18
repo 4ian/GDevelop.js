@@ -229,6 +229,7 @@ interface Project {
     void GetObjectPosition([Const] DOMString name);
     void RemoveObject([Const] DOMString name);
     void SwapObjects(unsigned long first, unsigned long second);
+    void MoveObject(unsigned long oldIndex, unsigned long newIndex);
     unsigned long GetObjectsCount();
 };
 
@@ -322,6 +323,7 @@ interface Layout {
     void GetObjectPosition([Const] DOMString name);
     void RemoveObject([Const] DOMString name);
     void SwapObjects(unsigned long first, unsigned long second);
+    void MoveObject(unsigned long oldIndex, unsigned long newIndex);
     unsigned long GetObjectsCount();
 };
 
@@ -507,6 +509,7 @@ interface InitialInstancesContainer {
     void MoveInstancesToLayer([Const] DOMString fromLayer, [Const] DOMString toLayer);
     void RemoveAllInstancesOnLayer([Const] DOMString layer);
     void RemoveInitialInstancesOfObject([Const] DOMString obj);
+    boolean HasInstancesOfObject([Const] DOMString objectName);
     boolean SomeInstancesAreOnLayer([Const] DOMString layer);
     void RenameInstancesOfObject([Const] DOMString oldName, [Const] DOMString newName);
     void RemoveInstance([Const, Ref] InitialInstance inst);
@@ -1247,7 +1250,24 @@ interface ShapePainterObject {
     void SetCoordinatesRelative();
     boolean AreCoordinatesAbsolute();
 
-    //TODO
+    void SetOutlineSize(float size);
+    float GetOutlineSize();
+
+    void SetOutlineOpacity(float val);
+    float GetOutlineOpacity();
+
+    void SetOutlineColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetOutlineColorR();
+    unsigned long GetOutlineColorG();
+    unsigned long GetOutlineColorB();
+
+    void SetFillOpacity(float val);
+    float GetFillOpacity();
+
+    void SetFillColor(unsigned long r,unsigned long g, unsigned long b);
+    unsigned long GetFillColorR();
+    unsigned long GetFillColorG();
+    unsigned long GetFillColorB();
 
     //Inherited from gdObject:
     void SetName([Const] DOMString name);

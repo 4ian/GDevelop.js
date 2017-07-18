@@ -101,6 +101,7 @@
         gd.asTiledSpriteObject = function(evt) { return gd.castObject(evt, gd.TiledSpriteObject); }
         gd.asPanelSpriteObject = function(evt) { return gd.castObject(evt, gd.PanelSpriteObject); }
         gd.asTextObject = function(evt) { return gd.castObject(evt, gd.TextObject); }
+        gd.asShapePainterObject = function(evt) { return gd.castObject(evt, gd.ShapePainterObject); }
 
         gd.asImageResource = function(evt) { return gd.castObject(evt, gd.ImageResource); }
 

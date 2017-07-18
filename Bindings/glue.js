@@ -414,6 +414,13 @@ Layout.prototype['SwapObjects'] = Layout.prototype.SwapObjects = function(arg0, 
   _emscripten_bind_Layout_SwapObjects_2(self, arg0, arg1);
 };;
 
+Layout.prototype['MoveObject'] = Layout.prototype.MoveObject = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Layout_MoveObject_2(self, arg0, arg1);
+};;
+
 Layout.prototype['GetObjectsCount'] = Layout.prototype.GetObjectsCount = function() {
   var self = this.ptr;
   return _emscripten_bind_Layout_GetObjectsCount_0(self);
@@ -2473,6 +2480,85 @@ ShapePainterObject.prototype['AreCoordinatesAbsolute'] = ShapePainterObject.prot
   return !!(_emscripten_bind_ShapePainterObject_AreCoordinatesAbsolute_0(self));
 };;
 
+ShapePainterObject.prototype['SetOutlineSize'] = ShapePainterObject.prototype.SetOutlineSize = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ShapePainterObject_SetOutlineSize_1(self, arg0);
+};;
+
+ShapePainterObject.prototype['GetOutlineSize'] = ShapePainterObject.prototype.GetOutlineSize = function() {
+  var self = this.ptr;
+  return _emscripten_bind_ShapePainterObject_GetOutlineSize_0(self);
+};;
+
+ShapePainterObject.prototype['SetOutlineOpacity'] = ShapePainterObject.prototype.SetOutlineOpacity = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ShapePainterObject_SetOutlineOpacity_1(self, arg0);
+};;
+
+ShapePainterObject.prototype['GetOutlineOpacity'] = ShapePainterObject.prototype.GetOutlineOpacity = function() {
+  var self = this.ptr;
+  return _emscripten_bind_ShapePainterObject_GetOutlineOpacity_0(self);
+};;
+
+ShapePainterObject.prototype['SetOutlineColor'] = ShapePainterObject.prototype.SetOutlineColor = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  _emscripten_bind_ShapePainterObject_SetOutlineColor_3(self, arg0, arg1, arg2);
+};;
+
+ShapePainterObject.prototype['GetOutlineColorR'] = ShapePainterObject.prototype.GetOutlineColorR = function() {
+  var self = this.ptr;
+  return _emscripten_bind_ShapePainterObject_GetOutlineColorR_0(self);
+};;
+
+ShapePainterObject.prototype['GetOutlineColorG'] = ShapePainterObject.prototype.GetOutlineColorG = function() {
+  var self = this.ptr;
+  return _emscripten_bind_ShapePainterObject_GetOutlineColorG_0(self);
+};;
+
+ShapePainterObject.prototype['GetOutlineColorB'] = ShapePainterObject.prototype.GetOutlineColorB = function() {
+  var self = this.ptr;
+  return _emscripten_bind_ShapePainterObject_GetOutlineColorB_0(self);
+};;
+
+ShapePainterObject.prototype['SetFillOpacity'] = ShapePainterObject.prototype.SetFillOpacity = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ShapePainterObject_SetFillOpacity_1(self, arg0);
+};;
+
+ShapePainterObject.prototype['GetFillOpacity'] = ShapePainterObject.prototype.GetFillOpacity = function() {
+  var self = this.ptr;
+  return _emscripten_bind_ShapePainterObject_GetFillOpacity_0(self);
+};;
+
+ShapePainterObject.prototype['SetFillColor'] = ShapePainterObject.prototype.SetFillColor = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  _emscripten_bind_ShapePainterObject_SetFillColor_3(self, arg0, arg1, arg2);
+};;
+
+ShapePainterObject.prototype['GetFillColorR'] = ShapePainterObject.prototype.GetFillColorR = function() {
+  var self = this.ptr;
+  return _emscripten_bind_ShapePainterObject_GetFillColorR_0(self);
+};;
+
+ShapePainterObject.prototype['GetFillColorG'] = ShapePainterObject.prototype.GetFillColorG = function() {
+  var self = this.ptr;
+  return _emscripten_bind_ShapePainterObject_GetFillColorG_0(self);
+};;
+
+ShapePainterObject.prototype['GetFillColorB'] = ShapePainterObject.prototype.GetFillColorB = function() {
+  var self = this.ptr;
+  return _emscripten_bind_ShapePainterObject_GetFillColorB_0(self);
+};;
+
 ShapePainterObject.prototype['SetName'] = ShapePainterObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
@@ -4392,6 +4478,13 @@ Project.prototype['SwapObjects'] = Project.prototype.SwapObjects = function(arg0
   _emscripten_bind_Project_SwapObjects_2(self, arg0, arg1);
 };;
 
+Project.prototype['MoveObject'] = Project.prototype.MoveObject = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Project_MoveObject_2(self, arg0, arg1);
+};;
+
 Project.prototype['GetObjectsCount'] = Project.prototype.GetObjectsCount = function() {
   var self = this.ptr;
   return _emscripten_bind_Project_GetObjectsCount_0(self);
@@ -5218,6 +5311,14 @@ InitialInstancesContainer.prototype['RemoveInitialInstancesOfObject'] = InitialI
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstancesContainer_RemoveInitialInstancesOfObject_1(self, arg0);
+};;
+
+InitialInstancesContainer.prototype['HasInstancesOfObject'] = InitialInstancesContainer.prototype.HasInstancesOfObject = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_InitialInstancesContainer_HasInstancesOfObject_1(self, arg0));
 };;
 
 InitialInstancesContainer.prototype['SomeInstancesAreOnLayer'] = InitialInstancesContainer.prototype.SomeInstancesAreOnLayer = function(arg0) {

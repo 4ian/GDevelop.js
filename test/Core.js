@@ -116,6 +116,39 @@ describe('libGD.js', function(){
 		after(function() { project.delete(); });
 	});
 
+	describe('ClassWithObjects (using gd.Layout)', function() {
+		var project = gd.ProjectHelper.createNewGDJSProject();
+		var layout = project.insertNewLayout("Scene", 0);
+
+		it('can move objects', function() {
+			var object = layout.insertNewObject(project, "Sprite", "MyObject", 0);
+			var object2 = layout.insertNewObject(project, "TextObject::Text", "MyObject2", 1);
+			var object3 = layout.insertNewObject(project, "TextObject::Text", "MyObject3", 2);
+
+			expect(layout.getObjectAt(0).getName()).to.be("MyObject");
+			expect(layout.getObjectAt(1).getName()).to.be("MyObject2");
+			expect(layout.getObjectAt(2).getName()).to.be("MyObject3");
+			layout.moveObject(0, 2);
+			expect(layout.getObjectAt(0).getName()).to.be("MyObject2");
+			expect(layout.getObjectAt(1).getName()).to.be("MyObject3");
+			expect(layout.getObjectAt(2).getName()).to.be("MyObject");
+			layout.moveObject(0, 0);
+			expect(layout.getObjectAt(0).getName()).to.be("MyObject2");
+			expect(layout.getObjectAt(1).getName()).to.be("MyObject3");
+			expect(layout.getObjectAt(2).getName()).to.be("MyObject");
+			layout.moveObject(1, 0);
+			expect(layout.getObjectAt(0).getName()).to.be("MyObject3");
+			expect(layout.getObjectAt(1).getName()).to.be("MyObject2");
+			expect(layout.getObjectAt(2).getName()).to.be("MyObject");
+			layout.moveObject(0, 999);
+			expect(layout.getObjectAt(0).getName()).to.be("MyObject3");
+			expect(layout.getObjectAt(1).getName()).to.be("MyObject2");
+			expect(layout.getObjectAt(2).getName()).to.be("MyObject");
+		});
+
+		after(function() { project.delete(); });
+	});
+
 	describe('gd.InitialInstancesContainer', function(){
 		var container = new gd.InitialInstancesContainer();
 		var containerCopy = null;
@@ -928,6 +961,29 @@ describe('libGD.js', function(){
 			var exporter = new gd.Exporter(fs);
 			exporter.exportLayoutForPixiPreview(project, layout, "/path/for/export/");
 			exporter.delete();
+		});
+	});
+
+	describe('gd.WholeProjectRefactorer', function() {
+		var project = new gd.ProjectHelper.createNewGDJSProject();
+		var layout = project.insertNewLayout("Scene", 0);
+		var instance1 = layout.getInitialInstances().insertNewInitialInstance();
+		var instance2 = layout.getInitialInstances().insertNewInitialInstance();
+		instance1.setObjectName("Object1");
+		instance2.setObjectName("Object2");
+
+		it('should rename an object', function() {
+			gd.WholeProjectRefactorer.objectRenamedInLayout(project, layout, "Object1", "Object3");
+			expect(layout.getInitialInstances().hasInstancesOfObject("Object1")).to.be(false);
+			expect(layout.getInitialInstances().hasInstancesOfObject("Object2")).to.be(true);
+			expect(layout.getInitialInstances().hasInstancesOfObject("Object3")).to.be(true);
+		});
+
+		it('should delete an object', function() {
+			gd.WholeProjectRefactorer.objectRemovedInLayout(project, layout, "Object3", true);
+			expect(layout.getInitialInstances().hasInstancesOfObject("Object1")).to.be(false);
+			expect(layout.getInitialInstances().hasInstancesOfObject("Object2")).to.be(true);
+			expect(layout.getInitialInstances().hasInstancesOfObject("Object3")).to.be(false);
 		});
 	});
 });

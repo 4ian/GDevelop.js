@@ -214,6 +214,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SwapObjects_2(Layout* self, uns
   self->SwapObjects(arg0, arg1);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_MoveObject_2(Layout* self, unsigned int arg0, unsigned int arg1) {
+  self->MoveObject(arg0, arg1);
+}
+
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectsCount_0(Layout* self) {
   return self->GetObjectsCount();
 }
@@ -1442,6 +1446,62 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_AreCoordinatesAbsol
   return self->AreCoordinatesAbsolute();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_SetOutlineSize_1(ShapePainterObject* self, float arg0) {
+  self->SetOutlineSize(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetOutlineSize_0(ShapePainterObject* self) {
+  return self->GetOutlineSize();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_SetOutlineOpacity_1(ShapePainterObject* self, float arg0) {
+  self->SetOutlineOpacity(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetOutlineOpacity_0(ShapePainterObject* self) {
+  return self->GetOutlineOpacity();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_SetOutlineColor_3(ShapePainterObject* self, unsigned int arg0, unsigned int arg1, unsigned int arg2) {
+  self->SetOutlineColor(arg0, arg1, arg2);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetOutlineColorR_0(ShapePainterObject* self) {
+  return self->GetOutlineColorR();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetOutlineColorG_0(ShapePainterObject* self) {
+  return self->GetOutlineColorG();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetOutlineColorB_0(ShapePainterObject* self) {
+  return self->GetOutlineColorB();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_SetFillOpacity_1(ShapePainterObject* self, float arg0) {
+  self->SetFillOpacity(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetFillOpacity_0(ShapePainterObject* self) {
+  return self->GetFillOpacity();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_SetFillColor_3(ShapePainterObject* self, unsigned int arg0, unsigned int arg1, unsigned int arg2) {
+  self->SetFillColor(arg0, arg1, arg2);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetFillColorR_0(ShapePainterObject* self) {
+  return self->GetFillColorR();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetFillColorG_0(ShapePainterObject* self) {
+  return self->GetFillColorG();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetFillColorB_0(ShapePainterObject* self) {
+  return self->GetFillColorB();
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_SetName_1(ShapePainterObject* self, char* arg0) {
   self->SetName(arg0);
 }
@@ -2638,6 +2698,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SwapObjects_2(Project* self, u
   self->SwapObjects(arg0, arg1);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_MoveObject_2(Project* self, unsigned int arg0, unsigned int arg1) {
+  self->MoveObject(arg0, arg1);
+}
+
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetObjectsCount_0(Project* self) {
   return self->GetObjectsCount();
 }
@@ -3164,6 +3228,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_RemoveAllIns
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_RemoveInitialInstancesOfObject_1(InitialInstancesContainer* self, char* arg0) {
   self->RemoveInitialInstancesOfObject(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_HasInstancesOfObject_1(InitialInstancesContainer* self, char* arg0) {
+  return self->HasInstancesOfObject(arg0);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstancesContainer_SomeInstancesAreOnLayer_1(InitialInstancesContainer* self, char* arg0) {
