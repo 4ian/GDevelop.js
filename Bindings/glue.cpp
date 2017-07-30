@@ -303,8 +303,8 @@ InstructionsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent_GetActions_0(W
   return &self->GetActions();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent_Clone_0(WhileEvent* self) {
-  self->Clone();
+WhileEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent_Clone_0(WhileEvent* self) {
+  return self->Clone();
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent_GetType_0(WhileEvent* self) {
@@ -590,8 +590,8 @@ InstructionsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_ForEachEvent_GetActions_0
   return &self->GetActions();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ForEachEvent_Clone_0(ForEachEvent* self) {
-  self->Clone();
+ForEachEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_ForEachEvent_Clone_0(ForEachEvent* self) {
+  return self->Clone();
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ForEachEvent_GetType_0(ForEachEvent* self) {
@@ -1311,8 +1311,8 @@ BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_BaseEvent_0() {
   return new BaseEvent();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_Clone_0(BaseEvent* self) {
-  self->Clone();
+BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_Clone_0(BaseEvent* self) {
+  return self->Clone();
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_GetType_0(BaseEvent* self) {
@@ -1720,8 +1720,8 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_RepeatEvent_GetRepeatExpression
   return self->GetRepeatExpression().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_RepeatEvent_Clone_0(RepeatEvent* self) {
-  self->Clone();
+RepeatEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_RepeatEvent_Clone_0(RepeatEvent* self) {
+  return self->Clone();
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_RepeatEvent_GetType_0(RepeatEvent* self) {
@@ -1960,8 +1960,8 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_GroupEvent_SetCreationTimestamp_1(Grou
   self->SetCreationTimestamp(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_GroupEvent_Clone_0(GroupEvent* self) {
-  self->Clone();
+GroupEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_GroupEvent_Clone_0(GroupEvent* self) {
+  return self->Clone();
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_GroupEvent_GetType_0(GroupEvent* self) {
@@ -2913,8 +2913,8 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_WRAPPED_SetComment_1(Comm
   self->WRAPPED_SetComment(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_Clone_0(CommentEvent* self) {
-  self->Clone();
+CommentEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_Clone_0(CommentEvent* self) {
+  return self->Clone();
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_GetType_0(CommentEvent* self) {
@@ -3512,8 +3512,8 @@ InstructionsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_GetActions_
   return &self->GetActions();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_Clone_0(StandardEvent* self) {
-  self->Clone();
+StandardEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_Clone_0(StandardEvent* self) {
+  return self->Clone();
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_GetType_0(StandardEvent* self) {

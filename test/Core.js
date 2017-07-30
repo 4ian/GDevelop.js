@@ -708,6 +708,33 @@ describe('libGD.js', function(){
 		});
 	});
 
+	describe('gd.Event', function() {
+		it('can have a type', function() {
+			var event = new gd.BaseEvent();
+			event.setType("Type1");
+			var event2 = new gd.BaseEvent();
+			event2.setType("Type2");
+
+			expect(event.getType()).to.be('Type1');
+			expect(event2.getType()).to.be('Type2');
+
+			event.delete();
+			event2.delete();
+		});
+
+		it('can be cloned', function() {
+			var event = new gd.BaseEvent();
+			event.setType("Type1");
+			var event2 = event.clone();
+
+			expect(event.getType()).to.be('Type1');
+			expect(event2.getType()).to.be('Type1');
+
+			event.delete();
+			event2.delete();
+		});
+	});
+
 	describe('gd.ArbitraryEventsWorker', function() {
 		var project = new gd.ProjectHelper.createNewGDJSProject();
 		var list = new gd.EventsList();

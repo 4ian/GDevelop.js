@@ -733,7 +733,7 @@ interface EventsList {
 interface BaseEvent {
     void BaseEvent();
 
-    void Clone();
+    BaseEvent Clone();
     [Const, Ref] DOMString GetType();
     void SetType([Const] DOMString type);
     boolean IsExecutable();
@@ -753,7 +753,7 @@ interface StandardEvent {
     [Ref] InstructionsList GetActions();
 
     //Inherited from BaseEvent:
-    void Clone();
+    StandardEvent Clone();
     [Const, Ref] DOMString GetType();
     void SetType([Const] DOMString type);
     boolean IsExecutable();
@@ -775,7 +775,7 @@ interface RepeatEvent {
     [Const, Ref] DOMString GetRepeatExpression();
 
     //Inherited from BaseEvent:
-    void Clone();
+    RepeatEvent Clone();
     [Const, Ref] DOMString GetType();
     void SetType([Const] DOMString type);
     boolean IsExecutable();
@@ -796,7 +796,7 @@ interface WhileEvent {
     [Ref] InstructionsList GetActions();
 
     //Inherited from BaseEvent:
-    void Clone();
+    WhileEvent Clone();
     [Const, Ref] DOMString GetType();
     void SetType([Const] DOMString type);
     boolean IsExecutable();
@@ -818,7 +818,7 @@ interface ForEachEvent {
     [Ref] InstructionsList GetActions();
 
     //Inherited from BaseEvent:
-    void Clone();
+    ForEachEvent Clone();
     [Const, Ref] DOMString GetType();
     void SetType([Const] DOMString type);
     boolean IsExecutable();
@@ -838,7 +838,7 @@ interface CommentEvent {
     void WRAPPED_SetComment([Const] DOMString type);
 
     //Inherited from BaseEvent:
-    void Clone();
+    CommentEvent Clone();
     [Const, Ref] DOMString GetType();
     void SetType([Const] DOMString type);
     boolean IsExecutable();
@@ -867,7 +867,7 @@ interface GroupEvent {
     void SetCreationTimestamp(unsigned long ts);
 
     //Inherited from BaseEvent:
-    void Clone();
+    GroupEvent Clone();
     [Const, Ref] DOMString GetType();
     void SetType([Const] DOMString type);
     boolean IsExecutable();

@@ -584,7 +584,7 @@ WhileEvent.prototype['GetActions'] = WhileEvent.prototype.GetActions = function(
 
 WhileEvent.prototype['Clone'] = WhileEvent.prototype.Clone = function() {
   var self = this.ptr;
-  _emscripten_bind_WhileEvent_Clone_0(self);
+  return wrapPointer(_emscripten_bind_WhileEvent_Clone_0(self), WhileEvent);
 };;
 
 WhileEvent.prototype['GetType'] = WhileEvent.prototype.GetType = function() {
@@ -1034,7 +1034,7 @@ ForEachEvent.prototype['GetActions'] = ForEachEvent.prototype.GetActions = funct
 
 ForEachEvent.prototype['Clone'] = ForEachEvent.prototype.Clone = function() {
   var self = this.ptr;
-  _emscripten_bind_ForEachEvent_Clone_0(self);
+  return wrapPointer(_emscripten_bind_ForEachEvent_Clone_0(self), ForEachEvent);
 };;
 
 ForEachEvent.prototype['GetType'] = ForEachEvent.prototype.GetType = function() {
@@ -2268,7 +2268,7 @@ Module['BaseEvent'] = BaseEvent;
 
 BaseEvent.prototype['Clone'] = BaseEvent.prototype.Clone = function() {
   var self = this.ptr;
-  _emscripten_bind_BaseEvent_Clone_0(self);
+  return wrapPointer(_emscripten_bind_BaseEvent_Clone_0(self), BaseEvent);
 };;
 
 BaseEvent.prototype['GetType'] = BaseEvent.prototype.GetType = function() {
@@ -2929,7 +2929,7 @@ RepeatEvent.prototype['GetRepeatExpression'] = RepeatEvent.prototype.GetRepeatEx
 
 RepeatEvent.prototype['Clone'] = RepeatEvent.prototype.Clone = function() {
   var self = this.ptr;
-  _emscripten_bind_RepeatEvent_Clone_0(self);
+  return wrapPointer(_emscripten_bind_RepeatEvent_Clone_0(self), RepeatEvent);
 };;
 
 RepeatEvent.prototype['GetType'] = RepeatEvent.prototype.GetType = function() {
@@ -3292,7 +3292,7 @@ GroupEvent.prototype['SetCreationTimestamp'] = GroupEvent.prototype.SetCreationT
 
 GroupEvent.prototype['Clone'] = GroupEvent.prototype.Clone = function() {
   var self = this.ptr;
-  _emscripten_bind_GroupEvent_Clone_0(self);
+  return wrapPointer(_emscripten_bind_GroupEvent_Clone_0(self), GroupEvent);
 };;
 
 GroupEvent.prototype['GetType'] = GroupEvent.prototype.GetType = function() {
@@ -4812,7 +4812,7 @@ CommentEvent.prototype['WRAPPED_SetComment'] = CommentEvent.prototype.WRAPPED_Se
 
 CommentEvent.prototype['Clone'] = CommentEvent.prototype.Clone = function() {
   var self = this.ptr;
-  _emscripten_bind_CommentEvent_Clone_0(self);
+  return wrapPointer(_emscripten_bind_CommentEvent_Clone_0(self), CommentEvent);
 };;
 
 CommentEvent.prototype['GetType'] = CommentEvent.prototype.GetType = function() {
@@ -5853,7 +5853,7 @@ StandardEvent.prototype['GetActions'] = StandardEvent.prototype.GetActions = fun
 
 StandardEvent.prototype['Clone'] = StandardEvent.prototype.Clone = function() {
   var self = this.ptr;
-  _emscripten_bind_StandardEvent_Clone_0(self);
+  return wrapPointer(_emscripten_bind_StandardEvent_Clone_0(self), StandardEvent);
 };;
 
 StandardEvent.prototype['GetType'] = StandardEvent.prototype.GetType = function() {
