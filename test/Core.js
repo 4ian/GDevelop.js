@@ -659,6 +659,8 @@ describe('libGD.js', function(){
 			expect(formattedTexts.getString(1)).to.be("MyCharacter");
 			expect(formattedTexts.getTextFormatting(0).isBold()).to.be(false);
 			expect(formattedTexts.getTextFormatting(1).isBold()).to.be(true);
+			expect(formattedTexts.getTextFormatting(0).getUserData()).not.to.be(0);
+			expect(formattedTexts.getTextFormatting(1).getUserData()).to.be(0);
 		});
 
 		after(function() {
@@ -988,6 +990,23 @@ describe('libGD.js', function(){
 			var exporter = new gd.Exporter(fs);
 			exporter.exportLayoutForPixiPreview(project, layout, "/path/for/export/");
 			exporter.delete();
+		});
+	});
+
+	describe('gd.EventsRemover', function() {
+		it('should remove events', function() {
+			var list = new gd.EventsList();
+			var event1 = list.insertEvent(new gd.StandardEvent(), 0);
+			var event2 = list.insertEvent(new gd.StandardEvent(), 1);
+			var event3 = list.insertEvent(new gd.StandardEvent(), 2);
+
+			var remover = new gd.EventsRemover();
+			remover.addEventToRemove(event1);
+			remover.addEventToRemove(event3);
+			remover.launch(list);
+
+			expect(list.getEventsCount()).to.be(1);
+			expect(list.getEventAt(0)).to.be(event2);
 		});
 	});
 

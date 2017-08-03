@@ -152,6 +152,24 @@ interface VariablesContainer {
     void UnserializeFrom([Const, Ref] SerializerElement element);
 };
 
+interface ObjectGroup {
+    void ObjectGroup();
+
+    [Const, Ref] DOMString GetName();
+    void SetName([Const] DOMString name);
+    void AddObject([Const] DOMString obj);
+    void RemoveObject([Const] DOMString obj);
+    boolean Find([Const] DOMString obj);
+};
+
+interface VectorObjectGroup {
+    void push_back([Const, Ref] ObjectGroup objectGroup);
+    unsigned long size();
+    [Ref] ObjectGroup at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] ObjectGroup objectGroup);
+    void clear();
+};
+
 interface Project {
     void Project();
 
@@ -216,6 +234,8 @@ interface Project {
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
 
+    [Ref] VectorObjectGroup GetObjectGroups();
+
     [Const, Value] DOMString FREE_GetTypeOfBehavior([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
     [Const, Value] DOMString FREE_GetTypeOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
     [Value] VectorString FREE_GetBehaviorsOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
@@ -273,15 +293,6 @@ interface gdObject {
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
-interface ObjectGroup {
-    void ObjectGroup();
-
-    [Const, Ref] DOMString GetName();
-    void AddObject([Const] DOMString obj);
-    void RemoveObject([Const] DOMString obj);
-    boolean Find([Const] DOMString obj);
-};
-
 interface Layout {
     void Layout();
 
@@ -308,6 +319,8 @@ interface Layout {
     void MoveLayer(unsigned long oldIndex, unsigned long newIndex);
     void SerializeLayersTo([Ref] SerializerElement element);
     void UnserializeLayersFrom([Const, Ref] SerializerElement element);
+
+    [Ref] VectorObjectGroup GetObjectGroups();
 
     [Ref] LayoutEditorCanvasOptions GetAssociatedSettings();
 
@@ -595,7 +608,7 @@ interface Instruction {
     [Const, Ref] DOMString GetType();
     void SetInverted(boolean inverted);
     boolean IsInverted();
-    void SetParameter(unsigned long id, [Const] DOMString type);
+    void SetParameter(unsigned long id, [Const] DOMString value);
     [Const, Ref] DOMString GetParameter(unsigned long id);
     void SetParametersCount(unsigned long count);
     unsigned long GetParametersCount();
@@ -614,6 +627,7 @@ interface TextFormatting {
     unsigned long GetColorRed();
     unsigned long GetColorGreen();
     unsigned long GetColorBlue();
+    unsigned long GetUserData();
 };
 
 interface InstructionSentenceFormatter {
@@ -880,6 +894,41 @@ interface GroupEvent {
     void SetFolded(boolean folded);
 };
 
+interface LinkEvent {
+    void LinkEvent();
+
+    void SetTarget([Const] DOMString name);
+    [Const, Ref] DOMString GetTarget();
+
+    long GetIncludeConfig();
+    void SetIncludeAllEvents();
+    void SetIncludeEventsGroup([Const] DOMString source);
+    [Const, Ref] DOMString GetEventsGroupName();
+    void SetIncludeStartAndEnd(unsigned long start, unsigned long end);
+    unsigned long GetIncludeStart();
+    unsigned long GetIncludeEnd();
+
+    //Inherited from BaseEvent:
+    LinkEvent Clone();
+    [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+};
+
+interface EventsRemover {
+    void EventsRemover();
+
+    void AddEventToRemove([Ref] BaseEvent eventToRemove);
+    void AddInstructionToRemove([Ref] Instruction instructionToRemove);
+    void Launch([Ref] EventsList events);
+};
 
 interface EventsRefactorer {
     void STATIC_RenameObjectInEvents([Const, Ref] Platform platform, [Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString oldName, [Const] DOMString newName);

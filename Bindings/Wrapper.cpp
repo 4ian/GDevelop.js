@@ -24,6 +24,7 @@
 #include <GDCore/IDE/Events/TextFormatting.h>
 #include <GDCore/IDE/Events/InstructionSentenceFormatter.h>
 #include <GDCore/IDE/Events/EventsRefactorer.h>
+#include <GDCore/IDE/Events/EventsRemover.h>
 #include <GDCore/IDE/WholeProjectRefactorer.h>
 #include <GDCore/IDE/Project/ProjectResourcesAdder.h>
 #include <GDCore/IDE/AbstractFileSystem.h>
@@ -38,6 +39,7 @@
 #include <GDCore/Events/Builtin/WhileEvent.h>
 #include <GDCore/Events/Builtin/RepeatEvent.h>
 #include <GDCore/Events/Builtin/GroupEvent.h>
+#include <GDCore/Events/Builtin/LinkEvent.h>
 
 #include <GDCore/Extensions/Builtin/SpriteExtension/SpriteObject.h>
 #include <GDCore/Extensions/Builtin/SpriteExtension/Animation.h>
@@ -240,6 +242,7 @@ typedef std::vector < std::shared_ptr<gd::PlatformExtension> > VectorPlatformExt
 typedef std::pair<gd::String, gd::Variable> PairStringVariable;
 typedef std::pair<gd::String, TextFormatting> PairStringTextFormatting;
 typedef std::vector<std::pair<gd::String, TextFormatting>> VectorPairStringTextFormatting;
+typedef std::vector<gd::ObjectGroup> VectorObjectGroup;
 typedef std::map<gd::String, gd::String> MapStringString;
 typedef std::map<gd::String, gd::ExpressionMetadata> MapStringExpressionMetadata;
 typedef std::map<gd::String, gd::InstructionMetadata> MapStringInstructionMetadata;
