@@ -598,6 +598,9 @@ interface InstructionsList {
     void Remove([Const, Ref] Instruction instr);
     void RemoveAt(unsigned long index);
     void Clear();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 interface Instruction {
@@ -758,6 +761,9 @@ interface BaseEvent {
     void SetDisabled(boolean disable);
     boolean IsFolded();
     void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 interface StandardEvent {
@@ -778,6 +784,9 @@ interface StandardEvent {
     void SetDisabled(boolean disable);
     boolean IsFolded();
     void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 interface RepeatEvent {
@@ -800,6 +809,9 @@ interface RepeatEvent {
     void SetDisabled(boolean disable);
     boolean IsFolded();
     void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 interface WhileEvent {
@@ -821,6 +833,9 @@ interface WhileEvent {
     void SetDisabled(boolean disable);
     boolean IsFolded();
     void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 interface ForEachEvent {
@@ -843,6 +858,9 @@ interface ForEachEvent {
     void SetDisabled(boolean disable);
     boolean IsFolded();
     void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 interface CommentEvent {
@@ -863,6 +881,9 @@ interface CommentEvent {
     void SetDisabled(boolean disable);
     boolean IsFolded();
     void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 interface GroupEvent {
@@ -892,6 +913,9 @@ interface GroupEvent {
     void SetDisabled(boolean disable);
     boolean IsFolded();
     void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 interface LinkEvent {
@@ -920,6 +944,9 @@ interface LinkEvent {
     void SetDisabled(boolean disable);
     boolean IsFolded();
     void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 interface EventsRemover {

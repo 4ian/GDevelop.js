@@ -1046,6 +1046,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent_SetFolded_1(WhileEvent* sel
   self->SetFolded(arg0);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent_SerializeTo_1(WhileEvent* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent_UnserializeFrom_2(WhileEvent* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_WhileEvent___destroy___0(WhileEvent* self) {
   delete self;
 }
@@ -1371,6 +1379,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_Clear_0(InstructionsL
   self->Clear();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_SerializeTo_1(InstructionsList* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_UnserializeFrom_2(InstructionsList* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList___destroy___0(InstructionsList* self) {
   delete self;
 }
@@ -1431,6 +1447,14 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_IsFolded_0(CommentEvent* 
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_SetFolded_1(CommentEvent* self, bool arg0) {
   self->SetFolded(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_SerializeTo_1(CommentEvent* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_UnserializeFrom_2(CommentEvent* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent___destroy___0(CommentEvent* self) {
@@ -1830,6 +1854,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_RepeatEvent_SetFolded_1(RepeatEvent* s
   self->SetFolded(arg0);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_RepeatEvent_SerializeTo_1(RepeatEvent* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_RepeatEvent_UnserializeFrom_2(RepeatEvent* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_RepeatEvent___destroy___0(RepeatEvent* self) {
   delete self;
 }
@@ -1890,6 +1922,14 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_IsFolded_0(StandardEvent
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_SetFolded_1(StandardEvent* self, bool arg0) {
   self->SetFolded(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_SerializeTo_1(StandardEvent* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent_UnserializeFrom_2(StandardEvent* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent___destroy___0(StandardEvent* self) {
@@ -2495,6 +2535,14 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_IsFolded_0(BaseEvent* self) 
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_SetFolded_1(BaseEvent* self, bool arg0) {
   self->SetFolded(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_SerializeTo_1(BaseEvent* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_UnserializeFrom_2(BaseEvent* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent___destroy___0(BaseEvent* self) {
@@ -3178,6 +3226,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_GroupEvent_SetFolded_1(GroupEvent* sel
   self->SetFolded(arg0);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_GroupEvent_SerializeTo_1(GroupEvent* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_GroupEvent_UnserializeFrom_2(GroupEvent* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_GroupEvent___destroy___0(GroupEvent* self) {
   delete self;
 }
@@ -3622,6 +3678,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ForEachEvent_SetFolded_1(ForEachEvent*
   self->SetFolded(arg0);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ForEachEvent_SerializeTo_1(ForEachEvent* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ForEachEvent_UnserializeFrom_2(ForEachEvent* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ForEachEvent___destroy___0(ForEachEvent* self) {
   delete self;
 }
@@ -3837,6 +3901,14 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_IsFolded_0(LinkEvent* self) 
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetFolded_1(LinkEvent* self, bool arg0) {
   self->SetFolded(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SerializeTo_1(LinkEvent* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_UnserializeFrom_2(LinkEvent* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent___destroy___0(LinkEvent* self) {

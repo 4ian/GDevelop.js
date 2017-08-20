@@ -1789,6 +1789,19 @@ WhileEvent.prototype['SetFolded'] = WhileEvent.prototype.SetFolded = function(ar
   _emscripten_bind_WhileEvent_SetFolded_1(self, arg0);
 };;
 
+WhileEvent.prototype['SerializeTo'] = WhileEvent.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_WhileEvent_SerializeTo_1(self, arg0);
+};;
+
+WhileEvent.prototype['UnserializeFrom'] = WhileEvent.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_WhileEvent_UnserializeFrom_2(self, arg0, arg1);
+};;
+
   WhileEvent.prototype['__destroy__'] = WhileEvent.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_WhileEvent___destroy___0(self);
@@ -2334,6 +2347,19 @@ InstructionsList.prototype['Clear'] = InstructionsList.prototype.Clear = functio
   _emscripten_bind_InstructionsList_Clear_0(self);
 };;
 
+InstructionsList.prototype['SerializeTo'] = InstructionsList.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_InstructionsList_SerializeTo_1(self, arg0);
+};;
+
+InstructionsList.prototype['UnserializeFrom'] = InstructionsList.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_InstructionsList_UnserializeFrom_2(self, arg0, arg1);
+};;
+
   InstructionsList.prototype['__destroy__'] = InstructionsList.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_InstructionsList___destroy___0(self);
@@ -2420,6 +2446,19 @@ CommentEvent.prototype['SetFolded'] = CommentEvent.prototype.SetFolded = functio
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   _emscripten_bind_CommentEvent_SetFolded_1(self, arg0);
+};;
+
+CommentEvent.prototype['SerializeTo'] = CommentEvent.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_CommentEvent_SerializeTo_1(self, arg0);
+};;
+
+CommentEvent.prototype['UnserializeFrom'] = CommentEvent.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_CommentEvent_UnserializeFrom_2(self, arg0, arg1);
 };;
 
   CommentEvent.prototype['__destroy__'] = CommentEvent.prototype.__destroy__ = function() {
@@ -3051,6 +3090,19 @@ RepeatEvent.prototype['SetFolded'] = RepeatEvent.prototype.SetFolded = function(
   _emscripten_bind_RepeatEvent_SetFolded_1(self, arg0);
 };;
 
+RepeatEvent.prototype['SerializeTo'] = RepeatEvent.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_RepeatEvent_SerializeTo_1(self, arg0);
+};;
+
+RepeatEvent.prototype['UnserializeFrom'] = RepeatEvent.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_RepeatEvent_UnserializeFrom_2(self, arg0, arg1);
+};;
+
   RepeatEvent.prototype['__destroy__'] = RepeatEvent.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_RepeatEvent___destroy___0(self);
@@ -3134,6 +3186,19 @@ StandardEvent.prototype['SetFolded'] = StandardEvent.prototype.SetFolded = funct
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   _emscripten_bind_StandardEvent_SetFolded_1(self, arg0);
+};;
+
+StandardEvent.prototype['SerializeTo'] = StandardEvent.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_StandardEvent_SerializeTo_1(self, arg0);
+};;
+
+StandardEvent.prototype['UnserializeFrom'] = StandardEvent.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_StandardEvent_UnserializeFrom_2(self, arg0, arg1);
 };;
 
   StandardEvent.prototype['__destroy__'] = StandardEvent.prototype.__destroy__ = function() {
@@ -4119,6 +4184,19 @@ BaseEvent.prototype['SetFolded'] = BaseEvent.prototype.SetFolded = function(arg0
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   _emscripten_bind_BaseEvent_SetFolded_1(self, arg0);
+};;
+
+BaseEvent.prototype['SerializeTo'] = BaseEvent.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_BaseEvent_SerializeTo_1(self, arg0);
+};;
+
+BaseEvent.prototype['UnserializeFrom'] = BaseEvent.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_BaseEvent_UnserializeFrom_2(self, arg0, arg1);
 };;
 
   BaseEvent.prototype['__destroy__'] = BaseEvent.prototype.__destroy__ = function() {
@@ -5158,6 +5236,19 @@ GroupEvent.prototype['SetFolded'] = GroupEvent.prototype.SetFolded = function(ar
   _emscripten_bind_GroupEvent_SetFolded_1(self, arg0);
 };;
 
+GroupEvent.prototype['SerializeTo'] = GroupEvent.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_GroupEvent_SerializeTo_1(self, arg0);
+};;
+
+GroupEvent.prototype['UnserializeFrom'] = GroupEvent.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_GroupEvent_UnserializeFrom_2(self, arg0, arg1);
+};;
+
   GroupEvent.prototype['__destroy__'] = GroupEvent.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_GroupEvent___destroy___0(self);
@@ -5878,6 +5969,19 @@ ForEachEvent.prototype['SetFolded'] = ForEachEvent.prototype.SetFolded = functio
   _emscripten_bind_ForEachEvent_SetFolded_1(self, arg0);
 };;
 
+ForEachEvent.prototype['SerializeTo'] = ForEachEvent.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ForEachEvent_SerializeTo_1(self, arg0);
+};;
+
+ForEachEvent.prototype['UnserializeFrom'] = ForEachEvent.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_ForEachEvent_UnserializeFrom_2(self, arg0, arg1);
+};;
+
   ForEachEvent.prototype['__destroy__'] = ForEachEvent.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ForEachEvent___destroy___0(self);
@@ -6236,6 +6340,19 @@ LinkEvent.prototype['SetFolded'] = LinkEvent.prototype.SetFolded = function(arg0
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   _emscripten_bind_LinkEvent_SetFolded_1(self, arg0);
+};;
+
+LinkEvent.prototype['SerializeTo'] = LinkEvent.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_LinkEvent_SerializeTo_1(self, arg0);
+};;
+
+LinkEvent.prototype['UnserializeFrom'] = LinkEvent.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_LinkEvent_UnserializeFrom_2(self, arg0, arg1);
 };;
 
   LinkEvent.prototype['__destroy__'] = LinkEvent.prototype.__destroy__ = function() {

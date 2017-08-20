@@ -628,9 +628,42 @@ describe('libGD.js', function(){
 			expect(list.size()).to.be(1);
 			expect(list.get(0).getType()).to.be("Type2");
 		});
-		it('should clear its instructions', function(){
+		it('can clear its instructions', function(){
 			list.clear();
 			expect(list.size()).to.be(0);
+		});
+		it('can be un/serialized', function(){
+			var newInstr = new gd.Instruction();
+			newInstr.setType("Type1");
+			newInstr.setParametersCount(2);
+			newInstr.setParameter(0, "Param1");
+			newInstr.setParameter(1, "Param2");
+			var instruction = list.insert(newInstr, 1);
+
+			var newInstr2 = new gd.Instruction();
+			newInstr2.setType("Type2");
+			newInstr2.setParametersCount(1);
+			newInstr2.setParameter(0, "Param3");
+			var instruction2 = list.insert(newInstr2, 1);
+
+			var project = gd.ProjectHelper.createNewGDJSProject();
+			var serializerElement = new gd.SerializerElement();
+			list.serializeTo(serializerElement);
+
+			var list2 = new gd.InstructionsList();
+			list2.unserializeFrom(project, serializerElement);
+
+			expect(list2.size()).to.be(2);
+			expect(list2.get(0).getType()).to.be("Type1");
+			expect(list2.get(1).getType()).to.be("Type2");
+			expect(list2.get(0).getParametersCount()).to.be(2);
+			expect(list2.get(1).getParametersCount()).to.be(1);
+			expect(list2.get(0).getParameter(0)).to.be("Param1");
+			expect(list2.get(0).getParameter(1)).to.be("Param2");
+			expect(list2.get(1).getParameter(0)).to.be("Param3");
+
+			list2.delete();
+			project.delete();
 		});
 
 		after(function() {list.delete();});
@@ -667,10 +700,6 @@ describe('libGD.js', function(){
 			instrFormatter.delete();
 			action.delete();
 		});
-	});
-
-	describe('gd.BaseEvent (and gd.EmptyEvent)', function(){
-		//Nothing for now.
 	});
 
 	describe('gd.EventsList', function(){
@@ -710,7 +739,7 @@ describe('libGD.js', function(){
 		});
 	});
 
-	describe('gd.Event', function() {
+	describe('gd.BaseEvent', function() {
 		it('can have a type', function() {
 			var event = new gd.BaseEvent();
 			event.setType("Type1");
@@ -734,6 +763,13 @@ describe('libGD.js', function(){
 
 			event.delete();
 			event2.delete();
+		});
+
+		it('can be de/serialized', function() {
+			var event = new gd.BaseEvent();
+			expect(event.serializeTo).to.be.a('function');
+			expect(event.unserializeFrom).to.be.a('function');
+			event.delete();
 		});
 	});
 
