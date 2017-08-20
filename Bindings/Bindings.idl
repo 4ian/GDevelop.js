@@ -591,6 +591,7 @@ interface InstructionsList {
     void InstructionsList();
 
     [Ref] Instruction Insert([Const, Ref] Instruction instr, unsigned long pos);
+    void InsertInstructions([Const, Ref] InstructionsList list, unsigned long begin, unsigned long end, unsigned long pos);
     unsigned long size();
     void WRAPPED_set(unsigned long index, [Const, Ref] Instruction instr);
     boolean Contains([Const, Ref] Instruction instr/*, boolean recursive*/); //TODO

@@ -632,6 +632,31 @@ describe('libGD.js', function(){
 			list.clear();
 			expect(list.size()).to.be(0);
 		});
+		it('can insert events from another list', function(){
+			var list1 = new gd.InstructionsList();
+			var list2 = new gd.InstructionsList();
+
+			var newInstr = new gd.Instruction();
+			newInstr.setType("Type1");
+			list1.insert(newInstr, 0);
+			var newInstr2 = new gd.Instruction();
+			newInstr2.setType("Type2");
+			list1.insert(newInstr2, 1);
+
+			list2.insertInstructions(list1, 0, list1.size(), 0);
+			expect(list2.size()).to.be(2);
+			expect(list2.get(0).getType()).to.be("Type1");
+			expect(list2.get(1).getType()).to.be("Type2");
+
+			list2.insertInstructions(list1, 0, list1.size(), 1);
+			expect(list2.size()).to.be(4);
+			expect(list2.get(0).getType()).to.be("Type1");
+			expect(list2.get(1).getType()).to.be("Type1");
+			expect(list2.get(2).getType()).to.be("Type2");
+			expect(list2.get(3).getType()).to.be("Type2");
+			list1.delete();
+			list2.delete();
+		});
 		it('can be un/serialized', function(){
 			var newInstr = new gd.Instruction();
 			newInstr.setType("Type1");

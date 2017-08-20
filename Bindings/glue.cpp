@@ -1351,6 +1351,10 @@ Instruction* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_Insert_2(Inst
   return &self->Insert(*arg0, arg1);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_InsertInstructions_4(InstructionsList* self, InstructionsList* arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3) {
+  self->InsertInstructions(*arg0, arg1, arg2, arg3);
+}
+
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsList_size_0(InstructionsList* self) {
   return self->size();
 }

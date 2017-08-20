@@ -2306,6 +2306,15 @@ InstructionsList.prototype['Insert'] = InstructionsList.prototype.Insert = funct
   return wrapPointer(_emscripten_bind_InstructionsList_Insert_2(self, arg0, arg1), Instruction);
 };;
 
+InstructionsList.prototype['InsertInstructions'] = InstructionsList.prototype.InsertInstructions = function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  _emscripten_bind_InstructionsList_InsertInstructions_4(self, arg0, arg1, arg2, arg3);
+};;
+
 InstructionsList.prototype['size'] = InstructionsList.prototype.size = function() {
   var self = this.ptr;
   return _emscripten_bind_InstructionsList_size_0(self);
