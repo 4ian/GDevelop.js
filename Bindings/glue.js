@@ -4083,6 +4083,14 @@ Exporter.prototype.__class__ = Exporter;
 Exporter.__cache__ = {};
 Module['Exporter'] = Exporter;
 
+Exporter.prototype['SetCodeOutputDirectory'] = Exporter.prototype.SetCodeOutputDirectory = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Exporter_SetCodeOutputDirectory_1(self, arg0);
+};;
+
 Exporter.prototype['ExportLayoutForPixiPreview'] = Exporter.prototype.ExportLayoutForPixiPreview = function(arg0, arg1, arg2) {
   var self = this.ptr;
   ensureStringCache.prepare();

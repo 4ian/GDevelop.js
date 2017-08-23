@@ -2471,6 +2471,10 @@ gdjs::Exporter* EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_Exporter_2(Abstrac
   return new gdjs::Exporter(*arg0, arg1);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_SetCodeOutputDirectory_1(gdjs::Exporter* self, char* arg0) {
+  self->SetCodeOutputDirectory(arg0);
+}
+
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportLayoutForPixiPreview_3(gdjs::Exporter* self, Project* arg0, Layout* arg1, char* arg2) {
   return self->ExportLayoutForPixiPreview(*arg0, *arg1, arg2);
 }
