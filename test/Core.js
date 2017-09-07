@@ -908,6 +908,18 @@ describe('libGD.js', function(){
 			evt.setComment("Hello 官话 world!");
 			expect(evt.getComment()).to.be("Hello 官话 world!");
 		});
+		it('can have a background color', function(){
+			evt.setBackgroundColor(100, 200, 255);
+			expect(evt.getBackgroundColorRed()).to.be(100);
+			expect(evt.getBackgroundColorGreen()).to.be(200);
+			expect(evt.getBackgroundColorBlue()).to.be(255);
+		});
+		it('can have a text color', function(){
+			evt.setTextColor(101, 201, 254);
+			expect(evt.getTextColorRed()).to.be(101);
+			expect(evt.getTextColorGreen()).to.be(201);
+			expect(evt.getTextColorBlue()).to.be(254);
+		});
 
 		after(function() {evt.delete();});
 	});

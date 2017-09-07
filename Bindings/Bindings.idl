@@ -867,8 +867,18 @@ interface ForEachEvent {
 interface CommentEvent {
     void CommentEvent();
 
-    [Const, Ref] DOMString WRAPPED_GetComment();
-    void WRAPPED_SetComment([Const] DOMString type);
+    [Const, Ref] DOMString GetComment();
+    void SetComment([Const] DOMString type);
+
+    void SetBackgroundColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetBackgroundColorRed();
+    unsigned long GetBackgroundColorGreen();
+    unsigned long GetBackgroundColorBlue();
+
+    void SetTextColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetTextColorRed();
+    unsigned long GetTextColorGreen();
+    unsigned long GetTextColorBlue();
 
     //Inherited from BaseEvent:
     CommentEvent Clone();

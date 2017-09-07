@@ -2384,17 +2384,63 @@ CommentEvent.prototype.__class__ = CommentEvent;
 CommentEvent.__cache__ = {};
 Module['CommentEvent'] = CommentEvent;
 
-CommentEvent.prototype['WRAPPED_GetComment'] = CommentEvent.prototype.WRAPPED_GetComment = function() {
+CommentEvent.prototype['GetComment'] = CommentEvent.prototype.GetComment = function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_CommentEvent_WRAPPED_GetComment_0(self));
+  return Pointer_stringify(_emscripten_bind_CommentEvent_GetComment_0(self));
 };;
 
-CommentEvent.prototype['WRAPPED_SetComment'] = CommentEvent.prototype.WRAPPED_SetComment = function(arg0) {
+CommentEvent.prototype['SetComment'] = CommentEvent.prototype.SetComment = function(arg0) {
   var self = this.ptr;
   ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_CommentEvent_WRAPPED_SetComment_1(self, arg0);
+  _emscripten_bind_CommentEvent_SetComment_1(self, arg0);
+};;
+
+CommentEvent.prototype['SetBackgroundColor'] = CommentEvent.prototype.SetBackgroundColor = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  _emscripten_bind_CommentEvent_SetBackgroundColor_3(self, arg0, arg1, arg2);
+};;
+
+CommentEvent.prototype['GetBackgroundColorRed'] = CommentEvent.prototype.GetBackgroundColorRed = function() {
+  var self = this.ptr;
+  return _emscripten_bind_CommentEvent_GetBackgroundColorRed_0(self);
+};;
+
+CommentEvent.prototype['GetBackgroundColorGreen'] = CommentEvent.prototype.GetBackgroundColorGreen = function() {
+  var self = this.ptr;
+  return _emscripten_bind_CommentEvent_GetBackgroundColorGreen_0(self);
+};;
+
+CommentEvent.prototype['GetBackgroundColorBlue'] = CommentEvent.prototype.GetBackgroundColorBlue = function() {
+  var self = this.ptr;
+  return _emscripten_bind_CommentEvent_GetBackgroundColorBlue_0(self);
+};;
+
+CommentEvent.prototype['SetTextColor'] = CommentEvent.prototype.SetTextColor = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  _emscripten_bind_CommentEvent_SetTextColor_3(self, arg0, arg1, arg2);
+};;
+
+CommentEvent.prototype['GetTextColorRed'] = CommentEvent.prototype.GetTextColorRed = function() {
+  var self = this.ptr;
+  return _emscripten_bind_CommentEvent_GetTextColorRed_0(self);
+};;
+
+CommentEvent.prototype['GetTextColorGreen'] = CommentEvent.prototype.GetTextColorGreen = function() {
+  var self = this.ptr;
+  return _emscripten_bind_CommentEvent_GetTextColorGreen_0(self);
+};;
+
+CommentEvent.prototype['GetTextColorBlue'] = CommentEvent.prototype.GetTextColorBlue = function() {
+  var self = this.ptr;
+  return _emscripten_bind_CommentEvent_GetTextColorBlue_0(self);
 };;
 
 CommentEvent.prototype['Clone'] = CommentEvent.prototype.Clone = function() {

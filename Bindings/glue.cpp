@@ -1401,12 +1401,44 @@ CommentEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_CommentEvent_0()
   return new CommentEvent();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_WRAPPED_GetComment_0(CommentEvent* self) {
-  return self->WRAPPED_GetComment().c_str();
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_GetComment_0(CommentEvent* self) {
+  return self->GetComment().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_WRAPPED_SetComment_1(CommentEvent* self, char* arg0) {
-  self->WRAPPED_SetComment(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_SetComment_1(CommentEvent* self, char* arg0) {
+  self->SetComment(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_SetBackgroundColor_3(CommentEvent* self, unsigned int arg0, unsigned int arg1, unsigned int arg2) {
+  self->SetBackgroundColor(arg0, arg1, arg2);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_GetBackgroundColorRed_0(CommentEvent* self) {
+  return self->GetBackgroundColorRed();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_GetBackgroundColorGreen_0(CommentEvent* self) {
+  return self->GetBackgroundColorGreen();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_GetBackgroundColorBlue_0(CommentEvent* self) {
+  return self->GetBackgroundColorBlue();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_SetTextColor_3(CommentEvent* self, unsigned int arg0, unsigned int arg1, unsigned int arg2) {
+  self->SetTextColor(arg0, arg1, arg2);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_GetTextColorRed_0(CommentEvent* self) {
+  return self->GetTextColorRed();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_GetTextColorGreen_0(CommentEvent* self) {
+  return self->GetTextColorGreen();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_GetTextColorBlue_0(CommentEvent* self) {
+  return self->GetTextColorBlue();
 }
 
 CommentEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_CommentEvent_Clone_0(CommentEvent* self) {
