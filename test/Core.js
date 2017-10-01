@@ -568,6 +568,49 @@ describe('libGD.js', function(){
 		after(function() {project.delete();});
 	});
 
+	describe('gd.ObjectGroupsContainer', function(){
+		var container = new gd.ObjectGroupsContainer();
+		var group1 = null;
+		var group2 = null;
+		var group3 = null;
+		it('can have groups inserted', function() {
+			group1 = container.insertNew('Group1', 0);
+			group2 = container.insertNew('Group2', 1);
+			group3 = container.insertNew('Group3', 2);
+
+			expect(container.getAt(0).getName()).to.be("Group1");
+			expect(container.getAt(1).getName()).to.be("Group2");
+			expect(container.getAt(2).getName()).to.be("Group3");
+			expect(container.has("Group1")).to.be(true);
+			expect(container.has("Group2")).to.be(true);
+			expect(container.has("Group3")).to.be(true);
+			expect(container.has("Group4")).to.be(false);
+			expect(container.count()).to.be(3);
+		});
+
+		it('can move groups', function() {
+			container.move(0, 1);
+			expect(container.getAt(0).getName()).to.be("Group2");
+			expect(container.getAt(1).getName()).to.be("Group1");
+			expect(container.getAt(2).getName()).to.be("Group3");
+		});
+
+		it('can rename groups', function() {
+			container.rename("Inexisting", "Whatever");
+			container.rename("Group1", "Group1Renamed");
+
+			expect(container.has("Group1")).to.be(false);
+			expect(container.has("Group1Renamed")).to.be(true);
+		});
+
+		it('can remove groups', function() {
+			container.remove("Group2");
+			expect(container.has("Group2")).to.be(false);
+			expect(container.has("Group3")).to.be(true);
+			expect(container.count()).to.be(2);
+		});
+	});
+
 	describe('gd.Instruction', function(){
 		var instr = new gd.Instruction();
 

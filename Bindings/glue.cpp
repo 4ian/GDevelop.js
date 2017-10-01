@@ -171,6 +171,10 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroup_Find_1(ObjectGroup* self, 
   return self->Find(arg0);
 }
 
+const VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroup_GetAllObjectsNames_0(ObjectGroup* self) {
+  return &self->GetAllObjectsNames();
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroup___destroy___0(ObjectGroup* self) {
   delete self;
 }
@@ -504,7 +508,7 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_UnserializeFrom_1(Project* sel
   self->UnserializeFrom(*arg0);
 }
 
-VectorObjectGroup* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetObjectGroups_0(Project* self) {
+ObjectGroupsContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetObjectGroups_0(Project* self) {
   return &self->GetObjectGroups();
 }
 
@@ -1230,6 +1234,56 @@ int EMSCRIPTEN_KEEPALIVE emscripten_bind_HighestZOrderFinder_GetLowestZOrder_0(H
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_HighestZOrderFinder___destroy___0(HighestZOrderFinder* self) {
+  delete self;
+}
+
+// ObjectGroupsContainer
+
+ObjectGroupsContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_ObjectGroupsContainer_0() {
+  return new ObjectGroupsContainer();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_Has_1(ObjectGroupsContainer* self, char* arg0) {
+  return self->Has(arg0);
+}
+
+ObjectGroup* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_Insert_2(ObjectGroupsContainer* self, ObjectGroup* arg0, unsigned int arg1) {
+  return &self->Insert(*arg0, arg1);
+}
+
+ObjectGroup* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_InsertNew_2(ObjectGroupsContainer* self, char* arg0, unsigned int arg1) {
+  return &self->InsertNew(arg0, arg1);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_Count_0(ObjectGroupsContainer* self) {
+  return self->Count();
+}
+
+ObjectGroup* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_GetAt_1(ObjectGroupsContainer* self, unsigned int arg0) {
+  return &self->GetAt(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_Clear_0(ObjectGroupsContainer* self) {
+  self->Clear();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_Remove_1(ObjectGroupsContainer* self, char* arg0) {
+  self->Remove(arg0);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_GetPosition_1(ObjectGroupsContainer* self, char* arg0) {
+  return self->GetPosition(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_Rename_2(ObjectGroupsContainer* self, char* arg0, char* arg1) {
+  return self->Rename(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_Move_2(ObjectGroupsContainer* self, unsigned int arg0, unsigned int arg1) {
+  self->Move(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer___destroy___0(ObjectGroupsContainer* self) {
   delete self;
 }
 
@@ -2280,160 +2334,6 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper___destroy___0(ProjectHel
   delete self;
 }
 
-// Layout
-
-Layout* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_Layout_0() {
-  return new Layout();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SetName_1(Layout* self, char* arg0) {
-  self->SetName(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetName_0(Layout* self) {
-  return self->GetName().c_str();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SetBackgroundColor_3(Layout* self, unsigned int arg0, unsigned int arg1, unsigned int arg2) {
-  self->SetBackgroundColor(arg0, arg1, arg2);
-}
-
-unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetBackgroundColorRed_0(Layout* self) {
-  return self->GetBackgroundColorRed();
-}
-
-unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetBackgroundColorGreen_0(Layout* self) {
-  return self->GetBackgroundColorGreen();
-}
-
-unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetBackgroundColorBlue_0(Layout* self) {
-  return self->GetBackgroundColorBlue();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SetWindowDefaultTitle_1(Layout* self, char* arg0) {
-  self->SetWindowDefaultTitle(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetWindowDefaultTitle_0(Layout* self) {
-  return self->GetWindowDefaultTitle().c_str();
-}
-
-InitialInstancesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetInitialInstances_0(Layout* self) {
-  return &self->GetInitialInstances();
-}
-
-VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetVariables_0(Layout* self) {
-  return &self->GetVariables();
-}
-
-EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetEvents_0(Layout* self) {
-  return &self->GetEvents();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertNewLayer_2(Layout* self, char* arg0, unsigned int arg1) {
-  self->InsertNewLayer(arg0, arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertLayer_2(Layout* self, Layer* arg0, unsigned int arg1) {
-  self->InsertLayer(*arg0, arg1);
-}
-
-Layer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetLayer_1(Layout* self, char* arg0) {
-  return &self->GetLayer(arg0);
-}
-
-Layer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetLayerAt_1(Layout* self, unsigned int arg0) {
-  return &self->GetLayerAt(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_HasLayerNamed_1(Layout* self, char* arg0) {
-  return self->HasLayerNamed(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_RemoveLayer_1(Layout* self, char* arg0) {
-  self->RemoveLayer(arg0);
-}
-
-unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetLayersCount_0(Layout* self) {
-  return self->GetLayersCount();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SwapLayers_2(Layout* self, unsigned int arg0, unsigned int arg1) {
-  self->SwapLayers(arg0, arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_MoveLayer_2(Layout* self, unsigned int arg0, unsigned int arg1) {
-  self->MoveLayer(arg0, arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SerializeLayersTo_1(Layout* self, SerializerElement* arg0) {
-  self->SerializeLayersTo(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_UnserializeLayersFrom_1(Layout* self, SerializerElement* arg0) {
-  self->UnserializeLayersFrom(*arg0);
-}
-
-VectorObjectGroup* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectGroups_0(Layout* self) {
-  return &self->GetObjectGroups();
-}
-
-LayoutEditorCanvasOptions* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetAssociatedSettings_0(Layout* self) {
-  return &self->GetAssociatedSettings();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SerializeTo_1(Layout* self, SerializerElement* arg0) {
-  self->SerializeTo(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_UnserializeFrom_2(Layout* self, Project* arg0, SerializerElement* arg1) {
-  self->UnserializeFrom(*arg0, *arg1);
-}
-
-gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertNewObject_4(Layout* self, Project* arg0, char* arg1, char* arg2, unsigned int arg3) {
-  return &self->InsertNewObject(*arg0, arg1, arg2, arg3);
-}
-
-gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertObject_2(Layout* self, gdObject* arg0, unsigned int arg1) {
-  return &self->InsertObject(*arg0, arg1);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_HasObjectNamed_1(Layout* self, char* arg0) {
-  return self->HasObjectNamed(arg0);
-}
-
-gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObject_1(Layout* self, char* arg0) {
-  return &self->GetObject(arg0);
-}
-
-gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectAt_1(Layout* self, unsigned int arg0) {
-  return &self->GetObjectAt(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectPosition_1(Layout* self, char* arg0) {
-  self->GetObjectPosition(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_RemoveObject_1(Layout* self, char* arg0) {
-  self->RemoveObject(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SwapObjects_2(Layout* self, unsigned int arg0, unsigned int arg1) {
-  self->SwapObjects(arg0, arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_MoveObject_2(Layout* self, unsigned int arg0, unsigned int arg1) {
-  self->MoveObject(arg0, arg1);
-}
-
-unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectsCount_0(Layout* self) {
-  return self->GetObjectsCount();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout___destroy___0(Layout* self) {
-  delete self;
-}
-
 // AudioResource
 
 AudioResource* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_AudioResource_0() {
@@ -3433,29 +3333,157 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectMetadata___destroy___0(ObjectMet
   delete self;
 }
 
-// VectorObjectGroup
+// Layout
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorObjectGroup_push_back_1(VectorObjectGroup* self, ObjectGroup* arg0) {
-  self->push_back(*arg0);
+Layout* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_Layout_0() {
+  return new Layout();
 }
 
-unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorObjectGroup_size_0(VectorObjectGroup* self) {
-  return self->size();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SetName_1(Layout* self, char* arg0) {
+  self->SetName(arg0);
 }
 
-ObjectGroup* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorObjectGroup_at_1(VectorObjectGroup* self, unsigned int arg0) {
-  return &self->at(arg0);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetName_0(Layout* self) {
+  return self->GetName().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorObjectGroup_WRAPPED_set_2(VectorObjectGroup* self, unsigned int arg0, ObjectGroup* arg1) {
-  self->WRAPPED_set(arg0, *arg1);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SetBackgroundColor_3(Layout* self, unsigned int arg0, unsigned int arg1, unsigned int arg2) {
+  self->SetBackgroundColor(arg0, arg1, arg2);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorObjectGroup_clear_0(VectorObjectGroup* self) {
-  self->clear();
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetBackgroundColorRed_0(Layout* self) {
+  return self->GetBackgroundColorRed();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorObjectGroup___destroy___0(VectorObjectGroup* self) {
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetBackgroundColorGreen_0(Layout* self) {
+  return self->GetBackgroundColorGreen();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetBackgroundColorBlue_0(Layout* self) {
+  return self->GetBackgroundColorBlue();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SetWindowDefaultTitle_1(Layout* self, char* arg0) {
+  self->SetWindowDefaultTitle(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetWindowDefaultTitle_0(Layout* self) {
+  return self->GetWindowDefaultTitle().c_str();
+}
+
+InitialInstancesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetInitialInstances_0(Layout* self) {
+  return &self->GetInitialInstances();
+}
+
+VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetVariables_0(Layout* self) {
+  return &self->GetVariables();
+}
+
+EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetEvents_0(Layout* self) {
+  return &self->GetEvents();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertNewLayer_2(Layout* self, char* arg0, unsigned int arg1) {
+  self->InsertNewLayer(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertLayer_2(Layout* self, Layer* arg0, unsigned int arg1) {
+  self->InsertLayer(*arg0, arg1);
+}
+
+Layer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetLayer_1(Layout* self, char* arg0) {
+  return &self->GetLayer(arg0);
+}
+
+Layer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetLayerAt_1(Layout* self, unsigned int arg0) {
+  return &self->GetLayerAt(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_HasLayerNamed_1(Layout* self, char* arg0) {
+  return self->HasLayerNamed(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_RemoveLayer_1(Layout* self, char* arg0) {
+  self->RemoveLayer(arg0);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetLayersCount_0(Layout* self) {
+  return self->GetLayersCount();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SwapLayers_2(Layout* self, unsigned int arg0, unsigned int arg1) {
+  self->SwapLayers(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_MoveLayer_2(Layout* self, unsigned int arg0, unsigned int arg1) {
+  self->MoveLayer(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SerializeLayersTo_1(Layout* self, SerializerElement* arg0) {
+  self->SerializeLayersTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_UnserializeLayersFrom_1(Layout* self, SerializerElement* arg0) {
+  self->UnserializeLayersFrom(*arg0);
+}
+
+ObjectGroupsContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectGroups_0(Layout* self) {
+  return &self->GetObjectGroups();
+}
+
+LayoutEditorCanvasOptions* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetAssociatedSettings_0(Layout* self) {
+  return &self->GetAssociatedSettings();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SerializeTo_1(Layout* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_UnserializeFrom_2(Layout* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
+gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertNewObject_4(Layout* self, Project* arg0, char* arg1, char* arg2, unsigned int arg3) {
+  return &self->InsertNewObject(*arg0, arg1, arg2, arg3);
+}
+
+gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertObject_2(Layout* self, gdObject* arg0, unsigned int arg1) {
+  return &self->InsertObject(*arg0, arg1);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_HasObjectNamed_1(Layout* self, char* arg0) {
+  return self->HasObjectNamed(arg0);
+}
+
+gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObject_1(Layout* self, char* arg0) {
+  return &self->GetObject(arg0);
+}
+
+gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectAt_1(Layout* self, unsigned int arg0) {
+  return &self->GetObjectAt(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectPosition_1(Layout* self, char* arg0) {
+  self->GetObjectPosition(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_RemoveObject_1(Layout* self, char* arg0) {
+  self->RemoveObject(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SwapObjects_2(Layout* self, unsigned int arg0, unsigned int arg1) {
+  self->SwapObjects(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_MoveObject_2(Layout* self, unsigned int arg0, unsigned int arg1) {
+  self->MoveObject(arg0, arg1);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectsCount_0(Layout* self) {
+  return self->GetObjectsCount();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout___destroy___0(Layout* self) {
   delete self;
 }
 

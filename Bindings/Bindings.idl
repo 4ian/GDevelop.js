@@ -160,14 +160,23 @@ interface ObjectGroup {
     void AddObject([Const] DOMString obj);
     void RemoveObject([Const] DOMString obj);
     boolean Find([Const] DOMString obj);
+
+    [Const, Ref] VectorString GetAllObjectsNames();
 };
 
-interface VectorObjectGroup {
-    void push_back([Const, Ref] ObjectGroup objectGroup);
-    unsigned long size();
-    [Ref] ObjectGroup at(unsigned long index);
-    void WRAPPED_set(unsigned long index, [Const, Ref] ObjectGroup objectGroup);
-    void clear();
+interface ObjectGroupsContainer {
+    void ObjectGroupsContainer();
+
+    boolean Has([Const] DOMString name);
+    [Ref] ObjectGroup Insert([Const, Ref] ObjectGroup objectGroup, unsigned long position);
+    [Ref] ObjectGroup InsertNew([Const] DOMString name, unsigned long position);
+    unsigned long Count();
+    [Ref] ObjectGroup GetAt(unsigned long index);
+    void Clear();
+    void Remove([Const] DOMString name);
+    unsigned long GetPosition([Const] DOMString name);
+    boolean Rename([Const] DOMString oldName, [Const] DOMString newName);
+    void Move(unsigned long oldIndex, unsigned long newIndex);
 };
 
 interface Project {
@@ -234,7 +243,7 @@ interface Project {
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
 
-    [Ref] VectorObjectGroup GetObjectGroups();
+    [Ref] ObjectGroupsContainer GetObjectGroups();
 
     [Const, Value] DOMString FREE_GetTypeOfBehavior([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
     [Const, Value] DOMString FREE_GetTypeOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
@@ -320,7 +329,7 @@ interface Layout {
     void SerializeLayersTo([Ref] SerializerElement element);
     void UnserializeLayersFrom([Const, Ref] SerializerElement element);
 
-    [Ref] VectorObjectGroup GetObjectGroups();
+    [Ref] ObjectGroupsContainer GetObjectGroups();
 
     [Ref] LayoutEditorCanvasOptions GetAssociatedSettings();
 

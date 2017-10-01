@@ -368,6 +368,11 @@ ObjectGroup.prototype['Find'] = ObjectGroup.prototype.Find = function(arg0) {
   return !!(_emscripten_bind_ObjectGroup_Find_1(self, arg0));
 };;
 
+ObjectGroup.prototype['GetAllObjectsNames'] = ObjectGroup.prototype.GetAllObjectsNames = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ObjectGroup_GetAllObjectsNames_0(self), VectorString);
+};;
+
   ObjectGroup.prototype['__destroy__'] = ObjectGroup.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ObjectGroup___destroy___0(self);
@@ -902,7 +907,7 @@ Project.prototype['UnserializeFrom'] = Project.prototype.UnserializeFrom = funct
 
 Project.prototype['GetObjectGroups'] = Project.prototype.GetObjectGroups = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Project_GetObjectGroups_0(self), VectorObjectGroup);
+  return wrapPointer(_emscripten_bind_Project_GetObjectGroups_0(self), ObjectGroupsContainer);
 };;
 
 Project.prototype['FREE_GetTypeOfBehavior'] = Project.prototype.FREE_GetTypeOfBehavior = function(arg0, arg1, arg2) {
@@ -2092,6 +2097,94 @@ HighestZOrderFinder.prototype['GetLowestZOrder'] = HighestZOrderFinder.prototype
   HighestZOrderFinder.prototype['__destroy__'] = HighestZOrderFinder.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_HighestZOrderFinder___destroy___0(self);
+};
+// ObjectGroupsContainer
+function ObjectGroupsContainer() {
+  this.ptr = _emscripten_bind_ObjectGroupsContainer_ObjectGroupsContainer_0();
+  getCache(ObjectGroupsContainer)[this.ptr] = this;
+};;
+ObjectGroupsContainer.prototype = Object.create(WrapperObject.prototype);
+ObjectGroupsContainer.prototype.constructor = ObjectGroupsContainer;
+ObjectGroupsContainer.prototype.__class__ = ObjectGroupsContainer;
+ObjectGroupsContainer.__cache__ = {};
+Module['ObjectGroupsContainer'] = ObjectGroupsContainer;
+
+ObjectGroupsContainer.prototype['Has'] = ObjectGroupsContainer.prototype.Has = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_ObjectGroupsContainer_Has_1(self, arg0));
+};;
+
+ObjectGroupsContainer.prototype['Insert'] = ObjectGroupsContainer.prototype.Insert = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  return wrapPointer(_emscripten_bind_ObjectGroupsContainer_Insert_2(self, arg0, arg1), ObjectGroup);
+};;
+
+ObjectGroupsContainer.prototype['InsertNew'] = ObjectGroupsContainer.prototype.InsertNew = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  return wrapPointer(_emscripten_bind_ObjectGroupsContainer_InsertNew_2(self, arg0, arg1), ObjectGroup);
+};;
+
+ObjectGroupsContainer.prototype['Count'] = ObjectGroupsContainer.prototype.Count = function() {
+  var self = this.ptr;
+  return _emscripten_bind_ObjectGroupsContainer_Count_0(self);
+};;
+
+ObjectGroupsContainer.prototype['GetAt'] = ObjectGroupsContainer.prototype.GetAt = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_ObjectGroupsContainer_GetAt_1(self, arg0), ObjectGroup);
+};;
+
+ObjectGroupsContainer.prototype['Clear'] = ObjectGroupsContainer.prototype.Clear = function() {
+  var self = this.ptr;
+  _emscripten_bind_ObjectGroupsContainer_Clear_0(self);
+};;
+
+ObjectGroupsContainer.prototype['Remove'] = ObjectGroupsContainer.prototype.Remove = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ObjectGroupsContainer_Remove_1(self, arg0);
+};;
+
+ObjectGroupsContainer.prototype['GetPosition'] = ObjectGroupsContainer.prototype.GetPosition = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return _emscripten_bind_ObjectGroupsContainer_GetPosition_1(self, arg0);
+};;
+
+ObjectGroupsContainer.prototype['Rename'] = ObjectGroupsContainer.prototype.Rename = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return !!(_emscripten_bind_ObjectGroupsContainer_Rename_2(self, arg0, arg1));
+};;
+
+ObjectGroupsContainer.prototype['Move'] = ObjectGroupsContainer.prototype.Move = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_ObjectGroupsContainer_Move_2(self, arg0, arg1);
+};;
+
+  ObjectGroupsContainer.prototype['__destroy__'] = ObjectGroupsContainer.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_ObjectGroupsContainer___destroy___0(self);
 };
 // WholeProjectRefactorer
 function WholeProjectRefactorer() { throw "cannot construct a WholeProjectRefactorer, no constructor in IDL" }
@@ -3766,261 +3859,6 @@ ProjectHelper.prototype['STATIC_InitializePlatforms'] = ProjectHelper.prototype.
   var self = this.ptr;
   _emscripten_bind_ProjectHelper___destroy___0(self);
 };
-// Layout
-function Layout() {
-  this.ptr = _emscripten_bind_Layout_Layout_0();
-  getCache(Layout)[this.ptr] = this;
-};;
-Layout.prototype = Object.create(WrapperObject.prototype);
-Layout.prototype.constructor = Layout;
-Layout.prototype.__class__ = Layout;
-Layout.__cache__ = {};
-Module['Layout'] = Layout;
-
-Layout.prototype['SetName'] = Layout.prototype.SetName = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Layout_SetName_1(self, arg0);
-};;
-
-Layout.prototype['GetName'] = Layout.prototype.GetName = function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_Layout_GetName_0(self));
-};;
-
-Layout.prototype['SetBackgroundColor'] = Layout.prototype.SetBackgroundColor = function(arg0, arg1, arg2) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  _emscripten_bind_Layout_SetBackgroundColor_3(self, arg0, arg1, arg2);
-};;
-
-Layout.prototype['GetBackgroundColorRed'] = Layout.prototype.GetBackgroundColorRed = function() {
-  var self = this.ptr;
-  return _emscripten_bind_Layout_GetBackgroundColorRed_0(self);
-};;
-
-Layout.prototype['GetBackgroundColorGreen'] = Layout.prototype.GetBackgroundColorGreen = function() {
-  var self = this.ptr;
-  return _emscripten_bind_Layout_GetBackgroundColorGreen_0(self);
-};;
-
-Layout.prototype['GetBackgroundColorBlue'] = Layout.prototype.GetBackgroundColorBlue = function() {
-  var self = this.ptr;
-  return _emscripten_bind_Layout_GetBackgroundColorBlue_0(self);
-};;
-
-Layout.prototype['SetWindowDefaultTitle'] = Layout.prototype.SetWindowDefaultTitle = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Layout_SetWindowDefaultTitle_1(self, arg0);
-};;
-
-Layout.prototype['GetWindowDefaultTitle'] = Layout.prototype.GetWindowDefaultTitle = function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_Layout_GetWindowDefaultTitle_0(self));
-};;
-
-Layout.prototype['GetInitialInstances'] = Layout.prototype.GetInitialInstances = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Layout_GetInitialInstances_0(self), InitialInstancesContainer);
-};;
-
-Layout.prototype['GetVariables'] = Layout.prototype.GetVariables = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Layout_GetVariables_0(self), VariablesContainer);
-};;
-
-Layout.prototype['GetEvents'] = Layout.prototype.GetEvents = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Layout_GetEvents_0(self), EventsList);
-};;
-
-Layout.prototype['InsertNewLayer'] = Layout.prototype.InsertNewLayer = function(arg0, arg1) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_Layout_InsertNewLayer_2(self, arg0, arg1);
-};;
-
-Layout.prototype['InsertLayer'] = Layout.prototype.InsertLayer = function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_Layout_InsertLayer_2(self, arg0, arg1);
-};;
-
-Layout.prototype['GetLayer'] = Layout.prototype.GetLayer = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_Layout_GetLayer_1(self, arg0), Layer);
-};;
-
-Layout.prototype['GetLayerAt'] = Layout.prototype.GetLayerAt = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return wrapPointer(_emscripten_bind_Layout_GetLayerAt_1(self, arg0), Layer);
-};;
-
-Layout.prototype['HasLayerNamed'] = Layout.prototype.HasLayerNamed = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return !!(_emscripten_bind_Layout_HasLayerNamed_1(self, arg0));
-};;
-
-Layout.prototype['RemoveLayer'] = Layout.prototype.RemoveLayer = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Layout_RemoveLayer_1(self, arg0);
-};;
-
-Layout.prototype['GetLayersCount'] = Layout.prototype.GetLayersCount = function() {
-  var self = this.ptr;
-  return _emscripten_bind_Layout_GetLayersCount_0(self);
-};;
-
-Layout.prototype['SwapLayers'] = Layout.prototype.SwapLayers = function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_Layout_SwapLayers_2(self, arg0, arg1);
-};;
-
-Layout.prototype['MoveLayer'] = Layout.prototype.MoveLayer = function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_Layout_MoveLayer_2(self, arg0, arg1);
-};;
-
-Layout.prototype['SerializeLayersTo'] = Layout.prototype.SerializeLayersTo = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Layout_SerializeLayersTo_1(self, arg0);
-};;
-
-Layout.prototype['UnserializeLayersFrom'] = Layout.prototype.UnserializeLayersFrom = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Layout_UnserializeLayersFrom_1(self, arg0);
-};;
-
-Layout.prototype['GetObjectGroups'] = Layout.prototype.GetObjectGroups = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Layout_GetObjectGroups_0(self), VectorObjectGroup);
-};;
-
-Layout.prototype['GetAssociatedSettings'] = Layout.prototype.GetAssociatedSettings = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Layout_GetAssociatedSettings_0(self), LayoutEditorCanvasOptions);
-};;
-
-Layout.prototype['SerializeTo'] = Layout.prototype.SerializeTo = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Layout_SerializeTo_1(self, arg0);
-};;
-
-Layout.prototype['UnserializeFrom'] = Layout.prototype.UnserializeFrom = function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_Layout_UnserializeFrom_2(self, arg0, arg1);
-};;
-
-Layout.prototype['InsertNewObject'] = Layout.prototype.InsertNewObject = function(arg0, arg1, arg2, arg3) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
-  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  return wrapPointer(_emscripten_bind_Layout_InsertNewObject_4(self, arg0, arg1, arg2, arg3), gdObject);
-};;
-
-Layout.prototype['InsertObject'] = Layout.prototype.InsertObject = function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  return wrapPointer(_emscripten_bind_Layout_InsertObject_2(self, arg0, arg1), gdObject);
-};;
-
-Layout.prototype['HasObjectNamed'] = Layout.prototype.HasObjectNamed = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return !!(_emscripten_bind_Layout_HasObjectNamed_1(self, arg0));
-};;
-
-Layout.prototype['GetObject'] = Layout.prototype.GetObject = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_Layout_GetObject_1(self, arg0), gdObject);
-};;
-
-Layout.prototype['GetObjectAt'] = Layout.prototype.GetObjectAt = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return wrapPointer(_emscripten_bind_Layout_GetObjectAt_1(self, arg0), gdObject);
-};;
-
-Layout.prototype['GetObjectPosition'] = Layout.prototype.GetObjectPosition = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Layout_GetObjectPosition_1(self, arg0);
-};;
-
-Layout.prototype['RemoveObject'] = Layout.prototype.RemoveObject = function(arg0) {
-  var self = this.ptr;
-  ensureStringCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Layout_RemoveObject_1(self, arg0);
-};;
-
-Layout.prototype['SwapObjects'] = Layout.prototype.SwapObjects = function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_Layout_SwapObjects_2(self, arg0, arg1);
-};;
-
-Layout.prototype['MoveObject'] = Layout.prototype.MoveObject = function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_Layout_MoveObject_2(self, arg0, arg1);
-};;
-
-Layout.prototype['GetObjectsCount'] = Layout.prototype.GetObjectsCount = function() {
-  var self = this.ptr;
-  return _emscripten_bind_Layout_GetObjectsCount_0(self);
-};;
-
-  Layout.prototype['__destroy__'] = Layout.prototype.__destroy__ = function() {
-  var self = this.ptr;
-  _emscripten_bind_Layout___destroy___0(self);
-};
 // AudioResource
 function AudioResource() {
   this.ptr = _emscripten_bind_AudioResource_AudioResource_0();
@@ -5561,46 +5399,260 @@ ObjectMetadata.prototype['GetIconFilename'] = ObjectMetadata.prototype.GetIconFi
   var self = this.ptr;
   _emscripten_bind_ObjectMetadata___destroy___0(self);
 };
-// VectorObjectGroup
-function VectorObjectGroup() { throw "cannot construct a VectorObjectGroup, no constructor in IDL" }
-VectorObjectGroup.prototype = Object.create(WrapperObject.prototype);
-VectorObjectGroup.prototype.constructor = VectorObjectGroup;
-VectorObjectGroup.prototype.__class__ = VectorObjectGroup;
-VectorObjectGroup.__cache__ = {};
-Module['VectorObjectGroup'] = VectorObjectGroup;
+// Layout
+function Layout() {
+  this.ptr = _emscripten_bind_Layout_Layout_0();
+  getCache(Layout)[this.ptr] = this;
+};;
+Layout.prototype = Object.create(WrapperObject.prototype);
+Layout.prototype.constructor = Layout;
+Layout.prototype.__class__ = Layout;
+Layout.__cache__ = {};
+Module['Layout'] = Layout;
 
-VectorObjectGroup.prototype['push_back'] = VectorObjectGroup.prototype.push_back = function(arg0) {
+Layout.prototype['SetName'] = Layout.prototype.SetName = function(arg0) {
   var self = this.ptr;
+  ensureStringCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_VectorObjectGroup_push_back_1(self, arg0);
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Layout_SetName_1(self, arg0);
 };;
 
-VectorObjectGroup.prototype['size'] = VectorObjectGroup.prototype.size = function() {
+Layout.prototype['GetName'] = Layout.prototype.GetName = function() {
   var self = this.ptr;
-  return _emscripten_bind_VectorObjectGroup_size_0(self);
+  return Pointer_stringify(_emscripten_bind_Layout_GetName_0(self));
 };;
 
-VectorObjectGroup.prototype['at'] = VectorObjectGroup.prototype.at = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return wrapPointer(_emscripten_bind_VectorObjectGroup_at_1(self, arg0), ObjectGroup);
-};;
-
-VectorObjectGroup.prototype['WRAPPED_set'] = VectorObjectGroup.prototype.WRAPPED_set = function(arg0, arg1) {
+Layout.prototype['SetBackgroundColor'] = Layout.prototype.SetBackgroundColor = function(arg0, arg1, arg2) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_VectorObjectGroup_WRAPPED_set_2(self, arg0, arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  _emscripten_bind_Layout_SetBackgroundColor_3(self, arg0, arg1, arg2);
 };;
 
-VectorObjectGroup.prototype['clear'] = VectorObjectGroup.prototype.clear = function() {
+Layout.prototype['GetBackgroundColorRed'] = Layout.prototype.GetBackgroundColorRed = function() {
   var self = this.ptr;
-  _emscripten_bind_VectorObjectGroup_clear_0(self);
+  return _emscripten_bind_Layout_GetBackgroundColorRed_0(self);
 };;
 
-  VectorObjectGroup.prototype['__destroy__'] = VectorObjectGroup.prototype.__destroy__ = function() {
+Layout.prototype['GetBackgroundColorGreen'] = Layout.prototype.GetBackgroundColorGreen = function() {
   var self = this.ptr;
-  _emscripten_bind_VectorObjectGroup___destroy___0(self);
+  return _emscripten_bind_Layout_GetBackgroundColorGreen_0(self);
+};;
+
+Layout.prototype['GetBackgroundColorBlue'] = Layout.prototype.GetBackgroundColorBlue = function() {
+  var self = this.ptr;
+  return _emscripten_bind_Layout_GetBackgroundColorBlue_0(self);
+};;
+
+Layout.prototype['SetWindowDefaultTitle'] = Layout.prototype.SetWindowDefaultTitle = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Layout_SetWindowDefaultTitle_1(self, arg0);
+};;
+
+Layout.prototype['GetWindowDefaultTitle'] = Layout.prototype.GetWindowDefaultTitle = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Layout_GetWindowDefaultTitle_0(self));
+};;
+
+Layout.prototype['GetInitialInstances'] = Layout.prototype.GetInitialInstances = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Layout_GetInitialInstances_0(self), InitialInstancesContainer);
+};;
+
+Layout.prototype['GetVariables'] = Layout.prototype.GetVariables = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Layout_GetVariables_0(self), VariablesContainer);
+};;
+
+Layout.prototype['GetEvents'] = Layout.prototype.GetEvents = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Layout_GetEvents_0(self), EventsList);
+};;
+
+Layout.prototype['InsertNewLayer'] = Layout.prototype.InsertNewLayer = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Layout_InsertNewLayer_2(self, arg0, arg1);
+};;
+
+Layout.prototype['InsertLayer'] = Layout.prototype.InsertLayer = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Layout_InsertLayer_2(self, arg0, arg1);
+};;
+
+Layout.prototype['GetLayer'] = Layout.prototype.GetLayer = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_Layout_GetLayer_1(self, arg0), Layer);
+};;
+
+Layout.prototype['GetLayerAt'] = Layout.prototype.GetLayerAt = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_Layout_GetLayerAt_1(self, arg0), Layer);
+};;
+
+Layout.prototype['HasLayerNamed'] = Layout.prototype.HasLayerNamed = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_Layout_HasLayerNamed_1(self, arg0));
+};;
+
+Layout.prototype['RemoveLayer'] = Layout.prototype.RemoveLayer = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Layout_RemoveLayer_1(self, arg0);
+};;
+
+Layout.prototype['GetLayersCount'] = Layout.prototype.GetLayersCount = function() {
+  var self = this.ptr;
+  return _emscripten_bind_Layout_GetLayersCount_0(self);
+};;
+
+Layout.prototype['SwapLayers'] = Layout.prototype.SwapLayers = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Layout_SwapLayers_2(self, arg0, arg1);
+};;
+
+Layout.prototype['MoveLayer'] = Layout.prototype.MoveLayer = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Layout_MoveLayer_2(self, arg0, arg1);
+};;
+
+Layout.prototype['SerializeLayersTo'] = Layout.prototype.SerializeLayersTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Layout_SerializeLayersTo_1(self, arg0);
+};;
+
+Layout.prototype['UnserializeLayersFrom'] = Layout.prototype.UnserializeLayersFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Layout_UnserializeLayersFrom_1(self, arg0);
+};;
+
+Layout.prototype['GetObjectGroups'] = Layout.prototype.GetObjectGroups = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Layout_GetObjectGroups_0(self), ObjectGroupsContainer);
+};;
+
+Layout.prototype['GetAssociatedSettings'] = Layout.prototype.GetAssociatedSettings = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Layout_GetAssociatedSettings_0(self), LayoutEditorCanvasOptions);
+};;
+
+Layout.prototype['SerializeTo'] = Layout.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Layout_SerializeTo_1(self, arg0);
+};;
+
+Layout.prototype['UnserializeFrom'] = Layout.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Layout_UnserializeFrom_2(self, arg0, arg1);
+};;
+
+Layout.prototype['InsertNewObject'] = Layout.prototype.InsertNewObject = function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  return wrapPointer(_emscripten_bind_Layout_InsertNewObject_4(self, arg0, arg1, arg2, arg3), gdObject);
+};;
+
+Layout.prototype['InsertObject'] = Layout.prototype.InsertObject = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  return wrapPointer(_emscripten_bind_Layout_InsertObject_2(self, arg0, arg1), gdObject);
+};;
+
+Layout.prototype['HasObjectNamed'] = Layout.prototype.HasObjectNamed = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_Layout_HasObjectNamed_1(self, arg0));
+};;
+
+Layout.prototype['GetObject'] = Layout.prototype.GetObject = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_Layout_GetObject_1(self, arg0), gdObject);
+};;
+
+Layout.prototype['GetObjectAt'] = Layout.prototype.GetObjectAt = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_Layout_GetObjectAt_1(self, arg0), gdObject);
+};;
+
+Layout.prototype['GetObjectPosition'] = Layout.prototype.GetObjectPosition = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Layout_GetObjectPosition_1(self, arg0);
+};;
+
+Layout.prototype['RemoveObject'] = Layout.prototype.RemoveObject = function(arg0) {
+  var self = this.ptr;
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Layout_RemoveObject_1(self, arg0);
+};;
+
+Layout.prototype['SwapObjects'] = Layout.prototype.SwapObjects = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Layout_SwapObjects_2(self, arg0, arg1);
+};;
+
+Layout.prototype['MoveObject'] = Layout.prototype.MoveObject = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Layout_MoveObject_2(self, arg0, arg1);
+};;
+
+Layout.prototype['GetObjectsCount'] = Layout.prototype.GetObjectsCount = function() {
+  var self = this.ptr;
+  return _emscripten_bind_Layout_GetObjectsCount_0(self);
+};;
+
+  Layout.prototype['__destroy__'] = Layout.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_Layout___destroy___0(self);
 };
 // VariablesContainer
 function VariablesContainer() {
