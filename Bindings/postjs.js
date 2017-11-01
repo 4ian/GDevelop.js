@@ -103,6 +103,8 @@
         gd.asPanelSpriteObject = function(evt) { return gd.castObject(evt, gd.PanelSpriteObject); }
         gd.asTextObject = function(evt) { return gd.castObject(evt, gd.TextObject); }
         gd.asShapePainterObject = function(evt) { return gd.castObject(evt, gd.ShapePainterObject); }
+        gd.asAdMobObject = function(evt) { return gd.castObject(evt, gd.AdMobObject); }
+        gd.asTextEntryObject = function(evt) { return gd.castObject(evt, gd.TextEntryObject); }
 
         gd.asImageResource = function(evt) { return gd.castObject(evt, gd.ImageResource); }
 

@@ -542,6 +542,7 @@ describe('libGD.js', function(){
 		var project = gd.ProjectHelper.createNewGDJSProject();
 		var layout = project.insertNewLayout("Scene", 0);
 		var object = layout.insertNewObject(project, "Sprite", "MyObject", 0);
+		var object2 = layout.insertNewObject(project, "Sprite", "MyObject2", 1);
 
 		it('has properties and initial values', function() {
 			object.setName("TheObject");
@@ -563,6 +564,20 @@ describe('libGD.js', function(){
 			var behaviors = gd.getBehaviorsOfObject(project, layout, "TheObject", true);
 			expect(behaviors.size()).to.be(1);
 			expect(behaviors.get(0)).to.be("Draggable");
+		});
+
+		it('can be un/serialized', function() {
+			var serializerElement = new gd.SerializerElement();
+			object.serializeTo(serializerElement);
+			object2.unserializeFrom(project, serializerElement);
+			object2.unserializeFrom(project, serializerElement); // Also check that multiple
+			object2.unserializeFrom(project, serializerElement); // unserialization is idempotent
+			serializerElement.delete();
+
+			//Check that behaviors were persisted and restored
+			var behaviors = object2.getAllBehaviorNames();
+			expect(behaviors.size()).to.be(1);
+			expect(behaviors.at(0)).to.be("Draggable");
 		});
 
 		after(function() {project.delete();});

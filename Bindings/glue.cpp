@@ -175,6 +175,14 @@ const VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroup_GetAllObjec
   return &self->GetAllObjectsNames();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroup_SerializeTo_1(ObjectGroup* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroup_UnserializeFrom_1(ObjectGroup* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroup___destroy___0(ObjectGroup* self) {
   delete self;
 }
@@ -1281,6 +1289,14 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_Rename_2(ObjectG
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_Move_2(ObjectGroupsContainer* self, unsigned int arg0, unsigned int arg1) {
   self->Move(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_SerializeTo_1(ObjectGroupsContainer* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_UnserializeFrom_1(ObjectGroupsContainer* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer___destroy___0(ObjectGroupsContainer* self) {
@@ -2544,6 +2560,14 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_IsNumber_0(Variable* self) {
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_IsStructure_0(Variable* self) {
   return self->IsStructure();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_SerializeTo_1(Variable* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_UnserializeFrom_1(Variable* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable___destroy___0(Variable* self) {

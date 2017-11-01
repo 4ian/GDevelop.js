@@ -130,6 +130,9 @@ interface Variable {
     [Const, Ref] MapStringVariable GetAllChildren();
     boolean IsNumber();
     boolean IsStructure();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
 };
 
 interface VariablesContainer {
@@ -162,6 +165,9 @@ interface ObjectGroup {
     boolean Find([Const] DOMString obj);
 
     [Const, Ref] VectorString GetAllObjectsNames();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
 };
 
 interface ObjectGroupsContainer {
@@ -177,6 +183,9 @@ interface ObjectGroupsContainer {
     unsigned long GetPosition([Const] DOMString name);
     boolean Rename([Const] DOMString oldName, [Const] DOMString newName);
     void Move(unsigned long oldIndex, unsigned long newIndex);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
 };
 
 interface Project {

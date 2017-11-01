@@ -373,6 +373,18 @@ ObjectGroup.prototype['GetAllObjectsNames'] = ObjectGroup.prototype.GetAllObject
   return wrapPointer(_emscripten_bind_ObjectGroup_GetAllObjectsNames_0(self), VectorString);
 };;
 
+ObjectGroup.prototype['SerializeTo'] = ObjectGroup.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ObjectGroup_SerializeTo_1(self, arg0);
+};;
+
+ObjectGroup.prototype['UnserializeFrom'] = ObjectGroup.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ObjectGroup_UnserializeFrom_1(self, arg0);
+};;
+
   ObjectGroup.prototype['__destroy__'] = ObjectGroup.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ObjectGroup___destroy___0(self);
@@ -2180,6 +2192,18 @@ ObjectGroupsContainer.prototype['Move'] = ObjectGroupsContainer.prototype.Move =
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   _emscripten_bind_ObjectGroupsContainer_Move_2(self, arg0, arg1);
+};;
+
+ObjectGroupsContainer.prototype['SerializeTo'] = ObjectGroupsContainer.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ObjectGroupsContainer_SerializeTo_1(self, arg0);
+};;
+
+ObjectGroupsContainer.prototype['UnserializeFrom'] = ObjectGroupsContainer.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ObjectGroupsContainer_UnserializeFrom_1(self, arg0);
 };;
 
   ObjectGroupsContainer.prototype['__destroy__'] = ObjectGroupsContainer.prototype.__destroy__ = function() {
@@ -4204,6 +4228,18 @@ Variable.prototype['IsNumber'] = Variable.prototype.IsNumber = function() {
 Variable.prototype['IsStructure'] = Variable.prototype.IsStructure = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Variable_IsStructure_0(self));
+};;
+
+Variable.prototype['SerializeTo'] = Variable.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Variable_SerializeTo_1(self, arg0);
+};;
+
+Variable.prototype['UnserializeFrom'] = Variable.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Variable_UnserializeFrom_1(self, arg0);
 };;
 
   Variable.prototype['__destroy__'] = Variable.prototype.__destroy__ = function() {
