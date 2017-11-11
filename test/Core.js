@@ -1163,4 +1163,71 @@ describe('libGD.js', function(){
 			expect(layout.getInitialInstances().hasInstancesOfObject("Object3")).to.be(false);
 		});
 	});
+
+	describe('gd.ExpressionParser and gd.CallbacksForExpressionCorrectnessTesting', function () {
+		var project = new gd.ProjectHelper.createNewGDJSProject();
+		var layout = project.insertNewLayout("Scene", 0);
+		layout.insertNewObject(project, "Sprite", "MySpriteObject", 0);
+
+		function testMathExpression(expression, expectedError, expectedErrorPosition) {
+			var callbacks, parser;
+
+			callbacks = new gd.CallbacksForExpressionCorrectnessTesting(project, layout);
+			parser = new gd.ExpressionParser(expression);
+			expect(parser.parseMathExpression(project.getCurrentPlatform(), project, layout, callbacks)).to.be(!expectedError);
+			if (expectedError) expect(parser.getFirstError()).to.be(expectedError);
+			if (expectedErrorPosition) expect(parser.getFirstErrorPosition()).to.be(expectedErrorPosition);
+			parser.delete();
+			callbacks.delete();
+		}
+
+		it('can parse valid expressions', function() {
+			testMathExpression('1+1');
+			testMathExpression('2-3');
+			testMathExpression('4/5');
+			testMathExpression('6*7');
+			testMathExpression('8 + 9');
+			testMathExpression('10 +    11');
+			testMathExpression('12 +    13 - 14');
+			testMathExpression('  15 +    16 - 17   ');
+		});
+
+		it('report errors in invalid expressions', function() {
+			testMathExpression('1//2', 'Operators without any number between them');
+			testMathExpression('bad expression', 'Syntax error');
+			testMathExpression('1 + test()', 'Syntax error');
+		});
+
+		it('can parse valid expressions with free functions', function() {
+			testMathExpression('1+sin(3.14)');
+			testMathExpression('abs(-5)');
+			testMathExpression('abs(-5) + cos(sin(3))');
+			testMathExpression('atan2(-5, 3)');
+			testMathExpression('MouseX("", 0) + 1');
+		});
+
+		it('can report errors when using too much arguments', function() {
+			testMathExpression('abs(-5, 3)', 'Incorrect number of parameters Expected (maximum) :1');
+			testMathExpression('MouseX("", 0, 0) + 1', 'Incorrect number of parameters Expected (maximum) :2');
+		});
+
+		it('can parse valid expressions with free functions having optional parameters', function() {
+			testMathExpression('MouseX() + 1');
+			testMathExpression('MouseX("") + 1');
+		});
+
+		it('can parse expressions with objects functions', function() {
+			testMathExpression('MySpriteObject.X()');
+			testMathExpression('MySpriteObject.X() + 1');
+			testMathExpression('MySpriteObject.PointX(Point)');
+		});
+
+		it('can report errors when using too much arguments in object functions', function() {
+			testMathExpression('MySpriteObject.PointX(Point, 2)', 'Incorrect number of parameters Expected (maximum) :2');
+		});
+
+		it('can parse arguments being expressions', function() {
+			testMathExpression('MouseX(VariableString(myVariable), 0) + 1');
+		});
+	});
 });

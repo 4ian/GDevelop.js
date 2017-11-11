@@ -1868,6 +1868,52 @@ Platform.prototype['GetAllPlatformExtensions'] = Platform.prototype.GetAllPlatfo
   var self = this.ptr;
   _emscripten_bind_Platform___destroy___0(self);
 };
+// ExpressionParser
+function ExpressionParser(arg0) {
+  ensureStringCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  this.ptr = _emscripten_bind_ExpressionParser_ExpressionParser_1(arg0);
+  getCache(ExpressionParser)[this.ptr] = this;
+};;
+ExpressionParser.prototype = Object.create(WrapperObject.prototype);
+ExpressionParser.prototype.constructor = ExpressionParser;
+ExpressionParser.prototype.__class__ = ExpressionParser;
+ExpressionParser.__cache__ = {};
+Module['ExpressionParser'] = ExpressionParser;
+
+ExpressionParser.prototype['ParseMathExpression'] = ExpressionParser.prototype.ParseMathExpression = function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  return !!(_emscripten_bind_ExpressionParser_ParseMathExpression_4(self, arg0, arg1, arg2, arg3));
+};;
+
+ExpressionParser.prototype['ParseStringExpression'] = ExpressionParser.prototype.ParseStringExpression = function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  return !!(_emscripten_bind_ExpressionParser_ParseStringExpression_4(self, arg0, arg1, arg2, arg3));
+};;
+
+ExpressionParser.prototype['GetFirstError'] = ExpressionParser.prototype.GetFirstError = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_ExpressionParser_GetFirstError_0(self));
+};;
+
+ExpressionParser.prototype['GetFirstErrorPosition'] = ExpressionParser.prototype.GetFirstErrorPosition = function() {
+  var self = this.ptr;
+  return _emscripten_bind_ExpressionParser_GetFirstErrorPosition_0(self);
+};;
+
+  ExpressionParser.prototype['__destroy__'] = ExpressionParser.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_ExpressionParser___destroy___0(self);
+};
 // VoidPtr
 function VoidPtr() { throw "cannot construct a VoidPtr, no constructor in IDL" }
 VoidPtr.prototype = Object.create(WrapperObject.prototype);
@@ -4245,6 +4291,33 @@ Variable.prototype['UnserializeFrom'] = Variable.prototype.UnserializeFrom = fun
   Variable.prototype['__destroy__'] = Variable.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Variable___destroy___0(self);
+};
+// CallbacksForExpressionCorrectnessTesting
+function CallbacksForExpressionCorrectnessTesting(arg0, arg1) {
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  this.ptr = _emscripten_bind_CallbacksForExpressionCorrectnessTesting_CallbacksForExpressionCorrectnessTesting_2(arg0, arg1);
+  getCache(CallbacksForExpressionCorrectnessTesting)[this.ptr] = this;
+};;
+CallbacksForExpressionCorrectnessTesting.prototype = Object.create(WrapperObject.prototype);
+CallbacksForExpressionCorrectnessTesting.prototype.constructor = CallbacksForExpressionCorrectnessTesting;
+CallbacksForExpressionCorrectnessTesting.prototype.__class__ = CallbacksForExpressionCorrectnessTesting;
+CallbacksForExpressionCorrectnessTesting.__cache__ = {};
+Module['CallbacksForExpressionCorrectnessTesting'] = CallbacksForExpressionCorrectnessTesting;
+
+CallbacksForExpressionCorrectnessTesting.prototype['GetFirstError'] = CallbacksForExpressionCorrectnessTesting.prototype.GetFirstError = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_CallbacksForExpressionCorrectnessTesting_GetFirstError_0(self));
+};;
+
+CallbacksForExpressionCorrectnessTesting.prototype['GetFirstErrorPosition'] = CallbacksForExpressionCorrectnessTesting.prototype.GetFirstErrorPosition = function() {
+  var self = this.ptr;
+  return _emscripten_bind_CallbacksForExpressionCorrectnessTesting_GetFirstErrorPosition_0(self);
+};;
+
+  CallbacksForExpressionCorrectnessTesting.prototype['__destroy__'] = CallbacksForExpressionCorrectnessTesting.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_CallbacksForExpressionCorrectnessTesting___destroy___0(self);
 };
 // PlatformExtension
 function PlatformExtension() { throw "cannot construct a PlatformExtension, no constructor in IDL" }
@@ -7310,6 +7383,28 @@ TextFormatting.prototype['GetUserData'] = TextFormatting.prototype.GetUserData =
   TextFormatting.prototype['__destroy__'] = TextFormatting.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_TextFormatting___destroy___0(self);
+};
+// ParserCallbacks
+function ParserCallbacks() { throw "cannot construct a ParserCallbacks, no constructor in IDL" }
+ParserCallbacks.prototype = Object.create(WrapperObject.prototype);
+ParserCallbacks.prototype.constructor = ParserCallbacks;
+ParserCallbacks.prototype.__class__ = ParserCallbacks;
+ParserCallbacks.__cache__ = {};
+Module['ParserCallbacks'] = ParserCallbacks;
+
+ParserCallbacks.prototype['GetFirstError'] = ParserCallbacks.prototype.GetFirstError = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_ParserCallbacks_GetFirstError_0(self));
+};;
+
+ParserCallbacks.prototype['GetFirstErrorPosition'] = ParserCallbacks.prototype.GetFirstErrorPosition = function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParserCallbacks_GetFirstErrorPosition_0(self);
+};;
+
+  ParserCallbacks.prototype['__destroy__'] = ParserCallbacks.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_ParserCallbacks___destroy___0(self);
 };
 (function() {
   function setupEnums() {

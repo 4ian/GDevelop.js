@@ -1025,6 +1025,29 @@ interface MetadataProvider {
     boolean STATIC_HasBehaviorStrExpression([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
 };
 
+interface ParserCallbacks {
+    [Const, Ref] DOMString GetFirstError();
+    unsigned long GetFirstErrorPosition();
+};
+
+interface ExpressionParser {
+    void ExpressionParser([Const] DOMString expression);
+
+    boolean ParseMathExpression([Const, Ref] Platform platform, [Const, Ref] Project project, [Const, Ref] Layout layout, [Ref] ParserCallbacks callbacks);
+    boolean ParseStringExpression([Const, Ref] Platform platform, [Const, Ref] Project project, [Const, Ref] Layout layout, [Ref] ParserCallbacks callbacks);
+
+    [Const, Ref] DOMString GetFirstError();
+    unsigned long GetFirstErrorPosition();
+};
+
+interface CallbacksForExpressionCorrectnessTesting {
+    void CallbacksForExpressionCorrectnessTesting([Const, Ref] Project project, [Const, Ref] Layout layout);
+
+    //Inherited from ParserCallbacks:
+    [Const, Ref] DOMString GetFirstError();
+    unsigned long GetFirstErrorPosition();
+};
+
 interface AbstractFileSystem {
 };
 

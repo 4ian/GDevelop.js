@@ -32,6 +32,8 @@
 #include <GDCore/Extensions/Metadata/MetadataProvider.h>
 #include <GDCore/IDE/Events/EventsParametersLister.h>
 #include <GDCore/IDE/Events/ArbitraryEventsWorker.h>
+#include <GDCore/Events/Parsers/ExpressionParser.h>
+#include <GDCore/IDE/Events/ExpressionsCorrectnessTesting.h>
 
 #include <GDCore/Events/Builtin/StandardEvent.h>
 #include <GDCore/Events/Builtin/CommentEvent.h>

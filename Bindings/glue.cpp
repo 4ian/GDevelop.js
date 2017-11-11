@@ -1104,6 +1104,32 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Platform___destroy___0(Platform* self)
   delete self;
 }
 
+// ExpressionParser
+
+ExpressionParser* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParser_ExpressionParser_1(char* arg0) {
+  return new ExpressionParser(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParser_ParseMathExpression_4(ExpressionParser* self, Platform* arg0, Project* arg1, Layout* arg2, ParserCallbacks* arg3) {
+  return self->ParseMathExpression(*arg0, *arg1, *arg2, *arg3);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParser_ParseStringExpression_4(ExpressionParser* self, Platform* arg0, Project* arg1, Layout* arg2, ParserCallbacks* arg3) {
+  return self->ParseStringExpression(*arg0, *arg1, *arg2, *arg3);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParser_GetFirstError_0(ExpressionParser* self) {
+  return self->GetFirstError().c_str();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParser_GetFirstErrorPosition_0(ExpressionParser* self) {
+  return self->GetFirstErrorPosition();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParser___destroy___0(ExpressionParser* self) {
+  delete self;
+}
+
 // VoidPtr
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VoidPtr___destroy___0(void** self) {
@@ -2571,6 +2597,24 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_UnserializeFrom_1(Variable* s
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable___destroy___0(Variable* self) {
+  delete self;
+}
+
+// CallbacksForExpressionCorrectnessTesting
+
+CallbacksForExpressionCorrectnessTesting* EMSCRIPTEN_KEEPALIVE emscripten_bind_CallbacksForExpressionCorrectnessTesting_CallbacksForExpressionCorrectnessTesting_2(Project* arg0, Layout* arg1) {
+  return new CallbacksForExpressionCorrectnessTesting(*arg0, *arg1);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_CallbacksForExpressionCorrectnessTesting_GetFirstError_0(CallbacksForExpressionCorrectnessTesting* self) {
+  return self->GetFirstError().c_str();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_CallbacksForExpressionCorrectnessTesting_GetFirstErrorPosition_0(CallbacksForExpressionCorrectnessTesting* self) {
+  return self->GetFirstErrorPosition();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_CallbacksForExpressionCorrectnessTesting___destroy___0(CallbacksForExpressionCorrectnessTesting* self) {
   delete self;
 }
 
@@ -4437,6 +4481,20 @@ unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_TextFormatting_GetUserData_0(T
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextFormatting___destroy___0(TextFormatting* self) {
+  delete self;
+}
+
+// ParserCallbacks
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParserCallbacks_GetFirstError_0(ParserCallbacks* self) {
+  return self->GetFirstError().c_str();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ParserCallbacks_GetFirstErrorPosition_0(ParserCallbacks* self) {
+  return self->GetFirstErrorPosition();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParserCallbacks___destroy___0(ParserCallbacks* self) {
   delete self;
 }
 
