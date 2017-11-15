@@ -5508,6 +5508,50 @@ ObjectMetadata.prototype['GetIconFilename'] = ObjectMetadata.prototype.GetIconFi
   var self = this.ptr;
   _emscripten_bind_ObjectMetadata___destroy___0(self);
 };
+// VectorPoint
+function VectorPoint() {
+  this.ptr = _emscripten_bind_VectorPoint_VectorPoint_0();
+  getCache(VectorPoint)[this.ptr] = this;
+};;
+VectorPoint.prototype = Object.create(WrapperObject.prototype);
+VectorPoint.prototype.constructor = VectorPoint;
+VectorPoint.prototype.__class__ = VectorPoint;
+VectorPoint.__cache__ = {};
+Module['VectorPoint'] = VectorPoint;
+
+VectorPoint.prototype['push_back'] = VectorPoint.prototype.push_back = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VectorPoint_push_back_1(self, arg0);
+};;
+
+VectorPoint.prototype['size'] = VectorPoint.prototype.size = function() {
+  var self = this.ptr;
+  return _emscripten_bind_VectorPoint_size_0(self);
+};;
+
+VectorPoint.prototype['at'] = VectorPoint.prototype.at = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_VectorPoint_at_1(self, arg0), Point);
+};;
+
+VectorPoint.prototype['WRAPPED_set'] = VectorPoint.prototype.WRAPPED_set = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_VectorPoint_WRAPPED_set_2(self, arg0, arg1);
+};;
+
+VectorPoint.prototype['clear'] = VectorPoint.prototype.clear = function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorPoint_clear_0(self);
+};;
+
+  VectorPoint.prototype['__destroy__'] = VectorPoint.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorPoint___destroy___0(self);
+};
 // Layout
 function Layout() {
   this.ptr = _emscripten_bind_Layout_Layout_0();
@@ -6264,6 +6308,32 @@ Sprite.prototype['GetImageName'] = Sprite.prototype.GetImageName = function() {
   return Pointer_stringify(_emscripten_bind_Sprite_GetImageName_0(self));
 };;
 
+Sprite.prototype['GetOrigin'] = Sprite.prototype.GetOrigin = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Sprite_GetOrigin_0(self), Point);
+};;
+
+Sprite.prototype['GetCenter'] = Sprite.prototype.GetCenter = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Sprite_GetCenter_0(self), Point);
+};;
+
+Sprite.prototype['IsDefaultCenterPoint'] = Sprite.prototype.IsDefaultCenterPoint = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_Sprite_IsDefaultCenterPoint_0(self));
+};;
+
+Sprite.prototype['SetDefaultCenterPoint'] = Sprite.prototype.SetDefaultCenterPoint = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Sprite_SetDefaultCenterPoint_1(self, arg0);
+};;
+
+Sprite.prototype['GetAllNonDefaultPoints'] = Sprite.prototype.GetAllNonDefaultPoints = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Sprite_GetAllNonDefaultPoints_0(self), VectorPoint);
+};;
+
 Sprite.prototype['AddPoint'] = Sprite.prototype.AddPoint = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
@@ -6292,27 +6362,6 @@ Sprite.prototype['HasPoint'] = Sprite.prototype.HasPoint = function(arg0) {
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Sprite_HasPoint_1(self, arg0));
-};;
-
-Sprite.prototype['GetOrigin'] = Sprite.prototype.GetOrigin = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Sprite_GetOrigin_0(self), Point);
-};;
-
-Sprite.prototype['GetCenter'] = Sprite.prototype.GetCenter = function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Sprite_GetCenter_0(self), Point);
-};;
-
-Sprite.prototype['IsDefaultCenterPoint'] = Sprite.prototype.IsDefaultCenterPoint = function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_Sprite_IsDefaultCenterPoint_0(self));
-};;
-
-Sprite.prototype['SetDefaultCenterPoint'] = Sprite.prototype.SetDefaultCenterPoint = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Sprite_SetDefaultCenterPoint_1(self, arg0);
 };;
 
   Sprite.prototype['__destroy__'] = Sprite.prototype.__destroy__ = function() {

@@ -3401,6 +3401,36 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectMetadata___destroy___0(ObjectMet
   delete self;
 }
 
+// VectorPoint
+
+VectorPoint* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_VectorPoint_0() {
+  return new VectorPoint();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_push_back_1(VectorPoint* self, Point* arg0) {
+  self->push_back(*arg0);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_size_0(VectorPoint* self) {
+  return self->size();
+}
+
+Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_at_1(VectorPoint* self, unsigned int arg0) {
+  return &self->at(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_WRAPPED_set_2(VectorPoint* self, unsigned int arg0, Point* arg1) {
+  self->WRAPPED_set(arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_clear_0(VectorPoint* self) {
+  self->clear();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint___destroy___0(VectorPoint* self) {
+  delete self;
+}
+
 // Layout
 
 Layout* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_Layout_0() {
@@ -3858,22 +3888,6 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetImageName_0(Sprite* s
   return self->GetImageName().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_AddPoint_1(Sprite* self, Point* arg0) {
-  self->AddPoint(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_DelPoint_1(Sprite* self, char* arg0) {
-  self->DelPoint(arg0);
-}
-
-Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetPoint_1(Sprite* self, char* arg0) {
-  return &self->GetPoint(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_HasPoint_1(Sprite* self, char* arg0) {
-  return self->HasPoint(arg0);
-}
-
 Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetOrigin_0(Sprite* self) {
   return &self->GetOrigin();
 }
@@ -3888,6 +3902,26 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_IsDefaultCenterPoint_0(Sprite* 
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetDefaultCenterPoint_1(Sprite* self, bool arg0) {
   self->SetDefaultCenterPoint(arg0);
+}
+
+VectorPoint* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetAllNonDefaultPoints_0(Sprite* self) {
+  return &self->GetAllNonDefaultPoints();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_AddPoint_1(Sprite* self, Point* arg0) {
+  self->AddPoint(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_DelPoint_1(Sprite* self, char* arg0) {
+  self->DelPoint(arg0);
+}
+
+Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetPoint_1(Sprite* self, char* arg0) {
+  return &self->GetPoint(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_HasPoint_1(Sprite* self, char* arg0) {
+  return self->HasPoint(arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite___destroy___0(Sprite* self) {

@@ -1121,19 +1121,32 @@ interface Point {
     void SetY(float y);
 };
 
+interface VectorPoint {
+    void VectorPoint();
+
+    void push_back([Const, Ref] Point pt);
+    unsigned long size();
+    [Ref] Point at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] Point pt);
+    void clear();
+};
+
 interface Sprite {
     void Sprite();
 
     void SetImageName([Const] DOMString name);
     [Const, Ref] DOMString GetImageName();
-    void AddPoint([Const, Ref] Point point);
-    void DelPoint([Const] DOMString name);
-    [Ref] Point GetPoint([Const] DOMString name);
-    boolean HasPoint([Const] DOMString name);
+
     [Ref] Point GetOrigin();
     [Ref] Point GetCenter();
     boolean IsDefaultCenterPoint();
     void SetDefaultCenterPoint(boolean defaultPoint);
+
+    [Ref] VectorPoint GetAllNonDefaultPoints();
+    void AddPoint([Const, Ref] Point point);
+    void DelPoint([Const] DOMString name);
+    [Ref] Point GetPoint([Const] DOMString name);
+    boolean HasPoint([Const] DOMString name);
 };
 
 interface Direction {

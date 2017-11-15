@@ -1065,6 +1065,34 @@ describe('libGD.js', function(){
 				expect(direction.getSprite(2).getImageName()).to.be("image1");
 			});
 		});
+
+		describe('gd.Sprite', function() {
+			var sprite1 = new gd.Sprite();
+
+			it('can have default points', function() {
+				sprite1.getCenter().setX(2);
+				sprite1.getCenter().setY(3);
+				sprite1.getOrigin().setX(4);
+				sprite1.getOrigin().setY(5);
+				expect(sprite1.getCenter().getX()).to.be(2);
+				expect(sprite1.getCenter().getY()).to.be(3);
+				expect(sprite1.getOrigin().getX()).to.be(4);
+				expect(sprite1.getOrigin().getY()).to.be(5);
+			});
+
+			it('can have custom points', function() {
+				var point = new gd.Point("test");
+				sprite1.addPoint(point);
+				point.delete();
+
+				expect(sprite1.hasPoint("test")).to.be(true);
+				sprite1.getPoint("test").setX(1);
+				sprite1.getPoint("test").setY(2);
+				expect(sprite1.getPoint("test").getX()).to.be(1);
+				expect(sprite1.getPoint("test").getY()).to.be(2);
+			});
+
+		});
 	});
 
 	describe('gd.MetadataProvider', function() {

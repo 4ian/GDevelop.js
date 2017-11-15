@@ -252,6 +252,7 @@ typedef std::map<gd::String, gd::EventMetadata> MapStringEventMetadata;
 typedef std::map<gd::String, gd::Variable> MapStringVariable;
 typedef std::map<gd::String, gd::PropertyDescriptor> MapStringPropertyDescriptor;
 typedef std::set<gd::String> SetString;
+typedef std::vector<Point> VectorPoint;
 typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 
 //Customize some functions implementation thanks to WRAPPED_* macros
