@@ -10,7 +10,16 @@ This module is used to power [GDevApp], a radically innovative game creator that
 How to build
 ------------
 
-Make sure you have [CMake](http://www.cmake.org/) and [Emscripten](https://github.com/kripken/emscripten) installed (your OS package manager should be able to provide both). You need Emscripten 1.33.1 at least to avoid [this bug](https://github.com/kripken/emscripten/pull/3479).
+* Make sure you have [CMake 3.5+](http://www.cmake.org/)
+
+* Install [Emscripten](https://github.com/kripken/emscripten), as explained on the [Emscripten installation instructions](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html):
+
+```shell
+./emsdk update
+./emsdk install latest
+./emsdk activate latest
+source ./emsdk_env.sh
+```
 
 * Make sure you have Node.js installed and grunt:
 
@@ -23,22 +32,6 @@ Make sure you have [CMake](http://www.cmake.org/) and [Emscripten](https://githu
 ```shell
     git clone https://github.com/4ian/GD.git
     cd GD && git clone https://github.com/4ian/GDevelop.js.git
-```
-
-* Patch WebIDL binder to support returning javascript boolean. Go to path/to/emscripten/tools/webidl_binder.py, search for
-
-```python
-    elif return_type == 'String':
-      call_prefix += 'Pointer_stringify('
-      call_postfix += ')'
-```
-
-and add just after:
-
-```python
-    elif return_type == 'Boolean':
-      call_prefix += '!!('
-      call_postfix += ')'
 ```
 
 * Launch the build:
