@@ -54,9 +54,9 @@ function getClass(obj) {
 }
 Module['getClass'] = getClass;
 
-// Converts a value into a C-style string, storing it in temporary space
+// Converts big (string or array) values into a C-style storage, in temporary space
 
-var ensureStringCache = {
+var ensureCache = {
   buffer: 0,  // the main buffer of temporary storage
   size: 0,   // the size of buffer
   pos: 0,    // the next free offset in buffer
@@ -64,49 +64,106 @@ var ensureStringCache = {
   needed: 0, // the total size we need next time
 
   prepare: function() {
-    if (this.needed) {
+    if (ensureCache.needed) {
       // clear the temps
-      for (var i = 0; i < this.temps.length; i++) {
-        Module['_free'](this.temps[i]);
+      for (var i = 0; i < ensureCache.temps.length; i++) {
+        Module['_free'](ensureCache.temps[i]);
       }
-      this.temps.length = 0;
+      ensureCache.temps.length = 0;
       // prepare to allocate a bigger buffer
-      Module['_free'](this.buffer);
-      this.buffer = 0;
-      this.size += this.needed;
+      Module['_free'](ensureCache.buffer);
+      ensureCache.buffer = 0;
+      ensureCache.size += ensureCache.needed;
       // clean up
-      this.needed = 0;
+      ensureCache.needed = 0;
     }
-    if (!this.buffer) { // happens first time, or when we need to grow
-      this.size += 100; // heuristic, avoid many small grow events
-      this.buffer = Module['_malloc'](this.size);
-      assert(this.buffer);
+    if (!ensureCache.buffer) { // happens first time, or when we need to grow
+      ensureCache.size += 128; // heuristic, avoid many small grow events
+      ensureCache.buffer = Module['_malloc'](ensureCache.size);
+      assert(ensureCache.buffer);
     }
-    this.pos = 0;
+    ensureCache.pos = 0;
   },
-  alloc: function(value) {
-    assert(this.buffer);
-    var array = intArrayFromString(value);
-    var len = array.length;
+  alloc: function(array, view) {
+    assert(ensureCache.buffer);
+    var bytes = view.BYTES_PER_ELEMENT;
+    var len = array.length * bytes;
+    len = (len + 7) & -8; // keep things aligned to 8 byte boundaries
     var ret;
-    if (this.pos + len >= this.size) {
-      // we failed to allocate in the buffer, this time around :(
+    if (ensureCache.pos + len >= ensureCache.size) {
+      // we failed to allocate in the buffer, ensureCache time around :(
       assert(len > 0); // null terminator, at least
-      this.needed += len;
+      ensureCache.needed += len;
       ret = Module['_malloc'](len);
-      this.temps.push(ret);
+      ensureCache.temps.push(ret);
     } else {
       // we can allocate in the buffer
-      ret = this.buffer + this.pos;
-      this.pos += len;
+      ret = ensureCache.buffer + ensureCache.pos;
+      ensureCache.pos += len;
     }
-    writeArrayToMemory(array, ret);
     return ret;
+  },  
+  copy: function(array, view, offset) {
+    var offsetShifted = offset;
+    var bytes = view.BYTES_PER_ELEMENT;
+    switch (bytes) {
+      case 2: offsetShifted >>= 1; break;
+      case 4: offsetShifted >>= 2; break;
+      case 8: offsetShifted >>= 3; break;
+    }
+    for (var i = 0; i < array.length; i++) {
+      view[offsetShifted + i] = array[i];
+    }   
   },
 };
 
 function ensureString(value) {
-  if (typeof value === 'string') return ensureStringCache.alloc(value);
+  if (typeof value === 'string') {
+    var intArray = intArrayFromString(value);
+    var offset = ensureCache.alloc(intArray, HEAP8);
+    ensureCache.copy(intArray, HEAP8, offset);
+    return offset;
+  }
+  return value;
+}
+function ensureInt8(value) {
+  if (typeof value === 'object') {
+    var offset = ensureCache.alloc(value, HEAP8);
+    ensureCache.copy(value, HEAP8, offset);
+    return offset;
+  }
+  return value;
+}
+function ensureInt16(value) {
+  if (typeof value === 'object') {
+    var offset = ensureCache.alloc(value, HEAP16);
+    ensureCache.copy(value, HEAP16, offset);
+    return offset;
+  }
+  return value;
+}
+function ensureInt32(value) {
+  if (typeof value === 'object') {
+    var offset = ensureCache.alloc(value, HEAP32);
+    ensureCache.copy(value, HEAP32, offset);
+    return offset;
+  }
+  return value;
+}
+function ensureFloat32(value) {
+  if (typeof value === 'object') {
+    var offset = ensureCache.alloc(value, HEAPF32);
+    ensureCache.copy(value, HEAPF32, offset);
+    return offset;
+  }
+  return value;
+}
+function ensureFloat64(value) {
+  if (typeof value === 'object') {
+    var offset = ensureCache.alloc(value, HEAPF64);
+    ensureCache.copy(value, HEAPF64, offset);
+    return offset;
+  }
   return value;
 }
 
@@ -172,7 +229,7 @@ VectorPlatformExtension.prototype['WRAPPED_at'] = VectorPlatformExtension.protot
 };
 // TextEntryObject
 function TextEntryObject(arg0) {
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_TextEntryObject_TextEntryObject_1(arg0);
@@ -186,7 +243,7 @@ Module['TextEntryObject'] = TextEntryObject;
 
 TextEntryObject.prototype['SetName'] = TextEntryObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TextEntryObject_SetName_1(self, arg0);
@@ -199,7 +256,7 @@ TextEntryObject.prototype['GetName'] = TextEntryObject.prototype.GetName = funct
 
 TextEntryObject.prototype['SetType'] = TextEntryObject.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TextEntryObject_SetType_1(self, arg0);
@@ -218,7 +275,7 @@ TextEntryObject.prototype['GetProperties'] = TextEntryObject.prototype.GetProper
 
 TextEntryObject.prototype['UpdateProperty'] = TextEntryObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -237,7 +294,7 @@ TextEntryObject.prototype['GetInitialInstanceProperties'] = TextEntryObject.prot
 
 TextEntryObject.prototype['UpdateInitialInstanceProperty'] = TextEntryObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -260,7 +317,7 @@ TextEntryObject.prototype['GetAllBehaviorNames'] = TextEntryObject.prototype.Get
 
 TextEntryObject.prototype['HasBehaviorNamed'] = TextEntryObject.prototype.HasBehaviorNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_TextEntryObject_HasBehaviorNamed_1(self, arg0));
@@ -268,7 +325,7 @@ TextEntryObject.prototype['HasBehaviorNamed'] = TextEntryObject.prototype.HasBeh
 
 TextEntryObject.prototype['AddNewBehavior'] = TextEntryObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -279,7 +336,7 @@ TextEntryObject.prototype['AddNewBehavior'] = TextEntryObject.prototype.AddNewBe
 
 TextEntryObject.prototype['GetBehavior'] = TextEntryObject.prototype.GetBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_TextEntryObject_GetBehavior_1(self, arg0), Behavior);
@@ -287,7 +344,7 @@ TextEntryObject.prototype['GetBehavior'] = TextEntryObject.prototype.GetBehavior
 
 TextEntryObject.prototype['RemoveBehavior'] = TextEntryObject.prototype.RemoveBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TextEntryObject_RemoveBehavior_1(self, arg0);
@@ -295,7 +352,7 @@ TextEntryObject.prototype['RemoveBehavior'] = TextEntryObject.prototype.RemoveBe
 
 TextEntryObject.prototype['RenameBehavior'] = TextEntryObject.prototype.RenameBehavior = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -338,7 +395,7 @@ ObjectGroup.prototype['GetName'] = ObjectGroup.prototype.GetName = function() {
 
 ObjectGroup.prototype['SetName'] = ObjectGroup.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ObjectGroup_SetName_1(self, arg0);
@@ -346,7 +403,7 @@ ObjectGroup.prototype['SetName'] = ObjectGroup.prototype.SetName = function(arg0
 
 ObjectGroup.prototype['AddObject'] = ObjectGroup.prototype.AddObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ObjectGroup_AddObject_1(self, arg0);
@@ -354,7 +411,7 @@ ObjectGroup.prototype['AddObject'] = ObjectGroup.prototype.AddObject = function(
 
 ObjectGroup.prototype['RemoveObject'] = ObjectGroup.prototype.RemoveObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ObjectGroup_RemoveObject_1(self, arg0);
@@ -362,7 +419,7 @@ ObjectGroup.prototype['RemoveObject'] = ObjectGroup.prototype.RemoveObject = fun
 
 ObjectGroup.prototype['Find'] = ObjectGroup.prototype.Find = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_ObjectGroup_Find_1(self, arg0));
@@ -516,7 +573,7 @@ ResourcesManager.prototype['GetAllResourcesList'] = ResourcesManager.prototype.G
 
 ResourcesManager.prototype['HasResource'] = ResourcesManager.prototype.HasResource = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_ResourcesManager_HasResource_1(self, arg0));
@@ -524,7 +581,7 @@ ResourcesManager.prototype['HasResource'] = ResourcesManager.prototype.HasResour
 
 ResourcesManager.prototype['GetResource'] = ResourcesManager.prototype.GetResource = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_ResourcesManager_GetResource_1(self, arg0), Resource);
@@ -538,7 +595,7 @@ ResourcesManager.prototype['AddResource'] = ResourcesManager.prototype.AddResour
 
 ResourcesManager.prototype['RemoveResource'] = ResourcesManager.prototype.RemoveResource = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ResourcesManager_RemoveResource_1(self, arg0);
@@ -546,7 +603,7 @@ ResourcesManager.prototype['RemoveResource'] = ResourcesManager.prototype.Remove
 
 ResourcesManager.prototype['RenameResource'] = ResourcesManager.prototype.RenameResource = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -556,7 +613,7 @@ ResourcesManager.prototype['RenameResource'] = ResourcesManager.prototype.Rename
 
 ResourcesManager.prototype['MoveResourceUpInList'] = ResourcesManager.prototype.MoveResourceUpInList = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_ResourcesManager_MoveResourceUpInList_1(self, arg0));
@@ -564,7 +621,7 @@ ResourcesManager.prototype['MoveResourceUpInList'] = ResourcesManager.prototype.
 
 ResourcesManager.prototype['MoveResourceDownInList'] = ResourcesManager.prototype.MoveResourceDownInList = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_ResourcesManager_MoveResourceDownInList_1(self, arg0));
@@ -587,7 +644,7 @@ Module['Project'] = Project;
 
 Project.prototype['SetName'] = Project.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetName_1(self, arg0);
@@ -600,7 +657,7 @@ Project.prototype['GetName'] = Project.prototype.GetName = function() {
 
 Project.prototype['SetAuthor'] = Project.prototype.SetAuthor = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetAuthor_1(self, arg0);
@@ -613,7 +670,7 @@ Project.prototype['GetAuthor'] = Project.prototype.GetAuthor = function() {
 
 Project.prototype['SetPackageName'] = Project.prototype.SetPackageName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetPackageName_1(self, arg0);
@@ -626,7 +683,7 @@ Project.prototype['GetPackageName'] = Project.prototype.GetPackageName = functio
 
 Project.prototype['SetProjectFile'] = Project.prototype.SetProjectFile = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetProjectFile_1(self, arg0);
@@ -683,7 +740,7 @@ Project.prototype['SetMinimumFPS'] = Project.prototype.SetMinimumFPS = function(
 
 Project.prototype['SetLastCompilationDirectory'] = Project.prototype.SetLastCompilationDirectory = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetLastCompilationDirectory_1(self, arg0);
@@ -712,7 +769,7 @@ Project.prototype['GetCurrentPlatform'] = Project.prototype.GetCurrentPlatform =
 
 Project.prototype['HasLayoutNamed'] = Project.prototype.HasLayoutNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Project_HasLayoutNamed_1(self, arg0));
@@ -720,7 +777,7 @@ Project.prototype['HasLayoutNamed'] = Project.prototype.HasLayoutNamed = functio
 
 Project.prototype['GetLayout'] = Project.prototype.GetLayout = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Project_GetLayout_1(self, arg0), Layout);
@@ -746,7 +803,7 @@ Project.prototype['GetLayoutsCount'] = Project.prototype.GetLayoutsCount = funct
 
 Project.prototype['InsertNewLayout'] = Project.prototype.InsertNewLayout = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -755,7 +812,7 @@ Project.prototype['InsertNewLayout'] = Project.prototype.InsertNewLayout = funct
 
 Project.prototype['RemoveLayout'] = Project.prototype.RemoveLayout = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_RemoveLayout_1(self, arg0);
@@ -763,7 +820,7 @@ Project.prototype['RemoveLayout'] = Project.prototype.RemoveLayout = function(ar
 
 Project.prototype['SetFirstLayout'] = Project.prototype.SetFirstLayout = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_SetFirstLayout_1(self, arg0);
@@ -776,7 +833,7 @@ Project.prototype['GetFirstLayout'] = Project.prototype.GetFirstLayout = functio
 
 Project.prototype['HasExternalEventsNamed'] = Project.prototype.HasExternalEventsNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Project_HasExternalEventsNamed_1(self, arg0));
@@ -784,7 +841,7 @@ Project.prototype['HasExternalEventsNamed'] = Project.prototype.HasExternalEvent
 
 Project.prototype['GetExternalEvents'] = Project.prototype.GetExternalEvents = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Project_GetExternalEvents_1(self, arg0), ExternalEvents);
@@ -810,7 +867,7 @@ Project.prototype['GetExternalEventsCount'] = Project.prototype.GetExternalEvent
 
 Project.prototype['InsertNewExternalEvents'] = Project.prototype.InsertNewExternalEvents = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -819,7 +876,7 @@ Project.prototype['InsertNewExternalEvents'] = Project.prototype.InsertNewExtern
 
 Project.prototype['RemoveExternalEvents'] = Project.prototype.RemoveExternalEvents = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_RemoveExternalEvents_1(self, arg0);
@@ -827,7 +884,7 @@ Project.prototype['RemoveExternalEvents'] = Project.prototype.RemoveExternalEven
 
 Project.prototype['HasExternalLayoutNamed'] = Project.prototype.HasExternalLayoutNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Project_HasExternalLayoutNamed_1(self, arg0));
@@ -835,7 +892,7 @@ Project.prototype['HasExternalLayoutNamed'] = Project.prototype.HasExternalLayou
 
 Project.prototype['GetExternalLayout'] = Project.prototype.GetExternalLayout = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Project_GetExternalLayout_1(self, arg0), ExternalLayout);
@@ -861,7 +918,7 @@ Project.prototype['GetExternalLayoutsCount'] = Project.prototype.GetExternalLayo
 
 Project.prototype['InsertNewExternalLayout'] = Project.prototype.InsertNewExternalLayout = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -870,7 +927,7 @@ Project.prototype['InsertNewExternalLayout'] = Project.prototype.InsertNewExtern
 
 Project.prototype['RemoveExternalLayout'] = Project.prototype.RemoveExternalLayout = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_RemoveExternalLayout_1(self, arg0);
@@ -894,7 +951,7 @@ Project.prototype['ExposeResources'] = Project.prototype.ExposeResources = funct
 
 Project.prototype['STATIC_ValidateObjectName'] = Project.prototype.STATIC_ValidateObjectName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Project_STATIC_ValidateObjectName_1(self, arg0));
@@ -924,7 +981,7 @@ Project.prototype['GetObjectGroups'] = Project.prototype.GetObjectGroups = funct
 
 Project.prototype['FREE_GetTypeOfBehavior'] = Project.prototype.FREE_GetTypeOfBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -934,7 +991,7 @@ Project.prototype['FREE_GetTypeOfBehavior'] = Project.prototype.FREE_GetTypeOfBe
 
 Project.prototype['FREE_GetTypeOfObject'] = Project.prototype.FREE_GetTypeOfObject = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -944,7 +1001,7 @@ Project.prototype['FREE_GetTypeOfObject'] = Project.prototype.FREE_GetTypeOfObje
 
 Project.prototype['FREE_GetBehaviorsOfObject'] = Project.prototype.FREE_GetBehaviorsOfObject = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -954,7 +1011,7 @@ Project.prototype['FREE_GetBehaviorsOfObject'] = Project.prototype.FREE_GetBehav
 
 Project.prototype['InsertNewObject'] = Project.prototype.InsertNewObject = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -973,7 +1030,7 @@ Project.prototype['InsertObject'] = Project.prototype.InsertObject = function(ar
 
 Project.prototype['HasObjectNamed'] = Project.prototype.HasObjectNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Project_HasObjectNamed_1(self, arg0));
@@ -981,7 +1038,7 @@ Project.prototype['HasObjectNamed'] = Project.prototype.HasObjectNamed = functio
 
 Project.prototype['GetObject'] = Project.prototype.GetObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Project_GetObject_1(self, arg0), gdObject);
@@ -995,7 +1052,7 @@ Project.prototype['GetObjectAt'] = Project.prototype.GetObjectAt = function(arg0
 
 Project.prototype['GetObjectPosition'] = Project.prototype.GetObjectPosition = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_GetObjectPosition_1(self, arg0);
@@ -1003,7 +1060,7 @@ Project.prototype['GetObjectPosition'] = Project.prototype.GetObjectPosition = f
 
 Project.prototype['RemoveObject'] = Project.prototype.RemoveObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Project_RemoveObject_1(self, arg0);
@@ -1045,7 +1102,7 @@ Module['Layer'] = Layer;
 
 Layer.prototype['SetName'] = Layer.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Layer_SetName_1(self, arg0);
@@ -1164,7 +1221,7 @@ EventMetadata.prototype['GetGroup'] = EventMetadata.prototype.GetGroup = functio
 };
 // TextObject
 function TextObject(arg0) {
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_TextObject_TextObject_1(arg0);
@@ -1178,7 +1235,7 @@ Module['TextObject'] = TextObject;
 
 TextObject.prototype['SetString'] = TextObject.prototype.SetString = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SetString_1(self, arg0);
@@ -1202,7 +1259,7 @@ TextObject.prototype['GetCharacterSize'] = TextObject.prototype.GetCharacterSize
 
 TextObject.prototype['SetFontFilename'] = TextObject.prototype.SetFontFilename = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SetFontFilename_1(self, arg0);
@@ -1271,7 +1328,7 @@ TextObject.prototype['GetColorB'] = TextObject.prototype.GetColorB = function() 
 
 TextObject.prototype['SetName'] = TextObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SetName_1(self, arg0);
@@ -1284,7 +1341,7 @@ TextObject.prototype['GetName'] = TextObject.prototype.GetName = function() {
 
 TextObject.prototype['SetType'] = TextObject.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_SetType_1(self, arg0);
@@ -1303,7 +1360,7 @@ TextObject.prototype['GetProperties'] = TextObject.prototype.GetProperties = fun
 
 TextObject.prototype['UpdateProperty'] = TextObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -1322,7 +1379,7 @@ TextObject.prototype['GetInitialInstanceProperties'] = TextObject.prototype.GetI
 
 TextObject.prototype['UpdateInitialInstanceProperty'] = TextObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -1345,7 +1402,7 @@ TextObject.prototype['GetAllBehaviorNames'] = TextObject.prototype.GetAllBehavio
 
 TextObject.prototype['HasBehaviorNamed'] = TextObject.prototype.HasBehaviorNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_TextObject_HasBehaviorNamed_1(self, arg0));
@@ -1353,7 +1410,7 @@ TextObject.prototype['HasBehaviorNamed'] = TextObject.prototype.HasBehaviorNamed
 
 TextObject.prototype['AddNewBehavior'] = TextObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -1364,7 +1421,7 @@ TextObject.prototype['AddNewBehavior'] = TextObject.prototype.AddNewBehavior = f
 
 TextObject.prototype['GetBehavior'] = TextObject.prototype.GetBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_TextObject_GetBehavior_1(self, arg0), Behavior);
@@ -1372,7 +1429,7 @@ TextObject.prototype['GetBehavior'] = TextObject.prototype.GetBehavior = functio
 
 TextObject.prototype['RemoveBehavior'] = TextObject.prototype.RemoveBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TextObject_RemoveBehavior_1(self, arg0);
@@ -1380,7 +1437,7 @@ TextObject.prototype['RemoveBehavior'] = TextObject.prototype.RemoveBehavior = f
 
 TextObject.prototype['RenameBehavior'] = TextObject.prototype.RenameBehavior = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -1418,7 +1475,7 @@ Module['ExternalEvents'] = ExternalEvents;
 
 ExternalEvents.prototype['SetName'] = ExternalEvents.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ExternalEvents_SetName_1(self, arg0);
@@ -1436,7 +1493,7 @@ ExternalEvents.prototype['GetAssociatedLayout'] = ExternalEvents.prototype.GetAs
 
 ExternalEvents.prototype['SetAssociatedLayout'] = ExternalEvents.prototype.SetAssociatedLayout = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ExternalEvents_SetAssociatedLayout_1(self, arg0);
@@ -1474,7 +1531,7 @@ Module['MapStringString'] = MapStringString;
 
 MapStringString.prototype['MAP_get'] = MapStringString.prototype.MAP_get = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_MapStringString_MAP_get_1(self, arg0));
@@ -1482,7 +1539,7 @@ MapStringString.prototype['MAP_get'] = MapStringString.prototype.MAP_get = funct
 
 MapStringString.prototype['MAP_set'] = MapStringString.prototype.MAP_set = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -1492,7 +1549,7 @@ MapStringString.prototype['MAP_set'] = MapStringString.prototype.MAP_set = funct
 
 MapStringString.prototype['MAP_has'] = MapStringString.prototype.MAP_has = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_MapStringString_MAP_has_1(self, arg0));
@@ -1509,7 +1566,7 @@ MapStringString.prototype['MAP_keys'] = MapStringString.prototype.MAP_keys = fun
 };
 // AdMobObject
 function AdMobObject(arg0) {
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_AdMobObject_AdMobObject_1(arg0);
@@ -1523,7 +1580,7 @@ Module['AdMobObject'] = AdMobObject;
 
 AdMobObject.prototype['SetName'] = AdMobObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_AdMobObject_SetName_1(self, arg0);
@@ -1536,7 +1593,7 @@ AdMobObject.prototype['GetName'] = AdMobObject.prototype.GetName = function() {
 
 AdMobObject.prototype['SetType'] = AdMobObject.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_AdMobObject_SetType_1(self, arg0);
@@ -1555,7 +1612,7 @@ AdMobObject.prototype['GetProperties'] = AdMobObject.prototype.GetProperties = f
 
 AdMobObject.prototype['UpdateProperty'] = AdMobObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -1574,7 +1631,7 @@ AdMobObject.prototype['GetInitialInstanceProperties'] = AdMobObject.prototype.Ge
 
 AdMobObject.prototype['UpdateInitialInstanceProperty'] = AdMobObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -1597,7 +1654,7 @@ AdMobObject.prototype['GetAllBehaviorNames'] = AdMobObject.prototype.GetAllBehav
 
 AdMobObject.prototype['HasBehaviorNamed'] = AdMobObject.prototype.HasBehaviorNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_AdMobObject_HasBehaviorNamed_1(self, arg0));
@@ -1605,7 +1662,7 @@ AdMobObject.prototype['HasBehaviorNamed'] = AdMobObject.prototype.HasBehaviorNam
 
 AdMobObject.prototype['AddNewBehavior'] = AdMobObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -1616,7 +1673,7 @@ AdMobObject.prototype['AddNewBehavior'] = AdMobObject.prototype.AddNewBehavior =
 
 AdMobObject.prototype['GetBehavior'] = AdMobObject.prototype.GetBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_AdMobObject_GetBehavior_1(self, arg0), Behavior);
@@ -1624,7 +1681,7 @@ AdMobObject.prototype['GetBehavior'] = AdMobObject.prototype.GetBehavior = funct
 
 AdMobObject.prototype['RemoveBehavior'] = AdMobObject.prototype.RemoveBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_AdMobObject_RemoveBehavior_1(self, arg0);
@@ -1632,7 +1689,7 @@ AdMobObject.prototype['RemoveBehavior'] = AdMobObject.prototype.RemoveBehavior =
 
 AdMobObject.prototype['RenameBehavior'] = AdMobObject.prototype.RenameBehavior = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -1670,7 +1727,7 @@ Module['ExternalLayout'] = ExternalLayout;
 
 ExternalLayout.prototype['SetName'] = ExternalLayout.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ExternalLayout_SetName_1(self, arg0);
@@ -1683,7 +1740,7 @@ ExternalLayout.prototype['GetName'] = ExternalLayout.prototype.GetName = functio
 
 ExternalLayout.prototype['SetAssociatedLayout'] = ExternalLayout.prototype.SetAssociatedLayout = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ExternalLayout_SetAssociatedLayout_1(self, arg0);
@@ -1758,7 +1815,7 @@ WhileEvent.prototype['GetType'] = WhileEvent.prototype.GetType = function() {
 
 WhileEvent.prototype['SetType'] = WhileEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_WhileEvent_SetType_1(self, arg0);
@@ -1853,7 +1910,7 @@ Platform.prototype['GetDescription'] = Platform.prototype.GetDescription = funct
 
 Platform.prototype['IsExtensionLoaded'] = Platform.prototype.IsExtensionLoaded = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Platform_IsExtensionLoaded_1(self, arg0));
@@ -1870,7 +1927,7 @@ Platform.prototype['GetAllPlatformExtensions'] = Platform.prototype.GetAllPlatfo
 };
 // ExpressionParser
 function ExpressionParser(arg0) {
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_ExpressionParser_ExpressionParser_1(arg0);
@@ -1928,7 +1985,7 @@ Module['VoidPtr'] = VoidPtr;
 };
 // SpriteObject
 function SpriteObject(arg0) {
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_SpriteObject_SpriteObject_1(arg0);
@@ -1989,7 +2046,7 @@ SpriteObject.prototype['MoveAnimation'] = SpriteObject.prototype.MoveAnimation =
 
 SpriteObject.prototype['SetName'] = SpriteObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_SpriteObject_SetName_1(self, arg0);
@@ -2002,7 +2059,7 @@ SpriteObject.prototype['GetName'] = SpriteObject.prototype.GetName = function() 
 
 SpriteObject.prototype['SetType'] = SpriteObject.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_SpriteObject_SetType_1(self, arg0);
@@ -2021,7 +2078,7 @@ SpriteObject.prototype['GetProperties'] = SpriteObject.prototype.GetProperties =
 
 SpriteObject.prototype['UpdateProperty'] = SpriteObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -2040,7 +2097,7 @@ SpriteObject.prototype['GetInitialInstanceProperties'] = SpriteObject.prototype.
 
 SpriteObject.prototype['UpdateInitialInstanceProperty'] = SpriteObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -2063,7 +2120,7 @@ SpriteObject.prototype['GetAllBehaviorNames'] = SpriteObject.prototype.GetAllBeh
 
 SpriteObject.prototype['HasBehaviorNamed'] = SpriteObject.prototype.HasBehaviorNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_SpriteObject_HasBehaviorNamed_1(self, arg0));
@@ -2071,7 +2128,7 @@ SpriteObject.prototype['HasBehaviorNamed'] = SpriteObject.prototype.HasBehaviorN
 
 SpriteObject.prototype['AddNewBehavior'] = SpriteObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -2082,7 +2139,7 @@ SpriteObject.prototype['AddNewBehavior'] = SpriteObject.prototype.AddNewBehavior
 
 SpriteObject.prototype['GetBehavior'] = SpriteObject.prototype.GetBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_SpriteObject_GetBehavior_1(self, arg0), Behavior);
@@ -2090,7 +2147,7 @@ SpriteObject.prototype['GetBehavior'] = SpriteObject.prototype.GetBehavior = fun
 
 SpriteObject.prototype['RemoveBehavior'] = SpriteObject.prototype.RemoveBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_SpriteObject_RemoveBehavior_1(self, arg0);
@@ -2098,7 +2155,7 @@ SpriteObject.prototype['RemoveBehavior'] = SpriteObject.prototype.RemoveBehavior
 
 SpriteObject.prototype['RenameBehavior'] = SpriteObject.prototype.RenameBehavior = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -2136,7 +2193,7 @@ Module['HighestZOrderFinder'] = HighestZOrderFinder;
 
 HighestZOrderFinder.prototype['RestrictSearchToLayer'] = HighestZOrderFinder.prototype.RestrictSearchToLayer = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_HighestZOrderFinder_RestrictSearchToLayer_1(self, arg0);
@@ -2169,7 +2226,7 @@ Module['ObjectGroupsContainer'] = ObjectGroupsContainer;
 
 ObjectGroupsContainer.prototype['Has'] = ObjectGroupsContainer.prototype.Has = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_ObjectGroupsContainer_Has_1(self, arg0));
@@ -2184,7 +2241,7 @@ ObjectGroupsContainer.prototype['Insert'] = ObjectGroupsContainer.prototype.Inse
 
 ObjectGroupsContainer.prototype['InsertNew'] = ObjectGroupsContainer.prototype.InsertNew = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -2209,7 +2266,7 @@ ObjectGroupsContainer.prototype['Clear'] = ObjectGroupsContainer.prototype.Clear
 
 ObjectGroupsContainer.prototype['Remove'] = ObjectGroupsContainer.prototype.Remove = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ObjectGroupsContainer_Remove_1(self, arg0);
@@ -2217,7 +2274,7 @@ ObjectGroupsContainer.prototype['Remove'] = ObjectGroupsContainer.prototype.Remo
 
 ObjectGroupsContainer.prototype['GetPosition'] = ObjectGroupsContainer.prototype.GetPosition = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return _emscripten_bind_ObjectGroupsContainer_GetPosition_1(self, arg0);
@@ -2225,7 +2282,7 @@ ObjectGroupsContainer.prototype['GetPosition'] = ObjectGroupsContainer.prototype
 
 ObjectGroupsContainer.prototype['Rename'] = ObjectGroupsContainer.prototype.Rename = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -2266,7 +2323,7 @@ Module['WholeProjectRefactorer'] = WholeProjectRefactorer;
 
 WholeProjectRefactorer.prototype['STATIC_ObjectRenamedInLayout'] = WholeProjectRefactorer.prototype.STATIC_ObjectRenamedInLayout = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -2278,7 +2335,7 @@ WholeProjectRefactorer.prototype['STATIC_ObjectRenamedInLayout'] = WholeProjectR
 
 WholeProjectRefactorer.prototype['STATIC_ObjectRemovedInLayout'] = WholeProjectRefactorer.prototype.STATIC_ObjectRemovedInLayout = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -2289,7 +2346,7 @@ WholeProjectRefactorer.prototype['STATIC_ObjectRemovedInLayout'] = WholeProjectR
 
 WholeProjectRefactorer.prototype['STATIC_GlobalObjectRenamed'] = WholeProjectRefactorer.prototype.STATIC_GlobalObjectRenamed = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -2300,7 +2357,7 @@ WholeProjectRefactorer.prototype['STATIC_GlobalObjectRenamed'] = WholeProjectRef
 
 WholeProjectRefactorer.prototype['STATIC_GlobalObjectRemoved'] = WholeProjectRefactorer.prototype.STATIC_GlobalObjectRemoved = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -2336,7 +2393,7 @@ SerializerElement.prototype['WRAPPED_SetBool'] = SerializerElement.prototype.WRA
 
 SerializerElement.prototype['WRAPPED_SetString'] = SerializerElement.prototype.WRAPPED_SetString = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_SerializerElement_WRAPPED_SetString_1(self, arg0);
@@ -2356,7 +2413,7 @@ SerializerElement.prototype['WRAPPED_SetDouble'] = SerializerElement.prototype.W
 
 SerializerElement.prototype['AddChild'] = SerializerElement.prototype.AddChild = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_SerializerElement_AddChild_1(self, arg0), SerializerElement);
@@ -2364,7 +2421,7 @@ SerializerElement.prototype['AddChild'] = SerializerElement.prototype.AddChild =
 
 SerializerElement.prototype['GetChild'] = SerializerElement.prototype.GetChild = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_SerializerElement_GetChild_1(self, arg0), SerializerElement);
@@ -2372,7 +2429,7 @@ SerializerElement.prototype['GetChild'] = SerializerElement.prototype.GetChild =
 
 SerializerElement.prototype['WRAPPED_SetChild'] = SerializerElement.prototype.WRAPPED_SetChild = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -2381,7 +2438,7 @@ SerializerElement.prototype['WRAPPED_SetChild'] = SerializerElement.prototype.WR
 
 SerializerElement.prototype['HasChild'] = SerializerElement.prototype.HasChild = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_SerializerElement_HasChild_1(self, arg0));
@@ -2554,7 +2611,7 @@ CommentEvent.prototype['GetComment'] = CommentEvent.prototype.GetComment = funct
 
 CommentEvent.prototype['SetComment'] = CommentEvent.prototype.SetComment = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_CommentEvent_SetComment_1(self, arg0);
@@ -2618,7 +2675,7 @@ CommentEvent.prototype['GetType'] = CommentEvent.prototype.GetType = function() 
 
 CommentEvent.prototype['SetType'] = CommentEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_CommentEvent_SetType_1(self, arg0);
@@ -2693,7 +2750,7 @@ Module['MapStringInstructionMetadata'] = MapStringInstructionMetadata;
 
 MapStringInstructionMetadata.prototype['MAP_get'] = MapStringInstructionMetadata.prototype.MAP_get = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_MapStringInstructionMetadata_MAP_get_1(self, arg0), InstructionMetadata);
@@ -2701,7 +2758,7 @@ MapStringInstructionMetadata.prototype['MAP_get'] = MapStringInstructionMetadata
 
 MapStringInstructionMetadata.prototype['MAP_set'] = MapStringInstructionMetadata.prototype.MAP_set = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -2710,7 +2767,7 @@ MapStringInstructionMetadata.prototype['MAP_set'] = MapStringInstructionMetadata
 
 MapStringInstructionMetadata.prototype['MAP_has'] = MapStringInstructionMetadata.prototype.MAP_has = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_MapStringInstructionMetadata_MAP_has_1(self, arg0));
@@ -2860,7 +2917,7 @@ Behavior.prototype['Clone'] = Behavior.prototype.Clone = function() {
 
 Behavior.prototype['SetName'] = Behavior.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Behavior_SetName_1(self, arg0);
@@ -2878,7 +2935,7 @@ Behavior.prototype['GetTypeName'] = Behavior.prototype.GetTypeName = function() 
 
 Behavior.prototype['UpdateProperty'] = Behavior.prototype.UpdateProperty = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -2928,7 +2985,7 @@ Module['VectorString'] = VectorString;
 
 VectorString.prototype['push_back'] = VectorString.prototype.push_back = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_VectorString_push_back_1(self, arg0);
@@ -2953,7 +3010,7 @@ VectorString.prototype['at'] = VectorString.prototype.at = function(arg0) {
 
 VectorString.prototype['WRAPPED_set'] = VectorString.prototype.WRAPPED_set = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -2971,7 +3028,7 @@ VectorString.prototype['clear'] = VectorString.prototype.clear = function() {
 };
 // Point
 function Point(arg0) {
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_Point_Point_1(arg0);
@@ -2985,7 +3042,7 @@ Module['Point'] = Point;
 
 Point.prototype['SetName'] = Point.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Point_SetName_1(self, arg0);
@@ -3031,7 +3088,7 @@ Point.prototype['SetY'] = Point.prototype.SetY = function(arg0) {
 };
 // TiledSpriteObject
 function TiledSpriteObject(arg0) {
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_TiledSpriteObject_TiledSpriteObject_1(arg0);
@@ -3045,7 +3102,7 @@ Module['TiledSpriteObject'] = TiledSpriteObject;
 
 TiledSpriteObject.prototype['SetTexture'] = TiledSpriteObject.prototype.SetTexture = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TiledSpriteObject_SetTexture_1(self, arg0);
@@ -3080,7 +3137,7 @@ TiledSpriteObject.prototype['GetHeight'] = TiledSpriteObject.prototype.GetHeight
 
 TiledSpriteObject.prototype['SetName'] = TiledSpriteObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TiledSpriteObject_SetName_1(self, arg0);
@@ -3093,7 +3150,7 @@ TiledSpriteObject.prototype['GetName'] = TiledSpriteObject.prototype.GetName = f
 
 TiledSpriteObject.prototype['SetType'] = TiledSpriteObject.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TiledSpriteObject_SetType_1(self, arg0);
@@ -3112,7 +3169,7 @@ TiledSpriteObject.prototype['GetProperties'] = TiledSpriteObject.prototype.GetPr
 
 TiledSpriteObject.prototype['UpdateProperty'] = TiledSpriteObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -3131,7 +3188,7 @@ TiledSpriteObject.prototype['GetInitialInstanceProperties'] = TiledSpriteObject.
 
 TiledSpriteObject.prototype['UpdateInitialInstanceProperty'] = TiledSpriteObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -3154,7 +3211,7 @@ TiledSpriteObject.prototype['GetAllBehaviorNames'] = TiledSpriteObject.prototype
 
 TiledSpriteObject.prototype['HasBehaviorNamed'] = TiledSpriteObject.prototype.HasBehaviorNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_TiledSpriteObject_HasBehaviorNamed_1(self, arg0));
@@ -3162,7 +3219,7 @@ TiledSpriteObject.prototype['HasBehaviorNamed'] = TiledSpriteObject.prototype.Ha
 
 TiledSpriteObject.prototype['AddNewBehavior'] = TiledSpriteObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -3173,7 +3230,7 @@ TiledSpriteObject.prototype['AddNewBehavior'] = TiledSpriteObject.prototype.AddN
 
 TiledSpriteObject.prototype['GetBehavior'] = TiledSpriteObject.prototype.GetBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_TiledSpriteObject_GetBehavior_1(self, arg0), Behavior);
@@ -3181,7 +3238,7 @@ TiledSpriteObject.prototype['GetBehavior'] = TiledSpriteObject.prototype.GetBeha
 
 TiledSpriteObject.prototype['RemoveBehavior'] = TiledSpriteObject.prototype.RemoveBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_TiledSpriteObject_RemoveBehavior_1(self, arg0);
@@ -3189,7 +3246,7 @@ TiledSpriteObject.prototype['RemoveBehavior'] = TiledSpriteObject.prototype.Remo
 
 TiledSpriteObject.prototype['RenameBehavior'] = TiledSpriteObject.prototype.RenameBehavior = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -3237,7 +3294,7 @@ RepeatEvent.prototype['GetActions'] = RepeatEvent.prototype.GetActions = functio
 
 RepeatEvent.prototype['SetRepeatExpression'] = RepeatEvent.prototype.SetRepeatExpression = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_RepeatEvent_SetRepeatExpression_1(self, arg0);
@@ -3260,7 +3317,7 @@ RepeatEvent.prototype['GetType'] = RepeatEvent.prototype.GetType = function() {
 
 RepeatEvent.prototype['SetType'] = RepeatEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_RepeatEvent_SetType_1(self, arg0);
@@ -3358,7 +3415,7 @@ StandardEvent.prototype['GetType'] = StandardEvent.prototype.GetType = function(
 
 StandardEvent.prototype['SetType'] = StandardEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_StandardEvent_SetType_1(self, arg0);
@@ -3425,7 +3482,7 @@ StandardEvent.prototype['UnserializeFrom'] = StandardEvent.prototype.Unserialize
 };
 // PanelSpriteObject
 function PanelSpriteObject(arg0) {
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_PanelSpriteObject_PanelSpriteObject_1(arg0);
@@ -3494,7 +3551,7 @@ PanelSpriteObject.prototype['SetTiled'] = PanelSpriteObject.prototype.SetTiled =
 
 PanelSpriteObject.prototype['SetTexture'] = PanelSpriteObject.prototype.SetTexture = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_PanelSpriteObject_SetTexture_1(self, arg0);
@@ -3529,7 +3586,7 @@ PanelSpriteObject.prototype['GetHeight'] = PanelSpriteObject.prototype.GetHeight
 
 PanelSpriteObject.prototype['SetName'] = PanelSpriteObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_PanelSpriteObject_SetName_1(self, arg0);
@@ -3542,7 +3599,7 @@ PanelSpriteObject.prototype['GetName'] = PanelSpriteObject.prototype.GetName = f
 
 PanelSpriteObject.prototype['SetType'] = PanelSpriteObject.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_PanelSpriteObject_SetType_1(self, arg0);
@@ -3561,7 +3618,7 @@ PanelSpriteObject.prototype['GetProperties'] = PanelSpriteObject.prototype.GetPr
 
 PanelSpriteObject.prototype['UpdateProperty'] = PanelSpriteObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -3580,7 +3637,7 @@ PanelSpriteObject.prototype['GetInitialInstanceProperties'] = PanelSpriteObject.
 
 PanelSpriteObject.prototype['UpdateInitialInstanceProperty'] = PanelSpriteObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -3603,7 +3660,7 @@ PanelSpriteObject.prototype['GetAllBehaviorNames'] = PanelSpriteObject.prototype
 
 PanelSpriteObject.prototype['HasBehaviorNamed'] = PanelSpriteObject.prototype.HasBehaviorNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_PanelSpriteObject_HasBehaviorNamed_1(self, arg0));
@@ -3611,7 +3668,7 @@ PanelSpriteObject.prototype['HasBehaviorNamed'] = PanelSpriteObject.prototype.Ha
 
 PanelSpriteObject.prototype['AddNewBehavior'] = PanelSpriteObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -3622,7 +3679,7 @@ PanelSpriteObject.prototype['AddNewBehavior'] = PanelSpriteObject.prototype.AddN
 
 PanelSpriteObject.prototype['GetBehavior'] = PanelSpriteObject.prototype.GetBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PanelSpriteObject_GetBehavior_1(self, arg0), Behavior);
@@ -3630,7 +3687,7 @@ PanelSpriteObject.prototype['GetBehavior'] = PanelSpriteObject.prototype.GetBeha
 
 PanelSpriteObject.prototype['RemoveBehavior'] = PanelSpriteObject.prototype.RemoveBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_PanelSpriteObject_RemoveBehavior_1(self, arg0);
@@ -3638,7 +3695,7 @@ PanelSpriteObject.prototype['RemoveBehavior'] = PanelSpriteObject.prototype.Remo
 
 PanelSpriteObject.prototype['RenameBehavior'] = PanelSpriteObject.prototype.RenameBehavior = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -3665,7 +3722,7 @@ PanelSpriteObject.prototype['UnserializeFrom'] = PanelSpriteObject.prototype.Uns
 };
 // ShapePainterObject
 function ShapePainterObject(arg0) {
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_ShapePainterObject_ShapePainterObject_1(arg0);
@@ -3773,7 +3830,7 @@ ShapePainterObject.prototype['GetFillColorB'] = ShapePainterObject.prototype.Get
 
 ShapePainterObject.prototype['SetName'] = ShapePainterObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ShapePainterObject_SetName_1(self, arg0);
@@ -3786,7 +3843,7 @@ ShapePainterObject.prototype['GetName'] = ShapePainterObject.prototype.GetName =
 
 ShapePainterObject.prototype['SetType'] = ShapePainterObject.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ShapePainterObject_SetType_1(self, arg0);
@@ -3805,7 +3862,7 @@ ShapePainterObject.prototype['GetProperties'] = ShapePainterObject.prototype.Get
 
 ShapePainterObject.prototype['UpdateProperty'] = ShapePainterObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -3824,7 +3881,7 @@ ShapePainterObject.prototype['GetInitialInstanceProperties'] = ShapePainterObjec
 
 ShapePainterObject.prototype['UpdateInitialInstanceProperty'] = ShapePainterObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -3847,7 +3904,7 @@ ShapePainterObject.prototype['GetAllBehaviorNames'] = ShapePainterObject.prototy
 
 ShapePainterObject.prototype['HasBehaviorNamed'] = ShapePainterObject.prototype.HasBehaviorNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_ShapePainterObject_HasBehaviorNamed_1(self, arg0));
@@ -3855,7 +3912,7 @@ ShapePainterObject.prototype['HasBehaviorNamed'] = ShapePainterObject.prototype.
 
 ShapePainterObject.prototype['AddNewBehavior'] = ShapePainterObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -3866,7 +3923,7 @@ ShapePainterObject.prototype['AddNewBehavior'] = ShapePainterObject.prototype.Ad
 
 ShapePainterObject.prototype['GetBehavior'] = ShapePainterObject.prototype.GetBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_ShapePainterObject_GetBehavior_1(self, arg0), Behavior);
@@ -3874,7 +3931,7 @@ ShapePainterObject.prototype['GetBehavior'] = ShapePainterObject.prototype.GetBe
 
 ShapePainterObject.prototype['RemoveBehavior'] = ShapePainterObject.prototype.RemoveBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ShapePainterObject_RemoveBehavior_1(self, arg0);
@@ -3882,7 +3939,7 @@ ShapePainterObject.prototype['RemoveBehavior'] = ShapePainterObject.prototype.Re
 
 ShapePainterObject.prototype['RenameBehavior'] = ShapePainterObject.prototype.RenameBehavior = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -3947,7 +4004,7 @@ AudioResource.prototype['Clone'] = AudioResource.prototype.Clone = function() {
 
 AudioResource.prototype['SetName'] = AudioResource.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_AudioResource_SetName_1(self, arg0);
@@ -3960,7 +4017,7 @@ AudioResource.prototype['GetName'] = AudioResource.prototype.GetName = function(
 
 AudioResource.prototype['SetKind'] = AudioResource.prototype.SetKind = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_AudioResource_SetKind_1(self, arg0);
@@ -3989,7 +4046,7 @@ AudioResource.prototype['UseFile'] = AudioResource.prototype.UseFile = function(
 
 AudioResource.prototype['SetFile'] = AudioResource.prototype.SetFile = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_AudioResource_SetFile_1(self, arg0);
@@ -4024,7 +4081,7 @@ AudioResource.prototype['UnserializeFrom'] = AudioResource.prototype.Unserialize
 };
 // Exporter
 function Exporter(arg0, arg1) {
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -4039,7 +4096,7 @@ Module['Exporter'] = Exporter;
 
 Exporter.prototype['SetCodeOutputDirectory'] = Exporter.prototype.SetCodeOutputDirectory = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Exporter_SetCodeOutputDirectory_1(self, arg0);
@@ -4047,7 +4104,7 @@ Exporter.prototype['SetCodeOutputDirectory'] = Exporter.prototype.SetCodeOutputD
 
 Exporter.prototype['ExportLayoutForPixiPreview'] = Exporter.prototype.ExportLayoutForPixiPreview = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -4057,7 +4114,7 @@ Exporter.prototype['ExportLayoutForPixiPreview'] = Exporter.prototype.ExportLayo
 
 Exporter.prototype['ExportExternalLayoutForPixiPreview'] = Exporter.prototype.ExportExternalLayoutForPixiPreview = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -4068,7 +4125,7 @@ Exporter.prototype['ExportExternalLayoutForPixiPreview'] = Exporter.prototype.Ex
 
 Exporter.prototype['ExportWholePixiProject'] = Exporter.prototype.ExportWholePixiProject = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -4109,7 +4166,7 @@ BaseEvent.prototype['GetType'] = BaseEvent.prototype.GetType = function() {
 
 BaseEvent.prototype['SetType'] = BaseEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_BaseEvent_SetType_1(self, arg0);
@@ -4205,7 +4262,7 @@ Module['Variable'] = Variable;
 
 Variable.prototype['SetString'] = Variable.prototype.SetString = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Variable_SetString_1(self, arg0);
@@ -4229,7 +4286,7 @@ Variable.prototype['GetValue'] = Variable.prototype.GetValue = function() {
 
 Variable.prototype['HasChild'] = Variable.prototype.HasChild = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Variable_HasChild_1(self, arg0));
@@ -4237,7 +4294,7 @@ Variable.prototype['HasChild'] = Variable.prototype.HasChild = function(arg0) {
 
 Variable.prototype['GetChild'] = Variable.prototype.GetChild = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Variable_GetChild_1(self, arg0), Variable);
@@ -4245,7 +4302,7 @@ Variable.prototype['GetChild'] = Variable.prototype.GetChild = function(arg0) {
 
 Variable.prototype['RemoveChild'] = Variable.prototype.RemoveChild = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Variable_RemoveChild_1(self, arg0);
@@ -4253,7 +4310,7 @@ Variable.prototype['RemoveChild'] = Variable.prototype.RemoveChild = function(ar
 
 Variable.prototype['RenameChild'] = Variable.prototype.RenameChild = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -4374,7 +4431,7 @@ PlatformExtension.prototype['GetBehaviorsTypes'] = PlatformExtension.prototype.G
 
 PlatformExtension.prototype['GetObjectMetadata'] = PlatformExtension.prototype.GetObjectMetadata = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetObjectMetadata_1(self, arg0), ObjectMetadata);
@@ -4382,7 +4439,7 @@ PlatformExtension.prototype['GetObjectMetadata'] = PlatformExtension.prototype.G
 
 PlatformExtension.prototype['GetBehaviorMetadata'] = PlatformExtension.prototype.GetBehaviorMetadata = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetBehaviorMetadata_1(self, arg0), BehaviorMetadata);
@@ -4415,7 +4472,7 @@ PlatformExtension.prototype['GetAllStrExpressions'] = PlatformExtension.prototyp
 
 PlatformExtension.prototype['GetAllActionsForObject'] = PlatformExtension.prototype.GetAllActionsForObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllActionsForObject_1(self, arg0), MapStringInstructionMetadata);
@@ -4423,7 +4480,7 @@ PlatformExtension.prototype['GetAllActionsForObject'] = PlatformExtension.protot
 
 PlatformExtension.prototype['GetAllConditionsForObject'] = PlatformExtension.prototype.GetAllConditionsForObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllConditionsForObject_1(self, arg0), MapStringInstructionMetadata);
@@ -4431,7 +4488,7 @@ PlatformExtension.prototype['GetAllConditionsForObject'] = PlatformExtension.pro
 
 PlatformExtension.prototype['GetAllExpressionsForObject'] = PlatformExtension.prototype.GetAllExpressionsForObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllExpressionsForObject_1(self, arg0), MapStringExpressionMetadata);
@@ -4439,7 +4496,7 @@ PlatformExtension.prototype['GetAllExpressionsForObject'] = PlatformExtension.pr
 
 PlatformExtension.prototype['GetAllStrExpressionsForObject'] = PlatformExtension.prototype.GetAllStrExpressionsForObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllStrExpressionsForObject_1(self, arg0), MapStringExpressionMetadata);
@@ -4447,7 +4504,7 @@ PlatformExtension.prototype['GetAllStrExpressionsForObject'] = PlatformExtension
 
 PlatformExtension.prototype['GetAllActionsForBehavior'] = PlatformExtension.prototype.GetAllActionsForBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllActionsForBehavior_1(self, arg0), MapStringInstructionMetadata);
@@ -4455,7 +4512,7 @@ PlatformExtension.prototype['GetAllActionsForBehavior'] = PlatformExtension.prot
 
 PlatformExtension.prototype['GetAllConditionsForBehavior'] = PlatformExtension.prototype.GetAllConditionsForBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllConditionsForBehavior_1(self, arg0), MapStringInstructionMetadata);
@@ -4463,7 +4520,7 @@ PlatformExtension.prototype['GetAllConditionsForBehavior'] = PlatformExtension.p
 
 PlatformExtension.prototype['GetAllExpressionsForBehavior'] = PlatformExtension.prototype.GetAllExpressionsForBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllExpressionsForBehavior_1(self, arg0), MapStringExpressionMetadata);
@@ -4471,7 +4528,7 @@ PlatformExtension.prototype['GetAllExpressionsForBehavior'] = PlatformExtension.
 
 PlatformExtension.prototype['GetAllStrExpressionsForBehavior'] = PlatformExtension.prototype.GetAllStrExpressionsForBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllStrExpressionsForBehavior_1(self, arg0), MapStringExpressionMetadata);
@@ -4494,7 +4551,7 @@ Module['InitialInstance'] = InitialInstance;
 
 InitialInstance.prototype['SetObjectName'] = InitialInstance.prototype.SetObjectName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstance_SetObjectName_1(self, arg0);
@@ -4567,7 +4624,7 @@ InitialInstance.prototype['GetLayer'] = InitialInstance.prototype.GetLayer = fun
 
 InitialInstance.prototype['SetLayer'] = InitialInstance.prototype.SetLayer = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstance_SetLayer_1(self, arg0);
@@ -4608,7 +4665,7 @@ InitialInstance.prototype['GetCustomHeight'] = InitialInstance.prototype.GetCust
 
 InitialInstance.prototype['UpdateCustomProperty'] = InitialInstance.prototype.UpdateCustomProperty = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -4627,7 +4684,7 @@ InitialInstance.prototype['GetCustomProperties'] = InitialInstance.prototype.Get
 
 InitialInstance.prototype['GetRawFloatProperty'] = InitialInstance.prototype.GetRawFloatProperty = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return _emscripten_bind_InitialInstance_GetRawFloatProperty_1(self, arg0);
@@ -4635,7 +4692,7 @@ InitialInstance.prototype['GetRawFloatProperty'] = InitialInstance.prototype.Get
 
 InitialInstance.prototype['GetRawStringProperty'] = InitialInstance.prototype.GetRawStringProperty = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_InitialInstance_GetRawStringProperty_1(self, arg0));
@@ -4680,7 +4737,7 @@ Instruction.prototype['CLONE_Instruction'] = Instruction.prototype.CLONE_Instruc
 
 Instruction.prototype['SetType'] = Instruction.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Instruction_SetType_1(self, arg0);
@@ -4704,7 +4761,7 @@ Instruction.prototype['IsInverted'] = Instruction.prototype.IsInverted = functio
 
 Instruction.prototype['SetParameter'] = Instruction.prototype.SetParameter = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -4799,7 +4856,7 @@ InitialInstancesContainer.prototype['IterateOverInstances'] = InitialInstancesCo
 
 InitialInstancesContainer.prototype['IterateOverInstancesWithZOrdering'] = InitialInstancesContainer.prototype.IterateOverInstancesWithZOrdering = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -4808,7 +4865,7 @@ InitialInstancesContainer.prototype['IterateOverInstancesWithZOrdering'] = Initi
 
 InitialInstancesContainer.prototype['MoveInstancesToLayer'] = InitialInstancesContainer.prototype.MoveInstancesToLayer = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -4818,7 +4875,7 @@ InitialInstancesContainer.prototype['MoveInstancesToLayer'] = InitialInstancesCo
 
 InitialInstancesContainer.prototype['RemoveAllInstancesOnLayer'] = InitialInstancesContainer.prototype.RemoveAllInstancesOnLayer = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstancesContainer_RemoveAllInstancesOnLayer_1(self, arg0);
@@ -4826,7 +4883,7 @@ InitialInstancesContainer.prototype['RemoveAllInstancesOnLayer'] = InitialInstan
 
 InitialInstancesContainer.prototype['RemoveInitialInstancesOfObject'] = InitialInstancesContainer.prototype.RemoveInitialInstancesOfObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_InitialInstancesContainer_RemoveInitialInstancesOfObject_1(self, arg0);
@@ -4834,7 +4891,7 @@ InitialInstancesContainer.prototype['RemoveInitialInstancesOfObject'] = InitialI
 
 InitialInstancesContainer.prototype['HasInstancesOfObject'] = InitialInstancesContainer.prototype.HasInstancesOfObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_InitialInstancesContainer_HasInstancesOfObject_1(self, arg0));
@@ -4842,7 +4899,7 @@ InitialInstancesContainer.prototype['HasInstancesOfObject'] = InitialInstancesCo
 
 InitialInstancesContainer.prototype['SomeInstancesAreOnLayer'] = InitialInstancesContainer.prototype.SomeInstancesAreOnLayer = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_InitialInstancesContainer_SomeInstancesAreOnLayer_1(self, arg0));
@@ -4850,7 +4907,7 @@ InitialInstancesContainer.prototype['SomeInstancesAreOnLayer'] = InitialInstance
 
 InitialInstancesContainer.prototype['RenameInstancesOfObject'] = InitialInstancesContainer.prototype.RenameInstancesOfObject = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -4920,7 +4977,7 @@ ImageResource.prototype['Clone'] = ImageResource.prototype.Clone = function() {
 
 ImageResource.prototype['SetName'] = ImageResource.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ImageResource_SetName_1(self, arg0);
@@ -4933,7 +4990,7 @@ ImageResource.prototype['GetName'] = ImageResource.prototype.GetName = function(
 
 ImageResource.prototype['SetKind'] = ImageResource.prototype.SetKind = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ImageResource_SetKind_1(self, arg0);
@@ -4962,7 +5019,7 @@ ImageResource.prototype['UseFile'] = ImageResource.prototype.UseFile = function(
 
 ImageResource.prototype['SetFile'] = ImageResource.prototype.SetFile = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ImageResource_SetFile_1(self, arg0);
@@ -5100,7 +5157,7 @@ Serializer.prototype['STATIC_ToJSON'] = Serializer.prototype.STATIC_ToJSON = fun
 
 Serializer.prototype['STATIC_FromJSON'] = Serializer.prototype.STATIC_FromJSON = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Serializer_STATIC_FromJSON_1(self, arg0), SerializerElement);
@@ -5123,7 +5180,7 @@ Module['GroupEvent'] = GroupEvent;
 
 GroupEvent.prototype['SetName'] = GroupEvent.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_GroupEvent_SetName_1(self, arg0);
@@ -5159,7 +5216,7 @@ GroupEvent.prototype['GetBackgroundColorB'] = GroupEvent.prototype.GetBackground
 
 GroupEvent.prototype['SetSource'] = GroupEvent.prototype.SetSource = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_GroupEvent_SetSource_1(self, arg0);
@@ -5198,7 +5255,7 @@ GroupEvent.prototype['GetType'] = GroupEvent.prototype.GetType = function() {
 
 GroupEvent.prototype['SetType'] = GroupEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_GroupEvent_SetType_1(self, arg0);
@@ -5273,7 +5330,7 @@ Module['MapStringPropertyDescriptor'] = MapStringPropertyDescriptor;
 
 MapStringPropertyDescriptor.prototype['MAP_get'] = MapStringPropertyDescriptor.prototype.MAP_get = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_MapStringPropertyDescriptor_MAP_get_1(self, arg0), PropertyDescriptor);
@@ -5281,7 +5338,7 @@ MapStringPropertyDescriptor.prototype['MAP_get'] = MapStringPropertyDescriptor.p
 
 MapStringPropertyDescriptor.prototype['MAP_set'] = MapStringPropertyDescriptor.prototype.MAP_set = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -5290,7 +5347,7 @@ MapStringPropertyDescriptor.prototype['MAP_set'] = MapStringPropertyDescriptor.p
 
 MapStringPropertyDescriptor.prototype['MAP_has'] = MapStringPropertyDescriptor.prototype.MAP_has = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_MapStringPropertyDescriptor_MAP_has_1(self, arg0));
@@ -5352,7 +5409,7 @@ EventsList.prototype['InsertEvent'] = EventsList.prototype.InsertEvent = functio
 
 EventsList.prototype['InsertNewEvent'] = EventsList.prototype.InsertNewEvent = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -5466,7 +5523,7 @@ ParameterMetadata.prototype['GetDefaultValue'] = ParameterMetadata.prototype.Get
 
 ParameterMetadata.prototype['STATIC_IsObject'] = ParameterMetadata.prototype.STATIC_IsObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_ParameterMetadata_STATIC_IsObject_1(self, arg0));
@@ -5565,7 +5622,7 @@ Module['Layout'] = Layout;
 
 Layout.prototype['SetName'] = Layout.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Layout_SetName_1(self, arg0);
@@ -5601,7 +5658,7 @@ Layout.prototype['GetBackgroundColorBlue'] = Layout.prototype.GetBackgroundColor
 
 Layout.prototype['SetWindowDefaultTitle'] = Layout.prototype.SetWindowDefaultTitle = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Layout_SetWindowDefaultTitle_1(self, arg0);
@@ -5629,7 +5686,7 @@ Layout.prototype['GetEvents'] = Layout.prototype.GetEvents = function() {
 
 Layout.prototype['InsertNewLayer'] = Layout.prototype.InsertNewLayer = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -5645,7 +5702,7 @@ Layout.prototype['InsertLayer'] = Layout.prototype.InsertLayer = function(arg0, 
 
 Layout.prototype['GetLayer'] = Layout.prototype.GetLayer = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Layout_GetLayer_1(self, arg0), Layer);
@@ -5659,7 +5716,7 @@ Layout.prototype['GetLayerAt'] = Layout.prototype.GetLayerAt = function(arg0) {
 
 Layout.prototype['HasLayerNamed'] = Layout.prototype.HasLayerNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Layout_HasLayerNamed_1(self, arg0));
@@ -5667,7 +5724,7 @@ Layout.prototype['HasLayerNamed'] = Layout.prototype.HasLayerNamed = function(ar
 
 Layout.prototype['RemoveLayer'] = Layout.prototype.RemoveLayer = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Layout_RemoveLayer_1(self, arg0);
@@ -5729,7 +5786,7 @@ Layout.prototype['UnserializeFrom'] = Layout.prototype.UnserializeFrom = functio
 
 Layout.prototype['InsertNewObject'] = Layout.prototype.InsertNewObject = function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -5748,7 +5805,7 @@ Layout.prototype['InsertObject'] = Layout.prototype.InsertObject = function(arg0
 
 Layout.prototype['HasObjectNamed'] = Layout.prototype.HasObjectNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Layout_HasObjectNamed_1(self, arg0));
@@ -5756,7 +5813,7 @@ Layout.prototype['HasObjectNamed'] = Layout.prototype.HasObjectNamed = function(
 
 Layout.prototype['GetObject'] = Layout.prototype.GetObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Layout_GetObject_1(self, arg0), gdObject);
@@ -5770,7 +5827,7 @@ Layout.prototype['GetObjectAt'] = Layout.prototype.GetObjectAt = function(arg0) 
 
 Layout.prototype['GetObjectPosition'] = Layout.prototype.GetObjectPosition = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Layout_GetObjectPosition_1(self, arg0);
@@ -5778,7 +5835,7 @@ Layout.prototype['GetObjectPosition'] = Layout.prototype.GetObjectPosition = fun
 
 Layout.prototype['RemoveObject'] = Layout.prototype.RemoveObject = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Layout_RemoveObject_1(self, arg0);
@@ -5820,7 +5877,7 @@ Module['VariablesContainer'] = VariablesContainer;
 
 VariablesContainer.prototype['Has'] = VariablesContainer.prototype.Has = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_VariablesContainer_Has_1(self, arg0));
@@ -5828,7 +5885,7 @@ VariablesContainer.prototype['Has'] = VariablesContainer.prototype.Has = functio
 
 VariablesContainer.prototype['Get'] = VariablesContainer.prototype.Get = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_VariablesContainer_Get_1(self, arg0), Variable);
@@ -5842,7 +5899,7 @@ VariablesContainer.prototype['GetAt'] = VariablesContainer.prototype.GetAt = fun
 
 VariablesContainer.prototype['Insert'] = VariablesContainer.prototype.Insert = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -5852,7 +5909,7 @@ VariablesContainer.prototype['Insert'] = VariablesContainer.prototype.Insert = f
 
 VariablesContainer.prototype['InsertNew'] = VariablesContainer.prototype.InsertNew = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -5861,7 +5918,7 @@ VariablesContainer.prototype['InsertNew'] = VariablesContainer.prototype.InsertN
 
 VariablesContainer.prototype['Remove'] = VariablesContainer.prototype.Remove = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_VariablesContainer_Remove_1(self, arg0);
@@ -5869,7 +5926,7 @@ VariablesContainer.prototype['Remove'] = VariablesContainer.prototype.Remove = f
 
 VariablesContainer.prototype['Rename'] = VariablesContainer.prototype.Rename = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -5893,7 +5950,7 @@ VariablesContainer.prototype['Move'] = VariablesContainer.prototype.Move = funct
 
 VariablesContainer.prototype['GetPosition'] = VariablesContainer.prototype.GetPosition = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return _emscripten_bind_VariablesContainer_GetPosition_1(self, arg0);
@@ -5968,7 +6025,7 @@ Module['EventsRefactorer'] = EventsRefactorer;
 
 EventsRefactorer.prototype['STATIC_RenameObjectInEvents'] = EventsRefactorer.prototype.STATIC_RenameObjectInEvents = function(arg0, arg1, arg2, arg3, arg4, arg5) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -5982,7 +6039,7 @@ EventsRefactorer.prototype['STATIC_RenameObjectInEvents'] = EventsRefactorer.pro
 
 EventsRefactorer.prototype['STATIC_RemoveObjectInEvents'] = EventsRefactorer.prototype.STATIC_RemoveObjectInEvents = function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -5994,7 +6051,7 @@ EventsRefactorer.prototype['STATIC_RemoveObjectInEvents'] = EventsRefactorer.pro
 
 EventsRefactorer.prototype['STATIC_ReplaceStringInEvents'] = EventsRefactorer.prototype.STATIC_ReplaceStringInEvents = function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
@@ -6046,7 +6103,7 @@ Module['Animation'] = Animation;
 
 Animation.prototype['SetName'] = Animation.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Animation_SetName_1(self, arg0);
@@ -6111,7 +6168,7 @@ Module['MapStringEventMetadata'] = MapStringEventMetadata;
 
 MapStringEventMetadata.prototype['MAP_get'] = MapStringEventMetadata.prototype.MAP_get = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_MapStringEventMetadata_MAP_get_1(self, arg0), EventMetadata);
@@ -6119,7 +6176,7 @@ MapStringEventMetadata.prototype['MAP_get'] = MapStringEventMetadata.prototype.M
 
 MapStringEventMetadata.prototype['MAP_set'] = MapStringEventMetadata.prototype.MAP_set = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -6128,7 +6185,7 @@ MapStringEventMetadata.prototype['MAP_set'] = MapStringEventMetadata.prototype.M
 
 MapStringEventMetadata.prototype['MAP_has'] = MapStringEventMetadata.prototype.MAP_has = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_MapStringEventMetadata_MAP_has_1(self, arg0));
@@ -6156,7 +6213,7 @@ Module['ForEachEvent'] = ForEachEvent;
 
 ForEachEvent.prototype['SetObjectToPick'] = ForEachEvent.prototype.SetObjectToPick = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ForEachEvent_SetObjectToPick_1(self, arg0);
@@ -6189,7 +6246,7 @@ ForEachEvent.prototype['GetType'] = ForEachEvent.prototype.GetType = function() 
 
 ForEachEvent.prototype['SetType'] = ForEachEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ForEachEvent_SetType_1(self, arg0);
@@ -6297,7 +6354,7 @@ Module['Sprite'] = Sprite;
 
 Sprite.prototype['SetImageName'] = Sprite.prototype.SetImageName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Sprite_SetImageName_1(self, arg0);
@@ -6342,7 +6399,7 @@ Sprite.prototype['AddPoint'] = Sprite.prototype.AddPoint = function(arg0) {
 
 Sprite.prototype['DelPoint'] = Sprite.prototype.DelPoint = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Sprite_DelPoint_1(self, arg0);
@@ -6350,7 +6407,7 @@ Sprite.prototype['DelPoint'] = Sprite.prototype.DelPoint = function(arg0) {
 
 Sprite.prototype['GetPoint'] = Sprite.prototype.GetPoint = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_Sprite_GetPoint_1(self, arg0), Point);
@@ -6358,7 +6415,7 @@ Sprite.prototype['GetPoint'] = Sprite.prototype.GetPoint = function(arg0) {
 
 Sprite.prototype['HasPoint'] = Sprite.prototype.HasPoint = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Sprite_HasPoint_1(self, arg0));
@@ -6381,7 +6438,7 @@ Module['ArbitraryResourceWorkerJS'] = ArbitraryResourceWorkerJS;
 
 ArbitraryResourceWorkerJS.prototype['ExposeImage'] = ArbitraryResourceWorkerJS.prototype.ExposeImage = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ArbitraryResourceWorkerJS_ExposeImage_1(self, arg0);
@@ -6389,7 +6446,7 @@ ArbitraryResourceWorkerJS.prototype['ExposeImage'] = ArbitraryResourceWorkerJS.p
 
 ArbitraryResourceWorkerJS.prototype['ExposeShader'] = ArbitraryResourceWorkerJS.prototype.ExposeShader = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ArbitraryResourceWorkerJS_ExposeShader_1(self, arg0);
@@ -6397,7 +6454,7 @@ ArbitraryResourceWorkerJS.prototype['ExposeShader'] = ArbitraryResourceWorkerJS.
 
 ArbitraryResourceWorkerJS.prototype['ExposeFile'] = ArbitraryResourceWorkerJS.prototype.ExposeFile = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ArbitraryResourceWorkerJS_ExposeFile_1(self, arg0);
@@ -6417,7 +6474,7 @@ Module['MapStringExpressionMetadata'] = MapStringExpressionMetadata;
 
 MapStringExpressionMetadata.prototype['MAP_get'] = MapStringExpressionMetadata.prototype.MAP_get = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_MapStringExpressionMetadata_MAP_get_1(self, arg0), ExpressionMetadata);
@@ -6425,7 +6482,7 @@ MapStringExpressionMetadata.prototype['MAP_get'] = MapStringExpressionMetadata.p
 
 MapStringExpressionMetadata.prototype['MAP_set'] = MapStringExpressionMetadata.prototype.MAP_set = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -6434,7 +6491,7 @@ MapStringExpressionMetadata.prototype['MAP_set'] = MapStringExpressionMetadata.p
 
 MapStringExpressionMetadata.prototype['MAP_has'] = MapStringExpressionMetadata.prototype.MAP_has = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_MapStringExpressionMetadata_MAP_has_1(self, arg0));
@@ -6459,7 +6516,7 @@ Module['MapStringVariable'] = MapStringVariable;
 
 MapStringVariable.prototype['MAP_get'] = MapStringVariable.prototype.MAP_get = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_MapStringVariable_MAP_get_1(self, arg0), Variable);
@@ -6467,7 +6524,7 @@ MapStringVariable.prototype['MAP_get'] = MapStringVariable.prototype.MAP_get = f
 
 MapStringVariable.prototype['MAP_set'] = MapStringVariable.prototype.MAP_set = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -6476,7 +6533,7 @@ MapStringVariable.prototype['MAP_set'] = MapStringVariable.prototype.MAP_set = f
 
 MapStringVariable.prototype['MAP_has'] = MapStringVariable.prototype.MAP_has = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_MapStringVariable_MAP_has_1(self, arg0));
@@ -6504,7 +6561,7 @@ Module['LinkEvent'] = LinkEvent;
 
 LinkEvent.prototype['SetTarget'] = LinkEvent.prototype.SetTarget = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_LinkEvent_SetTarget_1(self, arg0);
@@ -6527,7 +6584,7 @@ LinkEvent.prototype['SetIncludeAllEvents'] = LinkEvent.prototype.SetIncludeAllEv
 
 LinkEvent.prototype['SetIncludeEventsGroup'] = LinkEvent.prototype.SetIncludeEventsGroup = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_LinkEvent_SetIncludeEventsGroup_1(self, arg0);
@@ -6567,7 +6624,7 @@ LinkEvent.prototype['GetType'] = LinkEvent.prototype.GetType = function() {
 
 LinkEvent.prototype['SetType'] = LinkEvent.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_LinkEvent_SetType_1(self, arg0);
@@ -6650,7 +6707,7 @@ Resource.prototype['Clone'] = Resource.prototype.Clone = function() {
 
 Resource.prototype['SetName'] = Resource.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Resource_SetName_1(self, arg0);
@@ -6663,7 +6720,7 @@ Resource.prototype['GetName'] = Resource.prototype.GetName = function() {
 
 Resource.prototype['SetKind'] = Resource.prototype.SetKind = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Resource_SetKind_1(self, arg0);
@@ -6692,7 +6749,7 @@ Resource.prototype['UseFile'] = Resource.prototype.UseFile = function() {
 
 Resource.prototype['SetFile'] = Resource.prototype.SetFile = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_Resource_SetFile_1(self, arg0);
@@ -6738,7 +6795,7 @@ Module['AbstractFileSystemJS'] = AbstractFileSystemJS;
 
 AbstractFileSystemJS.prototype['MkDir'] = AbstractFileSystemJS.prototype.MkDir = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_AbstractFileSystemJS_MkDir_1(self, arg0);
@@ -6746,7 +6803,7 @@ AbstractFileSystemJS.prototype['MkDir'] = AbstractFileSystemJS.prototype.MkDir =
 
 AbstractFileSystemJS.prototype['DirExists'] = AbstractFileSystemJS.prototype.DirExists = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_AbstractFileSystemJS_DirExists_1(self, arg0);
@@ -6754,7 +6811,7 @@ AbstractFileSystemJS.prototype['DirExists'] = AbstractFileSystemJS.prototype.Dir
 
 AbstractFileSystemJS.prototype['ClearDir'] = AbstractFileSystemJS.prototype.ClearDir = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_AbstractFileSystemJS_ClearDir_1(self, arg0);
@@ -6767,7 +6824,7 @@ AbstractFileSystemJS.prototype['GetTempDir'] = AbstractFileSystemJS.prototype.Ge
 
 AbstractFileSystemJS.prototype['FileNameFrom'] = AbstractFileSystemJS.prototype.FileNameFrom = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_AbstractFileSystemJS_FileNameFrom_1(self, arg0));
@@ -6775,7 +6832,7 @@ AbstractFileSystemJS.prototype['FileNameFrom'] = AbstractFileSystemJS.prototype.
 
 AbstractFileSystemJS.prototype['DirNameFrom'] = AbstractFileSystemJS.prototype.DirNameFrom = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_AbstractFileSystemJS_DirNameFrom_1(self, arg0));
@@ -6783,7 +6840,7 @@ AbstractFileSystemJS.prototype['DirNameFrom'] = AbstractFileSystemJS.prototype.D
 
 AbstractFileSystemJS.prototype['IsAbsolute'] = AbstractFileSystemJS.prototype.IsAbsolute = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_AbstractFileSystemJS_IsAbsolute_1(self, arg0));
@@ -6791,7 +6848,7 @@ AbstractFileSystemJS.prototype['IsAbsolute'] = AbstractFileSystemJS.prototype.Is
 
 AbstractFileSystemJS.prototype['CopyFile'] = AbstractFileSystemJS.prototype.CopyFile = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -6801,7 +6858,7 @@ AbstractFileSystemJS.prototype['CopyFile'] = AbstractFileSystemJS.prototype.Copy
 
 AbstractFileSystemJS.prototype['WriteToFile'] = AbstractFileSystemJS.prototype.WriteToFile = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -6811,7 +6868,7 @@ AbstractFileSystemJS.prototype['WriteToFile'] = AbstractFileSystemJS.prototype.W
 
 AbstractFileSystemJS.prototype['ReadFile'] = AbstractFileSystemJS.prototype.ReadFile = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_AbstractFileSystemJS_ReadFile_1(self, arg0));
@@ -6819,7 +6876,7 @@ AbstractFileSystemJS.prototype['ReadFile'] = AbstractFileSystemJS.prototype.Read
 
 AbstractFileSystemJS.prototype['ReadDir'] = AbstractFileSystemJS.prototype.ReadDir = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_AbstractFileSystemJS_ReadDir_1(self, arg0), VectorString);
@@ -6827,7 +6884,7 @@ AbstractFileSystemJS.prototype['ReadDir'] = AbstractFileSystemJS.prototype.ReadD
 
 AbstractFileSystemJS.prototype['FileExists'] = AbstractFileSystemJS.prototype.FileExists = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_AbstractFileSystemJS_FileExists_1(self, arg0));
@@ -6839,7 +6896,7 @@ AbstractFileSystemJS.prototype['FileExists'] = AbstractFileSystemJS.prototype.Fi
 };
 // PropertyDescriptor
 function PropertyDescriptor(arg0) {
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_PropertyDescriptor_PropertyDescriptor_1(arg0);
@@ -6853,7 +6910,7 @@ Module['PropertyDescriptor'] = PropertyDescriptor;
 
 PropertyDescriptor.prototype['SetValue'] = PropertyDescriptor.prototype.SetValue = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PropertyDescriptor_SetValue_1(self, arg0), PropertyDescriptor);
@@ -6866,7 +6923,7 @@ PropertyDescriptor.prototype['GetValue'] = PropertyDescriptor.prototype.GetValue
 
 PropertyDescriptor.prototype['SetType'] = PropertyDescriptor.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PropertyDescriptor_SetType_1(self, arg0), PropertyDescriptor);
@@ -6879,7 +6936,7 @@ PropertyDescriptor.prototype['GetType'] = PropertyDescriptor.prototype.GetType =
 
 PropertyDescriptor.prototype['AddExtraInfo'] = PropertyDescriptor.prototype.AddExtraInfo = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PropertyDescriptor_AddExtraInfo_1(self, arg0), PropertyDescriptor);
@@ -6909,7 +6966,7 @@ Module['ObjectListDialogsHelper'] = ObjectListDialogsHelper;
 
 ObjectListDialogsHelper.prototype['SetSearchText'] = ObjectListDialogsHelper.prototype.SetSearchText = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ObjectListDialogsHelper_SetSearchText_1(self, arg0);
@@ -6917,7 +6974,7 @@ ObjectListDialogsHelper.prototype['SetSearchText'] = ObjectListDialogsHelper.pro
 
 ObjectListDialogsHelper.prototype['SetAllowedObjectType'] = ObjectListDialogsHelper.prototype.SetAllowedObjectType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_ObjectListDialogsHelper_SetAllowedObjectType_1(self, arg0);
@@ -6967,7 +7024,7 @@ InstructionSentenceFormatter.prototype['GetAsFormattedText'] = InstructionSenten
 
 InstructionSentenceFormatter.prototype['GetFormattingFromType'] = InstructionSentenceFormatter.prototype.GetFormattingFromType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_InstructionSentenceFormatter_GetFormattingFromType_1(self, arg0), TextFormatting);
@@ -6975,7 +7032,7 @@ InstructionSentenceFormatter.prototype['GetFormattingFromType'] = InstructionSen
 
 InstructionSentenceFormatter.prototype['LabelFromType'] = InstructionSentenceFormatter.prototype.LabelFromType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return Pointer_stringify(_emscripten_bind_InstructionSentenceFormatter_LabelFromType_1(self, arg0));
@@ -6992,7 +7049,7 @@ InstructionSentenceFormatter.prototype['LoadTypesFormattingFromConfig'] = Instru
 };
 // gdObject
 function gdObject(arg0) {
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   this.ptr = _emscripten_bind_gdObject_gdObject_1(arg0);
@@ -7006,7 +7063,7 @@ Module['gdObject'] = gdObject;
 
 gdObject.prototype['SetName'] = gdObject.prototype.SetName = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_gdObject_SetName_1(self, arg0);
@@ -7019,7 +7076,7 @@ gdObject.prototype['GetName'] = gdObject.prototype.GetName = function() {
 
 gdObject.prototype['SetType'] = gdObject.prototype.SetType = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_gdObject_SetType_1(self, arg0);
@@ -7038,7 +7095,7 @@ gdObject.prototype['GetProperties'] = gdObject.prototype.GetProperties = functio
 
 gdObject.prototype['UpdateProperty'] = gdObject.prototype.UpdateProperty = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -7057,7 +7114,7 @@ gdObject.prototype['GetInitialInstanceProperties'] = gdObject.prototype.GetIniti
 
 gdObject.prototype['UpdateInitialInstanceProperty'] = gdObject.prototype.UpdateInitialInstanceProperty = function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7080,7 +7137,7 @@ gdObject.prototype['GetAllBehaviorNames'] = gdObject.prototype.GetAllBehaviorNam
 
 gdObject.prototype['HasBehaviorNamed'] = gdObject.prototype.HasBehaviorNamed = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_gdObject_HasBehaviorNamed_1(self, arg0));
@@ -7088,7 +7145,7 @@ gdObject.prototype['HasBehaviorNamed'] = gdObject.prototype.HasBehaviorNamed = f
 
 gdObject.prototype['AddNewBehavior'] = gdObject.prototype.AddNewBehavior = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7099,7 +7156,7 @@ gdObject.prototype['AddNewBehavior'] = gdObject.prototype.AddNewBehavior = funct
 
 gdObject.prototype['GetBehavior'] = gdObject.prototype.GetBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_gdObject_GetBehavior_1(self, arg0), Behavior);
@@ -7107,7 +7164,7 @@ gdObject.prototype['GetBehavior'] = gdObject.prototype.GetBehavior = function(ar
 
 gdObject.prototype['RemoveBehavior'] = gdObject.prototype.RemoveBehavior = function(arg0) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   _emscripten_bind_gdObject_RemoveBehavior_1(self, arg0);
@@ -7115,7 +7172,7 @@ gdObject.prototype['RemoveBehavior'] = gdObject.prototype.RemoveBehavior = funct
 
 gdObject.prototype['RenameBehavior'] = gdObject.prototype.RenameBehavior = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
@@ -7167,7 +7224,7 @@ Module['MetadataProvider'] = MetadataProvider;
 
 MetadataProvider.prototype['STATIC_GetBehaviorMetadata'] = MetadataProvider.prototype.STATIC_GetBehaviorMetadata = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7176,7 +7233,7 @@ MetadataProvider.prototype['STATIC_GetBehaviorMetadata'] = MetadataProvider.prot
 
 MetadataProvider.prototype['STATIC_GetObjectMetadata'] = MetadataProvider.prototype.STATIC_GetObjectMetadata = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7185,7 +7242,7 @@ MetadataProvider.prototype['STATIC_GetObjectMetadata'] = MetadataProvider.protot
 
 MetadataProvider.prototype['STATIC_GetActionMetadata'] = MetadataProvider.prototype.STATIC_GetActionMetadata = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7194,7 +7251,7 @@ MetadataProvider.prototype['STATIC_GetActionMetadata'] = MetadataProvider.protot
 
 MetadataProvider.prototype['STATIC_GetConditionMetadata'] = MetadataProvider.prototype.STATIC_GetConditionMetadata = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7203,7 +7260,7 @@ MetadataProvider.prototype['STATIC_GetConditionMetadata'] = MetadataProvider.pro
 
 MetadataProvider.prototype['STATIC_GetExpressionMetadata'] = MetadataProvider.prototype.STATIC_GetExpressionMetadata = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7212,7 +7269,7 @@ MetadataProvider.prototype['STATIC_GetExpressionMetadata'] = MetadataProvider.pr
 
 MetadataProvider.prototype['STATIC_GetObjectExpressionMetadata'] = MetadataProvider.prototype.STATIC_GetObjectExpressionMetadata = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7223,7 +7280,7 @@ MetadataProvider.prototype['STATIC_GetObjectExpressionMetadata'] = MetadataProvi
 
 MetadataProvider.prototype['STATIC_GetBehaviorExpressionMetadata'] = MetadataProvider.prototype.STATIC_GetBehaviorExpressionMetadata = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7234,7 +7291,7 @@ MetadataProvider.prototype['STATIC_GetBehaviorExpressionMetadata'] = MetadataPro
 
 MetadataProvider.prototype['STATIC_GetStrExpressionMetadata'] = MetadataProvider.prototype.STATIC_GetStrExpressionMetadata = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7243,7 +7300,7 @@ MetadataProvider.prototype['STATIC_GetStrExpressionMetadata'] = MetadataProvider
 
 MetadataProvider.prototype['STATIC_GetObjectStrExpressionMetadata'] = MetadataProvider.prototype.STATIC_GetObjectStrExpressionMetadata = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7254,7 +7311,7 @@ MetadataProvider.prototype['STATIC_GetObjectStrExpressionMetadata'] = MetadataPr
 
 MetadataProvider.prototype['STATIC_GetBehaviorStrExpressionMetadata'] = MetadataProvider.prototype.STATIC_GetBehaviorStrExpressionMetadata = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7265,7 +7322,7 @@ MetadataProvider.prototype['STATIC_GetBehaviorStrExpressionMetadata'] = Metadata
 
 MetadataProvider.prototype['STATIC_HasCondition'] = MetadataProvider.prototype.STATIC_HasCondition = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7274,7 +7331,7 @@ MetadataProvider.prototype['STATIC_HasCondition'] = MetadataProvider.prototype.S
 
 MetadataProvider.prototype['STATIC_HasAction'] = MetadataProvider.prototype.STATIC_HasAction = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7283,7 +7340,7 @@ MetadataProvider.prototype['STATIC_HasAction'] = MetadataProvider.prototype.STAT
 
 MetadataProvider.prototype['STATIC_HasObjectAction'] = MetadataProvider.prototype.STATIC_HasObjectAction = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7294,7 +7351,7 @@ MetadataProvider.prototype['STATIC_HasObjectAction'] = MetadataProvider.prototyp
 
 MetadataProvider.prototype['STATIC_HasObjectCondition'] = MetadataProvider.prototype.STATIC_HasObjectCondition = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7305,7 +7362,7 @@ MetadataProvider.prototype['STATIC_HasObjectCondition'] = MetadataProvider.proto
 
 MetadataProvider.prototype['STATIC_HasBehaviorAction'] = MetadataProvider.prototype.STATIC_HasBehaviorAction = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7316,7 +7373,7 @@ MetadataProvider.prototype['STATIC_HasBehaviorAction'] = MetadataProvider.protot
 
 MetadataProvider.prototype['STATIC_HasBehaviorCondition'] = MetadataProvider.prototype.STATIC_HasBehaviorCondition = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7327,7 +7384,7 @@ MetadataProvider.prototype['STATIC_HasBehaviorCondition'] = MetadataProvider.pro
 
 MetadataProvider.prototype['STATIC_HasExpression'] = MetadataProvider.prototype.STATIC_HasExpression = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7336,7 +7393,7 @@ MetadataProvider.prototype['STATIC_HasExpression'] = MetadataProvider.prototype.
 
 MetadataProvider.prototype['STATIC_HasObjectExpression'] = MetadataProvider.prototype.STATIC_HasObjectExpression = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7347,7 +7404,7 @@ MetadataProvider.prototype['STATIC_HasObjectExpression'] = MetadataProvider.prot
 
 MetadataProvider.prototype['STATIC_HasBehaviorExpression'] = MetadataProvider.prototype.STATIC_HasBehaviorExpression = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7358,7 +7415,7 @@ MetadataProvider.prototype['STATIC_HasBehaviorExpression'] = MetadataProvider.pr
 
 MetadataProvider.prototype['STATIC_HasStrExpression'] = MetadataProvider.prototype.STATIC_HasStrExpression = function(arg0, arg1) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7367,7 +7424,7 @@ MetadataProvider.prototype['STATIC_HasStrExpression'] = MetadataProvider.prototy
 
 MetadataProvider.prototype['STATIC_HasObjectStrExpression'] = MetadataProvider.prototype.STATIC_HasObjectStrExpression = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
@@ -7378,7 +7435,7 @@ MetadataProvider.prototype['STATIC_HasObjectStrExpression'] = MetadataProvider.p
 
 MetadataProvider.prototype['STATIC_HasBehaviorStrExpression'] = MetadataProvider.prototype.STATIC_HasBehaviorStrExpression = function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureStringCache.prepare();
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
