@@ -4134,6 +4134,16 @@ Exporter.prototype['ExportWholePixiProject'] = Exporter.prototype.ExportWholePix
   return !!(_emscripten_bind_Exporter_ExportWholePixiProject_4(self, arg0, arg1, arg2, arg3));
 };;
 
+Exporter.prototype['ExportWholeCocos2dProject'] = Exporter.prototype.ExportWholeCocos2dProject = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return !!(_emscripten_bind_Exporter_ExportWholeCocos2dProject_3(self, arg0, arg1, arg2));
+};;
+
 Exporter.prototype['GetLastError'] = Exporter.prototype.GetLastError = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_Exporter_GetLastError_0(self));

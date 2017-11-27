@@ -2461,6 +2461,10 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportWholePixiProject_4(gdjs
   return self->ExportWholePixiProject(*arg0, arg1, arg2, arg3);
 }
 
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportWholeCocos2dProject_3(gdjs::Exporter* self, Project* arg0, bool arg1, char* arg2) {
+  return self->ExportWholeCocos2dProject(*arg0, arg1, arg2);
+}
+
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_GetLastError_0(gdjs::Exporter* self) {
   return self->GetLastError().c_str();
 }

@@ -1477,5 +1477,8 @@ interface Exporter {
     boolean ExportExternalLayoutForPixiPreview([Ref] Project project, [Ref] Layout layout, [Ref] ExternalLayout externalLayout, [Const] DOMString exportDir);
     boolean ExportWholePixiProject([Ref] Project project, [Const] DOMString exportDir,
         boolean minify, boolean exportForCordova);
+
+    boolean ExportWholeCocos2dProject([Ref] Project project, boolean debugMode, [Const] DOMString exportDir);
+
     [Const, Ref] DOMString GetLastError();
 };
