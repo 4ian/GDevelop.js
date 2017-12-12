@@ -1055,7 +1055,7 @@ Project.prototype['GetObjectPosition'] = Project.prototype.GetObjectPosition = f
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_Project_GetObjectPosition_1(self, arg0);
+  return _emscripten_bind_Project_GetObjectPosition_1(self, arg0);
 };;
 
 Project.prototype['RemoveObject'] = Project.prototype.RemoveObject = function(arg0) {
@@ -5840,7 +5840,7 @@ Layout.prototype['GetObjectPosition'] = Layout.prototype.GetObjectPosition = fun
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_Layout_GetObjectPosition_1(self, arg0);
+  return _emscripten_bind_Layout_GetObjectPosition_1(self, arg0);
 };;
 
 Layout.prototype['RemoveObject'] = Layout.prototype.RemoveObject = function(arg0) {

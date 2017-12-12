@@ -118,9 +118,9 @@ describe('libGD.js', function(){
 
 	describe('ClassWithObjects (using gd.Layout)', function() {
 		var project = gd.ProjectHelper.createNewGDJSProject();
-		var layout = project.insertNewLayout("Scene", 0);
 
 		it('can move objects', function() {
+			var layout = project.insertNewLayout("Scene", 0);
 			var object = layout.insertNewObject(project, "Sprite", "MyObject", 0);
 			var object2 = layout.insertNewObject(project, "TextObject::Text", "MyObject2", 1);
 			var object3 = layout.insertNewObject(project, "TextObject::Text", "MyObject3", 2);
@@ -144,6 +144,18 @@ describe('libGD.js', function(){
 			expect(layout.getObjectAt(0).getName()).to.be("MyObject3");
 			expect(layout.getObjectAt(1).getName()).to.be("MyObject2");
 			expect(layout.getObjectAt(2).getName()).to.be("MyObject");
+		});
+
+		it('can find position of objects', function() {
+			var layout = project.insertNewLayout("Scene2", 0);
+			var object = layout.insertNewObject(project, "Sprite", "MyObject", 0);
+			var object2 = layout.insertNewObject(project, "TextObject::Text", "MyObject2", 1);
+			var object3 = layout.insertNewObject(project, "TextObject::Text", "MyObject3", 2);
+
+			expect(layout.getObjectPosition("MyObject")).to.be(0);
+			expect(layout.getObjectPosition("MyObject2")).to.be(1);
+			expect(layout.getObjectPosition("MyObject3")).to.be(2);
+			expect(layout.getObjectPosition("MyObject4")).to.be(-1);
 		});
 
 		after(function() { project.delete(); });

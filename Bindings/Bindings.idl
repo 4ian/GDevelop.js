@@ -264,7 +264,7 @@ interface Project {
     boolean HasObjectNamed([Const] DOMString name);
     [Ref] gdObject GetObject([Const] DOMString name);
     [Ref] gdObject GetObjectAt(unsigned long pos);
-    void GetObjectPosition([Const] DOMString name);
+    unsigned long GetObjectPosition([Const] DOMString name);
     void RemoveObject([Const] DOMString name);
     void SwapObjects(unsigned long first, unsigned long second);
     void MoveObject(unsigned long oldIndex, unsigned long newIndex);
@@ -351,7 +351,7 @@ interface Layout {
     boolean HasObjectNamed([Const] DOMString name);
     [Ref] gdObject GetObject([Const] DOMString name);
     [Ref] gdObject GetObjectAt(unsigned long pos);
-    void GetObjectPosition([Const] DOMString name);
+    unsigned long GetObjectPosition([Const] DOMString name);
     void RemoveObject([Const] DOMString name);
     void SwapObjects(unsigned long first, unsigned long second);
     void MoveObject(unsigned long oldIndex, unsigned long newIndex);

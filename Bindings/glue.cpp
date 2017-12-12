@@ -555,8 +555,8 @@ gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetObjectAt_1(Project* se
   return &self->GetObjectAt(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetObjectPosition_1(Project* self, char* arg0) {
-  self->GetObjectPosition(arg0);
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetObjectPosition_1(Project* self, char* arg0) {
+  return self->GetObjectPosition(arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_RemoveObject_1(Project* self, char* arg0) {
@@ -3565,8 +3565,8 @@ gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectAt_1(Layout* self
   return &self->GetObjectAt(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectPosition_1(Layout* self, char* arg0) {
-  self->GetObjectPosition(arg0);
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectPosition_1(Layout* self, char* arg0) {
+  return self->GetObjectPosition(arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_RemoveObject_1(Layout* self, char* arg0) {
