@@ -96,6 +96,7 @@
         gd.asCommentEvent = function(evt) { return gd.castObject(evt, gd.CommentEvent); }
         gd.asGroupEvent = function(evt) { return gd.castObject(evt, gd.GroupEvent); }
         gd.asLinkEvent = function(evt) { return gd.castObject(evt, gd.LinkEvent); }
+        gd.asJsCodeEvent = function(evt) { return gd.castObject(evt, gd.JsCodeEvent); }
         gd.asPlatform = function(evt) { return gd.castObject(evt, gd.Platform); }
 
         gd.asSpriteObject = function(evt) { return gd.castObject(evt, gd.SpriteObject); }
