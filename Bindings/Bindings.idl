@@ -1482,3 +1482,30 @@ interface Exporter {
 
     [Const, Ref] DOMString GetLastError();
 };
+
+[Prefix="gdjs::"]
+interface JsCodeEvent {
+    void JsCodeEvent();
+
+    [Const, Ref] DOMString GetInlineCode();
+    void SetInlineCode([Const] DOMString type);
+
+    [Const, Ref] DOMString GetParameterObjects();
+    void SetParameterObjects([Const] DOMString type);
+
+    //Inherited from BaseEvent:
+    JsCodeEvent Clone();
+    [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};

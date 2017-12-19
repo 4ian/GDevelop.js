@@ -68,4 +68,25 @@ describe('libGD.js - GDJS related tests', function(){
 			expect(props.get("Testing mode").getValue()).to.be("true");
 		});
 	});
+	describe('JsCodeEvent', function(){
+		it("can store its code", function() {
+			var event = new gd.JsCodeEvent();
+			event.setInlineCode('console.log("Hello world");');
+			expect(event.getInlineCode()).to.be('console.log("Hello world");');
+		});
+		it("can store the objects to pass as parameter", function() {
+			var event = new gd.JsCodeEvent();
+			event.setParameterObjects('MyObject');
+			expect(event.getParameterObjects()).to.be('MyObject');
+		});
+		it("can be cloned", function() {
+			var event = new gd.JsCodeEvent();
+			event.setInlineCode('console.log("Hello world 2");');
+			event.setParameterObjects('MyObject2');
+
+			var cloneEvent = event.clone();
+			expect(cloneEvent.getParameterObjects()).to.be('MyObject2');
+			expect(cloneEvent.getInlineCode()).to.be('console.log("Hello world 2");');
+		});
+	});
 });

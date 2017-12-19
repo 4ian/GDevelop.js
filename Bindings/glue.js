@@ -2899,6 +2899,120 @@ Module['SetString'] = SetString;
   var self = this.ptr;
   _emscripten_bind_SetString___destroy___0(self);
 };
+// JsCodeEvent
+function JsCodeEvent() {
+  this.ptr = _emscripten_bind_JsCodeEvent_JsCodeEvent_0();
+  getCache(JsCodeEvent)[this.ptr] = this;
+};;
+JsCodeEvent.prototype = Object.create(WrapperObject.prototype);
+JsCodeEvent.prototype.constructor = JsCodeEvent;
+JsCodeEvent.prototype.__class__ = JsCodeEvent;
+JsCodeEvent.__cache__ = {};
+Module['JsCodeEvent'] = JsCodeEvent;
+
+JsCodeEvent.prototype['GetInlineCode'] = JsCodeEvent.prototype.GetInlineCode = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_JsCodeEvent_GetInlineCode_0(self));
+};;
+
+JsCodeEvent.prototype['SetInlineCode'] = JsCodeEvent.prototype.SetInlineCode = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_JsCodeEvent_SetInlineCode_1(self, arg0);
+};;
+
+JsCodeEvent.prototype['GetParameterObjects'] = JsCodeEvent.prototype.GetParameterObjects = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_JsCodeEvent_GetParameterObjects_0(self));
+};;
+
+JsCodeEvent.prototype['SetParameterObjects'] = JsCodeEvent.prototype.SetParameterObjects = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_JsCodeEvent_SetParameterObjects_1(self, arg0);
+};;
+
+JsCodeEvent.prototype['Clone'] = JsCodeEvent.prototype.Clone = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_JsCodeEvent_Clone_0(self), JsCodeEvent);
+};;
+
+JsCodeEvent.prototype['GetType'] = JsCodeEvent.prototype.GetType = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_JsCodeEvent_GetType_0(self));
+};;
+
+JsCodeEvent.prototype['SetType'] = JsCodeEvent.prototype.SetType = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_JsCodeEvent_SetType_1(self, arg0);
+};;
+
+JsCodeEvent.prototype['IsExecutable'] = JsCodeEvent.prototype.IsExecutable = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_JsCodeEvent_IsExecutable_0(self));
+};;
+
+JsCodeEvent.prototype['CanHaveSubEvents'] = JsCodeEvent.prototype.CanHaveSubEvents = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_JsCodeEvent_CanHaveSubEvents_0(self));
+};;
+
+JsCodeEvent.prototype['HasSubEvents'] = JsCodeEvent.prototype.HasSubEvents = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_JsCodeEvent_HasSubEvents_0(self));
+};;
+
+JsCodeEvent.prototype['GetSubEvents'] = JsCodeEvent.prototype.GetSubEvents = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_JsCodeEvent_GetSubEvents_0(self), EventsList);
+};;
+
+JsCodeEvent.prototype['IsDisabled'] = JsCodeEvent.prototype.IsDisabled = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_JsCodeEvent_IsDisabled_0(self));
+};;
+
+JsCodeEvent.prototype['SetDisabled'] = JsCodeEvent.prototype.SetDisabled = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_JsCodeEvent_SetDisabled_1(self, arg0);
+};;
+
+JsCodeEvent.prototype['IsFolded'] = JsCodeEvent.prototype.IsFolded = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_JsCodeEvent_IsFolded_0(self));
+};;
+
+JsCodeEvent.prototype['SetFolded'] = JsCodeEvent.prototype.SetFolded = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_JsCodeEvent_SetFolded_1(self, arg0);
+};;
+
+JsCodeEvent.prototype['SerializeTo'] = JsCodeEvent.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_JsCodeEvent_SerializeTo_1(self, arg0);
+};;
+
+JsCodeEvent.prototype['UnserializeFrom'] = JsCodeEvent.prototype.UnserializeFrom = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_JsCodeEvent_UnserializeFrom_2(self, arg0, arg1);
+};;
+
+  JsCodeEvent.prototype['__destroy__'] = JsCodeEvent.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_JsCodeEvent___destroy___0(self);
+};
 // Behavior
 function Behavior() {
   this.ptr = _emscripten_bind_Behavior_Behavior_0();

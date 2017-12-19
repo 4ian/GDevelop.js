@@ -57,6 +57,7 @@
 
 #include <GDJS/Events/CodeGeneration/EventsCodeGenerator.h>
 #include <GDJS/IDE/Exporter.h>
+#include <GDJS/Events/Builtin/JsCodeEvent.h>
 
 #include "ProjectHelper.h"
 #include <emscripten.h>

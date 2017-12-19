@@ -1698,6 +1698,84 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_SetString___destroy___0(SetString* sel
   delete self;
 }
 
+// JsCodeEvent
+
+gdjs::JsCodeEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_JsCodeEvent_0() {
+  return new gdjs::JsCodeEvent();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_GetInlineCode_0(gdjs::JsCodeEvent* self) {
+  return self->GetInlineCode().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_SetInlineCode_1(gdjs::JsCodeEvent* self, char* arg0) {
+  self->SetInlineCode(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_GetParameterObjects_0(gdjs::JsCodeEvent* self) {
+  return self->GetParameterObjects().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_SetParameterObjects_1(gdjs::JsCodeEvent* self, char* arg0) {
+  self->SetParameterObjects(arg0);
+}
+
+gdjs::JsCodeEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_Clone_0(gdjs::JsCodeEvent* self) {
+  return self->Clone();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_GetType_0(gdjs::JsCodeEvent* self) {
+  return self->GetType().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_SetType_1(gdjs::JsCodeEvent* self, char* arg0) {
+  self->SetType(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_IsExecutable_0(gdjs::JsCodeEvent* self) {
+  return self->IsExecutable();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_CanHaveSubEvents_0(gdjs::JsCodeEvent* self) {
+  return self->CanHaveSubEvents();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_HasSubEvents_0(gdjs::JsCodeEvent* self) {
+  return self->HasSubEvents();
+}
+
+EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_GetSubEvents_0(gdjs::JsCodeEvent* self) {
+  return &self->GetSubEvents();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_IsDisabled_0(gdjs::JsCodeEvent* self) {
+  return self->IsDisabled();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_SetDisabled_1(gdjs::JsCodeEvent* self, bool arg0) {
+  self->SetDisabled(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_IsFolded_0(gdjs::JsCodeEvent* self) {
+  return self->IsFolded();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_SetFolded_1(gdjs::JsCodeEvent* self, bool arg0) {
+  self->SetFolded(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_SerializeTo_1(gdjs::JsCodeEvent* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_UnserializeFrom_2(gdjs::JsCodeEvent* self, Project* arg0, SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent___destroy___0(gdjs::JsCodeEvent* self) {
+  delete self;
+}
+
 // Behavior
 
 Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior_Behavior_0() {
