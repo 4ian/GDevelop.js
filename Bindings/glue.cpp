@@ -3563,6 +3563,18 @@ EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetEvents_0(Layout* self
   return &self->GetEvents();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_UpdateBehaviorsSharedData_1(Layout* self, Project* arg0) {
+  self->UpdateBehaviorsSharedData(*arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_HasBehaviorSharedData_1(Layout* self, char* arg0) {
+  return self->HasBehaviorSharedData(arg0);
+}
+
+BehaviorsSharedData* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetBehaviorSharedData_1(Layout* self, char* arg0) {
+  return &self->GetBehaviorSharedData(arg0);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertNewLayer_2(Layout* self, char* arg0, unsigned int arg1) {
   self->InsertNewLayer(arg0, arg1);
 }
@@ -4043,6 +4055,28 @@ temp.clear(); for(auto it = self->begin(); it != self->end();++it) { temp.push_b
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringExpressionMetadata___destroy___0(MapStringExpressionMetadata* self) {
+  delete self;
+}
+
+// BehaviorsSharedData
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_GetName_0(BehaviorsSharedData* self) {
+  return self->GetName().c_str();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_GetTypeName_0(BehaviorsSharedData* self) {
+  return self->GetTypeName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_SerializeTo_1(BehaviorsSharedData* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_UnserializeFrom_1(BehaviorsSharedData* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData___destroy___0(BehaviorsSharedData* self) {
   delete self;
 }
 

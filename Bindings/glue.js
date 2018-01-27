@@ -5808,6 +5808,28 @@ Layout.prototype['GetEvents'] = Layout.prototype.GetEvents = function() {
   return wrapPointer(_emscripten_bind_Layout_GetEvents_0(self), EventsList);
 };;
 
+Layout.prototype['UpdateBehaviorsSharedData'] = Layout.prototype.UpdateBehaviorsSharedData = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Layout_UpdateBehaviorsSharedData_1(self, arg0);
+};;
+
+Layout.prototype['HasBehaviorSharedData'] = Layout.prototype.HasBehaviorSharedData = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_Layout_HasBehaviorSharedData_1(self, arg0));
+};;
+
+Layout.prototype['GetBehaviorSharedData'] = Layout.prototype.GetBehaviorSharedData = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_Layout_GetBehaviorSharedData_1(self, arg0), BehaviorsSharedData);
+};;
+
 Layout.prototype['InsertNewLayer'] = Layout.prototype.InsertNewLayer = function(arg0, arg1) {
   var self = this.ptr;
   ensureCache.prepare();
@@ -6629,6 +6651,40 @@ MapStringExpressionMetadata.prototype['MAP_keys'] = MapStringExpressionMetadata.
   MapStringExpressionMetadata.prototype['__destroy__'] = MapStringExpressionMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_MapStringExpressionMetadata___destroy___0(self);
+};
+// BehaviorsSharedData
+function BehaviorsSharedData() { throw "cannot construct a BehaviorsSharedData, no constructor in IDL" }
+BehaviorsSharedData.prototype = Object.create(WrapperObject.prototype);
+BehaviorsSharedData.prototype.constructor = BehaviorsSharedData;
+BehaviorsSharedData.prototype.__class__ = BehaviorsSharedData;
+BehaviorsSharedData.__cache__ = {};
+Module['BehaviorsSharedData'] = BehaviorsSharedData;
+
+BehaviorsSharedData.prototype['GetName'] = BehaviorsSharedData.prototype.GetName = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_BehaviorsSharedData_GetName_0(self));
+};;
+
+BehaviorsSharedData.prototype['GetTypeName'] = BehaviorsSharedData.prototype.GetTypeName = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_BehaviorsSharedData_GetTypeName_0(self));
+};;
+
+BehaviorsSharedData.prototype['SerializeTo'] = BehaviorsSharedData.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_BehaviorsSharedData_SerializeTo_1(self, arg0);
+};;
+
+BehaviorsSharedData.prototype['UnserializeFrom'] = BehaviorsSharedData.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_BehaviorsSharedData_UnserializeFrom_1(self, arg0);
+};;
+
+  BehaviorsSharedData.prototype['__destroy__'] = BehaviorsSharedData.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_BehaviorsSharedData___destroy___0(self);
 };
 // MapStringVariable
 function MapStringVariable() { throw "cannot construct a MapStringVariable, no constructor in IDL" }

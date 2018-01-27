@@ -550,6 +550,29 @@ describe('libGD.js', function(){
 		});
 	});
 
+	describe('gd.BehaviorsSharedData', function(){
+		var project = gd.ProjectHelper.createNewGDJSProject();
+		var layout = project.insertNewLayout("Scene", 0);
+		var object = layout.insertNewObject(project, "Sprite", "MyObject", 0);
+
+		it('can be created by gd.Layout.updateBehaviorsSharedData', function() {
+			layout.updateBehaviorsSharedData(project);
+			expect(layout.hasBehaviorSharedData("Physics")).to.be(false);
+			var behavior = object.addNewBehavior(project, "PhysicsBehavior::PhysicsBehavior", "Physics");
+			expect(layout.hasBehaviorSharedData("Physics")).to.be(false);
+			layout.updateBehaviorsSharedData(project);
+			expect(layout.hasBehaviorSharedData("Physics")).to.be(true);
+			layout.removeObject("MyObject")
+			expect(layout.hasBehaviorSharedData("Physics")).to.be(true);
+			layout.updateBehaviorsSharedData(project);
+			expect(layout.hasBehaviorSharedData("Physics")).to.be(false);
+		});
+
+		after(function() {
+			project.delete();
+		});
+	});
+
 	describe('gd.Object', function(){
 		var project = gd.ProjectHelper.createNewGDJSProject();
 		var layout = project.insertNewLayout("Scene", 0);

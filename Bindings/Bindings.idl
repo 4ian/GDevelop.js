@@ -283,6 +283,14 @@ interface Behavior {
     [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
 };
 
+interface BehaviorsSharedData {
+    [Const, Ref] DOMString GetName();
+    [Const, Ref] DOMString GetTypeName();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
 interface gdObject {
     // /!\ We need to call it gdObject to avoid messing up with javascript Object
     //     global in glue.js!
@@ -325,6 +333,10 @@ interface Layout {
     [Ref] InitialInstancesContainer GetInitialInstances();
     [Ref] VariablesContainer GetVariables();
     [Ref] EventsList GetEvents();
+
+    void UpdateBehaviorsSharedData([Const, Ref] Project project);
+    boolean HasBehaviorSharedData([Const] DOMString behaviorName);
+    [Ref] BehaviorsSharedData GetBehaviorSharedData([Const] DOMString behaviorName);
 
     void InsertNewLayer([Const] DOMString name, unsigned long position);
     void InsertLayer([Const, Ref] Layer layer, unsigned long position);
