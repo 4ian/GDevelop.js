@@ -566,9 +566,9 @@ ResourcesManager.prototype.__class__ = ResourcesManager;
 ResourcesManager.__cache__ = {};
 Module['ResourcesManager'] = ResourcesManager;
 
-ResourcesManager.prototype['GetAllResourcesList'] = ResourcesManager.prototype.GetAllResourcesList = function() {
+ResourcesManager.prototype['GetAllResourceNames'] = ResourcesManager.prototype.GetAllResourceNames = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_ResourcesManager_GetAllResourcesList_0(self), VectorString);
+  return wrapPointer(_emscripten_bind_ResourcesManager_GetAllResourceNames_0(self), VectorString);
 };;
 
 ResourcesManager.prototype['HasResource'] = ResourcesManager.prototype.HasResource = function(arg0) {
@@ -5814,6 +5814,11 @@ Layout.prototype['UpdateBehaviorsSharedData'] = Layout.prototype.UpdateBehaviors
   _emscripten_bind_Layout_UpdateBehaviorsSharedData_1(self, arg0);
 };;
 
+Layout.prototype['GetAllBehaviorSharedDataNames'] = Layout.prototype.GetAllBehaviorSharedDataNames = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Layout_GetAllBehaviorSharedDataNames_0(self), VectorString);
+};;
+
 Layout.prototype['HasBehaviorSharedData'] = Layout.prototype.HasBehaviorSharedData = function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
@@ -6668,6 +6673,23 @@ BehaviorsSharedData.prototype['GetName'] = BehaviorsSharedData.prototype.GetName
 BehaviorsSharedData.prototype['GetTypeName'] = BehaviorsSharedData.prototype.GetTypeName = function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_BehaviorsSharedData_GetTypeName_0(self));
+};;
+
+BehaviorsSharedData.prototype['UpdateProperty'] = BehaviorsSharedData.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_BehaviorsSharedData_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+BehaviorsSharedData.prototype['GetProperties'] = BehaviorsSharedData.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_BehaviorsSharedData_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
 };;
 
 BehaviorsSharedData.prototype['SerializeTo'] = BehaviorsSharedData.prototype.SerializeTo = function(arg0) {

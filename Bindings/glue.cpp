@@ -269,9 +269,9 @@ ResourcesManager* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_Resource
   return new ResourcesManager();
 }
 
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_GetAllResourcesList_0(ResourcesManager* self) {
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_GetAllResourceNames_0(ResourcesManager* self) {
   static VectorString temp;
-  return (temp = self->GetAllResourcesList(), &temp);
+  return (temp = self->GetAllResourceNames(), &temp);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_HasResource_1(ResourcesManager* self, char* arg0) {
@@ -3567,6 +3567,11 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_UpdateBehaviorsSharedData_1(Lay
   self->UpdateBehaviorsSharedData(*arg0);
 }
 
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetAllBehaviorSharedDataNames_0(Layout* self) {
+  static VectorString temp;
+  return (temp = self->GetAllBehaviorSharedDataNames(), &temp);
+}
+
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_HasBehaviorSharedData_1(Layout* self, char* arg0) {
   return self->HasBehaviorSharedData(arg0);
 }
@@ -4066,6 +4071,15 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_GetName_0(B
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_GetTypeName_0(BehaviorsSharedData* self) {
   return self->GetTypeName().c_str();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_UpdateProperty_3(BehaviorsSharedData* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_GetProperties_1(BehaviorsSharedData* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_SerializeTo_1(BehaviorsSharedData* self, SerializerElement* arg0) {

@@ -547,7 +547,7 @@ describe('libGD.js', function() {
       var resource = new gd.Resource();
       resource.setName('MyResource');
       project.getResourcesManager().addResource(resource);
-      var allResources = project.getResourcesManager().getAllResourcesList();
+      var allResources = project.getResourcesManager().getAllResourceNames();
 
       expect(allResources.size()).to.be(1);
     });
@@ -556,7 +556,7 @@ describe('libGD.js', function() {
       resource.setName('MyResource');
       project.getResourcesManager().addResource(resource);
       project.getResourcesManager().removeResource('MyResource');
-      var allResources = project.getResourcesManager().getAllResourcesList();
+      var allResources = project.getResourcesManager().getAllResourceNames();
 
       expect(allResources.size()).to.be(0);
     });
@@ -584,12 +584,12 @@ describe('libGD.js', function() {
 
       gd.castObject(obj, gd.SpriteObject).addAnimation(anim1);
 
-      var allResources = project.getResourcesManager().getAllResourcesList();
+      var allResources = project.getResourcesManager().getAllResourceNames();
       expect(allResources.size()).to.be(2);
 
       gd.ProjectResourcesAdder.removeAllUselessImages(project);
 
-      var allResources = project.getResourcesManager().getAllResourcesList();
+      var allResources = project.getResourcesManager().getAllResourceNames();
       expect(allResources.size()).to.be(1);
       expect(allResources.get(0)).to.be('Used');
     });

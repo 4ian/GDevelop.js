@@ -287,6 +287,9 @@ interface BehaviorsSharedData {
     [Const, Ref] DOMString GetName();
     [Const, Ref] DOMString GetTypeName();
 
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Const, Ref] Project project);
+    [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
+
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
 };
@@ -335,6 +338,7 @@ interface Layout {
     [Ref] EventsList GetEvents();
 
     void UpdateBehaviorsSharedData([Const, Ref] Project project);
+    [Value] VectorString GetAllBehaviorSharedDataNames();
     boolean HasBehaviorSharedData([Const] DOMString behaviorName);
     [Ref] BehaviorsSharedData GetBehaviorSharedData([Const] DOMString behaviorName);
 
@@ -432,7 +436,7 @@ interface Resource {
 interface ResourcesManager {
     void ResourcesManager();
 
-    [Value] VectorString GetAllResourcesList();
+    [Value] VectorString GetAllResourceNames();
     boolean HasResource([Const] DOMString name);
     [Const, Ref] Resource GetResource([Const] DOMString name);
     boolean AddResource([Const, Ref] Resource res);
