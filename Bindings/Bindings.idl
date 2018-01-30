@@ -442,8 +442,10 @@ interface ResourcesManager {
     boolean AddResource([Const, Ref] Resource res);
     void RemoveResource([Const] DOMString name);
     void RenameResource([Const] DOMString oldName, [Const] DOMString name);
+    unsigned long GetResourcePosition([Const] DOMString name);
     boolean MoveResourceUpInList([Const] DOMString oldName);
     boolean MoveResourceDownInList([Const] DOMString oldName);
+    void MoveResource(unsigned long oldIndex, unsigned long newIndex);
 };
 
 interface ImageResource {
@@ -1089,7 +1091,7 @@ interface AbstractFileSystemJS {
 
 interface ProjectResourcesAdder {
     void STATIC_AddAllMissingImages([Ref] Project project);
-    void STATIC_GetAllUselessImages([Ref] Project project);
+    [Value] VectorString STATIC_GetAllUselessImages([Ref] Project project);
     void STATIC_RemoveAllUselessImages([Ref] Project project);
 };
 

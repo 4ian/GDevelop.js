@@ -294,12 +294,20 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_RenameResource_2(Reso
   self->RenameResource(arg0, arg1);
 }
 
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_GetResourcePosition_1(ResourcesManager* self, char* arg0) {
+  return self->GetResourcePosition(arg0);
+}
+
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_MoveResourceUpInList_1(ResourcesManager* self, char* arg0) {
   return self->MoveResourceUpInList(arg0);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_MoveResourceDownInList_1(ResourcesManager* self, char* arg0) {
   return self->MoveResourceDownInList(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_MoveResource_2(ResourcesManager* self, unsigned int arg0, unsigned int arg1) {
+  self->MoveResource(arg0, arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager___destroy___0(ResourcesManager* self) {
@@ -3961,8 +3969,9 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_AddAllMis
   self->STATIC_AddAllMissingImages(*arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessImages_1(ProjectResourcesAdder* self, Project* arg0) {
-  self->STATIC_GetAllUselessImages(*arg0);
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessImages_1(ProjectResourcesAdder* self, Project* arg0) {
+  static VectorString temp;
+  return (temp = self->STATIC_GetAllUselessImages(*arg0), &temp);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUselessImages_1(ProjectResourcesAdder* self, Project* arg0) {

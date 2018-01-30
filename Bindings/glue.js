@@ -611,6 +611,14 @@ ResourcesManager.prototype['RenameResource'] = ResourcesManager.prototype.Rename
   _emscripten_bind_ResourcesManager_RenameResource_2(self, arg0, arg1);
 };;
 
+ResourcesManager.prototype['GetResourcePosition'] = ResourcesManager.prototype.GetResourcePosition = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return _emscripten_bind_ResourcesManager_GetResourcePosition_1(self, arg0);
+};;
+
 ResourcesManager.prototype['MoveResourceUpInList'] = ResourcesManager.prototype.MoveResourceUpInList = function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
@@ -625,6 +633,13 @@ ResourcesManager.prototype['MoveResourceDownInList'] = ResourcesManager.prototyp
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_ResourcesManager_MoveResourceDownInList_1(self, arg0));
+};;
+
+ResourcesManager.prototype['MoveResource'] = ResourcesManager.prototype.MoveResource = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_ResourcesManager_MoveResource_2(self, arg0, arg1);
 };;
 
   ResourcesManager.prototype['__destroy__'] = ResourcesManager.prototype.__destroy__ = function() {
@@ -6479,7 +6494,7 @@ ProjectResourcesAdder.prototype['STATIC_AddAllMissingImages'] = ProjectResources
 ProjectResourcesAdder.prototype['STATIC_GetAllUselessImages'] = ProjectResourcesAdder.prototype.STATIC_GetAllUselessImages = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessImages_1(self, arg0);
+  return wrapPointer(_emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessImages_1(self, arg0), VectorString);
 };;
 
 ProjectResourcesAdder.prototype['STATIC_RemoveAllUselessImages'] = ProjectResourcesAdder.prototype.STATIC_RemoveAllUselessImages = function(arg0) {

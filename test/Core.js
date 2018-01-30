@@ -541,24 +541,46 @@ describe('libGD.js', function() {
   });
 
   describe('gd.ResourcesManager', function() {
-    var project = gd.ProjectHelper.createNewGDJSProject();
 
     it('should support adding resources', function() {
+      var project = gd.ProjectHelper.createNewGDJSProject();
       var resource = new gd.Resource();
+      var resource2 = new gd.Resource();
       resource.setName('MyResource');
+      resource2.setName('MyResource2');
       project.getResourcesManager().addResource(resource);
+      project.getResourcesManager().addResource(resource2);
       var allResources = project.getResourcesManager().getAllResourceNames();
 
-      expect(allResources.size()).to.be(1);
+      expect(allResources.size()).to.be(2);
+      project.delete();
     });
+
+    it('should support finding resources', function() {
+      var project = gd.ProjectHelper.createNewGDJSProject();
+      var resource = new gd.Resource();
+      var resource2 = new gd.Resource();
+      resource.setName('MyResource');
+      resource2.setName('MyResource2');
+      project.getResourcesManager().addResource(resource);
+      project.getResourcesManager().addResource(resource2);
+
+      expect(project.getResourcesManager().getResourcePosition('MyResource')).to.be(0);
+      expect(project.getResourcesManager().getResourcePosition('MyResource2')).to.be(1);
+      expect(project.getResourcesManager().getResourcePosition('MyResource3')).to.be(-1);
+      project.delete();
+    });
+
     it('should support removing resources', function() {
+      var project = gd.ProjectHelper.createNewGDJSProject();
       var resource = new gd.Resource();
       resource.setName('MyResource');
       project.getResourcesManager().addResource(resource);
       project.getResourcesManager().removeResource('MyResource');
-      var allResources = project.getResourcesManager().getAllResourceNames();
 
+      var allResources = project.getResourcesManager().getAllResourceNames();
       expect(allResources.size()).to.be(0);
+      project.delete();
     });
   });
 
