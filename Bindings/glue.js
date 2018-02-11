@@ -696,6 +696,19 @@ Project.prototype['GetPackageName'] = Project.prototype.GetPackageName = functio
   return Pointer_stringify(_emscripten_bind_Project_GetPackageName_0(self));
 };;
 
+Project.prototype['SetOrientation'] = Project.prototype.SetOrientation = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Project_SetOrientation_1(self, arg0);
+};;
+
+Project.prototype['GetOrientation'] = Project.prototype.GetOrientation = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Project_GetOrientation_0(self));
+};;
+
 Project.prototype['SetProjectFile'] = Project.prototype.SetProjectFile = function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
@@ -780,6 +793,11 @@ Project.prototype['AddPlatform'] = Project.prototype.AddPlatform = function(arg0
 Project.prototype['GetCurrentPlatform'] = Project.prototype.GetCurrentPlatform = function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Project_GetCurrentPlatform_0(self), Platform);
+};;
+
+Project.prototype['GetPlatformSpecificAssets'] = Project.prototype.GetPlatformSpecificAssets = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Project_GetPlatformSpecificAssets_0(self), PlatformSpecificAssets);
 };;
 
 Project.prototype['HasLayoutNamed'] = Project.prototype.HasLayoutNamed = function(arg0) {
@@ -5671,6 +5689,81 @@ ParameterMetadata.prototype['STATIC_IsObject'] = ParameterMetadata.prototype.STA
   ParameterMetadata.prototype['__destroy__'] = ParameterMetadata.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ParameterMetadata___destroy___0(self);
+};
+// PlatformSpecificAssets
+function PlatformSpecificAssets() {
+  this.ptr = _emscripten_bind_PlatformSpecificAssets_PlatformSpecificAssets_0();
+  getCache(PlatformSpecificAssets)[this.ptr] = this;
+};;
+PlatformSpecificAssets.prototype = Object.create(WrapperObject.prototype);
+PlatformSpecificAssets.prototype.constructor = PlatformSpecificAssets;
+PlatformSpecificAssets.prototype.__class__ = PlatformSpecificAssets;
+PlatformSpecificAssets.__cache__ = {};
+Module['PlatformSpecificAssets'] = PlatformSpecificAssets;
+
+PlatformSpecificAssets.prototype['Has'] = PlatformSpecificAssets.prototype.Has = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return !!(_emscripten_bind_PlatformSpecificAssets_Has_2(self, arg0, arg1));
+};;
+
+PlatformSpecificAssets.prototype['Get'] = PlatformSpecificAssets.prototype.Get = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return Pointer_stringify(_emscripten_bind_PlatformSpecificAssets_Get_2(self, arg0, arg1));
+};;
+
+PlatformSpecificAssets.prototype['Remove'] = PlatformSpecificAssets.prototype.Remove = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  _emscripten_bind_PlatformSpecificAssets_Remove_2(self, arg0, arg1);
+};;
+
+PlatformSpecificAssets.prototype['Set'] = PlatformSpecificAssets.prototype.Set = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  _emscripten_bind_PlatformSpecificAssets_Set_3(self, arg0, arg1, arg2);
+};;
+
+PlatformSpecificAssets.prototype['ExposeResources'] = PlatformSpecificAssets.prototype.ExposeResources = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_PlatformSpecificAssets_ExposeResources_1(self, arg0);
+};;
+
+PlatformSpecificAssets.prototype['SerializeTo'] = PlatformSpecificAssets.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_PlatformSpecificAssets_SerializeTo_1(self, arg0);
+};;
+
+PlatformSpecificAssets.prototype['UnserializeFrom'] = PlatformSpecificAssets.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_PlatformSpecificAssets_UnserializeFrom_1(self, arg0);
+};;
+
+  PlatformSpecificAssets.prototype['__destroy__'] = PlatformSpecificAssets.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_PlatformSpecificAssets___destroy___0(self);
 };
 // ObjectMetadata
 function ObjectMetadata() { throw "cannot construct a ObjectMetadata, no constructor in IDL" }

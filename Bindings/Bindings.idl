@@ -188,15 +188,31 @@ interface ObjectGroupsContainer {
     void UnserializeFrom([Const, Ref] SerializerElement element);
 };
 
+interface PlatformSpecificAssets {
+    void PlatformSpecificAssets();
+
+    boolean Has([Const] DOMString platform, [Const] DOMString name);
+    [Const, Ref] DOMString Get([Const] DOMString platform, [Const] DOMString name);
+    void Remove([Const] DOMString platform, [Const] DOMString name);
+    void Set([Const] DOMString platform, [Const] DOMString name, [Const] DOMString resourceName);
+
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
 interface Project {
     void Project();
 
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
-    void SetAuthor([Const] DOMString name);
+    void SetAuthor([Const] DOMString authorName);
     [Const, Ref] DOMString GetAuthor();
-    void SetPackageName([Const] DOMString name);
+    void SetPackageName([Const] DOMString packageName);
     [Const, Ref] DOMString GetPackageName();
+    void SetOrientation([Const] DOMString orientation);
+    [Const, Ref] DOMString GetOrientation();
     void SetProjectFile([Const] DOMString file);
     [Const, Ref] DOMString GetProjectFile();
     void SetDefaultWidth(long width);
@@ -214,6 +230,8 @@ interface Project {
     [Const, Ref] VectorString GetUsedExtensions();
     void AddPlatform([Ref] Platform platform);
     [Ref] Platform GetCurrentPlatform();
+
+    [Ref] PlatformSpecificAssets GetPlatformSpecificAssets();
 
     //createObject
     //createEvent

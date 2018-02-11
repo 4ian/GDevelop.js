@@ -25,6 +25,10 @@ describe('libGD.js', function() {
       expect(project.getName()).to.be('My super project');
       project.setPackageName('com.test.package');
       expect(project.getPackageName()).to.be('com.test.package');
+      project.setOrientation('portrait');
+      expect(project.getOrientation()).to.be('portrait');
+      project.setOrientation('landscape');
+      expect(project.getOrientation()).to.be('landscape');
       project.setAuthor('Me');
       expect(project.getAuthor()).to.be('Me');
       project.setMaximumFPS(15);

@@ -344,6 +344,14 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetPackageName_0(Projec
   return self->GetPackageName().c_str();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetOrientation_1(Project* self, char* arg0) {
+  self->SetOrientation(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetOrientation_0(Project* self) {
+  return self->GetOrientation().c_str();
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetProjectFile_1(Project* self, char* arg0) {
   self->SetProjectFile(arg0);
 }
@@ -402,6 +410,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_AddPlatform_1(Project* self, P
 
 Platform* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetCurrentPlatform_0(Project* self) {
   return &self->GetCurrentPlatform();
+}
+
+PlatformSpecificAssets* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetPlatformSpecificAssets_0(Project* self) {
+  return &self->GetPlatformSpecificAssets();
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_HasLayoutNamed_1(Project* self, char* arg0) {
@@ -3466,6 +3478,44 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_STATIC_IsObject_1(Pa
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata___destroy___0(ParameterMetadata* self) {
+  delete self;
+}
+
+// PlatformSpecificAssets
+
+PlatformSpecificAssets* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformSpecificAssets_PlatformSpecificAssets_0() {
+  return new PlatformSpecificAssets();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformSpecificAssets_Has_2(PlatformSpecificAssets* self, char* arg0, char* arg1) {
+  return self->Has(arg0, arg1);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformSpecificAssets_Get_2(PlatformSpecificAssets* self, char* arg0, char* arg1) {
+  return self->Get(arg0, arg1).c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformSpecificAssets_Remove_2(PlatformSpecificAssets* self, char* arg0, char* arg1) {
+  self->Remove(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformSpecificAssets_Set_3(PlatformSpecificAssets* self, char* arg0, char* arg1, char* arg2) {
+  self->Set(arg0, arg1, arg2);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformSpecificAssets_ExposeResources_1(PlatformSpecificAssets* self, ArbitraryResourceWorker* arg0) {
+  self->ExposeResources(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformSpecificAssets_SerializeTo_1(PlatformSpecificAssets* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformSpecificAssets_UnserializeFrom_1(PlatformSpecificAssets* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformSpecificAssets___destroy___0(PlatformSpecificAssets* self) {
   delete self;
 }
 
