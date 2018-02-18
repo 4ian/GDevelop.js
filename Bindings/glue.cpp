@@ -416,6 +416,10 @@ PlatformSpecificAssets* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetPlatform
   return &self->GetPlatformSpecificAssets();
 }
 
+LoadingScreen* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetLoadingScreen_0(Project* self) {
+  return &self->GetLoadingScreen();
+}
+
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_HasLayoutNamed_1(Project* self, char* arg0) {
   return self->HasLayoutNamed(arg0);
 }
@@ -3153,6 +3157,32 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_UnserializeFrom_1(ImageR
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource___destroy___0(ImageResource* self) {
+  delete self;
+}
+
+// LoadingScreen
+
+LoadingScreen* EMSCRIPTEN_KEEPALIVE emscripten_bind_LoadingScreen_LoadingScreen_0() {
+  return new LoadingScreen();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LoadingScreen_ShowGDevelopSplash_1(LoadingScreen* self, bool arg0) {
+  self->ShowGDevelopSplash(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_LoadingScreen_IsGDevelopSplashShown_0(LoadingScreen* self) {
+  return self->IsGDevelopSplashShown();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LoadingScreen_SerializeTo_1(LoadingScreen* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LoadingScreen_UnserializeFrom_1(LoadingScreen* self, SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LoadingScreen___destroy___0(LoadingScreen* self) {
   delete self;
 }
 

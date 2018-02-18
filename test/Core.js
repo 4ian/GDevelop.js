@@ -37,6 +37,13 @@ describe('libGD.js', function() {
       expect(project.getMinimumFPS()).to.be(15);
     });
 
+    it('can store loading screen setup', function() {
+      project.getLoadingScreen().showGDevelopSplash(true);
+      expect(project.getLoadingScreen().isGDevelopSplashShown()).to.be(true);
+      project.getLoadingScreen().showGDevelopSplash(false);
+      expect(project.getLoadingScreen().isGDevelopSplashShown()).to.be(false);
+    });
+
     it('handles layouts', function() {
       expect(project.hasLayoutNamed('Scene')).to.be(false);
 

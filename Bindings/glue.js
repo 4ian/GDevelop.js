@@ -800,6 +800,11 @@ Project.prototype['GetPlatformSpecificAssets'] = Project.prototype.GetPlatformSp
   return wrapPointer(_emscripten_bind_Project_GetPlatformSpecificAssets_0(self), PlatformSpecificAssets);
 };;
 
+Project.prototype['GetLoadingScreen'] = Project.prototype.GetLoadingScreen = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Project_GetLoadingScreen_0(self), LoadingScreen);
+};;
+
 Project.prototype['HasLayoutNamed'] = Project.prototype.HasLayoutNamed = function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
@@ -5208,6 +5213,44 @@ ImageResource.prototype['UnserializeFrom'] = ImageResource.prototype.Unserialize
   ImageResource.prototype['__destroy__'] = ImageResource.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ImageResource___destroy___0(self);
+};
+// LoadingScreen
+function LoadingScreen() {
+  this.ptr = _emscripten_bind_LoadingScreen_LoadingScreen_0();
+  getCache(LoadingScreen)[this.ptr] = this;
+};;
+LoadingScreen.prototype = Object.create(WrapperObject.prototype);
+LoadingScreen.prototype.constructor = LoadingScreen;
+LoadingScreen.prototype.__class__ = LoadingScreen;
+LoadingScreen.__cache__ = {};
+Module['LoadingScreen'] = LoadingScreen;
+
+LoadingScreen.prototype['ShowGDevelopSplash'] = LoadingScreen.prototype.ShowGDevelopSplash = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_LoadingScreen_ShowGDevelopSplash_1(self, arg0);
+};;
+
+LoadingScreen.prototype['IsGDevelopSplashShown'] = LoadingScreen.prototype.IsGDevelopSplashShown = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_LoadingScreen_IsGDevelopSplashShown_0(self));
+};;
+
+LoadingScreen.prototype['SerializeTo'] = LoadingScreen.prototype.SerializeTo = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_LoadingScreen_SerializeTo_1(self, arg0);
+};;
+
+LoadingScreen.prototype['UnserializeFrom'] = LoadingScreen.prototype.UnserializeFrom = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_LoadingScreen_UnserializeFrom_1(self, arg0);
+};;
+
+  LoadingScreen.prototype['__destroy__'] = LoadingScreen.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_LoadingScreen___destroy___0(self);
 };
 // SerializerValue
 function SerializerValue() { throw "cannot construct a SerializerValue, no constructor in IDL" }
