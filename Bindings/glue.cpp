@@ -2529,6 +2529,15 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_GetAbsoluteFile_1
   return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
 }
 
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_GetProperties_1(AudioResource* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_UpdateProperty_3(AudioResource* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_SerializeTo_1(AudioResource* self, SerializerElement* arg0) {
   self->SerializeTo(*arg0);
 }
@@ -3146,6 +3155,15 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetFile_0(ImageRe
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetAbsoluteFile_1(ImageResource* self, Project* arg0) {
   static gd::String temp;
   return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetProperties_1(ImageResource* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_UpdateProperty_3(ImageResource* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_SerializeTo_1(ImageResource* self, SerializerElement* arg0) {
@@ -4353,6 +4371,15 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetFile_0(Resource* se
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetAbsoluteFile_1(Resource* self, Project* arg0) {
   static gd::String temp;
   return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetProperties_1(Resource* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_UpdateProperty_3(Resource* self, char* arg0, char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SerializeTo_1(Resource* self, SerializerElement* arg0) {

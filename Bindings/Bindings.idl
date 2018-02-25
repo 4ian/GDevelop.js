@@ -443,6 +443,24 @@ interface Layer {
     boolean GetVisibility();
 };
 
+interface PropertyDescriptor {
+    void PropertyDescriptor([Const] DOMString propValue);
+
+    [Ref] PropertyDescriptor SetValue([Const] DOMString value);
+    [Const, Ref] DOMString GetValue();
+    [Ref] PropertyDescriptor SetType([Const] DOMString type);
+    [Const, Ref] DOMString GetType();
+    [Ref] PropertyDescriptor AddExtraInfo([Const] DOMString type);
+    [Value] VectorString GetExtraInfo();
+};
+
+interface MapStringPropertyDescriptor {
+    [Ref] PropertyDescriptor MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] PropertyDescriptor prop);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
 interface Resource {
     void Resource();
 
@@ -457,6 +475,9 @@ interface Resource {
     void SetFile([Const] DOMString file);
     [Const, Ref] DOMString GetFile();
     [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
+
+    [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
@@ -496,6 +517,9 @@ interface ImageResource {
     [Const, Ref] DOMString GetFile();
     [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
 
+    [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
+
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
 };
@@ -516,26 +540,11 @@ interface AudioResource {
     [Const, Ref] DOMString GetFile();
     [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
 
+    [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
+
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
-};
-
-interface PropertyDescriptor {
-    void PropertyDescriptor([Const] DOMString propValue);
-
-    [Ref] PropertyDescriptor SetValue([Const] DOMString value);
-    [Const, Ref] DOMString GetValue();
-    [Ref] PropertyDescriptor SetType([Const] DOMString type);
-    [Const, Ref] DOMString GetType();
-    [Ref] PropertyDescriptor AddExtraInfo([Const] DOMString type);
-    [Value] VectorString GetExtraInfo();
-};
-
-interface MapStringPropertyDescriptor {
-    [Ref] PropertyDescriptor MAP_get([Const] DOMString name);
-    void MAP_set([Const] DOMString name, [Const, Ref] PropertyDescriptor prop);
-    boolean MAP_has([Const] DOMString name);
-    [Value] VectorString MAP_keys();
 };
 
 interface InitialInstance {

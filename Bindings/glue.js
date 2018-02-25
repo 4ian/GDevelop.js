@@ -4215,6 +4215,23 @@ AudioResource.prototype['GetAbsoluteFile'] = AudioResource.prototype.GetAbsolute
   return Pointer_stringify(_emscripten_bind_AudioResource_GetAbsoluteFile_1(self, arg0));
 };;
 
+AudioResource.prototype['GetProperties'] = AudioResource.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_AudioResource_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+AudioResource.prototype['UpdateProperty'] = AudioResource.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_AudioResource_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
 AudioResource.prototype['SerializeTo'] = AudioResource.prototype.SerializeTo = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
@@ -5196,6 +5213,23 @@ ImageResource.prototype['GetAbsoluteFile'] = ImageResource.prototype.GetAbsolute
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   return Pointer_stringify(_emscripten_bind_ImageResource_GetAbsoluteFile_1(self, arg0));
+};;
+
+ImageResource.prototype['GetProperties'] = ImageResource.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_ImageResource_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+ImageResource.prototype['UpdateProperty'] = ImageResource.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_ImageResource_UpdateProperty_3(self, arg0, arg1, arg2));
 };;
 
 ImageResource.prototype['SerializeTo'] = ImageResource.prototype.SerializeTo = function(arg0) {
@@ -7117,6 +7151,23 @@ Resource.prototype['GetAbsoluteFile'] = Resource.prototype.GetAbsoluteFile = fun
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   return Pointer_stringify(_emscripten_bind_Resource_GetAbsoluteFile_1(self, arg0));
+};;
+
+Resource.prototype['GetProperties'] = Resource.prototype.GetProperties = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_Resource_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+Resource.prototype['UpdateProperty'] = Resource.prototype.UpdateProperty = function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_Resource_UpdateProperty_3(self, arg0, arg1, arg2));
 };;
 
 Resource.prototype['SerializeTo'] = Resource.prototype.SerializeTo = function(arg0) {

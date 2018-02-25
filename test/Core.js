@@ -549,10 +549,32 @@ describe('libGD.js', function() {
       expect(resource.getName()).to.be('MyResource');
       expect(resource.getFile()).to.be('MyFile');
     });
+
+    it('has smooth and alreadyLoaded custom properties', function() {
+      var project = gd.ProjectHelper.createNewGDJSProject();
+      var resource = new gd.ImageResource();
+
+      var properties = resource.getProperties();
+      expect(properties.get('Smooth the image').getValue()).to.be('true');
+      expect(properties.get('Always loaded in memory').getValue()).to.be(
+        'false'
+      );
+
+      // Note: updateProperty expect the booleans in an usual "0" or "1" format.
+      resource.updateProperty('Smooth the image', '0', project);
+      resource.updateProperty('Always loaded in memory', '1', project);
+
+      var updatedProperties = resource.getProperties();
+      expect(updatedProperties.get('Smooth the image').getValue()).to.be('false');
+      expect(updatedProperties.get('Always loaded in memory').getValue()).to.be(
+        'true'
+      );
+
+      project.delete();
+    });
   });
 
   describe('gd.ResourcesManager', function() {
-
     it('should support adding resources', function() {
       var project = gd.ProjectHelper.createNewGDJSProject();
       var resource = new gd.Resource();
@@ -576,9 +598,15 @@ describe('libGD.js', function() {
       project.getResourcesManager().addResource(resource);
       project.getResourcesManager().addResource(resource2);
 
-      expect(project.getResourcesManager().getResourcePosition('MyResource')).to.be(0);
-      expect(project.getResourcesManager().getResourcePosition('MyResource2')).to.be(1);
-      expect(project.getResourcesManager().getResourcePosition('MyResource3')).to.be(-1);
+      expect(
+        project.getResourcesManager().getResourcePosition('MyResource')
+      ).to.be(0);
+      expect(
+        project.getResourcesManager().getResourcePosition('MyResource2')
+      ).to.be(1);
+      expect(
+        project.getResourcesManager().getResourcePosition('MyResource3')
+      ).to.be(-1);
       project.delete();
     });
 
