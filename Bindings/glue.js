@@ -1230,6 +1230,50 @@ EventsParametersLister.prototype['Launch'] = EventsParametersLister.prototype.La
   var self = this.ptr;
   _emscripten_bind_EventsParametersLister___destroy___0(self);
 };
+// VectorPolygon2d
+function VectorPolygon2d() {
+  this.ptr = _emscripten_bind_VectorPolygon2d_VectorPolygon2d_0();
+  getCache(VectorPolygon2d)[this.ptr] = this;
+};;
+VectorPolygon2d.prototype = Object.create(WrapperObject.prototype);
+VectorPolygon2d.prototype.constructor = VectorPolygon2d;
+VectorPolygon2d.prototype.__class__ = VectorPolygon2d;
+VectorPolygon2d.__cache__ = {};
+Module['VectorPolygon2d'] = VectorPolygon2d;
+
+VectorPolygon2d.prototype['push_back'] = VectorPolygon2d.prototype.push_back = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VectorPolygon2d_push_back_1(self, arg0);
+};;
+
+VectorPolygon2d.prototype['size'] = VectorPolygon2d.prototype.size = function() {
+  var self = this.ptr;
+  return _emscripten_bind_VectorPolygon2d_size_0(self);
+};;
+
+VectorPolygon2d.prototype['at'] = VectorPolygon2d.prototype.at = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_VectorPolygon2d_at_1(self, arg0), Polygon2d);
+};;
+
+VectorPolygon2d.prototype['WRAPPED_set'] = VectorPolygon2d.prototype.WRAPPED_set = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_VectorPolygon2d_WRAPPED_set_2(self, arg0, arg1);
+};;
+
+VectorPolygon2d.prototype['clear'] = VectorPolygon2d.prototype.clear = function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorPolygon2d_clear_0(self);
+};;
+
+  VectorPolygon2d.prototype['__destroy__'] = VectorPolygon2d.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorPolygon2d___destroy___0(self);
+};
 // EventMetadata
 function EventMetadata() { throw "cannot construct a EventMetadata, no constructor in IDL" }
 EventMetadata.prototype = Object.create(WrapperObject.prototype);
@@ -3237,6 +3281,51 @@ Point.prototype['SetY'] = Point.prototype.SetY = function(arg0) {
   Point.prototype['__destroy__'] = Point.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_Point___destroy___0(self);
+};
+// Polygon2d
+function Polygon2d() {
+  this.ptr = _emscripten_bind_Polygon2d_Polygon2d_0();
+  getCache(Polygon2d)[this.ptr] = this;
+};;
+Polygon2d.prototype = Object.create(WrapperObject.prototype);
+Polygon2d.prototype.constructor = Polygon2d;
+Polygon2d.prototype.__class__ = Polygon2d;
+Polygon2d.__cache__ = {};
+Module['Polygon2d'] = Polygon2d;
+
+Polygon2d.prototype['Move'] = Polygon2d.prototype.Move = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Polygon2d_Move_2(self, arg0, arg1);
+};;
+
+Polygon2d.prototype['Rotate'] = Polygon2d.prototype.Rotate = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Polygon2d_Rotate_1(self, arg0);
+};;
+
+Polygon2d.prototype['IsConvex'] = Polygon2d.prototype.IsConvex = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_Polygon2d_IsConvex_0(self));
+};;
+
+Polygon2d.prototype['ComputeCenter'] = Polygon2d.prototype.ComputeCenter = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Polygon2d_ComputeCenter_0(self), Vector2f);
+};;
+
+Polygon2d.prototype['STATIC_CreateRectangle'] = Polygon2d.prototype.STATIC_CreateRectangle = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  return wrapPointer(_emscripten_bind_Polygon2d_STATIC_CreateRectangle_2(self, arg0, arg1), Polygon2d);
+};;
+
+  Polygon2d.prototype['__destroy__'] = Polygon2d.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_Polygon2d___destroy___0(self);
 };
 // TiledSpriteObject
 function TiledSpriteObject(arg0) {
@@ -6755,6 +6844,28 @@ Sprite.prototype['HasPoint'] = Sprite.prototype.HasPoint = function(arg0) {
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_Sprite_HasPoint_1(self, arg0));
+};;
+
+Sprite.prototype['IsCollisionMaskAutomatic'] = Sprite.prototype.IsCollisionMaskAutomatic = function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_Sprite_IsCollisionMaskAutomatic_0(self));
+};;
+
+Sprite.prototype['SetCollisionMaskAutomatic'] = Sprite.prototype.SetCollisionMaskAutomatic = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Sprite_SetCollisionMaskAutomatic_1(self, arg0);
+};;
+
+Sprite.prototype['GetCustomCollisionMask'] = Sprite.prototype.GetCustomCollisionMask = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Sprite_GetCustomCollisionMask_0(self), VectorPolygon2d);
+};;
+
+Sprite.prototype['SetCustomCollisionMask'] = Sprite.prototype.SetCustomCollisionMask = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Sprite_SetCustomCollisionMask_1(self, arg0);
 };;
 
   Sprite.prototype['__destroy__'] = Sprite.prototype.__destroy__ = function() {

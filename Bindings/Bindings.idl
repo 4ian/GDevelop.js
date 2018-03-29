@@ -1187,6 +1187,27 @@ interface VectorPoint {
     void clear();
 };
 
+interface Polygon2d {
+    void Polygon2d();
+
+    void Move(float x, float y);
+    void Rotate(float angle);
+    boolean IsConvex();
+    [Value] Vector2f ComputeCenter();
+
+    [Value] Polygon2d STATIC_CreateRectangle(float width, float height);
+};
+
+interface VectorPolygon2d {
+    void VectorPolygon2d();
+
+    void push_back([Const, Ref] Polygon2d polygon);
+    unsigned long size();
+    [Ref] Polygon2d at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] Polygon2d polygon);
+    void clear();
+};
+
 interface Sprite {
     void Sprite();
 
@@ -1203,6 +1224,12 @@ interface Sprite {
     void DelPoint([Const] DOMString name);
     [Ref] Point GetPoint([Const] DOMString name);
     boolean HasPoint([Const] DOMString name);
+
+    boolean IsCollisionMaskAutomatic();
+    void SetCollisionMaskAutomatic(boolean enabled);
+
+    [Ref] VectorPolygon2d GetCustomCollisionMask();
+    void SetCustomCollisionMask([Const, Ref] VectorPolygon2d collisionMask);
 };
 
 interface Direction {

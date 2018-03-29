@@ -673,6 +673,36 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsParametersLister___destroy___0(E
   delete self;
 }
 
+// VectorPolygon2d
+
+VectorPolygon2d* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPolygon2d_VectorPolygon2d_0() {
+  return new VectorPolygon2d();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPolygon2d_push_back_1(VectorPolygon2d* self, Polygon2d* arg0) {
+  self->push_back(*arg0);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPolygon2d_size_0(VectorPolygon2d* self) {
+  return self->size();
+}
+
+Polygon2d* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPolygon2d_at_1(VectorPolygon2d* self, unsigned int arg0) {
+  return &self->at(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPolygon2d_WRAPPED_set_2(VectorPolygon2d* self, unsigned int arg0, Polygon2d* arg1) {
+  self->WRAPPED_set(arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPolygon2d_clear_0(VectorPolygon2d* self) {
+  self->clear();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPolygon2d___destroy___0(VectorPolygon2d* self) {
+  delete self;
+}
+
 // EventMetadata
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventMetadata_GetFullName_0(EventMetadata* self) {
@@ -1914,6 +1944,38 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Point_SetY_1(Point* self, float arg0) 
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Point___destroy___0(Point* self) {
+  delete self;
+}
+
+// Polygon2d
+
+Polygon2d* EMSCRIPTEN_KEEPALIVE emscripten_bind_Polygon2d_Polygon2d_0() {
+  return new Polygon2d();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Polygon2d_Move_2(Polygon2d* self, float arg0, float arg1) {
+  self->Move(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Polygon2d_Rotate_1(Polygon2d* self, float arg0) {
+  self->Rotate(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Polygon2d_IsConvex_0(Polygon2d* self) {
+  return self->IsConvex();
+}
+
+sf::Vector2f* EMSCRIPTEN_KEEPALIVE emscripten_bind_Polygon2d_ComputeCenter_0(Polygon2d* self) {
+  static sf::Vector2f temp;
+  return (temp = self->ComputeCenter(), &temp);
+}
+
+Polygon2d* EMSCRIPTEN_KEEPALIVE emscripten_bind_Polygon2d_STATIC_CreateRectangle_2(Polygon2d* self, float arg0, float arg1) {
+  static Polygon2d temp;
+  return (temp = self->STATIC_CreateRectangle(arg0, arg1), &temp);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Polygon2d___destroy___0(Polygon2d* self) {
   delete self;
 }
 
@@ -4128,6 +4190,22 @@ Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetPoint_1(Sprite* self, char
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_HasPoint_1(Sprite* self, char* arg0) {
   return self->HasPoint(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_IsCollisionMaskAutomatic_0(Sprite* self) {
+  return self->IsCollisionMaskAutomatic();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetCollisionMaskAutomatic_1(Sprite* self, bool arg0) {
+  self->SetCollisionMaskAutomatic(arg0);
+}
+
+VectorPolygon2d* EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_GetCustomCollisionMask_0(Sprite* self) {
+  return &self->GetCustomCollisionMask();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite_SetCustomCollisionMask_1(Sprite* self, VectorPolygon2d* arg0) {
+  self->SetCustomCollisionMask(*arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite___destroy___0(Sprite* self) {

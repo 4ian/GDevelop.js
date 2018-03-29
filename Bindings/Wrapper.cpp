@@ -254,6 +254,7 @@ typedef std::map<gd::String, gd::Variable> MapStringVariable;
 typedef std::map<gd::String, gd::PropertyDescriptor> MapStringPropertyDescriptor;
 typedef std::set<gd::String> SetString;
 typedef std::vector<Point> VectorPoint;
+typedef std::vector<Polygon2d> VectorPolygon2d;
 typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 
 //Customize some functions implementation thanks to WRAPPED_* macros
@@ -325,6 +326,7 @@ typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 #define STATIC_ObjectRemovedInLayout ObjectRemovedInLayout
 #define STATIC_GlobalObjectRenamed GlobalObjectRenamed
 #define STATIC_GlobalObjectRemoved GlobalObjectRemoved
+#define STATIC_CreateRectangle CreateRectangle
 
 //We postfix some methods with "At" as Javascript does not support overloading
 #define GetLayoutAt GetLayout
