@@ -1265,6 +1265,12 @@ VectorPolygon2d.prototype['WRAPPED_set'] = VectorPolygon2d.prototype.WRAPPED_set
   _emscripten_bind_VectorPolygon2d_WRAPPED_set_2(self, arg0, arg1);
 };;
 
+VectorPolygon2d.prototype['FREE_removeFromVectorPolygon2d'] = VectorPolygon2d.prototype.FREE_removeFromVectorPolygon2d = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VectorPolygon2d_FREE_removeFromVectorPolygon2d_1(self, arg0);
+};;
+
 VectorPolygon2d.prototype['clear'] = VectorPolygon2d.prototype.clear = function() {
   var self = this.ptr;
   _emscripten_bind_VectorPolygon2d_clear_0(self);
@@ -3292,6 +3298,11 @@ Polygon2d.prototype.constructor = Polygon2d;
 Polygon2d.prototype.__class__ = Polygon2d;
 Polygon2d.__cache__ = {};
 Module['Polygon2d'] = Polygon2d;
+
+Polygon2d.prototype['GetVertices'] = Polygon2d.prototype.GetVertices = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Polygon2d_GetVertices_0(self), VectorVector2f);
+};;
 
 Polygon2d.prototype['Move'] = Polygon2d.prototype.Move = function(arg0, arg1) {
   var self = this.ptr;
@@ -8026,6 +8037,56 @@ ParserCallbacks.prototype['GetFirstErrorPosition'] = ParserCallbacks.prototype.G
   ParserCallbacks.prototype['__destroy__'] = ParserCallbacks.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_ParserCallbacks___destroy___0(self);
+};
+// VectorVector2f
+function VectorVector2f() {
+  this.ptr = _emscripten_bind_VectorVector2f_VectorVector2f_0();
+  getCache(VectorVector2f)[this.ptr] = this;
+};;
+VectorVector2f.prototype = Object.create(WrapperObject.prototype);
+VectorVector2f.prototype.constructor = VectorVector2f;
+VectorVector2f.prototype.__class__ = VectorVector2f;
+VectorVector2f.__cache__ = {};
+Module['VectorVector2f'] = VectorVector2f;
+
+VectorVector2f.prototype['push_back'] = VectorVector2f.prototype.push_back = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VectorVector2f_push_back_1(self, arg0);
+};;
+
+VectorVector2f.prototype['size'] = VectorVector2f.prototype.size = function() {
+  var self = this.ptr;
+  return _emscripten_bind_VectorVector2f_size_0(self);
+};;
+
+VectorVector2f.prototype['at'] = VectorVector2f.prototype.at = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_VectorVector2f_at_1(self, arg0), Vector2f);
+};;
+
+VectorVector2f.prototype['WRAPPED_set'] = VectorVector2f.prototype.WRAPPED_set = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_VectorVector2f_WRAPPED_set_2(self, arg0, arg1);
+};;
+
+VectorVector2f.prototype['FREE_removeFromVectorVector2f'] = VectorVector2f.prototype.FREE_removeFromVectorVector2f = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VectorVector2f_FREE_removeFromVectorVector2f_1(self, arg0);
+};;
+
+VectorVector2f.prototype['clear'] = VectorVector2f.prototype.clear = function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorVector2f_clear_0(self);
+};;
+
+  VectorVector2f.prototype['__destroy__'] = VectorVector2f.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorVector2f___destroy___0(self);
 };
 (function() {
   function setupEnums() {

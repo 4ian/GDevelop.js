@@ -695,6 +695,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPolygon2d_WRAPPED_set_2(VectorPo
   self->WRAPPED_set(arg0, *arg1);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPolygon2d_FREE_removeFromVectorPolygon2d_1(VectorPolygon2d* self, unsigned int arg0) {
+  removeFromVectorPolygon2d(*self, arg0);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPolygon2d_clear_0(VectorPolygon2d* self) {
   self->clear();
 }
@@ -1951,6 +1955,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Point___destroy___0(Point* self) {
 
 Polygon2d* EMSCRIPTEN_KEEPALIVE emscripten_bind_Polygon2d_Polygon2d_0() {
   return new Polygon2d();
+}
+
+VectorVector2f* EMSCRIPTEN_KEEPALIVE emscripten_bind_Polygon2d_GetVertices_0(Polygon2d* self) {
+  return &self->GetVertices();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Polygon2d_Move_2(Polygon2d* self, float arg0, float arg1) {
@@ -4853,6 +4861,40 @@ unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ParserCallbacks_GetFirstErrorP
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParserCallbacks___destroy___0(ParserCallbacks* self) {
+  delete self;
+}
+
+// VectorVector2f
+
+VectorVector2f* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorVector2f_VectorVector2f_0() {
+  return new VectorVector2f();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorVector2f_push_back_1(VectorVector2f* self, sf::Vector2f* arg0) {
+  self->push_back(*arg0);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorVector2f_size_0(VectorVector2f* self) {
+  return self->size();
+}
+
+sf::Vector2f* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorVector2f_at_1(VectorVector2f* self, unsigned int arg0) {
+  return &self->at(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorVector2f_WRAPPED_set_2(VectorVector2f* self, unsigned int arg0, sf::Vector2f* arg1) {
+  self->WRAPPED_set(arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorVector2f_FREE_removeFromVectorVector2f_1(VectorVector2f* self, unsigned int arg0) {
+  removeFromVectorVector2f(*self, arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorVector2f_clear_0(VectorVector2f* self) {
+  self->clear();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorVector2f___destroy___0(VectorVector2f* self) {
   delete self;
 }
 

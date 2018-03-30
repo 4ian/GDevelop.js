@@ -239,6 +239,16 @@ public:
     };
 };
 
+// Implement some std::vector<*> erase methods as free functions as there is no
+// easy way to properly expose the erase method :'(
+void removeFromVectorPolygon2d(std::vector<Polygon2d>& vec, size_t pos) {
+	vec.erase(vec.begin() + pos);
+}
+
+void removeFromVectorVector2f(std::vector<sf::Vector2f>& vec, size_t pos) {
+	vec.erase(vec.begin() + pos);
+}
+
 //Declares typedef for std::vector and templatized types
 typedef std::vector<gd::String> VectorString;
 typedef std::vector < std::shared_ptr<gd::PlatformExtension> > VectorPlatformExtension;
@@ -255,6 +265,7 @@ typedef std::map<gd::String, gd::PropertyDescriptor> MapStringPropertyDescriptor
 typedef std::set<gd::String> SetString;
 typedef std::vector<Point> VectorPoint;
 typedef std::vector<Polygon2d> VectorPolygon2d;
+typedef std::vector<sf::Vector2f> VectorVector2f;
 typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
 
 //Customize some functions implementation thanks to WRAPPED_* macros

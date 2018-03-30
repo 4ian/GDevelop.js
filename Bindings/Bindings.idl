@@ -1190,6 +1190,7 @@ interface VectorPoint {
 interface Polygon2d {
     void Polygon2d();
 
+    [Ref] VectorVector2f GetVertices();
     void Move(float x, float y);
     void Rotate(float angle);
     boolean IsConvex();
@@ -1205,6 +1206,7 @@ interface VectorPolygon2d {
     unsigned long size();
     [Ref] Polygon2d at(unsigned long index);
     void WRAPPED_set(unsigned long index, [Const, Ref] Polygon2d polygon);
+    void FREE_removeFromVectorPolygon2d(unsigned long index);
     void clear();
 };
 
@@ -1309,6 +1311,16 @@ interface Vector2f {
     attribute float y;
 };
 
+interface VectorVector2f {
+    void VectorVector2f();
+
+    void push_back([Const, Ref] Vector2f pt);
+    unsigned long size();
+    [Ref] Vector2f at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] Vector2f pt);
+    void FREE_removeFromVectorVector2f(unsigned long index);
+    void clear();
+};
 
 //Extensions bindings:
 

@@ -1561,4 +1561,32 @@ describe('libGD.js', function() {
       testMathExpression('MouseX(VariableString(myVariable), 0) + 1');
     });
   });
+
+  describe('gd.Vector2f', function() {
+    describe('gd.VectorVector2f', function() {
+      const vectorVector2f = new gd.VectorVector2f();
+      const vector2f = new gd.Vector2f();
+
+      vectorVector2f.push_back(vector2f);
+      vectorVector2f.push_back(vector2f);
+      vectorVector2f.push_back(vector2f);
+
+      expect(vectorVector2f.size()).to.be(3);
+      vectorVector2f.at(0).set_x(1);
+      vectorVector2f.at(1).set_x(2);
+      vectorVector2f.at(2).set_x(3);
+
+      expect(vectorVector2f.at(0).get_x()).to.be(1);
+      expect(vectorVector2f.at(1).get_x()).to.be(2);
+      expect(vectorVector2f.at(2).get_x()).to.be(3);
+
+      gd.removeFromVectorVector2f(vectorVector2f, 1);
+      expect(vectorVector2f.size()).to.be(2);
+      expect(vectorVector2f.at(0).get_x()).to.be(1);
+      expect(vectorVector2f.at(1).get_x()).to.be(3);
+
+      vectorVector2f.clear();
+      expect(vectorVector2f.size()).to.be(0);
+    });
+  })
 });
