@@ -3,9 +3,7 @@ GDevelop.js
 
 This is a port of some parts of **[GDevelop]** to Javascript using **[Emscripten]**.
 
-GDevelop is a full featured, cross-platform, open-source game creator software requiring no programming skills. Download it on [the official website](http://compilgames.net) and check its [GitHub page](https://github.com/4ian/GD).
-
-This module is used to power [GDevApp], a radically innovative game creator that can be used by anyone to create games directly from a desktop or tablet web browser.
+GDevelop is a full featured, cross-platform, open-source game creator software requiring no programming skills. Download it on [the official website](https://gdevelop-app.com) and check its [GitHub page](https://github.com/4ian/GD).
 
 How to build
 ------------
@@ -44,6 +42,17 @@ source ./emsdk_env.sh
 
 Output is created in */path/to/GD/Binaries/Output/libGD.js/*.
 
+* You can then launch GDevelop 5 that will use your build of Gdevelop.js:
+
+```shell
+    cd ..
+    cd newIDE/app
+    npm install
+    npm start
+```
+
+More information in [GDevelop 5 readme](https://github.com/4ian/GD/blob/master/newIDE/README.md).
+
 Launch tests and examples
 -------------------------
 
@@ -55,7 +64,7 @@ Or launch example:
 
     cd examples && node demo.js
 
-The demo generate a json file that can be opened with [GDevelop] or [GDevApp]!
+The demo generate a json file that can be opened with [GDevelop]!
 
 ### Memory profiler
 
@@ -87,5 +96,4 @@ License
 * GDevelop is under the MIT license (and GPL v3 license for the GUI).
 
 [GDevelop]: https://github.com/4ian/GD
-[GDevApp]: https://gdevapp.com
 [Emscripten]: https://github.com/kripken/emscripten
