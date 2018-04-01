@@ -123,13 +123,17 @@ interface Variable {
     [Const, Ref] DOMString GetString();
     void SetValue([Const] double val);
     double GetValue();
+
     boolean HasChild([Const] DOMString str);
     [Ref] Variable GetChild([Const] DOMString str);
     void RemoveChild([Const] DOMString name);
     boolean RenameChild([Const] DOMString oldName, [Const] DOMString newName);
-    [Const, Ref] MapStringVariable GetAllChildren();
+    [Value] VectorString GetAllChildrenNames();
+    unsigned long GetChildrenCount();
     boolean IsNumber();
     boolean IsStructure();
+    boolean Contains([Const, Ref] Variable variableToSearch, boolean recursive);
+    void RemoveRecursively([Const, Ref] Variable variableToRemove);
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
@@ -140,7 +144,8 @@ interface VariablesContainer {
 
     boolean Has([Const] DOMString name);
     [Ref] Variable Get([Const] DOMString name);
-    [Ref] PairStringVariable GetAt(unsigned long index);
+    [Ref] Variable GetAt(unsigned long index);
+    [Const, Ref] DOMString GetNameAt(unsigned long index);
     [Ref] Variable Insert([Const] DOMString name, [Const, Ref] Variable var, unsigned long index);
     [Ref] Variable InsertNew([Const] DOMString name, unsigned long index);
     void Remove([Const] DOMString name);
@@ -150,6 +155,7 @@ interface VariablesContainer {
     unsigned long GetPosition([Const] DOMString name);
     unsigned long Count();
     void Clear();
+    void RemoveRecursively([Const, Ref] Variable variableToRemove);
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);

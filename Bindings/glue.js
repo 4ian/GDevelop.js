@@ -4597,9 +4597,14 @@ Variable.prototype['RenameChild'] = Variable.prototype.RenameChild = function(ar
   return !!(_emscripten_bind_Variable_RenameChild_2(self, arg0, arg1));
 };;
 
-Variable.prototype['GetAllChildren'] = Variable.prototype.GetAllChildren = function() {
+Variable.prototype['GetAllChildrenNames'] = Variable.prototype.GetAllChildrenNames = function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Variable_GetAllChildren_0(self), MapStringVariable);
+  return wrapPointer(_emscripten_bind_Variable_GetAllChildrenNames_0(self), VectorString);
+};;
+
+Variable.prototype['GetChildrenCount'] = Variable.prototype.GetChildrenCount = function() {
+  var self = this.ptr;
+  return _emscripten_bind_Variable_GetChildrenCount_0(self);
 };;
 
 Variable.prototype['IsNumber'] = Variable.prototype.IsNumber = function() {
@@ -4610,6 +4615,19 @@ Variable.prototype['IsNumber'] = Variable.prototype.IsNumber = function() {
 Variable.prototype['IsStructure'] = Variable.prototype.IsStructure = function() {
   var self = this.ptr;
   return !!(_emscripten_bind_Variable_IsStructure_0(self));
+};;
+
+Variable.prototype['Contains'] = Variable.prototype.Contains = function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  return !!(_emscripten_bind_Variable_Contains_2(self, arg0, arg1));
+};;
+
+Variable.prototype['RemoveRecursively'] = Variable.prototype.RemoveRecursively = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Variable_RemoveRecursively_1(self, arg0);
 };;
 
 Variable.prototype['SerializeTo'] = Variable.prototype.SerializeTo = function(arg0) {
@@ -6330,7 +6348,13 @@ VariablesContainer.prototype['Get'] = VariablesContainer.prototype.Get = functio
 VariablesContainer.prototype['GetAt'] = VariablesContainer.prototype.GetAt = function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return wrapPointer(_emscripten_bind_VariablesContainer_GetAt_1(self, arg0), PairStringVariable);
+  return wrapPointer(_emscripten_bind_VariablesContainer_GetAt_1(self, arg0), Variable);
+};;
+
+VariablesContainer.prototype['GetNameAt'] = VariablesContainer.prototype.GetNameAt = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return Pointer_stringify(_emscripten_bind_VariablesContainer_GetNameAt_1(self, arg0));
 };;
 
 VariablesContainer.prototype['Insert'] = VariablesContainer.prototype.Insert = function(arg0, arg1, arg2) {
@@ -6400,6 +6424,12 @@ VariablesContainer.prototype['Count'] = VariablesContainer.prototype.Count = fun
 VariablesContainer.prototype['Clear'] = VariablesContainer.prototype.Clear = function() {
   var self = this.ptr;
   _emscripten_bind_VariablesContainer_Clear_0(self);
+};;
+
+VariablesContainer.prototype['RemoveRecursively'] = VariablesContainer.prototype.RemoveRecursively = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VariablesContainer_RemoveRecursively_1(self, arg0);
 };;
 
 VariablesContainer.prototype['SerializeTo'] = VariablesContainer.prototype.SerializeTo = function(arg0) {

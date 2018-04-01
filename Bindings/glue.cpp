@@ -2761,8 +2761,13 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_RenameChild_2(Variable* self,
   return self->RenameChild(arg0, arg1);
 }
 
-const MapStringVariable* EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_GetAllChildren_0(Variable* self) {
-  return &self->GetAllChildren();
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_GetAllChildrenNames_0(Variable* self) {
+  static VectorString temp;
+  return (temp = self->GetAllChildrenNames(), &temp);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_GetChildrenCount_0(Variable* self) {
+  return self->GetChildrenCount();
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_IsNumber_0(Variable* self) {
@@ -2771,6 +2776,14 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_IsNumber_0(Variable* self) {
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_IsStructure_0(Variable* self) {
   return self->IsStructure();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_Contains_2(Variable* self, Variable* arg0, bool arg1) {
+  return self->Contains(*arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_RemoveRecursively_1(Variable* self, Variable* arg0) {
+  self->RemoveRecursively(*arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Variable_SerializeTo_1(Variable* self, SerializerElement* arg0) {
@@ -3874,8 +3887,12 @@ Variable* EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_Get_1(Variable
   return &self->Get(arg0);
 }
 
-PairStringVariable* EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_GetAt_1(VariablesContainer* self, unsigned int arg0) {
+Variable* EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_GetAt_1(VariablesContainer* self, unsigned int arg0) {
   return &self->GetAt(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_GetNameAt_1(VariablesContainer* self, unsigned int arg0) {
+  return self->GetNameAt(arg0).c_str();
 }
 
 Variable* EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_Insert_3(VariablesContainer* self, char* arg0, Variable* arg1, unsigned int arg2) {
@@ -3912,6 +3929,10 @@ unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_Count_0(Var
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_Clear_0(VariablesContainer* self) {
   self->Clear();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_RemoveRecursively_1(VariablesContainer* self, Variable* arg0) {
+  self->RemoveRecursively(*arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer_SerializeTo_1(VariablesContainer* self, SerializerElement* arg0) {
