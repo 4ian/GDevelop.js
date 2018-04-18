@@ -13,11 +13,15 @@ How to build
 * Install [Emscripten](https://github.com/kripken/emscripten), as explained on the [Emscripten installation instructions](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html):
 
 ```shell
+git clone https://github.com/juj/emsdk.git
+cd emsdk
 ./emsdk update
 ./emsdk install latest
 ./emsdk activate latest
 source ./emsdk_env.sh
 ```
+
+(on Windows run `emsdk` instead of `./emsdk`, and `emsdk_env.bat` instead of `source ./emsdk_env.sh`. For up-to-date information, check again [Emscripten installation instructions](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)).
 
 * Make sure you have Node.js installed and grunt:
 
