@@ -72,21 +72,21 @@ public:
     arg0 = (const char*)EM_ASM_INT({
       var self = Module['getCache'](Module['ArbitraryResourceWorkerJS'])[$0];
       if (!self.hasOwnProperty('exposeImage')) throw 'a JSImplementation must implement all functions, you forgot ArbitraryResourceWorkerJS::exposeImage.';
-      return ensureString(self.exposeImage(Module.Pointer_stringify($1)));
+      return ensureString(self.exposeImage(Pointer_stringify($1)));
     }, (int)this, arg0.c_str());
   }
   void ExposeShader(gd::String & arg0) {
     arg0 = (const char*)EM_ASM_INT({
       var self = Module['getCache'](Module['ArbitraryResourceWorkerJS'])[$0];
       if (!self.hasOwnProperty('exposeShader')) throw 'a JSImplementation must implement all functions, you forgot ArbitraryResourceWorkerJS::exposeShader.';
-      return ensureString(self.exposeShader(Module.Pointer_stringify($1)));
+      return ensureString(self.exposeShader(Pointer_stringify($1)));
     }, (int)this, arg0.c_str());
   }
   void ExposeFile(gd::String & arg0) {
     arg0 = (const char*)EM_ASM_INT({
       var self = Module['getCache'](Module['ArbitraryResourceWorkerJS'])[$0];
       if (!self.hasOwnProperty('exposeFile')) throw 'a JSImplementation must implement all functions, you forgot ArbitraryResourceWorkerJS::exposeFile.';
-      return ensureString(self.exposeFile(Module.Pointer_stringify($1)));
+      return ensureString(self.exposeFile(Pointer_stringify($1)));
     }, (int)this, arg0.c_str());
   }
 
@@ -103,14 +103,14 @@ public:
 	    EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('mkDir')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::mkDir.';
-	      self.mkDir(Module.Pointer_stringify($1));
+	      self.mkDir(Pointer_stringify($1));
 	    }, (int)this, path.c_str());
 	}
     virtual bool DirExists(const gd::String & path) {
 	    return EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('dirExists')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::dirExists.';
-	      return self.dirExists(Module.Pointer_stringify($1));
+	      return self.dirExists(Pointer_stringify($1));
 	    }, (int)this, path.c_str());
 	}
 
@@ -118,7 +118,7 @@ public:
 	    return EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('fileExists')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::fileExists.';
-	      return self.fileExists(Module.Pointer_stringify($1));
+	      return self.fileExists(Pointer_stringify($1));
 	    }, (int)this, path.c_str());
 	}
 
@@ -126,7 +126,7 @@ public:
 	    return (const char *)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('fileNameFrom')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::fileNameFrom.';
-	      return ensureString(self.fileNameFrom(Module.Pointer_stringify($1)));
+	      return ensureString(self.fileNameFrom(Pointer_stringify($1)));
 	    }, (int)this, file.c_str());
 	}
 
@@ -134,7 +134,7 @@ public:
 	    return (const char *)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('dirNameFrom')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::dirNameFrom.';
-	      return ensureString(self.dirNameFrom(Module.Pointer_stringify($1)));
+	      return ensureString(self.dirNameFrom(Pointer_stringify($1)));
 	    }, (int)this, file.c_str());
 	}
 
@@ -142,7 +142,7 @@ public:
 	    filename = (const char*)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('makeAbsolute')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::makeAbsolute.';
-	      return ensureString(self.makeAbsolute(Module.Pointer_stringify($1), Module.Pointer_stringify($2)));
+	      return ensureString(self.makeAbsolute(Pointer_stringify($1), Pointer_stringify($2)));
 	    }, (int)this, filename.c_str(), baseDirectory.c_str());
 
 	    return true;
@@ -152,7 +152,7 @@ public:
 	    filename = (const char*)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('makeRelative')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::makeRelative.';
-	      return ensureString(self.makeRelative(Module.Pointer_stringify($1), Module.Pointer_stringify($2)));
+	      return ensureString(self.makeRelative(Pointer_stringify($1), Pointer_stringify($2)));
 	    }, (int)this, filename.c_str(), baseDirectory.c_str());
 
 	    return true;
@@ -162,7 +162,7 @@ public:
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('isAbsolute')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::isAbsolute.';
-	      return self.isAbsolute(Module.Pointer_stringify($1));
+	      return self.isAbsolute(Pointer_stringify($1));
 	    }, (int)this, filename.c_str());
 	};
 
@@ -170,7 +170,7 @@ public:
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('copyFile')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::copyFile.';
-	      return self.copyFile(Module.Pointer_stringify($1), Module.Pointer_stringify($2));
+	      return self.copyFile(Pointer_stringify($1), Pointer_stringify($2));
 	    }, (int)this, file.c_str(), destination.c_str());
 	}
 
@@ -178,7 +178,7 @@ public:
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('clearDir')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::clearDir.';
-	      return self.clearDir(Module.Pointer_stringify($1));
+	      return self.clearDir(Pointer_stringify($1));
 	    }, (int)this, directory.c_str());
 	}
 
@@ -186,7 +186,7 @@ public:
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('copyDir')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::copyDir.';
-	      return self.copyDir(Module.Pointer_stringify($1), Module.Pointer_stringify($2));
+	      return self.copyDir(Pointer_stringify($1), Pointer_stringify($2));
 	    }, (int)this, source.c_str(), destination.c_str());
 	}
 
@@ -194,7 +194,7 @@ public:
 	    return (bool)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('writeToFile')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::writeToFile.';
-	      return self.writeToFile(Module.Pointer_stringify($1), Module.Pointer_stringify($2));
+	      return self.writeToFile(Pointer_stringify($1), Pointer_stringify($2));
 	    }, (int)this, file.c_str(), content.c_str());
 	}
 
@@ -202,7 +202,7 @@ public:
 	    return (const char *)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('readFile')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::readFile.';
-	      return ensureString(self.readFile(Module.Pointer_stringify($1)));
+	      return ensureString(self.readFile(Pointer_stringify($1)));
 	    }, (int)this, file.c_str());
 	}
     virtual gd::String GetTempDir() {
@@ -217,7 +217,7 @@ public:
 	    std::vector<gd::String> directories = *(std::vector<gd::String>*)EM_ASM_INT({
 	      var self = Module['getCache'](Module['AbstractFileSystemJS'])[$0];
 	      if (!self.hasOwnProperty('readDir')) throw 'a JSImplementation must implement all functions, you forgot AbstractFileSystemJS::readDir.';
-	      return self.readDir(Module.Pointer_stringify($1), Module.Pointer_stringify($2)).ptr;
+	      return self.readDir(Pointer_stringify($1), Pointer_stringify($2)).ptr;
 	    }, (int)this, path.c_str(), extension.c_str());
 
 	    return directories;
