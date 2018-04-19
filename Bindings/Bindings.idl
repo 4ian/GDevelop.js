@@ -314,7 +314,7 @@ interface Behavior {
     [Const, Ref] DOMString GetName();
     [Const, Ref] DOMString GetTypeName();
 
-    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Const, Ref] Project project);
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
     [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
 };
 
@@ -322,7 +322,7 @@ interface BehaviorsSharedData {
     [Const, Ref] DOMString GetName();
     [Const, Ref] DOMString GetTypeName();
 
-    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Const, Ref] Project project);
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
     [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
 
     void SerializeTo([Ref] SerializerElement element);
@@ -372,7 +372,7 @@ interface Layout {
     [Ref] VariablesContainer GetVariables();
     [Ref] EventsList GetEvents();
 
-    void UpdateBehaviorsSharedData([Const, Ref] Project project);
+    void UpdateBehaviorsSharedData([Ref] Project project);
     [Value] VectorString GetAllBehaviorSharedDataNames();
     boolean HasBehaviorSharedData([Const] DOMString behaviorName);
     [Ref] BehaviorsSharedData GetBehaviorSharedData([Const] DOMString behaviorName);
@@ -580,7 +580,7 @@ interface InitialInstance {
     void SetCustomHeight(float height);
     float GetCustomHeight();
 
-    void UpdateCustomProperty([Const] DOMString name, [Const] DOMString value, [Const, Ref] Project project, [Const, Ref] Layout layout);
+    void UpdateCustomProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout layout);
     [Value] MapStringPropertyDescriptor GetCustomProperties([Ref] Project project, [Ref] Layout layout);
     float GetRawFloatProperty([Const] DOMString name);
     [Const, Ref] DOMString GetRawStringProperty([Const] DOMString name);
