@@ -265,6 +265,7 @@ typedef std::pair<gd::String, TextFormatting> PairStringTextFormatting;
 typedef std::vector<std::pair<gd::String, TextFormatting>> VectorPairStringTextFormatting;
 typedef std::vector<gd::ObjectGroup> VectorObjectGroup;
 typedef std::map<gd::String, gd::String> MapStringString;
+typedef std::map<gd::String, bool> MapStringBoolean;
 typedef std::map<gd::String, gd::ExpressionMetadata> MapStringExpressionMetadata;
 typedef std::map<gd::String, gd::InstructionMetadata> MapStringInstructionMetadata;
 typedef std::map<gd::String, gd::EventMetadata> MapStringEventMetadata;

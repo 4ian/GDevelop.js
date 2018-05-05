@@ -41,6 +41,15 @@ interface MapStringString {
     [Value] VectorString MAP_keys();
 };
 
+interface MapStringBoolean {
+    void MapStringBoolean();
+
+    boolean MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, boolean value);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
 interface MapStringVariable {
     [Ref] Variable MAP_get([Const] DOMString name);
     void MAP_set([Const] DOMString name, [Const, Ref] Variable prop);
@@ -1600,8 +1609,7 @@ interface Exporter {
 
     boolean ExportLayoutForPixiPreview([Ref] Project project, [Ref] Layout layout, [Const] DOMString exportDir);
     boolean ExportExternalLayoutForPixiPreview([Ref] Project project, [Ref] Layout layout, [Ref] ExternalLayout externalLayout, [Const] DOMString exportDir);
-    boolean ExportWholePixiProject([Ref] Project project, [Const] DOMString exportDir,
-        boolean minify, boolean exportForCordova);
+    boolean ExportWholePixiProject([Ref] Project project, [Const] DOMString exportDir, [Ref] MapStringBoolean exportOptions);
 
     boolean ExportWholeCocos2dProject([Ref] Project project, boolean debugMode, [Const] DOMString exportDir);
 
