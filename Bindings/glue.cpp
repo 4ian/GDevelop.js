@@ -3829,6 +3829,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_UnserializeFrom_2(Layout* self,
   self->UnserializeFrom(*arg0, *arg1);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_SetStopSoundsOnStartup_1(Layout* self, bool arg0) {
+  self->SetStopSoundsOnStartup(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_StopSoundsOnStartup_0(Layout* self) {
+  return self->StopSoundsOnStartup();
+}
+
 gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_InsertNewObject_4(Layout* self, Project* arg0, const char* arg1, const char* arg2, unsigned int arg3) {
   return &self->InsertNewObject(*arg0, arg1, arg2, arg3);
 }

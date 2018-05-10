@@ -6238,6 +6238,17 @@ Layout.prototype['UnserializeFrom'] = Layout.prototype.UnserializeFrom = /** @su
   _emscripten_bind_Layout_UnserializeFrom_2(self, arg0, arg1);
 };;
 
+Layout.prototype['SetStopSoundsOnStartup'] = Layout.prototype.SetStopSoundsOnStartup = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Layout_SetStopSoundsOnStartup_1(self, arg0);
+};;
+
+Layout.prototype['StopSoundsOnStartup'] = Layout.prototype.StopSoundsOnStartup = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_Layout_StopSoundsOnStartup_0(self));
+};;
+
 Layout.prototype['InsertNewObject'] = Layout.prototype.InsertNewObject = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
   ensureCache.prepare();
