@@ -305,6 +305,12 @@ TextEntryObject.prototype['UpdateInitialInstanceProperty'] = TextEntryObject.pro
   return !!(_emscripten_bind_TextEntryObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
 };;
 
+TextEntryObject.prototype['ExposeResources'] = TextEntryObject.prototype.ExposeResources = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_TextEntryObject_ExposeResources_1(self, arg0);
+};;
+
 TextEntryObject.prototype['GetVariables'] = TextEntryObject.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_TextEntryObject_GetVariables_0(self), VariablesContainer);
@@ -1478,6 +1484,12 @@ TextObject.prototype['UpdateInitialInstanceProperty'] = TextObject.prototype.Upd
   return !!(_emscripten_bind_TextObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
 };;
 
+TextObject.prototype['ExposeResources'] = TextObject.prototype.ExposeResources = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_TextObject_ExposeResources_1(self, arg0);
+};;
+
 TextObject.prototype['GetVariables'] = TextObject.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_TextObject_GetVariables_0(self), VariablesContainer);
@@ -1652,6 +1664,26 @@ MapStringString.prototype['MAP_keys'] = MapStringString.prototype.MAP_keys = /**
   var self = this.ptr;
   _emscripten_bind_MapStringString___destroy___0(self);
 };
+// ImagesUsedInventorizer
+/** @suppress {undefinedVars, duplicate} */function ImagesUsedInventorizer() {
+  this.ptr = _emscripten_bind_ImagesUsedInventorizer_ImagesUsedInventorizer_0();
+  getCache(ImagesUsedInventorizer)[this.ptr] = this;
+};;
+ImagesUsedInventorizer.prototype = Object.create(WrapperObject.prototype);
+ImagesUsedInventorizer.prototype.constructor = ImagesUsedInventorizer;
+ImagesUsedInventorizer.prototype.__class__ = ImagesUsedInventorizer;
+ImagesUsedInventorizer.__cache__ = {};
+Module['ImagesUsedInventorizer'] = ImagesUsedInventorizer;
+
+ImagesUsedInventorizer.prototype['GetAllUsedImages'] = ImagesUsedInventorizer.prototype.GetAllUsedImages = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ImagesUsedInventorizer_GetAllUsedImages_0(self), SetString);
+};;
+
+  ImagesUsedInventorizer.prototype['__destroy__'] = ImagesUsedInventorizer.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ImagesUsedInventorizer___destroy___0(self);
+};
 // AdMobObject
 /** @suppress {undefinedVars, duplicate} */function AdMobObject(arg0) {
   ensureCache.prepare();
@@ -1728,6 +1760,12 @@ AdMobObject.prototype['UpdateInitialInstanceProperty'] = AdMobObject.prototype.U
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
   if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
   return !!(_emscripten_bind_AdMobObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
+AdMobObject.prototype['ExposeResources'] = AdMobObject.prototype.ExposeResources = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_AdMobObject_ExposeResources_1(self, arg0);
 };;
 
 AdMobObject.prototype['GetVariables'] = AdMobObject.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {
@@ -2194,6 +2232,12 @@ SpriteObject.prototype['UpdateInitialInstanceProperty'] = SpriteObject.prototype
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
   if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
   return !!(_emscripten_bind_SpriteObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
+SpriteObject.prototype['ExposeResources'] = SpriteObject.prototype.ExposeResources = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_SpriteObject_ExposeResources_1(self, arg0);
 };;
 
 SpriteObject.prototype['GetVariables'] = SpriteObject.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {
@@ -2983,6 +3027,11 @@ SetString.prototype.__class__ = SetString;
 SetString.__cache__ = {};
 Module['SetString'] = SetString;
 
+SetString.prototype['FREE_toNewVectorString'] = SetString.prototype.FREE_toNewVectorString = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_SetString_FREE_toNewVectorString_0(self), VectorString);
+};;
+
   SetString.prototype['__destroy__'] = SetString.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_SetString___destroy___0(self);
@@ -3451,6 +3500,12 @@ TiledSpriteObject.prototype['UpdateInitialInstanceProperty'] = TiledSpriteObject
   return !!(_emscripten_bind_TiledSpriteObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
 };;
 
+TiledSpriteObject.prototype['ExposeResources'] = TiledSpriteObject.prototype.ExposeResources = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_TiledSpriteObject_ExposeResources_1(self, arg0);
+};;
+
 TiledSpriteObject.prototype['GetVariables'] = TiledSpriteObject.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_TiledSpriteObject_GetVariables_0(self), VariablesContainer);
@@ -3900,6 +3955,12 @@ PanelSpriteObject.prototype['UpdateInitialInstanceProperty'] = PanelSpriteObject
   return !!(_emscripten_bind_PanelSpriteObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
 };;
 
+PanelSpriteObject.prototype['ExposeResources'] = PanelSpriteObject.prototype.ExposeResources = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_PanelSpriteObject_ExposeResources_1(self, arg0);
+};;
+
 PanelSpriteObject.prototype['GetVariables'] = PanelSpriteObject.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_PanelSpriteObject_GetVariables_0(self), VariablesContainer);
@@ -4142,6 +4203,12 @@ ShapePainterObject.prototype['UpdateInitialInstanceProperty'] = ShapePainterObje
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
   if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
   return !!(_emscripten_bind_ShapePainterObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
+ShapePainterObject.prototype['ExposeResources'] = ShapePainterObject.prototype.ExposeResources = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ShapePainterObject_ExposeResources_1(self, arg0);
 };;
 
 ShapePainterObject.prototype['GetVariables'] = ShapePainterObject.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {
@@ -7690,6 +7757,12 @@ gdObject.prototype['UpdateInitialInstanceProperty'] = gdObject.prototype.UpdateI
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
   if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
   return !!(_emscripten_bind_gdObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
+gdObject.prototype['ExposeResources'] = gdObject.prototype.ExposeResources = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_gdObject_ExposeResources_1(self, arg0);
 };;
 
 gdObject.prototype['GetVariables'] = gdObject.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {

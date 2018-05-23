@@ -98,10 +98,11 @@ function patchGlueCppFile(cb) {
 			if(freeCallPos !== -1) {
 				var nameEndPos = line.indexOf("(", freeCallPos);
 				var name = line.substring(freeCallPos + 11, nameEndPos);
+				var startOfLine = line.substring(0, freeCallPos);
+				var endOfLine = line.substring(nameEndPos+1, line.length);
+				var hasOtherParamers = endOfLine[0] !== ')';
 
-				line = line.substring(0, freeCallPos) +
-	           		name + "(*self, " +
-	           		line.substring(nameEndPos+1, line.length);
+				line = startOfLine + name + "(*self" + (hasOtherParamers ? ', ' : '') + endOfLine;
 			}
 
 			//Fix calls to operator [] with pointers

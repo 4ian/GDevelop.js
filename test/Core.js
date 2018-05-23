@@ -697,13 +697,21 @@ describe('libGD.js', function() {
   describe('gd.ArbitraryResourceWorker', function() {
     var project = gd.ProjectHelper.createNewGDJSProject();
     var obj = project.insertNewObject(project, 'Sprite', 'MyObject', 0);
+    const spriteObject = gd.asSpriteObject(obj);
     var sprite1 = new gd.Sprite();
     sprite1.setImageName('Used');
+    const animation = new gd.Animation();
+    animation.setDirectionsCount(1);
+    animation.getDirection(0).addSprite(sprite1);
+    spriteObject.addAnimation(animation);
 
-    it('should be called with resources of the project', function() {
+    it('should be called with resources of the project', function(done) {
       var worker = extend(new gd.ArbitraryResourceWorkerJS(), {
         exposeImage: function(image) {
-          console.log(image);
+          expect(image).to.be('Used');
+          done();
+
+          return image;
         },
       });
 
@@ -714,6 +722,60 @@ describe('libGD.js', function() {
       project.delete();
     });
   });
+
+  describe('gd.ImagesUsedInventorizer', function() {
+    var sprite1 = new gd.Sprite();
+    sprite1.setImageName('Image1');
+    var sprite2 = new gd.Sprite();
+    sprite2.setImageName('Image2');
+    var sprite3 = new gd.Sprite();
+    sprite3.setImageName('Image3');
+
+    const spriteObject = new gd.SpriteObject('My sprite object');
+    const animation = new gd.Animation();
+    animation.setDirectionsCount(1);
+    animation.getDirection(0).addSprite(sprite1);
+    animation.getDirection(0).addSprite(sprite2);
+    animation.getDirection(0).addSprite(sprite1);
+    spriteObject.addAnimation(animation);
+
+    const spriteObject2 = new gd.SpriteObject('My sprite object');
+    const animation2 = new gd.Animation();
+    animation2.setDirectionsCount(1);
+    animation2.getDirection(0).addSprite(sprite1);
+    animation2.getDirection(0).addSprite(sprite3);
+    animation2.getDirection(0).addSprite(sprite1);
+    spriteObject2.addAnimation(animation2);
+
+    it('should find the images used by objects', function() {
+      const imagesUsedInventorizer = new gd.ImagesUsedInventorizer();
+
+      {
+        spriteObject.exposeResources(imagesUsedInventorizer);
+        const resourceNames = imagesUsedInventorizer.getAllUsedImages().toNewVectorString().toJSArray();
+        expect(resourceNames).to.have.length(2);
+        expect(resourceNames).to.contain('Image1');
+        expect(resourceNames).to.contain('Image2');
+      }
+
+      {
+        spriteObject2.exposeResources(imagesUsedInventorizer);
+        const resourceNames = imagesUsedInventorizer.getAllUsedImages().toNewVectorString().toJSArray();
+        expect(resourceNames).to.have.length(3);
+        expect(resourceNames).to.contain('Image1');
+        expect(resourceNames).to.contain('Image2');
+        expect(resourceNames).to.contain('Image3');
+      }
+
+      imagesUsedInventorizer.delete();
+    });
+
+    after(function() {
+      spriteObject.delete();
+      spriteObject2.delete();
+    });
+  });
+
   describe('gd.Behavior', function() {
     var project = gd.ProjectHelper.createNewGDJSProject();
     var behavior = new gd.Behavior();

@@ -71,8 +71,7 @@ interface MapStringEventMetadata {
 
 interface SetString {
     void SetString();
-
-    //TODO
+    [Value] VectorString FREE_toNewVectorString();
 };
 
 interface ProjectHelper {
@@ -345,7 +344,9 @@ interface gdObject {
     [Value] MapStringPropertyDescriptor GetInitialInstanceProperties([Const, Ref] InitialInstance instance, [Ref] Project project, [Ref] Layout scene);
     boolean UpdateInitialInstanceProperty([Ref] InitialInstance instance, [Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout scene);
 
-    [Ref]VariablesContainer GetVariables();
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+
+    [Ref] VariablesContainer GetVariables();
     [Value] VectorString GetAllBehaviorNames();
     boolean HasBehaviorNamed([Const] DOMString name);
     Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
@@ -1165,6 +1166,12 @@ interface ArbitraryResourceWorkerJS {
     void ExposeFile([Ref] DOMString file);
 };
 
+interface ImagesUsedInventorizer {
+    void ImagesUsedInventorizer();
+
+    [Ref] SetString GetAllUsedImages();
+};
+
 interface LayoutEditorCanvasOptions {
     void LayoutEditorCanvasOptions();
 
@@ -1300,7 +1307,9 @@ interface SpriteObject {
     [Value] MapStringPropertyDescriptor GetInitialInstanceProperties([Const, Ref] InitialInstance instance, [Ref] Project project, [Ref] Layout scene);
     boolean UpdateInitialInstanceProperty([Ref] InitialInstance instance, [Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout scene);
 
-    [Ref]VariablesContainer GetVariables();
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+
+    [Ref] VariablesContainer GetVariables();
     [Value] VectorString GetAllBehaviorNames();
     boolean HasBehaviorNamed([Const] DOMString name);
     Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
@@ -1365,7 +1374,9 @@ interface TextObject {
     [Value] MapStringPropertyDescriptor GetInitialInstanceProperties([Const, Ref] InitialInstance instance, [Ref] Project project, [Ref] Layout scene);
     boolean UpdateInitialInstanceProperty([Ref] InitialInstance instance, [Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout scene);
 
-    [Ref]VariablesContainer GetVariables();
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+
+    [Ref] VariablesContainer GetVariables();
     [Value] VectorString GetAllBehaviorNames();
     boolean HasBehaviorNamed([Const] DOMString name);
     Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
@@ -1399,7 +1410,9 @@ interface TiledSpriteObject {
     [Value] MapStringPropertyDescriptor GetInitialInstanceProperties([Const, Ref] InitialInstance instance, [Ref] Project project, [Ref] Layout scene);
     boolean UpdateInitialInstanceProperty([Ref] InitialInstance instance, [Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout scene);
 
-    [Ref]VariablesContainer GetVariables();
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+
+    [Ref] VariablesContainer GetVariables();
     [Value] VectorString GetAllBehaviorNames();
     boolean HasBehaviorNamed([Const] DOMString name);
     Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
@@ -1449,7 +1462,9 @@ interface PanelSpriteObject {
     [Value] MapStringPropertyDescriptor GetInitialInstanceProperties([Const, Ref] InitialInstance instance, [Ref] Project project, [Ref] Layout scene);
     boolean UpdateInitialInstanceProperty([Ref] InitialInstance instance, [Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout scene);
 
-    [Ref]VariablesContainer GetVariables();
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+
+    [Ref] VariablesContainer GetVariables();
     [Value] VectorString GetAllBehaviorNames();
     boolean HasBehaviorNamed([Const] DOMString name);
     Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
@@ -1476,7 +1491,9 @@ interface AdMobObject {
     [Value] MapStringPropertyDescriptor GetInitialInstanceProperties([Const, Ref] InitialInstance instance, [Ref] Project project, [Ref] Layout scene);
     boolean UpdateInitialInstanceProperty([Ref] InitialInstance instance, [Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout scene);
 
-    [Ref]VariablesContainer GetVariables();
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+
+    [Ref] VariablesContainer GetVariables();
     [Value] VectorString GetAllBehaviorNames();
     boolean HasBehaviorNamed([Const] DOMString name);
     Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
@@ -1526,7 +1543,9 @@ interface ShapePainterObject {
     [Value] MapStringPropertyDescriptor GetInitialInstanceProperties([Const, Ref] InitialInstance instance, [Ref] Project project, [Ref] Layout scene);
     boolean UpdateInitialInstanceProperty([Ref] InitialInstance instance, [Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout scene);
 
-    [Ref]VariablesContainer GetVariables();
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+
+    [Ref] VariablesContainer GetVariables();
     [Value] VectorString GetAllBehaviorNames();
     boolean HasBehaviorNamed([Const] DOMString name);
     Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
@@ -1553,7 +1572,9 @@ interface TextEntryObject {
     [Value] MapStringPropertyDescriptor GetInitialInstanceProperties([Const, Ref] InitialInstance instance, [Ref] Project project, [Ref] Layout scene);
     boolean UpdateInitialInstanceProperty([Ref] InitialInstance instance, [Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout scene);
 
-    [Ref]VariablesContainer GetVariables();
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+
+    [Ref] VariablesContainer GetVariables();
     [Value] VectorString GetAllBehaviorNames();
     boolean HasBehaviorNamed([Const] DOMString name);
     Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);

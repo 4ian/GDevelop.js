@@ -29,6 +29,7 @@
 #include <GDCore/IDE/Project/ProjectResourcesAdder.h>
 #include <GDCore/IDE/AbstractFileSystem.h>
 #include <GDCore/IDE/Project/ArbitraryResourceWorker.h>
+#include <GDCore/IDE/Project/ImagesUsedInventorizer.h>
 #include <GDCore/Extensions/Metadata/MetadataProvider.h>
 #include <GDCore/IDE/Events/EventsParametersLister.h>
 #include <GDCore/IDE/Events/ArbitraryEventsWorker.h>
@@ -247,6 +248,13 @@ void removeFromVectorPolygon2d(std::vector<Polygon2d>& vec, size_t pos) {
 
 void removeFromVectorVector2f(std::vector<sf::Vector2f>& vec, size_t pos) {
 	vec.erase(vec.begin() + pos);
+}
+
+// Implement a conversion from std::set<gd::String> to std::vector<gd::String> as there
+// is no easy way to properly expose iterators :/
+std::vector<gd::String> toNewVectorString(const std::set<gd::String> & set) {
+	std::vector<gd::String> output(set.begin(), set.end());
+	return output;
 }
 
 //Declares typedef for std::vector and templatized types

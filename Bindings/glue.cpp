@@ -104,6 +104,10 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_UpdateInitialInstanceP
   return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_ExposeResources_1(TextEntryObject* self, ArbitraryResourceWorker* arg0) {
+  self->ExposeResources(*arg0);
+}
+
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetVariables_0(TextEntryObject* self) {
   return &self->GetVariables();
 }
@@ -829,6 +833,10 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_UpdateInitialInstanceProper
   return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_ExposeResources_1(TextObject* self, ArbitraryResourceWorker* arg0) {
+  self->ExposeResources(*arg0);
+}
+
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetVariables_0(TextObject* self) {
   return &self->GetVariables();
 }
@@ -931,6 +939,20 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString___destroy___0(MapStrin
   delete self;
 }
 
+// ImagesUsedInventorizer
+
+ImagesUsedInventorizer* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImagesUsedInventorizer_ImagesUsedInventorizer_0() {
+  return new ImagesUsedInventorizer();
+}
+
+SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImagesUsedInventorizer_GetAllUsedImages_0(ImagesUsedInventorizer* self) {
+  return &self->GetAllUsedImages();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ImagesUsedInventorizer___destroy___0(ImagesUsedInventorizer* self) {
+  delete self;
+}
+
 // AdMobObject
 
 AdMobObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_AdMobObject_1(const char* arg0) {
@@ -969,6 +991,10 @@ MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_Ge
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UpdateInitialInstanceProperty_5(AdMobObject* self, InitialInstance* arg0, const char* arg1, const char* arg2, Project* arg3, Layout* arg4) {
   return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_ExposeResources_1(AdMobObject* self, ArbitraryResourceWorker* arg0) {
+  self->ExposeResources(*arg0);
 }
 
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetVariables_0(AdMobObject* self) {
@@ -1264,6 +1290,10 @@ MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_G
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_UpdateInitialInstanceProperty_5(SpriteObject* self, InitialInstance* arg0, const char* arg1, const char* arg2, Project* arg3, Layout* arg4) {
   return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_ExposeResources_1(SpriteObject* self, ArbitraryResourceWorker* arg0) {
+  self->ExposeResources(*arg0);
 }
 
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject_GetVariables_0(SpriteObject* self) {
@@ -1752,6 +1782,11 @@ SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_SetString_SetString_0() {
   return new SetString();
 }
 
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_SetString_FREE_toNewVectorString_0(SetString* self) {
+  static VectorString temp;
+  return (temp = toNewVectorString(*self), &temp);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_SetString___destroy___0(SetString* self) {
   delete self;
 }
@@ -2051,6 +2086,10 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_UpdateInitialInstanc
   return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_ExposeResources_1(TiledSpriteObject* self, ArbitraryResourceWorker* arg0) {
+  self->ExposeResources(*arg0);
+}
+
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_TiledSpriteObject_GetVariables_0(TiledSpriteObject* self) {
   return &self->GetVariables();
 }
@@ -2344,6 +2383,10 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_UpdateInitialInstanc
   return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_ExposeResources_1(PanelSpriteObject* self, ArbitraryResourceWorker* arg0) {
+  self->ExposeResources(*arg0);
+}
+
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetVariables_0(PanelSpriteObject* self) {
   return &self->GetVariables();
 }
@@ -2491,6 +2534,10 @@ MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterOb
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_UpdateInitialInstanceProperty_5(ShapePainterObject* self, InitialInstance* arg0, const char* arg1, const char* arg2, Project* arg3, Layout* arg4) {
   return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_ExposeResources_1(ShapePainterObject* self, ArbitraryResourceWorker* arg0) {
+  self->ExposeResources(*arg0);
 }
 
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_GetVariables_0(ShapePainterObject* self) {
@@ -4702,6 +4749,10 @@ MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_GetIn
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_UpdateInitialInstanceProperty_5(gdObject* self, InitialInstance* arg0, const char* arg1, const char* arg2, Project* arg3, Layout* arg4) {
   return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_ExposeResources_1(gdObject* self, ArbitraryResourceWorker* arg0) {
+  self->ExposeResources(*arg0);
 }
 
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject_GetVariables_0(gdObject* self) {
