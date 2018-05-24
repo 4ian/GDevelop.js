@@ -380,6 +380,14 @@ int EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetMainWindowDefaultHeight_0(Pr
   return self->GetMainWindowDefaultHeight();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetSizeOnStartupMode_1(Project* self, const char* arg0) {
+  self->SetSizeOnStartupMode(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetSizeOnStartupMode_0(Project* self) {
+  return self->GetSizeOnStartupMode().c_str();
+}
+
 int EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetMaximumFPS_0(Project* self) {
   return self->GetMaximumFPS();
 }

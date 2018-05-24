@@ -750,6 +750,19 @@ Project.prototype['GetMainWindowDefaultHeight'] = Project.prototype.GetMainWindo
   return _emscripten_bind_Project_GetMainWindowDefaultHeight_0(self);
 };;
 
+Project.prototype['SetSizeOnStartupMode'] = Project.prototype.SetSizeOnStartupMode = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Project_SetSizeOnStartupMode_1(self, arg0);
+};;
+
+Project.prototype['GetSizeOnStartupMode'] = Project.prototype.GetSizeOnStartupMode = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Project_GetSizeOnStartupMode_0(self));
+};;
+
 Project.prototype['GetMaximumFPS'] = Project.prototype.GetMaximumFPS = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return _emscripten_bind_Project_GetMaximumFPS_0(self);

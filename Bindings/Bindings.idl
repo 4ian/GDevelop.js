@@ -243,6 +243,8 @@ interface Project {
     long GetMainWindowDefaultWidth();
     void SetDefaultHeight(long height);
     long GetMainWindowDefaultHeight();
+    void SetSizeOnStartupMode([Const] DOMString orientation);
+    [Const, Ref] DOMString GetSizeOnStartupMode();
     long GetMaximumFPS();
     void SetMaximumFPS(long fps);
     long GetMinimumFPS();
