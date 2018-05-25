@@ -380,6 +380,14 @@ int EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetMainWindowDefaultHeight_0(Pr
   return self->GetMainWindowDefaultHeight();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetSizeOnStartupMode_1(Project* self, const char* arg0) {
+  self->SetSizeOnStartupMode(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetSizeOnStartupMode_0(Project* self) {
+  return self->GetSizeOnStartupMode().c_str();
+}
+
 int EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetMaximumFPS_0(Project* self) {
   return self->GetMaximumFPS();
 }
@@ -2685,8 +2693,8 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportExternalLayoutForPixiPr
   return self->ExportExternalLayoutForPixiPreview(*arg0, *arg1, *arg2, arg3);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportWholePixiProject_4(gdjs::Exporter* self, Project* arg0, const char* arg1, bool arg2, bool arg3) {
-  return self->ExportWholePixiProject(*arg0, arg1, arg2, arg3);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportWholePixiProject_3(gdjs::Exporter* self, Project* arg0, const char* arg1, MapStringBoolean* arg2) {
+  return self->ExportWholePixiProject(*arg0, arg1, *arg2);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter_ExportWholeCocos2dProject_3(gdjs::Exporter* self, Project* arg0, bool arg1, const char* arg2) {
@@ -2768,6 +2776,33 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent___destroy___0(BaseEvent* sel
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsCodeGenerator_STATIC_GenerateSceneEventsCompleteCode_5(gdjs::EventsCodeGenerator* self, Project* arg0, Layout* arg1, EventsList* arg2, SetString* arg3, bool arg4) {
   static gd::String temp;
   return (temp = self->STATIC_GenerateSceneEventsCompleteCode(*arg0, *arg1, *arg2, *arg3, arg4), temp.c_str());
+}
+
+// MapStringBoolean
+
+MapStringBoolean* EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringBoolean_MapStringBoolean_0() {
+  return new MapStringBoolean();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringBoolean_MAP_get_1(MapStringBoolean* self, const char* arg0) {
+  return self->MAP_get(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringBoolean_MAP_set_2(MapStringBoolean* self, const char* arg0, bool arg1) {
+  (*self)MAP_set(arg0, arg1);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringBoolean_MAP_has_1(MapStringBoolean* self, const char* arg0) {
+  return self->MAP_has(arg0);
+}
+
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringBoolean_MAP_keys_0(MapStringBoolean* self) {
+  static VectorString temp;
+temp.clear(); for(auto it = self->begin(); it != self->end();++it) { temp.push_back(it->first); } return &temp;
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringBoolean___destroy___0(MapStringBoolean* self) {
+  delete self;
 }
 
 // Variable

@@ -750,6 +750,19 @@ Project.prototype['GetMainWindowDefaultHeight'] = Project.prototype.GetMainWindo
   return _emscripten_bind_Project_GetMainWindowDefaultHeight_0(self);
 };;
 
+Project.prototype['SetSizeOnStartupMode'] = Project.prototype.SetSizeOnStartupMode = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Project_SetSizeOnStartupMode_1(self, arg0);
+};;
+
+Project.prototype['GetSizeOnStartupMode'] = Project.prototype.GetSizeOnStartupMode = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Project_GetSizeOnStartupMode_0(self));
+};;
+
 Project.prototype['GetMaximumFPS'] = Project.prototype.GetMaximumFPS = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return _emscripten_bind_Project_GetMaximumFPS_0(self);
@@ -4459,15 +4472,14 @@ Exporter.prototype['ExportExternalLayoutForPixiPreview'] = Exporter.prototype.Ex
   return !!(_emscripten_bind_Exporter_ExportExternalLayoutForPixiPreview_4(self, arg0, arg1, arg2, arg3));
 };;
 
-Exporter.prototype['ExportWholePixiProject'] = Exporter.prototype.ExportWholePixiProject = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
+Exporter.prototype['ExportWholePixiProject'] = Exporter.prototype.ExportWholePixiProject = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
   var self = this.ptr;
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  return !!(_emscripten_bind_Exporter_ExportWholePixiProject_4(self, arg0, arg1, arg2, arg3));
+  return !!(_emscripten_bind_Exporter_ExportWholePixiProject_3(self, arg0, arg1, arg2));
 };;
 
 Exporter.prototype['ExportWholeCocos2dProject'] = Exporter.prototype.ExportWholeCocos2dProject = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
@@ -4595,6 +4607,51 @@ EventsCodeGenerator.prototype['STATIC_GenerateSceneEventsCompleteCode'] = Events
   return Pointer_stringify(_emscripten_bind_EventsCodeGenerator_STATIC_GenerateSceneEventsCompleteCode_5(self, arg0, arg1, arg2, arg3, arg4));
 };;
 
+// MapStringBoolean
+/** @suppress {undefinedVars, duplicate} */function MapStringBoolean() {
+  this.ptr = _emscripten_bind_MapStringBoolean_MapStringBoolean_0();
+  getCache(MapStringBoolean)[this.ptr] = this;
+};;
+MapStringBoolean.prototype = Object.create(WrapperObject.prototype);
+MapStringBoolean.prototype.constructor = MapStringBoolean;
+MapStringBoolean.prototype.__class__ = MapStringBoolean;
+MapStringBoolean.__cache__ = {};
+Module['MapStringBoolean'] = MapStringBoolean;
+
+MapStringBoolean.prototype['MAP_get'] = MapStringBoolean.prototype.MAP_get = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_MapStringBoolean_MAP_get_1(self, arg0));
+};;
+
+MapStringBoolean.prototype['MAP_set'] = MapStringBoolean.prototype.MAP_set = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_MapStringBoolean_MAP_set_2(self, arg0, arg1);
+};;
+
+MapStringBoolean.prototype['MAP_has'] = MapStringBoolean.prototype.MAP_has = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_MapStringBoolean_MAP_has_1(self, arg0));
+};;
+
+MapStringBoolean.prototype['MAP_keys'] = MapStringBoolean.prototype.MAP_keys = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_MapStringBoolean_MAP_keys_0(self), VectorString);
+};;
+
+  MapStringBoolean.prototype['__destroy__'] = MapStringBoolean.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_MapStringBoolean___destroy___0(self);
+};
 // Variable
 /** @suppress {undefinedVars, duplicate} */function Variable() {
   this.ptr = _emscripten_bind_Variable_Variable_0();
