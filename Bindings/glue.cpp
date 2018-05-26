@@ -50,6 +50,407 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystem___destroy___0(Abstr
   delete self;
 }
 
+// ParticleEmitterObject
+
+ParticleEmitterObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_ParticleEmitterObject_1(const char* arg0) {
+  return new ParticleEmitterObject(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetRendererType_1(ParticleEmitterObject* self, ParticleEmitterObject_RendererType arg0) {
+  self->SetRendererType(arg0);
+}
+
+ParticleEmitterObject_RendererType EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetRendererType_0(ParticleEmitterObject* self) {
+  return self->GetRendererType();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleTexture_1(ParticleEmitterObject* self, const char* arg0) {
+  self->SetParticleTexture(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleTexture_0(ParticleEmitterObject* self) {
+  return self->GetParticleTexture().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetRendererParam1_1(ParticleEmitterObject* self, float arg0) {
+  self->SetRendererParam1(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetRendererParam1_0(ParticleEmitterObject* self) {
+  return self->GetRendererParam1();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetRendererParam2_1(ParticleEmitterObject* self, float arg0) {
+  self->SetRendererParam2(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetRendererParam2_0(ParticleEmitterObject* self) {
+  return self->GetRendererParam2();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_IsRenderingAdditive_0(ParticleEmitterObject* self) {
+  return self->IsRenderingAdditive();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetRenderingAdditive_0(ParticleEmitterObject* self) {
+  self->SetRenderingAdditive();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetRenderingAlpha_0(ParticleEmitterObject* self) {
+  self->SetRenderingAlpha();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetMaxParticleNb_1(ParticleEmitterObject* self, float arg0) {
+  self->SetMaxParticleNb(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetMaxParticleNb_0(ParticleEmitterObject* self) {
+  return self->GetMaxParticleNb();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetTank_1(ParticleEmitterObject* self, float arg0) {
+  self->SetTank(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetTank_0(ParticleEmitterObject* self) {
+  return self->GetTank();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetFlow_1(ParticleEmitterObject* self, float arg0) {
+  self->SetFlow(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetFlow_0(ParticleEmitterObject* self) {
+  return self->GetFlow();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetDestroyWhenNoParticles_1(ParticleEmitterObject* self, bool arg0) {
+  self->SetDestroyWhenNoParticles(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetDestroyWhenNoParticles_0(ParticleEmitterObject* self) {
+  return self->GetDestroyWhenNoParticles();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetEmitterForceMin_1(ParticleEmitterObject* self, float arg0) {
+  self->SetEmitterForceMin(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetEmitterForceMin_0(ParticleEmitterObject* self) {
+  return self->GetEmitterForceMin();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetEmitterForceMax_1(ParticleEmitterObject* self, float arg0) {
+  self->SetEmitterForceMax(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetEmitterForceMax_0(ParticleEmitterObject* self) {
+  return self->GetEmitterForceMax();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetConeSprayAngle_1(ParticleEmitterObject* self, float arg0) {
+  self->SetConeSprayAngle(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetConeSprayAngle_0(ParticleEmitterObject* self) {
+  return self->GetConeSprayAngle();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetZoneRadius_1(ParticleEmitterObject* self, float arg0) {
+  self->SetZoneRadius(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetZoneRadius_0(ParticleEmitterObject* self) {
+  return self->GetZoneRadius();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleGravityX_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleGravityX(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleGravityX_0(ParticleEmitterObject* self) {
+  return self->GetParticleGravityX();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleGravityY_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleGravityY(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleGravityY_0(ParticleEmitterObject* self) {
+  return self->GetParticleGravityY();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleGravityZ_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleGravityZ(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleGravityZ_0(ParticleEmitterObject* self) {
+  return self->GetParticleGravityZ();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleGravityAngle_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleGravityAngle(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleGravityAngle_0(ParticleEmitterObject* self) {
+  return self->GetParticleGravityAngle();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleGravityLength_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleGravityLength(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleGravityLength_0(ParticleEmitterObject* self) {
+  return self->GetParticleGravityLength();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetFriction_1(ParticleEmitterObject* self, float arg0) {
+  self->SetFriction(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetFriction_0(ParticleEmitterObject* self) {
+  return self->GetFriction();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleLifeTimeMin_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleLifeTimeMin(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleLifeTimeMin_0(ParticleEmitterObject* self) {
+  return self->GetParticleLifeTimeMin();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleLifeTimeMax_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleLifeTimeMax(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleLifeTimeMax_0(ParticleEmitterObject* self) {
+  return self->GetParticleLifeTimeMax();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleRed1_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleRed1(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleRed1_0(ParticleEmitterObject* self) {
+  return self->GetParticleRed1();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleRed2_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleRed2(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleRed2_0(ParticleEmitterObject* self) {
+  return self->GetParticleRed2();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleGreen1_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleGreen1(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleGreen1_0(ParticleEmitterObject* self) {
+  return self->GetParticleGreen1();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleGreen2_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleGreen2(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleGreen2_0(ParticleEmitterObject* self) {
+  return self->GetParticleGreen2();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleBlue1_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleBlue1(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleBlue1_0(ParticleEmitterObject* self) {
+  return self->GetParticleBlue1();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleBlue2_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleBlue2(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleBlue2_0(ParticleEmitterObject* self) {
+  return self->GetParticleBlue2();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleAlpha1_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleAlpha1(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleAlpha1_0(ParticleEmitterObject* self) {
+  return self->GetParticleAlpha1();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleAlpha2_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleAlpha2(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleAlpha2_0(ParticleEmitterObject* self) {
+  return self->GetParticleAlpha2();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleSize1_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleSize1(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleSize1_0(ParticleEmitterObject* self) {
+  return self->GetParticleSize1();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleSize2_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleSize2(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleSize2_0(ParticleEmitterObject* self) {
+  return self->GetParticleSize2();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleAngle1_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleAngle1(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleAngle1_0(ParticleEmitterObject* self) {
+  return self->GetParticleAngle1();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleAngle2_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleAngle2(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleAngle2_0(ParticleEmitterObject* self) {
+  return self->GetParticleAngle2();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleAlphaRandomness1_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleAlphaRandomness1(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleAlphaRandomness1_0(ParticleEmitterObject* self) {
+  return self->GetParticleAlphaRandomness1();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleAlphaRandomness2_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleAlphaRandomness2(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleAlphaRandomness2_0(ParticleEmitterObject* self) {
+  return self->GetParticleAlphaRandomness2();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleSizeRandomness1_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleSizeRandomness1(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleSizeRandomness1_0(ParticleEmitterObject* self) {
+  return self->GetParticleSizeRandomness1();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleSizeRandomness2_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleSizeRandomness2(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleSizeRandomness2_0(ParticleEmitterObject* self) {
+  return self->GetParticleSizeRandomness2();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleAngleRandomness1_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleAngleRandomness1(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleAngleRandomness1_0(ParticleEmitterObject* self) {
+  return self->GetParticleAngleRandomness1();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetParticleAngleRandomness2_1(ParticleEmitterObject* self, float arg0) {
+  self->SetParticleAngleRandomness2(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetParticleAngleRandomness2_0(ParticleEmitterObject* self) {
+  return self->GetParticleAngleRandomness2();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetName_1(ParticleEmitterObject* self, const char* arg0) {
+  self->SetName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetName_0(ParticleEmitterObject* self) {
+  return self->GetName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SetType_1(ParticleEmitterObject* self, const char* arg0) {
+  self->SetType(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetType_0(ParticleEmitterObject* self) {
+  return self->GetType().c_str();
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetProperties_1(ParticleEmitterObject* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_UpdateProperty_3(ParticleEmitterObject* self, const char* arg0, const char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetInitialInstanceProperties_3(ParticleEmitterObject* self, const InitialInstance* arg0, Project* arg1, Layout* arg2) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_UpdateInitialInstanceProperty_5(ParticleEmitterObject* self, InitialInstance* arg0, const char* arg1, const char* arg2, Project* arg3, Layout* arg4) {
+  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_ExposeResources_1(ParticleEmitterObject* self, ArbitraryResourceWorker* arg0) {
+  self->ExposeResources(*arg0);
+}
+
+VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetVariables_0(ParticleEmitterObject* self) {
+  return &self->GetVariables();
+}
+
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetAllBehaviorNames_0(ParticleEmitterObject* self) {
+  static VectorString temp;
+  return (temp = self->GetAllBehaviorNames(), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_HasBehaviorNamed_1(ParticleEmitterObject* self, const char* arg0) {
+  return self->HasBehaviorNamed(arg0);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_AddNewBehavior_3(ParticleEmitterObject* self, Project* arg0, const char* arg1, const char* arg2) {
+  return self->AddNewBehavior(*arg0, arg1, arg2);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_GetBehavior_1(ParticleEmitterObject* self, const char* arg0) {
+  return &self->GetBehavior(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_RemoveBehavior_1(ParticleEmitterObject* self, const char* arg0) {
+  self->RemoveBehavior(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_RenameBehavior_2(ParticleEmitterObject* self, const char* arg0, const char* arg1) {
+  return self->RenameBehavior(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_SerializeTo_1(ParticleEmitterObject* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_UnserializeFrom_2(ParticleEmitterObject* self, Project* arg0, const SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject___destroy___0(ParticleEmitterObject* self) {
+  delete self;
+}
+
 // VectorPlatformExtension
 
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPlatformExtension_size_0(VectorPlatformExtension* self) {
@@ -5011,6 +5412,17 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorVector2f_clear_0(VectorVector2f*
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorVector2f___destroy___0(VectorVector2f* self) {
   delete self;
+}
+
+// ParticleEmitterObject_RendererType
+ParticleEmitterObject_RendererType EMSCRIPTEN_KEEPALIVE emscripten_enum_ParticleEmitterObject_RendererType_Point() {
+  return ParticleEmitterObject::Point;
+}
+ParticleEmitterObject_RendererType EMSCRIPTEN_KEEPALIVE emscripten_enum_ParticleEmitterObject_RendererType_Line() {
+  return ParticleEmitterObject::Line;
+}
+ParticleEmitterObject_RendererType EMSCRIPTEN_KEEPALIVE emscripten_enum_ParticleEmitterObject_RendererType_Quad() {
+  return ParticleEmitterObject::Quad;
 }
 
 }

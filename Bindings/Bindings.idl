@@ -1597,6 +1597,130 @@ interface TextEntryObject {
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
+enum ParticleEmitterObject_RendererType {
+  "ParticleEmitterObject::Point",
+  "ParticleEmitterObject::Line",
+  "ParticleEmitterObject::Quad"
+};
+
+interface ParticleEmitterObject {
+    void ParticleEmitterObject([Const] DOMString name);
+
+    void SetRendererType(ParticleEmitterObject_RendererType type);
+    ParticleEmitterObject_RendererType GetRendererType();
+
+    void SetParticleTexture([Const] DOMString resourceName);
+    [Const, Ref] DOMString GetParticleTexture();
+    void SetRendererParam1(float newValue);
+    float GetRendererParam1();
+    void SetRendererParam2(float newValue);
+    float GetRendererParam2();
+
+    boolean IsRenderingAdditive();
+    void SetRenderingAdditive();
+    void SetRenderingAlpha();
+
+    void SetMaxParticleNb(float newValue);
+    float GetMaxParticleNb();
+    void SetTank(float newValue);
+    float GetTank();
+    void SetFlow(float newValue);
+    float GetFlow();
+    void SetDestroyWhenNoParticles(boolean enable);
+    boolean GetDestroyWhenNoParticles();
+
+    void SetEmitterForceMin(float newValue);
+    float GetEmitterForceMin();
+    void SetEmitterForceMax(float newValue);
+    float GetEmitterForceMax();
+
+    void SetConeSprayAngle(float newValue);
+    float GetConeSprayAngle();
+
+    void SetZoneRadius(float newValue);
+    float GetZoneRadius();
+
+    void SetParticleGravityX(float newValue);
+    float GetParticleGravityX();
+    void SetParticleGravityY(float newValue);
+    float GetParticleGravityY();
+    void SetParticleGravityZ(float newValue);
+    float GetParticleGravityZ();
+    void SetParticleGravityAngle(float newValue);
+    float GetParticleGravityAngle();
+    void SetParticleGravityLength(float newValue);
+    float GetParticleGravityLength();
+    void SetFriction(float newValue);
+    float GetFriction();
+
+    void SetParticleLifeTimeMin(float newValue);
+    float GetParticleLifeTimeMin();
+    void SetParticleLifeTimeMax(float newValue);
+    float GetParticleLifeTimeMax();
+
+    void SetParticleRed1(float newValue);
+    float GetParticleRed1();
+    void SetParticleRed2(float newValue);
+    float GetParticleRed2();
+    void SetParticleGreen1(float newValue);
+    float GetParticleGreen1();
+    void SetParticleGreen2(float newValue);
+    float GetParticleGreen2();
+    void SetParticleBlue1(float newValue);
+    float GetParticleBlue1();
+    void SetParticleBlue2(float newValue);
+    float GetParticleBlue2();
+    void SetParticleAlpha1(float newValue);
+    float GetParticleAlpha1();
+    void SetParticleAlpha2(float newValue);
+    float GetParticleAlpha2();
+    void SetParticleSize1(float newValue);
+    float GetParticleSize1();
+    void SetParticleSize2(float newValue);
+    float GetParticleSize2();
+    void SetParticleAngle1(float newValue);
+    float GetParticleAngle1();
+    void SetParticleAngle2(float newValue);
+    float GetParticleAngle2();
+    void SetParticleAlphaRandomness1(float newValue);
+    float GetParticleAlphaRandomness1();
+    void SetParticleAlphaRandomness2(float newValue);
+    float GetParticleAlphaRandomness2();
+    void SetParticleSizeRandomness1(float newValue);
+    float GetParticleSizeRandomness1();
+    void SetParticleSizeRandomness2(float newValue);
+    float GetParticleSizeRandomness2();
+    void SetParticleAngleRandomness1(float newValue);
+    float GetParticleAngleRandomness1();
+    void SetParticleAngleRandomness2(float newValue);
+    float GetParticleAngleRandomness2();
+
+    //Inherited from gdObject:
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetType([Const] DOMString type);
+    [Const, Ref] DOMString GetType();
+
+    [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
+
+    [Value] MapStringPropertyDescriptor GetInitialInstanceProperties([Const, Ref] InitialInstance instance, [Ref] Project project, [Ref] Layout scene);
+    boolean UpdateInitialInstanceProperty([Ref] InitialInstance instance, [Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout scene);
+
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+
+    [Ref] VariablesContainer GetVariables();
+    [Value] VectorString GetAllBehaviorNames();
+    boolean HasBehaviorNamed([Const] DOMString name);
+    Behavior AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
+    [Ref] Behavior GetBehavior([Const] DOMString name);
+    void RemoveBehavior([Const] DOMString name);
+    boolean RenameBehavior([Const] DOMString oldBame, [Const] DOMString name);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
 //GDJS bindings:
 
 [NoDelete, Prefix="gdjs::"]

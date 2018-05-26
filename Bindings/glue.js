@@ -204,6 +204,597 @@ Module['AbstractFileSystem'] = AbstractFileSystem;
   var self = this.ptr;
   _emscripten_bind_AbstractFileSystem___destroy___0(self);
 };
+// ParticleEmitterObject
+/** @suppress {undefinedVars, duplicate} */function ParticleEmitterObject(arg0) {
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  this.ptr = _emscripten_bind_ParticleEmitterObject_ParticleEmitterObject_1(arg0);
+  getCache(ParticleEmitterObject)[this.ptr] = this;
+};;
+ParticleEmitterObject.prototype = Object.create(WrapperObject.prototype);
+ParticleEmitterObject.prototype.constructor = ParticleEmitterObject;
+ParticleEmitterObject.prototype.__class__ = ParticleEmitterObject;
+ParticleEmitterObject.__cache__ = {};
+Module['ParticleEmitterObject'] = ParticleEmitterObject;
+
+ParticleEmitterObject.prototype['SetRendererType'] = ParticleEmitterObject.prototype.SetRendererType = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetRendererType_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetRendererType'] = ParticleEmitterObject.prototype.GetRendererType = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetRendererType_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleTexture'] = ParticleEmitterObject.prototype.SetParticleTexture = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ParticleEmitterObject_SetParticleTexture_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleTexture'] = ParticleEmitterObject.prototype.GetParticleTexture = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_ParticleEmitterObject_GetParticleTexture_0(self));
+};;
+
+ParticleEmitterObject.prototype['SetRendererParam1'] = ParticleEmitterObject.prototype.SetRendererParam1 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetRendererParam1_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetRendererParam1'] = ParticleEmitterObject.prototype.GetRendererParam1 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetRendererParam1_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetRendererParam2'] = ParticleEmitterObject.prototype.SetRendererParam2 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetRendererParam2_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetRendererParam2'] = ParticleEmitterObject.prototype.GetRendererParam2 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetRendererParam2_0(self);
+};;
+
+ParticleEmitterObject.prototype['IsRenderingAdditive'] = ParticleEmitterObject.prototype.IsRenderingAdditive = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_ParticleEmitterObject_IsRenderingAdditive_0(self));
+};;
+
+ParticleEmitterObject.prototype['SetRenderingAdditive'] = ParticleEmitterObject.prototype.SetRenderingAdditive = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetRenderingAdditive_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetRenderingAlpha'] = ParticleEmitterObject.prototype.SetRenderingAlpha = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetRenderingAlpha_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetMaxParticleNb'] = ParticleEmitterObject.prototype.SetMaxParticleNb = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetMaxParticleNb_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetMaxParticleNb'] = ParticleEmitterObject.prototype.GetMaxParticleNb = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetMaxParticleNb_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetTank'] = ParticleEmitterObject.prototype.SetTank = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetTank_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetTank'] = ParticleEmitterObject.prototype.GetTank = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetTank_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetFlow'] = ParticleEmitterObject.prototype.SetFlow = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetFlow_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetFlow'] = ParticleEmitterObject.prototype.GetFlow = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetFlow_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetDestroyWhenNoParticles'] = ParticleEmitterObject.prototype.SetDestroyWhenNoParticles = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetDestroyWhenNoParticles_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetDestroyWhenNoParticles'] = ParticleEmitterObject.prototype.GetDestroyWhenNoParticles = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_ParticleEmitterObject_GetDestroyWhenNoParticles_0(self));
+};;
+
+ParticleEmitterObject.prototype['SetEmitterForceMin'] = ParticleEmitterObject.prototype.SetEmitterForceMin = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetEmitterForceMin_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetEmitterForceMin'] = ParticleEmitterObject.prototype.GetEmitterForceMin = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetEmitterForceMin_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetEmitterForceMax'] = ParticleEmitterObject.prototype.SetEmitterForceMax = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetEmitterForceMax_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetEmitterForceMax'] = ParticleEmitterObject.prototype.GetEmitterForceMax = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetEmitterForceMax_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetConeSprayAngle'] = ParticleEmitterObject.prototype.SetConeSprayAngle = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetConeSprayAngle_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetConeSprayAngle'] = ParticleEmitterObject.prototype.GetConeSprayAngle = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetConeSprayAngle_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetZoneRadius'] = ParticleEmitterObject.prototype.SetZoneRadius = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetZoneRadius_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetZoneRadius'] = ParticleEmitterObject.prototype.GetZoneRadius = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetZoneRadius_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleGravityX'] = ParticleEmitterObject.prototype.SetParticleGravityX = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleGravityX_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleGravityX'] = ParticleEmitterObject.prototype.GetParticleGravityX = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleGravityX_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleGravityY'] = ParticleEmitterObject.prototype.SetParticleGravityY = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleGravityY_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleGravityY'] = ParticleEmitterObject.prototype.GetParticleGravityY = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleGravityY_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleGravityZ'] = ParticleEmitterObject.prototype.SetParticleGravityZ = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleGravityZ_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleGravityZ'] = ParticleEmitterObject.prototype.GetParticleGravityZ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleGravityZ_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleGravityAngle'] = ParticleEmitterObject.prototype.SetParticleGravityAngle = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleGravityAngle_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleGravityAngle'] = ParticleEmitterObject.prototype.GetParticleGravityAngle = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleGravityAngle_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleGravityLength'] = ParticleEmitterObject.prototype.SetParticleGravityLength = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleGravityLength_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleGravityLength'] = ParticleEmitterObject.prototype.GetParticleGravityLength = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleGravityLength_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetFriction'] = ParticleEmitterObject.prototype.SetFriction = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetFriction_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetFriction'] = ParticleEmitterObject.prototype.GetFriction = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetFriction_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleLifeTimeMin'] = ParticleEmitterObject.prototype.SetParticleLifeTimeMin = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleLifeTimeMin_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleLifeTimeMin'] = ParticleEmitterObject.prototype.GetParticleLifeTimeMin = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleLifeTimeMin_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleLifeTimeMax'] = ParticleEmitterObject.prototype.SetParticleLifeTimeMax = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleLifeTimeMax_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleLifeTimeMax'] = ParticleEmitterObject.prototype.GetParticleLifeTimeMax = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleLifeTimeMax_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleRed1'] = ParticleEmitterObject.prototype.SetParticleRed1 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleRed1_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleRed1'] = ParticleEmitterObject.prototype.GetParticleRed1 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleRed1_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleRed2'] = ParticleEmitterObject.prototype.SetParticleRed2 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleRed2_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleRed2'] = ParticleEmitterObject.prototype.GetParticleRed2 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleRed2_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleGreen1'] = ParticleEmitterObject.prototype.SetParticleGreen1 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleGreen1_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleGreen1'] = ParticleEmitterObject.prototype.GetParticleGreen1 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleGreen1_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleGreen2'] = ParticleEmitterObject.prototype.SetParticleGreen2 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleGreen2_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleGreen2'] = ParticleEmitterObject.prototype.GetParticleGreen2 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleGreen2_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleBlue1'] = ParticleEmitterObject.prototype.SetParticleBlue1 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleBlue1_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleBlue1'] = ParticleEmitterObject.prototype.GetParticleBlue1 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleBlue1_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleBlue2'] = ParticleEmitterObject.prototype.SetParticleBlue2 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleBlue2_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleBlue2'] = ParticleEmitterObject.prototype.GetParticleBlue2 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleBlue2_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleAlpha1'] = ParticleEmitterObject.prototype.SetParticleAlpha1 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleAlpha1_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleAlpha1'] = ParticleEmitterObject.prototype.GetParticleAlpha1 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleAlpha1_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleAlpha2'] = ParticleEmitterObject.prototype.SetParticleAlpha2 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleAlpha2_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleAlpha2'] = ParticleEmitterObject.prototype.GetParticleAlpha2 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleAlpha2_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleSize1'] = ParticleEmitterObject.prototype.SetParticleSize1 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleSize1_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleSize1'] = ParticleEmitterObject.prototype.GetParticleSize1 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleSize1_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleSize2'] = ParticleEmitterObject.prototype.SetParticleSize2 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleSize2_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleSize2'] = ParticleEmitterObject.prototype.GetParticleSize2 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleSize2_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleAngle1'] = ParticleEmitterObject.prototype.SetParticleAngle1 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleAngle1_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleAngle1'] = ParticleEmitterObject.prototype.GetParticleAngle1 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleAngle1_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleAngle2'] = ParticleEmitterObject.prototype.SetParticleAngle2 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleAngle2_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleAngle2'] = ParticleEmitterObject.prototype.GetParticleAngle2 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleAngle2_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleAlphaRandomness1'] = ParticleEmitterObject.prototype.SetParticleAlphaRandomness1 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleAlphaRandomness1_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleAlphaRandomness1'] = ParticleEmitterObject.prototype.GetParticleAlphaRandomness1 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleAlphaRandomness1_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleAlphaRandomness2'] = ParticleEmitterObject.prototype.SetParticleAlphaRandomness2 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleAlphaRandomness2_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleAlphaRandomness2'] = ParticleEmitterObject.prototype.GetParticleAlphaRandomness2 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleAlphaRandomness2_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleSizeRandomness1'] = ParticleEmitterObject.prototype.SetParticleSizeRandomness1 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleSizeRandomness1_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleSizeRandomness1'] = ParticleEmitterObject.prototype.GetParticleSizeRandomness1 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleSizeRandomness1_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleSizeRandomness2'] = ParticleEmitterObject.prototype.SetParticleSizeRandomness2 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleSizeRandomness2_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleSizeRandomness2'] = ParticleEmitterObject.prototype.GetParticleSizeRandomness2 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleSizeRandomness2_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleAngleRandomness1'] = ParticleEmitterObject.prototype.SetParticleAngleRandomness1 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleAngleRandomness1_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleAngleRandomness1'] = ParticleEmitterObject.prototype.GetParticleAngleRandomness1 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleAngleRandomness1_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetParticleAngleRandomness2'] = ParticleEmitterObject.prototype.SetParticleAngleRandomness2 = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SetParticleAngleRandomness2_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetParticleAngleRandomness2'] = ParticleEmitterObject.prototype.GetParticleAngleRandomness2 = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ParticleEmitterObject_GetParticleAngleRandomness2_0(self);
+};;
+
+ParticleEmitterObject.prototype['SetName'] = ParticleEmitterObject.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ParticleEmitterObject_SetName_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetName'] = ParticleEmitterObject.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_ParticleEmitterObject_GetName_0(self));
+};;
+
+ParticleEmitterObject.prototype['SetType'] = ParticleEmitterObject.prototype.SetType = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ParticleEmitterObject_SetType_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetType'] = ParticleEmitterObject.prototype.GetType = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_ParticleEmitterObject_GetType_0(self));
+};;
+
+ParticleEmitterObject.prototype['GetProperties'] = ParticleEmitterObject.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_ParticleEmitterObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+ParticleEmitterObject.prototype['UpdateProperty'] = ParticleEmitterObject.prototype.UpdateProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_ParticleEmitterObject_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+ParticleEmitterObject.prototype['GetInitialInstanceProperties'] = ParticleEmitterObject.prototype.GetInitialInstanceProperties = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return wrapPointer(_emscripten_bind_ParticleEmitterObject_GetInitialInstanceProperties_3(self, arg0, arg1, arg2), MapStringPropertyDescriptor);
+};;
+
+ParticleEmitterObject.prototype['UpdateInitialInstanceProperty'] = ParticleEmitterObject.prototype.UpdateInitialInstanceProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return !!(_emscripten_bind_ParticleEmitterObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
+ParticleEmitterObject.prototype['ExposeResources'] = ParticleEmitterObject.prototype.ExposeResources = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_ExposeResources_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['GetVariables'] = ParticleEmitterObject.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ParticleEmitterObject_GetVariables_0(self), VariablesContainer);
+};;
+
+ParticleEmitterObject.prototype['GetAllBehaviorNames'] = ParticleEmitterObject.prototype.GetAllBehaviorNames = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ParticleEmitterObject_GetAllBehaviorNames_0(self), VectorString);
+};;
+
+ParticleEmitterObject.prototype['HasBehaviorNamed'] = ParticleEmitterObject.prototype.HasBehaviorNamed = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_ParticleEmitterObject_HasBehaviorNamed_1(self, arg0));
+};;
+
+ParticleEmitterObject.prototype['AddNewBehavior'] = ParticleEmitterObject.prototype.AddNewBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return wrapPointer(_emscripten_bind_ParticleEmitterObject_AddNewBehavior_3(self, arg0, arg1, arg2), Behavior);
+};;
+
+ParticleEmitterObject.prototype['GetBehavior'] = ParticleEmitterObject.prototype.GetBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ParticleEmitterObject_GetBehavior_1(self, arg0), Behavior);
+};;
+
+ParticleEmitterObject.prototype['RemoveBehavior'] = ParticleEmitterObject.prototype.RemoveBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ParticleEmitterObject_RemoveBehavior_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['RenameBehavior'] = ParticleEmitterObject.prototype.RenameBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return !!(_emscripten_bind_ParticleEmitterObject_RenameBehavior_2(self, arg0, arg1));
+};;
+
+ParticleEmitterObject.prototype['SerializeTo'] = ParticleEmitterObject.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ParticleEmitterObject_SerializeTo_1(self, arg0);
+};;
+
+ParticleEmitterObject.prototype['UnserializeFrom'] = ParticleEmitterObject.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_ParticleEmitterObject_UnserializeFrom_2(self, arg0, arg1);
+};;
+
+  ParticleEmitterObject.prototype['__destroy__'] = ParticleEmitterObject.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ParticleEmitterObject___destroy___0(self);
+};
 // VectorPlatformExtension
 function VectorPlatformExtension() { throw "cannot construct a VectorPlatformExtension, no constructor in IDL" }
 VectorPlatformExtension.prototype = Object.create(WrapperObject.prototype);
@@ -8262,6 +8853,15 @@ VectorVector2f.prototype['clear'] = VectorVector2f.prototype.clear = /** @suppre
 (function() {
   function setupEnums() {
     
+
+    // ParticleEmitterObject_RendererType
+
+    Module['ParticleEmitterObject']['Point'] = _emscripten_enum_ParticleEmitterObject_RendererType_Point();
+
+    Module['ParticleEmitterObject']['Line'] = _emscripten_enum_ParticleEmitterObject_RendererType_Line();
+
+    Module['ParticleEmitterObject']['Quad'] = _emscripten_enum_ParticleEmitterObject_RendererType_Quad();
+
   }
   if (Module['calledRun']) setupEnums();
   else addOnPreMain(setupEnums);

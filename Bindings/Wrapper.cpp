@@ -55,6 +55,7 @@
 #include "../../Extensions/PanelSpriteObject/PanelSpriteObject.h"
 #include "../../Extensions/PrimitiveDrawing/ShapePainterObject.h"
 #include "../../Extensions/TextEntryObject/TextEntryObject.h"
+#include "../../Extensions/ParticleSystem/ParticleEmitterObject.h"
 
 #include <GDJS/Events/CodeGeneration/EventsCodeGenerator.h>
 #include <GDJS/IDE/Exporter.h>
@@ -276,6 +277,7 @@ typedef std::vector<Point> VectorPoint;
 typedef std::vector<Polygon2d> VectorPolygon2d;
 typedef std::vector<sf::Vector2f> VectorVector2f;
 typedef gd::Object gdObject; //To avoid clashing javascript Object in glue.js
+typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 
 //Customize some functions implementation thanks to WRAPPED_* macros
 //The original names will be reconstructed in the js file (see postjs.js)
