@@ -113,7 +113,8 @@
         //Convenience methods:
         gd.VectorString.prototype.toJSArray = function() {
             var arr = [];
-            for(var i = 0;i < this.size(); ++i) {
+            var size = this.size();
+            for(var i = 0;i < size; ++i) {
                 arr.push(this.at(i));
             }
             return arr;
