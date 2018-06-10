@@ -733,6 +733,14 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetName_0(Project* self
   return self->GetName().c_str();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetVersion_1(Project* self, const char* arg0) {
+  self->SetVersion(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetVersion_0(Project* self) {
+  return self->GetVersion().c_str();
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetAuthor_1(Project* self, const char* arg0) {
   self->SetAuthor(arg0);
 }

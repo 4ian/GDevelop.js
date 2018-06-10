@@ -1267,6 +1267,19 @@ Project.prototype['GetName'] = Project.prototype.GetName = /** @suppress {undefi
   return Pointer_stringify(_emscripten_bind_Project_GetName_0(self));
 };;
 
+Project.prototype['SetVersion'] = Project.prototype.SetVersion = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Project_SetVersion_1(self, arg0);
+};;
+
+Project.prototype['GetVersion'] = Project.prototype.GetVersion = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Project_GetVersion_0(self));
+};;
+
 Project.prototype['SetAuthor'] = Project.prototype.SetAuthor = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();

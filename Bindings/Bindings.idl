@@ -231,6 +231,8 @@ interface Project {
 
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
+    void SetVersion([Const] DOMString authorName);
+    [Const, Ref] DOMString GetVersion();
     void SetAuthor([Const] DOMString authorName);
     [Const, Ref] DOMString GetAuthor();
     void SetPackageName([Const] DOMString packageName);

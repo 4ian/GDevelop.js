@@ -23,6 +23,8 @@ describe('libGD.js', function() {
     it('has properties that can be read and changed', function() {
       project.setName('My super project');
       expect(project.getName()).to.be('My super project');
+      project.setVersion('1.2.34');
+      expect(project.getVersion()).to.be('1.2.34');
       project.setPackageName('com.test.package');
       expect(project.getPackageName()).to.be('com.test.package');
       project.setOrientation('portrait');
