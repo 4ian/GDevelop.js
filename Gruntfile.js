@@ -101,7 +101,14 @@ module.exports = function(grunt) {
               {expand: true, src: [buildOutputPath+'/libGD.js'], dest: '.', ext: '.js.gz'}
             ]
           }
-        }
+        },
+        copy: {
+          newIDE: {
+            files: [
+              {expand: true, src: [buildOutputPath+'/libGD.js'], dest: '../newIDE/app/public', flatten: true},
+            ],
+          }
+        },
     });
 
     grunt.loadNpmTasks('grunt-mocha-cli');
@@ -121,7 +128,7 @@ module.exports = function(grunt) {
       'newer:shell:updateGDBindings',
       'shell:make',
     ]);
-    grunt.registerTask('build', ['build:raw', 'concat:without-profiler', 'compress']);
-    grunt.registerTask('build:with-profiler', ['build:raw', 'concat:with-profiler', 'compress']);
+    grunt.registerTask('build', ['build:raw', 'concat:without-profiler', 'compress', 'copy:newIDE']);
+    grunt.registerTask('build:with-profiler', ['build:raw', 'concat:with-profiler', 'compress', 'copy:newIDE']);
     grunt.registerTask('test', ['mochacli']);
 };
