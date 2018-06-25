@@ -7363,6 +7363,28 @@ Animation.prototype['SetUseMultipleDirections'] = Animation.prototype.SetUseMult
   var self = this.ptr;
   _emscripten_bind_Animation___destroy___0(self);
 };
+// EventsContext
+function EventsContext() { throw "cannot construct a EventsContext, no constructor in IDL" }
+EventsContext.prototype = Object.create(WrapperObject.prototype);
+EventsContext.prototype.constructor = EventsContext;
+EventsContext.prototype.__class__ = EventsContext;
+EventsContext.__cache__ = {};
+Module['EventsContext'] = EventsContext;
+
+EventsContext.prototype['GetObjectOrGroupNames'] = EventsContext.prototype.GetObjectOrGroupNames = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_EventsContext_GetObjectOrGroupNames_0(self), SetString);
+};;
+
+EventsContext.prototype['GetObjectNames'] = EventsContext.prototype.GetObjectNames = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_EventsContext_GetObjectNames_0(self), SetString);
+};;
+
+  EventsContext.prototype['__destroy__'] = EventsContext.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_EventsContext___destroy___0(self);
+};
 // MapStringEventMetadata
 function MapStringEventMetadata() { throw "cannot construct a MapStringEventMetadata, no constructor in IDL" }
 MapStringEventMetadata.prototype = Object.create(WrapperObject.prototype);
@@ -7690,6 +7712,35 @@ ArbitraryResourceWorkerJS.prototype['ExposeFile'] = ArbitraryResourceWorkerJS.pr
   ArbitraryResourceWorkerJS.prototype['__destroy__'] = ArbitraryResourceWorkerJS.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(self);
+};
+// EventsContextAnalyzer
+/** @suppress {undefinedVars, duplicate} */function EventsContextAnalyzer(arg0, arg1, arg2) {
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  this.ptr = _emscripten_bind_EventsContextAnalyzer_EventsContextAnalyzer_3(arg0, arg1, arg2);
+  getCache(EventsContextAnalyzer)[this.ptr] = this;
+};;
+EventsContextAnalyzer.prototype = Object.create(WrapperObject.prototype);
+EventsContextAnalyzer.prototype.constructor = EventsContextAnalyzer;
+EventsContextAnalyzer.prototype.__class__ = EventsContextAnalyzer;
+EventsContextAnalyzer.__cache__ = {};
+Module['EventsContextAnalyzer'] = EventsContextAnalyzer;
+
+EventsContextAnalyzer.prototype['GetEventsContext'] = EventsContextAnalyzer.prototype.GetEventsContext = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_EventsContextAnalyzer_GetEventsContext_0(self), EventsContext);
+};;
+
+EventsContextAnalyzer.prototype['Launch'] = EventsContextAnalyzer.prototype.Launch = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_EventsContextAnalyzer_Launch_1(self, arg0);
+};;
+
+  EventsContextAnalyzer.prototype['__destroy__'] = EventsContextAnalyzer.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_EventsContextAnalyzer___destroy___0(self);
 };
 // MapStringExpressionMetadata
 function MapStringExpressionMetadata() { throw "cannot construct a MapStringExpressionMetadata, no constructor in IDL" }

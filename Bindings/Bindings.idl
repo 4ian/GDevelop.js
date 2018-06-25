@@ -1168,6 +1168,20 @@ interface EventsParametersLister {
     void Launch([Ref] EventsList events);
 };
 
+
+interface EventsContext {
+    [Const, Ref] SetString GetObjectOrGroupNames();
+    [Const, Ref] SetString GetObjectNames();
+};
+
+interface EventsContextAnalyzer {
+    void EventsContextAnalyzer([Const, Ref] Platform platform, [Ref] Project project, [Ref] Layout layout);
+    [Const, Ref] EventsContext GetEventsContext();
+
+    //Inherited from ArbitraryEventsWorker
+    void Launch([Ref] EventsList events);
+};
+
 interface ArbitraryResourceWorker {
 };
 [JSImplementation="ArbitraryResourceWorker"]

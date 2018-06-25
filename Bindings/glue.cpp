@@ -4550,6 +4550,20 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Animation___destroy___0(Animation* sel
   delete self;
 }
 
+// EventsContext
+
+const SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsContext_GetObjectOrGroupNames_0(EventsContext* self) {
+  return &self->GetObjectOrGroupNames();
+}
+
+const SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsContext_GetObjectNames_0(EventsContext* self) {
+  return &self->GetObjectNames();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsContext___destroy___0(EventsContext* self) {
+  delete self;
+}
+
 // MapStringEventMetadata
 
 EventMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringEventMetadata_MAP_get_1(MapStringEventMetadata* self, const char* arg0) {
@@ -4750,6 +4764,24 @@ ArbitraryResourceWorkerJS* EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourc
 
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(ArbitraryResourceWorkerJS* self) {
+  delete self;
+}
+
+// EventsContextAnalyzer
+
+EventsContextAnalyzer* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsContextAnalyzer_EventsContextAnalyzer_3(const Platform* arg0, Project* arg1, Layout* arg2) {
+  return new EventsContextAnalyzer(*arg0, *arg1, *arg2);
+}
+
+const EventsContext* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsContextAnalyzer_GetEventsContext_0(EventsContextAnalyzer* self) {
+  return &self->GetEventsContext();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsContextAnalyzer_Launch_1(EventsContextAnalyzer* self, EventsList* arg0) {
+  self->Launch(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsContextAnalyzer___destroy___0(EventsContextAnalyzer* self) {
   delete self;
 }
 
