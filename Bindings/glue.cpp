@@ -668,6 +668,36 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_PairStringVariable___destroy___0(PairS
   delete self;
 }
 
+// ExtraInformation
+
+gd::InstructionMetadata::ExtraInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExtraInformation_SetFunctionName_1(gd::InstructionMetadata::ExtraInformation* self, const char* arg0) {
+  return &self->SetFunctionName(arg0);
+}
+
+gd::InstructionMetadata::ExtraInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExtraInformation_SetManipulatedType_1(gd::InstructionMetadata::ExtraInformation* self, const char* arg0) {
+  return &self->SetManipulatedType(arg0);
+}
+
+gd::InstructionMetadata::ExtraInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExtraInformation_SetGetter_1(gd::InstructionMetadata::ExtraInformation* self, const char* arg0) {
+  return &self->SetGetter(arg0);
+}
+
+gd::InstructionMetadata::ExtraInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExtraInformation_SetMutators_1(gd::InstructionMetadata::ExtraInformation* self, const MapStringString* arg0) {
+  return &self->SetMutators(*arg0);
+}
+
+gd::InstructionMetadata::ExtraInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExtraInformation_SetIncludeFile_1(gd::InstructionMetadata::ExtraInformation* self, const char* arg0) {
+  return &self->SetIncludeFile(arg0);
+}
+
+gd::InstructionMetadata::ExtraInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExtraInformation_AddIncludeFile_1(gd::InstructionMetadata::ExtraInformation* self, const char* arg0) {
+  return &self->AddIncludeFile(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExtraInformation___destroy___0(gd::InstructionMetadata::ExtraInformation* self) {
+  delete self;
+}
+
 // ResourcesManager
 
 ResourcesManager* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesManager_ResourcesManager_0() {
@@ -1932,6 +1962,30 @@ unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata_GetParamete
   return self->GetParametersCount();
 }
 
+ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata_SetHidden_0(ExpressionMetadata* self) {
+  return &self->SetHidden();
+}
+
+ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata_SetGroup_1(ExpressionMetadata* self, const char* arg0) {
+  return &self->SetGroup(arg0);
+}
+
+ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata_AddParameter_4(ExpressionMetadata* self, const char* arg0, const char* arg1, const char* arg2, bool arg3) {
+  return &self->AddParameter(arg0, arg1, arg2, arg3);
+}
+
+ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata_AddCodeOnlyParameter_2(ExpressionMetadata* self, const char* arg0, const char* arg1) {
+  return &self->AddCodeOnlyParameter(arg0, arg1);
+}
+
+ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata_SetDefaultValue_1(ExpressionMetadata* self, const char* arg0) {
+  return &self->SetDefaultValue(arg0);
+}
+
+ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata_GetCodeExtraInformation_0(ExpressionMetadata* self) {
+  return &self->GetCodeExtraInformation();
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata___destroy___0(ExpressionMetadata* self) {
   delete self;
 }
@@ -2151,10 +2205,6 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_CanHaveSubInstruct
   return self->CanHaveSubInstructions();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_SetCanHaveSubInstructions_0(InstructionMetadata* self) {
-  self->SetCanHaveSubInstructions();
-}
-
 const ParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_GetParameter_1(InstructionMetadata* self, unsigned int arg0) {
   return &self->GetParameter(arg0);
 }
@@ -2169,6 +2219,46 @@ int EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_GetUsageComplexity_
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_IsHidden_0(InstructionMetadata* self) {
   return self->IsHidden();
+}
+
+InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_SetCanHaveSubInstructions_0(InstructionMetadata* self) {
+  return &self->SetCanHaveSubInstructions();
+}
+
+InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_SetHidden_0(InstructionMetadata* self) {
+  return &self->SetHidden();
+}
+
+InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_SetGroup_1(InstructionMetadata* self, const char* arg0) {
+  return &self->SetGroup(arg0);
+}
+
+InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_AddParameter_4(InstructionMetadata* self, const char* arg0, const char* arg1, const char* arg2, bool arg3) {
+  return &self->AddParameter(arg0, arg1, arg2, arg3);
+}
+
+InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_AddCodeOnlyParameter_2(InstructionMetadata* self, const char* arg0, const char* arg1) {
+  return &self->AddCodeOnlyParameter(arg0, arg1);
+}
+
+InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_SetDefaultValue_1(InstructionMetadata* self, const char* arg0) {
+  return &self->SetDefaultValue(arg0);
+}
+
+InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_MarkAsSimple_0(InstructionMetadata* self) {
+  return &self->MarkAsSimple();
+}
+
+InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_MarkAsAdvanced_0(InstructionMetadata* self) {
+  return &self->MarkAsAdvanced();
+}
+
+InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_MarkAsComplex_0(InstructionMetadata* self) {
+  return &self->MarkAsComplex();
+}
+
+gd::InstructionMetadata::ExtraInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_GetCodeExtraInformation_0(InstructionMetadata* self) {
+  return &self->GetCodeExtraInformation();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata___destroy___0(InstructionMetadata* self) {
@@ -3012,6 +3102,28 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper___destroy___0(ProjectHel
   delete self;
 }
 
+// ExpressionCodeGenerationInformation
+
+ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation_SetFunctionName_1(ExpressionCodeGenerationInformation* self, const char* arg0) {
+  return &self->SetFunctionName(arg0);
+}
+
+ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation_SetStatic_0(ExpressionCodeGenerationInformation* self) {
+  return &self->SetStatic();
+}
+
+ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation_SetIncludeFile_1(ExpressionCodeGenerationInformation* self, const char* arg0) {
+  return &self->SetIncludeFile(arg0);
+}
+
+ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation_AddIncludeFile_1(ExpressionCodeGenerationInformation* self, const char* arg0) {
+  return &self->AddIncludeFile(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation___destroy___0(ExpressionCodeGenerationInformation* self) {
+  delete self;
+}
+
 // AudioResource
 
 AudioResource* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_AudioResource_0() {
@@ -3308,6 +3420,34 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_CallbacksForExpressionCorrectnessTesti
 }
 
 // PlatformExtension
+
+PlatformExtension* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_PlatformExtension_0() {
+  return new PlatformExtension();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_SetExtensionInformation_5(PlatformExtension* self, const char* arg0, const char* arg1, const char* arg2, const char* arg3, const char* arg4) {
+  self->SetExtensionInformation(arg0, arg1, arg2, arg3, arg4);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_MarkAsDeprecated_0(PlatformExtension* self) {
+  self->MarkAsDeprecated();
+}
+
+const InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_AddCondition_7(PlatformExtension* self, const char* arg0, const char* arg1, const char* arg2, const char* arg3, const char* arg4, const char* arg5, const char* arg6) {
+  return &self->AddCondition(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+}
+
+const InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_AddAction_7(PlatformExtension* self, const char* arg0, const char* arg1, const char* arg2, const char* arg3, const char* arg4, const char* arg5, const char* arg6) {
+  return &self->AddAction(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+}
+
+const ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_AddExpression_5(PlatformExtension* self, const char* arg0, const char* arg1, const char* arg2, const char* arg3, const char* arg4) {
+  return &self->AddExpression(arg0, arg1, arg2, arg3, arg4);
+}
+
+const ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_AddStrExpression_5(PlatformExtension* self, const char* arg0, const char* arg1, const char* arg2, const char* arg3, const char* arg4) {
+  return &self->AddStrExpression(arg0, arg1, arg2, arg3, arg4);
+}
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetFullName_0(PlatformExtension* self) {
   return self->GetFullName().c_str();
@@ -5276,6 +5416,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject___destroy___0(gdObject* self)
 
 JsPlatform* EMSCRIPTEN_KEEPALIVE emscripten_bind_JsPlatform_STATIC_Get_0(JsPlatform* self) {
   return &self->STATIC_Get();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsPlatform_AddNewExtension_1(JsPlatform* self, const PlatformExtension* arg0) {
+  self->AddNewExtension(*arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsPlatform___destroy___0(JsPlatform* self) {

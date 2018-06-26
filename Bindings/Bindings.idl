@@ -115,6 +115,7 @@ interface Platform {
 
 interface JsPlatform {
     [Ref] JsPlatform STATIC_Get();
+    void AddNewExtension([Const, Ref] PlatformExtension extension);
 };
 
 interface PairStringVariable {
@@ -740,6 +741,24 @@ interface InstructionSentenceFormatter {
     void LoadTypesFormattingFromConfig();
 };
 
+//TODO: This should be renamed to InstructionCodeGenerationInformation
+[Prefix="gd::InstructionMetadata::"]
+interface ExtraInformation {
+    [Ref] ExtraInformation SetFunctionName([Const] DOMString functionName_);
+    [Ref] ExtraInformation SetManipulatedType([Const] DOMString type_);
+    [Ref] ExtraInformation SetGetter([Const] DOMString getter);
+    [Ref] ExtraInformation SetMutators([Const, Ref] MapStringString mutators);
+    [Ref] ExtraInformation SetIncludeFile([Const] DOMString includeFile);
+    [Ref] ExtraInformation AddIncludeFile([Const] DOMString includeFile);
+};
+
+interface ExpressionCodeGenerationInformation {
+    [Ref] ExpressionCodeGenerationInformation SetFunctionName([Const] DOMString functionName);
+    [Ref] ExpressionCodeGenerationInformation SetStatic();
+    [Ref] ExpressionCodeGenerationInformation SetIncludeFile([Const] DOMString includeFile);
+    [Ref] ExpressionCodeGenerationInformation AddIncludeFile([Const] DOMString includeFile);
+};
+
 interface InstructionMetadata {
     [Const, Ref] DOMString GetFullName();
     [Const, Ref] DOMString GetDescription();
@@ -748,11 +767,26 @@ interface InstructionMetadata {
     [Const, Ref] DOMString GetIconFilename();
     [Const, Ref] DOMString GetSmallIconFilename();
     boolean CanHaveSubInstructions();
-    void SetCanHaveSubInstructions();
     [Const, Ref] ParameterMetadata GetParameter(unsigned long index);
     unsigned long GetParametersCount();
     long GetUsageComplexity();
     boolean IsHidden();
+    
+    [Ref] InstructionMetadata SetCanHaveSubInstructions();
+    [Ref] InstructionMetadata SetHidden();
+    [Ref] InstructionMetadata SetGroup([Const] DOMString group); //TODO: check if useful
+    [Ref] InstructionMetadata AddParameter([Const] DOMString type,
+                                        [Const] DOMString description,
+                                        [Const] DOMString optionalObjectType,
+                                        boolean parameterIsOptional);
+    [Ref] InstructionMetadata AddCodeOnlyParameter(
+        [Const] DOMString type, [Const] DOMString supplementaryInformation);
+    [Ref] InstructionMetadata SetDefaultValue([Const] DOMString defaultValue);
+    [Ref] InstructionMetadata MarkAsSimple();
+    [Ref] InstructionMetadata MarkAsAdvanced();
+    [Ref] InstructionMetadata MarkAsComplex();
+
+    [Ref] ExtraInformation GetCodeExtraInformation();
 };
 
 interface ExpressionMetadata {
@@ -763,6 +797,19 @@ interface ExpressionMetadata {
     boolean IsShown();
     [Ref] ParameterMetadata GetParameter(unsigned long id);
     unsigned long GetParametersCount();
+
+    [Ref] ExpressionMetadata SetHidden();
+    [Ref] ExpressionMetadata SetGroup([Const] DOMString str); //TODO: check if useful
+    [Ref] ExpressionMetadata AddParameter(
+        [Const] DOMString type,
+        [Const] DOMString description,
+        [Const] DOMString optionalObjectType,
+        boolean parameterIsOptional);
+    [Ref] ExpressionMetadata AddCodeOnlyParameter(
+        [Const] DOMString type, [Const] DOMString supplementaryInformation);
+    [Ref] ExpressionMetadata SetDefaultValue([Const] DOMString defaultValue);
+    
+    [Ref] ExpressionCodeGenerationInformation GetCodeExtraInformation();
 };
 
 interface ParameterMetadata {
@@ -797,6 +844,41 @@ interface EventMetadata {
 };
 
 interface PlatformExtension {
+    void PlatformExtension();
+    void SetExtensionInformation([Const] DOMString name,
+                                [Const] DOMString fullname,
+                                [Const] DOMString description,
+                                [Const] DOMString author,
+                                [Const] DOMString license);
+    void MarkAsDeprecated();
+    
+    [Const, Ref] InstructionMetadata AddCondition([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentence,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon,
+                                        [Const] DOMString smallicon);
+
+    [Const, Ref] InstructionMetadata AddAction([Const] DOMString name,
+                                     [Const] DOMString fullname,
+                                     [Const] DOMString description,
+                                     [Const] DOMString sentence,
+                                     [Const] DOMString group,
+                                     [Const] DOMString icon,
+                                     [Const] DOMString smallicon);
+  
+    [Const, Ref] ExpressionMetadata AddExpression([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString group,
+                                        [Const] DOMString smallicon);
+  
+    [Const, Ref] ExpressionMetadata AddStrExpression([Const] DOMString name,
+                                           [Const] DOMString fullname,
+                                           [Const] DOMString description,
+                                           [Const] DOMString group,
+                                           [Const] DOMString smallicon);
 
     [Const, Ref] DOMString GetFullName();
     [Const, Ref] DOMString GetName();
@@ -805,7 +887,6 @@ interface PlatformExtension {
     [Const, Ref] DOMString GetLicense();
     boolean IsBuiltin();
     [Const, Ref] DOMString GetNameSpace();
-
 
     [Value] VectorString GetExtensionObjectsTypes();
     [Value] VectorString GetBehaviorsTypes();

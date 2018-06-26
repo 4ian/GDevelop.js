@@ -1152,6 +1152,64 @@ PairStringVariable.prototype['WRAPPED_GetVariable'] = PairStringVariable.prototy
   var self = this.ptr;
   _emscripten_bind_PairStringVariable___destroy___0(self);
 };
+// ExtraInformation
+function ExtraInformation() { throw "cannot construct a ExtraInformation, no constructor in IDL" }
+ExtraInformation.prototype = Object.create(WrapperObject.prototype);
+ExtraInformation.prototype.constructor = ExtraInformation;
+ExtraInformation.prototype.__class__ = ExtraInformation;
+ExtraInformation.__cache__ = {};
+Module['ExtraInformation'] = ExtraInformation;
+
+ExtraInformation.prototype['SetFunctionName'] = ExtraInformation.prototype.SetFunctionName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ExtraInformation_SetFunctionName_1(self, arg0), ExtraInformation);
+};;
+
+ExtraInformation.prototype['SetManipulatedType'] = ExtraInformation.prototype.SetManipulatedType = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ExtraInformation_SetManipulatedType_1(self, arg0), ExtraInformation);
+};;
+
+ExtraInformation.prototype['SetGetter'] = ExtraInformation.prototype.SetGetter = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ExtraInformation_SetGetter_1(self, arg0), ExtraInformation);
+};;
+
+ExtraInformation.prototype['SetMutators'] = ExtraInformation.prototype.SetMutators = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_ExtraInformation_SetMutators_1(self, arg0), ExtraInformation);
+};;
+
+ExtraInformation.prototype['SetIncludeFile'] = ExtraInformation.prototype.SetIncludeFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ExtraInformation_SetIncludeFile_1(self, arg0), ExtraInformation);
+};;
+
+ExtraInformation.prototype['AddIncludeFile'] = ExtraInformation.prototype.AddIncludeFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ExtraInformation_AddIncludeFile_1(self, arg0), ExtraInformation);
+};;
+
+  ExtraInformation.prototype['__destroy__'] = ExtraInformation.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ExtraInformation___destroy___0(self);
+};
 // ResourcesManager
 /** @suppress {undefinedVars, duplicate} */function ResourcesManager() {
   this.ptr = _emscripten_bind_ResourcesManager_ResourcesManager_0();
@@ -3241,6 +3299,55 @@ ExpressionMetadata.prototype['GetParametersCount'] = ExpressionMetadata.prototyp
   return _emscripten_bind_ExpressionMetadata_GetParametersCount_0(self);
 };;
 
+ExpressionMetadata.prototype['SetHidden'] = ExpressionMetadata.prototype.SetHidden = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ExpressionMetadata_SetHidden_0(self), ExpressionMetadata);
+};;
+
+ExpressionMetadata.prototype['SetGroup'] = ExpressionMetadata.prototype.SetGroup = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ExpressionMetadata_SetGroup_1(self, arg0), ExpressionMetadata);
+};;
+
+ExpressionMetadata.prototype['AddParameter'] = ExpressionMetadata.prototype.AddParameter = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  return wrapPointer(_emscripten_bind_ExpressionMetadata_AddParameter_4(self, arg0, arg1, arg2, arg3), ExpressionMetadata);
+};;
+
+ExpressionMetadata.prototype['AddCodeOnlyParameter'] = ExpressionMetadata.prototype.AddCodeOnlyParameter = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return wrapPointer(_emscripten_bind_ExpressionMetadata_AddCodeOnlyParameter_2(self, arg0, arg1), ExpressionMetadata);
+};;
+
+ExpressionMetadata.prototype['SetDefaultValue'] = ExpressionMetadata.prototype.SetDefaultValue = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ExpressionMetadata_SetDefaultValue_1(self, arg0), ExpressionMetadata);
+};;
+
+ExpressionMetadata.prototype['GetCodeExtraInformation'] = ExpressionMetadata.prototype.GetCodeExtraInformation = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ExpressionMetadata_GetCodeExtraInformation_0(self), ExpressionCodeGenerationInformation);
+};;
+
   ExpressionMetadata.prototype['__destroy__'] = ExpressionMetadata.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_ExpressionMetadata___destroy___0(self);
@@ -3574,11 +3681,6 @@ InstructionMetadata.prototype['CanHaveSubInstructions'] = InstructionMetadata.pr
   return !!(_emscripten_bind_InstructionMetadata_CanHaveSubInstructions_0(self));
 };;
 
-InstructionMetadata.prototype['SetCanHaveSubInstructions'] = InstructionMetadata.prototype.SetCanHaveSubInstructions = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  _emscripten_bind_InstructionMetadata_SetCanHaveSubInstructions_0(self);
-};;
-
 InstructionMetadata.prototype['GetParameter'] = InstructionMetadata.prototype.GetParameter = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
@@ -3598,6 +3700,75 @@ InstructionMetadata.prototype['GetUsageComplexity'] = InstructionMetadata.protot
 InstructionMetadata.prototype['IsHidden'] = InstructionMetadata.prototype.IsHidden = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return !!(_emscripten_bind_InstructionMetadata_IsHidden_0(self));
+};;
+
+InstructionMetadata.prototype['SetCanHaveSubInstructions'] = InstructionMetadata.prototype.SetCanHaveSubInstructions = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_InstructionMetadata_SetCanHaveSubInstructions_0(self), InstructionMetadata);
+};;
+
+InstructionMetadata.prototype['SetHidden'] = InstructionMetadata.prototype.SetHidden = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_InstructionMetadata_SetHidden_0(self), InstructionMetadata);
+};;
+
+InstructionMetadata.prototype['SetGroup'] = InstructionMetadata.prototype.SetGroup = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_InstructionMetadata_SetGroup_1(self, arg0), InstructionMetadata);
+};;
+
+InstructionMetadata.prototype['AddParameter'] = InstructionMetadata.prototype.AddParameter = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  return wrapPointer(_emscripten_bind_InstructionMetadata_AddParameter_4(self, arg0, arg1, arg2, arg3), InstructionMetadata);
+};;
+
+InstructionMetadata.prototype['AddCodeOnlyParameter'] = InstructionMetadata.prototype.AddCodeOnlyParameter = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return wrapPointer(_emscripten_bind_InstructionMetadata_AddCodeOnlyParameter_2(self, arg0, arg1), InstructionMetadata);
+};;
+
+InstructionMetadata.prototype['SetDefaultValue'] = InstructionMetadata.prototype.SetDefaultValue = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_InstructionMetadata_SetDefaultValue_1(self, arg0), InstructionMetadata);
+};;
+
+InstructionMetadata.prototype['MarkAsSimple'] = InstructionMetadata.prototype.MarkAsSimple = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_InstructionMetadata_MarkAsSimple_0(self), InstructionMetadata);
+};;
+
+InstructionMetadata.prototype['MarkAsAdvanced'] = InstructionMetadata.prototype.MarkAsAdvanced = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_InstructionMetadata_MarkAsAdvanced_0(self), InstructionMetadata);
+};;
+
+InstructionMetadata.prototype['MarkAsComplex'] = InstructionMetadata.prototype.MarkAsComplex = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_InstructionMetadata_MarkAsComplex_0(self), InstructionMetadata);
+};;
+
+InstructionMetadata.prototype['GetCodeExtraInformation'] = InstructionMetadata.prototype.GetCodeExtraInformation = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_InstructionMetadata_GetCodeExtraInformation_0(self), ExtraInformation);
 };;
 
   InstructionMetadata.prototype['__destroy__'] = InstructionMetadata.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
@@ -4922,6 +5093,47 @@ ProjectHelper.prototype['STATIC_InitializePlatforms'] = ProjectHelper.prototype.
   var self = this.ptr;
   _emscripten_bind_ProjectHelper___destroy___0(self);
 };
+// ExpressionCodeGenerationInformation
+function ExpressionCodeGenerationInformation() { throw "cannot construct a ExpressionCodeGenerationInformation, no constructor in IDL" }
+ExpressionCodeGenerationInformation.prototype = Object.create(WrapperObject.prototype);
+ExpressionCodeGenerationInformation.prototype.constructor = ExpressionCodeGenerationInformation;
+ExpressionCodeGenerationInformation.prototype.__class__ = ExpressionCodeGenerationInformation;
+ExpressionCodeGenerationInformation.__cache__ = {};
+Module['ExpressionCodeGenerationInformation'] = ExpressionCodeGenerationInformation;
+
+ExpressionCodeGenerationInformation.prototype['SetFunctionName'] = ExpressionCodeGenerationInformation.prototype.SetFunctionName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ExpressionCodeGenerationInformation_SetFunctionName_1(self, arg0), ExpressionCodeGenerationInformation);
+};;
+
+ExpressionCodeGenerationInformation.prototype['SetStatic'] = ExpressionCodeGenerationInformation.prototype.SetStatic = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ExpressionCodeGenerationInformation_SetStatic_0(self), ExpressionCodeGenerationInformation);
+};;
+
+ExpressionCodeGenerationInformation.prototype['SetIncludeFile'] = ExpressionCodeGenerationInformation.prototype.SetIncludeFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ExpressionCodeGenerationInformation_SetIncludeFile_1(self, arg0), ExpressionCodeGenerationInformation);
+};;
+
+ExpressionCodeGenerationInformation.prototype['AddIncludeFile'] = ExpressionCodeGenerationInformation.prototype.AddIncludeFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ExpressionCodeGenerationInformation_AddIncludeFile_1(self, arg0), ExpressionCodeGenerationInformation);
+};;
+
+  ExpressionCodeGenerationInformation.prototype['__destroy__'] = ExpressionCodeGenerationInformation.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ExpressionCodeGenerationInformation___destroy___0(self);
+};
 // AudioResource
 /** @suppress {undefinedVars, duplicate} */function AudioResource() {
   this.ptr = _emscripten_bind_AudioResource_AudioResource_0();
@@ -5402,12 +5614,108 @@ CallbacksForExpressionCorrectnessTesting.prototype['GetFirstErrorPosition'] = Ca
   _emscripten_bind_CallbacksForExpressionCorrectnessTesting___destroy___0(self);
 };
 // PlatformExtension
-function PlatformExtension() { throw "cannot construct a PlatformExtension, no constructor in IDL" }
+/** @suppress {undefinedVars, duplicate} */function PlatformExtension() {
+  this.ptr = _emscripten_bind_PlatformExtension_PlatformExtension_0();
+  getCache(PlatformExtension)[this.ptr] = this;
+};;
 PlatformExtension.prototype = Object.create(WrapperObject.prototype);
 PlatformExtension.prototype.constructor = PlatformExtension;
 PlatformExtension.prototype.__class__ = PlatformExtension;
 PlatformExtension.__cache__ = {};
 Module['PlatformExtension'] = PlatformExtension;
+
+PlatformExtension.prototype['SetExtensionInformation'] = PlatformExtension.prototype.SetExtensionInformation = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  _emscripten_bind_PlatformExtension_SetExtensionInformation_5(self, arg0, arg1, arg2, arg3, arg4);
+};;
+
+PlatformExtension.prototype['MarkAsDeprecated'] = PlatformExtension.prototype.MarkAsDeprecated = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_PlatformExtension_MarkAsDeprecated_0(self);
+};;
+
+PlatformExtension.prototype['AddCondition'] = PlatformExtension.prototype.AddCondition = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4, arg5, arg6) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  if (arg5 && typeof arg5 === 'object') arg5 = arg5.ptr;
+  else arg5 = ensureString(arg5);
+  if (arg6 && typeof arg6 === 'object') arg6 = arg6.ptr;
+  else arg6 = ensureString(arg6);
+  return wrapPointer(_emscripten_bind_PlatformExtension_AddCondition_7(self, arg0, arg1, arg2, arg3, arg4, arg5, arg6), InstructionMetadata);
+};;
+
+PlatformExtension.prototype['AddAction'] = PlatformExtension.prototype.AddAction = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4, arg5, arg6) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  if (arg5 && typeof arg5 === 'object') arg5 = arg5.ptr;
+  else arg5 = ensureString(arg5);
+  if (arg6 && typeof arg6 === 'object') arg6 = arg6.ptr;
+  else arg6 = ensureString(arg6);
+  return wrapPointer(_emscripten_bind_PlatformExtension_AddAction_7(self, arg0, arg1, arg2, arg3, arg4, arg5, arg6), InstructionMetadata);
+};;
+
+PlatformExtension.prototype['AddExpression'] = PlatformExtension.prototype.AddExpression = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  return wrapPointer(_emscripten_bind_PlatformExtension_AddExpression_5(self, arg0, arg1, arg2, arg3, arg4), ExpressionMetadata);
+};;
+
+PlatformExtension.prototype['AddStrExpression'] = PlatformExtension.prototype.AddStrExpression = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  return wrapPointer(_emscripten_bind_PlatformExtension_AddStrExpression_5(self, arg0, arg1, arg2, arg3, arg4), ExpressionMetadata);
+};;
 
 PlatformExtension.prototype['GetFullName'] = PlatformExtension.prototype.GetFullName = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
@@ -8560,6 +8868,12 @@ Module['JsPlatform'] = JsPlatform;
 JsPlatform.prototype['STATIC_Get'] = JsPlatform.prototype.STATIC_Get = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_JsPlatform_STATIC_Get_0(self), JsPlatform);
+};;
+
+JsPlatform.prototype['AddNewExtension'] = JsPlatform.prototype.AddNewExtension = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_JsPlatform_AddNewExtension_1(self, arg0);
 };;
 
   JsPlatform.prototype['__destroy__'] = JsPlatform.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
