@@ -86,6 +86,8 @@ interface SetString {
 interface ProjectHelper {
     [Ref] Project STATIC_CreateNewGDJSProject();
     void STATIC_InitializePlatforms();
+    [Const, Ref] DOMString STATIC_SanityCheckBehavior(Behavior behavior, [Const] DOMString propertyName, [Const] DOMString newValue);
+    [Const, Ref] DOMString STATIC_SanityCheckObject(gdObject obj, [Const] DOMString propertyName, [Const] DOMString newValue);
 };
 
 interface VersionWrapper {
@@ -331,7 +333,23 @@ interface Behavior {
     [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
 };
 
+[JSImplementation="Behavior"]
+interface BehaviorJsImplementation {
+    void BehaviorJsImplementation();
+    // BehaviorJsImplementation Clone(); Not exposed
+
+    [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+
+    [Const, Ref] DOMString GetRawJSONContent();
+    [Ref] BehaviorJsImplementation SetRawJSONContent([Const] DOMString newContent);
+};
+
 interface BehaviorsSharedData {
+    void BehaviorsSharedData();
     [Const, Ref] DOMString GetName();
     [Const, Ref] DOMString GetTypeName();
 
@@ -370,6 +388,25 @@ interface gdObject {
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+[JSImplementation="gdObject"]
+interface ObjectJsImplementation {
+    void ObjectJsImplementation([Const] DOMString name);
+    //ObjectJsImplementation Clone(); Not exposed
+
+    [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
+
+    [Const, Ref] DOMString GetRawJSONContent();
+    [Ref] ObjectJsImplementation SetRawJSONContent([Const] DOMString newContent);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+
+    // Not exposed as protected:
+    // void DoSerializeTo([Ref] SerializerElement element);
+    // void DoUnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 interface Layout {
@@ -479,6 +516,8 @@ interface PropertyDescriptor {
 };
 
 interface MapStringPropertyDescriptor {
+    void MapStringPropertyDescriptor();
+
     [Ref] PropertyDescriptor MAP_get([Const] DOMString name);
     void MAP_set([Const] DOMString name, [Const, Ref] PropertyDescriptor prop);
     boolean MAP_has([Const] DOMString name);
@@ -827,6 +866,37 @@ interface ObjectMetadata {
     [Const, Ref] DOMString GetFullName();
     [Const, Ref] DOMString GetDescription();
     [Const, Ref] DOMString GetIconFilename();
+
+    [Const, Ref] InstructionMetadata AddCondition([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentence,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon,
+                                        [Const] DOMString smallicon);
+
+    [Const, Ref] InstructionMetadata AddAction([Const] DOMString name,
+                                     [Const] DOMString fullname,
+                                     [Const] DOMString description,
+                                     [Const] DOMString sentence,
+                                     [Const] DOMString group,
+                                     [Const] DOMString icon,
+                                     [Const] DOMString smallicon);
+  
+    [Const, Ref] ExpressionMetadata AddExpression([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString group,
+                                        [Const] DOMString smallicon);
+  
+    [Const, Ref] ExpressionMetadata AddStrExpression([Const] DOMString name,
+                                           [Const] DOMString fullname,
+                                           [Const] DOMString description,
+                                           [Const] DOMString group,
+                                           [Const] DOMString smallicon);
+
+    [Ref] ObjectMetadata SetIncludeFile([Const] DOMString includeFile);
+    [Ref] ObjectMetadata AddIncludeFile([Const] DOMString includeFile);
 };
 
 interface BehaviorMetadata {
@@ -835,6 +905,37 @@ interface BehaviorMetadata {
     [Const, Ref] DOMString GetDescription();
     [Const, Ref] DOMString GetGroup();
     [Const, Ref] DOMString GetIconFilename();
+
+    [Const, Ref] InstructionMetadata AddCondition([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentence,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon,
+                                        [Const] DOMString smallicon);
+
+    [Const, Ref] InstructionMetadata AddAction([Const] DOMString name,
+                                     [Const] DOMString fullname,
+                                     [Const] DOMString description,
+                                     [Const] DOMString sentence,
+                                     [Const] DOMString group,
+                                     [Const] DOMString icon,
+                                     [Const] DOMString smallicon);
+  
+    [Const, Ref] ExpressionMetadata AddExpression([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString group,
+                                        [Const] DOMString smallicon);
+  
+    [Const, Ref] ExpressionMetadata AddStrExpression([Const] DOMString name,
+                                           [Const] DOMString fullname,
+                                           [Const] DOMString description,
+                                           [Const] DOMString group,
+                                           [Const] DOMString smallicon);
+
+    [Ref] BehaviorMetadata SetIncludeFile([Const] DOMString includeFile);
+    [Ref] BehaviorMetadata AddIncludeFile([Const] DOMString includeFile);
 };
 
 interface EventMetadata {
@@ -879,6 +980,16 @@ interface PlatformExtension {
                                            [Const] DOMString description,
                                            [Const] DOMString group,
                                            [Const] DOMString smallicon);
+
+    [Ref] BehaviorMetadata WRAPPED_AddBehavior([Const] DOMString name,
+        [Const] DOMString fullname,
+        [Const] DOMString defaultName,
+        [Const] DOMString description,
+        [Const] DOMString group,
+        [Const] DOMString icon24x24,
+        [Const] DOMString className,
+        Behavior instance,
+        BehaviorsSharedData sharedDatasInstance);
 
     [Const, Ref] DOMString GetFullName();
     [Const, Ref] DOMString GetName();

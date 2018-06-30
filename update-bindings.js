@@ -55,7 +55,7 @@ function generateGlueFromBinding(cb) {
  */
 function patchGlueCppFile(cb) {
 	var file = 'Bindings/glue.cpp';
-	var classesToErase = ['ArbitraryResourceWorkerJS', 'AbstractFileSystemJS'];
+	var classesToErase = ['ArbitraryResourceWorkerJS', 'AbstractFileSystemJS', 'BehaviorJsImplementation', 'ObjectJsImplementation'];
 	var functionsToErase = ['emscripten_bind_ArbitraryResourceWorkerJS_ExposeImage_1', 'emscripten_bind_ArbitraryResourceWorkerJS_ExposeShader_1', 'emscripten_bind_ArbitraryResourceWorkerJS_ExposeFile_1'];
 	fs.readFile(file, function (err, data) {
 		if (err) cb(err);

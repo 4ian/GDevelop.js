@@ -67,6 +67,8 @@ add_library(
         GD
         SHARED
         "Bindings/Wrapper.cpp"
+        "Bindings/BehaviorJsImplementation.cpp"
+        "Bindings/ObjectJsImplementation.cpp"
 )
 set_target_properties(GD PROPERTIES SUFFIX ".raw.js")
 set(LIBRARY_OUTPUT_PATH ${GD_base_dir}/Binaries/Output/libGD.js/${CMAKE_BUILD_TYPE})
@@ -95,5 +97,5 @@ target_link_libraries(GD SystemInfo)
 target_link_libraries(GD Shopify)
 target_link_libraries(GD PathfindingBehavior)
 target_link_libraries(GD PhysicsBehavior)
-target_link_libraries(GD FacebookInstantGames)
+# target_link_libraries(GD FacebookInstantGames) - Pure JS extension
 target_link_libraries(GD ParticleSystem)

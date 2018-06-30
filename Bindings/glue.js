@@ -192,6 +192,61 @@ Module['InitialInstanceJSFunctorWrapper'] = InitialInstanceJSFunctorWrapper;
   var self = this.ptr;
   _emscripten_bind_InitialInstanceJSFunctorWrapper___destroy___0(self);
 };
+// Behavior
+/** @suppress {undefinedVars, duplicate} */function Behavior() {
+  this.ptr = _emscripten_bind_Behavior_Behavior_0();
+  getCache(Behavior)[this.ptr] = this;
+};;
+Behavior.prototype = Object.create(WrapperObject.prototype);
+Behavior.prototype.constructor = Behavior;
+Behavior.prototype.__class__ = Behavior;
+Behavior.__cache__ = {};
+Module['Behavior'] = Behavior;
+
+Behavior.prototype['Clone'] = Behavior.prototype.Clone = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Behavior_Clone_0(self), Behavior);
+};;
+
+Behavior.prototype['SetName'] = Behavior.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Behavior_SetName_1(self, arg0);
+};;
+
+Behavior.prototype['GetName'] = Behavior.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Behavior_GetName_0(self));
+};;
+
+Behavior.prototype['GetTypeName'] = Behavior.prototype.GetTypeName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Behavior_GetTypeName_0(self));
+};;
+
+Behavior.prototype['UpdateProperty'] = Behavior.prototype.UpdateProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_Behavior_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+Behavior.prototype['GetProperties'] = Behavior.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_Behavior_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+  Behavior.prototype['__destroy__'] = Behavior.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_Behavior___destroy___0(self);
+};
 // AbstractFileSystem
 function AbstractFileSystem() { throw "cannot construct a AbstractFileSystem, no constructor in IDL" }
 AbstractFileSystem.prototype = Object.create(WrapperObject.prototype);
@@ -203,6 +258,162 @@ Module['AbstractFileSystem'] = AbstractFileSystem;
   AbstractFileSystem.prototype['__destroy__'] = AbstractFileSystem.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_AbstractFileSystem___destroy___0(self);
+};
+// gdObject
+/** @suppress {undefinedVars, duplicate} */function gdObject(arg0) {
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  this.ptr = _emscripten_bind_gdObject_gdObject_1(arg0);
+  getCache(gdObject)[this.ptr] = this;
+};;
+gdObject.prototype = Object.create(WrapperObject.prototype);
+gdObject.prototype.constructor = gdObject;
+gdObject.prototype.__class__ = gdObject;
+gdObject.__cache__ = {};
+Module['gdObject'] = gdObject;
+
+gdObject.prototype['SetName'] = gdObject.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_gdObject_SetName_1(self, arg0);
+};;
+
+gdObject.prototype['GetName'] = gdObject.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_gdObject_GetName_0(self));
+};;
+
+gdObject.prototype['SetType'] = gdObject.prototype.SetType = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_gdObject_SetType_1(self, arg0);
+};;
+
+gdObject.prototype['GetType'] = gdObject.prototype.GetType = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_gdObject_GetType_0(self));
+};;
+
+gdObject.prototype['GetProperties'] = gdObject.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_gdObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+gdObject.prototype['UpdateProperty'] = gdObject.prototype.UpdateProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_gdObject_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+gdObject.prototype['GetInitialInstanceProperties'] = gdObject.prototype.GetInitialInstanceProperties = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return wrapPointer(_emscripten_bind_gdObject_GetInitialInstanceProperties_3(self, arg0, arg1, arg2), MapStringPropertyDescriptor);
+};;
+
+gdObject.prototype['UpdateInitialInstanceProperty'] = gdObject.prototype.UpdateInitialInstanceProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return !!(_emscripten_bind_gdObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
+gdObject.prototype['ExposeResources'] = gdObject.prototype.ExposeResources = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_gdObject_ExposeResources_1(self, arg0);
+};;
+
+gdObject.prototype['GetVariables'] = gdObject.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_gdObject_GetVariables_0(self), VariablesContainer);
+};;
+
+gdObject.prototype['GetAllBehaviorNames'] = gdObject.prototype.GetAllBehaviorNames = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_gdObject_GetAllBehaviorNames_0(self), VectorString);
+};;
+
+gdObject.prototype['HasBehaviorNamed'] = gdObject.prototype.HasBehaviorNamed = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_gdObject_HasBehaviorNamed_1(self, arg0));
+};;
+
+gdObject.prototype['AddNewBehavior'] = gdObject.prototype.AddNewBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return wrapPointer(_emscripten_bind_gdObject_AddNewBehavior_3(self, arg0, arg1, arg2), Behavior);
+};;
+
+gdObject.prototype['GetBehavior'] = gdObject.prototype.GetBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_gdObject_GetBehavior_1(self, arg0), Behavior);
+};;
+
+gdObject.prototype['RemoveBehavior'] = gdObject.prototype.RemoveBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_gdObject_RemoveBehavior_1(self, arg0);
+};;
+
+gdObject.prototype['RenameBehavior'] = gdObject.prototype.RenameBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return !!(_emscripten_bind_gdObject_RenameBehavior_2(self, arg0, arg1));
+};;
+
+gdObject.prototype['SerializeTo'] = gdObject.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_gdObject_SerializeTo_1(self, arg0);
+};;
+
+gdObject.prototype['UnserializeFrom'] = gdObject.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_gdObject_UnserializeFrom_2(self, arg0, arg1);
+};;
+
+  gdObject.prototype['__destroy__'] = gdObject.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_gdObject___destroy___0(self);
 };
 // ParticleEmitterObject
 /** @suppress {undefinedVars, duplicate} */function ParticleEmitterObject(arg0) {
@@ -1152,6 +1363,67 @@ PairStringVariable.prototype['WRAPPED_GetVariable'] = PairStringVariable.prototy
   var self = this.ptr;
   _emscripten_bind_PairStringVariable___destroy___0(self);
 };
+// ObjectJsImplementation
+/** @suppress {undefinedVars, duplicate} */function ObjectJsImplementation(arg0) {
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  this.ptr = _emscripten_bind_ObjectJsImplementation_ObjectJsImplementation_1(arg0);
+  getCache(ObjectJsImplementation)[this.ptr] = this;
+};;
+ObjectJsImplementation.prototype = Object.create(gdObject.prototype);
+ObjectJsImplementation.prototype.constructor = ObjectJsImplementation;
+ObjectJsImplementation.prototype.__class__ = ObjectJsImplementation;
+ObjectJsImplementation.__cache__ = {};
+Module['ObjectJsImplementation'] = ObjectJsImplementation;
+
+ObjectJsImplementation.prototype['GetProperties'] = ObjectJsImplementation.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_ObjectJsImplementation_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+ObjectJsImplementation.prototype['UpdateProperty'] = ObjectJsImplementation.prototype.UpdateProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_ObjectJsImplementation_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+ObjectJsImplementation.prototype['GetRawJSONContent'] = ObjectJsImplementation.prototype.GetRawJSONContent = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_ObjectJsImplementation_GetRawJSONContent_0(self));
+};;
+
+ObjectJsImplementation.prototype['SetRawJSONContent'] = ObjectJsImplementation.prototype.SetRawJSONContent = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ObjectJsImplementation_SetRawJSONContent_1(self, arg0), ObjectJsImplementation);
+};;
+
+ObjectJsImplementation.prototype['SerializeTo'] = ObjectJsImplementation.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ObjectJsImplementation_SerializeTo_1(self, arg0);
+};;
+
+ObjectJsImplementation.prototype['UnserializeFrom'] = ObjectJsImplementation.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_ObjectJsImplementation_UnserializeFrom_2(self, arg0, arg1);
+};;
+
+  ObjectJsImplementation.prototype['__destroy__'] = ObjectJsImplementation.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ObjectJsImplementation___destroy___0(self);
+};
 // ExtraInformation
 function ExtraInformation() { throw "cannot construct a ExtraInformation, no constructor in IDL" }
 ExtraInformation.prototype = Object.create(WrapperObject.prototype);
@@ -1878,6 +2150,94 @@ BehaviorMetadata.prototype['GetGroup'] = BehaviorMetadata.prototype.GetGroup = /
 BehaviorMetadata.prototype['GetIconFilename'] = BehaviorMetadata.prototype.GetIconFilename = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_BehaviorMetadata_GetIconFilename_0(self));
+};;
+
+BehaviorMetadata.prototype['AddCondition'] = BehaviorMetadata.prototype.AddCondition = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4, arg5, arg6) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  if (arg5 && typeof arg5 === 'object') arg5 = arg5.ptr;
+  else arg5 = ensureString(arg5);
+  if (arg6 && typeof arg6 === 'object') arg6 = arg6.ptr;
+  else arg6 = ensureString(arg6);
+  return wrapPointer(_emscripten_bind_BehaviorMetadata_AddCondition_7(self, arg0, arg1, arg2, arg3, arg4, arg5, arg6), InstructionMetadata);
+};;
+
+BehaviorMetadata.prototype['AddAction'] = BehaviorMetadata.prototype.AddAction = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4, arg5, arg6) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  if (arg5 && typeof arg5 === 'object') arg5 = arg5.ptr;
+  else arg5 = ensureString(arg5);
+  if (arg6 && typeof arg6 === 'object') arg6 = arg6.ptr;
+  else arg6 = ensureString(arg6);
+  return wrapPointer(_emscripten_bind_BehaviorMetadata_AddAction_7(self, arg0, arg1, arg2, arg3, arg4, arg5, arg6), InstructionMetadata);
+};;
+
+BehaviorMetadata.prototype['AddExpression'] = BehaviorMetadata.prototype.AddExpression = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  return wrapPointer(_emscripten_bind_BehaviorMetadata_AddExpression_5(self, arg0, arg1, arg2, arg3, arg4), ExpressionMetadata);
+};;
+
+BehaviorMetadata.prototype['AddStrExpression'] = BehaviorMetadata.prototype.AddStrExpression = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  return wrapPointer(_emscripten_bind_BehaviorMetadata_AddStrExpression_5(self, arg0, arg1, arg2, arg3, arg4), ExpressionMetadata);
+};;
+
+BehaviorMetadata.prototype['SetIncludeFile'] = BehaviorMetadata.prototype.SetIncludeFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_BehaviorMetadata_SetIncludeFile_1(self, arg0), BehaviorMetadata);
+};;
+
+BehaviorMetadata.prototype['AddIncludeFile'] = BehaviorMetadata.prototype.AddIncludeFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_BehaviorMetadata_AddIncludeFile_1(self, arg0), BehaviorMetadata);
 };;
 
   BehaviorMetadata.prototype['__destroy__'] = BehaviorMetadata.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
@@ -3938,61 +4298,6 @@ JsCodeEvent.prototype['UnserializeFrom'] = JsCodeEvent.prototype.UnserializeFrom
   var self = this.ptr;
   _emscripten_bind_JsCodeEvent___destroy___0(self);
 };
-// Behavior
-/** @suppress {undefinedVars, duplicate} */function Behavior() {
-  this.ptr = _emscripten_bind_Behavior_Behavior_0();
-  getCache(Behavior)[this.ptr] = this;
-};;
-Behavior.prototype = Object.create(WrapperObject.prototype);
-Behavior.prototype.constructor = Behavior;
-Behavior.prototype.__class__ = Behavior;
-Behavior.__cache__ = {};
-Module['Behavior'] = Behavior;
-
-Behavior.prototype['Clone'] = Behavior.prototype.Clone = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Behavior_Clone_0(self), Behavior);
-};;
-
-Behavior.prototype['SetName'] = Behavior.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_Behavior_SetName_1(self, arg0);
-};;
-
-Behavior.prototype['GetName'] = Behavior.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_Behavior_GetName_0(self));
-};;
-
-Behavior.prototype['GetTypeName'] = Behavior.prototype.GetTypeName = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_Behavior_GetTypeName_0(self));
-};;
-
-Behavior.prototype['UpdateProperty'] = Behavior.prototype.UpdateProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  return !!(_emscripten_bind_Behavior_UpdateProperty_3(self, arg0, arg1, arg2));
-};;
-
-Behavior.prototype['GetProperties'] = Behavior.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return wrapPointer(_emscripten_bind_Behavior_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
-};;
-
-  Behavior.prototype['__destroy__'] = Behavior.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  _emscripten_bind_Behavior___destroy___0(self);
-};
 // ArbitraryEventsWorker
 function ArbitraryEventsWorker() { throw "cannot construct a ArbitraryEventsWorker, no constructor in IDL" }
 ArbitraryEventsWorker.prototype = Object.create(WrapperObject.prototype);
@@ -4010,6 +4315,63 @@ ArbitraryEventsWorker.prototype['Launch'] = ArbitraryEventsWorker.prototype.Laun
   ArbitraryEventsWorker.prototype['__destroy__'] = ArbitraryEventsWorker.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_ArbitraryEventsWorker___destroy___0(self);
+};
+// BehaviorJsImplementation
+/** @suppress {undefinedVars, duplicate} */function BehaviorJsImplementation() {
+  this.ptr = _emscripten_bind_BehaviorJsImplementation_BehaviorJsImplementation_0();
+  getCache(BehaviorJsImplementation)[this.ptr] = this;
+};;
+BehaviorJsImplementation.prototype = Object.create(Behavior.prototype);
+BehaviorJsImplementation.prototype.constructor = BehaviorJsImplementation;
+BehaviorJsImplementation.prototype.__class__ = BehaviorJsImplementation;
+BehaviorJsImplementation.__cache__ = {};
+Module['BehaviorJsImplementation'] = BehaviorJsImplementation;
+
+BehaviorJsImplementation.prototype['GetProperties'] = BehaviorJsImplementation.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_BehaviorJsImplementation_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+BehaviorJsImplementation.prototype['UpdateProperty'] = BehaviorJsImplementation.prototype.UpdateProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_BehaviorJsImplementation_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+BehaviorJsImplementation.prototype['SerializeTo'] = BehaviorJsImplementation.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_BehaviorJsImplementation_SerializeTo_1(self, arg0);
+};;
+
+BehaviorJsImplementation.prototype['UnserializeFrom'] = BehaviorJsImplementation.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_BehaviorJsImplementation_UnserializeFrom_1(self, arg0);
+};;
+
+BehaviorJsImplementation.prototype['GetRawJSONContent'] = BehaviorJsImplementation.prototype.GetRawJSONContent = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_BehaviorJsImplementation_GetRawJSONContent_0(self));
+};;
+
+BehaviorJsImplementation.prototype['SetRawJSONContent'] = BehaviorJsImplementation.prototype.SetRawJSONContent = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_BehaviorJsImplementation_SetRawJSONContent_1(self, arg0), BehaviorJsImplementation);
+};;
+
+  BehaviorJsImplementation.prototype['__destroy__'] = BehaviorJsImplementation.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_BehaviorJsImplementation___destroy___0(self);
 };
 // VectorString
 /** @suppress {undefinedVars, duplicate} */function VectorString() {
@@ -5089,6 +5451,28 @@ ProjectHelper.prototype['STATIC_InitializePlatforms'] = ProjectHelper.prototype.
   _emscripten_bind_ProjectHelper_STATIC_InitializePlatforms_0(self);
 };;
 
+ProjectHelper.prototype['STATIC_SanityCheckBehavior'] = ProjectHelper.prototype.STATIC_SanityCheckBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return Pointer_stringify(_emscripten_bind_ProjectHelper_STATIC_SanityCheckBehavior_3(self, arg0, arg1, arg2));
+};;
+
+ProjectHelper.prototype['STATIC_SanityCheckObject'] = ProjectHelper.prototype.STATIC_SanityCheckObject = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return Pointer_stringify(_emscripten_bind_ProjectHelper_STATIC_SanityCheckObject_3(self, arg0, arg1, arg2));
+};;
+
   ProjectHelper.prototype['__destroy__'] = ProjectHelper.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_ProjectHelper___destroy___0(self);
@@ -5715,6 +6099,28 @@ PlatformExtension.prototype['AddStrExpression'] = PlatformExtension.prototype.Ad
   if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
   else arg4 = ensureString(arg4);
   return wrapPointer(_emscripten_bind_PlatformExtension_AddStrExpression_5(self, arg0, arg1, arg2, arg3, arg4), ExpressionMetadata);
+};;
+
+PlatformExtension.prototype['WRAPPED_AddBehavior'] = PlatformExtension.prototype.WRAPPED_AddBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  if (arg5 && typeof arg5 === 'object') arg5 = arg5.ptr;
+  else arg5 = ensureString(arg5);
+  if (arg6 && typeof arg6 === 'object') arg6 = arg6.ptr;
+  else arg6 = ensureString(arg6);
+  if (arg7 && typeof arg7 === 'object') arg7 = arg7.ptr;
+  if (arg8 && typeof arg8 === 'object') arg8 = arg8.ptr;
+  return wrapPointer(_emscripten_bind_PlatformExtension_WRAPPED_AddBehavior_9(self, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8), BehaviorMetadata);
 };;
 
 PlatformExtension.prototype['GetFullName'] = PlatformExtension.prototype.GetFullName = /** @suppress {undefinedVars, duplicate} */function() {
@@ -6709,7 +7115,10 @@ GroupEvent.prototype['UnserializeFrom'] = GroupEvent.prototype.UnserializeFrom =
   _emscripten_bind_GroupEvent___destroy___0(self);
 };
 // MapStringPropertyDescriptor
-function MapStringPropertyDescriptor() { throw "cannot construct a MapStringPropertyDescriptor, no constructor in IDL" }
+/** @suppress {undefinedVars, duplicate} */function MapStringPropertyDescriptor() {
+  this.ptr = _emscripten_bind_MapStringPropertyDescriptor_MapStringPropertyDescriptor_0();
+  getCache(MapStringPropertyDescriptor)[this.ptr] = this;
+};;
 MapStringPropertyDescriptor.prototype = Object.create(WrapperObject.prototype);
 MapStringPropertyDescriptor.prototype.constructor = MapStringPropertyDescriptor;
 MapStringPropertyDescriptor.prototype.__class__ = MapStringPropertyDescriptor;
@@ -7022,6 +7431,94 @@ ObjectMetadata.prototype['GetDescription'] = ObjectMetadata.prototype.GetDescrip
 ObjectMetadata.prototype['GetIconFilename'] = ObjectMetadata.prototype.GetIconFilename = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ObjectMetadata_GetIconFilename_0(self));
+};;
+
+ObjectMetadata.prototype['AddCondition'] = ObjectMetadata.prototype.AddCondition = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4, arg5, arg6) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  if (arg5 && typeof arg5 === 'object') arg5 = arg5.ptr;
+  else arg5 = ensureString(arg5);
+  if (arg6 && typeof arg6 === 'object') arg6 = arg6.ptr;
+  else arg6 = ensureString(arg6);
+  return wrapPointer(_emscripten_bind_ObjectMetadata_AddCondition_7(self, arg0, arg1, arg2, arg3, arg4, arg5, arg6), InstructionMetadata);
+};;
+
+ObjectMetadata.prototype['AddAction'] = ObjectMetadata.prototype.AddAction = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4, arg5, arg6) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  if (arg5 && typeof arg5 === 'object') arg5 = arg5.ptr;
+  else arg5 = ensureString(arg5);
+  if (arg6 && typeof arg6 === 'object') arg6 = arg6.ptr;
+  else arg6 = ensureString(arg6);
+  return wrapPointer(_emscripten_bind_ObjectMetadata_AddAction_7(self, arg0, arg1, arg2, arg3, arg4, arg5, arg6), InstructionMetadata);
+};;
+
+ObjectMetadata.prototype['AddExpression'] = ObjectMetadata.prototype.AddExpression = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  return wrapPointer(_emscripten_bind_ObjectMetadata_AddExpression_5(self, arg0, arg1, arg2, arg3, arg4), ExpressionMetadata);
+};;
+
+ObjectMetadata.prototype['AddStrExpression'] = ObjectMetadata.prototype.AddStrExpression = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  else arg4 = ensureString(arg4);
+  return wrapPointer(_emscripten_bind_ObjectMetadata_AddStrExpression_5(self, arg0, arg1, arg2, arg3, arg4), ExpressionMetadata);
+};;
+
+ObjectMetadata.prototype['SetIncludeFile'] = ObjectMetadata.prototype.SetIncludeFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ObjectMetadata_SetIncludeFile_1(self, arg0), ObjectMetadata);
+};;
+
+ObjectMetadata.prototype['AddIncludeFile'] = ObjectMetadata.prototype.AddIncludeFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ObjectMetadata_AddIncludeFile_1(self, arg0), ObjectMetadata);
 };;
 
   ObjectMetadata.prototype['__destroy__'] = ObjectMetadata.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
@@ -8093,7 +8590,10 @@ MapStringExpressionMetadata.prototype['MAP_keys'] = MapStringExpressionMetadata.
   _emscripten_bind_MapStringExpressionMetadata___destroy___0(self);
 };
 // BehaviorsSharedData
-function BehaviorsSharedData() { throw "cannot construct a BehaviorsSharedData, no constructor in IDL" }
+/** @suppress {undefinedVars, duplicate} */function BehaviorsSharedData() {
+  this.ptr = _emscripten_bind_BehaviorsSharedData_BehaviorsSharedData_0();
+  getCache(BehaviorsSharedData)[this.ptr] = this;
+};;
 BehaviorsSharedData.prototype = Object.create(WrapperObject.prototype);
 BehaviorsSharedData.prototype.constructor = BehaviorsSharedData;
 BehaviorsSharedData.prototype.__class__ = BehaviorsSharedData;
@@ -8700,162 +9200,6 @@ InstructionSentenceFormatter.prototype['LoadTypesFormattingFromConfig'] = Instru
   InstructionSentenceFormatter.prototype['__destroy__'] = InstructionSentenceFormatter.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_InstructionSentenceFormatter___destroy___0(self);
-};
-// gdObject
-/** @suppress {undefinedVars, duplicate} */function gdObject(arg0) {
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  this.ptr = _emscripten_bind_gdObject_gdObject_1(arg0);
-  getCache(gdObject)[this.ptr] = this;
-};;
-gdObject.prototype = Object.create(WrapperObject.prototype);
-gdObject.prototype.constructor = gdObject;
-gdObject.prototype.__class__ = gdObject;
-gdObject.__cache__ = {};
-Module['gdObject'] = gdObject;
-
-gdObject.prototype['SetName'] = gdObject.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_gdObject_SetName_1(self, arg0);
-};;
-
-gdObject.prototype['GetName'] = gdObject.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_gdObject_GetName_0(self));
-};;
-
-gdObject.prototype['SetType'] = gdObject.prototype.SetType = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_gdObject_SetType_1(self, arg0);
-};;
-
-gdObject.prototype['GetType'] = gdObject.prototype.GetType = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_gdObject_GetType_0(self));
-};;
-
-gdObject.prototype['GetProperties'] = gdObject.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return wrapPointer(_emscripten_bind_gdObject_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
-};;
-
-gdObject.prototype['UpdateProperty'] = gdObject.prototype.UpdateProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  return !!(_emscripten_bind_gdObject_UpdateProperty_3(self, arg0, arg1, arg2));
-};;
-
-gdObject.prototype['GetInitialInstanceProperties'] = gdObject.prototype.GetInitialInstanceProperties = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  return wrapPointer(_emscripten_bind_gdObject_GetInitialInstanceProperties_3(self, arg0, arg1, arg2), MapStringPropertyDescriptor);
-};;
-
-gdObject.prototype['UpdateInitialInstanceProperty'] = gdObject.prototype.UpdateInitialInstanceProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
-  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
-  return !!(_emscripten_bind_gdObject_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
-};;
-
-gdObject.prototype['ExposeResources'] = gdObject.prototype.ExposeResources = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_gdObject_ExposeResources_1(self, arg0);
-};;
-
-gdObject.prototype['GetVariables'] = gdObject.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_gdObject_GetVariables_0(self), VariablesContainer);
-};;
-
-gdObject.prototype['GetAllBehaviorNames'] = gdObject.prototype.GetAllBehaviorNames = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_gdObject_GetAllBehaviorNames_0(self), VectorString);
-};;
-
-gdObject.prototype['HasBehaviorNamed'] = gdObject.prototype.HasBehaviorNamed = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return !!(_emscripten_bind_gdObject_HasBehaviorNamed_1(self, arg0));
-};;
-
-gdObject.prototype['AddNewBehavior'] = gdObject.prototype.AddNewBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  else arg2 = ensureString(arg2);
-  return wrapPointer(_emscripten_bind_gdObject_AddNewBehavior_3(self, arg0, arg1, arg2), Behavior);
-};;
-
-gdObject.prototype['GetBehavior'] = gdObject.prototype.GetBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_gdObject_GetBehavior_1(self, arg0), Behavior);
-};;
-
-gdObject.prototype['RemoveBehavior'] = gdObject.prototype.RemoveBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_gdObject_RemoveBehavior_1(self, arg0);
-};;
-
-gdObject.prototype['RenameBehavior'] = gdObject.prototype.RenameBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  return !!(_emscripten_bind_gdObject_RenameBehavior_2(self, arg0, arg1));
-};;
-
-gdObject.prototype['SerializeTo'] = gdObject.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_gdObject_SerializeTo_1(self, arg0);
-};;
-
-gdObject.prototype['UnserializeFrom'] = gdObject.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_gdObject_UnserializeFrom_2(self, arg0, arg1);
-};;
-
-  gdObject.prototype['__destroy__'] = gdObject.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  _emscripten_bind_gdObject___destroy___0(self);
 };
 // JsPlatform
 function JsPlatform() { throw "cannot construct a JsPlatform, no constructor in IDL" }
