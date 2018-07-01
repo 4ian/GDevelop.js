@@ -1394,6 +1394,27 @@ ObjectJsImplementation.prototype['UpdateProperty'] = ObjectJsImplementation.prot
   return !!(_emscripten_bind_ObjectJsImplementation_UpdateProperty_3(self, arg0, arg1, arg2));
 };;
 
+ObjectJsImplementation.prototype['GetInitialInstanceProperties'] = ObjectJsImplementation.prototype.GetInitialInstanceProperties = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return wrapPointer(_emscripten_bind_ObjectJsImplementation_GetInitialInstanceProperties_3(self, arg0, arg1, arg2), MapStringPropertyDescriptor);
+};;
+
+ObjectJsImplementation.prototype['UpdateInitialInstanceProperty'] = ObjectJsImplementation.prototype.UpdateInitialInstanceProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return !!(_emscripten_bind_ObjectJsImplementation_UpdateInitialInstanceProperty_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
 ObjectJsImplementation.prototype['GetRawJSONContent'] = ObjectJsImplementation.prototype.GetRawJSONContent = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ObjectJsImplementation_GetRawJSONContent_0(self));
@@ -5451,7 +5472,7 @@ ProjectHelper.prototype['STATIC_InitializePlatforms'] = ProjectHelper.prototype.
   _emscripten_bind_ProjectHelper_STATIC_InitializePlatforms_0(self);
 };;
 
-ProjectHelper.prototype['STATIC_SanityCheckBehavior'] = ProjectHelper.prototype.STATIC_SanityCheckBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+ProjectHelper.prototype['STATIC_SanityCheckBehaviorProperty'] = ProjectHelper.prototype.STATIC_SanityCheckBehaviorProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
   var self = this.ptr;
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
@@ -5459,10 +5480,10 @@ ProjectHelper.prototype['STATIC_SanityCheckBehavior'] = ProjectHelper.prototype.
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return Pointer_stringify(_emscripten_bind_ProjectHelper_STATIC_SanityCheckBehavior_3(self, arg0, arg1, arg2));
+  return Pointer_stringify(_emscripten_bind_ProjectHelper_STATIC_SanityCheckBehaviorProperty_3(self, arg0, arg1, arg2));
 };;
 
-ProjectHelper.prototype['STATIC_SanityCheckObject'] = ProjectHelper.prototype.STATIC_SanityCheckObject = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+ProjectHelper.prototype['STATIC_SanityCheckObjectProperty'] = ProjectHelper.prototype.STATIC_SanityCheckObjectProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
   var self = this.ptr;
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
@@ -5470,7 +5491,18 @@ ProjectHelper.prototype['STATIC_SanityCheckObject'] = ProjectHelper.prototype.ST
   else arg1 = ensureString(arg1);
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
-  return Pointer_stringify(_emscripten_bind_ProjectHelper_STATIC_SanityCheckObject_3(self, arg0, arg1, arg2));
+  return Pointer_stringify(_emscripten_bind_ProjectHelper_STATIC_SanityCheckObjectProperty_3(self, arg0, arg1, arg2));
+};;
+
+ProjectHelper.prototype['STATIC_SanityCheckObjectInitialInstanceProperty'] = ProjectHelper.prototype.STATIC_SanityCheckObjectInitialInstanceProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return Pointer_stringify(_emscripten_bind_ProjectHelper_STATIC_SanityCheckObjectInitialInstanceProperty_3(self, arg0, arg1, arg2));
 };;
 
   ProjectHelper.prototype['__destroy__'] = ProjectHelper.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
@@ -6121,6 +6153,21 @@ PlatformExtension.prototype['WRAPPED_AddBehavior'] = PlatformExtension.prototype
   if (arg7 && typeof arg7 === 'object') arg7 = arg7.ptr;
   if (arg8 && typeof arg8 === 'object') arg8 = arg8.ptr;
   return wrapPointer(_emscripten_bind_PlatformExtension_WRAPPED_AddBehavior_9(self, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8), BehaviorMetadata);
+};;
+
+PlatformExtension.prototype['WRAPPED_AddObject'] = PlatformExtension.prototype.WRAPPED_AddObject = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return wrapPointer(_emscripten_bind_PlatformExtension_WRAPPED_AddObject_5(self, arg0, arg1, arg2, arg3, arg4), ObjectMetadata);
 };;
 
 PlatformExtension.prototype['GetFullName'] = PlatformExtension.prototype.GetFullName = /** @suppress {undefinedVars, duplicate} */function() {

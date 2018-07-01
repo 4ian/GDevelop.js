@@ -887,8 +887,8 @@ describe('libGD.js', function() {
       }));
 
       try {
-        expect(gd.ProjectHelper.sanityCheckBehavior(myBehavior, "My first property", "Value1")).to.be('');
-        expect(gd.ProjectHelper.sanityCheckBehavior(myBehavior, "My other property", "0")).to.be('');
+        expect(gd.ProjectHelper.sanityCheckBehaviorProperty(myBehavior, "My first property", "Value1")).to.be('');
+        expect(gd.ProjectHelper.sanityCheckBehaviorProperty(myBehavior, "My other property", "0")).to.be('');
       } catch(ex) {
         console.error(ex);
         expect().fail("Exception caught while launching sanityCheckBehavior on a gd.BehaviorJsImplementation.");
@@ -984,9 +984,33 @@ describe('libGD.js', function() {
         property2: true,
       }));
 
+      myObject.updateInitialInstanceProperty = function(content, instance, propertyName, newValue, project, layout) { 
+        if (propertyName === "My instance property") {
+          content.property1 = newValue;
+          return true;
+        }
+        if (propertyName === "My other instance property") {
+          content.property2 = newValue === "1";
+          return true;
+        }
+
+        return false;
+      }
+      myObject.getInitialInstanceProperties = function(content, instance, project, layout) { 
+        var properties = new gd.MapStringPropertyDescriptor();
+
+        properties.set("My instance property", new gd.PropertyDescriptor(content.property1));
+        properties.set("My other instance property", new gd.PropertyDescriptor(content.property2 ? "1" : "0")
+          .setType("Boolean"));
+
+        return properties;
+      }
+
       try {
-        expect(gd.ProjectHelper.sanityCheckObject(myObject, "My first property", "Value1")).to.be('');
-        expect(gd.ProjectHelper.sanityCheckObject(myObject, "My other property", "0")).to.be('');
+        expect(gd.ProjectHelper.sanityCheckObjectProperty(myObject, "My first property", "Value1")).to.be('');
+        expect(gd.ProjectHelper.sanityCheckObjectProperty(myObject, "My other property", "0")).to.be('');
+        expect(gd.ProjectHelper.sanityCheckObjectInitialInstanceProperty(myObject, "My instance property", "Value1")).to.be('');
+        expect(gd.ProjectHelper.sanityCheckObjectInitialInstanceProperty(myObject, "My other instance property", "0")).to.be('');
       } catch(ex) {
         console.error(ex);
         expect().fail("Exception caught while launching sanityCheckObject on a gd.ObjectJsImplementation.");

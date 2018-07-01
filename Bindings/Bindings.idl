@@ -86,8 +86,9 @@ interface SetString {
 interface ProjectHelper {
     [Ref] Project STATIC_CreateNewGDJSProject();
     void STATIC_InitializePlatforms();
-    [Const, Ref] DOMString STATIC_SanityCheckBehavior(Behavior behavior, [Const] DOMString propertyName, [Const] DOMString newValue);
-    [Const, Ref] DOMString STATIC_SanityCheckObject(gdObject obj, [Const] DOMString propertyName, [Const] DOMString newValue);
+    [Const, Ref] DOMString STATIC_SanityCheckBehaviorProperty(Behavior behavior, [Const] DOMString propertyName, [Const] DOMString newValue);
+    [Const, Ref] DOMString STATIC_SanityCheckObjectProperty(gdObject obj, [Const] DOMString propertyName, [Const] DOMString newValue);
+    [Const, Ref] DOMString STATIC_SanityCheckObjectInitialInstanceProperty(gdObject obj, [Const] DOMString propertyName, [Const] DOMString newValue);
 };
 
 interface VersionWrapper {
@@ -397,6 +398,9 @@ interface ObjectJsImplementation {
 
     [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
     boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
+
+    [Value] MapStringPropertyDescriptor GetInitialInstanceProperties([Const, Ref] InitialInstance instance, [Ref] Project project, [Ref] Layout scene);
+    boolean UpdateInitialInstanceProperty([Ref] InitialInstance instance, [Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout scene);
 
     [Const, Ref] DOMString GetRawJSONContent();
     [Ref] ObjectJsImplementation SetRawJSONContent([Const] DOMString newContent);
@@ -990,6 +994,12 @@ interface PlatformExtension {
         [Const] DOMString className,
         Behavior instance,
         BehaviorsSharedData sharedDatasInstance);
+
+    [Ref] ObjectMetadata WRAPPED_AddObject([Const] DOMString name,
+        [Const] DOMString fullname,
+        [Const] DOMString description,
+        [Const] DOMString icon24x24,
+        gdObject instance);
 
     [Const, Ref] DOMString GetFullName();
     [Const, Ref] DOMString GetName();

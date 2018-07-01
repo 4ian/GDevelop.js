@@ -25,6 +25,14 @@ std::unique_ptr<gd::Object> ObjectJsImplementation::Clone() const {
             Module['ObjectJsImplementation'])[$0]['updateProperty'] =
             Module['getCache'](
                 Module['ObjectJsImplementation'])[$1]['updateProperty'];
+        Module['getCache'](Module['ObjectJsImplementation'])
+            [$0]['getInitialInstanceProperties'] =
+                Module['getCache'](Module['ObjectJsImplementation'])
+                    [$1]['getInitialInstanceProperties'];
+        Module['getCache'](Module['ObjectJsImplementation'])
+            [$0]['updateInitialInstanceProperty'] =
+                Module['getCache'](Module['ObjectJsImplementation'])
+                    [$1]['updateInitialInstanceProperty'];
       },
       (int)clone,
       (int)this);
@@ -58,8 +66,8 @@ ObjectJsImplementation::GetProperties(gd::Project&) const {
   return copiedProperties;
 }
 bool ObjectJsImplementation::UpdateProperty(const gd::String& arg0,
-                                              const gd::String& arg1,
-                                              Project&) {
+                                            const gd::String& arg1,
+                                            Project&) {
   jsonContent = (const char*)EM_ASM_INT(
       {
         var self = Module['getCache'](Module['ObjectJsImplementation'])[$0];
@@ -77,12 +85,80 @@ bool ObjectJsImplementation::UpdateProperty(const gd::String& arg0,
 
   return true;
 }
+
+std::map<gd::String, gd::PropertyDescriptor>
+ObjectJsImplementation::GetInitialInstanceProperties(
+    const gd::InitialInstance& instance,
+    gd::Project& project,
+    gd::Layout& scene) {
+  std::map<gd::String, gd::PropertyDescriptor>* jsCreatedProperties = nullptr;
+  std::map<gd::String, gd::PropertyDescriptor> copiedProperties;
+
+  jsCreatedProperties = (std::map<gd::String, gd::PropertyDescriptor>*)EM_ASM_INT(
+      {
+        var self = Module['getCache'](Module['ObjectJsImplementation'])[$0];
+        if (!self.hasOwnProperty('getInitialInstanceProperties'))
+          throw 'getInitialInstanceProperties is not defined on a ObjectJsImplementation.';
+
+        var objectContent = JSON.parse(Pointer_stringify($1));
+        var newProperties = self['getInitialInstanceProperties'](
+            objectContent,
+            wrapPointer($2, Module['InitialInstance']),
+            wrapPointer($3, Module['Project']),
+            wrapPointer($4, Module['Layout']));
+        if (!newProperties)
+          throw 'getInitialInstanceProperties returned nothing in a gd::ObjectJsImplementation.';
+
+        return getPointer(newProperties);
+      },
+      (int)this,
+      jsonContent.c_str(),
+      (int)&instance,
+      (int)&project,
+      (int)&scene);
+
+  copiedProperties = *jsCreatedProperties;
+  delete jsCreatedProperties;
+  return copiedProperties;
+}
+
+bool ObjectJsImplementation::UpdateInitialInstanceProperty(
+    gd::InitialInstance& instance,
+    const gd::String& name,
+    const gd::String& value,
+    gd::Project& project,
+    gd::Layout& scene) {
+  return EM_ASM_INT(
+      {
+        var self = Module['getCache'](Module['ObjectJsImplementation'])[$0];
+        if (!self.hasOwnProperty('updateInitialInstanceProperty'))
+          throw 'updateInitialInstanceProperty is not defined on a ObjectJsImplementation.';
+        var objectContent = JSON.parse(Pointer_stringify($1));
+        return self['updateInitialInstanceProperty'](
+            objectContent,
+            wrapPointer($2, Module['InitialInstance']),
+            Pointer_stringify($3),
+            Pointer_stringify($4),
+            wrapPointer($5, Module['Project']),
+            wrapPointer($6, Module['Layout']));
+      },
+      (int)this,
+      jsonContent.c_str(),
+      (int)&instance,
+      name.c_str(),
+      value.c_str(),
+      (int)&project,
+      (int)&scene);
+}
+
 void ObjectJsImplementation::DoSerializeTo(SerializerElement& arg0) const {
-  arg0 = gd::Serializer::FromJSON(jsonContent);
+  arg0.AddChild("content") = gd::Serializer::FromJSON(jsonContent);
 }
-void ObjectJsImplementation::DoUnserializeFrom(Project& arg0, const SerializerElement& arg1) {
-  jsonContent = gd::Serializer::ToJSON(arg1);
+void ObjectJsImplementation::DoUnserializeFrom(Project& arg0,
+                                               const SerializerElement& arg1) {
+  jsonContent = gd::Serializer::ToJSON(arg1.GetChild("content"));
 }
+
 void ObjectJsImplementation::__destroy__() {  // Useless?
   EM_ASM_INT(
       {

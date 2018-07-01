@@ -48,9 +48,9 @@ class ProjectHelper {
    * \brief This check that the given gd::Behavior can be properly cloned
    * and have the given property updated.
    */
-  static gd::String SanityCheckBehavior(gd::Behavior* behavior,
-                                        const gd::String& propertyName,
-                                        const gd::String& newValue) {
+  static gd::String SanityCheckBehaviorProperty(gd::Behavior* behavior,
+                                                const gd::String& propertyName,
+                                                const gd::String& newValue) {
     gd::Project project;
     project.AddPlatform(JsPlatform::Get());
 
@@ -78,7 +78,7 @@ class ProjectHelper {
       return "FAIL: Updating the property of the behavior will change the "
              "property of the cloned behavior. Clone behavior property is "
              "now: " +
-             copiedBehaviorValue+ ". Should have been:" + originalValue;
+             copiedBehaviorValue + ". Should have been:" + originalValue;
     }
 
     delete copiedBehavior;
@@ -89,9 +89,9 @@ class ProjectHelper {
    * \brief This check that the given gd::Object can be properly cloned
    * and have the given property updated.
    */
-  static gd::String SanityCheckObject(gd::Object* object,
-                                        const gd::String& propertyName,
-                                        const gd::String& newValue) {
+  static gd::String SanityCheckObjectProperty(gd::Object* object,
+                                              const gd::String& propertyName,
+                                              const gd::String& newValue) {
     gd::Project project;
     project.AddPlatform(JsPlatform::Get());
 
@@ -119,7 +119,50 @@ class ProjectHelper {
       return "FAIL: Updating the property of the object will change the "
              "property of the cloned object. Clone object property is "
              "now: " +
-             copiedObjectValue+ ". Should have been:" + originalValue;
+             copiedObjectValue + ". Should have been:" + originalValue;
+    }
+
+    return "";
+  }
+
+  /**
+   * \brief This check that the given gd::Object can be properly cloned
+   * and return/set the properties of a gd::InitialInstance.
+   */
+  static gd::String SanityCheckObjectInitialInstanceProperty(
+      gd::Object* object,
+      const gd::String& propertyName,
+      const gd::String& newValue) {
+    gd::Project project;
+    project.AddPlatform(JsPlatform::Get());
+    gd::Layout layout;
+    gd::InitialInstance instance;
+
+    gd::String originalValue = object
+                                   ->GetInitialInstanceProperties(
+                                       instance, project, layout)[propertyName]
+                                   .GetValue();
+
+    std::unique_ptr<gd::Object> copiedObject = object->Clone();
+    if (copiedObject
+            ->GetInitialInstanceProperties(
+                instance, project, layout)[propertyName]
+            .GetValue() != originalValue) {
+      return "FAIL: Cloned object does not return the same initial value for "
+             "the instance property";
+    }
+
+    copiedObject->UpdateInitialInstanceProperty(
+        instance, propertyName, newValue, project, layout);
+    gd::String updatedValue = copiedObject
+                                  ->GetInitialInstanceProperties(
+                                      instance, project, layout)[propertyName]
+                                  .GetValue();
+    if (updatedValue != newValue) {
+      return "FAIL: expected the newValue to be set for the instance property "
+             "using the copied object, but "
+             "received:" +
+             updatedValue;
     }
 
     return "";

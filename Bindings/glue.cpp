@@ -805,6 +805,15 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectJsImplementation_UpdateProperty_
   return self->UpdateProperty(arg0, arg1, *arg2);
 }
 
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectJsImplementation_GetInitialInstanceProperties_3(ObjectJsImplementation* self, const InitialInstance* arg0, Project* arg1, Layout* arg2) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectJsImplementation_UpdateInitialInstanceProperty_5(ObjectJsImplementation* self, InitialInstance* arg0, const char* arg1, const char* arg2, Project* arg3, Layout* arg4) {
+  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectJsImplementation_GetRawJSONContent_0(ObjectJsImplementation* self) {
   return self->GetRawJSONContent().c_str();
 }
@@ -3279,12 +3288,16 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_InitializePlatfor
   self->STATIC_InitializePlatforms();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_SanityCheckBehavior_3(ProjectHelper* self, Behavior* arg0, const char* arg1, const char* arg2) {
-  return self->STATIC_SanityCheckBehavior(arg0, arg1, arg2).c_str();
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_SanityCheckBehaviorProperty_3(ProjectHelper* self, Behavior* arg0, const char* arg1, const char* arg2) {
+  return self->STATIC_SanityCheckBehaviorProperty(arg0, arg1, arg2).c_str();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_SanityCheckObject_3(ProjectHelper* self, gdObject* arg0, const char* arg1, const char* arg2) {
-  return self->STATIC_SanityCheckObject(arg0, arg1, arg2).c_str();
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_SanityCheckObjectProperty_3(ProjectHelper* self, gdObject* arg0, const char* arg1, const char* arg2) {
+  return self->STATIC_SanityCheckObjectProperty(arg0, arg1, arg2).c_str();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_SanityCheckObjectInitialInstanceProperty_3(ProjectHelper* self, gdObject* arg0, const char* arg1, const char* arg2) {
+  return self->STATIC_SanityCheckObjectInitialInstanceProperty(arg0, arg1, arg2).c_str();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper___destroy___0(ProjectHelper* self) {
@@ -3640,6 +3653,10 @@ const ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension
 
 BehaviorMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_WRAPPED_AddBehavior_9(PlatformExtension* self, const char* arg0, const char* arg1, const char* arg2, const char* arg3, const char* arg4, const char* arg5, const char* arg6, Behavior* arg7, BehaviorsSharedData* arg8) {
   return &self->WRAPPED_AddBehavior(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+}
+
+ObjectMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_WRAPPED_AddObject_5(PlatformExtension* self, const char* arg0, const char* arg1, const char* arg2, const char* arg3, gdObject* arg4) {
+  return &self->WRAPPED_AddObject(arg0, arg1, arg2, arg3, arg4);
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetFullName_0(PlatformExtension* self) {

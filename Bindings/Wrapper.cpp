@@ -403,6 +403,13 @@ typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
               std::shared_ptr<gd::Behavior>(instance), \
               std::shared_ptr<gd::BehaviorsSharedData>(sharedDatasInstance))
 
+#define WRAPPED_AddObject(name, fullname, description, icon24x24, instance) \
+  AddObject(name,                                                           \
+            fullname,                                                       \
+            description,                                                    \
+            icon24x24,                                                      \
+            std::unique_ptr<gd::Object>(instance))
+
 #define MAP_get(a) find(a)->second
 #define MAP_set(key, value) [key] = value
 #define MAP_has(key) find(key) != self->end()
@@ -457,8 +464,10 @@ typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 #define STATIC_GlobalObjectRenamed GlobalObjectRenamed
 #define STATIC_GlobalObjectRemoved GlobalObjectRemoved
 #define STATIC_CreateRectangle CreateRectangle
-#define STATIC_SanityCheckBehavior SanityCheckBehavior
-#define STATIC_SanityCheckObject SanityCheckObject
+#define STATIC_SanityCheckBehaviorProperty SanityCheckBehaviorProperty
+#define STATIC_SanityCheckObjectProperty SanityCheckObjectProperty
+#define STATIC_SanityCheckObjectInitialInstanceProperty \
+  SanityCheckObjectInitialInstanceProperty
 
 // We postfix some methods with "At" as Javascript does not support overloading
 #define GetLayoutAt GetLayout

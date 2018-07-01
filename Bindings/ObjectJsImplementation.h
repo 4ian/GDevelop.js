@@ -22,7 +22,15 @@ class ObjectJsImplementation : public gd::Object {
                               const gd::String& value,
                               gd::Project& project) override;
 
-  //TODO: Expose properties of instances
+  std::map<gd::String, gd::PropertyDescriptor> GetInitialInstanceProperties(
+      const gd::InitialInstance& instance,
+      gd::Project& project,
+      gd::Layout& scene) override;
+  bool UpdateInitialInstanceProperty(gd::InitialInstance& instance,
+                                     const gd::String& name,
+                                     const gd::String& value,
+                                     gd::Project& project,
+                                     gd::Layout& scene) override;
 
   void __destroy__();
 

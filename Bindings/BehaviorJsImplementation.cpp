@@ -76,12 +76,14 @@ bool BehaviorJsImplementation::UpdateProperty(const gd::String& arg0,
 
   return true;
 }
+
 void BehaviorJsImplementation::SerializeTo(SerializerElement& arg0) const {
   arg0.AddChild("content") = gd::Serializer::FromJSON(jsonContent);
 }
 void BehaviorJsImplementation::UnserializeFrom(const SerializerElement& arg1) {
   jsonContent = gd::Serializer::ToJSON(arg1.GetChild("content"));
 }
+
 void BehaviorJsImplementation::__destroy__() {  // Useless?
   EM_ASM_INT(
       {
