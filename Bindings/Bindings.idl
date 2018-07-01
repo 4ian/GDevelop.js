@@ -86,9 +86,9 @@ interface SetString {
 interface ProjectHelper {
     [Ref] Project STATIC_CreateNewGDJSProject();
     void STATIC_InitializePlatforms();
-    [Const, Ref] DOMString STATIC_SanityCheckBehaviorProperty(Behavior behavior, [Const] DOMString propertyName, [Const] DOMString newValue);
-    [Const, Ref] DOMString STATIC_SanityCheckObjectProperty(gdObject obj, [Const] DOMString propertyName, [Const] DOMString newValue);
-    [Const, Ref] DOMString STATIC_SanityCheckObjectInitialInstanceProperty(gdObject obj, [Const] DOMString propertyName, [Const] DOMString newValue);
+    [Const, Value] DOMString STATIC_SanityCheckBehaviorProperty(Behavior behavior, [Const] DOMString propertyName, [Const] DOMString newValue);
+    [Const, Value] DOMString STATIC_SanityCheckObjectProperty(gdObject obj, [Const] DOMString propertyName, [Const] DOMString newValue);
+    [Const, Value] DOMString STATIC_SanityCheckObjectInitialInstanceProperty(gdObject obj, [Const] DOMString propertyName, [Const] DOMString newValue);
 };
 
 interface VersionWrapper {

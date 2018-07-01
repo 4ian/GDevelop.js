@@ -3289,15 +3289,18 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_InitializePlatfor
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_SanityCheckBehaviorProperty_3(ProjectHelper* self, Behavior* arg0, const char* arg1, const char* arg2) {
-  return self->STATIC_SanityCheckBehaviorProperty(arg0, arg1, arg2).c_str();
+  static gd::String temp;
+  return (temp = self->STATIC_SanityCheckBehaviorProperty(arg0, arg1, arg2), temp.c_str());
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_SanityCheckObjectProperty_3(ProjectHelper* self, gdObject* arg0, const char* arg1, const char* arg2) {
-  return self->STATIC_SanityCheckObjectProperty(arg0, arg1, arg2).c_str();
+  static gd::String temp;
+  return (temp = self->STATIC_SanityCheckObjectProperty(arg0, arg1, arg2), temp.c_str());
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_SanityCheckObjectInitialInstanceProperty_3(ProjectHelper* self, gdObject* arg0, const char* arg1, const char* arg2) {
-  return self->STATIC_SanityCheckObjectInitialInstanceProperty(arg0, arg1, arg2).c_str();
+  static gd::String temp;
+  return (temp = self->STATIC_SanityCheckObjectInitialInstanceProperty(arg0, arg1, arg2), temp.c_str());
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper___destroy___0(ProjectHelper* self) {

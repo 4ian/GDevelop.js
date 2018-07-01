@@ -408,7 +408,7 @@ typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
             fullname,                                                       \
             description,                                                    \
             icon24x24,                                                      \
-            std::unique_ptr<gd::Object>(instance))
+            std::shared_ptr<gd::Object>(instance))
 
 #define MAP_get(a) find(a)->second
 #define MAP_set(key, value) [key] = value
