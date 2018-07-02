@@ -645,6 +645,8 @@ interface InitialInstance {
     [Value] MapStringPropertyDescriptor GetCustomProperties([Ref] Project project, [Ref] Layout layout);
     float GetRawFloatProperty([Const] DOMString name);
     [Const, Ref] DOMString GetRawStringProperty([Const] DOMString name);
+    void SetRawFloatProperty([Const] DOMString name, float value);
+    void SetRawStringProperty([Const] DOMString name, [Const] DOMString value);
 
     [Ref] VariablesContainer GetVariables();
 

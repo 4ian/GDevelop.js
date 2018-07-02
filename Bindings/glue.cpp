@@ -3867,6 +3867,14 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstance_GetRawStringPro
   return self->GetRawStringProperty(arg0).c_str();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstance_SetRawFloatProperty_2(InitialInstance* self, const char* arg0, float arg1) {
+  self->SetRawFloatProperty(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstance_SetRawStringProperty_2(InitialInstance* self, const char* arg0, const char* arg1) {
+  self->SetRawStringProperty(arg0, arg1);
+}
+
 VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstance_GetVariables_0(InitialInstance* self) {
   return &self->GetVariables();
 }

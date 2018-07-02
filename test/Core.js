@@ -984,27 +984,48 @@ describe('libGD.js', function() {
         property2: true,
       }));
 
-      myObject.updateInitialInstanceProperty = function(content, instance, propertyName, newValue, project, layout) { 
+      myObject.updateInitialInstanceProperty = function(
+        content,
+        instance,
+        propertyName,
+        newValue,
+        project,
+        layout
+      ) {
         if (propertyName === "My instance property") {
-          content.property1 = newValue;
+          instance.setRawStringProperty("instanceprop1", newValue);
           return true;
         }
         if (propertyName === "My other instance property") {
-          content.property2 = newValue === "1";
+          instance.setRawFloatProperty("instanceprop2", parseFloat(newValue));
           return true;
         }
-
+  
         return false;
-      }
-      myObject.getInitialInstanceProperties = function(content, instance, project, layout) { 
+      };
+      myObject.getInitialInstanceProperties = function(
+        content,
+        instance,
+        project,
+        layout
+      ) {
         var properties = new gd.MapStringPropertyDescriptor();
-
-        properties.set("My instance property", new gd.PropertyDescriptor(content.property1));
-        properties.set("My other instance property", new gd.PropertyDescriptor(content.property2 ? "1" : "0")
-          .setType("Boolean"));
-
+  
+        properties.set(
+          "My instance property",
+          new gd.PropertyDescriptor(
+            instance.getRawStringProperty("instanceprop1")
+          )
+        );
+        properties.set(
+          "My other instance property",
+          new gd.PropertyDescriptor(
+            instance.getRawFloatProperty("instanceprop2").toString() //TODO: How to avoid people forgetting toString?
+          ).setType("number")
+        );
+  
         return properties;
-      }
+      };
 
       try {
         expect(gd.ProjectHelper.sanityCheckObjectProperty(myObject, "My first property", "Value1")).to.be('');

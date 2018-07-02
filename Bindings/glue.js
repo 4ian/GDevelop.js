@@ -6484,6 +6484,25 @@ InitialInstance.prototype['GetRawStringProperty'] = InitialInstance.prototype.Ge
   return Pointer_stringify(_emscripten_bind_InitialInstance_GetRawStringProperty_1(self, arg0));
 };;
 
+InitialInstance.prototype['SetRawFloatProperty'] = InitialInstance.prototype.SetRawFloatProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_InitialInstance_SetRawFloatProperty_2(self, arg0, arg1);
+};;
+
+InitialInstance.prototype['SetRawStringProperty'] = InitialInstance.prototype.SetRawStringProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  _emscripten_bind_InitialInstance_SetRawStringProperty_2(self, arg0, arg1);
+};;
+
 InitialInstance.prototype['GetVariables'] = InitialInstance.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_InitialInstance_GetVariables_0(self), VariablesContainer);
