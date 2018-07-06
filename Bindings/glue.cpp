@@ -3,6 +3,7 @@
 
 
 
+
 class InitialInstanceJSFunctor : public InitialInstanceJSFunctorWrapper {
 public:
   void invoke(InitialInstance* arg0) {
@@ -84,6 +85,41 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Behavior___destroy___0(Behavior* self)
 // AbstractFileSystem
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_AbstractFileSystem___destroy___0(AbstractFileSystem* self) {
+  delete self;
+}
+
+// BehaviorsSharedData
+
+BehaviorsSharedData* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_BehaviorsSharedData_0() {
+  return new BehaviorsSharedData();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_GetName_0(BehaviorsSharedData* self) {
+  return self->GetName().c_str();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_GetTypeName_0(BehaviorsSharedData* self) {
+  return self->GetTypeName().c_str();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_UpdateProperty_3(BehaviorsSharedData* self, const char* arg0, const char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_GetProperties_1(BehaviorsSharedData* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_SerializeTo_1(BehaviorsSharedData* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_UnserializeFrom_1(BehaviorsSharedData* self, const SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData___destroy___0(BehaviorsSharedData* self) {
   delete self;
 }
 
@@ -2180,9 +2216,38 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata___destroy___0(Expre
   delete self;
 }
 
-// InitialInstanceFunctor
+// BehaviorSharedDataJsImplementation
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstanceFunctor___destroy___0(InitialInstanceFunctor* self) {
+BehaviorSharedDataJsImplementation* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorSharedDataJsImplementation_BehaviorSharedDataJsImplementation_0() {
+  return new BehaviorSharedDataJsImplementation();
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorSharedDataJsImplementation_GetProperties_1(BehaviorSharedDataJsImplementation* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorSharedDataJsImplementation_UpdateProperty_3(BehaviorSharedDataJsImplementation* self, const char* arg0, const char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorSharedDataJsImplementation_SerializeTo_1(BehaviorSharedDataJsImplementation* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorSharedDataJsImplementation_UnserializeFrom_1(BehaviorSharedDataJsImplementation* self, const SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorSharedDataJsImplementation_GetRawJSONContent_0(BehaviorSharedDataJsImplementation* self) {
+  return self->GetRawJSONContent().c_str();
+}
+
+BehaviorSharedDataJsImplementation* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorSharedDataJsImplementation_SetRawJSONContent_1(BehaviorSharedDataJsImplementation* self, const char* arg0) {
+  return &self->SetRawJSONContent(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorSharedDataJsImplementation___destroy___0(BehaviorSharedDataJsImplementation* self) {
   delete self;
 }
 
@@ -2455,21 +2520,9 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata___destroy___0(Inst
   delete self;
 }
 
-// VectorPairStringTextFormatting
+// InitialInstanceFunctor
 
-unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPairStringTextFormatting_size_0(VectorPairStringTextFormatting* self) {
-  return self->size();
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPairStringTextFormatting_WRAPPED_GetString_1(VectorPairStringTextFormatting* self, unsigned int arg0) {
-  return self->WRAPPED_GetString(arg0).c_str();
-}
-
-TextFormatting* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPairStringTextFormatting_WRAPPED_GetTextFormatting_1(VectorPairStringTextFormatting* self, unsigned int arg0) {
-  return &self->WRAPPED_GetTextFormatting(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPairStringTextFormatting___destroy___0(VectorPairStringTextFormatting* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstanceFunctor___destroy___0(InitialInstanceFunctor* self) {
   delete self;
 }
 
@@ -3291,6 +3344,11 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_InitializePlatfor
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_SanityCheckBehaviorProperty_3(ProjectHelper* self, Behavior* arg0, const char* arg1, const char* arg2) {
   static gd::String temp;
   return (temp = self->STATIC_SanityCheckBehaviorProperty(arg0, arg1, arg2), temp.c_str());
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_SanityCheckBehaviorsSharedDataProperty_3(ProjectHelper* self, BehaviorsSharedData* arg0, const char* arg1, const char* arg2) {
+  static gd::String temp;
+  return (temp = self->STATIC_SanityCheckBehaviorsSharedDataProperty(arg0, arg1, arg2), temp.c_str());
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper_STATIC_SanityCheckObjectProperty_3(ProjectHelper* self, gdObject* arg0, const char* arg1, const char* arg2) {
@@ -4206,6 +4264,24 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VersionWrapper_STATIC_Date_0(Ve
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VersionWrapper___destroy___0(VersionWrapper* self) {
+  delete self;
+}
+
+// VectorPairStringTextFormatting
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPairStringTextFormatting_size_0(VectorPairStringTextFormatting* self) {
+  return self->size();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPairStringTextFormatting_WRAPPED_GetString_1(VectorPairStringTextFormatting* self, unsigned int arg0) {
+  return self->WRAPPED_GetString(arg0).c_str();
+}
+
+TextFormatting* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPairStringTextFormatting_WRAPPED_GetTextFormatting_1(VectorPairStringTextFormatting* self, unsigned int arg0) {
+  return &self->WRAPPED_GetTextFormatting(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPairStringTextFormatting___destroy___0(VectorPairStringTextFormatting* self) {
   delete self;
 }
 
@@ -5194,41 +5270,6 @@ temp.clear(); for(auto it = self->begin(); it != self->end();++it) { temp.push_b
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringExpressionMetadata___destroy___0(MapStringExpressionMetadata* self) {
-  delete self;
-}
-
-// BehaviorsSharedData
-
-BehaviorsSharedData* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_BehaviorsSharedData_0() {
-  return new BehaviorsSharedData();
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_GetName_0(BehaviorsSharedData* self) {
-  return self->GetName().c_str();
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_GetTypeName_0(BehaviorsSharedData* self) {
-  return self->GetTypeName().c_str();
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_UpdateProperty_3(BehaviorsSharedData* self, const char* arg0, const char* arg1, Project* arg2) {
-  return self->UpdateProperty(arg0, arg1, *arg2);
-}
-
-MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_GetProperties_1(BehaviorsSharedData* self, Project* arg0) {
-  static MapStringPropertyDescriptor temp;
-  return (temp = self->GetProperties(*arg0), &temp);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_SerializeTo_1(BehaviorsSharedData* self, SerializerElement* arg0) {
-  self->SerializeTo(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData_UnserializeFrom_1(BehaviorsSharedData* self, const SerializerElement* arg0) {
-  self->UnserializeFrom(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorsSharedData___destroy___0(BehaviorsSharedData* self) {
   delete self;
 }
 

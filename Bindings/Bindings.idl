@@ -87,6 +87,7 @@ interface ProjectHelper {
     [Ref] Project STATIC_CreateNewGDJSProject();
     void STATIC_InitializePlatforms();
     [Const, Value] DOMString STATIC_SanityCheckBehaviorProperty(Behavior behavior, [Const] DOMString propertyName, [Const] DOMString newValue);
+    [Const, Value] DOMString STATIC_SanityCheckBehaviorsSharedDataProperty(BehaviorsSharedData behavior, [Const] DOMString propertyName, [Const] DOMString newValue);
     [Const, Value] DOMString STATIC_SanityCheckObjectProperty(gdObject obj, [Const] DOMString propertyName, [Const] DOMString newValue);
     [Const, Value] DOMString STATIC_SanityCheckObjectInitialInstanceProperty(gdObject obj, [Const] DOMString propertyName, [Const] DOMString newValue);
 };
@@ -359,6 +360,21 @@ interface BehaviorsSharedData {
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+[JSImplementation="BehaviorsSharedData"]
+interface BehaviorSharedDataJsImplementation {
+    void BehaviorSharedDataJsImplementation();
+    // BehaviorSharedDataJsImplementation Clone(); Not exposed
+
+    [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+
+    [Const, Ref] DOMString GetRawJSONContent();
+    [Ref] BehaviorSharedDataJsImplementation SetRawJSONContent([Const] DOMString newContent);
 };
 
 interface gdObject {

@@ -69,6 +69,7 @@ add_library(
         "Bindings/Wrapper.cpp"
         "Bindings/BehaviorJsImplementation.cpp"
         "Bindings/ObjectJsImplementation.cpp"
+        "Bindings/BehaviorSharedDataJsImplementation.cpp"
 )
 set_target_properties(GD PROPERTIES SUFFIX ".raw.js")
 set(LIBRARY_OUTPUT_PATH ${GD_base_dir}/Binaries/Output/libGD.js/${CMAKE_BUILD_TYPE})

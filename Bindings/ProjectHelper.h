@@ -86,6 +86,46 @@ class ProjectHelper {
   }
 
   /**
+   * \brief This check that the given gd::BehaviorsSharedData can be properly cloned
+   * and have the given property updated.
+   */
+  static gd::String SanityCheckBehaviorsSharedDataProperty(gd::BehaviorsSharedData* sharedData,
+                                                const gd::String& propertyName,
+                                                const gd::String& newValue) {
+    gd::Project project;
+    project.AddPlatform(JsPlatform::Get());
+
+    gd::String originalValue =
+        sharedData->GetProperties(project)[propertyName].GetValue();
+
+    std::shared_ptr<gd::BehaviorsSharedData> copiedSharedData = sharedData->Clone();
+    if (copiedSharedData->GetProperties(project)[propertyName].GetValue() !=
+        originalValue) {
+      return "FAIL: Cloning the sharedData does not copy properly the property";
+    }
+
+    sharedData->UpdateProperty(propertyName, newValue, project);
+    gd::String updatedValue =
+        sharedData->GetProperties(project)[propertyName].GetValue();
+    if (updatedValue != newValue) {
+      return "FAIL: expected the newValue to be set for the property, but "
+             "received:" +
+             updatedValue;
+    }
+
+    gd::String copiedSharedDataValue =
+        copiedSharedData->GetProperties(project)[propertyName].GetValue();
+    if (copiedSharedDataValue != originalValue) {
+      return "FAIL: Updating the property of the sharedData will change the "
+             "property of the cloned sharedData. Clone sharedData property is "
+             "now: " +
+             copiedSharedDataValue + ". Should have been:" + originalValue;
+    }
+
+    return "";
+  }
+
+  /**
    * \brief This check that the given gd::Object can be properly cloned
    * and have the given property updated.
    */

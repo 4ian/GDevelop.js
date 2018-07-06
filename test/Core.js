@@ -453,11 +453,7 @@ describe('libGD.js', function() {
       container.swap(0, 2);
       expect(container.getNameAt(0)).to.be('ThirdVariable');
       expect(container.getNameAt(2)).to.be('Variable');
-      expect(
-        container
-          .getAt(2)
-          .getValue()
-      ).to.be(4);
+      expect(container.getAt(2).getValue()).to.be(4);
 
       container.delete();
     });
@@ -601,7 +597,9 @@ describe('libGD.js', function() {
       resource.updateProperty('Always loaded in memory', '1', project);
 
       var updatedProperties = resource.getProperties();
-      expect(updatedProperties.get('Smooth the image').getValue()).to.be('false');
+      expect(updatedProperties.get('Smooth the image').getValue()).to.be(
+        'false'
+      );
       expect(updatedProperties.get('Always loaded in memory').getValue()).to.be(
         'true'
       );
@@ -754,7 +752,10 @@ describe('libGD.js', function() {
 
       {
         spriteObject.exposeResources(imagesUsedInventorizer);
-        const resourceNames = imagesUsedInventorizer.getAllUsedImages().toNewVectorString().toJSArray();
+        const resourceNames = imagesUsedInventorizer
+          .getAllUsedImages()
+          .toNewVectorString()
+          .toJSArray();
         expect(resourceNames).to.have.length(2);
         expect(resourceNames).to.contain('Image1');
         expect(resourceNames).to.contain('Image2');
@@ -762,7 +763,10 @@ describe('libGD.js', function() {
 
       {
         spriteObject2.exposeResources(imagesUsedInventorizer);
-        const resourceNames = imagesUsedInventorizer.getAllUsedImages().toNewVectorString().toJSArray();
+        const resourceNames = imagesUsedInventorizer
+          .getAllUsedImages()
+          .toNewVectorString()
+          .toJSArray();
         expect(resourceNames).to.have.length(3);
         expect(resourceNames).to.contain('Image1');
         expect(resourceNames).to.contain('Image2');
@@ -827,74 +831,178 @@ describe('libGD.js', function() {
     });
   });
 
+  describe('gd.BehaviorSharedDataJsImplementation', function() {
+    it('can declare a gd.BehaviorSharedDataJsImplementation and pass sanity checks', function() {
+      var mySharedData = new gd.BehaviorSharedDataJsImplementation();
+      mySharedData.updateProperty = function(content, propertyName, newValue) {
+        if (propertyName === 'My first property') {
+          content.property1 = newValue;
+          return true;
+        }
+        if (propertyName === 'My other property') {
+          content.property2 = newValue === '1';
+          return true;
+        }
+
+        return false;
+      };
+      mySharedData.getProperties = function(content) {
+        var properties = new gd.MapStringPropertyDescriptor();
+
+        properties.set(
+          'My first property',
+          new gd.PropertyDescriptor(content.property1)
+        );
+        properties.set(
+          'My other property',
+          new gd.PropertyDescriptor(content.property2 ? '1' : '0').setType(
+            'Boolean'
+          )
+        );
+
+        return properties;
+      };
+      mySharedData.setRawJSONContent(
+        JSON.stringify({
+          property1: 'Initial value 1',
+          property2: true,
+        })
+      );
+
+      try {
+        expect(
+          gd.ProjectHelper.sanityCheckBehaviorsSharedDataProperty(
+            mySharedData,
+            'My first property',
+            'Value1'
+          )
+        ).to.be('');
+        expect(
+          gd.ProjectHelper.sanityCheckBehaviorsSharedDataProperty(
+            mySharedData,
+            'My other property',
+            '0'
+          )
+        ).to.be('');
+      } catch (ex) {
+        console.error(ex);
+        expect().fail(
+          'Exception caught while launching sanityCheckBehavior on a gd.BehaviorSharedDataJsImplementation.'
+        );
+      }
+    });
+  });
+
   describe('gd.MapStringPropertyDescriptor', function() {
     it('can be used to manipulate properties', function() {
       var properties = new gd.MapStringPropertyDescriptor();
-      expect(properties.has("Property0")).to.be(false);
+      expect(properties.has('Property0')).to.be(false);
 
-      properties.set("Property1", new gd.PropertyDescriptor('Hello Property1'));
-      expect(properties.get("Property1").getValue()).to.be('Hello Property1');
-      expect(properties.get("Property1").getType()).to.be('string');
-      properties.get("Property1").setValue('Hello modified Property1');
-      expect(properties.get("Property1").getValue()).to.be('Hello modified Property1');
-      expect(properties.keys().toJSArray()).not.to.contain("Property0");
-      expect(properties.keys().toJSArray()).to.contain("Property1");
-
-      properties.set("Property0", (new gd.PropertyDescriptor('Hello Property0'))
-        .setType("another type")
-        .addExtraInfo("Info1")
-        .addExtraInfo("Info3")
+      properties.set('Property1', new gd.PropertyDescriptor('Hello Property1'));
+      expect(properties.get('Property1').getValue()).to.be('Hello Property1');
+      expect(properties.get('Property1').getType()).to.be('string');
+      properties.get('Property1').setValue('Hello modified Property1');
+      expect(properties.get('Property1').getValue()).to.be(
+        'Hello modified Property1'
       );
-      expect(properties.get("Property0").getValue()).to.be('Hello Property0');
-      expect(properties.get("Property0").getType()).to.be('another type');
-      expect(properties.get("Property0").getExtraInfo().toJSArray()).to.contain('Info1');
-      expect(properties.get("Property0").getExtraInfo().toJSArray()).not.to.contain('Info2');
-      expect(properties.get("Property0").getExtraInfo().toJSArray()).to.contain('Info3');
-      expect(properties.has("Property0")).to.be(true);
-      expect(properties.has("Property1")).to.be(true);
-      expect(properties.keys().toJSArray()).to.contain("Property0");
-      expect(properties.keys().toJSArray()).to.contain("Property1");
+      expect(properties.keys().toJSArray()).not.to.contain('Property0');
+      expect(properties.keys().toJSArray()).to.contain('Property1');
+
+      properties.set(
+        'Property0',
+        new gd.PropertyDescriptor('Hello Property0')
+          .setType('another type')
+          .addExtraInfo('Info1')
+          .addExtraInfo('Info3')
+      );
+      expect(properties.get('Property0').getValue()).to.be('Hello Property0');
+      expect(properties.get('Property0').getType()).to.be('another type');
+      expect(
+        properties
+          .get('Property0')
+          .getExtraInfo()
+          .toJSArray()
+      ).to.contain('Info1');
+      expect(
+        properties
+          .get('Property0')
+          .getExtraInfo()
+          .toJSArray()
+      ).not.to.contain('Info2');
+      expect(
+        properties
+          .get('Property0')
+          .getExtraInfo()
+          .toJSArray()
+      ).to.contain('Info3');
+      expect(properties.has('Property0')).to.be(true);
+      expect(properties.has('Property1')).to.be(true);
+      expect(properties.keys().toJSArray()).to.contain('Property0');
+      expect(properties.keys().toJSArray()).to.contain('Property1');
     });
   });
 
   describe('gd.BehaviorJsImplementation', function() {
     it('can declare a gd.BehaviorJsImplementation and pass sanity checks', function() {
       var myBehavior = new gd.BehaviorJsImplementation();
-      myBehavior.updateProperty = function(content, propertyName, newValue) { 
-        if (propertyName === "My first property") {
+      myBehavior.updateProperty = function(content, propertyName, newValue) {
+        if (propertyName === 'My first property') {
           content.property1 = newValue;
           return true;
         }
-        if (propertyName === "My other property") {
-          content.property2 = newValue === "1";
+        if (propertyName === 'My other property') {
+          content.property2 = newValue === '1';
           return true;
         }
 
         return false;
-      }
-      myBehavior.getProperties = function(content) { 
+      };
+      myBehavior.getProperties = function(content) {
         var properties = new gd.MapStringPropertyDescriptor();
 
-        properties.set("My first property", new gd.PropertyDescriptor(content.property1));
-        properties.set("My other property", new gd.PropertyDescriptor(content.property2 ? "1" : "0")
-          .setType("Boolean"));
+        properties.set(
+          'My first property',
+          new gd.PropertyDescriptor(content.property1)
+        );
+        properties.set(
+          'My other property',
+          new gd.PropertyDescriptor(content.property2 ? '1' : '0').setType(
+            'Boolean'
+          )
+        );
 
         return properties;
-      }
-      myBehavior.setRawJSONContent(JSON.stringify({
-        property1: "Initial value 1",
-        property2: true,
-      }));
+      };
+      myBehavior.setRawJSONContent(
+        JSON.stringify({
+          property1: 'Initial value 1',
+          property2: true,
+        })
+      );
 
       try {
-        expect(gd.ProjectHelper.sanityCheckBehaviorProperty(myBehavior, "My first property", "Value1")).to.be('');
-        expect(gd.ProjectHelper.sanityCheckBehaviorProperty(myBehavior, "My other property", "0")).to.be('');
-      } catch(ex) {
+        expect(
+          gd.ProjectHelper.sanityCheckBehaviorProperty(
+            myBehavior,
+            'My first property',
+            'Value1'
+          )
+        ).to.be('');
+        expect(
+          gd.ProjectHelper.sanityCheckBehaviorProperty(
+            myBehavior,
+            'My other property',
+            '0'
+          )
+        ).to.be('');
+      } catch (ex) {
         console.error(ex);
-        expect().fail("Exception caught while launching sanityCheckBehavior on a gd.BehaviorJsImplementation.");
+        expect().fail(
+          'Exception caught while launching sanityCheckBehavior on a gd.BehaviorJsImplementation.'
+        );
       }
     });
-  })
+  });
 
   describe('gd.Object', function() {
     var project = gd.ProjectHelper.createNewGDJSProject();
@@ -954,35 +1062,43 @@ describe('libGD.js', function() {
     });
   });
 
-
   describe('gd.ObjectJsImplementation', function() {
     it('can declare a gd.ObjectJsImplementation and pass sanity checks', function() {
       var myObject = new gd.ObjectJsImplementation();
-      myObject.updateProperty = function(content, propertyName, newValue) { 
-        if (propertyName === "My first property") {
+      myObject.updateProperty = function(content, propertyName, newValue) {
+        if (propertyName === 'My first property') {
           content.property1 = newValue;
           return true;
         }
-        if (propertyName === "My other property") {
-          content.property2 = newValue === "1";
+        if (propertyName === 'My other property') {
+          content.property2 = newValue === '1';
           return true;
         }
 
         return false;
-      }
-      myObject.getProperties = function(content) { 
+      };
+      myObject.getProperties = function(content) {
         var properties = new gd.MapStringPropertyDescriptor();
 
-        properties.set("My first property", new gd.PropertyDescriptor(content.property1));
-        properties.set("My other property", new gd.PropertyDescriptor(content.property2 ? "1" : "0")
-          .setType("Boolean"));
+        properties.set(
+          'My first property',
+          new gd.PropertyDescriptor(content.property1)
+        );
+        properties.set(
+          'My other property',
+          new gd.PropertyDescriptor(content.property2 ? '1' : '0').setType(
+            'Boolean'
+          )
+        );
 
         return properties;
-      }
-      myObject.setRawJSONContent(JSON.stringify({
-        property1: "Initial value 1",
-        property2: true,
-      }));
+      };
+      myObject.setRawJSONContent(
+        JSON.stringify({
+          property1: 'Initial value 1',
+          property2: true,
+        })
+      );
 
       myObject.updateInitialInstanceProperty = function(
         content,
@@ -992,15 +1108,15 @@ describe('libGD.js', function() {
         project,
         layout
       ) {
-        if (propertyName === "My instance property") {
-          instance.setRawStringProperty("instanceprop1", newValue);
+        if (propertyName === 'My instance property') {
+          instance.setRawStringProperty('instanceprop1', newValue);
           return true;
         }
-        if (propertyName === "My other instance property") {
-          instance.setRawFloatProperty("instanceprop2", parseFloat(newValue));
+        if (propertyName === 'My other instance property') {
+          instance.setRawFloatProperty('instanceprop2', parseFloat(newValue));
           return true;
         }
-  
+
         return false;
       };
       myObject.getInitialInstanceProperties = function(
@@ -1010,34 +1126,60 @@ describe('libGD.js', function() {
         layout
       ) {
         var properties = new gd.MapStringPropertyDescriptor();
-  
+
         properties.set(
-          "My instance property",
+          'My instance property',
           new gd.PropertyDescriptor(
-            instance.getRawStringProperty("instanceprop1")
+            instance.getRawStringProperty('instanceprop1')
           )
         );
         properties.set(
-          "My other instance property",
+          'My other instance property',
           new gd.PropertyDescriptor(
-            instance.getRawFloatProperty("instanceprop2").toString() //TODO: How to avoid people forgetting toString?
-          ).setType("number")
+            instance.getRawFloatProperty('instanceprop2').toString() //TODO: How to avoid people forgetting toString?
+          ).setType('number')
         );
-  
+
         return properties;
       };
 
       try {
-        expect(gd.ProjectHelper.sanityCheckObjectProperty(myObject, "My first property", "Value1")).to.be('');
-        expect(gd.ProjectHelper.sanityCheckObjectProperty(myObject, "My other property", "0")).to.be('');
-        expect(gd.ProjectHelper.sanityCheckObjectInitialInstanceProperty(myObject, "My instance property", "Value1")).to.be('');
-        expect(gd.ProjectHelper.sanityCheckObjectInitialInstanceProperty(myObject, "My other instance property", "0")).to.be('');
-      } catch(ex) {
+        expect(
+          gd.ProjectHelper.sanityCheckObjectProperty(
+            myObject,
+            'My first property',
+            'Value1'
+          )
+        ).to.be('');
+        expect(
+          gd.ProjectHelper.sanityCheckObjectProperty(
+            myObject,
+            'My other property',
+            '0'
+          )
+        ).to.be('');
+        expect(
+          gd.ProjectHelper.sanityCheckObjectInitialInstanceProperty(
+            myObject,
+            'My instance property',
+            'Value1'
+          )
+        ).to.be('');
+        expect(
+          gd.ProjectHelper.sanityCheckObjectInitialInstanceProperty(
+            myObject,
+            'My other instance property',
+            '0'
+          )
+        ).to.be('');
+      } catch (ex) {
         console.error(ex);
-        expect().fail("Exception caught while launching sanityCheckObject on a gd.ObjectJsImplementation.");
+        expect().fail(
+          'Exception caught while launching sanityCheckObject on a gd.ObjectJsImplementation.'
+        );
       }
-    })
-  })
+    });
+  });
 
   describe('gd.ObjectGroupsContainer', function() {
     var container = new gd.ObjectGroupsContainer();
@@ -1840,5 +1982,5 @@ describe('libGD.js', function() {
       vectorVector2f.clear();
       expect(vectorVector2f.size()).to.be(0);
     });
-  })
+  });
 });

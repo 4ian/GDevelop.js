@@ -66,6 +66,7 @@
 #include "ProjectHelper.h"
 
 #include "BehaviorJsImplementation.h"
+#include "BehaviorSharedDataJsImplementation.h"
 #include "ObjectJsImplementation.h"
 
 /**
@@ -468,6 +469,8 @@ typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 #define STATIC_SanityCheckObjectProperty SanityCheckObjectProperty
 #define STATIC_SanityCheckObjectInitialInstanceProperty \
   SanityCheckObjectInitialInstanceProperty
+#define STATIC_SanityCheckBehaviorsSharedDataProperty \
+  SanityCheckBehaviorsSharedDataProperty
 
 // We postfix some methods with "At" as Javascript does not support overloading
 #define GetLayoutAt GetLayout

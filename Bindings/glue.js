@@ -259,6 +259,60 @@ Module['AbstractFileSystem'] = AbstractFileSystem;
   var self = this.ptr;
   _emscripten_bind_AbstractFileSystem___destroy___0(self);
 };
+// BehaviorsSharedData
+/** @suppress {undefinedVars, duplicate} */function BehaviorsSharedData() {
+  this.ptr = _emscripten_bind_BehaviorsSharedData_BehaviorsSharedData_0();
+  getCache(BehaviorsSharedData)[this.ptr] = this;
+};;
+BehaviorsSharedData.prototype = Object.create(WrapperObject.prototype);
+BehaviorsSharedData.prototype.constructor = BehaviorsSharedData;
+BehaviorsSharedData.prototype.__class__ = BehaviorsSharedData;
+BehaviorsSharedData.__cache__ = {};
+Module['BehaviorsSharedData'] = BehaviorsSharedData;
+
+BehaviorsSharedData.prototype['GetName'] = BehaviorsSharedData.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_BehaviorsSharedData_GetName_0(self));
+};;
+
+BehaviorsSharedData.prototype['GetTypeName'] = BehaviorsSharedData.prototype.GetTypeName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_BehaviorsSharedData_GetTypeName_0(self));
+};;
+
+BehaviorsSharedData.prototype['UpdateProperty'] = BehaviorsSharedData.prototype.UpdateProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_BehaviorsSharedData_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+BehaviorsSharedData.prototype['GetProperties'] = BehaviorsSharedData.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_BehaviorsSharedData_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+BehaviorsSharedData.prototype['SerializeTo'] = BehaviorsSharedData.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_BehaviorsSharedData_SerializeTo_1(self, arg0);
+};;
+
+BehaviorsSharedData.prototype['UnserializeFrom'] = BehaviorsSharedData.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_BehaviorsSharedData_UnserializeFrom_1(self, arg0);
+};;
+
+  BehaviorsSharedData.prototype['__destroy__'] = BehaviorsSharedData.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_BehaviorsSharedData___destroy___0(self);
+};
 // gdObject
 /** @suppress {undefinedVars, duplicate} */function gdObject(arg0) {
   ensureCache.prepare();
@@ -3733,17 +3787,62 @@ ExpressionMetadata.prototype['GetCodeExtraInformation'] = ExpressionMetadata.pro
   var self = this.ptr;
   _emscripten_bind_ExpressionMetadata___destroy___0(self);
 };
-// InitialInstanceFunctor
-function InitialInstanceFunctor() { throw "cannot construct a InitialInstanceFunctor, no constructor in IDL" }
-InitialInstanceFunctor.prototype = Object.create(WrapperObject.prototype);
-InitialInstanceFunctor.prototype.constructor = InitialInstanceFunctor;
-InitialInstanceFunctor.prototype.__class__ = InitialInstanceFunctor;
-InitialInstanceFunctor.__cache__ = {};
-Module['InitialInstanceFunctor'] = InitialInstanceFunctor;
+// BehaviorSharedDataJsImplementation
+/** @suppress {undefinedVars, duplicate} */function BehaviorSharedDataJsImplementation() {
+  this.ptr = _emscripten_bind_BehaviorSharedDataJsImplementation_BehaviorSharedDataJsImplementation_0();
+  getCache(BehaviorSharedDataJsImplementation)[this.ptr] = this;
+};;
+BehaviorSharedDataJsImplementation.prototype = Object.create(BehaviorsSharedData.prototype);
+BehaviorSharedDataJsImplementation.prototype.constructor = BehaviorSharedDataJsImplementation;
+BehaviorSharedDataJsImplementation.prototype.__class__ = BehaviorSharedDataJsImplementation;
+BehaviorSharedDataJsImplementation.__cache__ = {};
+Module['BehaviorSharedDataJsImplementation'] = BehaviorSharedDataJsImplementation;
 
-  InitialInstanceFunctor.prototype['__destroy__'] = InitialInstanceFunctor.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+BehaviorSharedDataJsImplementation.prototype['GetProperties'] = BehaviorSharedDataJsImplementation.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
-  _emscripten_bind_InitialInstanceFunctor___destroy___0(self);
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_BehaviorSharedDataJsImplementation_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+BehaviorSharedDataJsImplementation.prototype['UpdateProperty'] = BehaviorSharedDataJsImplementation.prototype.UpdateProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_BehaviorSharedDataJsImplementation_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+BehaviorSharedDataJsImplementation.prototype['SerializeTo'] = BehaviorSharedDataJsImplementation.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_BehaviorSharedDataJsImplementation_SerializeTo_1(self, arg0);
+};;
+
+BehaviorSharedDataJsImplementation.prototype['UnserializeFrom'] = BehaviorSharedDataJsImplementation.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_BehaviorSharedDataJsImplementation_UnserializeFrom_1(self, arg0);
+};;
+
+BehaviorSharedDataJsImplementation.prototype['GetRawJSONContent'] = BehaviorSharedDataJsImplementation.prototype.GetRawJSONContent = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_BehaviorSharedDataJsImplementation_GetRawJSONContent_0(self));
+};;
+
+BehaviorSharedDataJsImplementation.prototype['SetRawJSONContent'] = BehaviorSharedDataJsImplementation.prototype.SetRawJSONContent = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_BehaviorSharedDataJsImplementation_SetRawJSONContent_1(self, arg0), BehaviorSharedDataJsImplementation);
+};;
+
+  BehaviorSharedDataJsImplementation.prototype['__destroy__'] = BehaviorSharedDataJsImplementation.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_BehaviorSharedDataJsImplementation___destroy___0(self);
 };
 // InstructionsList
 /** @suppress {undefinedVars, duplicate} */function InstructionsList() {
@@ -4156,34 +4255,17 @@ InstructionMetadata.prototype['GetCodeExtraInformation'] = InstructionMetadata.p
   var self = this.ptr;
   _emscripten_bind_InstructionMetadata___destroy___0(self);
 };
-// VectorPairStringTextFormatting
-function VectorPairStringTextFormatting() { throw "cannot construct a VectorPairStringTextFormatting, no constructor in IDL" }
-VectorPairStringTextFormatting.prototype = Object.create(WrapperObject.prototype);
-VectorPairStringTextFormatting.prototype.constructor = VectorPairStringTextFormatting;
-VectorPairStringTextFormatting.prototype.__class__ = VectorPairStringTextFormatting;
-VectorPairStringTextFormatting.__cache__ = {};
-Module['VectorPairStringTextFormatting'] = VectorPairStringTextFormatting;
+// InitialInstanceFunctor
+function InitialInstanceFunctor() { throw "cannot construct a InitialInstanceFunctor, no constructor in IDL" }
+InitialInstanceFunctor.prototype = Object.create(WrapperObject.prototype);
+InitialInstanceFunctor.prototype.constructor = InitialInstanceFunctor;
+InitialInstanceFunctor.prototype.__class__ = InitialInstanceFunctor;
+InitialInstanceFunctor.__cache__ = {};
+Module['InitialInstanceFunctor'] = InitialInstanceFunctor;
 
-VectorPairStringTextFormatting.prototype['size'] = VectorPairStringTextFormatting.prototype.size = /** @suppress {undefinedVars, duplicate} */function() {
+  InitialInstanceFunctor.prototype['__destroy__'] = InitialInstanceFunctor.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  return _emscripten_bind_VectorPairStringTextFormatting_size_0(self);
-};;
-
-VectorPairStringTextFormatting.prototype['WRAPPED_GetString'] = VectorPairStringTextFormatting.prototype.WRAPPED_GetString = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return Pointer_stringify(_emscripten_bind_VectorPairStringTextFormatting_WRAPPED_GetString_1(self, arg0));
-};;
-
-VectorPairStringTextFormatting.prototype['WRAPPED_GetTextFormatting'] = VectorPairStringTextFormatting.prototype.WRAPPED_GetTextFormatting = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return wrapPointer(_emscripten_bind_VectorPairStringTextFormatting_WRAPPED_GetTextFormatting_1(self, arg0), TextFormatting);
-};;
-
-  VectorPairStringTextFormatting.prototype['__destroy__'] = VectorPairStringTextFormatting.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  _emscripten_bind_VectorPairStringTextFormatting___destroy___0(self);
+  _emscripten_bind_InitialInstanceFunctor___destroy___0(self);
 };
 // SetString
 /** @suppress {undefinedVars, duplicate} */function SetString() {
@@ -5481,6 +5563,17 @@ ProjectHelper.prototype['STATIC_SanityCheckBehaviorProperty'] = ProjectHelper.pr
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   else arg2 = ensureString(arg2);
   return Pointer_stringify(_emscripten_bind_ProjectHelper_STATIC_SanityCheckBehaviorProperty_3(self, arg0, arg1, arg2));
+};;
+
+ProjectHelper.prototype['STATIC_SanityCheckBehaviorsSharedDataProperty'] = ProjectHelper.prototype.STATIC_SanityCheckBehaviorsSharedDataProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  return Pointer_stringify(_emscripten_bind_ProjectHelper_STATIC_SanityCheckBehaviorsSharedDataProperty_3(self, arg0, arg1, arg2));
 };;
 
 ProjectHelper.prototype['STATIC_SanityCheckObjectProperty'] = ProjectHelper.prototype.STATIC_SanityCheckObjectProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
@@ -7000,6 +7093,35 @@ VersionWrapper.prototype['STATIC_Date'] = VersionWrapper.prototype.STATIC_Date =
   VersionWrapper.prototype['__destroy__'] = VersionWrapper.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_VersionWrapper___destroy___0(self);
+};
+// VectorPairStringTextFormatting
+function VectorPairStringTextFormatting() { throw "cannot construct a VectorPairStringTextFormatting, no constructor in IDL" }
+VectorPairStringTextFormatting.prototype = Object.create(WrapperObject.prototype);
+VectorPairStringTextFormatting.prototype.constructor = VectorPairStringTextFormatting;
+VectorPairStringTextFormatting.prototype.__class__ = VectorPairStringTextFormatting;
+VectorPairStringTextFormatting.__cache__ = {};
+Module['VectorPairStringTextFormatting'] = VectorPairStringTextFormatting;
+
+VectorPairStringTextFormatting.prototype['size'] = VectorPairStringTextFormatting.prototype.size = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_VectorPairStringTextFormatting_size_0(self);
+};;
+
+VectorPairStringTextFormatting.prototype['WRAPPED_GetString'] = VectorPairStringTextFormatting.prototype.WRAPPED_GetString = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return Pointer_stringify(_emscripten_bind_VectorPairStringTextFormatting_WRAPPED_GetString_1(self, arg0));
+};;
+
+VectorPairStringTextFormatting.prototype['WRAPPED_GetTextFormatting'] = VectorPairStringTextFormatting.prototype.WRAPPED_GetTextFormatting = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_VectorPairStringTextFormatting_WRAPPED_GetTextFormatting_1(self, arg0), TextFormatting);
+};;
+
+  VectorPairStringTextFormatting.prototype['__destroy__'] = VectorPairStringTextFormatting.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorPairStringTextFormatting___destroy___0(self);
 };
 // Serializer
 function Serializer() { throw "cannot construct a Serializer, no constructor in IDL" }
@@ -8654,60 +8776,6 @@ MapStringExpressionMetadata.prototype['MAP_keys'] = MapStringExpressionMetadata.
   MapStringExpressionMetadata.prototype['__destroy__'] = MapStringExpressionMetadata.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_MapStringExpressionMetadata___destroy___0(self);
-};
-// BehaviorsSharedData
-/** @suppress {undefinedVars, duplicate} */function BehaviorsSharedData() {
-  this.ptr = _emscripten_bind_BehaviorsSharedData_BehaviorsSharedData_0();
-  getCache(BehaviorsSharedData)[this.ptr] = this;
-};;
-BehaviorsSharedData.prototype = Object.create(WrapperObject.prototype);
-BehaviorsSharedData.prototype.constructor = BehaviorsSharedData;
-BehaviorsSharedData.prototype.__class__ = BehaviorsSharedData;
-BehaviorsSharedData.__cache__ = {};
-Module['BehaviorsSharedData'] = BehaviorsSharedData;
-
-BehaviorsSharedData.prototype['GetName'] = BehaviorsSharedData.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_BehaviorsSharedData_GetName_0(self));
-};;
-
-BehaviorsSharedData.prototype['GetTypeName'] = BehaviorsSharedData.prototype.GetTypeName = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_BehaviorsSharedData_GetTypeName_0(self));
-};;
-
-BehaviorsSharedData.prototype['UpdateProperty'] = BehaviorsSharedData.prototype.UpdateProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
-  return !!(_emscripten_bind_BehaviorsSharedData_UpdateProperty_3(self, arg0, arg1, arg2));
-};;
-
-BehaviorsSharedData.prototype['GetProperties'] = BehaviorsSharedData.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return wrapPointer(_emscripten_bind_BehaviorsSharedData_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
-};;
-
-BehaviorsSharedData.prototype['SerializeTo'] = BehaviorsSharedData.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_BehaviorsSharedData_SerializeTo_1(self, arg0);
-};;
-
-BehaviorsSharedData.prototype['UnserializeFrom'] = BehaviorsSharedData.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_BehaviorsSharedData_UnserializeFrom_1(self, arg0);
-};;
-
-  BehaviorsSharedData.prototype['__destroy__'] = BehaviorsSharedData.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  _emscripten_bind_BehaviorsSharedData___destroy___0(self);
 };
 // MapStringVariable
 function MapStringVariable() { throw "cannot construct a MapStringVariable, no constructor in IDL" }
