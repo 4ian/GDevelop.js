@@ -1328,6 +1328,14 @@ BehaviorMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_AddInclu
   return &self->AddIncludeFile(arg0);
 }
 
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_WRAPPED_Get_0(BehaviorMetadata* self) {
+  return self->WRAPPED_Get();
+}
+
+BehaviorsSharedData* EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata_WRAPPED_GetSharedDataInstance_0(BehaviorMetadata* self) {
+  return self->WRAPPED_GetSharedDataInstance();
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_BehaviorMetadata___destroy___0(BehaviorMetadata* self) {
   delete self;
 }

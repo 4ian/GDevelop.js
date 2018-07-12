@@ -2315,6 +2315,16 @@ BehaviorMetadata.prototype['AddIncludeFile'] = BehaviorMetadata.prototype.AddInc
   return wrapPointer(_emscripten_bind_BehaviorMetadata_AddIncludeFile_1(self, arg0), BehaviorMetadata);
 };;
 
+BehaviorMetadata.prototype['WRAPPED_Get'] = BehaviorMetadata.prototype.WRAPPED_Get = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_BehaviorMetadata_WRAPPED_Get_0(self), Behavior);
+};;
+
+BehaviorMetadata.prototype['WRAPPED_GetSharedDataInstance'] = BehaviorMetadata.prototype.WRAPPED_GetSharedDataInstance = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_BehaviorMetadata_WRAPPED_GetSharedDataInstance_0(self), BehaviorsSharedData);
+};;
+
   BehaviorMetadata.prototype['__destroy__'] = BehaviorMetadata.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_BehaviorMetadata___destroy___0(self);

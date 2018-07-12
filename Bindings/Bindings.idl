@@ -958,6 +958,9 @@ interface BehaviorMetadata {
 
     [Ref] BehaviorMetadata SetIncludeFile([Const] DOMString includeFile);
     [Ref] BehaviorMetadata AddIncludeFile([Const] DOMString includeFile);
+    
+    Behavior WRAPPED_Get();
+    BehaviorsSharedData WRAPPED_GetSharedDataInstance();
 };
 
 interface EventMetadata {

@@ -51,6 +51,7 @@ class ProjectHelper {
   static gd::String SanityCheckBehaviorProperty(gd::Behavior* behavior,
                                                 const gd::String& propertyName,
                                                 const gd::String& newValue) {
+    if (!behavior) return "FAIL: behavior passed is null";
     gd::Project project;
     project.AddPlatform(JsPlatform::Get());
 
@@ -92,6 +93,7 @@ class ProjectHelper {
   static gd::String SanityCheckBehaviorsSharedDataProperty(gd::BehaviorsSharedData* sharedData,
                                                 const gd::String& propertyName,
                                                 const gd::String& newValue) {
+    if (!sharedData) return "FAIL: sharedData passed is null";
     gd::Project project;
     project.AddPlatform(JsPlatform::Get());
 
@@ -132,6 +134,7 @@ class ProjectHelper {
   static gd::String SanityCheckObjectProperty(gd::Object* object,
                                               const gd::String& propertyName,
                                               const gd::String& newValue) {
+    if (!object) return "FAIL: object passed is null";
     gd::Project project;
     project.AddPlatform(JsPlatform::Get());
 
@@ -173,6 +176,8 @@ class ProjectHelper {
       gd::Object* object,
       const gd::String& propertyName,
       const gd::String& newValue) {
+    if (!object) return "FAIL: object passed is null";
+
     gd::Project project;
     project.AddPlatform(JsPlatform::Get());
     gd::Layout layout;

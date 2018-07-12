@@ -372,7 +372,6 @@ typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 
 // Customize some functions implementation thanks to WRAPPED_* macros
 // The original names will be reconstructed in the js file (see postjs.js)
-#define WRAPPED_at(a) at(a).get()
 #define WRAPPED_set(a, b) at(a) = b
 #define WRAPPED_GetString(i) at(i).first
 #define WRAPPED_GetComment() com1
@@ -385,6 +384,8 @@ typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 #define WRAPPED_SetInt(v) SetValue(v)
 #define WRAPPED_SetDouble(v) SetValue(v)
 #define WRAPPED_SetChild(name, child) GetChild(name) = child
+
+// Wrappers to avoid dealing with shared_ptr in the methods interface:
 #define WRAPPED_AddBehavior(name,                      \
                             fullname,                  \
                             defaultName,               \
@@ -410,6 +411,10 @@ typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
             description,                                                    \
             icon24x24,                                                      \
             std::shared_ptr<gd::Object>(instance))
+
+#define WRAPPED_Get() Get().get()
+#define WRAPPED_GetSharedDataInstance() GetSharedDataInstance().get()
+#define WRAPPED_at(a) at(a).get()
 
 #define MAP_get(a) find(a)->second
 #define MAP_set(key, value) [key] = value
