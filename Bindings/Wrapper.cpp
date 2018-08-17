@@ -32,6 +32,7 @@
 #include <GDCore/IDE/Events/ExpressionsCorrectnessTesting.h>
 #include <GDCore/IDE/Events/InstructionSentenceFormatter.h>
 #include <GDCore/IDE/Events/TextFormatting.h>
+#include <GDCore/IDE/Events/EventsListUnfolder.h>
 #include <GDCore/IDE/Project/ArbitraryResourceWorker.h>
 #include <GDCore/IDE/Project/ImagesUsedInventorizer.h>
 #include <GDCore/IDE/Project/ProjectResourcesAdder.h>
@@ -367,6 +368,7 @@ typedef std::set<gd::String> SetString;
 typedef std::vector<Point> VectorPoint;
 typedef std::vector<Polygon2d> VectorPolygon2d;
 typedef std::vector<sf::Vector2f> VectorVector2f;
+typedef std::vector<EventsSearchResult> VectorEventsSearchResult;
 typedef gd::Object gdObject;  // To avoid clashing javascript Object in glue.js
 typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 
@@ -476,6 +478,8 @@ typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
   SanityCheckObjectInitialInstanceProperty
 #define STATIC_SanityCheckBehaviorsSharedDataProperty \
   SanityCheckBehaviorsSharedDataProperty
+#define STATIC_SearchInEvents SearchInEvents 
+#define STATIC_UnfoldWhenContaining UnfoldWhenContaining 
 
 // We postfix some methods with "At" as Javascript does not support overloading
 #define GetLayoutAt GetLayout

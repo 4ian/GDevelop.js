@@ -623,88 +623,152 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPlatformExtension___destroy___0(
   delete self;
 }
 
-// TextEntryObject
+// PanelSpriteObject
 
-TextEntryObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_TextEntryObject_1(const char* arg0) {
-  return new TextEntryObject(arg0);
+PanelSpriteObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_PanelSpriteObject_1(const char* arg0) {
+  return new PanelSpriteObject(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_SetName_1(TextEntryObject* self, const char* arg0) {
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetLeftMargin_0(PanelSpriteObject* self) {
+  return self->GetLeftMargin();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetLeftMargin_1(PanelSpriteObject* self, float arg0) {
+  self->SetLeftMargin(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetTopMargin_0(PanelSpriteObject* self) {
+  return self->GetTopMargin();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetTopMargin_1(PanelSpriteObject* self, float arg0) {
+  self->SetTopMargin(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetRightMargin_0(PanelSpriteObject* self) {
+  return self->GetRightMargin();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetRightMargin_1(PanelSpriteObject* self, float arg0) {
+  self->SetRightMargin(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetBottomMargin_0(PanelSpriteObject* self) {
+  return self->GetBottomMargin();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetBottomMargin_1(PanelSpriteObject* self, float arg0) {
+  self->SetBottomMargin(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_IsTiled_0(PanelSpriteObject* self) {
+  return self->IsTiled();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetTiled_1(PanelSpriteObject* self, bool arg0) {
+  self->SetTiled(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetTexture_1(PanelSpriteObject* self, const char* arg0) {
+  self->SetTexture(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetTexture_0(PanelSpriteObject* self) {
+  return self->GetTexture().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetWidth_1(PanelSpriteObject* self, float arg0) {
+  self->SetWidth(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetWidth_0(PanelSpriteObject* self) {
+  return self->GetWidth();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetHeight_1(PanelSpriteObject* self, float arg0) {
+  self->SetHeight(arg0);
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetHeight_0(PanelSpriteObject* self) {
+  return self->GetHeight();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetName_1(PanelSpriteObject* self, const char* arg0) {
   self->SetName(arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetName_0(TextEntryObject* self) {
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetName_0(PanelSpriteObject* self) {
   return self->GetName().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_SetType_1(TextEntryObject* self, const char* arg0) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetType_1(PanelSpriteObject* self, const char* arg0) {
   self->SetType(arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetType_0(TextEntryObject* self) {
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetType_0(PanelSpriteObject* self) {
   return self->GetType().c_str();
 }
 
-MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetProperties_1(TextEntryObject* self, Project* arg0) {
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetProperties_1(PanelSpriteObject* self, Project* arg0) {
   static MapStringPropertyDescriptor temp;
   return (temp = self->GetProperties(*arg0), &temp);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_UpdateProperty_3(TextEntryObject* self, const char* arg0, const char* arg1, Project* arg2) {
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_UpdateProperty_3(PanelSpriteObject* self, const char* arg0, const char* arg1, Project* arg2) {
   return self->UpdateProperty(arg0, arg1, *arg2);
 }
 
-MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetInitialInstanceProperties_3(TextEntryObject* self, const InitialInstance* arg0, Project* arg1, Layout* arg2) {
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetInitialInstanceProperties_3(PanelSpriteObject* self, const InitialInstance* arg0, Project* arg1, Layout* arg2) {
   static MapStringPropertyDescriptor temp;
   return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_UpdateInitialInstanceProperty_5(TextEntryObject* self, InitialInstance* arg0, const char* arg1, const char* arg2, Project* arg3, Layout* arg4) {
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_UpdateInitialInstanceProperty_5(PanelSpriteObject* self, InitialInstance* arg0, const char* arg1, const char* arg2, Project* arg3, Layout* arg4) {
   return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_ExposeResources_1(TextEntryObject* self, ArbitraryResourceWorker* arg0) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_ExposeResources_1(PanelSpriteObject* self, ArbitraryResourceWorker* arg0) {
   self->ExposeResources(*arg0);
 }
 
-VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetVariables_0(TextEntryObject* self) {
+VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetVariables_0(PanelSpriteObject* self) {
   return &self->GetVariables();
 }
 
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetAllBehaviorNames_0(TextEntryObject* self) {
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetAllBehaviorNames_0(PanelSpriteObject* self) {
   static VectorString temp;
   return (temp = self->GetAllBehaviorNames(), &temp);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_HasBehaviorNamed_1(TextEntryObject* self, const char* arg0) {
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_HasBehaviorNamed_1(PanelSpriteObject* self, const char* arg0) {
   return self->HasBehaviorNamed(arg0);
 }
 
-Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_AddNewBehavior_3(TextEntryObject* self, Project* arg0, const char* arg1, const char* arg2) {
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_AddNewBehavior_3(PanelSpriteObject* self, Project* arg0, const char* arg1, const char* arg2) {
   return self->AddNewBehavior(*arg0, arg1, arg2);
 }
 
-Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetBehavior_1(TextEntryObject* self, const char* arg0) {
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetBehavior_1(PanelSpriteObject* self, const char* arg0) {
   return &self->GetBehavior(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_RemoveBehavior_1(TextEntryObject* self, const char* arg0) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_RemoveBehavior_1(PanelSpriteObject* self, const char* arg0) {
   self->RemoveBehavior(arg0);
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_RenameBehavior_2(TextEntryObject* self, const char* arg0, const char* arg1) {
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_RenameBehavior_2(PanelSpriteObject* self, const char* arg0, const char* arg1) {
   return self->RenameBehavior(arg0, arg1);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_SerializeTo_1(TextEntryObject* self, SerializerElement* arg0) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SerializeTo_1(PanelSpriteObject* self, SerializerElement* arg0) {
   self->SerializeTo(*arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_UnserializeFrom_2(TextEntryObject* self, Project* arg0, const SerializerElement* arg1) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_UnserializeFrom_2(PanelSpriteObject* self, Project* arg0, const SerializerElement* arg1) {
   self->UnserializeFrom(*arg0, *arg1);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject___destroy___0(TextEntryObject* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject___destroy___0(PanelSpriteObject* self) {
   delete self;
 }
 
@@ -2464,6 +2528,10 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_GetSmallIco
   return self->GetSmallIconFilename().c_str();
 }
 
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_GetHelpPath_0(InstructionMetadata* self) {
+  return self->GetHelpPath().c_str();
+}
+
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_CanHaveSubInstructions_0(InstructionMetadata* self) {
   return self->CanHaveSubInstructions();
 }
@@ -2486,6 +2554,10 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_IsHidden_0(Instruc
 
 InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_SetCanHaveSubInstructions_0(InstructionMetadata* self) {
   return &self->SetCanHaveSubInstructions();
+}
+
+InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_SetHelpPath_1(InstructionMetadata* self, const char* arg0) {
+  return &self->SetHelpPath(arg0);
 }
 
 InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_SetHidden_0(InstructionMetadata* self) {
@@ -2624,6 +2696,32 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent_UnserializeFrom_2(gdjs::Js
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent___destroy___0(gdjs::JsCodeEvent* self) {
+  delete self;
+}
+
+// EventsSearchResult
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsSearchResult_IsEventsListValid_0(EventsSearchResult* self) {
+  return self->IsEventsListValid();
+}
+
+const EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsSearchResult_GetEventsList_0(EventsSearchResult* self) {
+  return &self->GetEventsList();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsSearchResult_GetPositionInList_0(EventsSearchResult* self) {
+  return self->GetPositionInList();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsSearchResult_IsEventValid_0(EventsSearchResult* self) {
+  return self->IsEventValid();
+}
+
+const BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsSearchResult_GetEvent_0(EventsSearchResult* self) {
+  return &self->GetEvent();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsSearchResult___destroy___0(EventsSearchResult* self) {
   delete self;
 }
 
@@ -3037,155 +3135,6 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent___destroy___0(StandardEv
   delete self;
 }
 
-// PanelSpriteObject
-
-PanelSpriteObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_PanelSpriteObject_1(const char* arg0) {
-  return new PanelSpriteObject(arg0);
-}
-
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetLeftMargin_0(PanelSpriteObject* self) {
-  return self->GetLeftMargin();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetLeftMargin_1(PanelSpriteObject* self, float arg0) {
-  self->SetLeftMargin(arg0);
-}
-
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetTopMargin_0(PanelSpriteObject* self) {
-  return self->GetTopMargin();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetTopMargin_1(PanelSpriteObject* self, float arg0) {
-  self->SetTopMargin(arg0);
-}
-
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetRightMargin_0(PanelSpriteObject* self) {
-  return self->GetRightMargin();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetRightMargin_1(PanelSpriteObject* self, float arg0) {
-  self->SetRightMargin(arg0);
-}
-
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetBottomMargin_0(PanelSpriteObject* self) {
-  return self->GetBottomMargin();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetBottomMargin_1(PanelSpriteObject* self, float arg0) {
-  self->SetBottomMargin(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_IsTiled_0(PanelSpriteObject* self) {
-  return self->IsTiled();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetTiled_1(PanelSpriteObject* self, bool arg0) {
-  self->SetTiled(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetTexture_1(PanelSpriteObject* self, const char* arg0) {
-  self->SetTexture(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetTexture_0(PanelSpriteObject* self) {
-  return self->GetTexture().c_str();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetWidth_1(PanelSpriteObject* self, float arg0) {
-  self->SetWidth(arg0);
-}
-
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetWidth_0(PanelSpriteObject* self) {
-  return self->GetWidth();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetHeight_1(PanelSpriteObject* self, float arg0) {
-  self->SetHeight(arg0);
-}
-
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetHeight_0(PanelSpriteObject* self) {
-  return self->GetHeight();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetName_1(PanelSpriteObject* self, const char* arg0) {
-  self->SetName(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetName_0(PanelSpriteObject* self) {
-  return self->GetName().c_str();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SetType_1(PanelSpriteObject* self, const char* arg0) {
-  self->SetType(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetType_0(PanelSpriteObject* self) {
-  return self->GetType().c_str();
-}
-
-MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetProperties_1(PanelSpriteObject* self, Project* arg0) {
-  static MapStringPropertyDescriptor temp;
-  return (temp = self->GetProperties(*arg0), &temp);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_UpdateProperty_3(PanelSpriteObject* self, const char* arg0, const char* arg1, Project* arg2) {
-  return self->UpdateProperty(arg0, arg1, *arg2);
-}
-
-MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetInitialInstanceProperties_3(PanelSpriteObject* self, const InitialInstance* arg0, Project* arg1, Layout* arg2) {
-  static MapStringPropertyDescriptor temp;
-  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_UpdateInitialInstanceProperty_5(PanelSpriteObject* self, InitialInstance* arg0, const char* arg1, const char* arg2, Project* arg3, Layout* arg4) {
-  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_ExposeResources_1(PanelSpriteObject* self, ArbitraryResourceWorker* arg0) {
-  self->ExposeResources(*arg0);
-}
-
-VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetVariables_0(PanelSpriteObject* self) {
-  return &self->GetVariables();
-}
-
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetAllBehaviorNames_0(PanelSpriteObject* self) {
-  static VectorString temp;
-  return (temp = self->GetAllBehaviorNames(), &temp);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_HasBehaviorNamed_1(PanelSpriteObject* self, const char* arg0) {
-  return self->HasBehaviorNamed(arg0);
-}
-
-Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_AddNewBehavior_3(PanelSpriteObject* self, Project* arg0, const char* arg1, const char* arg2) {
-  return self->AddNewBehavior(*arg0, arg1, arg2);
-}
-
-Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_GetBehavior_1(PanelSpriteObject* self, const char* arg0) {
-  return &self->GetBehavior(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_RemoveBehavior_1(PanelSpriteObject* self, const char* arg0) {
-  self->RemoveBehavior(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_RenameBehavior_2(PanelSpriteObject* self, const char* arg0, const char* arg1) {
-  return self->RenameBehavior(arg0, arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_SerializeTo_1(PanelSpriteObject* self, SerializerElement* arg0) {
-  self->SerializeTo(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject_UnserializeFrom_2(PanelSpriteObject* self, Project* arg0, const SerializerElement* arg1) {
-  self->UnserializeFrom(*arg0, *arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PanelSpriteObject___destroy___0(PanelSpriteObject* self) {
-  delete self;
-}
-
 // ShapePainterObject
 
 ShapePainterObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_ShapePainterObject_1(const char* arg0) {
@@ -3501,6 +3450,91 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Exporter___destroy___0(gdjs::Exporter*
   delete self;
 }
 
+// TextEntryObject
+
+TextEntryObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_TextEntryObject_1(const char* arg0) {
+  return new TextEntryObject(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_SetName_1(TextEntryObject* self, const char* arg0) {
+  self->SetName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetName_0(TextEntryObject* self) {
+  return self->GetName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_SetType_1(TextEntryObject* self, const char* arg0) {
+  self->SetType(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetType_0(TextEntryObject* self) {
+  return self->GetType().c_str();
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetProperties_1(TextEntryObject* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_UpdateProperty_3(TextEntryObject* self, const char* arg0, const char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetInitialInstanceProperties_3(TextEntryObject* self, const InitialInstance* arg0, Project* arg1, Layout* arg2) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_UpdateInitialInstanceProperty_5(TextEntryObject* self, InitialInstance* arg0, const char* arg1, const char* arg2, Project* arg3, Layout* arg4) {
+  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_ExposeResources_1(TextEntryObject* self, ArbitraryResourceWorker* arg0) {
+  self->ExposeResources(*arg0);
+}
+
+VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetVariables_0(TextEntryObject* self) {
+  return &self->GetVariables();
+}
+
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetAllBehaviorNames_0(TextEntryObject* self) {
+  static VectorString temp;
+  return (temp = self->GetAllBehaviorNames(), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_HasBehaviorNamed_1(TextEntryObject* self, const char* arg0) {
+  return self->HasBehaviorNamed(arg0);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_AddNewBehavior_3(TextEntryObject* self, Project* arg0, const char* arg1, const char* arg2) {
+  return self->AddNewBehavior(*arg0, arg1, arg2);
+}
+
+Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_GetBehavior_1(TextEntryObject* self, const char* arg0) {
+  return &self->GetBehavior(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_RemoveBehavior_1(TextEntryObject* self, const char* arg0) {
+  self->RemoveBehavior(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_RenameBehavior_2(TextEntryObject* self, const char* arg0, const char* arg1) {
+  return self->RenameBehavior(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_SerializeTo_1(TextEntryObject* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_UnserializeFrom_2(TextEntryObject* self, Project* arg0, const SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject___destroy___0(TextEntryObject* self) {
+  delete self;
+}
+
 // BaseEvent
 
 BaseEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent_BaseEvent_0() {
@@ -3696,8 +3730,12 @@ PlatformExtension* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_Platfo
   return new PlatformExtension();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_SetExtensionInformation_5(PlatformExtension* self, const char* arg0, const char* arg1, const char* arg2, const char* arg3, const char* arg4) {
-  self->SetExtensionInformation(arg0, arg1, arg2, arg3, arg4);
+PlatformExtension* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_SetExtensionInformation_5(PlatformExtension* self, const char* arg0, const char* arg1, const char* arg2, const char* arg3, const char* arg4) {
+  return &self->SetExtensionInformation(arg0, arg1, arg2, arg3, arg4);
+}
+
+PlatformExtension* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_SetExtensionHelpPath_1(PlatformExtension* self, const char* arg0) {
+  return &self->SetExtensionHelpPath(arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_MarkAsDeprecated_0(PlatformExtension* self) {
@@ -3746,6 +3784,10 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetAuthor_0(P
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetLicense_0(PlatformExtension* self) {
   return self->GetLicense().c_str();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_GetHelpPath_0(PlatformExtension* self) {
+  return self->GetHelpPath().c_str();
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_IsBuiltin_0(PlatformExtension* self) {
@@ -4959,6 +5001,11 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer_STATIC_ReplaceStringI
   self->STATIC_ReplaceStringInEvents(*arg0, *arg1, *arg2, arg3, arg4, arg5, arg6, arg7);
 }
 
+VectorEventsSearchResult* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer_STATIC_SearchInEvents_7(EventsRefactorer* self, Project* arg0, Layout* arg1, EventsList* arg2, const char* arg3, bool arg4, bool arg5, bool arg6) {
+  static VectorEventsSearchResult temp;
+  return (temp = self->STATIC_SearchInEvents(*arg0, *arg1, *arg2, arg3, arg4, arg5, arg6), &temp);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer___destroy___0(EventsRefactorer* self) {
   delete self;
 }
@@ -5301,6 +5348,16 @@ temp.clear(); for(auto it = self->begin(); it != self->end();++it) { temp.push_b
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringVariable___destroy___0(MapStringVariable* self) {
+  delete self;
+}
+
+// EventsListUnfolder
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsListUnfolder_STATIC_UnfoldWhenContaining_2(EventsListUnfolder* self, EventsList* arg0, const BaseEvent* arg1) {
+  self->STATIC_UnfoldWhenContaining(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsListUnfolder___destroy___0(EventsListUnfolder* self) {
   delete self;
 }
 
@@ -5734,6 +5791,44 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider_STATIC_HasBehaviorStr
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_MetadataProvider___destroy___0(MetadataProvider* self) {
+  delete self;
+}
+
+// VectorEventsSearchResult
+
+VectorEventsSearchResult* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsSearchResult_VectorEventsSearchResult_0() {
+  return new VectorEventsSearchResult();
+}
+
+VectorEventsSearchResult* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsSearchResult_CLONE_VectorEventsSearchResult_0(VectorEventsSearchResult* self) {
+  return new VectorEventsSearchResult(*self);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsSearchResult_push_back_1(VectorEventsSearchResult* self, const EventsSearchResult* arg0) {
+  self->push_back(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsSearchResult_resize_1(VectorEventsSearchResult* self, unsigned int arg0) {
+  self->resize(arg0);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsSearchResult_size_0(VectorEventsSearchResult* self) {
+  return self->size();
+}
+
+const EventsSearchResult* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsSearchResult_at_1(VectorEventsSearchResult* self, unsigned int arg0) {
+  return &self->at(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsSearchResult_WRAPPED_set_2(VectorEventsSearchResult* self, unsigned int arg0, const EventsSearchResult* arg1) {
+  self->WRAPPED_set(arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsSearchResult_clear_0(VectorEventsSearchResult* self) {
+  self->clear();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsSearchResult___destroy___0(VectorEventsSearchResult* self) {
   delete self;
 }
 

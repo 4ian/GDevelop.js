@@ -1983,4 +1983,26 @@ describe('libGD.js', function() {
       expect(vectorVector2f.size()).to.be(0);
     });
   });
+
+  describe('gd.PlatformExtension', function() {
+    it('can be created and have basic information filled', function() {
+      const extension = new gd.PlatformExtension();
+      extension
+        .setExtensionInformation(
+          'TestExtensionName',
+          'Full name of test extension',
+          'Description of test extension',
+          'Author of test extension',
+          'License of test extension'
+        )
+        .setExtensionHelpPath('/path/to/extension/help');
+
+        expect(extension.getName()).to.be('TestExtensionName');
+        expect(extension.getFullName()).to.be('Full name of test extension');
+        expect(extension.getDescription()).to.be('Description of test extension');
+        expect(extension.getAuthor()).to.be('Author of test extension');
+        expect(extension.getLicense()).to.be('License of test extension');
+        expect(extension.getHelpPath()).to.be('/path/to/extension/help');
+    });
+  });
 });
