@@ -373,6 +373,17 @@ typedef std::vector<EventsSearchResult> VectorEventsSearchResult;
 typedef gd::Object gdObject;  // To avoid clashing javascript Object in glue.js
 typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 
+typedef ExtensionAndMetadata<BehaviorMetadata> ExtensionAndBehaviorMetadata;
+typedef ExtensionAndMetadata<ObjectMetadata> ExtensionAndObjectMetadata;
+typedef ExtensionAndMetadata<InstructionMetadata> ExtensionAndInstructionMetadata;
+typedef ExtensionAndMetadata<InstructionMetadata> ExtensionAndInstructionMetadata;
+typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
+typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
+typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
+typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
+typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
+typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
+
 // Customize some functions implementation thanks to WRAPPED_* macros
 // The original names will be reconstructed in the js file (see postjs.js)
 #define WRAPPED_set(a, b) at(a) = b
@@ -433,6 +444,17 @@ typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 #define STATIC_AddAllMissingImages AddAllMissingImages
 #define STATIC_GetAllUselessImages GetAllUselessImages
 #define STATIC_RemoveAllUselessImages RemoveAllUselessImages
+
+#define STATIC_GetExtensionAndBehaviorMetadata GetExtensionAndBehaviorMetadata
+#define STATIC_GetExtensionAndObjectMetadata GetExtensionAndObjectMetadata
+#define STATIC_GetExtensionAndActionMetadata GetExtensionAndActionMetadata
+#define STATIC_GetExtensionAndConditionMetadata GetExtensionAndConditionMetadata
+#define STATIC_GetExtensionAndExpressionMetadata GetExtensionAndExpressionMetadata
+#define STATIC_GetExtensionAndObjectExpressionMetadata GetExtensionAndObjectExpressionMetadata
+#define STATIC_GetExtensionAndBehaviorExpressionMetadata GetExtensionAndBehaviorExpressionMetadata
+#define STATIC_GetExtensionAndStrExpressionMetadata GetExtensionAndStrExpressionMetadata
+#define STATIC_GetExtensionAndObjectStrExpressionMetadata GetExtensionAndObjectStrExpressionMetadata
+#define STATIC_GetExtensionAndBehaviorStrExpressionMetadata GetExtensionAndBehaviorStrExpressionMetadata
 #define STATIC_HasCondition HasCondition
 #define STATIC_HasAction HasAction
 #define STATIC_HasObjectAction HasObjectAction
@@ -445,9 +467,11 @@ typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 #define STATIC_HasStrExpression HasStrExpression
 #define STATIC_HasObjectStrExpression HasObjectStrExpression
 #define STATIC_HasBehaviorStrExpression HasBehaviorStrExpression
+
 #define STATIC_RenameObjectInEvents RenameObjectInEvents
 #define STATIC_RemoveObjectInEvents RemoveObjectInEvents
 #define STATIC_ReplaceStringInEvents ReplaceStringInEvents
+
 #define STATIC_GetBehaviorMetadata GetBehaviorMetadata
 #define STATIC_GetObjectMetadata GetObjectMetadata
 #define STATIC_GetActionMetadata GetActionMetadata
@@ -458,6 +482,7 @@ typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 #define STATIC_GetStrExpressionMetadata GetStrExpressionMetadata
 #define STATIC_GetObjectStrExpressionMetadata GetObjectStrExpressionMetadata
 #define STATIC_GetBehaviorStrExpressionMetadata GetBehaviorStrExpressionMetadata
+
 #define STATIC_GenerateSceneEventsCompleteCode GenerateSceneEventsCompleteCode
 #define STATIC_Major Major
 #define STATIC_Minor Minor

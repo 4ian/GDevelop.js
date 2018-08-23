@@ -1330,8 +1330,38 @@ interface WholeProjectRefactorer {
     void STATIC_GlobalObjectRemoved([Ref] Project project, [Const] DOMString objectName, boolean removeEventsAndGroups);
 };
 
+interface ExtensionAndBehaviorMetadata {
+  [Const, Ref] PlatformExtension GetExtension();
+  [Const, Ref] BehaviorMetadata GetMetadata();
+};
+
+interface ExtensionAndObjectMetadata {
+  [Const, Ref] PlatformExtension GetExtension();
+  [Const, Ref] ObjectMetadata GetMetadata();
+};
+
+interface ExtensionAndInstructionMetadata {
+  [Const, Ref] PlatformExtension GetExtension();
+  [Const, Ref] InstructionMetadata GetMetadata();
+};
+
+interface ExtensionAndExpressionMetadata {
+  [Const, Ref] PlatformExtension GetExtension();
+  [Const, Ref] ExpressionMetadata GetMetadata();
+};
+
 interface MetadataProvider {
 
+    [Value] ExtensionAndBehaviorMetadata STATIC_GetExtensionAndBehaviorMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndObjectMetadata STATIC_GetExtensionAndObjectMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndInstructionMetadata STATIC_GetExtensionAndActionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndInstructionMetadata STATIC_GetExtensionAndConditionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndExpressionMetadata STATIC_GetExtensionAndExpressionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndExpressionMetadata STATIC_GetExtensionAndObjectExpressionMetadata([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
+    [Value] ExtensionAndExpressionMetadata STATIC_GetExtensionAndBehaviorExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    [Value] ExtensionAndExpressionMetadata STATIC_GetExtensionAndStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndExpressionMetadata STATIC_GetExtensionAndObjectStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
+    [Value] ExtensionAndExpressionMetadata STATIC_GetExtensionAndBehaviorStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
     [Const, Ref] BehaviorMetadata STATIC_GetBehaviorMetadata([Const, Ref] Platform p, [Const] DOMString type);
     [Const, Ref] ObjectMetadata STATIC_GetObjectMetadata([Const, Ref] Platform p, [Const] DOMString type);
     [Const, Ref] InstructionMetadata STATIC_GetActionMetadata([Const, Ref] Platform p, [Const] DOMString type);
@@ -1423,7 +1453,8 @@ interface EventsParametersLister {
 interface EventsTypesLister {
     void EventsTypesLister();
     [Const, Ref] VectorString GetAllEventsTypes();
-    [Const, Ref] VectorString GetAllInstructionsTypes();
+    [Const, Ref] VectorString GetAllConditionsTypes();
+    [Const, Ref] VectorString GetAllActionsTypes();
 
     //Inherited from ArbitraryEventsWorker
     void Launch([Ref] EventsList events);
