@@ -27,6 +27,7 @@
 #include <GDCore/IDE/Events/ArbitraryEventsWorker.h>
 #include <GDCore/IDE/Events/EventsContextAnalyzer.h>
 #include <GDCore/IDE/Events/EventsParametersLister.h>
+#include <GDCore/IDE/Events/EventsTypesLister.h>
 #include <GDCore/IDE/Events/EventsRefactorer.h>
 #include <GDCore/IDE/Events/EventsRemover.h>
 #include <GDCore/IDE/Events/ExpressionsCorrectnessTesting.h>
@@ -478,8 +479,8 @@ typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
   SanityCheckObjectInitialInstanceProperty
 #define STATIC_SanityCheckBehaviorsSharedDataProperty \
   SanityCheckBehaviorsSharedDataProperty
-#define STATIC_SearchInEvents SearchInEvents 
-#define STATIC_UnfoldWhenContaining UnfoldWhenContaining 
+#define STATIC_SearchInEvents SearchInEvents
+#define STATIC_UnfoldWhenContaining UnfoldWhenContaining
 
 // We postfix some methods with "At" as Javascript does not support overloading
 #define GetLayoutAt GetLayout

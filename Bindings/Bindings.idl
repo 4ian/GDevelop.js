@@ -833,7 +833,7 @@ interface InstructionMetadata {
     unsigned long GetParametersCount();
     long GetUsageComplexity();
     boolean IsHidden();
-    
+
     [Ref] InstructionMetadata SetCanHaveSubInstructions();
     [Ref] InstructionMetadata SetHelpPath([Const] DOMString helpPath);
     [Ref] InstructionMetadata SetHidden();
@@ -871,7 +871,7 @@ interface ExpressionMetadata {
     [Ref] ExpressionMetadata AddCodeOnlyParameter(
         [Const] DOMString type, [Const] DOMString supplementaryInformation);
     [Ref] ExpressionMetadata SetDefaultValue([Const] DOMString defaultValue);
-    
+
     [Ref] ExpressionCodeGenerationInformation GetCodeExtraInformation();
 };
 
@@ -906,13 +906,13 @@ interface ObjectMetadata {
                                      [Const] DOMString group,
                                      [Const] DOMString icon,
                                      [Const] DOMString smallicon);
-  
+
     [Const, Ref] ExpressionMetadata AddExpression([Const] DOMString name,
                                         [Const] DOMString fullname,
                                         [Const] DOMString description,
                                         [Const] DOMString group,
                                         [Const] DOMString smallicon);
-  
+
     [Const, Ref] ExpressionMetadata AddStrExpression([Const] DOMString name,
                                            [Const] DOMString fullname,
                                            [Const] DOMString description,
@@ -945,13 +945,13 @@ interface BehaviorMetadata {
                                      [Const] DOMString group,
                                      [Const] DOMString icon,
                                      [Const] DOMString smallicon);
-  
+
     [Const, Ref] ExpressionMetadata AddExpression([Const] DOMString name,
                                         [Const] DOMString fullname,
                                         [Const] DOMString description,
                                         [Const] DOMString group,
                                         [Const] DOMString smallicon);
-  
+
     [Const, Ref] ExpressionMetadata AddStrExpression([Const] DOMString name,
                                            [Const] DOMString fullname,
                                            [Const] DOMString description,
@@ -960,7 +960,7 @@ interface BehaviorMetadata {
 
     [Ref] BehaviorMetadata SetIncludeFile([Const] DOMString includeFile);
     [Ref] BehaviorMetadata AddIncludeFile([Const] DOMString includeFile);
-    
+
     Behavior WRAPPED_Get();
     BehaviorsSharedData WRAPPED_GetSharedDataInstance();
 };
@@ -980,7 +980,7 @@ interface PlatformExtension {
                                 [Const] DOMString license);
     [Ref] PlatformExtension SetExtensionHelpPath([Const] DOMString helpPath);
     void MarkAsDeprecated();
-    
+
     [Const, Ref] InstructionMetadata AddCondition([Const] DOMString name,
                                         [Const] DOMString fullname,
                                         [Const] DOMString description,
@@ -996,13 +996,13 @@ interface PlatformExtension {
                                      [Const] DOMString group,
                                      [Const] DOMString icon,
                                      [Const] DOMString smallicon);
-  
+
     [Const, Ref] ExpressionMetadata AddExpression([Const] DOMString name,
                                         [Const] DOMString fullname,
                                         [Const] DOMString description,
                                         [Const] DOMString group,
                                         [Const] DOMString smallicon);
-  
+
     [Const, Ref] ExpressionMetadata AddStrExpression([Const] DOMString name,
                                            [Const] DOMString fullname,
                                            [Const] DOMString description,
@@ -1415,6 +1415,14 @@ interface ArbitraryEventsWorker {
 interface EventsParametersLister {
     void EventsParametersLister([Ref] Project project);
     [Const, Ref] MapStringString GetParametersAndTypes();
+
+    //Inherited from ArbitraryEventsWorker
+    void Launch([Ref] EventsList events);
+};
+
+interface EventsTypesLister {
+    void EventsTypesLister();
+    [Const, Ref] VectorString GetAllEventsTypes();
 
     //Inherited from ArbitraryEventsWorker
     void Launch([Ref] EventsList events);
