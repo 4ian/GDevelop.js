@@ -1423,6 +1423,7 @@ interface EventsParametersLister {
 interface EventsTypesLister {
     void EventsTypesLister();
     [Const, Ref] VectorString GetAllEventsTypes();
+    [Const, Ref] VectorString GetAllInstructionsTypes();
 
     //Inherited from ArbitraryEventsWorker
     void Launch([Ref] EventsList events);
