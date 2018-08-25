@@ -120,6 +120,15 @@ interface Platform {
 interface JsPlatform {
     [Ref] JsPlatform STATIC_Get();
     void AddNewExtension([Const, Ref] PlatformExtension extension);
+
+    // Inherited from Platform:
+    [Const, Value] DOMString GetName();
+    [Const, Value] DOMString GetFullName();
+    [Const, Value] DOMString GetSubtitle();
+    [Const, Value] DOMString GetDescription();
+    boolean IsExtensionLoaded([Const] DOMString name);
+
+    [Const, Ref] VectorPlatformExtension GetAllPlatformExtensions();
 };
 
 interface PairStringVariable {
@@ -1451,7 +1460,7 @@ interface EventsParametersLister {
 };
 
 interface EventsTypesLister {
-    void EventsTypesLister();
+    void EventsTypesLister([Const, Ref] Project project);
     [Const, Ref] VectorString GetAllEventsTypes();
     [Const, Ref] VectorString GetAllConditionsTypes();
     [Const, Ref] VectorString GetAllActionsTypes();
