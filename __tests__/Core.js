@@ -158,7 +158,7 @@ describe('libGD.js', function() {
     });
   });
 
-  describe('ClassWithObjects (using gd.Layout)', function() {
+  describe('gd.ObjectsContainer (using gd.Layout)', function() {
     let project = null;
     beforeAll(() => (project = gd.ProjectHelper.createNewGDJSProject()));
 
@@ -2065,7 +2065,7 @@ describe('libGD.js', function() {
       parameters.push_back(parameter4);
       parameters.push_back(parameter5);
 
-      objectsContainer = new gd.ClassWithObjects();
+      objectsContainer = new gd.ObjectsContainer();
       gd.ParameterMetadataTools.parametersToObjectsContainer(
         project,
         parameters,
