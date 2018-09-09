@@ -1257,10 +1257,6 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_UnserializeFrom_1(Project* sel
   self->UnserializeFrom(*arg0);
 }
 
-ObjectGroupsContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetObjectGroups_0(Project* self) {
-  return &self->GetObjectGroups();
-}
-
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_FREE_GetTypeOfBehavior_3(Project* self, const Layout* arg0, const char* arg1, bool arg2) {
   static gd::String temp;
   return (temp = GetTypeOfBehavior(*self, *arg0, arg1, arg2), temp.c_str());
@@ -1314,6 +1310,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_MoveObject_2(Project* self, un
 
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetObjectsCount_0(Project* self) {
   return self->GetObjectsCount();
+}
+
+ObjectGroupsContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetObjectGroups_0(Project* self) {
+  return &self->GetObjectGroups();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project___destroy___0(Project* self) {
@@ -1471,6 +1471,36 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventMetadata_GetGroup_0(EventM
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventMetadata___destroy___0(EventMetadata* self) {
+  delete self;
+}
+
+// VectorParameterMetadata
+
+VectorParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorParameterMetadata_VectorParameterMetadata_0() {
+  return new VectorParameterMetadata();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorParameterMetadata_push_back_1(VectorParameterMetadata* self, const ParameterMetadata* arg0) {
+  self->push_back(*arg0);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorParameterMetadata_size_0(VectorParameterMetadata* self) {
+  return self->size();
+}
+
+ParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorParameterMetadata_at_1(VectorParameterMetadata* self, unsigned int arg0) {
+  return &self->at(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorParameterMetadata_WRAPPED_set_2(VectorParameterMetadata* self, unsigned int arg0, const ParameterMetadata* arg1) {
+  self->WRAPPED_set(arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorParameterMetadata_clear_0(VectorParameterMetadata* self) {
+  self->clear();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorParameterMetadata___destroy___0(VectorParameterMetadata* self) {
   delete self;
 }
 
@@ -1661,26 +1691,25 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalEvents___destroy___0(ExternalE
   delete self;
 }
 
-// MapStringString
+// ExpressionCodeGenerationInformation
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString_MAP_get_1(MapStringString* self, const char* arg0) {
-  return self->MAP_get(arg0).c_str();
+ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation_SetFunctionName_1(ExpressionCodeGenerationInformation* self, const char* arg0) {
+  return &self->SetFunctionName(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString_MAP_set_2(MapStringString* self, const char* arg0, const char* arg1) {
-  (*self)MAP_set(arg0, arg1);
+ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation_SetStatic_0(ExpressionCodeGenerationInformation* self) {
+  return &self->SetStatic();
 }
 
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString_MAP_has_1(MapStringString* self, const char* arg0) {
-  return self->MAP_has(arg0);
+ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation_SetIncludeFile_1(ExpressionCodeGenerationInformation* self, const char* arg0) {
+  return &self->SetIncludeFile(arg0);
 }
 
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString_MAP_keys_0(MapStringString* self) {
-  static VectorString temp;
-temp.clear(); for(auto it = self->begin(); it != self->end();++it) { temp.push_back(it->first); } return &temp;
+ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation_AddIncludeFile_1(ExpressionCodeGenerationInformation* self, const char* arg0) {
+  return &self->AddIncludeFile(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString___destroy___0(MapStringString* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation___destroy___0(ExpressionCodeGenerationInformation* self) {
   delete self;
 }
 
@@ -2779,6 +2808,29 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsSearchResult___destroy___0(Event
   delete self;
 }
 
+// MapStringString
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString_MAP_get_1(MapStringString* self, const char* arg0) {
+  return self->MAP_get(arg0).c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString_MAP_set_2(MapStringString* self, const char* arg0, const char* arg1) {
+  (*self)MAP_set(arg0, arg1);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString_MAP_has_1(MapStringString* self, const char* arg0) {
+  return self->MAP_has(arg0);
+}
+
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString_MAP_keys_0(MapStringString* self) {
+  static VectorString temp;
+temp.clear(); for(auto it = self->begin(); it != self->end();++it) { temp.push_back(it->first); } return &temp;
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString___destroy___0(MapStringString* self) {
+  delete self;
+}
+
 // ArbitraryEventsWorker
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryEventsWorker_Launch_1(ArbitraryEventsWorker* self, EventsList* arg0) {
@@ -3189,6 +3241,16 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent___destroy___0(StandardEv
   delete self;
 }
 
+// ParameterMetadataTools
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadataTools_STATIC_ParametersToObjectsContainer_3(ParameterMetadataTools* self, Project* arg0, const VectorParameterMetadata* arg1, ClassWithObjects* arg2) {
+  self->STATIC_ParametersToObjectsContainer(*arg0, *arg1, *arg2);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadataTools___destroy___0(ParameterMetadataTools* self) {
+  delete self;
+}
+
 // ShapePainterObject
 
 ShapePainterObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_ShapePainterObject_1(const char* arg0) {
@@ -3376,25 +3438,57 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectHelper___destroy___0(ProjectHel
   delete self;
 }
 
-// ExpressionCodeGenerationInformation
+// ClassWithObjects
 
-ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation_SetFunctionName_1(ExpressionCodeGenerationInformation* self, const char* arg0) {
-  return &self->SetFunctionName(arg0);
+ClassWithObjects* EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects_ClassWithObjects_0() {
+  return new ClassWithObjects();
 }
 
-ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation_SetStatic_0(ExpressionCodeGenerationInformation* self) {
-  return &self->SetStatic();
+gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects_InsertNewObject_4(ClassWithObjects* self, Project* arg0, const char* arg1, const char* arg2, unsigned int arg3) {
+  return &self->InsertNewObject(*arg0, arg1, arg2, arg3);
 }
 
-ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation_SetIncludeFile_1(ExpressionCodeGenerationInformation* self, const char* arg0) {
-  return &self->SetIncludeFile(arg0);
+gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects_InsertObject_2(ClassWithObjects* self, const gdObject* arg0, unsigned int arg1) {
+  return &self->InsertObject(*arg0, arg1);
 }
 
-ExpressionCodeGenerationInformation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation_AddIncludeFile_1(ExpressionCodeGenerationInformation* self, const char* arg0) {
-  return &self->AddIncludeFile(arg0);
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects_HasObjectNamed_1(ClassWithObjects* self, const char* arg0) {
+  return self->HasObjectNamed(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerationInformation___destroy___0(ExpressionCodeGenerationInformation* self) {
+gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects_GetObject_1(ClassWithObjects* self, const char* arg0) {
+  return &self->GetObject(arg0);
+}
+
+gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects_GetObjectAt_1(ClassWithObjects* self, unsigned int arg0) {
+  return &self->GetObjectAt(arg0);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects_GetObjectPosition_1(ClassWithObjects* self, const char* arg0) {
+  return self->GetObjectPosition(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects_RemoveObject_1(ClassWithObjects* self, const char* arg0) {
+  self->RemoveObject(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects_SwapObjects_2(ClassWithObjects* self, unsigned int arg0, unsigned int arg1) {
+  self->SwapObjects(arg0, arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects_MoveObject_2(ClassWithObjects* self, unsigned int arg0, unsigned int arg1) {
+  self->MoveObject(arg0, arg1);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects_GetObjectsCount_0(ClassWithObjects* self) {
+  return self->GetObjectsCount();
+}
+
+ObjectGroupsContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects_GetObjectGroups_0(ClassWithObjects* self) {
+  return &self->GetObjectGroups();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ClassWithObjects___destroy___0(ClassWithObjects* self) {
   delete self;
 }
 
@@ -3656,6 +3750,11 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_BaseEvent___destroy___0(BaseEvent* sel
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsCodeGenerator_STATIC_GenerateSceneEventsCompleteCode_5(gdjs::EventsCodeGenerator* self, Project* arg0, Layout* arg1, EventsList* arg2, SetString* arg3, bool arg4) {
   static gd::String temp;
   return (temp = self->STATIC_GenerateSceneEventsCompleteCode(*arg0, *arg1, *arg2, *arg3, arg4), temp.c_str());
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsCodeGenerator_STATIC_GenerateEventsFunctionCode_4(gdjs::EventsCodeGenerator* self, Project* arg0, const VectorParameterMetadata* arg1, const EventsList* arg2, bool arg3) {
+  static gd::String temp;
+  return (temp = self->STATIC_GenerateEventsFunctionCode(*arg0, *arg1, *arg2, arg3), temp.c_str());
 }
 
 // MapStringBoolean
@@ -4630,28 +4729,64 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsList___destroy___0(EventsList* s
 
 // ParameterMetadata
 
+ParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_ParameterMetadata_0() {
+  return new ParameterMetadata();
+}
+
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_GetType_0(ParameterMetadata* self) {
   return self->GetType().c_str();
+}
+
+ParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_SetType_1(ParameterMetadata* self, const char* arg0) {
+  return &self->SetType(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_GetName_0(ParameterMetadata* self) {
+  return self->GetName().c_str();
+}
+
+ParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_SetName_1(ParameterMetadata* self, const char* arg0) {
+  return &self->SetName(arg0);
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_GetExtraInfo_0(ParameterMetadata* self) {
   return self->GetExtraInfo().c_str();
 }
 
+ParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_SetExtraInfo_1(ParameterMetadata* self, const char* arg0) {
+  return &self->SetExtraInfo(arg0);
+}
+
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_IsOptional_0(ParameterMetadata* self) {
   return self->IsOptional();
+}
+
+ParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_SetOptional_1(ParameterMetadata* self, bool arg0) {
+  return &self->SetOptional(arg0);
 }
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_GetDescription_0(ParameterMetadata* self) {
   return self->GetDescription().c_str();
 }
 
+ParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_SetDescription_1(ParameterMetadata* self, const char* arg0) {
+  return &self->SetDescription(arg0);
+}
+
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_IsCodeOnly_0(ParameterMetadata* self) {
   return self->IsCodeOnly();
 }
 
+ParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_SetCodeOnly_1(ParameterMetadata* self, bool arg0) {
+  return &self->SetCodeOnly(arg0);
+}
+
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_GetDefaultValue_0(ParameterMetadata* self) {
   return self->GetDefaultValue().c_str();
+}
+
+ParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_SetDefaultValue_1(ParameterMetadata* self, const char* arg0) {
+  return &self->SetDefaultValue(arg0);
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_STATIC_IsObject_1(ParameterMetadata* self, const char* arg0) {
@@ -4887,10 +5022,6 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_UnserializeLayersFrom_1(Layout*
   self->UnserializeLayersFrom(*arg0);
 }
 
-ObjectGroupsContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectGroups_0(Layout* self) {
-  return &self->GetObjectGroups();
-}
-
 LayoutEditorCanvasOptions* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetAssociatedSettings_0(Layout* self) {
   return &self->GetAssociatedSettings();
 }
@@ -4949,6 +5080,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_MoveObject_2(Layout* self, unsi
 
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectsCount_0(Layout* self) {
   return self->GetObjectsCount();
+}
+
+ObjectGroupsContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout_GetObjectGroups_0(Layout* self) {
+  return &self->GetObjectGroups();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Layout___destroy___0(Layout* self) {
