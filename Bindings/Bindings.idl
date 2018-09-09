@@ -240,6 +240,23 @@ interface LoadingScreen {
     void UnserializeFrom([Const, Ref] SerializerElement element);
 };
 
+interface ObjectsContainer {
+    void ObjectsContainer();
+
+    [Ref] gdObject InsertNewObject([Ref] Project project, [Const] DOMString type, [Const] DOMString name, unsigned long pos);
+    [Ref] gdObject InsertObject([Const, Ref] gdObject obj, unsigned long pos);
+    boolean HasObjectNamed([Const] DOMString name);
+    [Ref] gdObject GetObject([Const] DOMString name);
+    [Ref] gdObject GetObjectAt(unsigned long pos);
+    unsigned long GetObjectPosition([Const] DOMString name);
+    void RemoveObject([Const] DOMString name);
+    void SwapObjects(unsigned long first, unsigned long second);
+    void MoveObject(unsigned long oldIndex, unsigned long newIndex);
+    unsigned long GetObjectsCount();
+
+    [Ref] ObjectGroupsContainer GetObjectGroups();
+};
+
 interface Project {
     void Project();
 
@@ -313,13 +330,11 @@ interface Project {
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
 
-    [Ref] ObjectGroupsContainer GetObjectGroups();
-
     [Const, Value] DOMString FREE_GetTypeOfBehavior([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
     [Const, Value] DOMString FREE_GetTypeOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
     [Value] VectorString FREE_GetBehaviorsOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
 
-    //Inherited from gd::ClassWithObjects
+    //Inherited from gd::ObjectsContainer
     [Ref] gdObject InsertNewObject([Ref] Project project, [Const] DOMString type, [Const] DOMString name, unsigned long pos);
     [Ref] gdObject InsertObject([Const, Ref] gdObject obj, unsigned long pos);
     boolean HasObjectNamed([Const] DOMString name);
@@ -330,6 +345,8 @@ interface Project {
     void SwapObjects(unsigned long first, unsigned long second);
     void MoveObject(unsigned long oldIndex, unsigned long newIndex);
     unsigned long GetObjectsCount();
+
+    [Ref] ObjectGroupsContainer GetObjectGroups();
 };
 
 interface Behavior {
@@ -470,8 +487,6 @@ interface Layout {
     void SerializeLayersTo([Ref] SerializerElement element);
     void UnserializeLayersFrom([Const, Ref] SerializerElement element);
 
-    [Ref] ObjectGroupsContainer GetObjectGroups();
-
     [Ref] LayoutEditorCanvasOptions GetAssociatedSettings();
 
     void SerializeTo([Ref] SerializerElement element);
@@ -480,7 +495,7 @@ interface Layout {
     void SetStopSoundsOnStartup(boolean enable);
     boolean StopSoundsOnStartup();
 
-    //Inherited from gd::ClassWithObjects
+    //Inherited from gd::ObjectsContainer
     [Ref] gdObject InsertNewObject([Ref] Project project, [Const] DOMString type, [Const] DOMString name, unsigned long pos);
     [Ref] gdObject InsertObject([Const, Ref] gdObject obj, unsigned long pos);
     boolean HasObjectNamed([Const] DOMString name);
@@ -491,6 +506,8 @@ interface Layout {
     void SwapObjects(unsigned long first, unsigned long second);
     void MoveObject(unsigned long oldIndex, unsigned long newIndex);
     unsigned long GetObjectsCount();
+
+    [Ref] ObjectGroupsContainer GetObjectGroups();
 };
 
 interface ExternalEvents {
@@ -885,13 +902,37 @@ interface ExpressionMetadata {
 };
 
 interface ParameterMetadata {
+    void ParameterMetadata();
+
     [Const, Ref] DOMString GetType();
+    [Ref] ParameterMetadata SetType([Const] DOMString type_);
+    [Const, Ref] DOMString GetName();
+    [Ref] ParameterMetadata SetName([Const] DOMString name_);
     [Const, Ref] DOMString GetExtraInfo();
+    [Ref] ParameterMetadata SetExtraInfo([Const] DOMString extraInfo_);
     boolean IsOptional();
+    [Ref] ParameterMetadata SetOptional(boolean optional_);
     [Const, Ref] DOMString GetDescription();
+    [Ref] ParameterMetadata SetDescription([Const] DOMString description_);
     boolean IsCodeOnly();
+    [Ref] ParameterMetadata SetCodeOnly(boolean codeOnly_);
     [Const, Ref] DOMString GetDefaultValue();
+    [Ref] ParameterMetadata SetDefaultValue([Const] DOMString defaultValue_);
     boolean STATIC_IsObject([Const] DOMString param);
+};
+
+interface VectorParameterMetadata {
+    void VectorParameterMetadata();
+
+    void push_back([Const, Ref] ParameterMetadata parameterMetadata);
+    unsigned long size();
+    [Ref] ParameterMetadata at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] ParameterMetadata parameterMetadata);
+    void clear();
+};
+
+interface ParameterMetadataTools {
+    void STATIC_ParametersToObjectsContainer([Ref] Project project, [Const, Ref] VectorParameterMetadata parameters, [Ref] ObjectsContainer outputObjectsContainer);
 };
 
 interface ObjectMetadata {
@@ -2043,6 +2084,7 @@ interface ParticleEmitterObject {
 [NoDelete, Prefix="gdjs::"]
 interface EventsCodeGenerator {
     [Const, Value] DOMString STATIC_GenerateSceneEventsCompleteCode([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Ref] SetString includes, boolean compilationForRuntime);
+    [Const, Value] DOMString STATIC_GenerateEventsFunctionCode([Ref] Project project, [Const, Ref] VectorParameterMetadata parameters, [Const, Ref] EventsList events, boolean compilationForRuntime);
 };
 
 [Prefix="gdjs::"]

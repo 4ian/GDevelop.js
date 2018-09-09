@@ -2130,11 +2130,6 @@ Project.prototype['UnserializeFrom'] = Project.prototype.UnserializeFrom = /** @
   _emscripten_bind_Project_UnserializeFrom_1(self, arg0);
 };;
 
-Project.prototype['GetObjectGroups'] = Project.prototype.GetObjectGroups = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Project_GetObjectGroups_0(self), ObjectGroupsContainer);
-};;
-
 Project.prototype['FREE_GetTypeOfBehavior'] = Project.prototype.FREE_GetTypeOfBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
   var self = this.ptr;
   ensureCache.prepare();
@@ -2239,6 +2234,11 @@ Project.prototype['MoveObject'] = Project.prototype.MoveObject = /** @suppress {
 Project.prototype['GetObjectsCount'] = Project.prototype.GetObjectsCount = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return _emscripten_bind_Project_GetObjectsCount_0(self);
+};;
+
+Project.prototype['GetObjectGroups'] = Project.prototype.GetObjectGroups = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Project_GetObjectGroups_0(self), ObjectGroupsContainer);
 };;
 
   Project.prototype['__destroy__'] = Project.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
@@ -2522,6 +2522,50 @@ EventMetadata.prototype['GetGroup'] = EventMetadata.prototype.GetGroup = /** @su
   EventMetadata.prototype['__destroy__'] = EventMetadata.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_EventMetadata___destroy___0(self);
+};
+// VectorParameterMetadata
+/** @suppress {undefinedVars, duplicate} */function VectorParameterMetadata() {
+  this.ptr = _emscripten_bind_VectorParameterMetadata_VectorParameterMetadata_0();
+  getCache(VectorParameterMetadata)[this.ptr] = this;
+};;
+VectorParameterMetadata.prototype = Object.create(WrapperObject.prototype);
+VectorParameterMetadata.prototype.constructor = VectorParameterMetadata;
+VectorParameterMetadata.prototype.__class__ = VectorParameterMetadata;
+VectorParameterMetadata.__cache__ = {};
+Module['VectorParameterMetadata'] = VectorParameterMetadata;
+
+VectorParameterMetadata.prototype['push_back'] = VectorParameterMetadata.prototype.push_back = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VectorParameterMetadata_push_back_1(self, arg0);
+};;
+
+VectorParameterMetadata.prototype['size'] = VectorParameterMetadata.prototype.size = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_VectorParameterMetadata_size_0(self);
+};;
+
+VectorParameterMetadata.prototype['at'] = VectorParameterMetadata.prototype.at = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_VectorParameterMetadata_at_1(self, arg0), ParameterMetadata);
+};;
+
+VectorParameterMetadata.prototype['WRAPPED_set'] = VectorParameterMetadata.prototype.WRAPPED_set = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_VectorParameterMetadata_WRAPPED_set_2(self, arg0, arg1);
+};;
+
+VectorParameterMetadata.prototype['clear'] = VectorParameterMetadata.prototype.clear = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorParameterMetadata_clear_0(self);
+};;
+
+  VectorParameterMetadata.prototype['__destroy__'] = VectorParameterMetadata.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorParameterMetadata___destroy___0(self);
 };
 // TextObject
 /** @suppress {undefinedVars, duplicate} */function TextObject(arg0) {
@@ -5271,6 +5315,26 @@ StandardEvent.prototype['UnserializeFrom'] = StandardEvent.prototype.Unserialize
   var self = this.ptr;
   _emscripten_bind_StandardEvent___destroy___0(self);
 };
+// ParameterMetadataTools
+function ParameterMetadataTools() { throw "cannot construct a ParameterMetadataTools, no constructor in IDL" }
+ParameterMetadataTools.prototype = Object.create(WrapperObject.prototype);
+ParameterMetadataTools.prototype.constructor = ParameterMetadataTools;
+ParameterMetadataTools.prototype.__class__ = ParameterMetadataTools;
+ParameterMetadataTools.__cache__ = {};
+Module['ParameterMetadataTools'] = ParameterMetadataTools;
+
+ParameterMetadataTools.prototype['STATIC_ParametersToObjectsContainer'] = ParameterMetadataTools.prototype.STATIC_ParametersToObjectsContainer = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  _emscripten_bind_ParameterMetadataTools_STATIC_ParametersToObjectsContainer_3(self, arg0, arg1, arg2);
+};;
+
+  ParameterMetadataTools.prototype['__destroy__'] = ParameterMetadataTools.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ParameterMetadataTools___destroy___0(self);
+};
 // ShapePainterObject
 /** @suppress {undefinedVars, duplicate} */function ShapePainterObject(arg0) {
   ensureCache.prepare();
@@ -6071,6 +6135,15 @@ EventsCodeGenerator.prototype['STATIC_GenerateSceneEventsCompleteCode'] = Events
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
   if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
   return Pointer_stringify(_emscripten_bind_EventsCodeGenerator_STATIC_GenerateSceneEventsCompleteCode_5(self, arg0, arg1, arg2, arg3, arg4));
+};;
+
+EventsCodeGenerator.prototype['STATIC_GenerateEventsFunctionCode'] = EventsCodeGenerator.prototype.STATIC_GenerateEventsFunctionCode = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  return Pointer_stringify(_emscripten_bind_EventsCodeGenerator_STATIC_GenerateEventsFunctionCode_4(self, arg0, arg1, arg2, arg3));
 };;
 
 // MapStringBoolean
@@ -7645,7 +7718,10 @@ EventsList.prototype['UnserializeFrom'] = EventsList.prototype.UnserializeFrom =
   _emscripten_bind_EventsList___destroy___0(self);
 };
 // ParameterMetadata
-function ParameterMetadata() { throw "cannot construct a ParameterMetadata, no constructor in IDL" }
+/** @suppress {undefinedVars, duplicate} */function ParameterMetadata() {
+  this.ptr = _emscripten_bind_ParameterMetadata_ParameterMetadata_0();
+  getCache(ParameterMetadata)[this.ptr] = this;
+};;
 ParameterMetadata.prototype = Object.create(WrapperObject.prototype);
 ParameterMetadata.prototype.constructor = ParameterMetadata;
 ParameterMetadata.prototype.__class__ = ParameterMetadata;
@@ -7657,9 +7733,38 @@ ParameterMetadata.prototype['GetType'] = ParameterMetadata.prototype.GetType = /
   return Pointer_stringify(_emscripten_bind_ParameterMetadata_GetType_0(self));
 };;
 
+ParameterMetadata.prototype['SetType'] = ParameterMetadata.prototype.SetType = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ParameterMetadata_SetType_1(self, arg0), ParameterMetadata);
+};;
+
+ParameterMetadata.prototype['GetName'] = ParameterMetadata.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_ParameterMetadata_GetName_0(self));
+};;
+
+ParameterMetadata.prototype['SetName'] = ParameterMetadata.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ParameterMetadata_SetName_1(self, arg0), ParameterMetadata);
+};;
+
 ParameterMetadata.prototype['GetExtraInfo'] = ParameterMetadata.prototype.GetExtraInfo = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ParameterMetadata_GetExtraInfo_0(self));
+};;
+
+ParameterMetadata.prototype['SetExtraInfo'] = ParameterMetadata.prototype.SetExtraInfo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ParameterMetadata_SetExtraInfo_1(self, arg0), ParameterMetadata);
 };;
 
 ParameterMetadata.prototype['IsOptional'] = ParameterMetadata.prototype.IsOptional = /** @suppress {undefinedVars, duplicate} */function() {
@@ -7667,9 +7772,23 @@ ParameterMetadata.prototype['IsOptional'] = ParameterMetadata.prototype.IsOption
   return !!(_emscripten_bind_ParameterMetadata_IsOptional_0(self));
 };;
 
+ParameterMetadata.prototype['SetOptional'] = ParameterMetadata.prototype.SetOptional = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_ParameterMetadata_SetOptional_1(self, arg0), ParameterMetadata);
+};;
+
 ParameterMetadata.prototype['GetDescription'] = ParameterMetadata.prototype.GetDescription = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ParameterMetadata_GetDescription_0(self));
+};;
+
+ParameterMetadata.prototype['SetDescription'] = ParameterMetadata.prototype.SetDescription = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ParameterMetadata_SetDescription_1(self, arg0), ParameterMetadata);
 };;
 
 ParameterMetadata.prototype['IsCodeOnly'] = ParameterMetadata.prototype.IsCodeOnly = /** @suppress {undefinedVars, duplicate} */function() {
@@ -7677,9 +7796,23 @@ ParameterMetadata.prototype['IsCodeOnly'] = ParameterMetadata.prototype.IsCodeOn
   return !!(_emscripten_bind_ParameterMetadata_IsCodeOnly_0(self));
 };;
 
+ParameterMetadata.prototype['SetCodeOnly'] = ParameterMetadata.prototype.SetCodeOnly = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_ParameterMetadata_SetCodeOnly_1(self, arg0), ParameterMetadata);
+};;
+
 ParameterMetadata.prototype['GetDefaultValue'] = ParameterMetadata.prototype.GetDefaultValue = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ParameterMetadata_GetDefaultValue_0(self));
+};;
+
+ParameterMetadata.prototype['SetDefaultValue'] = ParameterMetadata.prototype.SetDefaultValue = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ParameterMetadata_SetDefaultValue_1(self, arg0), ParameterMetadata);
 };;
 
 ParameterMetadata.prototype['STATIC_IsObject'] = ParameterMetadata.prototype.STATIC_IsObject = /** @suppress {undefinedVars, duplicate} */function(arg0) {
@@ -8112,11 +8245,6 @@ Layout.prototype['UnserializeLayersFrom'] = Layout.prototype.UnserializeLayersFr
   _emscripten_bind_Layout_UnserializeLayersFrom_1(self, arg0);
 };;
 
-Layout.prototype['GetObjectGroups'] = Layout.prototype.GetObjectGroups = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_Layout_GetObjectGroups_0(self), ObjectGroupsContainer);
-};;
-
 Layout.prototype['GetAssociatedSettings'] = Layout.prototype.GetAssociatedSettings = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Layout_GetAssociatedSettings_0(self), LayoutEditorCanvasOptions);
@@ -8220,6 +8348,11 @@ Layout.prototype['MoveObject'] = Layout.prototype.MoveObject = /** @suppress {un
 Layout.prototype['GetObjectsCount'] = Layout.prototype.GetObjectsCount = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return _emscripten_bind_Layout_GetObjectsCount_0(self);
+};;
+
+Layout.prototype['GetObjectGroups'] = Layout.prototype.GetObjectGroups = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_Layout_GetObjectGroups_0(self), ObjectGroupsContainer);
 };;
 
   Layout.prototype['__destroy__'] = Layout.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
@@ -8720,6 +8853,102 @@ ForEachEvent.prototype['UnserializeFrom'] = ForEachEvent.prototype.UnserializeFr
   ForEachEvent.prototype['__destroy__'] = ForEachEvent.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_ForEachEvent___destroy___0(self);
+};
+// ObjectsContainer
+/** @suppress {undefinedVars, duplicate} */function ObjectsContainer() {
+  this.ptr = _emscripten_bind_ObjectsContainer_ObjectsContainer_0();
+  getCache(ObjectsContainer)[this.ptr] = this;
+};;
+ObjectsContainer.prototype = Object.create(WrapperObject.prototype);
+ObjectsContainer.prototype.constructor = ObjectsContainer;
+ObjectsContainer.prototype.__class__ = ObjectsContainer;
+ObjectsContainer.__cache__ = {};
+Module['ObjectsContainer'] = ObjectsContainer;
+
+ObjectsContainer.prototype['InsertNewObject'] = ObjectsContainer.prototype.InsertNewObject = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  return wrapPointer(_emscripten_bind_ObjectsContainer_InsertNewObject_4(self, arg0, arg1, arg2, arg3), gdObject);
+};;
+
+ObjectsContainer.prototype['InsertObject'] = ObjectsContainer.prototype.InsertObject = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  return wrapPointer(_emscripten_bind_ObjectsContainer_InsertObject_2(self, arg0, arg1), gdObject);
+};;
+
+ObjectsContainer.prototype['HasObjectNamed'] = ObjectsContainer.prototype.HasObjectNamed = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_ObjectsContainer_HasObjectNamed_1(self, arg0));
+};;
+
+ObjectsContainer.prototype['GetObject'] = ObjectsContainer.prototype.GetObject = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ObjectsContainer_GetObject_1(self, arg0), gdObject);
+};;
+
+ObjectsContainer.prototype['GetObjectAt'] = ObjectsContainer.prototype.GetObjectAt = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_ObjectsContainer_GetObjectAt_1(self, arg0), gdObject);
+};;
+
+ObjectsContainer.prototype['GetObjectPosition'] = ObjectsContainer.prototype.GetObjectPosition = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return _emscripten_bind_ObjectsContainer_GetObjectPosition_1(self, arg0);
+};;
+
+ObjectsContainer.prototype['RemoveObject'] = ObjectsContainer.prototype.RemoveObject = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ObjectsContainer_RemoveObject_1(self, arg0);
+};;
+
+ObjectsContainer.prototype['SwapObjects'] = ObjectsContainer.prototype.SwapObjects = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_ObjectsContainer_SwapObjects_2(self, arg0, arg1);
+};;
+
+ObjectsContainer.prototype['MoveObject'] = ObjectsContainer.prototype.MoveObject = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_ObjectsContainer_MoveObject_2(self, arg0, arg1);
+};;
+
+ObjectsContainer.prototype['GetObjectsCount'] = ObjectsContainer.prototype.GetObjectsCount = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ObjectsContainer_GetObjectsCount_0(self);
+};;
+
+ObjectsContainer.prototype['GetObjectGroups'] = ObjectsContainer.prototype.GetObjectGroups = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ObjectsContainer_GetObjectGroups_0(self), ObjectGroupsContainer);
+};;
+
+  ObjectsContainer.prototype['__destroy__'] = ObjectsContainer.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ObjectsContainer___destroy___0(self);
 };
 // InstructionSentenceFormatter
 function InstructionSentenceFormatter() { throw "cannot construct a InstructionSentenceFormatter, no constructor in IDL" }

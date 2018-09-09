@@ -20,6 +20,7 @@
 
 #include <GDCore/Events/Parsers/ExpressionParser.h>
 #include <GDCore/Extensions/Metadata/MetadataProvider.h>
+#include <GDCore/Extensions/Metadata/ParameterMetadataTools.h>
 #include <GDCore/IDE/AbstractFileSystem.h>
 #include <GDCore/IDE/Dialogs/LayoutEditorCanvas/LayoutEditorCanvasOptions.h>
 #include <GDCore/IDE/Dialogs/ObjectListDialogsHelper.h>
@@ -370,6 +371,7 @@ typedef std::vector<Point> VectorPoint;
 typedef std::vector<Polygon2d> VectorPolygon2d;
 typedef std::vector<sf::Vector2f> VectorVector2f;
 typedef std::vector<EventsSearchResult> VectorEventsSearchResult;
+typedef std::vector<gd::ParameterMetadata> VectorParameterMetadata;
 typedef gd::Object gdObject;  // To avoid clashing javascript Object in glue.js
 typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 
@@ -484,6 +486,7 @@ typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
 #define STATIC_GetBehaviorStrExpressionMetadata GetBehaviorStrExpressionMetadata
 
 #define STATIC_GenerateSceneEventsCompleteCode GenerateSceneEventsCompleteCode
+#define STATIC_GenerateEventsFunctionCode GenerateEventsFunctionCode
 #define STATIC_Major Major
 #define STATIC_Minor Minor
 #define STATIC_Build Build
@@ -506,6 +509,8 @@ typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
   SanityCheckBehaviorsSharedDataProperty
 #define STATIC_SearchInEvents SearchInEvents
 #define STATIC_UnfoldWhenContaining UnfoldWhenContaining
+
+#define STATIC_ParametersToObjectsContainer ParametersToObjectsContainer
 
 // We postfix some methods with "At" as Javascript does not support overloading
 #define GetLayoutAt GetLayout

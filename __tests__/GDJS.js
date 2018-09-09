@@ -5,31 +5,125 @@ describe('libGD.js - GDJS related tests', function() {
   beforeAll(() => (gd = initGDevelopJS()));
 
   describe('EventsCodeGenerator', function() {
-    it("can generate code for a layout", function() {
-      var project = gd.ProjectHelper.createNewGDJSProject();
-      var layout = project.insertNewLayout('Scene', 0);
+    it('can generate code for a layout with generateSceneEventsCompleteCode', function() {
+      const project = gd.ProjectHelper.createNewGDJSProject();
+      const layout = project.insertNewLayout('Scene', 0);
 
-      var evt = layout
+      // Create a repeat event with a trigger once
+      const evt = layout
         .getEvents()
         .insertNewEvent(project, 'BuiltinCommonInstructions::Repeat', 0);
       gd.asRepeatEvent(evt).setRepeatExpression('5+4+3+2+1');
-      var instr = new gd.Instruction();
-      instr.setType('BuiltinCommonInstructions::Once');
+      const condition = new gd.Instruction();
+      condition.setType('BuiltinCommonInstructions::Once');
       gd.asRepeatEvent(evt)
         .getConditions()
-        .insert(instr, 0);
+        .insert(condition, 0);
 
-      var code = gd.EventsCodeGenerator.generateSceneEventsCompleteCode(
+      const code = gd.EventsCodeGenerator.generateSceneEventsCompleteCode(
         project,
         layout,
         layout.getEvents(),
         new gd.SetString(),
         true
       );
-      expect(code).toMatch(/(context.triggerOnce)/);
 
-      instr.delete();
-    })
+      // The loop is using a counter somewhere
+      expect(code).toMatch('repeatCount');
+
+      // Trigger once is used in a condition
+      expect(code).toMatch('runtimeScene.getOnceTriggers().triggerOnce');
+
+      condition.delete();
+    });
+
+    it('can generate code for a layout with generateEventsFunctionCode', function() {
+      const project = new gd.ProjectHelper.createNewGDJSProject();
+      
+      // Create a function accepting 4 parameters:
+      const parameters = new gd.VectorParameterMetadata();
+      const parameter1 = new gd.ParameterMetadata();
+      parameter1.setType('objectList');
+      parameter1.setName('MyObject');
+      parameter1.setDescription('The first object to be used');
+      const parameter2 = new gd.ParameterMetadata();
+      parameter2.setType('expression');
+      parameter2.setName('MyNumber');
+      parameter2.setDescription('Some number');
+      const parameter3 = new gd.ParameterMetadata();
+      parameter3.setType('objectList');
+      parameter3.setName('MySprite');
+      parameter3.setDescription('The second object to be used, a sprite');
+      parameter3.setExtraInfo('Sprite');
+      const parameter4 = new gd.ParameterMetadata();
+      parameter4.setType('string');
+      parameter4.setName('MyString');
+      parameter4.setDescription('Some string');
+      parameters.push_back(parameter1);
+      parameters.push_back(parameter2);
+      parameters.push_back(parameter3);
+      parameters.push_back(parameter4);
+
+      // Create a repeat event with...
+      const eventsList = new gd.EventsList();
+
+      const evt = eventsList.insertNewEvent(
+        project,
+        'BuiltinCommonInstructions::Repeat',
+        0
+      );
+      gd.asRepeatEvent(evt).setRepeatExpression('5+4+3+2+1');
+
+      // ...a trigger once condition...
+      const condition = new gd.Instruction();
+      condition.setType('BuiltinCommonInstructions::Once');
+      gd.asRepeatEvent(evt)
+        .getConditions()
+        .insert(condition, 0);
+      
+      // ...and an action to update a variable of MyObject
+      const action = new gd.Instruction();
+      action.setType('ModVarObjet');
+      action.setParametersCount(4);
+      action.setParameter(0, "MyObject");
+      action.setParameter(1, "ObjectVariable");
+      action.setParameter(2, "+");
+      action.setParameter(3, "42");
+      gd.asRepeatEvent(evt)
+        .getActions()
+        .insert(action, 0);
+
+      const code = gd.EventsCodeGenerator.generateEventsFunctionCode(
+        project,
+        parameters,
+        eventsList,
+        true
+      );
+
+      // Check that the context for the events function is here...
+      expect(code).toMatch('function(runtimeScene, eventsFunctionContext)');
+      expect(code).toMatch('var eventsFunctionContext =');
+
+      // ...and objects should be able to get queried...
+      expect(code).toMatch('gdjs.objectsListsToArray(MyObject);');
+      expect(code).toMatch('gdjs.objectsListsToArray(MySprite);');
+
+      // ...and arguments should be able to get queried too:
+      expect(code).toMatch('if (argName === "MyNumber") return MyNumber;');
+      expect(code).toMatch('if (argName === "MyString") return MyString;');
+
+      // The loop is using a counter somewhere
+      expect(code).toMatch('repeatCount');
+
+      // Trigger once is used in a condition
+      expect(code).toMatch('runtimeScene.getOnceTriggers().triggerOnce');
+      
+      // A variable is set to 42
+      expect(code).toMatch('getVariables().get("ObjectVariable")).add(42)');
+
+      condition.delete();
+      action.delete();
+    });
   });
   describe('TextObject', function() {
     it('should expose TextObject specific methods', function() {
