@@ -1,129 +1,133 @@
-var gd = require('../../Binaries/Output/libGD.js/Release/libGD.js')();
-var gd2 = require('../../Binaries/Output/libGD.js/Release/libGD.js')();
-var path = require('path');
-var extend = require('extend');
-var expect = require('expect.js');
+const initGDevelopJS = require('../../Binaries/Output/libGD.js/Release/libGD.js');
+const path = require('path');
+const extend = require('extend');
 
 describe('libGD.js', function() {
-  gd.initializePlatforms();
+  let gd = null;
+  beforeAll(() => (gd = initGDevelopJS()));
 
   describe('gd.VersionWrapper', function() {
     it('can return the version number of the library', function() {
-      expect(gd.VersionWrapper.major()).to.be.a('number');
-      expect(gd.VersionWrapper.minor()).to.be.a('number');
-      expect(gd.VersionWrapper.build()).to.be.a('number');
-      expect(gd.VersionWrapper.revision()).to.be.a('number');
-      expect(gd.VersionWrapper.fullString()).to.be.a('string');
+      expect(typeof gd.VersionWrapper.major()).toBe('number');
+      expect(typeof gd.VersionWrapper.minor()).toBe('number');
+      expect(typeof gd.VersionWrapper.build()).toBe('number');
+      expect(typeof gd.VersionWrapper.revision()).toBe('number');
+      expect(typeof gd.VersionWrapper.fullString()).toBe('string');
     });
   });
 
   describe('gd.Project', function() {
-    var project = gd.ProjectHelper.createNewGDJSProject();
+    let project = null;
+    beforeAll(() => (project = gd.ProjectHelper.createNewGDJSProject()));
 
     it('has properties that can be read and changed', function() {
       project.setName('My super project');
-      expect(project.getName()).to.be('My super project');
+      expect(project.getName()).toBe('My super project');
       project.setVersion('1.2.34');
-      expect(project.getVersion()).to.be('1.2.34');
+      expect(project.getVersion()).toBe('1.2.34');
       project.setPackageName('com.test.package');
-      expect(project.getPackageName()).to.be('com.test.package');
+      expect(project.getPackageName()).toBe('com.test.package');
       project.setOrientation('portrait');
-      expect(project.getOrientation()).to.be('portrait');
+      expect(project.getOrientation()).toBe('portrait');
       project.setOrientation('landscape');
-      expect(project.getOrientation()).to.be('landscape');
+      expect(project.getOrientation()).toBe('landscape');
       project.setAuthor('Me');
-      expect(project.getAuthor()).to.be('Me');
+      expect(project.getAuthor()).toBe('Me');
       project.setMaximumFPS(15);
-      expect(project.getMaximumFPS()).to.be(15);
+      expect(project.getMaximumFPS()).toBe(15);
       project.setMinimumFPS(15);
-      expect(project.getMinimumFPS()).to.be(15);
+      expect(project.getMinimumFPS()).toBe(15);
     });
 
     it('can store loading screen setup', function() {
       project.getLoadingScreen().showGDevelopSplash(true);
-      expect(project.getLoadingScreen().isGDevelopSplashShown()).to.be(true);
+      expect(project.getLoadingScreen().isGDevelopSplashShown()).toBe(true);
       project.getLoadingScreen().showGDevelopSplash(false);
-      expect(project.getLoadingScreen().isGDevelopSplashShown()).to.be(false);
+      expect(project.getLoadingScreen().isGDevelopSplashShown()).toBe(false);
     });
 
     it('handles layouts', function() {
-      expect(project.hasLayoutNamed('Scene')).to.be(false);
+      expect(project.hasLayoutNamed('Scene')).toBe(false);
 
       project.insertNewLayout('Scene', 0);
-      expect(project.hasLayoutNamed('Scene')).to.be(true);
-      expect(project.getLayout('Scene').getName()).to.be('Scene');
+      expect(project.hasLayoutNamed('Scene')).toBe(true);
+      expect(project.getLayout('Scene').getName()).toBe('Scene');
 
       project.removeLayout('Scene');
-      expect(project.hasLayoutNamed('Scene')).to.be(false);
+      expect(project.hasLayoutNamed('Scene')).toBe(false);
     });
 
     it('handles external events', function() {
-      expect(project.hasExternalEventsNamed('My events')).to.be(false);
+      expect(project.hasExternalEventsNamed('My events')).toBe(false);
 
       project.insertNewExternalEvents('My events', 0);
-      expect(project.hasExternalEventsNamed('My events')).to.be(true);
-      expect(project.getExternalEvents('My events').getName()).to.be(
+      expect(project.hasExternalEventsNamed('My events')).toBe(true);
+      expect(project.getExternalEvents('My events').getName()).toBe(
         'My events'
       );
 
       project.removeExternalEvents('My events');
-      expect(project.hasExternalEventsNamed('My events')).to.be(false);
+      expect(project.hasExternalEventsNamed('My events')).toBe(false);
     });
 
     it('handles external layouts', function() {
-      expect(project.hasExternalLayoutNamed('My layout')).to.be(false);
+      expect(project.hasExternalLayoutNamed('My layout')).toBe(false);
 
       project.insertNewExternalLayout('My layout', 0);
-      expect(project.hasExternalLayoutNamed('My layout')).to.be(true);
-      expect(project.getExternalLayout('My layout').getName()).to.be(
+      expect(project.hasExternalLayoutNamed('My layout')).toBe(true);
+      expect(project.getExternalLayout('My layout').getName()).toBe(
         'My layout'
       );
 
       project.removeExternalLayout('My layout');
-      expect(project.hasExternalLayoutNamed('My layout')).to.be(false);
+      expect(project.hasExternalLayoutNamed('My layout')).toBe(false);
     });
 
     it('should validate object names', function() {
-      expect(gd.Project.validateObjectName('ThisNameIs_Ok_123')).to.be(true);
-      expect(gd.Project.validateObjectName('ThisName IsNot_Ok_123')).to.be(
+      expect(gd.Project.validateObjectName('ThisNameIs_Ok_123')).toBe(true);
+      expect(gd.Project.validateObjectName('ThisName IsNot_Ok_123')).toBe(
         false
       );
-      expect(gd.Project.validateObjectName('ThisNameIsNot_Ok!')).to.be(false);
+      expect(gd.Project.validateObjectName('ThisNameIsNot_Ok!')).toBe(false);
     });
 
     it('should have a list of extensions', function() {
-      expect(project.getUsedExtensions().size()).to.be.a('number');
+      expect(typeof project.getUsedExtensions().size()).toBe('number');
       project.getUsedExtensions().clear();
-      expect(project.getUsedExtensions().size()).to.be(0);
+      expect(project.getUsedExtensions().size()).toBe(0);
     });
 
-    after(function() {
+    afterAll(function() {
       project.delete();
     });
   });
 
   describe('gd.Layout', function() {
-    var project = gd.ProjectHelper.createNewGDJSProject();
-    var layout = project.insertNewLayout('Scene', 0);
+    let project = null;
+    let layout = null;
+    beforeAll(() => {
+      project = gd.ProjectHelper.createNewGDJSProject();
+      layout = project.insertNewLayout('Scene', 0);
+    });
 
     it('can have a new name', function() {
-      expect(layout.getName()).to.be('Scene');
+      expect(layout.getName()).toBe('Scene');
       layout.setName('My super layout');
-      expect(layout.getName()).to.be('My super layout');
+      expect(layout.getName()).toBe('My super layout');
     });
     it('can have a name with UTF8 characters', function() {
       layout.setName('Scene with a 官话 name');
-      expect(layout.getName()).to.be('Scene with a 官话 name');
+      expect(layout.getName()).toBe('Scene with a 官话 name');
     });
     it('can store events', function() {
       var evts = layout.getEvents();
-      expect(evts.getEventsCount()).to.be(0);
+      expect(evts.getEventsCount()).toBe(0);
       var evt = evts.insertNewEvent(
         project,
         'BuiltinCommonInstructions::Standard',
         0
       );
-      expect(evts.getEventsCount()).to.be(1);
+      expect(evts.getEventsCount()).toBe(1);
       evt
         .getSubEvents()
         .insertNewEvent(project, 'BuiltinCommonInstructions::Standard', 0);
@@ -132,7 +136,7 @@ describe('libGD.js', function() {
           .getEventAt(0)
           .getSubEvents()
           .getEventsCount()
-      ).to.be(1);
+      ).toBe(1);
     });
     it('can have objects', function() {
       var object = layout.insertNewObject(project, 'Sprite', 'MyObject', 0);
@@ -143,19 +147,20 @@ describe('libGD.js', function() {
         1
       );
 
-      expect(layout.getObjectAt(0).ptr).to.be(object.ptr);
-      expect(layout.getObjectAt(1).ptr).to.be(object2.ptr);
-      expect(layout.getObjectAt(0).getType()).to.be('Sprite');
-      expect(layout.getObjectAt(1).getType()).to.be('TextObject::Text');
+      expect(layout.getObjectAt(0).ptr).toBe(object.ptr);
+      expect(layout.getObjectAt(1).ptr).toBe(object2.ptr);
+      expect(layout.getObjectAt(0).getType()).toBe('Sprite');
+      expect(layout.getObjectAt(1).getType()).toBe('TextObject::Text');
     });
 
-    after(function() {
+    afterAll(function() {
       project.delete();
     });
   });
 
   describe('ClassWithObjects (using gd.Layout)', function() {
-    var project = gd.ProjectHelper.createNewGDJSProject();
+    let project = null;
+    beforeAll(() => (project = gd.ProjectHelper.createNewGDJSProject()));
 
     it('can move objects', function() {
       var layout = project.insertNewLayout('Scene', 0);
@@ -173,25 +178,25 @@ describe('libGD.js', function() {
         2
       );
 
-      expect(layout.getObjectAt(0).getName()).to.be('MyObject');
-      expect(layout.getObjectAt(1).getName()).to.be('MyObject2');
-      expect(layout.getObjectAt(2).getName()).to.be('MyObject3');
+      expect(layout.getObjectAt(0).getName()).toBe('MyObject');
+      expect(layout.getObjectAt(1).getName()).toBe('MyObject2');
+      expect(layout.getObjectAt(2).getName()).toBe('MyObject3');
       layout.moveObject(0, 2);
-      expect(layout.getObjectAt(0).getName()).to.be('MyObject2');
-      expect(layout.getObjectAt(1).getName()).to.be('MyObject3');
-      expect(layout.getObjectAt(2).getName()).to.be('MyObject');
+      expect(layout.getObjectAt(0).getName()).toBe('MyObject2');
+      expect(layout.getObjectAt(1).getName()).toBe('MyObject3');
+      expect(layout.getObjectAt(2).getName()).toBe('MyObject');
       layout.moveObject(0, 0);
-      expect(layout.getObjectAt(0).getName()).to.be('MyObject2');
-      expect(layout.getObjectAt(1).getName()).to.be('MyObject3');
-      expect(layout.getObjectAt(2).getName()).to.be('MyObject');
+      expect(layout.getObjectAt(0).getName()).toBe('MyObject2');
+      expect(layout.getObjectAt(1).getName()).toBe('MyObject3');
+      expect(layout.getObjectAt(2).getName()).toBe('MyObject');
       layout.moveObject(1, 0);
-      expect(layout.getObjectAt(0).getName()).to.be('MyObject3');
-      expect(layout.getObjectAt(1).getName()).to.be('MyObject2');
-      expect(layout.getObjectAt(2).getName()).to.be('MyObject');
+      expect(layout.getObjectAt(0).getName()).toBe('MyObject3');
+      expect(layout.getObjectAt(1).getName()).toBe('MyObject2');
+      expect(layout.getObjectAt(2).getName()).toBe('MyObject');
       layout.moveObject(0, 999);
-      expect(layout.getObjectAt(0).getName()).to.be('MyObject3');
-      expect(layout.getObjectAt(1).getName()).to.be('MyObject2');
-      expect(layout.getObjectAt(2).getName()).to.be('MyObject');
+      expect(layout.getObjectAt(0).getName()).toBe('MyObject3');
+      expect(layout.getObjectAt(1).getName()).toBe('MyObject2');
+      expect(layout.getObjectAt(2).getName()).toBe('MyObject');
     });
 
     it('can find position of objects', function() {
@@ -210,23 +215,26 @@ describe('libGD.js', function() {
         2
       );
 
-      expect(layout.getObjectPosition('MyObject')).to.be(0);
-      expect(layout.getObjectPosition('MyObject2')).to.be(1);
-      expect(layout.getObjectPosition('MyObject3')).to.be(2);
-      expect(layout.getObjectPosition('MyObject4')).to.be(-1);
+      expect(layout.getObjectPosition('MyObject')).toBe(0);
+      expect(layout.getObjectPosition('MyObject2')).toBe(1);
+      expect(layout.getObjectPosition('MyObject3')).toBe(2);
+      expect(layout.getObjectPosition('MyObject4')).toBe(-1);
     });
 
-    after(function() {
+    afterAll(function() {
       project.delete();
     });
   });
 
   describe('gd.InitialInstancesContainer', function() {
-    var container = new gd.InitialInstancesContainer();
-    var containerCopy = null;
+    let container = null;
+    let containerCopy = null;
+    beforeAll(() => {
+      container = new gd.InitialInstancesContainer();
+    });
 
     it('initial state', function() {
-      expect(container.getInstancesCount()).to.be(0);
+      expect(container.getInstancesCount()).toBe(0);
     });
     it('adding instances', function() {
       var instance = container.insertNewInitialInstance();
@@ -242,7 +250,7 @@ describe('libGD.js', function() {
       instance3.setZOrder(-1);
       instance3.setLayer('OtherLayer');
 
-      expect(container.getInstancesCount()).to.be(3);
+      expect(container.getInstancesCount()).toBe(3);
     });
     it('iterating', function() {
       var i = 0;
@@ -253,7 +261,7 @@ describe('libGD.js', function() {
           (i === 0 && instance.getObjectName() === 'MyObject1') ||
             (i === 1 && instance.getObjectName() === 'MyObject2') ||
             (i === 2 && instance.getObjectName() === 'MyObject3')
-        ).to.be(true);
+        ).toBe(true);
         i++;
       };
       container.iterateOverInstances(functor);
@@ -269,7 +277,7 @@ describe('libGD.js', function() {
           (i === 0 && instance.getObjectName() === 'MyObject') ||
             (i === 1 && instance.getObjectName() === 'MyObject2') ||
             (i === 2 && instance.getObjectName() === 'MyObject3')
-        ).to.be(true);
+        ).toBe(true);
         i++;
       };
       container.iterateOverInstances(functor);
@@ -282,7 +290,7 @@ describe('libGD.js', function() {
         expect(
           (i === 0 && instance.getObjectName() === 'MyObject2') ||
             (i === 1 && instance.getObjectName() === 'MyObject')
-        ).to.be(true);
+        ).toBe(true);
         i++;
       };
       container.iterateOverInstancesWithZOrdering(functor, '');
@@ -293,69 +301,73 @@ describe('libGD.js', function() {
       var functor = new gd.InitialInstanceJSFunctor();
       functor.invoke = function(instance) {
         instance = gd.wrapPointer(instance, gd.InitialInstance);
-        expect(instance.getObjectName()).to.be('MyObject3');
+        expect(instance.getObjectName()).toBe('MyObject3');
       };
       container.iterateOverInstancesWithZOrdering(functor, 'YetAnotherLayer');
     });
     it('can be cloned', function() {
       containerCopy = container.clone();
-      expect(containerCopy.getInstancesCount()).to.be(3);
+      expect(containerCopy.getInstancesCount()).toBe(3);
 
       var instance = containerCopy.insertNewInitialInstance();
       instance.setObjectName('MyObject4');
-      expect(containerCopy.getInstancesCount()).to.be(4);
-      expect(container.getInstancesCount()).to.be(3);
+      expect(containerCopy.getInstancesCount()).toBe(4);
+      expect(container.getInstancesCount()).toBe(3);
 
       containerCopy.delete();
       containerCopy = null;
     });
     it('removing instances', function() {
       container.removeInitialInstancesOfObject('MyObject');
-      expect(container.getInstancesCount()).to.be(2);
+      expect(container.getInstancesCount()).toBe(2);
     });
     it('removing instances on a layer', function() {
       container.removeAllInstancesOnLayer('YetAnotherLayer');
-      expect(container.getInstancesCount()).to.be(1);
+      expect(container.getInstancesCount()).toBe(1);
     });
     it('can be serialized', function() {
-      expect(container.serializeTo).to.not.be(undefined);
-      expect(container.unserializeFrom).to.not.be(undefined);
+      expect(container.serializeTo).not.toBe(undefined);
+      expect(container.unserializeFrom).not.toBe(undefined);
     });
 
-    after(function() {
+    afterAll(function() {
       container.delete();
     });
   });
 
   describe('gd.InitialInstance', function() {
-    var project = gd.ProjectHelper.createNewGDJSProject();
-    var layout = project.insertNewLayout('Scene', 0);
-    layout.insertNewObject(project, 'Sprite', 'MySpriteObject', 0);
-    var initialInstance = layout
-      .getInitialInstances()
-      .insertNewInitialInstance();
+    let project = null;
+    let layout = null;
+    let initialInstance = null;
+    beforeAll(() => {
+      project = gd.ProjectHelper.createNewGDJSProject();
+      layout = project.insertNewLayout('Scene', 0);
+      layout.insertNewObject(project, 'Sprite', 'MySpriteObject', 0);
+
+      initialInstance = layout.getInitialInstances().insertNewInitialInstance();
+    });
 
     it('properties', function() {
       initialInstance.setObjectName('MySpriteObject');
-      expect(initialInstance.getObjectName()).to.be('MySpriteObject');
+      expect(initialInstance.getObjectName()).toBe('MySpriteObject');
       initialInstance.setX(150);
-      expect(initialInstance.getX()).to.be(150);
+      expect(initialInstance.getX()).toBe(150);
       initialInstance.setY(140);
-      expect(initialInstance.getY()).to.be(140);
+      expect(initialInstance.getY()).toBe(140);
       initialInstance.setAngle(45);
-      expect(initialInstance.getAngle()).to.be(45);
+      expect(initialInstance.getAngle()).toBe(45);
       initialInstance.setZOrder(12);
-      expect(initialInstance.getZOrder()).to.be(12);
+      expect(initialInstance.getZOrder()).toBe(12);
       initialInstance.setLayer('MyLayer');
-      expect(initialInstance.getLayer()).to.be('MyLayer');
+      expect(initialInstance.getLayer()).toBe('MyLayer');
       initialInstance.setLocked(true);
-      expect(initialInstance.isLocked()).to.be(true);
+      expect(initialInstance.isLocked()).toBe(true);
       initialInstance.setHasCustomSize(true);
-      expect(initialInstance.hasCustomSize()).to.be(true);
+      expect(initialInstance.hasCustomSize()).toBe(true);
       initialInstance.setCustomWidth(34);
-      expect(initialInstance.getCustomWidth()).to.be(34);
+      expect(initialInstance.getCustomWidth()).toBe(34);
       initialInstance.setCustomHeight(30);
-      expect(initialInstance.getCustomHeight()).to.be(30);
+      expect(initialInstance.getCustomHeight()).toBe(30);
     });
     it('Sprite object custom properties', function() {
       initialInstance.updateCustomProperty('Animation', '2', project, layout);
@@ -364,12 +376,12 @@ describe('libGD.js', function() {
           .getCustomProperties(project, layout)
           .get('Animation')
           .getValue()
-      ).to.be('2');
-      expect(initialInstance.getRawFloatProperty('animation')).to.be(2);
+      ).toBe('2');
+      expect(initialInstance.getRawFloatProperty('animation')).toBe(2);
     });
     it('can be serialized', function() {
-      expect(initialInstance.serializeTo).to.not.be(undefined);
-      expect(initialInstance.unserializeFrom).to.not.be(undefined);
+      expect(initialInstance.serializeTo).not.toBe(undefined);
+      expect(initialInstance.unserializeFrom).not.toBe(undefined);
 
       var element = new gd.SerializerElement();
       initialInstance.serializeTo(element);
@@ -378,19 +390,19 @@ describe('libGD.js', function() {
         .getInitialInstances()
         .insertNewInitialInstance();
       initialInstance2.unserializeFrom(element);
-      expect(initialInstance2.getObjectName()).to.be('MySpriteObject');
-      expect(initialInstance2.getX()).to.be(150);
-      expect(initialInstance2.getY()).to.be(140);
-      expect(initialInstance2.getAngle()).to.be(45);
-      expect(initialInstance2.getZOrder()).to.be(12);
-      expect(initialInstance2.getLayer()).to.be('MyLayer');
-      expect(initialInstance2.isLocked()).to.be(true);
-      expect(initialInstance2.hasCustomSize()).to.be(true);
-      expect(initialInstance2.getCustomWidth()).to.be(34);
-      expect(initialInstance2.getCustomHeight()).to.be(30);
+      expect(initialInstance2.getObjectName()).toBe('MySpriteObject');
+      expect(initialInstance2.getX()).toBe(150);
+      expect(initialInstance2.getY()).toBe(140);
+      expect(initialInstance2.getAngle()).toBe(45);
+      expect(initialInstance2.getZOrder()).toBe(12);
+      expect(initialInstance2.getLayer()).toBe('MyLayer');
+      expect(initialInstance2.isLocked()).toBe(true);
+      expect(initialInstance2.hasCustomSize()).toBe(true);
+      expect(initialInstance2.getCustomWidth()).toBe(34);
+      expect(initialInstance2.getCustomHeight()).toBe(30);
     });
 
-    after(function() {
+    afterAll(function() {
       project.delete();
     });
   });
@@ -399,20 +411,20 @@ describe('libGD.js', function() {
     it('container is empty after being created', function() {
       var container = new gd.VariablesContainer();
 
-      expect(container.has('Variable')).to.be(false);
-      expect(container.count()).to.be(0);
+      expect(container.has('Variable')).toBe(false);
+      expect(container.count()).toBe(0);
       container.delete();
     });
     it('can insert variables', function() {
       var container = new gd.VariablesContainer();
 
       container.insertNew('Variable', 0);
-      expect(container.has('Variable')).to.be(true);
-      expect(container.count()).to.be(1);
+      expect(container.has('Variable')).toBe(true);
+      expect(container.count()).toBe(1);
 
       container.insertNew('SecondVariable', 0);
-      expect(container.has('SecondVariable')).to.be(true);
-      expect(container.count()).to.be(2);
+      expect(container.has('SecondVariable')).toBe(true);
+      expect(container.count()).toBe(2);
       container.delete();
     });
     it('can rename variables', function() {
@@ -424,13 +436,13 @@ describe('libGD.js', function() {
         .setString('String of SecondVariable');
       container.insertNew('ThirdVariable', 0);
 
-      expect(container.has('SecondVariable')).to.be(true);
-      expect(container.has('NewName')).to.be(false);
+      expect(container.has('SecondVariable')).toBe(true);
+      expect(container.has('NewName')).toBe(false);
       container.rename('SecondVariable', 'NewName');
-      expect(container.has('SecondVariable')).to.be(false);
-      expect(container.has('NewName')).to.be(true);
+      expect(container.has('SecondVariable')).toBe(false);
+      expect(container.has('NewName')).toBe(true);
 
-      expect(container.get('NewName').getString()).to.be(
+      expect(container.get('NewName').getString()).toBe(
         'String of SecondVariable'
       );
       container.delete();
@@ -447,13 +459,13 @@ describe('libGD.js', function() {
         .getChild('Child1')
         .setValue(7);
 
-      expect(container.getNameAt(0)).to.be('Variable');
-      expect(container.getNameAt(2)).to.be('ThirdVariable');
+      expect(container.getNameAt(0)).toBe('Variable');
+      expect(container.getNameAt(2)).toBe('ThirdVariable');
 
       container.swap(0, 2);
-      expect(container.getNameAt(0)).to.be('ThirdVariable');
-      expect(container.getNameAt(2)).to.be('Variable');
-      expect(container.getAt(2).getValue()).to.be(4);
+      expect(container.getNameAt(0)).toBe('ThirdVariable');
+      expect(container.getNameAt(2)).toBe('Variable');
+      expect(container.getAt(2).getValue()).toBe(4);
 
       container.delete();
     });
@@ -470,65 +482,65 @@ describe('libGD.js', function() {
         .setValue(7);
 
       container.move(1, 2);
-      expect(container.getNameAt(0)).to.be('Variable');
-      expect(container.getNameAt(1)).to.be('ThirdVariable');
-      expect(container.getNameAt(2)).to.be('SecondVariable');
+      expect(container.getNameAt(0)).toBe('Variable');
+      expect(container.getNameAt(1)).toBe('ThirdVariable');
+      expect(container.getNameAt(2)).toBe('SecondVariable');
 
       container.move(1, 9999);
-      expect(container.getNameAt(0)).to.be('Variable');
-      expect(container.getNameAt(1)).to.be('ThirdVariable');
-      expect(container.getNameAt(2)).to.be('SecondVariable');
+      expect(container.getNameAt(0)).toBe('Variable');
+      expect(container.getNameAt(1)).toBe('ThirdVariable');
+      expect(container.getNameAt(2)).toBe('SecondVariable');
 
       container.move(2, 0);
-      expect(container.getNameAt(0)).to.be('SecondVariable');
-      expect(container.getNameAt(1)).to.be('Variable');
-      expect(container.getNameAt(2)).to.be('ThirdVariable');
+      expect(container.getNameAt(0)).toBe('SecondVariable');
+      expect(container.getNameAt(1)).toBe('Variable');
+      expect(container.getNameAt(2)).toBe('ThirdVariable');
 
       container.delete();
     });
   });
 
   describe('gd.Variable', function() {
-    var variable = new gd.Variable();
+    let variable = null;
+    beforeAll(() => (variable = new gd.Variable()));
 
     it('should have initial value', function() {
-      expect(variable.getValue()).to.be(0);
-      expect(variable.isNumber()).to.be(true);
+      expect(variable.getValue()).toBe(0);
+      expect(variable.isNumber()).toBe(true);
     });
     it('can have a value', function() {
       variable.setValue(5);
-      expect(variable.getValue()).to.be(5);
-      expect(variable.isNumber()).to.be(true);
+      expect(variable.getValue()).toBe(5);
+      expect(variable.isNumber()).toBe(true);
     });
     it('can have a string', function() {
       variable.setString('Hello');
-      expect(variable.getString()).to.be('Hello');
-      expect(variable.isNumber()).to.be(false);
+      expect(variable.getString()).toBe('Hello');
+      expect(variable.isNumber()).toBe(false);
     });
     it('can be a structure', function() {
       variable.getChild('FirstChild').setValue(1);
       variable.getChild('SecondChild').setString('two');
-      expect(variable.hasChild('FirstChild')).to.be(true);
-      expect(variable.hasChild('SecondChild')).to.be(true);
-      expect(variable.hasChild('NotExisting')).to.be(false);
-      expect(variable.getChild('SecondChild').getString()).to.be('two');
+      expect(variable.hasChild('FirstChild')).toBe(true);
+      expect(variable.hasChild('SecondChild')).toBe(true);
+      expect(variable.hasChild('NotExisting')).toBe(false);
+      expect(variable.getChild('SecondChild').getString()).toBe('two');
       variable.removeChild('FirstChild');
-      expect(variable.hasChild('FirstChild')).to.be(false);
+      expect(variable.hasChild('FirstChild')).toBe(false);
     });
     it('can expose its children', function() {
       variable.getChild('FirstChild').setValue(1);
 
       var childrenNames = variable.getAllChildrenNames();
-      expect(childrenNames.size()).to.be(2);
+      expect(childrenNames.size()).toBe(2);
 
       variable.getChild(childrenNames.get(0)).setString('one');
       variable.getChild(childrenNames.get(1)).setValue(2);
 
-      expect(variable.getChild('FirstChild').getString()).to.be('one');
-      expect(variable.getChild('SecondChild').getValue()).to.be(2);
+      expect(variable.getChild('FirstChild').getString()).toBe('one');
+      expect(variable.getChild('SecondChild').getValue()).toBe(2);
 
-      //Check that children count didn't change
-      expect(childrenNames.size()).to.be(2);
+      expect(childrenNames.size()).toBe(2);
     });
     it('can search inside children and remove them recursively', function() {
       var parentVariable = new gd.Variable();
@@ -536,39 +548,39 @@ describe('libGD.js', function() {
       var child1 = parentVariable.getChild('Child1');
       var child2 = parentVariable.getChild('Child2');
       var grandChild = parentVariable.getChild('Child1').getChild('GrandChild');
-      expect(parentVariable.contains(grandChild, true)).to.be(true);
-      expect(parentVariable.contains(grandChild, false)).to.be(false);
-      expect(parentVariable.contains(child1, true)).to.be(true);
-      expect(parentVariable.contains(child2, true)).to.be(true);
-      expect(parentVariable.contains(child1, false)).to.be(true);
-      expect(parentVariable.contains(child2, false)).to.be(true);
-      expect(child1.contains(grandChild, true)).to.be(true);
-      expect(child1.contains(grandChild, false)).to.be(true);
-      expect(child2.contains(grandChild, true)).to.be(false);
-      expect(child2.contains(grandChild, false)).to.be(false);
-      expect(grandChild.contains(grandChild, true)).to.be(false);
-      expect(grandChild.contains(grandChild, false)).to.be(false);
-      expect(grandChild.contains(child1, true)).to.be(false);
-      expect(grandChild.contains(child2, true)).to.be(false);
-      expect(grandChild.contains(parentVariable, true)).to.be(false);
-      expect(grandChild.contains(child1, false)).to.be(false);
-      expect(grandChild.contains(child2, false)).to.be(false);
-      expect(grandChild.contains(parentVariable, false)).to.be(false);
+      expect(parentVariable.contains(grandChild, true)).toBe(true);
+      expect(parentVariable.contains(grandChild, false)).toBe(false);
+      expect(parentVariable.contains(child1, true)).toBe(true);
+      expect(parentVariable.contains(child2, true)).toBe(true);
+      expect(parentVariable.contains(child1, false)).toBe(true);
+      expect(parentVariable.contains(child2, false)).toBe(true);
+      expect(child1.contains(grandChild, true)).toBe(true);
+      expect(child1.contains(grandChild, false)).toBe(true);
+      expect(child2.contains(grandChild, true)).toBe(false);
+      expect(child2.contains(grandChild, false)).toBe(false);
+      expect(grandChild.contains(grandChild, true)).toBe(false);
+      expect(grandChild.contains(grandChild, false)).toBe(false);
+      expect(grandChild.contains(child1, true)).toBe(false);
+      expect(grandChild.contains(child2, true)).toBe(false);
+      expect(grandChild.contains(parentVariable, true)).toBe(false);
+      expect(grandChild.contains(child1, false)).toBe(false);
+      expect(grandChild.contains(child2, false)).toBe(false);
+      expect(grandChild.contains(parentVariable, false)).toBe(false);
 
       parentVariable.removeRecursively(grandChild);
-      expect(child1.hasChild('GrandChild')).to.be(false);
-      expect(child1.getChildrenCount()).to.be(0);
-      expect(parentVariable.getChildrenCount()).to.be(2);
+      expect(child1.hasChild('GrandChild')).toBe(false);
+      expect(child1.getChildrenCount()).toBe(0);
+      expect(parentVariable.getChildrenCount()).toBe(2);
 
       parentVariable.removeRecursively(child2);
-      expect(parentVariable.getChildrenCount()).to.be(1);
-      expect(parentVariable.hasChild('Child1')).to.be(true);
-      expect(parentVariable.hasChild('Child2')).to.be(false);
+      expect(parentVariable.getChildrenCount()).toBe(1);
+      expect(parentVariable.hasChild('Child1')).toBe(true);
+      expect(parentVariable.hasChild('Child2')).toBe(false);
 
       parentVariable.delete();
     });
 
-    after(function() {
+    afterAll(function() {
       variable.delete();
     });
   });
@@ -578,8 +590,8 @@ describe('libGD.js', function() {
       var resource = new gd.ImageResource();
       resource.setName('MyResource');
       resource.setFile('MyFile');
-      expect(resource.getName()).to.be('MyResource');
-      expect(resource.getFile()).to.be('MyFile');
+      expect(resource.getName()).toBe('MyResource');
+      expect(resource.getFile()).toBe('MyFile');
     });
 
     it('has smooth and alreadyLoaded custom properties', function() {
@@ -587,8 +599,8 @@ describe('libGD.js', function() {
       var resource = new gd.ImageResource();
 
       var properties = resource.getProperties();
-      expect(properties.get('Smooth the image').getValue()).to.be('true');
-      expect(properties.get('Always loaded in memory').getValue()).to.be(
+      expect(properties.get('Smooth the image').getValue()).toBe('true');
+      expect(properties.get('Always loaded in memory').getValue()).toBe(
         'false'
       );
 
@@ -597,10 +609,10 @@ describe('libGD.js', function() {
       resource.updateProperty('Always loaded in memory', '1', project);
 
       var updatedProperties = resource.getProperties();
-      expect(updatedProperties.get('Smooth the image').getValue()).to.be(
+      expect(updatedProperties.get('Smooth the image').getValue()).toBe(
         'false'
       );
-      expect(updatedProperties.get('Always loaded in memory').getValue()).to.be(
+      expect(updatedProperties.get('Always loaded in memory').getValue()).toBe(
         'true'
       );
 
@@ -619,7 +631,7 @@ describe('libGD.js', function() {
       project.getResourcesManager().addResource(resource2);
       var allResources = project.getResourcesManager().getAllResourceNames();
 
-      expect(allResources.size()).to.be(2);
+      expect(allResources.size()).toBe(2);
       project.delete();
     });
 
@@ -634,13 +646,13 @@ describe('libGD.js', function() {
 
       expect(
         project.getResourcesManager().getResourcePosition('MyResource')
-      ).to.be(0);
+      ).toBe(0);
       expect(
         project.getResourcesManager().getResourcePosition('MyResource2')
-      ).to.be(1);
+      ).toBe(1);
       expect(
         project.getResourcesManager().getResourcePosition('MyResource3')
-      ).to.be(-1);
+      ).toBe(-1);
       project.delete();
     });
 
@@ -652,15 +664,14 @@ describe('libGD.js', function() {
       project.getResourcesManager().removeResource('MyResource');
 
       var allResources = project.getResourcesManager().getAllResourceNames();
-      expect(allResources.size()).to.be(0);
+      expect(allResources.size()).toBe(0);
       project.delete();
     });
   });
 
   describe('gd.ProjectResourcesAdder', function() {
-    var project = gd.ProjectHelper.createNewGDJSProject();
-
     it('should support removing useless resources', function() {
+      var project = gd.ProjectHelper.createNewGDJSProject();
       var resource1 = new gd.ImageResource();
       resource1.setName('Useless');
       var resource2 = new gd.ImageResource();
@@ -680,35 +691,32 @@ describe('libGD.js', function() {
       gd.castObject(obj, gd.SpriteObject).addAnimation(anim1);
 
       var allResources = project.getResourcesManager().getAllResourceNames();
-      expect(allResources.size()).to.be(2);
+      expect(allResources.size()).toBe(2);
 
       gd.ProjectResourcesAdder.removeAllUselessImages(project);
 
       var allResources = project.getResourcesManager().getAllResourceNames();
-      expect(allResources.size()).to.be(1);
-      expect(allResources.get(0)).to.be('Used');
-    });
-
-    after(function() {
+      expect(allResources.size()).toBe(1);
+      expect(allResources.get(0)).toBe('Used');
       project.delete();
     });
   });
 
   describe('gd.ArbitraryResourceWorker', function() {
-    var project = gd.ProjectHelper.createNewGDJSProject();
-    var obj = project.insertNewObject(project, 'Sprite', 'MyObject', 0);
-    const spriteObject = gd.asSpriteObject(obj);
-    var sprite1 = new gd.Sprite();
-    sprite1.setImageName('Used');
-    const animation = new gd.Animation();
-    animation.setDirectionsCount(1);
-    animation.getDirection(0).addSprite(sprite1);
-    spriteObject.addAnimation(animation);
-
     it('should be called with resources of the project', function(done) {
+      var project = gd.ProjectHelper.createNewGDJSProject();
+      var obj = project.insertNewObject(project, 'Sprite', 'MyObject', 0);
+      const spriteObject = gd.asSpriteObject(obj);
+      var sprite1 = new gd.Sprite();
+      sprite1.setImageName('Used');
+      const animation = new gd.Animation();
+      animation.setDirectionsCount(1);
+      animation.getDirection(0).addSprite(sprite1);
+      spriteObject.addAnimation(animation);
+
       var worker = extend(new gd.ArbitraryResourceWorkerJS(), {
         exposeImage: function(image) {
-          expect(image).to.be('Used');
+          expect(image).toBe('Used');
           done();
 
           return image;
@@ -716,38 +724,35 @@ describe('libGD.js', function() {
       });
 
       project.exposeResources(worker);
-    });
-
-    after(function() {
       project.delete();
     });
   });
 
   describe('gd.ImagesUsedInventorizer', function() {
-    var sprite1 = new gd.Sprite();
-    sprite1.setImageName('Image1');
-    var sprite2 = new gd.Sprite();
-    sprite2.setImageName('Image2');
-    var sprite3 = new gd.Sprite();
-    sprite3.setImageName('Image3');
-
-    const spriteObject = new gd.SpriteObject('My sprite object');
-    const animation = new gd.Animation();
-    animation.setDirectionsCount(1);
-    animation.getDirection(0).addSprite(sprite1);
-    animation.getDirection(0).addSprite(sprite2);
-    animation.getDirection(0).addSprite(sprite1);
-    spriteObject.addAnimation(animation);
-
-    const spriteObject2 = new gd.SpriteObject('My sprite object');
-    const animation2 = new gd.Animation();
-    animation2.setDirectionsCount(1);
-    animation2.getDirection(0).addSprite(sprite1);
-    animation2.getDirection(0).addSprite(sprite3);
-    animation2.getDirection(0).addSprite(sprite1);
-    spriteObject2.addAnimation(animation2);
-
     it('should find the images used by objects', function() {
+      var sprite1 = new gd.Sprite();
+      sprite1.setImageName('Image1');
+      var sprite2 = new gd.Sprite();
+      sprite2.setImageName('Image2');
+      var sprite3 = new gd.Sprite();
+      sprite3.setImageName('Image3');
+
+      const spriteObject = new gd.SpriteObject('My sprite object');
+      const animation = new gd.Animation();
+      animation.setDirectionsCount(1);
+      animation.getDirection(0).addSprite(sprite1);
+      animation.getDirection(0).addSprite(sprite2);
+      animation.getDirection(0).addSprite(sprite1);
+      spriteObject.addAnimation(animation);
+
+      const spriteObject2 = new gd.SpriteObject('My sprite object');
+      const animation2 = new gd.Animation();
+      animation2.setDirectionsCount(1);
+      animation2.getDirection(0).addSprite(sprite1);
+      animation2.getDirection(0).addSprite(sprite3);
+      animation2.getDirection(0).addSprite(sprite1);
+      spriteObject2.addAnimation(animation2);
+
       const imagesUsedInventorizer = new gd.ImagesUsedInventorizer();
 
       {
@@ -756,9 +761,9 @@ describe('libGD.js', function() {
           .getAllUsedImages()
           .toNewVectorString()
           .toJSArray();
-        expect(resourceNames).to.have.length(2);
-        expect(resourceNames).to.contain('Image1');
-        expect(resourceNames).to.contain('Image2');
+        expect(resourceNames).toHaveLength(2);
+        expect(resourceNames).toContain('Image1');
+        expect(resourceNames).toContain('Image2');
       }
 
       {
@@ -767,66 +772,65 @@ describe('libGD.js', function() {
           .getAllUsedImages()
           .toNewVectorString()
           .toJSArray();
-        expect(resourceNames).to.have.length(3);
-        expect(resourceNames).to.contain('Image1');
-        expect(resourceNames).to.contain('Image2');
-        expect(resourceNames).to.contain('Image3');
+        expect(resourceNames).toHaveLength(3);
+        expect(resourceNames).toContain('Image1');
+        expect(resourceNames).toContain('Image2');
+        expect(resourceNames).toContain('Image3');
       }
 
       imagesUsedInventorizer.delete();
-    });
 
-    after(function() {
       spriteObject.delete();
       spriteObject2.delete();
     });
   });
 
   describe('gd.Behavior', function() {
-    var project = gd.ProjectHelper.createNewGDJSProject();
-    var behavior = new gd.Behavior();
+    var project = null;
+    var behavior = null;
+    beforeAll(() => {
+      project = gd.ProjectHelper.createNewGDJSProject();
+      behavior = new gd.Behavior();
+    });
 
     it('properties and initial values', function() {
       behavior.setName('MyBehavior');
-      expect(behavior.getName()).to.be('MyBehavior');
-      expect(behavior.getTypeName()).to.be('');
+      expect(behavior.getName()).toBe('MyBehavior');
+      expect(behavior.getTypeName()).toBe('');
     });
     it('update a not existing property', function() {
       expect(
         behavior.updateProperty('PropertyThatDoesNotExist', 'MyValue', project)
-      ).to.be(false);
+      ).toBe(false);
     });
-    //TODO
 
-    after(function() {
+    afterAll(function() {
       behavior.delete();
       project.delete();
     });
   });
 
   describe('gd.BehaviorsSharedData', function() {
-    var project = gd.ProjectHelper.createNewGDJSProject();
-    var layout = project.insertNewLayout('Scene', 0);
-    var object = layout.insertNewObject(project, 'Sprite', 'MyObject', 0);
-
     it('can be created by gd.Layout.updateBehaviorsSharedData', function() {
+      var project = gd.ProjectHelper.createNewGDJSProject();
+      var layout = project.insertNewLayout('Scene', 0);
+      var object = layout.insertNewObject(project, 'Sprite', 'MyObject', 0);
+
       layout.updateBehaviorsSharedData(project);
-      expect(layout.hasBehaviorSharedData('Physics')).to.be(false);
+      expect(layout.hasBehaviorSharedData('Physics')).toBe(false);
       var behavior = object.addNewBehavior(
         project,
         'PhysicsBehavior::PhysicsBehavior',
         'Physics'
       );
-      expect(layout.hasBehaviorSharedData('Physics')).to.be(false);
+      expect(layout.hasBehaviorSharedData('Physics')).toBe(false);
       layout.updateBehaviorsSharedData(project);
-      expect(layout.hasBehaviorSharedData('Physics')).to.be(true);
+      expect(layout.hasBehaviorSharedData('Physics')).toBe(true);
       layout.removeObject('MyObject');
-      expect(layout.hasBehaviorSharedData('Physics')).to.be(true);
+      expect(layout.hasBehaviorSharedData('Physics')).toBe(true);
       layout.updateBehaviorsSharedData(project);
-      expect(layout.hasBehaviorSharedData('Physics')).to.be(false);
-    });
+      expect(layout.hasBehaviorSharedData('Physics')).toBe(false);
 
-    after(function() {
       project.delete();
     });
   });
@@ -876,17 +880,18 @@ describe('libGD.js', function() {
             'My first property',
             'Value1'
           )
-        ).to.be('');
+        ).toBe('');
         expect(
           gd.ProjectHelper.sanityCheckBehaviorsSharedDataProperty(
             mySharedData,
             'My other property',
             '0'
           )
-        ).to.be('');
+        ).toBe('');
       } catch (ex) {
         console.error(ex);
-        expect().fail(
+
+        throw Error(
           'Exception caught while launching sanityCheckBehavior on a gd.BehaviorSharedDataJsImplementation.'
         );
       }
@@ -896,17 +901,17 @@ describe('libGD.js', function() {
   describe('gd.MapStringPropertyDescriptor', function() {
     it('can be used to manipulate properties', function() {
       var properties = new gd.MapStringPropertyDescriptor();
-      expect(properties.has('Property0')).to.be(false);
+      expect(properties.has('Property0')).toBe(false);
 
       properties.set('Property1', new gd.PropertyDescriptor('Hello Property1'));
-      expect(properties.get('Property1').getValue()).to.be('Hello Property1');
-      expect(properties.get('Property1').getType()).to.be('string');
+      expect(properties.get('Property1').getValue()).toBe('Hello Property1');
+      expect(properties.get('Property1').getType()).toBe('string');
       properties.get('Property1').setValue('Hello modified Property1');
-      expect(properties.get('Property1').getValue()).to.be(
+      expect(properties.get('Property1').getValue()).toBe(
         'Hello modified Property1'
       );
-      expect(properties.keys().toJSArray()).not.to.contain('Property0');
-      expect(properties.keys().toJSArray()).to.contain('Property1');
+      expect(properties.keys().toJSArray()).not.toContain('Property0');
+      expect(properties.keys().toJSArray()).toContain('Property1');
 
       properties.set(
         'Property0',
@@ -915,30 +920,30 @@ describe('libGD.js', function() {
           .addExtraInfo('Info1')
           .addExtraInfo('Info3')
       );
-      expect(properties.get('Property0').getValue()).to.be('Hello Property0');
-      expect(properties.get('Property0').getType()).to.be('another type');
+      expect(properties.get('Property0').getValue()).toBe('Hello Property0');
+      expect(properties.get('Property0').getType()).toBe('another type');
       expect(
         properties
           .get('Property0')
           .getExtraInfo()
           .toJSArray()
-      ).to.contain('Info1');
+      ).toContain('Info1');
       expect(
         properties
           .get('Property0')
           .getExtraInfo()
           .toJSArray()
-      ).not.to.contain('Info2');
+      ).not.toContain('Info2');
       expect(
         properties
           .get('Property0')
           .getExtraInfo()
           .toJSArray()
-      ).to.contain('Info3');
-      expect(properties.has('Property0')).to.be(true);
-      expect(properties.has('Property1')).to.be(true);
-      expect(properties.keys().toJSArray()).to.contain('Property0');
-      expect(properties.keys().toJSArray()).to.contain('Property1');
+      ).toContain('Info3');
+      expect(properties.has('Property0')).toBe(true);
+      expect(properties.has('Property1')).toBe(true);
+      expect(properties.keys().toJSArray()).toContain('Property0');
+      expect(properties.keys().toJSArray()).toContain('Property1');
     });
   });
 
@@ -987,17 +992,18 @@ describe('libGD.js', function() {
             'My first property',
             'Value1'
           )
-        ).to.be('');
+        ).toBe('');
         expect(
           gd.ProjectHelper.sanityCheckBehaviorProperty(
             myBehavior,
             'My other property',
             '0'
           )
-        ).to.be('');
+        ).toBe('');
       } catch (ex) {
         console.error(ex);
-        expect().fail(
+
+        throw Error(
           'Exception caught while launching sanityCheckBehavior on a gd.BehaviorJsImplementation.'
         );
       }
@@ -1005,19 +1011,26 @@ describe('libGD.js', function() {
   });
 
   describe('gd.Object', function() {
-    var project = gd.ProjectHelper.createNewGDJSProject();
-    var layout = project.insertNewLayout('Scene', 0);
-    var object = layout.insertNewObject(project, 'Sprite', 'MyObject', 0);
-    var object2 = layout.insertNewObject(project, 'Sprite', 'MyObject2', 1);
+    var project = null;
+    var layout = null;
+    var object = null;
+    var object2 = null;
+
+    beforeAll(() => {
+      project = gd.ProjectHelper.createNewGDJSProject();
+      layout = project.insertNewLayout('Scene', 0);
+      object = layout.insertNewObject(project, 'Sprite', 'MyObject', 0);
+      object2 = layout.insertNewObject(project, 'Sprite', 'MyObject2', 1);
+    });
 
     it('has properties and initial values', function() {
       object.setName('TheObject');
-      expect(object.getName()).to.be('TheObject');
-      expect(object.hasBehaviorNamed('DoNotExists')).to.be(false);
+      expect(object.getName()).toBe('TheObject');
+      expect(object.hasBehaviorNamed('DoNotExists')).toBe(false);
     });
 
     it('can have its type retrieved with gd.getTypeOfObject', function() {
-      expect(gd.getTypeOfObject(project, layout, 'TheObject', true)).to.be(
+      expect(gd.getTypeOfObject(project, layout, 'TheObject', true)).toBe(
         'Sprite'
       );
     });
@@ -1028,8 +1041,8 @@ describe('libGD.js', function() {
         'DraggableBehavior::Draggable',
         'Draggable'
       );
-      expect(object.hasBehaviorNamed('Draggable')).to.be(true);
-      expect(object.getBehavior('Draggable')).to.be(behavior);
+      expect(object.hasBehaviorNamed('Draggable')).toBe(true);
+      expect(object.getBehavior('Draggable')).toBe(behavior);
     });
 
     it('can have its behaviors retrieved with gd.getBehaviorsOfObject', function() {
@@ -1039,8 +1052,8 @@ describe('libGD.js', function() {
         'TheObject',
         true
       );
-      expect(behaviors.size()).to.be(1);
-      expect(behaviors.get(0)).to.be('Draggable');
+      expect(behaviors.size()).toBe(1);
+      expect(behaviors.get(0)).toBe('Draggable');
     });
 
     it('can be un/serialized', function() {
@@ -1053,11 +1066,11 @@ describe('libGD.js', function() {
 
       //Check that behaviors were persisted and restored
       var behaviors = object2.getAllBehaviorNames();
-      expect(behaviors.size()).to.be(1);
-      expect(behaviors.at(0)).to.be('Draggable');
+      expect(behaviors.size()).toBe(1);
+      expect(behaviors.at(0)).toBe('Draggable');
     });
 
-    after(function() {
+    afterAll(function() {
       project.delete();
     });
   });
@@ -1150,31 +1163,32 @@ describe('libGD.js', function() {
             'My first property',
             'Value1'
           )
-        ).to.be('');
+        ).toBe('');
         expect(
           gd.ProjectHelper.sanityCheckObjectProperty(
             myObject,
             'My other property',
             '0'
           )
-        ).to.be('');
+        ).toBe('');
         expect(
           gd.ProjectHelper.sanityCheckObjectInitialInstanceProperty(
             myObject,
             'My instance property',
             'Value1'
           )
-        ).to.be('');
+        ).toBe('');
         expect(
           gd.ProjectHelper.sanityCheckObjectInitialInstanceProperty(
             myObject,
             'My other instance property',
             '0'
           )
-        ).to.be('');
+        ).toBe('');
       } catch (ex) {
         console.error(ex);
-        expect().fail(
+
+        throw Error(
           'Exception caught while launching sanityCheckObject on a gd.ObjectJsImplementation.'
         );
       }
@@ -1182,113 +1196,121 @@ describe('libGD.js', function() {
   });
 
   describe('gd.ObjectGroupsContainer', function() {
-    var container = new gd.ObjectGroupsContainer();
+    var container = null;
     var group1 = null;
     var group2 = null;
     var group3 = null;
+
+    beforeAll(() => (container = new gd.ObjectGroupsContainer()));
+
     it('can have groups inserted', function() {
       group1 = container.insertNew('Group1', 0);
       group2 = container.insertNew('Group2', 1);
       group3 = container.insertNew('Group3', 2);
 
-      expect(container.getAt(0).getName()).to.be('Group1');
-      expect(container.getAt(1).getName()).to.be('Group2');
-      expect(container.getAt(2).getName()).to.be('Group3');
-      expect(container.has('Group1')).to.be(true);
-      expect(container.has('Group2')).to.be(true);
-      expect(container.has('Group3')).to.be(true);
-      expect(container.has('Group4')).to.be(false);
-      expect(container.count()).to.be(3);
+      expect(container.getAt(0).getName()).toBe('Group1');
+      expect(container.getAt(1).getName()).toBe('Group2');
+      expect(container.getAt(2).getName()).toBe('Group3');
+      expect(container.has('Group1')).toBe(true);
+      expect(container.has('Group2')).toBe(true);
+      expect(container.has('Group3')).toBe(true);
+      expect(container.has('Group4')).toBe(false);
+      expect(container.count()).toBe(3);
     });
 
     it('can move groups', function() {
       container.move(0, 1);
-      expect(container.getAt(0).getName()).to.be('Group2');
-      expect(container.getAt(1).getName()).to.be('Group1');
-      expect(container.getAt(2).getName()).to.be('Group3');
+      expect(container.getAt(0).getName()).toBe('Group2');
+      expect(container.getAt(1).getName()).toBe('Group1');
+      expect(container.getAt(2).getName()).toBe('Group3');
     });
 
     it('can rename groups', function() {
       container.rename('Inexisting', 'Whatever');
       container.rename('Group1', 'Group1Renamed');
 
-      expect(container.has('Group1')).to.be(false);
-      expect(container.has('Group1Renamed')).to.be(true);
+      expect(container.has('Group1')).toBe(false);
+      expect(container.has('Group1Renamed')).toBe(true);
     });
 
     it('can remove groups', function() {
       container.remove('Group2');
-      expect(container.has('Group2')).to.be(false);
-      expect(container.has('Group3')).to.be(true);
-      expect(container.count()).to.be(2);
+      expect(container.has('Group2')).toBe(false);
+      expect(container.has('Group3')).toBe(true);
+      expect(container.count()).toBe(2);
     });
   });
 
   describe('gd.Instruction', function() {
-    var instr = new gd.Instruction();
-
     it('initial values', function() {
-      expect(instr.getParametersCount()).to.be(0);
-      expect(instr.getSubInstructions().size()).to.be(0);
+      var instr = new gd.Instruction();
+      expect(instr.getParametersCount()).toBe(0);
+      expect(instr.getSubInstructions().size()).toBe(0);
+      instr.delete();
     });
     it('setting parameters', function() {
+      var instr = new gd.Instruction();
       instr.setParametersCount(3);
-      expect(instr.getParametersCount()).to.be(3);
-      expect(instr.getParameter(1)).to.be('');
+      expect(instr.getParametersCount()).toBe(3);
+      expect(instr.getParameter(1)).toBe('');
       instr.setParameter(2, 'MyValue');
-      expect(instr.getParameter(2)).to.be('MyValue');
+      expect(instr.getParameter(2)).toBe('MyValue');
+      instr.delete();
     });
     it('can be cloned', function() {
+      var instr = new gd.Instruction();
+      instr.setParametersCount(3);
+      instr.setParameter(2, 'MyValue');
+
       var newInstr = instr.clone();
-      expect(newInstr.getParametersCount()).to.be(3);
-      expect(newInstr.getParameter(1)).to.be('');
-      expect(newInstr.getParameter(2)).to.be('MyValue');
+      expect(newInstr.getParametersCount()).toBe(3);
+      expect(newInstr.getParameter(1)).toBe('');
+      expect(newInstr.getParameter(2)).toBe('MyValue');
 
       newInstr.setParameter(2, 'MyChangedValue');
-      expect(instr.getParameter(2)).to.be('MyValue');
-      expect(newInstr.getParameter(2)).to.be('MyChangedValue');
+      expect(instr.getParameter(2)).toBe('MyValue');
+      expect(newInstr.getParameter(2)).toBe('MyChangedValue');
       newInstr.delete();
-      expect(instr.getParameter(2)).to.be('MyValue');
-    });
+      expect(instr.getParameter(2)).toBe('MyValue');
 
-    after(function() {
       instr.delete();
     });
   });
 
   describe('gd.InstructionsList', function() {
-    var list = new gd.InstructionsList();
+    var list = null;
+    beforeAll(() => (list = new gd.InstructionsList()));
 
     it('can insert instructions', function() {
-      expect(list.size()).to.be(0);
+      expect(list.size()).toBe(0);
       list.insert(new gd.Instruction(), 0);
-      expect(list.size()).to.be(1);
+      expect(list.size()).toBe(1);
     });
     it('can modify its instructions', function() {
-      expect(list.get(0).getType()).to.be('');
+      expect(list.get(0).getType()).toBe('');
 
       var newInstr = new gd.Instruction();
       newInstr.setType('Type2');
       list.set(0, newInstr);
 
-      expect(list.get(0).getType()).to.be('Type2');
-      expect(list.size()).to.be(1);
+      expect(list.get(0).getType()).toBe('Type2');
+      expect(list.size()).toBe(1);
     });
     it('can remove its instructions', function() {
       var newInstr = new gd.Instruction();
       newInstr.setType('Type3');
       var instruction = list.insert(newInstr, 1);
-      expect(list.get(1).getType()).to.be('Type3');
-      expect(list.size()).to.be(2);
-      expect(list.contains(instruction)).to.be(true);
+      expect(list.get(1).getType()).toBe('Type3');
+      expect(list.size()).toBe(2);
+      expect(list.contains(instruction)).toBe(true);
 
       list.remove(instruction);
-      expect(list.size()).to.be(1);
-      expect(list.get(0).getType()).to.be('Type2');
+      expect(list.size()).toBe(1);
+      expect(list.get(0).getType()).toBe('Type2');
     });
     it('can clear its instructions', function() {
       list.clear();
-      expect(list.size()).to.be(0);
+      expect(list.size()).toBe(0);
     });
     it('can insert events from another list', function() {
       var list1 = new gd.InstructionsList();
@@ -1302,16 +1324,16 @@ describe('libGD.js', function() {
       list1.insert(newInstr2, 1);
 
       list2.insertInstructions(list1, 0, list1.size(), 0);
-      expect(list2.size()).to.be(2);
-      expect(list2.get(0).getType()).to.be('Type1');
-      expect(list2.get(1).getType()).to.be('Type2');
+      expect(list2.size()).toBe(2);
+      expect(list2.get(0).getType()).toBe('Type1');
+      expect(list2.get(1).getType()).toBe('Type2');
 
       list2.insertInstructions(list1, 0, list1.size(), 1);
-      expect(list2.size()).to.be(4);
-      expect(list2.get(0).getType()).to.be('Type1');
-      expect(list2.get(1).getType()).to.be('Type1');
-      expect(list2.get(2).getType()).to.be('Type2');
-      expect(list2.get(3).getType()).to.be('Type2');
+      expect(list2.size()).toBe(4);
+      expect(list2.get(0).getType()).toBe('Type1');
+      expect(list2.get(1).getType()).toBe('Type1');
+      expect(list2.get(2).getType()).toBe('Type2');
+      expect(list2.get(3).getType()).toBe('Type2');
       list1.delete();
       list2.delete();
     });
@@ -1336,103 +1358,101 @@ describe('libGD.js', function() {
       var list2 = new gd.InstructionsList();
       list2.unserializeFrom(project, serializerElement);
 
-      expect(list2.size()).to.be(2);
-      expect(list2.get(0).getType()).to.be('Type1');
-      expect(list2.get(1).getType()).to.be('Type2');
-      expect(list2.get(0).getParametersCount()).to.be(2);
-      expect(list2.get(1).getParametersCount()).to.be(1);
-      expect(list2.get(0).getParameter(0)).to.be('Param1');
-      expect(list2.get(0).getParameter(1)).to.be('Param2');
-      expect(list2.get(1).getParameter(0)).to.be('Param3');
+      expect(list2.size()).toBe(2);
+      expect(list2.get(0).getType()).toBe('Type1');
+      expect(list2.get(1).getType()).toBe('Type2');
+      expect(list2.get(0).getParametersCount()).toBe(2);
+      expect(list2.get(1).getParametersCount()).toBe(1);
+      expect(list2.get(0).getParameter(0)).toBe('Param1');
+      expect(list2.get(0).getParameter(1)).toBe('Param2');
+      expect(list2.get(1).getParameter(0)).toBe('Param3');
 
       list2.delete();
       project.delete();
     });
 
-    after(function() {
+    afterAll(function() {
       list.delete();
     });
   });
 
   describe('InstructionSentenceFormatter', function() {
-    var instrFormatter = gd.InstructionSentenceFormatter.get();
-    instrFormatter.loadTypesFormattingFromConfig();
-    var action = new gd.Instruction(); //Create a simple instruction
-    action.setType('Delete');
-    action.setParametersCount(2);
-    action.setParameter(0, 'MyCharacter');
+    it('should translate instructions (plain text or into a vector of text with formatting)', function() {
+      var instrFormatter = gd.InstructionSentenceFormatter.get();
+      instrFormatter.loadTypesFormattingFromConfig();
+      var action = new gd.Instruction(); //Create a simple instruction
+      action.setType('Delete');
+      action.setParametersCount(2);
+      action.setParameter(0, 'MyCharacter');
 
-    it('should translate instructions', function() {
       var actionSentenceInEnglish = gd.InstructionSentenceFormatter.get().translate(
         action,
         gd.MetadataProvider.getActionMetadata(gd.JsPlatform.get(), 'Delete')
       );
-      expect(actionSentenceInEnglish).to.be('Delete object MyCharacter');
-    });
+      expect(actionSentenceInEnglish).toBe('Delete object MyCharacter');
 
-    it('should translate instructions into a vector of text with formatting', function() {
       var formattedTexts = gd.InstructionSentenceFormatter.get().getAsFormattedText(
         action,
         gd.MetadataProvider.getActionMetadata(gd.JsPlatform.get(), 'Delete')
       );
 
-      expect(formattedTexts.size()).to.be(2);
-      expect(formattedTexts.getString(0)).to.be('Delete object ');
-      expect(formattedTexts.getString(1)).to.be('MyCharacter');
-      expect(formattedTexts.getTextFormatting(0).isBold()).to.be(false);
-      expect(formattedTexts.getTextFormatting(1).isBold()).to.be(true);
-      expect(formattedTexts.getTextFormatting(0).getUserData()).not.to.be(0);
-      expect(formattedTexts.getTextFormatting(1).getUserData()).to.be(0);
-    });
+      expect(formattedTexts.size()).toBe(2);
+      expect(formattedTexts.getString(0)).toBe('Delete object ');
+      expect(formattedTexts.getString(1)).toBe('MyCharacter');
+      expect(formattedTexts.getTextFormatting(0).isBold()).toBe(false);
+      expect(formattedTexts.getTextFormatting(1).isBold()).toBe(true);
+      expect(formattedTexts.getTextFormatting(0).getUserData()).not.toBe(0);
+      expect(formattedTexts.getTextFormatting(1).getUserData()).toBe(0);
 
-    after(function() {
       instrFormatter.delete();
       action.delete();
     });
   });
 
   describe('gd.EventsList', function() {
-    var project = new gd.ProjectHelper.createNewGDJSProject();
-    var list = new gd.EventsList();
-
     it('can have events', function() {
+      var list = new gd.EventsList();
       list.insertEvent(new gd.StandardEvent(), 0);
       var lastEvent = list.insertEvent(new gd.StandardEvent(), 1);
       list.insertEvent(new gd.StandardEvent(), 1);
-      expect(list.getEventsCount()).to.be(3);
-      expect(list.getEventAt(2).ptr).to.be(lastEvent.ptr);
+      expect(list.getEventsCount()).toBe(3);
+      expect(list.getEventAt(2).ptr).toBe(lastEvent.ptr);
+      list.delete();
     });
 
     it('can create lots of new events', function() {
+      var project = new gd.ProjectHelper.createNewGDJSProject();
+      var list = new gd.EventsList();
       for (var i = 0; i < 500; ++i) {
         var evt = list.insertNewEvent(
           project,
           'BuiltinCommonInstructions::Standard',
           0
         );
-        expect(evt.getType()).to.be('BuiltinCommonInstructions::Standard');
-        expect(gd.asStandardEvent(list.getEventAt(0)).getType()).to.be(
+        expect(evt.getType()).toBe('BuiltinCommonInstructions::Standard');
+        expect(gd.asStandardEvent(list.getEventAt(0)).getType()).toBe(
           'BuiltinCommonInstructions::Standard'
         );
-        expect(list.getEventAt(0).getType()).to.be(
+        expect(list.getEventAt(0).getType()).toBe(
           'BuiltinCommonInstructions::Standard'
         );
       }
+      project.delete();
+      list.delete();
     });
 
     it('can tell if it contains an event', function() {
+      var list = new gd.EventsList();
+
       var parentEvent = list.insertEvent(new gd.StandardEvent(), 0);
       var subEvent = parentEvent
         .getSubEvents()
         .insertEvent(new gd.StandardEvent(), 0);
 
-      expect(list.contains(parentEvent, false)).to.be(true);
-      expect(list.contains(subEvent, false)).to.be(false);
-      expect(list.contains(subEvent, true)).to.be(true);
-    });
+      expect(list.contains(parentEvent, false)).toBe(true);
+      expect(list.contains(subEvent, false)).toBe(false);
+      expect(list.contains(subEvent, true)).toBe(true);
 
-    after(function() {
-      project.delete();
       list.delete();
     });
   });
@@ -1444,8 +1464,8 @@ describe('libGD.js', function() {
       var event2 = new gd.BaseEvent();
       event2.setType('Type2');
 
-      expect(event.getType()).to.be('Type1');
-      expect(event2.getType()).to.be('Type2');
+      expect(event.getType()).toBe('Type1');
+      expect(event2.getType()).toBe('Type2');
 
       event.delete();
       event2.delete();
@@ -1456,8 +1476,8 @@ describe('libGD.js', function() {
       event.setType('Type1');
       var event2 = event.clone();
 
-      expect(event.getType()).to.be('Type1');
-      expect(event2.getType()).to.be('Type1');
+      expect(event.getType()).toBe('Type1');
+      expect(event2.getType()).toBe('Type1');
 
       event.delete();
       event2.delete();
@@ -1465,163 +1485,162 @@ describe('libGD.js', function() {
 
     it('can be de/serialized', function() {
       var event = new gd.BaseEvent();
-      expect(event.serializeTo).to.be.a('function');
-      expect(event.unserializeFrom).to.be.a('function');
+      expect(typeof event.serializeTo).toBe('function');
+      expect(typeof event.unserializeFrom).toBe('function');
       event.delete();
     });
   });
 
   describe('gd.ArbitraryEventsWorker', function() {
-    var project = new gd.ProjectHelper.createNewGDJSProject();
-    var list = new gd.EventsList();
-
     describe('gd.EventsParametersLister', function() {
-      var evt = new gd.StandardEvent();
-      var actions = evt.getActions();
-      var act = new gd.Instruction();
-      act.setType('Delete');
-      act.setParametersCount(1);
-      act.setParameter(0, 'MyObject');
-      actions.push_back(act);
-      evt = list.insertEvent(evt, 0);
+      it('can list parameters and their types', function() {
+        var project = new gd.ProjectHelper.createNewGDJSProject();
+        var list = new gd.EventsList();
 
-      var subEvt = new gd.StandardEvent();
-      var conditions = subEvt.getConditions();
-      var cnd = new gd.Instruction();
-      cnd.setType('PosX');
-      cnd.setParametersCount(3);
-      cnd.setParameter(0, 'MyObject');
-      cnd.setParameter(1, '<');
-      cnd.setParameter(2, '300');
-      conditions.push_back(cnd);
-      evt.getSubEvents().insertEvent(subEvt, 0);
+        var evt = new gd.StandardEvent();
+        var actions = evt.getActions();
+        var act = new gd.Instruction();
+        act.setType('Delete');
+        act.setParametersCount(1);
+        act.setParameter(0, 'MyObject');
+        actions.push_back(act);
+        evt = list.insertEvent(evt, 0);
 
-      var parametersLister = new gd.EventsParametersLister(project);
-      parametersLister.launch(list);
+        var subEvt = new gd.StandardEvent();
+        var conditions = subEvt.getConditions();
+        var cnd = new gd.Instruction();
+        cnd.setType('PosX');
+        cnd.setParametersCount(3);
+        cnd.setParameter(0, 'MyObject');
+        cnd.setParameter(1, '<');
+        cnd.setParameter(2, '300');
+        conditions.push_back(cnd);
+        evt.getSubEvents().insertEvent(subEvt, 0);
 
-      //Check that we collected the parameters and their types
-      expect(
-        parametersLister
-          .getParametersAndTypes()
-          .keys()
-          .size()
-      ).to.be(3);
-      expect(parametersLister.getParametersAndTypes().get('MyObject')).to.be(
-        'object'
-      );
-      expect(parametersLister.getParametersAndTypes().get('300')).to.be(
-        'expression'
-      );
-    });
+        var parametersLister = new gd.EventsParametersLister(project);
+        parametersLister.launch(list);
 
-    after(function() {
-      project.delete();
-      list.delete();
+        expect(
+          parametersLister
+            .getParametersAndTypes()
+            .keys()
+            .size()
+        ).toBe(3);
+        expect(parametersLister.getParametersAndTypes().get('MyObject')).toBe(
+          'object'
+        );
+        expect(parametersLister.getParametersAndTypes().get('300')).toBe(
+          'expression'
+        );
+
+        project.delete();
+        list.delete();
+      });
     });
   });
 
   describe('gd.GroupEvent', function() {
-    var evt = new gd.GroupEvent();
-
     it('handle basic properties', function() {
+      const evt = new gd.GroupEvent();
       evt.setName('MyName');
       evt.setSource('http://source.url');
       evt.setCreationTimestamp(150);
-      expect(evt.getName()).to.be('MyName');
-      expect(evt.getSource()).to.be('http://source.url');
-      expect(evt.getCreationTimestamp()).to.be(150);
+      expect(evt.getName()).toBe('MyName');
+      expect(evt.getSource()).toBe('http://source.url');
+      expect(evt.getCreationTimestamp()).toBe(150);
     });
     it('can be folded', function() {
-      expect(evt.isFolded()).to.be(false);
+      const evt = new gd.GroupEvent();
+      expect(evt.isFolded()).toBe(false);
       evt.setFolded(true);
-      expect(evt.isFolded()).to.be(true);
+      expect(evt.isFolded()).toBe(true);
     });
     it('can remember parameters used to create the group from a template event', function() {
+      const evt = new gd.GroupEvent();
       var parameters = evt.getCreationParameters();
       parameters.push_back('Param1');
       parameters.push_back('Param2');
 
-      expect(evt.getCreationParameters().size()).to.be(2);
-      expect(evt.getCreationParameters().get(0)).to.be('Param1');
-      expect(evt.getCreationParameters().get(1)).to.be('Param2');
+      expect(evt.getCreationParameters().size()).toBe(2);
+      expect(evt.getCreationParameters().get(0)).toBe('Param1');
+      expect(evt.getCreationParameters().get(1)).toBe('Param2');
 
       parameters.clear();
-      expect(evt.getCreationParameters().size()).to.be(0);
+      expect(evt.getCreationParameters().size()).toBe(0);
       parameters.push_back('Param1');
-      expect(evt.getCreationParameters().get(0)).to.be('Param1');
+      expect(evt.getCreationParameters().get(0)).toBe('Param1');
     });
   });
 
   describe('gd.StandardEvent', function() {
-    var evt = new gd.StandardEvent();
-
     it('initial values', function() {
-      expect(evt.canHaveSubEvents()).to.be(true);
-      expect(evt.isExecutable()).to.be(true);
+      const evt = new gd.StandardEvent();
+      expect(evt.canHaveSubEvents()).toBe(true);
+      expect(evt.isExecutable()).toBe(true);
     });
     it('conditions and actions', function() {
+      const evt = new gd.StandardEvent();
       var conditions = evt.getConditions();
-      expect(evt.getConditions().size()).to.be(0);
+      expect(evt.getConditions().size()).toBe(0);
       var cnd = new gd.Instruction();
       conditions.push_back(cnd);
-      expect(evt.getConditions().size()).to.be(1);
+      expect(evt.getConditions().size()).toBe(1);
 
       var actions = evt.getActions();
-      expect(evt.getActions().size()).to.be(0);
+      expect(evt.getActions().size()).toBe(0);
       var act = new gd.Instruction();
       actions.push_back(act);
-      expect(evt.getActions().size()).to.be(1);
+      expect(evt.getActions().size()).toBe(1);
     });
 
-    after(function() {
+    afterAll(function() {
       evt.delete();
     });
   });
   describe('gd.CommentEvent', function() {
-    var evt = new gd.CommentEvent();
-
     it('initial values', function() {
-      expect(evt.canHaveSubEvents()).to.be(false);
-      expect(evt.isExecutable()).to.be(false);
+      const evt = new gd.CommentEvent();
+      expect(evt.canHaveSubEvents()).toBe(false);
+      expect(evt.isExecutable()).toBe(false);
     });
     it('can have a comment', function() {
+      const evt = new gd.CommentEvent();
       evt.setComment('My nice comment about my events!');
-      expect(evt.getComment()).to.be('My nice comment about my events!');
+      expect(evt.getComment()).toBe('My nice comment about my events!');
     });
     it('can have a comment with UTF8 characters', function() {
+      const evt = new gd.CommentEvent();
       evt.setComment('Hello 官话 world!');
-      expect(evt.getComment()).to.be('Hello 官话 world!');
+      expect(evt.getComment()).toBe('Hello 官话 world!');
     });
     it('can have a background color', function() {
+      const evt = new gd.CommentEvent();
       evt.setBackgroundColor(100, 200, 255);
-      expect(evt.getBackgroundColorRed()).to.be(100);
-      expect(evt.getBackgroundColorGreen()).to.be(200);
-      expect(evt.getBackgroundColorBlue()).to.be(255);
+      expect(evt.getBackgroundColorRed()).toBe(100);
+      expect(evt.getBackgroundColorGreen()).toBe(200);
+      expect(evt.getBackgroundColorBlue()).toBe(255);
     });
     it('can have a text color', function() {
+      const evt = new gd.CommentEvent();
       evt.setTextColor(101, 201, 254);
-      expect(evt.getTextColorRed()).to.be(101);
-      expect(evt.getTextColorGreen()).to.be(201);
-      expect(evt.getTextColorBlue()).to.be(254);
-    });
-
-    after(function() {
-      evt.delete();
+      expect(evt.getTextColorRed()).toBe(101);
+      expect(evt.getTextColorGreen()).toBe(201);
+      expect(evt.getTextColorBlue()).toBe(254);
     });
   });
 
   describe('gd.SpriteObject', function() {
-    var obj = new gd.SpriteObject('MySpriteObject');
-
     it('can have animations', function() {
+      var obj = new gd.SpriteObject('MySpriteObject');
       obj.addAnimation(new gd.Animation());
       obj.addAnimation(new gd.Animation());
-      expect(obj.getAnimationsCount()).to.be(2);
+      expect(obj.getAnimationsCount()).toBe(2);
       obj.removeAnimation(1);
-      expect(obj.getAnimationsCount()).to.be(1);
+      expect(obj.getAnimationsCount()).toBe(1);
     });
 
     it('can swap animations', function() {
+      var obj = new gd.SpriteObject('MySpriteObject');
       obj.removeAllAnimations();
       var anim1 = new gd.Animation();
       var anim2 = new gd.Animation();
@@ -1644,7 +1663,7 @@ describe('libGD.js', function() {
           .getDirection(0)
           .getSprite(0)
           .getImageName()
-      ).to.be('image1');
+      ).toBe('image1');
       obj.swapAnimations(0, 1);
       expect(
         obj
@@ -1652,7 +1671,7 @@ describe('libGD.js', function() {
           .getDirection(0)
           .getSprite(0)
           .getImageName()
-      ).to.be('image2');
+      ).toBe('image2');
     });
 
     describe('gd.Direction', function() {
@@ -1665,11 +1684,11 @@ describe('libGD.js', function() {
         direction.addSprite(sprite1);
         direction.addSprite(sprite2);
 
-        expect(direction.getSprite(0).getImageName()).to.be('image1');
+        expect(direction.getSprite(0).getImageName()).toBe('image1');
         direction.swapSprites(0, 1);
-        expect(direction.getSprite(0).getImageName()).to.be('image2');
+        expect(direction.getSprite(0).getImageName()).toBe('image2');
         direction.swapSprites(1, 0);
-        expect(direction.getSprite(0).getImageName()).to.be('image1');
+        expect(direction.getSprite(0).getImageName()).toBe('image1');
       });
 
       it('can move sprites', function() {
@@ -1684,103 +1703,105 @@ describe('libGD.js', function() {
         direction.addSprite(sprite2);
         direction.addSprite(sprite3);
 
-        expect(direction.getSprite(0).getImageName()).to.be('image1');
+        expect(direction.getSprite(0).getImageName()).toBe('image1');
         direction.moveSprite(0, 2);
-        expect(direction.getSprite(0).getImageName()).to.be('image2');
-        expect(direction.getSprite(1).getImageName()).to.be('image3');
-        expect(direction.getSprite(2).getImageName()).to.be('image1');
+        expect(direction.getSprite(0).getImageName()).toBe('image2');
+        expect(direction.getSprite(1).getImageName()).toBe('image3');
+        expect(direction.getSprite(2).getImageName()).toBe('image1');
         direction.swapSprites(1, 1);
-        expect(direction.getSprite(0).getImageName()).to.be('image2');
-        expect(direction.getSprite(1).getImageName()).to.be('image3');
-        expect(direction.getSprite(2).getImageName()).to.be('image1');
+        expect(direction.getSprite(0).getImageName()).toBe('image2');
+        expect(direction.getSprite(1).getImageName()).toBe('image3');
+        expect(direction.getSprite(2).getImageName()).toBe('image1');
         direction.swapSprites(1, 0);
-        expect(direction.getSprite(0).getImageName()).to.be('image3');
-        expect(direction.getSprite(1).getImageName()).to.be('image2');
-        expect(direction.getSprite(2).getImageName()).to.be('image1');
+        expect(direction.getSprite(0).getImageName()).toBe('image3');
+        expect(direction.getSprite(1).getImageName()).toBe('image2');
+        expect(direction.getSprite(2).getImageName()).toBe('image1');
         direction.swapSprites(999, 998);
-        expect(direction.getSprite(0).getImageName()).to.be('image3');
-        expect(direction.getSprite(1).getImageName()).to.be('image2');
-        expect(direction.getSprite(2).getImageName()).to.be('image1');
+        expect(direction.getSprite(0).getImageName()).toBe('image3');
+        expect(direction.getSprite(1).getImageName()).toBe('image2');
+        expect(direction.getSprite(2).getImageName()).toBe('image1');
       });
     });
 
     describe('gd.Sprite', function() {
-      var sprite1 = new gd.Sprite();
-
       it('can have default points', function() {
+        var sprite1 = new gd.Sprite();
         sprite1.getCenter().setX(2);
         sprite1.getCenter().setY(3);
         sprite1.getOrigin().setX(4);
         sprite1.getOrigin().setY(5);
-        expect(sprite1.getCenter().getX()).to.be(2);
-        expect(sprite1.getCenter().getY()).to.be(3);
-        expect(sprite1.getOrigin().getX()).to.be(4);
-        expect(sprite1.getOrigin().getY()).to.be(5);
+        expect(sprite1.getCenter().getX()).toBe(2);
+        expect(sprite1.getCenter().getY()).toBe(3);
+        expect(sprite1.getOrigin().getX()).toBe(4);
+        expect(sprite1.getOrigin().getY()).toBe(5);
       });
 
       it('can have custom points', function() {
+        var sprite1 = new gd.Sprite();
         var point = new gd.Point('test');
         sprite1.addPoint(point);
         point.delete();
 
-        expect(sprite1.hasPoint('test')).to.be(true);
+        expect(sprite1.hasPoint('test')).toBe(true);
         sprite1.getPoint('test').setX(1);
         sprite1.getPoint('test').setY(2);
-        expect(sprite1.getPoint('test').getX()).to.be(1);
-        expect(sprite1.getPoint('test').getY()).to.be(2);
+        expect(sprite1.getPoint('test').getX()).toBe(1);
+        expect(sprite1.getPoint('test').getY()).toBe(2);
       });
     });
   });
 
   describe('gd.MetadataProvider', function() {
-    var provider = gd.MetadataProvider;
-
     it('can return metadata about expressions (even if they do not exist)', function() {
       expect(
-        provider.hasExpression(gd.JsPlatform.get(), 'NotExistingExpression')
-      ).to.be(false);
+        gd.MetadataProvider.hasExpression(
+          gd.JsPlatform.get(),
+          'NotExistingExpression'
+        )
+      ).toBe(false);
       expect(
-        provider
-          .getExpressionMetadata(gd.JsPlatform.get(), 'NotExistingExpression')
-          .getFullName()
-      ).to.be('');
+        gd.MetadataProvider.getExpressionMetadata(
+          gd.JsPlatform.get(),
+          'NotExistingExpression'
+        ).getFullName()
+      ).toBe('');
     });
 
     describe('gd.ObjectMetadata', function() {
-      var objMetadata = provider.getObjectMetadata(
-        gd.JsPlatform.get(),
-        'Sprite'
-      );
-
       it('can return standard information about Sprite object', function() {
-        expect(objMetadata.getName()).to.be('Sprite');
-        expect(objMetadata.getFullName()).to.be('Sprite');
-        expect(objMetadata.getDescription().length).not.to.be(0);
-        expect(objMetadata.getIconFilename().length).not.to.be(0);
+        var objMetadata = gd.MetadataProvider.getObjectMetadata(
+          gd.JsPlatform.get(),
+          'Sprite'
+        );
+
+        expect(objMetadata.getName()).toBe('Sprite');
+        expect(objMetadata.getFullName()).toBe('Sprite');
+        expect(objMetadata.getDescription().length).not.toBe(0);
+        expect(objMetadata.getIconFilename().length).not.toBe(0);
       });
     });
     describe('gd.BehaviorMetadata', function() {
-      var autoMetadata = provider.getBehaviorMetadata(
-        gd.JsPlatform.get(),
-        'NotExistingBehavior'
-      );
-
       it('have standard methods to get information', function() {
-        expect(autoMetadata.getFullName).not.to.be(undefined);
-        expect(autoMetadata.getDefaultName).not.to.be(undefined);
-        expect(autoMetadata.getDescription).not.to.be(undefined);
-        expect(autoMetadata.getGroup).not.to.be(undefined);
-        expect(autoMetadata.getIconFilename).not.to.be(undefined);
+        var autoMetadata = gd.MetadataProvider.getBehaviorMetadata(
+          gd.JsPlatform.get(),
+          'NotExistingBehavior'
+        );
+
+        expect(autoMetadata.getFullName).not.toBe(undefined);
+        expect(autoMetadata.getDefaultName).not.toBe(undefined);
+        expect(autoMetadata.getDescription).not.toBe(undefined);
+        expect(autoMetadata.getGroup).not.toBe(undefined);
+        expect(autoMetadata.getIconFilename).not.toBe(undefined);
       });
     });
   });
 
   describe('gd.Exporter (and gd.AbstractFileSystemJS)', function() {
-    var fs = new gd.AbstractFileSystemJS();
-    var project = new gd.ProjectHelper.createNewGDJSProject();
-    var layout = project.insertNewLayout('Scene', 0);
-
     it('should export a layout for preview', function(done) {
+      var fs = new gd.AbstractFileSystemJS();
+      var project = new gd.ProjectHelper.createNewGDJSProject();
+      var layout = project.insertNewLayout('Scene', 0);
+
       fs.mkDir = fs.clearDir = function() {};
       fs.getTempDir = function(path) {
         return '/tmp/';
@@ -1792,8 +1813,7 @@ describe('libGD.js', function() {
         return path.dirname(fullpath);
       };
       fs.writeToFile = function(path, content) {
-        //Validate that some code have been generated:
-        expect(content).to.match(/context.startNewFrame/);
+        expect(content).toMatch(/context.startNewFrame/);
         done();
       };
 
@@ -1815,60 +1835,62 @@ describe('libGD.js', function() {
       remover.addEventToRemove(event3);
       remover.launch(list);
 
-      expect(list.getEventsCount()).to.be(1);
-      expect(list.getEventAt(0)).to.be(event2);
+      expect(list.getEventsCount()).toBe(1);
+      expect(list.getEventAt(0)).toBe(event2);
     });
   });
 
   describe('gd.WholeProjectRefactorer', function() {
-    var project = new gd.ProjectHelper.createNewGDJSProject();
-    var layout = project.insertNewLayout('Scene', 0);
-    var instance1 = layout.getInitialInstances().insertNewInitialInstance();
-    var instance2 = layout.getInitialInstances().insertNewInitialInstance();
-    instance1.setObjectName('Object1');
-    instance2.setObjectName('Object2');
+    it('should rename and delete an object', function() {
+      var project = new gd.ProjectHelper.createNewGDJSProject();
+      var layout = project.insertNewLayout('Scene', 0);
+      var instance1 = layout.getInitialInstances().insertNewInitialInstance();
+      var instance2 = layout.getInitialInstances().insertNewInitialInstance();
+      instance1.setObjectName('Object1');
+      instance2.setObjectName('Object2');
 
-    it('should rename an object', function() {
       gd.WholeProjectRefactorer.objectRenamedInLayout(
         project,
         layout,
         'Object1',
         'Object3'
       );
-      expect(
-        layout.getInitialInstances().hasInstancesOfObject('Object1')
-      ).to.be(false);
-      expect(
-        layout.getInitialInstances().hasInstancesOfObject('Object2')
-      ).to.be(true);
-      expect(
-        layout.getInitialInstances().hasInstancesOfObject('Object3')
-      ).to.be(true);
-    });
+      expect(layout.getInitialInstances().hasInstancesOfObject('Object1')).toBe(
+        false
+      );
+      expect(layout.getInitialInstances().hasInstancesOfObject('Object2')).toBe(
+        true
+      );
+      expect(layout.getInitialInstances().hasInstancesOfObject('Object3')).toBe(
+        true
+      );
 
-    it('should delete an object', function() {
       gd.WholeProjectRefactorer.objectRemovedInLayout(
         project,
         layout,
         'Object3',
         true
       );
-      expect(
-        layout.getInitialInstances().hasInstancesOfObject('Object1')
-      ).to.be(false);
-      expect(
-        layout.getInitialInstances().hasInstancesOfObject('Object2')
-      ).to.be(true);
-      expect(
-        layout.getInitialInstances().hasInstancesOfObject('Object3')
-      ).to.be(false);
+      expect(layout.getInitialInstances().hasInstancesOfObject('Object1')).toBe(
+        false
+      );
+      expect(layout.getInitialInstances().hasInstancesOfObject('Object2')).toBe(
+        true
+      );
+      expect(layout.getInitialInstances().hasInstancesOfObject('Object3')).toBe(
+        false
+      );
     });
   });
 
   describe('gd.ExpressionParser and gd.CallbacksForExpressionCorrectnessTesting', function() {
-    var project = new gd.ProjectHelper.createNewGDJSProject();
-    var layout = project.insertNewLayout('Scene', 0);
-    layout.insertNewObject(project, 'Sprite', 'MySpriteObject', 0);
+    let project = null;
+    let layout = null;
+    beforeAll(() => {
+      project = new gd.ProjectHelper.createNewGDJSProject();
+      layout = project.insertNewLayout('Scene', 0);
+      layout.insertNewObject(project, 'Sprite', 'MySpriteObject', 0);
+    });
 
     function testMathExpression(
       expression,
@@ -1889,10 +1911,10 @@ describe('libGD.js', function() {
           layout,
           callbacks
         )
-      ).to.be(!expectedError);
-      if (expectedError) expect(parser.getFirstError()).to.be(expectedError);
+      ).toBe(!expectedError);
+      if (expectedError) expect(parser.getFirstError()).toBe(expectedError);
       if (expectedErrorPosition)
-        expect(parser.getFirstErrorPosition()).to.be(expectedErrorPosition);
+        expect(parser.getFirstErrorPosition()).toBe(expectedErrorPosition);
       parser.delete();
       callbacks.delete();
     }
@@ -1958,29 +1980,31 @@ describe('libGD.js', function() {
 
   describe('gd.Vector2f', function() {
     describe('gd.VectorVector2f', function() {
-      const vectorVector2f = new gd.VectorVector2f();
-      const vector2f = new gd.Vector2f();
+      it('can be used to manipulate a vector of gd.Vector2f', function() {
+        const vectorVector2f = new gd.VectorVector2f();
+        const vector2f = new gd.Vector2f();
 
-      vectorVector2f.push_back(vector2f);
-      vectorVector2f.push_back(vector2f);
-      vectorVector2f.push_back(vector2f);
+        vectorVector2f.push_back(vector2f);
+        vectorVector2f.push_back(vector2f);
+        vectorVector2f.push_back(vector2f);
 
-      expect(vectorVector2f.size()).to.be(3);
-      vectorVector2f.at(0).set_x(1);
-      vectorVector2f.at(1).set_x(2);
-      vectorVector2f.at(2).set_x(3);
+        expect(vectorVector2f.size()).toBe(3);
+        vectorVector2f.at(0).set_x(1);
+        vectorVector2f.at(1).set_x(2);
+        vectorVector2f.at(2).set_x(3);
 
-      expect(vectorVector2f.at(0).get_x()).to.be(1);
-      expect(vectorVector2f.at(1).get_x()).to.be(2);
-      expect(vectorVector2f.at(2).get_x()).to.be(3);
+        expect(vectorVector2f.at(0).get_x()).toBe(1);
+        expect(vectorVector2f.at(1).get_x()).toBe(2);
+        expect(vectorVector2f.at(2).get_x()).toBe(3);
 
-      gd.removeFromVectorVector2f(vectorVector2f, 1);
-      expect(vectorVector2f.size()).to.be(2);
-      expect(vectorVector2f.at(0).get_x()).to.be(1);
-      expect(vectorVector2f.at(1).get_x()).to.be(3);
+        gd.removeFromVectorVector2f(vectorVector2f, 1);
+        expect(vectorVector2f.size()).toBe(2);
+        expect(vectorVector2f.at(0).get_x()).toBe(1);
+        expect(vectorVector2f.at(1).get_x()).toBe(3);
 
-      vectorVector2f.clear();
-      expect(vectorVector2f.size()).to.be(0);
+        vectorVector2f.clear();
+        expect(vectorVector2f.size()).toBe(0);
+      });
     });
   });
 
@@ -1997,12 +2021,12 @@ describe('libGD.js', function() {
         )
         .setExtensionHelpPath('/path/to/extension/help');
 
-        expect(extension.getName()).to.be('TestExtensionName');
-        expect(extension.getFullName()).to.be('Full name of test extension');
-        expect(extension.getDescription()).to.be('Description of test extension');
-        expect(extension.getAuthor()).to.be('Author of test extension');
-        expect(extension.getLicense()).to.be('License of test extension');
-        expect(extension.getHelpPath()).to.be('/path/to/extension/help');
+      expect(extension.getName()).toBe('TestExtensionName');
+      expect(extension.getFullName()).toBe('Full name of test extension');
+      expect(extension.getDescription()).toBe('Description of test extension');
+      expect(extension.getAuthor()).toBe('Author of test extension');
+      expect(extension.getLicense()).toBe('License of test extension');
+      expect(extension.getHelpPath()).toBe('/path/to/extension/help');
     });
   });
 });

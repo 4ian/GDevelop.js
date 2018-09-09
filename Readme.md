@@ -41,7 +41,7 @@ source ./emsdk_env.sh
 ```shell
     cd GDevelop.js
     npm install
-    grunt build
+    npm run build
 ```
 
 Output is created in */path/to/GD/Binaries/Output/libGD.js/*.
@@ -62,7 +62,7 @@ Launch tests and examples
 
 Launch tests with grunt:
 
-    grunt test
+    npm test
 
 Or launch example:
 

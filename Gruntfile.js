@@ -32,13 +32,6 @@ module.exports = function(grunt) {
   }
 
   grunt.initConfig({
-    mochacli: {
-      options: {
-        require: ['expect.js'],
-        bail: true,
-      },
-      all: ['test/**/*.js'],
-    },
     concat: {
       options: {
         separator: ';',
@@ -150,7 +143,6 @@ module.exports = function(grunt) {
     },
   });
 
-  grunt.loadNpmTasks('grunt-mocha-cli');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -179,5 +171,4 @@ module.exports = function(grunt) {
     'compress',
     'copy:newIDE',
   ]);
-  grunt.registerTask('test', ['mochacli']);
 };

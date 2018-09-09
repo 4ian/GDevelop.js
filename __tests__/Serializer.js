@@ -1,38 +1,40 @@
-var gd = require('../../Binaries/Output/libGD.js/Release/libGD.js')();
-var expect = require('expect.js');
+const initGDevelopJS = require('../../Binaries/Output/libGD.js/Release/libGD.js');
 
 describe('libGD.js object serialization', function() {
+  let gd = null;
+  beforeAll(() => (gd = initGDevelopJS()));
+
   describe('gd.SerializerElement', function() {
     it('should support operations on its value', function() {
       var element = new gd.SerializerElement();
       element.setString('aaa');
-      expect(element.getValue().getString()).to.be('aaa');
+      expect(element.getValue().getString()).toBe('aaa');
 
       element.setInt(123);
-      expect(element.getValue().getInt()).to.be(123);
+      expect(element.getValue().getInt()).toBe(123);
 
       element.setDouble(123.456);
-      expect(element.getValue().getDouble()).to.be(123.456);
+      expect(element.getValue().getDouble()).toBe(123.456);
     });
     it('should cast values from a type to another', function() {
       var element = new gd.SerializerElement();
       element.setString('123');
-      expect(element.getValue().getString()).to.be('123');
-      expect(element.getValue().getInt()).to.be(123);
-      expect(element.getValue().getDouble()).to.be(123.0);
+      expect(element.getValue().getString()).toBe('123');
+      expect(element.getValue().getInt()).toBe(123);
+      expect(element.getValue().getDouble()).toBe(123.0);
 
       element.setString('true');
-      expect(element.getValue().getBool()).to.be(true);
+      expect(element.getValue().getBool()).toBe(true);
       element.setBool(false);
-      expect(element.getValue().getBool()).to.be(false);
+      expect(element.getValue().getBool()).toBe(false);
     });
     it('should support operations on its children', function() {
       var element = new gd.SerializerElement();
 
-      expect(element.hasChild('Missing')).to.be(false);
+      expect(element.hasChild('Missing')).toBe(false);
       var child1 = element.addChild('Child1');
-      expect(element.hasChild('Child1')).to.be(true);
-      expect(element.getChild('Child1').ptr).to.be(child1.ptr);
+      expect(element.hasChild('Child1')).toBe(true);
+      expect(element.getChild('Child1').ptr).toBe(child1.ptr);
 
       var child2 = new gd.SerializerElement();
       child2.addChild('subChild').setString('Hello world!');
@@ -45,7 +47,7 @@ describe('libGD.js object serialization', function() {
           .getChild('subChild')
           .getValue()
           .getString()
-      ).to.be('Hello world!');
+      ).toBe('Hello world!');
     });
   });
 
@@ -62,7 +64,7 @@ describe('libGD.js object serialization', function() {
       serializedObject.delete();
       obj.delete();
 
-      expect(jsonObject).to.be(
+      expect(jsonObject).toBe(
         '{"bold": false,"italic": false,"name": "testObject","smoothed": true,"type": "TextObject::Text","underlined": false,"variables": [],"behaviors": [],"string": "Text of the object, with 官话 characters","font": "","characterSize": 20,"color": {"b": 255,"g": 255,"r": 255}}'
       );
     });
@@ -76,7 +78,7 @@ describe('libGD.js object serialization', function() {
       var element = gd.Serializer.fromJSON(json);
       var outputJson = gd.Serializer.toJSON(element);
 
-      expect(outputJson).to.be(json);
+      expect(outputJson).toBe(json);
     });
   });
 
@@ -89,7 +91,7 @@ describe('libGD.js object serialization', function() {
       var element = gd.Serializer.fromJSObject(object);
       var outputJson = gd.Serializer.toJSON(element);
 
-      expect(outputJson).to.be(json);
+      expect(outputJson).toBe(json);
     });
   });
 });
