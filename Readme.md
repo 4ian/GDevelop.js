@@ -16,8 +16,8 @@ How to build
 git clone https://github.com/juj/emsdk.git
 cd emsdk
 ./emsdk update
-./emsdk install latest
-./emsdk activate latest
+./emsdk install sdk-1.37.37-64bit
+./emsdk activate sdk-1.37.37-64bit
 source ./emsdk_env.sh
 ```
 
@@ -29,11 +29,11 @@ source ./emsdk_env.sh
     npm install -g grunt-cli
 ```
 
-* Clone [GDevelop repository](https://github.com/4ian/GD) and this repository at the root of GD repository:
+* Clone [GDevelop repository](https://github.com/4ian/GDevelop) and this repository at the root of GD repository:
 
 ```shell
-    git clone https://github.com/4ian/GD.git
-    cd GD && git clone https://github.com/4ian/GDevelop.js.git
+    git clone https://github.com/4ian/GDevelop.git
+    cd GDevelop && git clone https://github.com/4ian/GDevelop.js.git
 ```
 
 * Launch the build:

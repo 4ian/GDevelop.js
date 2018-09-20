@@ -1,25 +1,27 @@
 language: cpp
 sudo: false
-compiler:
-  - gcc
 
 # Cache .npm folder for faster npm install
 cache:
   directories:
     - $HOME/.npm
 
-env:
-  global:
-    - GCC_VERSION="4.8"
-
 addons:
+  artifacts:
+    s3_region: "us-east-1"
+    paths:
+    - GDevelop/Binaries/Output/libGD.js/Release
   apt:
     sources:
     - ubuntu-toolchain-r-test
     packages:
-    #Build dependencies:
+    # Cmake 3+ is required by Emscripten
     - cmake3
-    - g++-4.8 # Required for latest libstdc++6
+
+before_install:
+  # This workaround is required to avoid libstdc++ errors (Emscripten requires a recent version of libstdc++)
+  - wget -q -O libstdc++6 http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/libstdc++6_5.4.0-6ubuntu1~16.04.10_amd64.deb
+  - sudo dpkg --force-all -i libstdc++6
 
 install:
 # Emscripten

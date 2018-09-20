@@ -71,9 +71,7 @@ module.exports = function(grunt) {
           cmakeBinary +
           ' ' +
           cmakeArgs +
-          ' ../.. -DCMAKE_TOOLCHAIN_FILE="' +
-          cmakeToolchainpath +
-          '" -DFULL_VERSION_NUMBER=FALSE -DCMAKE_EXPORT_COMPILE_COMMANDS=ON',
+          ' ../.. -DFULL_VERSION_NUMBER=FALSE',
         options: {
           execOptions: {
             cwd: buildPath,
