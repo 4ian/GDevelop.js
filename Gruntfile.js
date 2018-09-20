@@ -9,10 +9,10 @@ module.exports = function(grunt) {
   var isWin = /^win/.test(process.platform);
   var cmakeBinary = isWin
     ? '"C:\\Program Files (x86)\\CMake\\bin\\cmake"'
-    : 'cmake';
+    : 'emconfigure cmake';
   var cmakeArgs = isWin ? '-G "MinGW Makefiles"' : '';
 
-  var makeBinary = isWin ? 'mingw32-make' : 'make';
+  var makeBinary = isWin ? 'mingw32-make' : 'emmake make';
 
   //Sanity checks
   var fs = require('fs');
