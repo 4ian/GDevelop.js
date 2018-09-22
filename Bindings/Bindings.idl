@@ -1730,6 +1730,10 @@ interface TextObject {
     unsigned long GetColorR();
     unsigned long GetColorG();
     unsigned long GetColorB();
+    void SetWrapping(boolean enable);
+    boolean IsWrapping();
+    void SetWrappingWidth(float width);
+    float GetWrappingWidth();
 
     //Inherited from gdObject:
     void SetName([Const] DOMString name);

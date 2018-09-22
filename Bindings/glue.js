@@ -2674,6 +2674,28 @@ TextObject.prototype['GetColorB'] = TextObject.prototype.GetColorB = /** @suppre
   return _emscripten_bind_TextObject_GetColorB_0(self);
 };;
 
+TextObject.prototype['SetWrapping'] = TextObject.prototype.SetWrapping = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_TextObject_SetWrapping_1(self, arg0);
+};;
+
+TextObject.prototype['IsWrapping'] = TextObject.prototype.IsWrapping = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_TextObject_IsWrapping_0(self));
+};;
+
+TextObject.prototype['SetWrappingWidth'] = TextObject.prototype.SetWrappingWidth = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_TextObject_SetWrappingWidth_1(self, arg0);
+};;
+
+TextObject.prototype['GetWrappingWidth'] = TextObject.prototype.GetWrappingWidth = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_TextObject_GetWrappingWidth_0(self);
+};;
+
 TextObject.prototype['SetName'] = TextObject.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
