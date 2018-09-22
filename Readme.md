@@ -3,9 +3,9 @@ GDevelop.js
 
 This is a port of some parts of **[GDevelop]** to Javascript using **[Emscripten]**.
 
-GDevelop is a full featured, cross-platform, open-source game creator software requiring no programming skills. Download it on [the official website](https://gdevelop-app.com) and check its [GitHub page](https://github.com/4ian/GD).
+GDevelop is a full featured, cross-platform, open-source game creator software requiring no programming skills. Download it on [the official website](https://gdevelop-app.com) and check its [GitHub page](https://github.com/4ian/GDevelop).
 
-How to build
+How to build [![Build Status](https://travis-ci.org/4ian/GDevelop.js.svg?branch=master)](https://travis-ci.org/4ian/GDevelop.js)
 ------------
 
 * Make sure you have [CMake 3.5+](http://www.cmake.org/)
@@ -70,12 +70,6 @@ Or launch example:
 
 The demo generate a json file that can be opened with [GDevelop]!
 
-### Memory profiler
-
-You can also build a version with the Emscripten memory profiler (added at the bottom of the web page):
-
-    grunt build:with-profiler
-
 ### About the internal steps of compilation
 
 The grunt *build* task:
@@ -97,7 +91,7 @@ License
 -------
 
 * GDevelop.js is distributed under the **MIT license**.
-* GDevelop is under the MIT license (and GPL v3 license for the GUI).
+* GDevelop is under the MIT license (and GPL v3 license for the old IDE).
 
-[GDevelop]: https://github.com/4ian/GD
+[GDevelop]: https://github.com/4ian/GDevelop
 [Emscripten]: https://github.com/kripken/emscripten
