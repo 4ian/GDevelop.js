@@ -1574,22 +1574,6 @@ unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetColorB_0(TextObj
   return self->GetColorB();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_SetWrapping_1(TextObject* self, bool arg0) {
-  self->SetWrapping(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_IsWrapping_0(TextObject* self) {
-  return self->IsWrapping();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_SetWrappingWidth_1(TextObject* self, float arg0) {
-  self->SetWrappingWidth(arg0);
-}
-
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetWrappingWidth_0(TextObject* self) {
-  return self->GetWrappingWidth();
-}
-
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_SetName_1(TextObject* self, const char* arg0) {
   self->SetName(arg0);
 }
