@@ -1367,10 +1367,10 @@ interface VectorEventsSearchResult {
 };
 
 interface EventsRefactorer {
-    void STATIC_RenameObjectInEvents([Const, Ref] Platform platform, [Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString oldName, [Const] DOMString newName);
-    void STATIC_RemoveObjectInEvents([Const, Ref] Platform platform, [Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString name);
-    void STATIC_ReplaceStringInEvents([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString toReplace, [Const] DOMString newString, boolean matchCase, boolean inConditions, boolean inActions);
-    [Value] VectorEventsSearchResult STATIC_SearchInEvents([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString search, boolean matchCase, boolean inConditions, boolean inActions);
+    void STATIC_RenameObjectInEvents([Const, Ref] Platform platform, [Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString oldName, [Const] DOMString newName);
+    void STATIC_RemoveObjectInEvents([Const, Ref] Platform platform, [Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString name);
+    void STATIC_ReplaceStringInEvents([Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString toReplace, [Const] DOMString newString, boolean matchCase, boolean inConditions, boolean inActions);
+    [Value] VectorEventsSearchResult STATIC_SearchInEvents([Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString search, boolean matchCase, boolean inConditions, boolean inActions);
 };
 
 interface WholeProjectRefactorer {
@@ -1457,6 +1457,53 @@ interface CallbacksForExpressionCorrectnessTesting {
     //Inherited from ParserCallbacks:
     [Const, Ref] DOMString GetFirstError();
     unsigned long GetFirstErrorPosition();
+};
+
+interface EventsFunction {
+    void EventsFunction();
+
+    void SetDescription([Const] DOMString description);
+    [Const, Ref] DOMString GetDescription();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetFullName([Const] DOMString fullName);
+    [Const, Ref] DOMString GetFullName();
+
+    [Ref] EventsList GetEvents();
+    [Ref] VectorParameterMetadata GetParameters();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface VectorEventsFunction {
+    void VectorEventsFunction();
+
+    void push_back([Const, Ref] EventsFunction eventsFunction);
+    unsigned long size();
+    [Ref] EventsFunction at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] EventsFunction eventsFunction);
+    void clear();
+};
+
+interface EventsFunctionsExtension {
+    void EventsFunctionsExtension();
+
+    void SetNamespace([Const] DOMString namespace);
+    [Const, Ref] DOMString GetNamespace();
+    void SetVersion([Const] DOMString version);
+    [Const, Ref] DOMString GetVersion();
+    void SetDescription([Const] DOMString description);
+    [Const, Ref] DOMString GetDescription();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetFullName([Const] DOMString fullName);
+    [Const, Ref] DOMString GetFullName();
+
+    [Ref] VectorEventsFunction GetEventsFunctions();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
 interface AbstractFileSystem {

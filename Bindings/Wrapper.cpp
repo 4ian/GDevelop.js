@@ -21,6 +21,8 @@
 #include <GDCore/Events/Parsers/ExpressionParser.h>
 #include <GDCore/Extensions/Metadata/MetadataProvider.h>
 #include <GDCore/Extensions/Metadata/ParameterMetadataTools.h>
+#include <GDCore/Extensions/EventsFunction.h>
+#include <GDCore/Extensions/EventsFunctionsExtension.h>
 #include <GDCore/IDE/AbstractFileSystem.h>
 #include <GDCore/IDE/Dialogs/LayoutEditorCanvas/LayoutEditorCanvasOptions.h>
 #include <GDCore/IDE/Dialogs/ObjectListDialogsHelper.h>
@@ -372,6 +374,7 @@ typedef std::vector<Polygon2d> VectorPolygon2d;
 typedef std::vector<sf::Vector2f> VectorVector2f;
 typedef std::vector<EventsSearchResult> VectorEventsSearchResult;
 typedef std::vector<gd::ParameterMetadata> VectorParameterMetadata;
+typedef std::vector<gd::EventsFunction> VectorEventsFunction;
 typedef gd::Object gdObject;  // To avoid clashing javascript Object in glue.js
 typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 

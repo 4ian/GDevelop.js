@@ -208,6 +208,32 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_gdObject___destroy___0(gdObject* self)
   delete self;
 }
 
+// Vector2f
+
+sf::Vector2f* EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_Vector2f_0() {
+  return new sf::Vector2f();
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_get_x_0(sf::Vector2f* self) {
+  return self->x;
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_set_x_1(sf::Vector2f* self, float arg0) {
+  self->x = arg0;
+}
+
+float EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_get_y_0(sf::Vector2f* self) {
+  return self->y;
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_set_y_1(sf::Vector2f* self, float arg0) {
+  self->y = arg0;
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f___destroy___0(sf::Vector2f* self) {
+  delete self;
+}
+
 // ParticleEmitterObject
 
 ParticleEmitterObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_ParticleEmitterObject_ParticleEmitterObject_1(const char* arg0) {
@@ -620,6 +646,56 @@ const PlatformExtension* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPlatformExte
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPlatformExtension___destroy___0(VectorPlatformExtension* self) {
+  delete self;
+}
+
+// EventsFunction
+
+EventsFunction* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_EventsFunction_0() {
+  return new EventsFunction();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_SetDescription_1(EventsFunction* self, const char* arg0) {
+  self->SetDescription(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_GetDescription_0(EventsFunction* self) {
+  return self->GetDescription().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_SetName_1(EventsFunction* self, const char* arg0) {
+  self->SetName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_GetName_0(EventsFunction* self) {
+  return self->GetName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_SetFullName_1(EventsFunction* self, const char* arg0) {
+  self->SetFullName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_GetFullName_0(EventsFunction* self) {
+  return self->GetFullName().c_str();
+}
+
+EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_GetEvents_0(EventsFunction* self) {
+  return &self->GetEvents();
+}
+
+VectorParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_GetParameters_0(EventsFunction* self) {
+  return &self->GetParameters();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_SerializeTo_1(EventsFunction* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_UnserializeFrom_2(EventsFunction* self, Project* arg0, const SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction___destroy___0(EventsFunction* self) {
   delete self;
 }
 
@@ -3229,6 +3305,36 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadataTools___destroy___0(P
   delete self;
 }
 
+// VectorEventsFunction
+
+VectorEventsFunction* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsFunction_VectorEventsFunction_0() {
+  return new VectorEventsFunction();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsFunction_push_back_1(VectorEventsFunction* self, const EventsFunction* arg0) {
+  self->push_back(*arg0);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsFunction_size_0(VectorEventsFunction* self) {
+  return self->size();
+}
+
+EventsFunction* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsFunction_at_1(VectorEventsFunction* self, unsigned int arg0) {
+  return &self->at(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsFunction_WRAPPED_set_2(VectorEventsFunction* self, unsigned int arg0, const EventsFunction* arg1) {
+  self->WRAPPED_set(arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsFunction_clear_0(VectorEventsFunction* self) {
+  self->clear();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsFunction___destroy___0(VectorEventsFunction* self) {
+  delete self;
+}
+
 // ShapePainterObject
 
 ShapePainterObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_ShapePainterObject_ShapePainterObject_1(const char* arg0) {
@@ -5110,47 +5216,83 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VariablesContainer___destroy___0(Varia
   delete self;
 }
 
-// Vector2f
+// EventsFunctionsExtension
 
-sf::Vector2f* EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_Vector2f_0() {
-  return new sf::Vector2f();
+EventsFunctionsExtension* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_EventsFunctionsExtension_0() {
+  return new EventsFunctionsExtension();
 }
 
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_get_x_0(sf::Vector2f* self) {
-  return self->x;
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_SetNamespace_1(EventsFunctionsExtension* self, const char* arg0) {
+  self->SetNamespace(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_set_x_1(sf::Vector2f* self, float arg0) {
-  self->x = arg0;
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_GetNamespace_0(EventsFunctionsExtension* self) {
+  return self->GetNamespace().c_str();
 }
 
-float EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_get_y_0(sf::Vector2f* self) {
-  return self->y;
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_SetVersion_1(EventsFunctionsExtension* self, const char* arg0) {
+  self->SetVersion(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f_set_y_1(sf::Vector2f* self, float arg0) {
-  self->y = arg0;
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_GetVersion_0(EventsFunctionsExtension* self) {
+  return self->GetVersion().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_Vector2f___destroy___0(sf::Vector2f* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_SetDescription_1(EventsFunctionsExtension* self, const char* arg0) {
+  self->SetDescription(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_GetDescription_0(EventsFunctionsExtension* self) {
+  return self->GetDescription().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_SetName_1(EventsFunctionsExtension* self, const char* arg0) {
+  self->SetName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_GetName_0(EventsFunctionsExtension* self) {
+  return self->GetName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_SetFullName_1(EventsFunctionsExtension* self, const char* arg0) {
+  self->SetFullName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_GetFullName_0(EventsFunctionsExtension* self) {
+  return self->GetFullName().c_str();
+}
+
+VectorEventsFunction* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_GetEventsFunctions_0(EventsFunctionsExtension* self) {
+  return &self->GetEventsFunctions();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_SerializeTo_1(EventsFunctionsExtension* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_UnserializeFrom_2(EventsFunctionsExtension* self, Project* arg0, const SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension___destroy___0(EventsFunctionsExtension* self) {
   delete self;
 }
 
 // EventsRefactorer
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer_STATIC_RenameObjectInEvents_6(EventsRefactorer* self, const Platform* arg0, Project* arg1, Layout* arg2, EventsList* arg3, const char* arg4, const char* arg5) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer_STATIC_RenameObjectInEvents_6(EventsRefactorer* self, const Platform* arg0, ObjectsContainer* arg1, ObjectsContainer* arg2, EventsList* arg3, const char* arg4, const char* arg5) {
   self->STATIC_RenameObjectInEvents(*arg0, *arg1, *arg2, *arg3, arg4, arg5);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer_STATIC_RemoveObjectInEvents_5(EventsRefactorer* self, const Platform* arg0, Project* arg1, Layout* arg2, EventsList* arg3, const char* arg4) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer_STATIC_RemoveObjectInEvents_5(EventsRefactorer* self, const Platform* arg0, ObjectsContainer* arg1, ObjectsContainer* arg2, EventsList* arg3, const char* arg4) {
   self->STATIC_RemoveObjectInEvents(*arg0, *arg1, *arg2, *arg3, arg4);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer_STATIC_ReplaceStringInEvents_8(EventsRefactorer* self, Project* arg0, Layout* arg1, EventsList* arg2, const char* arg3, const char* arg4, bool arg5, bool arg6, bool arg7) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer_STATIC_ReplaceStringInEvents_8(EventsRefactorer* self, ObjectsContainer* arg0, ObjectsContainer* arg1, EventsList* arg2, const char* arg3, const char* arg4, bool arg5, bool arg6, bool arg7) {
   self->STATIC_ReplaceStringInEvents(*arg0, *arg1, *arg2, arg3, arg4, arg5, arg6, arg7);
 }
 
-VectorEventsSearchResult* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer_STATIC_SearchInEvents_7(EventsRefactorer* self, Project* arg0, Layout* arg1, EventsList* arg2, const char* arg3, bool arg4, bool arg5, bool arg6) {
+VectorEventsSearchResult* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsRefactorer_STATIC_SearchInEvents_7(EventsRefactorer* self, ObjectsContainer* arg0, ObjectsContainer* arg1, EventsList* arg2, const char* arg3, bool arg4, bool arg5, bool arg6) {
   static VectorEventsSearchResult temp;
   return (temp = self->STATIC_SearchInEvents(*arg0, *arg1, *arg2, arg3, arg4, arg5, arg6), &temp);
 }

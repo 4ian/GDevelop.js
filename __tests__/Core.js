@@ -1814,7 +1814,7 @@ describe('libGD.js', function() {
       };
       fs.writeToFile = function(path, content) {
         //Validate that some code have been generated:
-        expect(content).toMatch("runtimeScene.getOnceTriggers().startNewFrame");
+        expect(content).toMatch('runtimeScene.getOnceTriggers().startNewFrame');
         done();
       };
 
@@ -2047,7 +2047,9 @@ describe('libGD.js', function() {
       const parameter3 = new gd.ParameterMetadata();
       parameter3.setType('objectList');
       // parameter3.setName(''); No name for this parameter
-      parameter3.setDescription('This parameter will be skipped, as it has no name');
+      parameter3.setDescription(
+        'This parameter will be skipped, as it has no name'
+      );
       parameter3.setExtraInfo('Sprite');
       const parameter4 = new gd.ParameterMetadata();
       parameter4.setType('string');
@@ -2074,11 +2076,67 @@ describe('libGD.js', function() {
 
       expect(objectsContainer.getObjectsCount()).toBe(2);
       expect(objectsContainer.hasObjectNamed('MyObjectWithoutType')).toBe(true);
-      expect(objectsContainer.getObject('MyObjectWithoutType').getType()).toBe('');
+      expect(objectsContainer.getObject('MyObjectWithoutType').getType()).toBe(
+        ''
+      );
       expect(objectsContainer.hasObjectNamed('MySpriteObject')).toBe(true);
       expect(objectsContainer.getObject('MySpriteObject').getType()).toBe(
         'Sprite'
       );
+
+      project.delete();
+    });
+  });
+
+  describe('gd.EventsFunction', () => {
+    it('can store events', function() {
+      const project = gd.ProjectHelper.createNewGDJSProject();
+      const eventsFunction = new gd.EventsFunction();
+      const events = eventsFunction.getEvents();
+      expect(events.getEventsCount()).toBe(0);
+      var evt = events.insertNewEvent(
+        project,
+        'BuiltinCommonInstructions::Standard',
+        0
+      );
+      expect(events.getEventsCount()).toBe(1);
+      eventsFunction.delete();
+      project.delete();
+    });
+    it('can have a name, fullname and description', function() {
+      const eventsFunction = new gd.EventsFunction();
+      eventsFunction.setName('My name');
+      eventsFunction.setFullName('My descriptive name');
+      eventsFunction.setDescription('My description');
+      expect(eventsFunction.getName()).toBe('My name');
+      expect(eventsFunction.getFullName()).toBe('My descriptive name');
+      expect(eventsFunction.getDescription()).toBe('My description');
+      eventsFunction.delete();
+    });
+  });
+
+  describe('gd.EventsFunctionsExtension', () => {
+    it('can have a namespace, version, name, fullname, description', function() {
+      const eventsFunctionsExtension = new gd.EventsFunctionsExtension();
+      eventsFunctionsExtension.setNamespace('MyExt');
+      eventsFunctionsExtension.setVersion('1.1');
+      eventsFunctionsExtension.setName('My name');
+      eventsFunctionsExtension.setFullName('My descriptive name');
+      eventsFunctionsExtension.setDescription('My description');
+      expect(eventsFunctionsExtension.getNamespace()).toBe('MyExt');
+      expect(eventsFunctionsExtension.getVersion()).toBe('1.1');
+      expect(eventsFunctionsExtension.getName()).toBe('My name');
+      expect(eventsFunctionsExtension.getFullName()).toBe('My descriptive name');
+      expect(eventsFunctionsExtension.getDescription()).toBe('My description');
+
+      const eventsFunction = new gd.EventsFunction();
+      eventsFunction.setName('MyFunction');
+      eventsFunctionsExtension.getEventsFunctions().push_back(eventsFunction);
+      eventsFunction.delete();
+      expect(eventsFunctionsExtension.getEventsFunctions().size()).toBe(1);
+      expect(eventsFunctionsExtension.getEventsFunctions().at(0).getName()).toBe('MyFunction');
+
+      eventsFunctionsExtension.delete();
     });
   });
 });
