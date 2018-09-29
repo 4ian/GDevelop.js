@@ -97,6 +97,17 @@ describe('libGD.js', function() {
       expect(project.getUsedExtensions().size()).toBe(0);
     });
 
+    it('handles events functions extensions', function() {
+      expect(project.hasEventsFunctionsExtensionNamed('Ext')).toBe(false);
+
+      project.insertNewEventsFunctionsExtension('Ext', 0);
+      expect(project.hasEventsFunctionsExtensionNamed('Ext')).toBe(true);
+      expect(project.getEventsFunctionsExtension('Ext').getName()).toBe('Ext');
+
+      project.removeEventsFunctionsExtension('Ext');
+      expect(project.hasEventsFunctionsExtensionNamed('Ext')).toBe(false);
+    });
+
     afterAll(function() {
       project.delete();
     });

@@ -519,6 +519,7 @@ typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
 #define GetLayoutAt GetLayout
 #define GetExternalEventsAt GetExternalEvents
 #define GetExternalLayoutAt GetExternalLayout
+#define GetEventsFunctionsExtensionAt GetEventsFunctionsExtension
 #define GetLayerAt GetLayer
 #define GetObjectAt GetObject
 #define GetAt Get

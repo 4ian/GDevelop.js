@@ -322,6 +322,14 @@ interface Project {
     [Ref] ExternalLayout InsertNewExternalLayout([Const] DOMString name, unsigned long position);
     void RemoveExternalLayout([Const] DOMString name);
 
+    boolean HasEventsFunctionsExtensionNamed([Const] DOMString name);
+    [Ref] EventsFunctionsExtension GetEventsFunctionsExtension([Const] DOMString name);
+    [Ref] EventsFunctionsExtension GetEventsFunctionsExtensionAt(unsigned long index);
+    void SwapEventsFunctionsExtensions(unsigned long first, unsigned long second);
+    unsigned long GetEventsFunctionsExtensionsCount();
+    [Ref] EventsFunctionsExtension InsertNewEventsFunctionsExtension([Const] DOMString name, unsigned long position);
+    void RemoveEventsFunctionsExtension([Const] DOMString name);
+
     [Ref] VariablesContainer GetVariables();
     [Ref] ResourcesManager GetResourcesManager();
     void ExposeResources([Ref] ArbitraryResourceWorker worker);
@@ -1462,12 +1470,14 @@ interface CallbacksForExpressionCorrectnessTesting {
 interface EventsFunction {
     void EventsFunction();
 
-    void SetDescription([Const] DOMString description);
+    [Ref] EventsFunction SetDescription([Const] DOMString description);
     [Const, Ref] DOMString GetDescription();
-    void SetName([Const] DOMString name);
+    [Ref] EventsFunction SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
-    void SetFullName([Const] DOMString fullName);
+    [Ref] EventsFunction SetFullName([Const] DOMString fullName);
     [Const, Ref] DOMString GetFullName();
+    [Ref] EventsFunction SetSentence([Const] DOMString sentence);
+    [Const, Ref] DOMString GetSentence();
 
     [Ref] EventsList GetEvents();
     [Ref] VectorParameterMetadata GetParameters();
@@ -1489,15 +1499,15 @@ interface VectorEventsFunction {
 interface EventsFunctionsExtension {
     void EventsFunctionsExtension();
 
-    void SetNamespace([Const] DOMString namespace);
+    [Ref] EventsFunctionsExtension SetNamespace([Const] DOMString namespace);
     [Const, Ref] DOMString GetNamespace();
-    void SetVersion([Const] DOMString version);
+    [Ref] EventsFunctionsExtension SetVersion([Const] DOMString version);
     [Const, Ref] DOMString GetVersion();
-    void SetDescription([Const] DOMString description);
+    [Ref] EventsFunctionsExtension SetDescription([Const] DOMString description);
     [Const, Ref] DOMString GetDescription();
-    void SetName([Const] DOMString name);
+    [Ref] EventsFunctionsExtension SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
-    void SetFullName([Const] DOMString fullName);
+    [Ref] EventsFunctionsExtension SetFullName([Const] DOMString fullName);
     [Const, Ref] DOMString GetFullName();
 
     [Ref] VectorEventsFunction GetEventsFunctions();
@@ -2131,7 +2141,7 @@ interface ParticleEmitterObject {
 [NoDelete, Prefix="gdjs::"]
 interface EventsCodeGenerator {
     [Const, Value] DOMString STATIC_GenerateSceneEventsCompleteCode([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Ref] SetString includes, boolean compilationForRuntime);
-    [Const, Value] DOMString STATIC_GenerateEventsFunctionCode([Ref] Project project, [Const, Ref] VectorParameterMetadata parameters, [Const, Ref] EventsList events, boolean compilationForRuntime);
+    [Const, Value] DOMString STATIC_GenerateEventsFunctionCode([Ref] Project project, [Const, Ref] EventsFunction eventsFunction, [Const] DOMString codeNamespace, [Ref] SetString includes, boolean compilationForRuntime);
 };
 
 [Prefix="gdjs::"]
