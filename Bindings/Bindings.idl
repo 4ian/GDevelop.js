@@ -1467,6 +1467,13 @@ interface CallbacksForExpressionCorrectnessTesting {
     unsigned long GetFirstErrorPosition();
 };
 
+enum EventsFunction_FunctionType {
+  "EventsFunction::Action",
+  "EventsFunction::Condition",
+  "EventsFunction::Expression",
+  "EventsFunction::StringExpression"
+};
+
 interface EventsFunction {
     void EventsFunction();
 
@@ -1478,6 +1485,8 @@ interface EventsFunction {
     [Const, Ref] DOMString GetFullName();
     [Ref] EventsFunction SetSentence([Const] DOMString sentence);
     [Const, Ref] DOMString GetSentence();
+    [Ref] EventsFunction SetFunctionType(EventsFunction_FunctionType type);
+    EventsFunction_FunctionType GetFunctionType();
 
     [Ref] EventsList GetEvents();
     [Ref] VectorParameterMetadata GetParameters();
