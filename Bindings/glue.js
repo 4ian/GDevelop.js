@@ -3562,6 +3562,14 @@ Platform.prototype['IsExtensionLoaded'] = Platform.prototype.IsExtensionLoaded =
   return !!(_emscripten_bind_Platform_IsExtensionLoaded_1(self, arg0));
 };;
 
+Platform.prototype['RemoveExtension'] = Platform.prototype.RemoveExtension = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Platform_RemoveExtension_1(self, arg0);
+};;
+
 Platform.prototype['GetAllPlatformExtensions'] = Platform.prototype.GetAllPlatformExtensions = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Platform_GetAllPlatformExtensions_0(self), VectorPlatformExtension);
@@ -10137,6 +10145,14 @@ JsPlatform.prototype['IsExtensionLoaded'] = JsPlatform.prototype.IsExtensionLoad
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return !!(_emscripten_bind_JsPlatform_IsExtensionLoaded_1(self, arg0));
+};;
+
+JsPlatform.prototype['RemoveExtension'] = JsPlatform.prototype.RemoveExtension = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_JsPlatform_RemoveExtension_1(self, arg0);
 };;
 
 JsPlatform.prototype['GetAllPlatformExtensions'] = JsPlatform.prototype.GetAllPlatformExtensions = /** @suppress {undefinedVars, duplicate} */function() {

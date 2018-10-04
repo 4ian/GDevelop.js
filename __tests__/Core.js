@@ -2039,8 +2039,35 @@ describe('libGD.js', function() {
       expect(extension.getAuthor()).toBe('Author of test extension');
       expect(extension.getLicense()).toBe('License of test extension');
       expect(extension.getHelpPath()).toBe('/path/to/extension/help');
+      extension.delete();
     });
   });
+
+  describe('gd.Platform (using gd.JsPlatform)', function() {
+    it('can have extension added and removed', function() {
+      const extension = new gd.PlatformExtension();
+      extension
+        .setExtensionInformation(
+          'MyNewExtension',
+          'Full name of test extension',
+          'Description of test extension',
+          'Author of test extension',
+          'License of test extension'
+        );
+
+      gd.JsPlatform.get().addNewExtension(extension);
+      expect(gd.JsPlatform.get().isExtensionLoaded("MyNewExtension")).toBe(true);
+      gd.JsPlatform.get().removeExtension("MyNewExtension");
+      expect(gd.JsPlatform.get().isExtensionLoaded("MyNewExtension")).toBe(false);
+      gd.JsPlatform.get().addNewExtension(extension);
+      gd.JsPlatform.get().addNewExtension(extension);
+      expect(gd.JsPlatform.get().isExtensionLoaded("MyNewExtension")).toBe(true);
+      gd.JsPlatform.get().removeExtension("MyNewExtension");
+      expect(gd.JsPlatform.get().isExtensionLoaded("MyNewExtension")).toBe(false);
+      extension.delete();
+    });
+  });
+
 
   describe('gd.ParameterMetadataTools', function() {
     it('can create an object container from parameters', function() {

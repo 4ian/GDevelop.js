@@ -111,15 +111,15 @@ interface Platform {
     [Const, Value] DOMString GetSubtitle();
     [Const, Value] DOMString GetDescription();
     boolean IsExtensionLoaded([Const] DOMString name);
+    void RemoveExtension([Const] DOMString name);
 
     [Const, Ref] VectorPlatformExtension GetAllPlatformExtensions();
-    //TODO:
-    //createObject
 };
 
 interface JsPlatform {
     [Ref] JsPlatform STATIC_Get();
     void AddNewExtension([Const, Ref] PlatformExtension extension);
+    
 
     // Inherited from Platform:
     [Const, Value] DOMString GetName();
@@ -127,6 +127,7 @@ interface JsPlatform {
     [Const, Value] DOMString GetSubtitle();
     [Const, Value] DOMString GetDescription();
     boolean IsExtensionLoaded([Const] DOMString name);
+    void RemoveExtension([Const] DOMString name);
 
     [Const, Ref] VectorPlatformExtension GetAllPlatformExtensions();
 };
