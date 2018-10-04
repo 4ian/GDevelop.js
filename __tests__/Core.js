@@ -2046,28 +2046,38 @@ describe('libGD.js', function() {
   describe('gd.Platform (using gd.JsPlatform)', function() {
     it('can have extension added and removed', function() {
       const extension = new gd.PlatformExtension();
-      extension
-        .setExtensionInformation(
-          'MyNewExtension',
-          'Full name of test extension',
-          'Description of test extension',
-          'Author of test extension',
-          'License of test extension'
-        );
+      extension.setExtensionInformation(
+        'MyNewExtension',
+        'Full name of test extension',
+        'Description of test extension',
+        'Author of test extension',
+        'License of test extension'
+      );
 
       gd.JsPlatform.get().addNewExtension(extension);
-      expect(gd.JsPlatform.get().isExtensionLoaded("MyNewExtension")).toBe(true);
-      gd.JsPlatform.get().removeExtension("MyNewExtension");
-      expect(gd.JsPlatform.get().isExtensionLoaded("MyNewExtension")).toBe(false);
+      expect(gd.JsPlatform.get().isExtensionLoaded('MyNewExtension')).toBe(
+        true
+      );
+      gd.JsPlatform.get().removeExtension('MyNewExtension');
+      expect(gd.JsPlatform.get().isExtensionLoaded('MyNewExtension')).toBe(
+        false
+      );
       gd.JsPlatform.get().addNewExtension(extension);
       gd.JsPlatform.get().addNewExtension(extension);
-      expect(gd.JsPlatform.get().isExtensionLoaded("MyNewExtension")).toBe(true);
-      gd.JsPlatform.get().removeExtension("MyNewExtension");
-      expect(gd.JsPlatform.get().isExtensionLoaded("MyNewExtension")).toBe(false);
+      expect(gd.JsPlatform.get().isExtensionLoaded('MyNewExtension')).toBe(
+        true
+      );
+      gd.JsPlatform.get().removeExtension('MyNewExtension');
+      expect(gd.JsPlatform.get().isExtensionLoaded('MyNewExtension')).toBe(
+        false
+      );
       extension.delete();
     });
-  });
 
+    it('has a namespace separator', function() {
+      expect(gd.PlatformExtension.getNamespaceSeparator()).toBe('::');
+    });
+  });
 
   describe('gd.ParameterMetadataTools', function() {
     it('can create an object container from parameters', function() {
@@ -2164,7 +2174,9 @@ describe('libGD.js', function() {
       expect(eventsFunctionsExtension.getNamespace()).toBe('MyExt');
       expect(eventsFunctionsExtension.getVersion()).toBe('1.1');
       expect(eventsFunctionsExtension.getName()).toBe('My name');
-      expect(eventsFunctionsExtension.getFullName()).toBe('My descriptive name');
+      expect(eventsFunctionsExtension.getFullName()).toBe(
+        'My descriptive name'
+      );
       expect(eventsFunctionsExtension.getDescription()).toBe('My description');
 
       const eventsFunction = new gd.EventsFunction();
@@ -2172,7 +2184,12 @@ describe('libGD.js', function() {
       eventsFunctionsExtension.getEventsFunctions().push_back(eventsFunction);
       eventsFunction.delete();
       expect(eventsFunctionsExtension.getEventsFunctions().size()).toBe(1);
-      expect(eventsFunctionsExtension.getEventsFunctions().at(0).getName()).toBe('MyFunction');
+      expect(
+        eventsFunctionsExtension
+          .getEventsFunctions()
+          .at(0)
+          .getName()
+      ).toBe('MyFunction');
 
       eventsFunctionsExtension.delete();
     });

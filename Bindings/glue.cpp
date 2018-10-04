@@ -2372,6 +2372,18 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer___destroy___0(Ob
 
 // WholeProjectRefactorer
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_WholeProjectRefactorer_STATIC_ExposeProjectEvents_2(WholeProjectRefactorer* self, Project* arg0, ArbitraryEventsWorker* arg1) {
+  self->STATIC_ExposeProjectEvents(*arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_WholeProjectRefactorer_STATIC_RenameEventsFunctionsExtension_4(WholeProjectRefactorer* self, Project* arg0, const EventsFunctionsExtension* arg1, const char* arg2, const char* arg3) {
+  self->STATIC_RenameEventsFunctionsExtension(*arg0, *arg1, arg2, arg3);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_WholeProjectRefactorer_STATIC_RenameEventsFunction_4(WholeProjectRefactorer* self, Project* arg0, const EventsFunctionsExtension* arg1, const char* arg2, const char* arg3) {
+  self->STATIC_RenameEventsFunction(*arg0, *arg1, arg2, arg3);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_WholeProjectRefactorer_STATIC_ObjectRenamedInLayout_4(WholeProjectRefactorer* self, Project* arg0, Layout* arg1, const char* arg2, const char* arg3) {
   self->STATIC_ObjectRenamedInLayout(*arg0, *arg1, arg2, arg3);
 }
@@ -4121,6 +4133,11 @@ MapStringExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtens
   return &self->GetAllStrExpressionsForBehavior(arg0);
 }
 
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension_STATIC_GetNamespaceSeparator_0(PlatformExtension* self) {
+  static gd::String temp;
+  return (temp = self->STATIC_GetNamespaceSeparator(), temp.c_str());
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_PlatformExtension___destroy___0(PlatformExtension* self) {
   delete self;
 }
@@ -4599,6 +4616,20 @@ TextFormatting* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPairStringTextFormatt
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPairStringTextFormatting___destroy___0(VectorPairStringTextFormatting* self) {
+  delete self;
+}
+
+// InstructionsTypeRenamer
+
+InstructionsTypeRenamer* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsTypeRenamer_InstructionsTypeRenamer_3(const Project* arg0, const char* arg1, const char* arg2) {
+  return new InstructionsTypeRenamer(*arg0, arg1, arg2);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsTypeRenamer_Launch_1(InstructionsTypeRenamer* self, EventsList* arg0) {
+  self->Launch(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionsTypeRenamer___destroy___0(InstructionsTypeRenamer* self) {
   delete self;
 }
 

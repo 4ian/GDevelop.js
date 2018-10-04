@@ -1110,6 +1110,8 @@ interface PlatformExtension {
     [Ref] MapStringInstructionMetadata GetAllConditionsForBehavior([Const] DOMString autoType);
     [Ref] MapStringExpressionMetadata GetAllExpressionsForBehavior([Const] DOMString autoType);
     [Ref] MapStringExpressionMetadata GetAllStrExpressionsForBehavior([Const] DOMString autoType);
+
+    [Const, Value] DOMString STATIC_GetNamespaceSeparator();
 };
 
 interface EventsList {
@@ -1383,6 +1385,17 @@ interface EventsRefactorer {
 };
 
 interface WholeProjectRefactorer {
+    void STATIC_ExposeProjectEvents([Ref] Project project, [Ref] ArbitraryEventsWorker worker);
+    void STATIC_RenameEventsFunctionsExtension(
+      [Ref] Project project,
+      [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension,
+      [Const] DOMString oldName,
+      [Const] DOMString newName);
+    void STATIC_RenameEventsFunction(
+      [Ref] Project project,
+      [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension,
+      [Const] DOMString oldName,
+      [Const] DOMString newName);
     void STATIC_ObjectRenamedInLayout([Ref] Project project, [Ref] Layout layout, [Const] DOMString oldName, [Const] DOMString newName);
     void STATIC_ObjectRemovedInLayout([Ref] Project project, [Ref] Layout layout, [Const] DOMString objectName, boolean removeEventsAndGroups);
     void STATIC_GlobalObjectRenamed([Ref] Project project, [Const] DOMString oldName, [Const] DOMString newName);
@@ -1577,6 +1590,12 @@ interface EventsTypesLister {
     void Launch([Ref] EventsList events);
 };
 
+interface InstructionsTypeRenamer {
+    void InstructionsTypeRenamer([Const, Ref] Project project, [Const] DOMString oldType, [Const] DOMString newType);
+
+    //Inherited from ArbitraryEventsWorker
+    void Launch([Ref] EventsList events);
+};
 
 interface EventsContext {
     [Const, Ref] SetString GetObjectOrGroupNames();

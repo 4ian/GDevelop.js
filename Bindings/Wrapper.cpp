@@ -28,6 +28,7 @@
 #include <GDCore/IDE/Dialogs/ObjectListDialogsHelper.h>
 #include <GDCore/IDE/Dialogs/PropertyDescriptor.h>
 #include <GDCore/IDE/Events/ArbitraryEventsWorker.h>
+#include <GDCore/IDE/Events/InstructionsTypeRenamer.h>
 #include <GDCore/IDE/Events/EventsContextAnalyzer.h>
 #include <GDCore/IDE/Events/EventsParametersLister.h>
 #include <GDCore/IDE/Events/EventsTypesLister.h>
@@ -477,6 +478,7 @@ typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
 #define STATIC_RenameObjectInEvents RenameObjectInEvents
 #define STATIC_RemoveObjectInEvents RemoveObjectInEvents
 #define STATIC_ReplaceStringInEvents ReplaceStringInEvents
+#define STATIC_ExposeProjectEvents ExposeProjectEvents
 
 #define STATIC_GetBehaviorMetadata GetBehaviorMetadata
 #define STATIC_GetObjectMetadata GetObjectMetadata
@@ -515,6 +517,10 @@ typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
 #define STATIC_UnfoldWhenContaining UnfoldWhenContaining
 
 #define STATIC_ParametersToObjectsContainer ParametersToObjectsContainer
+
+#define STATIC_GetNamespaceSeparator GetNamespaceSeparator
+#define STATIC_RenameEventsFunctionsExtension RenameEventsFunctionsExtension
+#define STATIC_RenameEventsFunction RenameEventsFunction
 
 // We postfix some methods with "At" as Javascript does not support overloading
 #define GetLayoutAt GetLayout

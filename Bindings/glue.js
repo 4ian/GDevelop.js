@@ -3981,6 +3981,37 @@ WholeProjectRefactorer.prototype.__class__ = WholeProjectRefactorer;
 WholeProjectRefactorer.__cache__ = {};
 Module['WholeProjectRefactorer'] = WholeProjectRefactorer;
 
+WholeProjectRefactorer.prototype['STATIC_ExposeProjectEvents'] = WholeProjectRefactorer.prototype.STATIC_ExposeProjectEvents = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_WholeProjectRefactorer_STATIC_ExposeProjectEvents_2(self, arg0, arg1);
+};;
+
+WholeProjectRefactorer.prototype['STATIC_RenameEventsFunctionsExtension'] = WholeProjectRefactorer.prototype.STATIC_RenameEventsFunctionsExtension = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  _emscripten_bind_WholeProjectRefactorer_STATIC_RenameEventsFunctionsExtension_4(self, arg0, arg1, arg2, arg3);
+};;
+
+WholeProjectRefactorer.prototype['STATIC_RenameEventsFunction'] = WholeProjectRefactorer.prototype.STATIC_RenameEventsFunction = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  _emscripten_bind_WholeProjectRefactorer_STATIC_RenameEventsFunction_4(self, arg0, arg1, arg2, arg3);
+};;
+
 WholeProjectRefactorer.prototype['STATIC_ObjectRenamedInLayout'] = WholeProjectRefactorer.prototype.STATIC_ObjectRenamedInLayout = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
   ensureCache.prepare();
@@ -6880,6 +6911,11 @@ PlatformExtension.prototype['GetAllStrExpressionsForBehavior'] = PlatformExtensi
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllStrExpressionsForBehavior_1(self, arg0), MapStringExpressionMetadata);
 };;
 
+PlatformExtension.prototype['STATIC_GetNamespaceSeparator'] = PlatformExtension.prototype.STATIC_GetNamespaceSeparator = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_PlatformExtension_STATIC_GetNamespaceSeparator_0(self));
+};;
+
   PlatformExtension.prototype['__destroy__'] = PlatformExtension.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_PlatformExtension___destroy___0(self);
@@ -7611,6 +7647,33 @@ VectorPairStringTextFormatting.prototype['WRAPPED_GetTextFormatting'] = VectorPa
   VectorPairStringTextFormatting.prototype['__destroy__'] = VectorPairStringTextFormatting.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_VectorPairStringTextFormatting___destroy___0(self);
+};
+// InstructionsTypeRenamer
+/** @suppress {undefinedVars, duplicate} */function InstructionsTypeRenamer(arg0, arg1, arg2) {
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  this.ptr = _emscripten_bind_InstructionsTypeRenamer_InstructionsTypeRenamer_3(arg0, arg1, arg2);
+  getCache(InstructionsTypeRenamer)[this.ptr] = this;
+};;
+InstructionsTypeRenamer.prototype = Object.create(WrapperObject.prototype);
+InstructionsTypeRenamer.prototype.constructor = InstructionsTypeRenamer;
+InstructionsTypeRenamer.prototype.__class__ = InstructionsTypeRenamer;
+InstructionsTypeRenamer.__cache__ = {};
+Module['InstructionsTypeRenamer'] = InstructionsTypeRenamer;
+
+InstructionsTypeRenamer.prototype['Launch'] = InstructionsTypeRenamer.prototype.Launch = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_InstructionsTypeRenamer_Launch_1(self, arg0);
+};;
+
+  InstructionsTypeRenamer.prototype['__destroy__'] = InstructionsTypeRenamer.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_InstructionsTypeRenamer___destroy___0(self);
 };
 // Serializer
 function Serializer() { throw "cannot construct a Serializer, no constructor in IDL" }
