@@ -119,7 +119,7 @@ interface Platform {
 interface JsPlatform {
     [Ref] JsPlatform STATIC_Get();
     void AddNewExtension([Const, Ref] PlatformExtension extension);
-    
+
 
     // Inherited from Platform:
     [Const, Value] DOMString GetName();
@@ -1533,6 +1533,8 @@ interface EventsFunctionsExtension {
     [Ref] EventsFunctionsExtension SetFullName([Const] DOMString fullName);
     [Const, Ref] DOMString GetFullName();
 
+    boolean HasEventsFunctionNamed([Const] DOMString name);
+    [Ref] EventsFunction GetEventsFunction([Const] DOMString name);
     [Ref] VectorEventsFunction GetEventsFunctions();
 
     void SerializeTo([Ref] SerializerElement element);

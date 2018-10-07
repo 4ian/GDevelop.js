@@ -2183,11 +2183,18 @@ describe('libGD.js', function() {
       eventsFunction.setName('MyFunction');
       eventsFunctionsExtension.getEventsFunctions().push_back(eventsFunction);
       eventsFunction.delete();
+      expect(eventsFunctionsExtension.hasEventsFunctionNamed('MyFunction')).toBe(true);
+      expect(eventsFunctionsExtension.hasEventsFunctionNamed('MyNotExistingFunction')).toBe(false);
       expect(eventsFunctionsExtension.getEventsFunctions().size()).toBe(1);
       expect(
         eventsFunctionsExtension
           .getEventsFunctions()
           .at(0)
+          .getName()
+      ).toBe('MyFunction');
+      expect(
+        eventsFunctionsExtension
+          .getEventsFunction('MyFunction')
           .getName()
       ).toBe('MyFunction');
 
