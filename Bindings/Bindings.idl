@@ -111,15 +111,15 @@ interface Platform {
     [Const, Value] DOMString GetSubtitle();
     [Const, Value] DOMString GetDescription();
     boolean IsExtensionLoaded([Const] DOMString name);
+    void RemoveExtension([Const] DOMString name);
 
     [Const, Ref] VectorPlatformExtension GetAllPlatformExtensions();
-    //TODO:
-    //createObject
 };
 
 interface JsPlatform {
     [Ref] JsPlatform STATIC_Get();
     void AddNewExtension([Const, Ref] PlatformExtension extension);
+
 
     // Inherited from Platform:
     [Const, Value] DOMString GetName();
@@ -127,6 +127,7 @@ interface JsPlatform {
     [Const, Value] DOMString GetSubtitle();
     [Const, Value] DOMString GetDescription();
     boolean IsExtensionLoaded([Const] DOMString name);
+    void RemoveExtension([Const] DOMString name);
 
     [Const, Ref] VectorPlatformExtension GetAllPlatformExtensions();
 };
@@ -321,6 +322,14 @@ interface Project {
     unsigned long GetExternalLayoutsCount();
     [Ref] ExternalLayout InsertNewExternalLayout([Const] DOMString name, unsigned long position);
     void RemoveExternalLayout([Const] DOMString name);
+
+    boolean HasEventsFunctionsExtensionNamed([Const] DOMString name);
+    [Ref] EventsFunctionsExtension GetEventsFunctionsExtension([Const] DOMString name);
+    [Ref] EventsFunctionsExtension GetEventsFunctionsExtensionAt(unsigned long index);
+    void SwapEventsFunctionsExtensions(unsigned long first, unsigned long second);
+    unsigned long GetEventsFunctionsExtensionsCount();
+    [Ref] EventsFunctionsExtension InsertNewEventsFunctionsExtension([Const] DOMString name, unsigned long position);
+    void RemoveEventsFunctionsExtension([Const] DOMString name);
 
     [Ref] VariablesContainer GetVariables();
     [Ref] ResourcesManager GetResourcesManager();
@@ -855,7 +864,7 @@ interface InstructionMetadata {
     [Const, Ref] DOMString GetSmallIconFilename();
     [Const, Ref] DOMString GetHelpPath();
     boolean CanHaveSubInstructions();
-    [Const, Ref] ParameterMetadata GetParameter(unsigned long index);
+    [Ref] ParameterMetadata GetParameter(unsigned long index);
     unsigned long GetParametersCount();
     long GetUsageComplexity();
     boolean IsHidden();
@@ -928,6 +937,7 @@ interface VectorParameterMetadata {
     unsigned long size();
     [Ref] ParameterMetadata at(unsigned long index);
     void WRAPPED_set(unsigned long index, [Const, Ref] ParameterMetadata parameterMetadata);
+    void FREE_removeFromVectorParameterMetadata(unsigned long index);
     void clear();
 };
 
@@ -1101,6 +1111,8 @@ interface PlatformExtension {
     [Ref] MapStringInstructionMetadata GetAllConditionsForBehavior([Const] DOMString autoType);
     [Ref] MapStringExpressionMetadata GetAllExpressionsForBehavior([Const] DOMString autoType);
     [Ref] MapStringExpressionMetadata GetAllStrExpressionsForBehavior([Const] DOMString autoType);
+
+    [Const, Value] DOMString STATIC_GetNamespaceSeparator();
 };
 
 interface EventsList {
@@ -1367,13 +1379,24 @@ interface VectorEventsSearchResult {
 };
 
 interface EventsRefactorer {
-    void STATIC_RenameObjectInEvents([Const, Ref] Platform platform, [Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString oldName, [Const] DOMString newName);
-    void STATIC_RemoveObjectInEvents([Const, Ref] Platform platform, [Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString name);
-    void STATIC_ReplaceStringInEvents([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString toReplace, [Const] DOMString newString, boolean matchCase, boolean inConditions, boolean inActions);
-    [Value] VectorEventsSearchResult STATIC_SearchInEvents([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Const] DOMString search, boolean matchCase, boolean inConditions, boolean inActions);
+    void STATIC_RenameObjectInEvents([Const, Ref] Platform platform, [Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString oldName, [Const] DOMString newName);
+    void STATIC_RemoveObjectInEvents([Const, Ref] Platform platform, [Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString name);
+    void STATIC_ReplaceStringInEvents([Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString toReplace, [Const] DOMString newString, boolean matchCase, boolean inConditions, boolean inActions);
+    [Value] VectorEventsSearchResult STATIC_SearchInEvents([Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString search, boolean matchCase, boolean inConditions, boolean inActions);
 };
 
 interface WholeProjectRefactorer {
+    void STATIC_ExposeProjectEvents([Ref] Project project, [Ref] ArbitraryEventsWorker worker);
+    void STATIC_RenameEventsFunctionsExtension(
+      [Ref] Project project,
+      [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension,
+      [Const] DOMString oldName,
+      [Const] DOMString newName);
+    void STATIC_RenameEventsFunction(
+      [Ref] Project project,
+      [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension,
+      [Const] DOMString oldName,
+      [Const] DOMString newName);
     void STATIC_ObjectRenamedInLayout([Ref] Project project, [Ref] Layout layout, [Const] DOMString oldName, [Const] DOMString newName);
     void STATIC_ObjectRemovedInLayout([Ref] Project project, [Ref] Layout layout, [Const] DOMString objectName, boolean removeEventsAndGroups);
     void STATIC_GlobalObjectRenamed([Ref] Project project, [Const] DOMString oldName, [Const] DOMString newName);
@@ -1459,6 +1482,66 @@ interface CallbacksForExpressionCorrectnessTesting {
     unsigned long GetFirstErrorPosition();
 };
 
+enum EventsFunction_FunctionType {
+  "EventsFunction::Action",
+  "EventsFunction::Condition",
+  "EventsFunction::Expression",
+  "EventsFunction::StringExpression"
+};
+
+interface EventsFunction {
+    void EventsFunction();
+
+    [Ref] EventsFunction SetDescription([Const] DOMString description);
+    [Const, Ref] DOMString GetDescription();
+    [Ref] EventsFunction SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    [Ref] EventsFunction SetFullName([Const] DOMString fullName);
+    [Const, Ref] DOMString GetFullName();
+    [Ref] EventsFunction SetSentence([Const] DOMString sentence);
+    [Const, Ref] DOMString GetSentence();
+    [Ref] EventsFunction SetFunctionType(EventsFunction_FunctionType type);
+    EventsFunction_FunctionType GetFunctionType();
+
+    [Ref] EventsList GetEvents();
+    [Ref] VectorParameterMetadata GetParameters();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface VectorEventsFunction {
+    void VectorEventsFunction();
+
+    void push_back([Const, Ref] EventsFunction eventsFunction);
+    unsigned long size();
+    [Ref] EventsFunction at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] EventsFunction eventsFunction);
+    void clear();
+};
+
+interface EventsFunctionsExtension {
+    void EventsFunctionsExtension();
+
+    [Ref] EventsFunctionsExtension SetNamespace([Const] DOMString namespace);
+    [Const, Ref] DOMString GetNamespace();
+    [Ref] EventsFunctionsExtension SetVersion([Const] DOMString version);
+    [Const, Ref] DOMString GetVersion();
+    [Ref] EventsFunctionsExtension SetDescription([Const] DOMString description);
+    [Const, Ref] DOMString GetDescription();
+    [Ref] EventsFunctionsExtension SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    [Ref] EventsFunctionsExtension SetFullName([Const] DOMString fullName);
+    [Const, Ref] DOMString GetFullName();
+
+    boolean HasEventsFunctionNamed([Const] DOMString name);
+    [Ref] EventsFunction GetEventsFunction([Const] DOMString name);
+    [Ref] VectorEventsFunction GetEventsFunctions();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
 interface AbstractFileSystem {
 };
 
@@ -1510,6 +1593,12 @@ interface EventsTypesLister {
     void Launch([Ref] EventsList events);
 };
 
+interface InstructionsTypeRenamer {
+    void InstructionsTypeRenamer([Const, Ref] Project project, [Const] DOMString oldType, [Const] DOMString newType);
+
+    //Inherited from ArbitraryEventsWorker
+    void Launch([Ref] EventsList events);
+};
 
 interface EventsContext {
     [Const, Ref] SetString GetObjectOrGroupNames();
@@ -2084,7 +2173,7 @@ interface ParticleEmitterObject {
 [NoDelete, Prefix="gdjs::"]
 interface EventsCodeGenerator {
     [Const, Value] DOMString STATIC_GenerateSceneEventsCompleteCode([Ref] Project project, [Ref] Layout layout, [Ref] EventsList events, [Ref] SetString includes, boolean compilationForRuntime);
-    [Const, Value] DOMString STATIC_GenerateEventsFunctionCode([Ref] Project project, [Const, Ref] VectorParameterMetadata parameters, [Const, Ref] EventsList events, boolean compilationForRuntime);
+    [Const, Value] DOMString STATIC_GenerateEventsFunctionCode([Ref] Project project, [Const, Ref] EventsFunction eventsFunction, [Const] DOMString codeNamespace, [Ref] SetString includes, boolean compilationForRuntime);
 };
 
 [Prefix="gdjs::"]

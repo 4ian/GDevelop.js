@@ -21,11 +21,14 @@
 #include <GDCore/Events/Parsers/ExpressionParser.h>
 #include <GDCore/Extensions/Metadata/MetadataProvider.h>
 #include <GDCore/Extensions/Metadata/ParameterMetadataTools.h>
+#include <GDCore/Project/EventsFunction.h>
+#include <GDCore/Project/EventsFunctionsExtension.h>
 #include <GDCore/IDE/AbstractFileSystem.h>
 #include <GDCore/IDE/Dialogs/LayoutEditorCanvas/LayoutEditorCanvasOptions.h>
 #include <GDCore/IDE/Dialogs/ObjectListDialogsHelper.h>
 #include <GDCore/IDE/Dialogs/PropertyDescriptor.h>
 #include <GDCore/IDE/Events/ArbitraryEventsWorker.h>
+#include <GDCore/IDE/Events/InstructionsTypeRenamer.h>
 #include <GDCore/IDE/Events/EventsContextAnalyzer.h>
 #include <GDCore/IDE/Events/EventsParametersLister.h>
 #include <GDCore/IDE/Events/EventsTypesLister.h>
@@ -340,6 +343,10 @@ void removeFromVectorVector2f(std::vector<sf::Vector2f> &vec, size_t pos) {
   vec.erase(vec.begin() + pos);
 }
 
+void removeFromVectorParameterMetadata(std::vector<gd::ParameterMetadata> &vec, size_t pos) {
+  vec.erase(vec.begin() + pos);
+}
+
 // Implement a conversion from std::set<gd::String> to std::vector<gd::String>
 // as there is no easy way to properly expose iterators :/
 std::vector<gd::String> toNewVectorString(const std::set<gd::String> &set) {
@@ -372,8 +379,10 @@ typedef std::vector<Polygon2d> VectorPolygon2d;
 typedef std::vector<sf::Vector2f> VectorVector2f;
 typedef std::vector<EventsSearchResult> VectorEventsSearchResult;
 typedef std::vector<gd::ParameterMetadata> VectorParameterMetadata;
+typedef std::vector<gd::EventsFunction> VectorEventsFunction;
 typedef gd::Object gdObject;  // To avoid clashing javascript Object in glue.js
 typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
+typedef EventsFunction::FunctionType EventsFunction_FunctionType;
 
 typedef ExtensionAndMetadata<BehaviorMetadata> ExtensionAndBehaviorMetadata;
 typedef ExtensionAndMetadata<ObjectMetadata> ExtensionAndObjectMetadata;
@@ -473,6 +482,7 @@ typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
 #define STATIC_RenameObjectInEvents RenameObjectInEvents
 #define STATIC_RemoveObjectInEvents RemoveObjectInEvents
 #define STATIC_ReplaceStringInEvents ReplaceStringInEvents
+#define STATIC_ExposeProjectEvents ExposeProjectEvents
 
 #define STATIC_GetBehaviorMetadata GetBehaviorMetadata
 #define STATIC_GetObjectMetadata GetObjectMetadata
@@ -512,10 +522,15 @@ typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
 
 #define STATIC_ParametersToObjectsContainer ParametersToObjectsContainer
 
+#define STATIC_GetNamespaceSeparator GetNamespaceSeparator
+#define STATIC_RenameEventsFunctionsExtension RenameEventsFunctionsExtension
+#define STATIC_RenameEventsFunction RenameEventsFunction
+
 // We postfix some methods with "At" as Javascript does not support overloading
 #define GetLayoutAt GetLayout
 #define GetExternalEventsAt GetExternalEvents
 #define GetExternalLayoutAt GetExternalLayout
+#define GetEventsFunctionsExtensionAt GetEventsFunctionsExtension
 #define GetLayerAt GetLayer
 #define GetObjectAt GetObject
 #define GetAt Get

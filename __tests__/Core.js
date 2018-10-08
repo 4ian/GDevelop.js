@@ -97,6 +97,17 @@ describe('libGD.js', function() {
       expect(project.getUsedExtensions().size()).toBe(0);
     });
 
+    it('handles events functions extensions', function() {
+      expect(project.hasEventsFunctionsExtensionNamed('Ext')).toBe(false);
+
+      project.insertNewEventsFunctionsExtension('Ext', 0);
+      expect(project.hasEventsFunctionsExtensionNamed('Ext')).toBe(true);
+      expect(project.getEventsFunctionsExtension('Ext').getName()).toBe('Ext');
+
+      project.removeEventsFunctionsExtension('Ext');
+      expect(project.hasEventsFunctionsExtensionNamed('Ext')).toBe(false);
+    });
+
     afterAll(function() {
       project.delete();
     });
@@ -1814,7 +1825,7 @@ describe('libGD.js', function() {
       };
       fs.writeToFile = function(path, content) {
         //Validate that some code have been generated:
-        expect(content).toMatch("runtimeScene.getOnceTriggers().startNewFrame");
+        expect(content).toMatch('runtimeScene.getOnceTriggers().startNewFrame');
         done();
       };
 
@@ -2028,6 +2039,43 @@ describe('libGD.js', function() {
       expect(extension.getAuthor()).toBe('Author of test extension');
       expect(extension.getLicense()).toBe('License of test extension');
       expect(extension.getHelpPath()).toBe('/path/to/extension/help');
+      extension.delete();
+    });
+  });
+
+  describe('gd.Platform (using gd.JsPlatform)', function() {
+    it('can have extension added and removed', function() {
+      const extension = new gd.PlatformExtension();
+      extension.setExtensionInformation(
+        'MyNewExtension',
+        'Full name of test extension',
+        'Description of test extension',
+        'Author of test extension',
+        'License of test extension'
+      );
+
+      gd.JsPlatform.get().addNewExtension(extension);
+      expect(gd.JsPlatform.get().isExtensionLoaded('MyNewExtension')).toBe(
+        true
+      );
+      gd.JsPlatform.get().removeExtension('MyNewExtension');
+      expect(gd.JsPlatform.get().isExtensionLoaded('MyNewExtension')).toBe(
+        false
+      );
+      gd.JsPlatform.get().addNewExtension(extension);
+      gd.JsPlatform.get().addNewExtension(extension);
+      expect(gd.JsPlatform.get().isExtensionLoaded('MyNewExtension')).toBe(
+        true
+      );
+      gd.JsPlatform.get().removeExtension('MyNewExtension');
+      expect(gd.JsPlatform.get().isExtensionLoaded('MyNewExtension')).toBe(
+        false
+      );
+      extension.delete();
+    });
+
+    it('has a namespace separator', function() {
+      expect(gd.PlatformExtension.getNamespaceSeparator()).toBe('::');
     });
   });
 
@@ -2047,7 +2095,9 @@ describe('libGD.js', function() {
       const parameter3 = new gd.ParameterMetadata();
       parameter3.setType('objectList');
       // parameter3.setName(''); No name for this parameter
-      parameter3.setDescription('This parameter will be skipped, as it has no name');
+      parameter3.setDescription(
+        'This parameter will be skipped, as it has no name'
+      );
       parameter3.setExtraInfo('Sprite');
       const parameter4 = new gd.ParameterMetadata();
       parameter4.setType('string');
@@ -2064,6 +2114,11 @@ describe('libGD.js', function() {
       parameters.push_back(parameter3);
       parameters.push_back(parameter4);
       parameters.push_back(parameter5);
+      
+      parameters.push_back(parameter5);
+      expect(parameters.size()).toBe(6);
+      gd.removeFromVectorParameterMetadata(parameters, 5);
+      expect(parameters.size()).toBe(5);
 
       objectsContainer = new gd.ObjectsContainer();
       gd.ParameterMetadataTools.parametersToObjectsContainer(
@@ -2074,11 +2129,81 @@ describe('libGD.js', function() {
 
       expect(objectsContainer.getObjectsCount()).toBe(2);
       expect(objectsContainer.hasObjectNamed('MyObjectWithoutType')).toBe(true);
-      expect(objectsContainer.getObject('MyObjectWithoutType').getType()).toBe('');
+      expect(objectsContainer.getObject('MyObjectWithoutType').getType()).toBe(
+        ''
+      );
       expect(objectsContainer.hasObjectNamed('MySpriteObject')).toBe(true);
       expect(objectsContainer.getObject('MySpriteObject').getType()).toBe(
         'Sprite'
       );
+
+      project.delete();
+    });
+  });
+
+  describe('gd.EventsFunction', () => {
+    it('can store events', function() {
+      const project = gd.ProjectHelper.createNewGDJSProject();
+      const eventsFunction = new gd.EventsFunction();
+      const events = eventsFunction.getEvents();
+      expect(events.getEventsCount()).toBe(0);
+      var evt = events.insertNewEvent(
+        project,
+        'BuiltinCommonInstructions::Standard',
+        0
+      );
+      expect(events.getEventsCount()).toBe(1);
+      eventsFunction.delete();
+      project.delete();
+    });
+    it('can have a name, fullname and description', function() {
+      const eventsFunction = new gd.EventsFunction();
+      eventsFunction.setName('My name');
+      eventsFunction.setFullName('My descriptive name');
+      eventsFunction.setDescription('My description');
+      expect(eventsFunction.getName()).toBe('My name');
+      expect(eventsFunction.getFullName()).toBe('My descriptive name');
+      expect(eventsFunction.getDescription()).toBe('My description');
+      eventsFunction.delete();
+    });
+  });
+
+  describe('gd.EventsFunctionsExtension', () => {
+    it('can have a namespace, version, name, fullname, description', function() {
+      const eventsFunctionsExtension = new gd.EventsFunctionsExtension();
+      eventsFunctionsExtension.setNamespace('MyExt');
+      eventsFunctionsExtension.setVersion('1.1');
+      eventsFunctionsExtension.setName('My name');
+      eventsFunctionsExtension.setFullName('My descriptive name');
+      eventsFunctionsExtension.setDescription('My description');
+      expect(eventsFunctionsExtension.getNamespace()).toBe('MyExt');
+      expect(eventsFunctionsExtension.getVersion()).toBe('1.1');
+      expect(eventsFunctionsExtension.getName()).toBe('My name');
+      expect(eventsFunctionsExtension.getFullName()).toBe(
+        'My descriptive name'
+      );
+      expect(eventsFunctionsExtension.getDescription()).toBe('My description');
+
+      const eventsFunction = new gd.EventsFunction();
+      eventsFunction.setName('MyFunction');
+      eventsFunctionsExtension.getEventsFunctions().push_back(eventsFunction);
+      eventsFunction.delete();
+      expect(eventsFunctionsExtension.hasEventsFunctionNamed('MyFunction')).toBe(true);
+      expect(eventsFunctionsExtension.hasEventsFunctionNamed('MyNotExistingFunction')).toBe(false);
+      expect(eventsFunctionsExtension.getEventsFunctions().size()).toBe(1);
+      expect(
+        eventsFunctionsExtension
+          .getEventsFunctions()
+          .at(0)
+          .getName()
+      ).toBe('MyFunction');
+      expect(
+        eventsFunctionsExtension
+          .getEventsFunction('MyFunction')
+          .getName()
+      ).toBe('MyFunction');
+
+      eventsFunctionsExtension.delete();
     });
   });
 });

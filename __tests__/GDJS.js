@@ -39,9 +39,12 @@ describe('libGD.js - GDJS related tests', function() {
 
     it('can generate code for a layout with generateEventsFunctionCode', function() {
       const project = new gd.ProjectHelper.createNewGDJSProject();
-      
+
+      const includeFiles = new gd.SetString();
+      const eventsFunction = new gd.EventsFunction();
+
       // Create a function accepting 4 parameters:
-      const parameters = new gd.VectorParameterMetadata();
+      const parameters = eventsFunction.getParameters();
       const parameter1 = new gd.ParameterMetadata();
       parameter1.setType('objectList');
       parameter1.setName('MyObject');
@@ -65,7 +68,7 @@ describe('libGD.js - GDJS related tests', function() {
       parameters.push_back(parameter4);
 
       // Create a repeat event with...
-      const eventsList = new gd.EventsList();
+      const eventsList = eventsFunction.getEvents();
 
       const evt = eventsList.insertNewEvent(
         project,
@@ -80,7 +83,7 @@ describe('libGD.js - GDJS related tests', function() {
       gd.asRepeatEvent(evt)
         .getConditions()
         .insert(condition, 0);
-      
+
       // ...and an action to update a variable of MyObject
       const action = new gd.Instruction();
       action.setType('ModVarObjet');
@@ -93,12 +96,17 @@ describe('libGD.js - GDJS related tests', function() {
         .getActions()
         .insert(action, 0);
 
+      const namespace = "gdjs.eventsFunction.myTest";
       const code = gd.EventsCodeGenerator.generateEventsFunctionCode(
         project,
-        parameters,
-        eventsList,
+        eventsFunction,
+        namespace,
+        includeFiles,
         true
       );
+
+      // Check that the function name is properly generated
+      expect(code).toMatch(namespace + '.func = function(');
 
       // Check that the context for the events function is here...
       expect(code).toMatch('function(runtimeScene, eventsFunctionContext)');
@@ -117,7 +125,7 @@ describe('libGD.js - GDJS related tests', function() {
 
       // Trigger once is used in a condition
       expect(code).toMatch('runtimeScene.getOnceTriggers().triggerOnce');
-      
+
       // A variable is set to 42
       expect(code).toMatch('getVariables().get("ObjectVariable")).add(42)');
 

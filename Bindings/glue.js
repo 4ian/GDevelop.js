@@ -469,6 +469,39 @@ gdObject.prototype['UnserializeFrom'] = gdObject.prototype.UnserializeFrom = /**
   var self = this.ptr;
   _emscripten_bind_gdObject___destroy___0(self);
 };
+// Vector2f
+/** @suppress {undefinedVars, duplicate} */function Vector2f() {
+  this.ptr = _emscripten_bind_Vector2f_Vector2f_0();
+  getCache(Vector2f)[this.ptr] = this;
+};;
+Vector2f.prototype = Object.create(WrapperObject.prototype);
+Vector2f.prototype.constructor = Vector2f;
+Vector2f.prototype.__class__ = Vector2f;
+Vector2f.__cache__ = {};
+Module['Vector2f'] = Vector2f;
+
+  Vector2f.prototype['get_x'] = Vector2f.prototype.get_x = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_Vector2f_get_x_0(self);
+};
+    Vector2f.prototype['set_x'] = Vector2f.prototype.set_x = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Vector2f_set_x_1(self, arg0);
+};
+  Vector2f.prototype['get_y'] = Vector2f.prototype.get_y = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_Vector2f_get_y_0(self);
+};
+    Vector2f.prototype['set_y'] = Vector2f.prototype.set_y = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_Vector2f_set_y_1(self, arg0);
+};
+  Vector2f.prototype['__destroy__'] = Vector2f.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_Vector2f___destroy___0(self);
+};
 // ParticleEmitterObject
 /** @suppress {undefinedVars, duplicate} */function ParticleEmitterObject(arg0) {
   ensureCache.prepare();
@@ -1082,6 +1115,107 @@ VectorPlatformExtension.prototype['WRAPPED_at'] = VectorPlatformExtension.protot
   VectorPlatformExtension.prototype['__destroy__'] = VectorPlatformExtension.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_VectorPlatformExtension___destroy___0(self);
+};
+// EventsFunction
+/** @suppress {undefinedVars, duplicate} */function EventsFunction() {
+  this.ptr = _emscripten_bind_EventsFunction_EventsFunction_0();
+  getCache(EventsFunction)[this.ptr] = this;
+};;
+EventsFunction.prototype = Object.create(WrapperObject.prototype);
+EventsFunction.prototype.constructor = EventsFunction;
+EventsFunction.prototype.__class__ = EventsFunction;
+EventsFunction.__cache__ = {};
+Module['EventsFunction'] = EventsFunction;
+
+EventsFunction.prototype['SetDescription'] = EventsFunction.prototype.SetDescription = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_EventsFunction_SetDescription_1(self, arg0), EventsFunction);
+};;
+
+EventsFunction.prototype['GetDescription'] = EventsFunction.prototype.GetDescription = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_EventsFunction_GetDescription_0(self));
+};;
+
+EventsFunction.prototype['SetName'] = EventsFunction.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_EventsFunction_SetName_1(self, arg0), EventsFunction);
+};;
+
+EventsFunction.prototype['GetName'] = EventsFunction.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_EventsFunction_GetName_0(self));
+};;
+
+EventsFunction.prototype['SetFullName'] = EventsFunction.prototype.SetFullName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_EventsFunction_SetFullName_1(self, arg0), EventsFunction);
+};;
+
+EventsFunction.prototype['GetFullName'] = EventsFunction.prototype.GetFullName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_EventsFunction_GetFullName_0(self));
+};;
+
+EventsFunction.prototype['SetSentence'] = EventsFunction.prototype.SetSentence = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_EventsFunction_SetSentence_1(self, arg0), EventsFunction);
+};;
+
+EventsFunction.prototype['GetSentence'] = EventsFunction.prototype.GetSentence = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_EventsFunction_GetSentence_0(self));
+};;
+
+EventsFunction.prototype['SetFunctionType'] = EventsFunction.prototype.SetFunctionType = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_EventsFunction_SetFunctionType_1(self, arg0), EventsFunction);
+};;
+
+EventsFunction.prototype['GetFunctionType'] = EventsFunction.prototype.GetFunctionType = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_EventsFunction_GetFunctionType_0(self);
+};;
+
+EventsFunction.prototype['GetEvents'] = EventsFunction.prototype.GetEvents = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_EventsFunction_GetEvents_0(self), EventsList);
+};;
+
+EventsFunction.prototype['GetParameters'] = EventsFunction.prototype.GetParameters = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_EventsFunction_GetParameters_0(self), VectorParameterMetadata);
+};;
+
+EventsFunction.prototype['SerializeTo'] = EventsFunction.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_EventsFunction_SerializeTo_1(self, arg0);
+};;
+
+EventsFunction.prototype['UnserializeFrom'] = EventsFunction.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_EventsFunction_UnserializeFrom_2(self, arg0, arg1);
+};;
+
+  EventsFunction.prototype['__destroy__'] = EventsFunction.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_EventsFunction___destroy___0(self);
 };
 // PanelSpriteObject
 /** @suppress {undefinedVars, duplicate} */function PanelSpriteObject(arg0) {
@@ -2089,6 +2223,57 @@ Project.prototype['RemoveExternalLayout'] = Project.prototype.RemoveExternalLayo
   _emscripten_bind_Project_RemoveExternalLayout_1(self, arg0);
 };;
 
+Project.prototype['HasEventsFunctionsExtensionNamed'] = Project.prototype.HasEventsFunctionsExtensionNamed = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_Project_HasEventsFunctionsExtensionNamed_1(self, arg0));
+};;
+
+Project.prototype['GetEventsFunctionsExtension'] = Project.prototype.GetEventsFunctionsExtension = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_Project_GetEventsFunctionsExtension_1(self, arg0), EventsFunctionsExtension);
+};;
+
+Project.prototype['GetEventsFunctionsExtensionAt'] = Project.prototype.GetEventsFunctionsExtensionAt = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_Project_GetEventsFunctionsExtensionAt_1(self, arg0), EventsFunctionsExtension);
+};;
+
+Project.prototype['SwapEventsFunctionsExtensions'] = Project.prototype.SwapEventsFunctionsExtensions = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_Project_SwapEventsFunctionsExtensions_2(self, arg0, arg1);
+};;
+
+Project.prototype['GetEventsFunctionsExtensionsCount'] = Project.prototype.GetEventsFunctionsExtensionsCount = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_Project_GetEventsFunctionsExtensionsCount_0(self);
+};;
+
+Project.prototype['InsertNewEventsFunctionsExtension'] = Project.prototype.InsertNewEventsFunctionsExtension = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  return wrapPointer(_emscripten_bind_Project_InsertNewEventsFunctionsExtension_2(self, arg0, arg1), EventsFunctionsExtension);
+};;
+
+Project.prototype['RemoveEventsFunctionsExtension'] = Project.prototype.RemoveEventsFunctionsExtension = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Project_RemoveEventsFunctionsExtension_1(self, arg0);
+};;
+
 Project.prototype['GetVariables'] = Project.prototype.GetVariables = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Project_GetVariables_0(self), VariablesContainer);
@@ -2556,6 +2741,12 @@ VectorParameterMetadata.prototype['WRAPPED_set'] = VectorParameterMetadata.proto
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   _emscripten_bind_VectorParameterMetadata_WRAPPED_set_2(self, arg0, arg1);
+};;
+
+VectorParameterMetadata.prototype['FREE_removeFromVectorParameterMetadata'] = VectorParameterMetadata.prototype.FREE_removeFromVectorParameterMetadata = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VectorParameterMetadata_FREE_removeFromVectorParameterMetadata_1(self, arg0);
 };;
 
 VectorParameterMetadata.prototype['clear'] = VectorParameterMetadata.prototype.clear = /** @suppress {undefinedVars, duplicate} */function() {
@@ -3377,6 +3568,14 @@ Platform.prototype['IsExtensionLoaded'] = Platform.prototype.IsExtensionLoaded =
   return !!(_emscripten_bind_Platform_IsExtensionLoaded_1(self, arg0));
 };;
 
+Platform.prototype['RemoveExtension'] = Platform.prototype.RemoveExtension = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Platform_RemoveExtension_1(self, arg0);
+};;
+
 Platform.prototype['GetAllPlatformExtensions'] = Platform.prototype.GetAllPlatformExtensions = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_Platform_GetAllPlatformExtensions_0(self), VectorPlatformExtension);
@@ -3787,6 +3986,37 @@ WholeProjectRefactorer.prototype.constructor = WholeProjectRefactorer;
 WholeProjectRefactorer.prototype.__class__ = WholeProjectRefactorer;
 WholeProjectRefactorer.__cache__ = {};
 Module['WholeProjectRefactorer'] = WholeProjectRefactorer;
+
+WholeProjectRefactorer.prototype['STATIC_ExposeProjectEvents'] = WholeProjectRefactorer.prototype.STATIC_ExposeProjectEvents = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_WholeProjectRefactorer_STATIC_ExposeProjectEvents_2(self, arg0, arg1);
+};;
+
+WholeProjectRefactorer.prototype['STATIC_RenameEventsFunctionsExtension'] = WholeProjectRefactorer.prototype.STATIC_RenameEventsFunctionsExtension = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  _emscripten_bind_WholeProjectRefactorer_STATIC_RenameEventsFunctionsExtension_4(self, arg0, arg1, arg2, arg3);
+};;
+
+WholeProjectRefactorer.prototype['STATIC_RenameEventsFunction'] = WholeProjectRefactorer.prototype.STATIC_RenameEventsFunction = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
+  else arg3 = ensureString(arg3);
+  _emscripten_bind_WholeProjectRefactorer_STATIC_RenameEventsFunction_4(self, arg0, arg1, arg2, arg3);
+};;
 
 WholeProjectRefactorer.prototype['STATIC_ObjectRenamedInLayout'] = WholeProjectRefactorer.prototype.STATIC_ObjectRenamedInLayout = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
   var self = this.ptr;
@@ -5335,6 +5565,50 @@ ParameterMetadataTools.prototype['STATIC_ParametersToObjectsContainer'] = Parame
   var self = this.ptr;
   _emscripten_bind_ParameterMetadataTools___destroy___0(self);
 };
+// VectorEventsFunction
+/** @suppress {undefinedVars, duplicate} */function VectorEventsFunction() {
+  this.ptr = _emscripten_bind_VectorEventsFunction_VectorEventsFunction_0();
+  getCache(VectorEventsFunction)[this.ptr] = this;
+};;
+VectorEventsFunction.prototype = Object.create(WrapperObject.prototype);
+VectorEventsFunction.prototype.constructor = VectorEventsFunction;
+VectorEventsFunction.prototype.__class__ = VectorEventsFunction;
+VectorEventsFunction.__cache__ = {};
+Module['VectorEventsFunction'] = VectorEventsFunction;
+
+VectorEventsFunction.prototype['push_back'] = VectorEventsFunction.prototype.push_back = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VectorEventsFunction_push_back_1(self, arg0);
+};;
+
+VectorEventsFunction.prototype['size'] = VectorEventsFunction.prototype.size = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_VectorEventsFunction_size_0(self);
+};;
+
+VectorEventsFunction.prototype['at'] = VectorEventsFunction.prototype.at = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_VectorEventsFunction_at_1(self, arg0), EventsFunction);
+};;
+
+VectorEventsFunction.prototype['WRAPPED_set'] = VectorEventsFunction.prototype.WRAPPED_set = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_VectorEventsFunction_WRAPPED_set_2(self, arg0, arg1);
+};;
+
+VectorEventsFunction.prototype['clear'] = VectorEventsFunction.prototype.clear = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorEventsFunction_clear_0(self);
+};;
+
+  VectorEventsFunction.prototype['__destroy__'] = VectorEventsFunction.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorEventsFunction___destroy___0(self);
+};
 // ShapePainterObject
 /** @suppress {undefinedVars, duplicate} */function ShapePainterObject(arg0) {
   ensureCache.prepare();
@@ -6137,13 +6411,16 @@ EventsCodeGenerator.prototype['STATIC_GenerateSceneEventsCompleteCode'] = Events
   return Pointer_stringify(_emscripten_bind_EventsCodeGenerator_STATIC_GenerateSceneEventsCompleteCode_5(self, arg0, arg1, arg2, arg3, arg4));
 };;
 
-EventsCodeGenerator.prototype['STATIC_GenerateEventsFunctionCode'] = EventsCodeGenerator.prototype.STATIC_GenerateEventsFunctionCode = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3) {
+EventsCodeGenerator.prototype['STATIC_GenerateEventsFunctionCode'] = EventsCodeGenerator.prototype.STATIC_GenerateEventsFunctionCode = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2, arg3, arg4) {
   var self = this.ptr;
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
   if (arg3 && typeof arg3 === 'object') arg3 = arg3.ptr;
-  return Pointer_stringify(_emscripten_bind_EventsCodeGenerator_STATIC_GenerateEventsFunctionCode_4(self, arg0, arg1, arg2, arg3));
+  if (arg4 && typeof arg4 === 'object') arg4 = arg4.ptr;
+  return Pointer_stringify(_emscripten_bind_EventsCodeGenerator_STATIC_GenerateEventsFunctionCode_5(self, arg0, arg1, arg2, arg3, arg4));
 };;
 
 // MapStringBoolean
@@ -6638,6 +6915,11 @@ PlatformExtension.prototype['GetAllStrExpressionsForBehavior'] = PlatformExtensi
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
   return wrapPointer(_emscripten_bind_PlatformExtension_GetAllStrExpressionsForBehavior_1(self, arg0), MapStringExpressionMetadata);
+};;
+
+PlatformExtension.prototype['STATIC_GetNamespaceSeparator'] = PlatformExtension.prototype.STATIC_GetNamespaceSeparator = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_PlatformExtension_STATIC_GetNamespaceSeparator_0(self));
 };;
 
   PlatformExtension.prototype['__destroy__'] = PlatformExtension.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
@@ -7371,6 +7653,33 @@ VectorPairStringTextFormatting.prototype['WRAPPED_GetTextFormatting'] = VectorPa
   VectorPairStringTextFormatting.prototype['__destroy__'] = VectorPairStringTextFormatting.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_VectorPairStringTextFormatting___destroy___0(self);
+};
+// InstructionsTypeRenamer
+/** @suppress {undefinedVars, duplicate} */function InstructionsTypeRenamer(arg0, arg1, arg2) {
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  else arg2 = ensureString(arg2);
+  this.ptr = _emscripten_bind_InstructionsTypeRenamer_InstructionsTypeRenamer_3(arg0, arg1, arg2);
+  getCache(InstructionsTypeRenamer)[this.ptr] = this;
+};;
+InstructionsTypeRenamer.prototype = Object.create(WrapperObject.prototype);
+InstructionsTypeRenamer.prototype.constructor = InstructionsTypeRenamer;
+InstructionsTypeRenamer.prototype.__class__ = InstructionsTypeRenamer;
+InstructionsTypeRenamer.__cache__ = {};
+Module['InstructionsTypeRenamer'] = InstructionsTypeRenamer;
+
+InstructionsTypeRenamer.prototype['Launch'] = InstructionsTypeRenamer.prototype.Launch = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_InstructionsTypeRenamer_Launch_1(self, arg0);
+};;
+
+  InstructionsTypeRenamer.prototype['__destroy__'] = InstructionsTypeRenamer.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_InstructionsTypeRenamer___destroy___0(self);
 };
 // Serializer
 function Serializer() { throw "cannot construct a Serializer, no constructor in IDL" }
@@ -8489,38 +8798,119 @@ VariablesContainer.prototype['UnserializeFrom'] = VariablesContainer.prototype.U
   var self = this.ptr;
   _emscripten_bind_VariablesContainer___destroy___0(self);
 };
-// Vector2f
-/** @suppress {undefinedVars, duplicate} */function Vector2f() {
-  this.ptr = _emscripten_bind_Vector2f_Vector2f_0();
-  getCache(Vector2f)[this.ptr] = this;
+// EventsFunctionsExtension
+/** @suppress {undefinedVars, duplicate} */function EventsFunctionsExtension() {
+  this.ptr = _emscripten_bind_EventsFunctionsExtension_EventsFunctionsExtension_0();
+  getCache(EventsFunctionsExtension)[this.ptr] = this;
 };;
-Vector2f.prototype = Object.create(WrapperObject.prototype);
-Vector2f.prototype.constructor = Vector2f;
-Vector2f.prototype.__class__ = Vector2f;
-Vector2f.__cache__ = {};
-Module['Vector2f'] = Vector2f;
+EventsFunctionsExtension.prototype = Object.create(WrapperObject.prototype);
+EventsFunctionsExtension.prototype.constructor = EventsFunctionsExtension;
+EventsFunctionsExtension.prototype.__class__ = EventsFunctionsExtension;
+EventsFunctionsExtension.__cache__ = {};
+Module['EventsFunctionsExtension'] = EventsFunctionsExtension;
 
-  Vector2f.prototype['get_x'] = Vector2f.prototype.get_x = /** @suppress {undefinedVars, duplicate} */function() {
+EventsFunctionsExtension.prototype['SetNamespace'] = EventsFunctionsExtension.prototype.SetNamespace = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
-  return _emscripten_bind_Vector2f_get_x_0(self);
-};
-    Vector2f.prototype['set_x'] = Vector2f.prototype.set_x = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_EventsFunctionsExtension_SetNamespace_1(self, arg0), EventsFunctionsExtension);
+};;
+
+EventsFunctionsExtension.prototype['GetNamespace'] = EventsFunctionsExtension.prototype.GetNamespace = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_EventsFunctionsExtension_GetNamespace_0(self));
+};;
+
+EventsFunctionsExtension.prototype['SetVersion'] = EventsFunctionsExtension.prototype.SetVersion = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_EventsFunctionsExtension_SetVersion_1(self, arg0), EventsFunctionsExtension);
+};;
+
+EventsFunctionsExtension.prototype['GetVersion'] = EventsFunctionsExtension.prototype.GetVersion = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_EventsFunctionsExtension_GetVersion_0(self));
+};;
+
+EventsFunctionsExtension.prototype['SetDescription'] = EventsFunctionsExtension.prototype.SetDescription = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_EventsFunctionsExtension_SetDescription_1(self, arg0), EventsFunctionsExtension);
+};;
+
+EventsFunctionsExtension.prototype['GetDescription'] = EventsFunctionsExtension.prototype.GetDescription = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_EventsFunctionsExtension_GetDescription_0(self));
+};;
+
+EventsFunctionsExtension.prototype['SetName'] = EventsFunctionsExtension.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_EventsFunctionsExtension_SetName_1(self, arg0), EventsFunctionsExtension);
+};;
+
+EventsFunctionsExtension.prototype['GetName'] = EventsFunctionsExtension.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_EventsFunctionsExtension_GetName_0(self));
+};;
+
+EventsFunctionsExtension.prototype['SetFullName'] = EventsFunctionsExtension.prototype.SetFullName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_EventsFunctionsExtension_SetFullName_1(self, arg0), EventsFunctionsExtension);
+};;
+
+EventsFunctionsExtension.prototype['GetFullName'] = EventsFunctionsExtension.prototype.GetFullName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_EventsFunctionsExtension_GetFullName_0(self));
+};;
+
+EventsFunctionsExtension.prototype['HasEventsFunctionNamed'] = EventsFunctionsExtension.prototype.HasEventsFunctionNamed = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_EventsFunctionsExtension_HasEventsFunctionNamed_1(self, arg0));
+};;
+
+EventsFunctionsExtension.prototype['GetEventsFunction'] = EventsFunctionsExtension.prototype.GetEventsFunction = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_EventsFunctionsExtension_GetEventsFunction_1(self, arg0), EventsFunction);
+};;
+
+EventsFunctionsExtension.prototype['GetEventsFunctions'] = EventsFunctionsExtension.prototype.GetEventsFunctions = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_EventsFunctionsExtension_GetEventsFunctions_0(self), VectorEventsFunction);
+};;
+
+EventsFunctionsExtension.prototype['SerializeTo'] = EventsFunctionsExtension.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Vector2f_set_x_1(self, arg0);
-};
-  Vector2f.prototype['get_y'] = Vector2f.prototype.get_y = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return _emscripten_bind_Vector2f_get_y_0(self);
-};
-    Vector2f.prototype['set_y'] = Vector2f.prototype.set_y = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  _emscripten_bind_EventsFunctionsExtension_SerializeTo_1(self, arg0);
+};;
+
+EventsFunctionsExtension.prototype['UnserializeFrom'] = EventsFunctionsExtension.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_Vector2f_set_y_1(self, arg0);
-};
-  Vector2f.prototype['__destroy__'] = Vector2f.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_EventsFunctionsExtension_UnserializeFrom_2(self, arg0, arg1);
+};;
+
+  EventsFunctionsExtension.prototype['__destroy__'] = EventsFunctionsExtension.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  _emscripten_bind_Vector2f___destroy___0(self);
+  _emscripten_bind_EventsFunctionsExtension___destroy___0(self);
 };
 // EventsRefactorer
 function EventsRefactorer() { throw "cannot construct a EventsRefactorer, no constructor in IDL" }
@@ -9842,6 +10232,14 @@ JsPlatform.prototype['IsExtensionLoaded'] = JsPlatform.prototype.IsExtensionLoad
   return !!(_emscripten_bind_JsPlatform_IsExtensionLoaded_1(self, arg0));
 };;
 
+JsPlatform.prototype['RemoveExtension'] = JsPlatform.prototype.RemoveExtension = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_JsPlatform_RemoveExtension_1(self, arg0);
+};;
+
 JsPlatform.prototype['GetAllPlatformExtensions'] = JsPlatform.prototype.GetAllPlatformExtensions = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_JsPlatform_GetAllPlatformExtensions_0(self), VectorPlatformExtension);
@@ -10354,6 +10752,18 @@ VectorVector2f.prototype['clear'] = VectorVector2f.prototype.clear = /** @suppre
 };
 (function() {
   function setupEnums() {
+    
+
+    // EventsFunction_FunctionType
+
+    Module['EventsFunction']['Action'] = _emscripten_enum_EventsFunction_FunctionType_Action();
+
+    Module['EventsFunction']['Condition'] = _emscripten_enum_EventsFunction_FunctionType_Condition();
+
+    Module['EventsFunction']['Expression'] = _emscripten_enum_EventsFunction_FunctionType_Expression();
+
+    Module['EventsFunction']['StringExpression'] = _emscripten_enum_EventsFunction_FunctionType_StringExpression();
+
     
 
     // ParticleEmitterObject_RendererType
