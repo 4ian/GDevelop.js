@@ -21,8 +21,8 @@
 #include <GDCore/Events/Parsers/ExpressionParser.h>
 #include <GDCore/Extensions/Metadata/MetadataProvider.h>
 #include <GDCore/Extensions/Metadata/ParameterMetadataTools.h>
-#include <GDCore/Extensions/EventsFunction.h>
-#include <GDCore/Extensions/EventsFunctionsExtension.h>
+#include <GDCore/Project/EventsFunction.h>
+#include <GDCore/Project/EventsFunctionsExtension.h>
 #include <GDCore/IDE/AbstractFileSystem.h>
 #include <GDCore/IDE/Dialogs/LayoutEditorCanvas/LayoutEditorCanvasOptions.h>
 #include <GDCore/IDE/Dialogs/ObjectListDialogsHelper.h>
