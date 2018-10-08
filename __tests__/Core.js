@@ -2114,6 +2114,11 @@ describe('libGD.js', function() {
       parameters.push_back(parameter3);
       parameters.push_back(parameter4);
       parameters.push_back(parameter5);
+      
+      parameters.push_back(parameter5);
+      expect(parameters.size()).toBe(6);
+      gd.removeFromVectorParameterMetadata(parameters, 5);
+      expect(parameters.size()).toBe(5);
 
       objectsContainer = new gd.ObjectsContainer();
       gd.ParameterMetadataTools.parametersToObjectsContainer(

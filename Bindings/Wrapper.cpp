@@ -343,6 +343,10 @@ void removeFromVectorVector2f(std::vector<sf::Vector2f> &vec, size_t pos) {
   vec.erase(vec.begin() + pos);
 }
 
+void removeFromVectorParameterMetadata(std::vector<gd::ParameterMetadata> &vec, size_t pos) {
+  vec.erase(vec.begin() + pos);
+}
+
 // Implement a conversion from std::set<gd::String> to std::vector<gd::String>
 // as there is no easy way to properly expose iterators :/
 std::vector<gd::String> toNewVectorString(const std::set<gd::String> &set) {
