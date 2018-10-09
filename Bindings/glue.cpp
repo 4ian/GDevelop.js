@@ -5345,6 +5345,14 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_GetFul
   return self->GetFullName().c_str();
 }
 
+EventsFunction* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_InsertNewEventsFunction_2(EventsFunctionsExtension* self, const char* arg0, unsigned int arg1) {
+  return &self->InsertNewEventsFunction(arg0, arg1);
+}
+
+EventsFunction* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_InsertEventsFunction_2(EventsFunctionsExtension* self, const EventsFunction* arg0, unsigned int arg1) {
+  return &self->InsertEventsFunction(*arg0, arg1);
+}
+
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_HasEventsFunctionNamed_1(EventsFunctionsExtension* self, const char* arg0) {
   return self->HasEventsFunctionNamed(arg0);
 }
@@ -5353,8 +5361,20 @@ EventsFunction* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_Ge
   return &self->GetEventsFunction(arg0);
 }
 
-VectorEventsFunction* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_GetEventsFunctions_0(EventsFunctionsExtension* self) {
-  return &self->GetEventsFunctions();
+EventsFunction* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_GetEventsFunctionAt_1(EventsFunctionsExtension* self, unsigned int arg0) {
+  return &self->GetEventsFunctionAt(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_RemoveEventsFunction_1(EventsFunctionsExtension* self, const char* arg0) {
+  self->RemoveEventsFunction(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_MoveEventsFunction_2(EventsFunctionsExtension* self, unsigned int arg0, unsigned int arg1) {
+  self->MoveEventsFunction(arg0, arg1);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_GetEventsFunctionsCount_0(EventsFunctionsExtension* self) {
+  return self->GetEventsFunctionsCount();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionsExtension_SerializeTo_1(EventsFunctionsExtension* self, SerializerElement* arg0) {

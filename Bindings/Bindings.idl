@@ -1533,10 +1533,15 @@ interface EventsFunctionsExtension {
     [Const, Ref] DOMString GetName();
     [Ref] EventsFunctionsExtension SetFullName([Const] DOMString fullName);
     [Const, Ref] DOMString GetFullName();
-
+    
+    [Ref] EventsFunction InsertNewEventsFunction([Const] DOMString name, unsigned long pos);
+    [Ref] EventsFunction InsertEventsFunction([Const, Ref] EventsFunction eventsFunction, unsigned long pos);
     boolean HasEventsFunctionNamed([Const] DOMString name);
     [Ref] EventsFunction GetEventsFunction([Const] DOMString name);
-    [Ref] VectorEventsFunction GetEventsFunctions();
+    [Ref] EventsFunction GetEventsFunctionAt(unsigned long pos);
+    void RemoveEventsFunction([Const] DOMString name);
+    void MoveEventsFunction(unsigned long oldIndex, unsigned long newIndex);
+    unsigned long GetEventsFunctionsCount();
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
