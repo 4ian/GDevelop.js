@@ -593,6 +593,8 @@ interface Resource {
     void SetFile([Const] DOMString file);
     [Const, Ref] DOMString GetFile();
     [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
+    void SetMetadata([Const] DOMString metadata);
+    [Const, Ref] DOMString GetMetadata();
 
     [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
     boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
@@ -634,6 +636,8 @@ interface ImageResource {
     void SetFile([Const] DOMString file);
     [Const, Ref] DOMString GetFile();
     [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
+    void SetMetadata([Const] DOMString metadata);
+    [Const, Ref] DOMString GetMetadata();
 
     [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
     boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
@@ -657,6 +661,8 @@ interface AudioResource {
     void SetFile([Const] DOMString file);
     [Const, Ref] DOMString GetFile();
     [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
+    void SetMetadata([Const] DOMString metadata);
+    [Const, Ref] DOMString GetMetadata();
 
     [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
     boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
@@ -1533,7 +1539,7 @@ interface EventsFunctionsExtension {
     [Const, Ref] DOMString GetName();
     [Ref] EventsFunctionsExtension SetFullName([Const] DOMString fullName);
     [Const, Ref] DOMString GetFullName();
-    
+
     [Ref] EventsFunction InsertNewEventsFunction([Const] DOMString name, unsigned long pos);
     [Ref] EventsFunction InsertEventsFunction([Const, Ref] EventsFunction eventsFunction, unsigned long pos);
     boolean HasEventsFunctionNamed([Const] DOMString name);

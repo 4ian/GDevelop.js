@@ -3659,6 +3659,14 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_GetAbsoluteFile_1
   return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_SetMetadata_1(AudioResource* self, const char* arg0) {
+  self->SetMetadata(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_GetMetadata_0(AudioResource* self) {
+  return self->GetMetadata().c_str();
+}
+
 MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_GetProperties_1(AudioResource* self, Project* arg0) {
   static MapStringPropertyDescriptor temp;
   return (temp = self->GetProperties(*arg0), &temp);
@@ -4486,6 +4494,14 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetFile_0(ImageRe
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetAbsoluteFile_1(ImageResource* self, const Project* arg0) {
   static gd::String temp;
   return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_SetMetadata_1(ImageResource* self, const char* arg0) {
+  self->SetMetadata(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetMetadata_0(ImageResource* self) {
+  return self->GetMetadata().c_str();
 }
 
 MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetProperties_1(ImageResource* self, Project* arg0) {
@@ -5993,6 +6009,14 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetFile_0(Resource* se
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetAbsoluteFile_1(Resource* self, const Project* arg0) {
   static gd::String temp;
   return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SetMetadata_1(Resource* self, const char* arg0) {
+  self->SetMetadata(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetMetadata_0(Resource* self) {
+  return self->GetMetadata().c_str();
 }
 
 MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetProperties_1(Resource* self, Project* arg0) {

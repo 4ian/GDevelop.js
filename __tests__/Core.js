@@ -598,18 +598,26 @@ describe('libGD.js', function() {
 
   describe('gd.ImageResource', function() {
     it('should have name and file', function() {
-      var resource = new gd.ImageResource();
+      const resource = new gd.ImageResource();
       resource.setName('MyResource');
       resource.setFile('MyFile');
       expect(resource.getName()).toBe('MyResource');
       expect(resource.getFile()).toBe('MyFile');
+      resource.delete();
+    });
+    it('can have metadata', function() {
+      const resource = new gd.ImageResource();
+      expect(resource.getMetadata()).toBe('');
+      resource.setMetadata(JSON.stringify({ hello: 'world' }));
+      expect(resource.getMetadata()).toBe('{"hello":"world"}');
+      resource.delete();
     });
 
     it('has smooth and alreadyLoaded custom properties', function() {
-      var project = gd.ProjectHelper.createNewGDJSProject();
-      var resource = new gd.ImageResource();
+      const project = gd.ProjectHelper.createNewGDJSProject();
+      const resource = new gd.ImageResource();
 
-      var properties = resource.getProperties();
+      const properties = resource.getProperties();
       expect(properties.get('Smooth the image').getValue()).toBe('true');
       expect(properties.get('Always loaded in memory').getValue()).toBe(
         'false'
@@ -619,7 +627,7 @@ describe('libGD.js', function() {
       resource.updateProperty('Smooth the image', '0', project);
       resource.updateProperty('Always loaded in memory', '1', project);
 
-      var updatedProperties = resource.getProperties();
+      const updatedProperties = resource.getProperties();
       expect(updatedProperties.get('Smooth the image').getValue()).toBe(
         'false'
       );
@@ -627,7 +635,26 @@ describe('libGD.js', function() {
         'true'
       );
 
+      resource.delete();
       project.delete();
+    });
+  });
+
+  describe('gd.AudioResource', function() {
+    it('should have name and file', function() {
+      const resource = new gd.AudioResource();
+      resource.setName('MyAudioResource');
+      resource.setFile('MyAudioFile');
+      expect(resource.getName()).toBe('MyAudioResource');
+      expect(resource.getFile()).toBe('MyAudioFile');
+      resource.delete();
+    });
+    it('can have metadata', function() {
+      const resource = new gd.AudioResource();
+      expect(resource.getMetadata()).toBe('');
+      resource.setMetadata(JSON.stringify({ hello: 'world' }));
+      expect(resource.getMetadata()).toBe('{"hello":"world"}');
+      resource.delete();
     });
   });
 
@@ -2114,7 +2141,7 @@ describe('libGD.js', function() {
       parameters.push_back(parameter3);
       parameters.push_back(parameter4);
       parameters.push_back(parameter5);
-      
+
       parameters.push_back(parameter5);
       expect(parameters.size()).toBe(6);
       gd.removeFromVectorParameterMetadata(parameters, 5);

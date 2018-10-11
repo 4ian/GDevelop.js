@@ -6043,6 +6043,19 @@ AudioResource.prototype['GetAbsoluteFile'] = AudioResource.prototype.GetAbsolute
   return Pointer_stringify(_emscripten_bind_AudioResource_GetAbsoluteFile_1(self, arg0));
 };;
 
+AudioResource.prototype['SetMetadata'] = AudioResource.prototype.SetMetadata = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_AudioResource_SetMetadata_1(self, arg0);
+};;
+
+AudioResource.prototype['GetMetadata'] = AudioResource.prototype.GetMetadata = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_AudioResource_GetMetadata_0(self));
+};;
+
 AudioResource.prototype['GetProperties'] = AudioResource.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
@@ -7463,6 +7476,19 @@ ImageResource.prototype['GetAbsoluteFile'] = ImageResource.prototype.GetAbsolute
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   return Pointer_stringify(_emscripten_bind_ImageResource_GetAbsoluteFile_1(self, arg0));
+};;
+
+ImageResource.prototype['SetMetadata'] = ImageResource.prototype.SetMetadata = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ImageResource_SetMetadata_1(self, arg0);
+};;
+
+ImageResource.prototype['GetMetadata'] = ImageResource.prototype.GetMetadata = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_ImageResource_GetMetadata_0(self));
 };;
 
 ImageResource.prototype['GetProperties'] = ImageResource.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
@@ -9944,6 +9970,19 @@ Resource.prototype['GetAbsoluteFile'] = Resource.prototype.GetAbsoluteFile = /**
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   return Pointer_stringify(_emscripten_bind_Resource_GetAbsoluteFile_1(self, arg0));
+};;
+
+Resource.prototype['SetMetadata'] = Resource.prototype.SetMetadata = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Resource_SetMetadata_1(self, arg0);
+};;
+
+Resource.prototype['GetMetadata'] = Resource.prototype.GetMetadata = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Resource_GetMetadata_0(self));
 };;
 
 Resource.prototype['GetProperties'] = Resource.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
