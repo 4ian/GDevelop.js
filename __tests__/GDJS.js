@@ -111,7 +111,11 @@ describe('libGD.js - GDJS related tests', function() {
       // Check that the context for the events function is here...
       expect(code).toMatch('function(runtimeScene, eventsFunctionContext)');
       expect(code).toMatch('var eventsFunctionContext =');
-
+      
+      // Check that the parameters, with th (optional) context of the parent function,
+      // are all here
+      expect(code).toMatch('function(runtimeScene, MyObject, MyNumber, MySprite, MyString, parentEventsFunctionContext)');
+      
       // ...and objects should be able to get queried...
       expect(code).toMatch('gdjs.objectsListsToArray(MyObject);');
       expect(code).toMatch('gdjs.objectsListsToArray(MySprite);');
