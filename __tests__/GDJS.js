@@ -96,6 +96,17 @@ describe('libGD.js - GDJS related tests', function() {
         .getActions()
         .insert(action, 0);
 
+      const action2 = new gd.Instruction();
+      action2.setType('ModVarObjet');
+      action2.setParametersCount(4);
+      action2.setParameter(0, "MyObject");
+      action2.setParameter(1, "ObjectVariable2");
+      action2.setParameter(2, "=");
+      action2.setParameter(3, "GetArgumentAsNumber(\"MyNumber\") + ToNumber(GetArgumentAsString(\"MyString\"))");
+      gd.asRepeatEvent(evt)
+        .getActions()
+        .insert(action2, 1);
+
       const namespace = "gdjs.eventsFunction.myTest";
       const code = gd.EventsCodeGenerator.generateEventsFunctionCode(
         project,
@@ -123,6 +134,14 @@ describe('libGD.js - GDJS related tests', function() {
       // ...and arguments should be able to get queried too:
       expect(code).toMatch('if (argName === "MyNumber") return MyNumber;');
       expect(code).toMatch('if (argName === "MyString") return MyString;');
+      
+      // GetArgumentAsString("MyString") should be generated code to query and cast as a string
+      // the argument
+      expect(code).toMatch('(typeof eventsFunctionContext !== \'undefined\' ? "" + eventsFunctionContext.getArgument("MyString") : "")');
+
+      // GetArgumentAsNumber("MyNumber") should be generated code to query and cast as a string
+      // the argument
+      expect(code).toMatch('(typeof eventsFunctionContext !== \'undefined\' ? Number(eventsFunctionContext.getArgument("MyNumber")) || 0 : 0)');
 
       // The loop is using a counter somewhere
       expect(code).toMatch('repeatCount');
@@ -130,7 +149,7 @@ describe('libGD.js - GDJS related tests', function() {
       // Trigger once is used in a condition
       expect(code).toMatch('runtimeScene.getOnceTriggers().triggerOnce');
 
-      // A variable is set to 42
+      // A variable have 42 added to it
       expect(code).toMatch('getVariables().get("ObjectVariable")).add(42)');
 
       condition.delete();
