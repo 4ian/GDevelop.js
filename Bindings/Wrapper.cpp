@@ -56,7 +56,6 @@
 #include <GDCore/Extensions/Builtin/SpriteExtension/Sprite.h>
 #include <GDCore/Extensions/Builtin/SpriteExtension/SpriteObject.h>
 
-#include "../../Extensions/AdMobObject/AdMobObject.h"
 #include "../../Extensions/PanelSpriteObject/PanelSpriteObject.h"
 #include "../../Extensions/ParticleSystem/ParticleEmitterObject.h"
 #include "../../Extensions/PrimitiveDrawing/ShapePainterObject.h"

@@ -88,10 +88,10 @@ describe('libGD.js - GDJS related tests', function() {
       const action = new gd.Instruction();
       action.setType('ModVarObjet');
       action.setParametersCount(4);
-      action.setParameter(0, "MyObject");
-      action.setParameter(1, "ObjectVariable");
-      action.setParameter(2, "+");
-      action.setParameter(3, "42");
+      action.setParameter(0, 'MyObject');
+      action.setParameter(1, 'ObjectVariable');
+      action.setParameter(2, '+');
+      action.setParameter(3, '42');
       gd.asRepeatEvent(evt)
         .getActions()
         .insert(action, 0);
@@ -99,15 +99,18 @@ describe('libGD.js - GDJS related tests', function() {
       const action2 = new gd.Instruction();
       action2.setType('ModVarObjet');
       action2.setParametersCount(4);
-      action2.setParameter(0, "MyObject");
-      action2.setParameter(1, "ObjectVariable2");
-      action2.setParameter(2, "=");
-      action2.setParameter(3, "GetArgumentAsNumber(\"MyNumber\") + ToNumber(GetArgumentAsString(\"MyString\"))");
+      action2.setParameter(0, 'MyObject');
+      action2.setParameter(1, 'ObjectVariable2');
+      action2.setParameter(2, '=');
+      action2.setParameter(
+        3,
+        'GetArgumentAsNumber("MyNumber") + ToNumber(GetArgumentAsString("MyString"))'
+      );
       gd.asRepeatEvent(evt)
         .getActions()
         .insert(action2, 1);
 
-      const namespace = "gdjs.eventsFunction.myTest";
+      const namespace = 'gdjs.eventsFunction.myTest';
       const code = gd.EventsCodeGenerator.generateEventsFunctionCode(
         project,
         eventsFunction,
@@ -122,11 +125,13 @@ describe('libGD.js - GDJS related tests', function() {
       // Check that the context for the events function is here...
       expect(code).toMatch('function(runtimeScene, eventsFunctionContext)');
       expect(code).toMatch('var eventsFunctionContext =');
-      
+
       // Check that the parameters, with th (optional) context of the parent function,
       // are all here
-      expect(code).toMatch('function(runtimeScene, MyObject, MyNumber, MySprite, MyString, parentEventsFunctionContext)');
-      
+      expect(code).toMatch(
+        'function(runtimeScene, MyObject, MyNumber, MySprite, MyString, parentEventsFunctionContext)'
+      );
+
       // ...and objects should be able to get queried...
       expect(code).toMatch('gdjs.objectsListsToArray(MyObject);');
       expect(code).toMatch('gdjs.objectsListsToArray(MySprite);');
@@ -134,14 +139,18 @@ describe('libGD.js - GDJS related tests', function() {
       // ...and arguments should be able to get queried too:
       expect(code).toMatch('if (argName === "MyNumber") return MyNumber;');
       expect(code).toMatch('if (argName === "MyString") return MyString;');
-      
+
       // GetArgumentAsString("MyString") should be generated code to query and cast as a string
       // the argument
-      expect(code).toMatch('(typeof eventsFunctionContext !== \'undefined\' ? "" + eventsFunctionContext.getArgument("MyString") : "")');
+      expect(code).toMatch(
+        '(typeof eventsFunctionContext !== \'undefined\' ? "" + eventsFunctionContext.getArgument("MyString") : "")'
+      );
 
       // GetArgumentAsNumber("MyNumber") should be generated code to query and cast as a string
       // the argument
-      expect(code).toMatch('(typeof eventsFunctionContext !== \'undefined\' ? Number(eventsFunctionContext.getArgument("MyNumber")) || 0 : 0)');
+      expect(code).toMatch(
+        '(typeof eventsFunctionContext !== \'undefined\' ? Number(eventsFunctionContext.getArgument("MyNumber")) || 0 : 0)'
+      );
 
       // The loop is using a counter somewhere
       expect(code).toMatch('repeatCount');
@@ -193,15 +202,6 @@ describe('libGD.js - GDJS related tests', function() {
   describe('TextEntryObject', function() {
     it('should expose TextEntryObject', function() {
       var object = new gd.TextEntryObject('MyTextEntryObject');
-    });
-  });
-  describe('AdMobObject', function() {
-    it('should expose AdMobObject properties', function() {
-      var project = gd.ProjectHelper.createNewGDJSProject();
-      var object = new gd.AdMobObject('MyAdMobObject');
-      var props = object.getProperties(project);
-      expect(props.has('Testing mode')).toBe(true);
-      expect(props.get('Testing mode').getValue()).toBe('true');
     });
   });
   describe('JsCodeEvent', function() {

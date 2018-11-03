@@ -1153,6 +1153,14 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetOrientation_0(Projec
   return self->GetOrientation().c_str();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetAdMobAppId_1(Project* self, const char* arg0) {
+  self->SetAdMobAppId(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetAdMobAppId_0(Project* self) {
+  return self->GetAdMobAppId().c_str();
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetProjectFile_1(Project* self, const char* arg0) {
   self->SetProjectFile(arg0);
 }
@@ -1903,91 +1911,6 @@ const InstructionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExtensionAndInst
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExtensionAndInstructionMetadata___destroy___0(ExtensionAndInstructionMetadata* self) {
-  delete self;
-}
-
-// AdMobObject
-
-AdMobObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_AdMobObject_1(const char* arg0) {
-  return new AdMobObject(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_SetName_1(AdMobObject* self, const char* arg0) {
-  self->SetName(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetName_0(AdMobObject* self) {
-  return self->GetName().c_str();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_SetType_1(AdMobObject* self, const char* arg0) {
-  self->SetType(arg0);
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetType_0(AdMobObject* self) {
-  return self->GetType().c_str();
-}
-
-MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetProperties_1(AdMobObject* self, Project* arg0) {
-  static MapStringPropertyDescriptor temp;
-  return (temp = self->GetProperties(*arg0), &temp);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UpdateProperty_3(AdMobObject* self, const char* arg0, const char* arg1, Project* arg2) {
-  return self->UpdateProperty(arg0, arg1, *arg2);
-}
-
-MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetInitialInstanceProperties_3(AdMobObject* self, const InitialInstance* arg0, Project* arg1, Layout* arg2) {
-  static MapStringPropertyDescriptor temp;
-  return (temp = self->GetInitialInstanceProperties(*arg0, *arg1, *arg2), &temp);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UpdateInitialInstanceProperty_5(AdMobObject* self, InitialInstance* arg0, const char* arg1, const char* arg2, Project* arg3, Layout* arg4) {
-  return self->UpdateInitialInstanceProperty(*arg0, arg1, arg2, *arg3, *arg4);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_ExposeResources_1(AdMobObject* self, ArbitraryResourceWorker* arg0) {
-  self->ExposeResources(*arg0);
-}
-
-VariablesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetVariables_0(AdMobObject* self) {
-  return &self->GetVariables();
-}
-
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetAllBehaviorNames_0(AdMobObject* self) {
-  static VectorString temp;
-  return (temp = self->GetAllBehaviorNames(), &temp);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_HasBehaviorNamed_1(AdMobObject* self, const char* arg0) {
-  return self->HasBehaviorNamed(arg0);
-}
-
-Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_AddNewBehavior_3(AdMobObject* self, Project* arg0, const char* arg1, const char* arg2) {
-  return self->AddNewBehavior(*arg0, arg1, arg2);
-}
-
-Behavior* EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_GetBehavior_1(AdMobObject* self, const char* arg0) {
-  return &self->GetBehavior(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_RemoveBehavior_1(AdMobObject* self, const char* arg0) {
-  self->RemoveBehavior(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_RenameBehavior_2(AdMobObject* self, const char* arg0, const char* arg1) {
-  return self->RenameBehavior(arg0, arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_SerializeTo_1(AdMobObject* self, SerializerElement* arg0) {
-  self->SerializeTo(*arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject_UnserializeFrom_2(AdMobObject* self, Project* arg0, const SerializerElement* arg1) {
-  self->UnserializeFrom(*arg0, *arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_AdMobObject___destroy___0(AdMobObject* self) {
   delete self;
 }
 
