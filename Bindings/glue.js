@@ -1612,6 +1612,19 @@ Direction.prototype['MoveSprite'] = Direction.prototype.MoveSprite = /** @suppre
   _emscripten_bind_Direction_MoveSprite_2(self, arg0, arg1);
 };;
 
+Direction.prototype['SetMetadata'] = Direction.prototype.SetMetadata = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Direction_SetMetadata_1(self, arg0);
+};;
+
+Direction.prototype['GetMetadata'] = Direction.prototype.GetMetadata = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Direction_GetMetadata_0(self));
+};;
+
   Direction.prototype['__destroy__'] = Direction.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_Direction___destroy___0(self);

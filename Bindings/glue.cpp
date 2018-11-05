@@ -960,6 +960,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Direction_MoveSprite_2(Direction* self
   self->MoveSprite(arg0, arg1);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Direction_SetMetadata_1(Direction* self, const char* arg0) {
+  self->SetMetadata(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Direction_GetMetadata_0(Direction* self) {
+  return self->GetMetadata().c_str();
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Direction___destroy___0(Direction* self) {
   delete self;
 }

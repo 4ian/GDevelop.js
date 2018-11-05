@@ -1714,9 +1714,9 @@ describe('libGD.js', function() {
 
     describe('gd.Direction', function() {
       it('can swap sprites', function() {
-        var direction = new gd.Direction();
-        var sprite1 = new gd.Sprite();
-        var sprite2 = new gd.Sprite();
+        const direction = new gd.Direction();
+        const sprite1 = new gd.Sprite();
+        const sprite2 = new gd.Sprite();
         sprite1.setImageName('image1');
         sprite2.setImageName('image2');
         direction.addSprite(sprite1);
@@ -1727,13 +1727,14 @@ describe('libGD.js', function() {
         expect(direction.getSprite(0).getImageName()).toBe('image2');
         direction.swapSprites(1, 0);
         expect(direction.getSprite(0).getImageName()).toBe('image1');
+        direction.delete();
       });
 
       it('can move sprites', function() {
-        var direction = new gd.Direction();
-        var sprite1 = new gd.Sprite();
-        var sprite2 = new gd.Sprite();
-        var sprite3 = new gd.Sprite();
+        const direction = new gd.Direction();
+        const sprite1 = new gd.Sprite();
+        const sprite2 = new gd.Sprite();
+        const sprite3 = new gd.Sprite();
         sprite1.setImageName('image1');
         sprite2.setImageName('image2');
         sprite3.setImageName('image3');
@@ -1758,6 +1759,15 @@ describe('libGD.js', function() {
         expect(direction.getSprite(0).getImageName()).toBe('image3');
         expect(direction.getSprite(1).getImageName()).toBe('image2');
         expect(direction.getSprite(2).getImageName()).toBe('image1');
+        direction.delete();
+      });
+
+      it('can have metadata', function() {
+        const direction = new gd.Direction();
+        expect(direction.getMetadata()).toBe("");
+        direction.setMetadata("{test: 1}");
+        expect(direction.getMetadata()).toBe("{test: 1}");
+        direction.delete();
       });
     });
 

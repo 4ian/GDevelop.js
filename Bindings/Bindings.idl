@@ -1736,6 +1736,9 @@ interface Direction {
     void SetTimeBetweenFrames(float time);
     void SwapSprites(unsigned long first, unsigned long second);
     void MoveSprite(unsigned long oldIndex, unsigned long newIndex);
+    
+    void SetMetadata([Const] DOMString metadata);
+    [Const, Ref] DOMString GetMetadata();
 };
 
 interface Animation {
