@@ -35,7 +35,7 @@ install:
   - npm install -g grunt-cli
 # GDevelop
   - git clone https://github.com/4ian/GDevelop.git
-  - cd GDevelop && git clone -b refactor/emscripten-build https://github.com/4ian/GDevelop.js.git
+  - cd GDevelop && git clone -b $TRAVIS_BRANCH https://github.com/4ian/GDevelop.js.git
   - cd GDevelop.js
   - npm install
   - npm run build
