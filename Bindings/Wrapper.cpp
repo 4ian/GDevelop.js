@@ -39,6 +39,7 @@
 #include <GDCore/IDE/Events/TextFormatting.h>
 #include <GDCore/IDE/Events/EventsListUnfolder.h>
 #include <GDCore/IDE/Project/ArbitraryResourceWorker.h>
+#include <GDCore/IDE/Project/ResourcesMergingHelper.h>
 #include <GDCore/IDE/Project/ImagesUsedInventorizer.h>
 #include <GDCore/IDE/Project/ProjectResourcesAdder.h>
 #include <GDCore/IDE/WholeProjectRefactorer.h>

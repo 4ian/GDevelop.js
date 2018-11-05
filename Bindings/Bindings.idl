@@ -1637,6 +1637,13 @@ interface ArbitraryResourceWorkerJS {
     void ExposeFile([Ref] DOMString file);
 };
 
+interface ResourcesMergingHelper {
+    void ResourcesMergingHelper([Ref] AbstractFileSystem fs);
+
+    void SetBaseDirectory([Const] DOMString basePath);
+    [Ref] MapStringString GetAllResourcesOldAndNewFilename();
+};
+
 interface ImagesUsedInventorizer {
     void ImagesUsedInventorizer();
 
@@ -1736,7 +1743,7 @@ interface Direction {
     void SetTimeBetweenFrames(float time);
     void SwapSprites(unsigned long first, unsigned long second);
     void MoveSprite(unsigned long oldIndex, unsigned long newIndex);
-    
+
     void SetMetadata([Const] DOMString metadata);
     [Const, Ref] DOMString GetMetadata();
 };

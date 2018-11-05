@@ -1764,9 +1764,9 @@ describe('libGD.js', function() {
 
       it('can have metadata', function() {
         const direction = new gd.Direction();
-        expect(direction.getMetadata()).toBe("");
-        direction.setMetadata("{test: 1}");
-        expect(direction.getMetadata()).toBe("{test: 1}");
+        expect(direction.getMetadata()).toBe('');
+        direction.setMetadata('{test: 1}');
+        expect(direction.getMetadata()).toBe('{test: 1}');
         direction.delete();
       });
     });
@@ -1841,6 +1841,78 @@ describe('libGD.js', function() {
         expect(autoMetadata.getGroup).not.toBe(undefined);
         expect(autoMetadata.getIconFilename).not.toBe(undefined);
       });
+    });
+  });
+
+  describe('gd.ResourcesMergingHelper (and gd.AbstractFileSystemJS)', function() {
+    it('should export files of the project', function() {
+      const project = new gd.ProjectHelper.createNewGDJSProject();
+      const layout = project.insertNewLayout('Scene', 0);
+      const resource = new gd.ImageResource();
+      const resource2 = new gd.ImageResource();
+      const resource3 = new gd.ImageResource();
+      const resource4 = new gd.ImageResource();
+      const resource5 = new gd.ImageResource();
+      resource.setName('MyResource');
+      resource.setFile('MyResource.png');
+      resource2.setName('MyAudioResource');
+      resource2.setFile('MyResource.wav');
+      resource3.setName('test/MyResource.png');
+      resource3.setFile('test/MyResource.png');
+      resource4.setName('test/MyResourceWithExtension');
+      resource4.setFile('test/MyResourceWithExtension');
+      resource5.setName('test/sub/folder/MyResourceWithExtension');
+      resource5.setFile('test/sub/folder/MyResourceWithExtension');
+      project.getResourcesManager().addResource(resource);
+      project.getResourcesManager().addResource(resource2);
+      project.getResourcesManager().addResource(resource3);
+      project.getResourcesManager().addResource(resource4);
+      project.getResourcesManager().addResource(resource5);
+
+      const fs = new gd.AbstractFileSystemJS();
+      fs.mkDir = fs.clearDir = function() {};
+      fs.getTempDir = function(path) {
+        return '/tmp/';
+      };
+      fs.fileNameFrom = function(fullpath) {
+        return path.basename(fullpath);
+      };
+      fs.dirNameFrom = function(fullpath) {
+        return path.dirname(fullpath);
+      };
+      fs.makeAbsolute = function(relativePath, baseDirectory) {
+        return path.resolve(baseDirectory, relativePath);
+      };
+      fs.makeRelative = function(absolutePath, baseDirectory) {
+        return path.relative(baseDirectory, absolutePath);
+      };
+
+      const resourcesMergingHelper = new gd.ResourcesMergingHelper(fs);
+      resourcesMergingHelper.setBaseDirectory('/my/project/');
+      project.exposeResources(resourcesMergingHelper);
+
+      const oldAndNewFilenames = resourcesMergingHelper.getAllResourcesOldAndNewFilename();
+      console.log(oldAndNewFilenames.keys().toJSArray());
+      expect(oldAndNewFilenames.get('/my/project/MyResource.png')).toBe(
+        'MyResource.png'
+      );
+      expect(oldAndNewFilenames.get('/my/project/MyResource.wav')).toBe(
+        'MyResource.wav'
+      );
+      expect(oldAndNewFilenames.get('/my/project/test/MyResource.png')).toBe(
+        'MyResource2.png'
+      );
+      expect(
+        oldAndNewFilenames.get('/my/project/test/MyResourceWithExtension')
+      ).toBe('MyResourceWithExtension');
+      expect(
+        oldAndNewFilenames.get(
+          '/my/project/test/sub/folder/MyResourceWithExtension'
+        )
+      ).toBe('MyResourceWithExtension2');
+
+      resourcesMergingHelper.delete();
+      project.delete();
     });
   });
 
@@ -2221,19 +2293,22 @@ describe('libGD.js', function() {
       );
       expect(eventsFunctionsExtension.getDescription()).toBe('My description');
 
-      const eventsFunction = eventsFunctionsExtension.insertNewEventsFunction('MyFunction', 0);
-      expect(eventsFunctionsExtension.hasEventsFunctionNamed('MyFunction')).toBe(true);
-      expect(eventsFunctionsExtension.hasEventsFunctionNamed('MyNotExistingFunction')).toBe(false);
+      const eventsFunction = eventsFunctionsExtension.insertNewEventsFunction(
+        'MyFunction',
+        0
+      );
+      expect(
+        eventsFunctionsExtension.hasEventsFunctionNamed('MyFunction')
+      ).toBe(true);
+      expect(
+        eventsFunctionsExtension.hasEventsFunctionNamed('MyNotExistingFunction')
+      ).toBe(false);
       expect(eventsFunctionsExtension.getEventsFunctionsCount()).toBe(1);
+      expect(eventsFunctionsExtension.getEventsFunctionAt(0).getName()).toBe(
+        'MyFunction'
+      );
       expect(
-        eventsFunctionsExtension
-          .getEventsFunctionAt(0)
-          .getName()
-      ).toBe('MyFunction');
-      expect(
-        eventsFunctionsExtension
-          .getEventsFunction('MyFunction')
-          .getName()
+        eventsFunctionsExtension.getEventsFunction('MyFunction').getName()
       ).toBe('MyFunction');
 
       eventsFunctionsExtension.delete();

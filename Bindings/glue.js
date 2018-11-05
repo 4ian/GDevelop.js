@@ -3849,6 +3849,35 @@ ObjectGroupsContainer.prototype['UnserializeFrom'] = ObjectGroupsContainer.proto
   var self = this.ptr;
   _emscripten_bind_ObjectGroupsContainer___destroy___0(self);
 };
+// ResourcesMergingHelper
+/** @suppress {undefinedVars, duplicate} */function ResourcesMergingHelper(arg0) {
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  this.ptr = _emscripten_bind_ResourcesMergingHelper_ResourcesMergingHelper_1(arg0);
+  getCache(ResourcesMergingHelper)[this.ptr] = this;
+};;
+ResourcesMergingHelper.prototype = Object.create(WrapperObject.prototype);
+ResourcesMergingHelper.prototype.constructor = ResourcesMergingHelper;
+ResourcesMergingHelper.prototype.__class__ = ResourcesMergingHelper;
+ResourcesMergingHelper.__cache__ = {};
+Module['ResourcesMergingHelper'] = ResourcesMergingHelper;
+
+ResourcesMergingHelper.prototype['SetBaseDirectory'] = ResourcesMergingHelper.prototype.SetBaseDirectory = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ResourcesMergingHelper_SetBaseDirectory_1(self, arg0);
+};;
+
+ResourcesMergingHelper.prototype['GetAllResourcesOldAndNewFilename'] = ResourcesMergingHelper.prototype.GetAllResourcesOldAndNewFilename = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ResourcesMergingHelper_GetAllResourcesOldAndNewFilename_0(self), MapStringString);
+};;
+
+  ResourcesMergingHelper.prototype['__destroy__'] = ResourcesMergingHelper.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ResourcesMergingHelper___destroy___0(self);
+};
 // WholeProjectRefactorer
 function WholeProjectRefactorer() { throw "cannot construct a WholeProjectRefactorer, no constructor in IDL" }
 WholeProjectRefactorer.prototype = Object.create(WrapperObject.prototype);

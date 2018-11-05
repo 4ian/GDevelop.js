@@ -2305,6 +2305,24 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer___destroy___0(Ob
   delete self;
 }
 
+// ResourcesMergingHelper
+
+ResourcesMergingHelper* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesMergingHelper_ResourcesMergingHelper_1(AbstractFileSystem* arg0) {
+  return new ResourcesMergingHelper(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesMergingHelper_SetBaseDirectory_1(ResourcesMergingHelper* self, const char* arg0) {
+  self->SetBaseDirectory(arg0);
+}
+
+MapStringString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesMergingHelper_GetAllResourcesOldAndNewFilename_0(ResourcesMergingHelper* self) {
+  return &self->GetAllResourcesOldAndNewFilename();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesMergingHelper___destroy___0(ResourcesMergingHelper* self) {
+  delete self;
+}
+
 // WholeProjectRefactorer
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_WholeProjectRefactorer_STATIC_ExposeProjectEvents_2(WholeProjectRefactorer* self, Project* arg0, ArbitraryEventsWorker* arg1) {
