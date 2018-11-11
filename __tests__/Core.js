@@ -1892,7 +1892,6 @@ describe('libGD.js', function() {
       project.exposeResources(resourcesMergingHelper);
 
       const oldAndNewFilenames = resourcesMergingHelper.getAllResourcesOldAndNewFilename();
-      console.log(oldAndNewFilenames.keys().toJSArray());
       expect(oldAndNewFilenames.get('/my/project/MyResource.png')).toBe(
         'MyResource.png'
       );
