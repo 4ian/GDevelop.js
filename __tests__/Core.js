@@ -658,6 +658,24 @@ describe('libGD.js', function() {
     });
   });
 
+  describe('gd.FontResource', function() {
+    it('should have name and file', function() {
+      const resource = new gd.FontResource();
+      resource.setName('MyFontResource');
+      resource.setFile('MyFontFile');
+      expect(resource.getName()).toBe('MyFontResource');
+      expect(resource.getFile()).toBe('MyFontFile');
+      resource.delete();
+    });
+    it('can have metadata', function() {
+      const resource = new gd.FontResource();
+      expect(resource.getMetadata()).toBe('');
+      resource.setMetadata(JSON.stringify({ hello: 'world' }));
+      expect(resource.getMetadata()).toBe('{"hello":"world"}');
+      resource.delete();
+    });
+  });
+
   describe('gd.ResourcesManager', function() {
     it('should support adding resources', function() {
       var project = gd.ProjectHelper.createNewGDJSProject();
@@ -731,7 +749,7 @@ describe('libGD.js', function() {
       var allResources = project.getResourcesManager().getAllResourceNames();
       expect(allResources.size()).toBe(2);
 
-      gd.ProjectResourcesAdder.removeAllUselessImages(project);
+      gd.ProjectResourcesAdder.removeAllUseless(project, 'image');
 
       var allResources = project.getResourcesManager().getAllResourceNames();
       expect(allResources.size()).toBe(1);
@@ -766,7 +784,7 @@ describe('libGD.js', function() {
     });
   });
 
-  describe('gd.ImagesUsedInventorizer', function() {
+  describe('gd.ResourcesInUseHelper', function() {
     it('should find the images used by objects', function() {
       var sprite1 = new gd.Sprite();
       sprite1.setImageName('Image1');
@@ -791,12 +809,12 @@ describe('libGD.js', function() {
       animation2.getDirection(0).addSprite(sprite1);
       spriteObject2.addAnimation(animation2);
 
-      const imagesUsedInventorizer = new gd.ImagesUsedInventorizer();
+      const resourcesInUse = new gd.ResourcesInUseHelper();
 
       {
-        spriteObject.exposeResources(imagesUsedInventorizer);
-        const resourceNames = imagesUsedInventorizer
-          .getAllUsedImages()
+        spriteObject.exposeResources(resourcesInUse);
+        const resourceNames = resourcesInUse
+          .getAllImages()
           .toNewVectorString()
           .toJSArray();
         expect(resourceNames).toHaveLength(2);
@@ -805,9 +823,9 @@ describe('libGD.js', function() {
       }
 
       {
-        spriteObject2.exposeResources(imagesUsedInventorizer);
-        const resourceNames = imagesUsedInventorizer
-          .getAllUsedImages()
+        spriteObject2.exposeResources(resourcesInUse);
+        const resourceNames = resourcesInUse
+          .getAllImages()
           .toNewVectorString()
           .toJSArray();
         expect(resourceNames).toHaveLength(3);
@@ -816,7 +834,7 @@ describe('libGD.js', function() {
         expect(resourceNames).toContain('Image3');
       }
 
-      imagesUsedInventorizer.delete();
+      resourcesInUse.delete();
 
       spriteObject.delete();
       spriteObject2.delete();

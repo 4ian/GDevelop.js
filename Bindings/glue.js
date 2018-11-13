@@ -1629,6 +1629,129 @@ Direction.prototype['GetMetadata'] = Direction.prototype.GetMetadata = /** @supp
   var self = this.ptr;
   _emscripten_bind_Direction___destroy___0(self);
 };
+// FontResource
+/** @suppress {undefinedVars, duplicate} */function FontResource() {
+  this.ptr = _emscripten_bind_FontResource_FontResource_0();
+  getCache(FontResource)[this.ptr] = this;
+};;
+FontResource.prototype = Object.create(WrapperObject.prototype);
+FontResource.prototype.constructor = FontResource;
+FontResource.prototype.__class__ = FontResource;
+FontResource.__cache__ = {};
+Module['FontResource'] = FontResource;
+
+FontResource.prototype['Clone'] = FontResource.prototype.Clone = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_FontResource_Clone_0(self), Resource);
+};;
+
+FontResource.prototype['SetName'] = FontResource.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_FontResource_SetName_1(self, arg0);
+};;
+
+FontResource.prototype['GetName'] = FontResource.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_FontResource_GetName_0(self));
+};;
+
+FontResource.prototype['SetKind'] = FontResource.prototype.SetKind = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_FontResource_SetKind_1(self, arg0);
+};;
+
+FontResource.prototype['GetKind'] = FontResource.prototype.GetKind = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_FontResource_GetKind_0(self));
+};;
+
+FontResource.prototype['IsUserAdded'] = FontResource.prototype.IsUserAdded = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_FontResource_IsUserAdded_0(self));
+};;
+
+FontResource.prototype['SetUserAdded'] = FontResource.prototype.SetUserAdded = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_FontResource_SetUserAdded_1(self, arg0);
+};;
+
+FontResource.prototype['UseFile'] = FontResource.prototype.UseFile = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_FontResource_UseFile_0(self));
+};;
+
+FontResource.prototype['SetFile'] = FontResource.prototype.SetFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_FontResource_SetFile_1(self, arg0);
+};;
+
+FontResource.prototype['GetFile'] = FontResource.prototype.GetFile = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_FontResource_GetFile_0(self));
+};;
+
+FontResource.prototype['GetAbsoluteFile'] = FontResource.prototype.GetAbsoluteFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return Pointer_stringify(_emscripten_bind_FontResource_GetAbsoluteFile_1(self, arg0));
+};;
+
+FontResource.prototype['SetMetadata'] = FontResource.prototype.SetMetadata = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_FontResource_SetMetadata_1(self, arg0);
+};;
+
+FontResource.prototype['GetMetadata'] = FontResource.prototype.GetMetadata = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_FontResource_GetMetadata_0(self));
+};;
+
+FontResource.prototype['GetProperties'] = FontResource.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_FontResource_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+FontResource.prototype['UpdateProperty'] = FontResource.prototype.UpdateProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_FontResource_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+FontResource.prototype['SerializeTo'] = FontResource.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_FontResource_SerializeTo_1(self, arg0);
+};;
+
+FontResource.prototype['UnserializeFrom'] = FontResource.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_FontResource_UnserializeFrom_1(self, arg0);
+};;
+
+  FontResource.prototype['__destroy__'] = FontResource.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_FontResource___destroy___0(self);
+};
 // PairStringVariable
 /** @suppress {undefinedVars, duplicate} */function PairStringVariable() {
   this.ptr = _emscripten_bind_PairStringVariable_PairStringVariable_0();
@@ -2822,17 +2945,17 @@ TextObject.prototype['GetCharacterSize'] = TextObject.prototype.GetCharacterSize
   return _emscripten_bind_TextObject_GetCharacterSize_0(self);
 };;
 
-TextObject.prototype['SetFontFilename'] = TextObject.prototype.SetFontFilename = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+TextObject.prototype['SetFontName'] = TextObject.prototype.SetFontName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_TextObject_SetFontFilename_1(self, arg0);
+  _emscripten_bind_TextObject_SetFontName_1(self, arg0);
 };;
 
-TextObject.prototype['GetFontFilename'] = TextObject.prototype.GetFontFilename = /** @suppress {undefinedVars, duplicate} */function() {
+TextObject.prototype['GetFontName'] = TextObject.prototype.GetFontName = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_TextObject_GetFontFilename_0(self));
+  return Pointer_stringify(_emscripten_bind_TextObject_GetFontName_0(self));
 };;
 
 TextObject.prototype['IsBold'] = TextObject.prototype.IsBold = /** @suppress {undefinedVars, duplicate} */function() {
@@ -3134,26 +3257,6 @@ MapStringString.prototype['MAP_keys'] = MapStringString.prototype.MAP_keys = /**
   MapStringString.prototype['__destroy__'] = MapStringString.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_MapStringString___destroy___0(self);
-};
-// ImagesUsedInventorizer
-/** @suppress {undefinedVars, duplicate} */function ImagesUsedInventorizer() {
-  this.ptr = _emscripten_bind_ImagesUsedInventorizer_ImagesUsedInventorizer_0();
-  getCache(ImagesUsedInventorizer)[this.ptr] = this;
-};;
-ImagesUsedInventorizer.prototype = Object.create(WrapperObject.prototype);
-ImagesUsedInventorizer.prototype.constructor = ImagesUsedInventorizer;
-ImagesUsedInventorizer.prototype.__class__ = ImagesUsedInventorizer;
-ImagesUsedInventorizer.__cache__ = {};
-Module['ImagesUsedInventorizer'] = ImagesUsedInventorizer;
-
-ImagesUsedInventorizer.prototype['GetAllUsedImages'] = ImagesUsedInventorizer.prototype.GetAllUsedImages = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_ImagesUsedInventorizer_GetAllUsedImages_0(self), SetString);
-};;
-
-  ImagesUsedInventorizer.prototype['__destroy__'] = ImagesUsedInventorizer.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  _emscripten_bind_ImagesUsedInventorizer___destroy___0(self);
 };
 // ExtensionAndExpressionMetadata
 function ExtensionAndExpressionMetadata() { throw "cannot construct a ExtensionAndExpressionMetadata, no constructor in IDL" }
@@ -6216,6 +6319,44 @@ TextEntryObject.prototype['UnserializeFrom'] = TextEntryObject.prototype.Unseria
   TextEntryObject.prototype['__destroy__'] = TextEntryObject.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_TextEntryObject___destroy___0(self);
+};
+// ResourcesInUseHelper
+/** @suppress {undefinedVars, duplicate} */function ResourcesInUseHelper() {
+  this.ptr = _emscripten_bind_ResourcesInUseHelper_ResourcesInUseHelper_0();
+  getCache(ResourcesInUseHelper)[this.ptr] = this;
+};;
+ResourcesInUseHelper.prototype = Object.create(WrapperObject.prototype);
+ResourcesInUseHelper.prototype.constructor = ResourcesInUseHelper;
+ResourcesInUseHelper.prototype.__class__ = ResourcesInUseHelper;
+ResourcesInUseHelper.__cache__ = {};
+Module['ResourcesInUseHelper'] = ResourcesInUseHelper;
+
+ResourcesInUseHelper.prototype['GetAllImages'] = ResourcesInUseHelper.prototype.GetAllImages = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ResourcesInUseHelper_GetAllImages_0(self), SetString);
+};;
+
+ResourcesInUseHelper.prototype['GetAllAudios'] = ResourcesInUseHelper.prototype.GetAllAudios = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ResourcesInUseHelper_GetAllAudios_0(self), SetString);
+};;
+
+ResourcesInUseHelper.prototype['GetAllFonts'] = ResourcesInUseHelper.prototype.GetAllFonts = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ResourcesInUseHelper_GetAllFonts_0(self), SetString);
+};;
+
+ResourcesInUseHelper.prototype['GetAll'] = ResourcesInUseHelper.prototype.GetAll = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ResourcesInUseHelper_GetAll_1(self, arg0), SetString);
+};;
+
+  ResourcesInUseHelper.prototype['__destroy__'] = ResourcesInUseHelper.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ResourcesInUseHelper___destroy___0(self);
 };
 // BaseEvent
 /** @suppress {undefinedVars, duplicate} */function BaseEvent() {
@@ -10138,22 +10279,31 @@ ProjectResourcesAdder.prototype.__class__ = ProjectResourcesAdder;
 ProjectResourcesAdder.__cache__ = {};
 Module['ProjectResourcesAdder'] = ProjectResourcesAdder;
 
-ProjectResourcesAdder.prototype['STATIC_AddAllMissingImages'] = ProjectResourcesAdder.prototype.STATIC_AddAllMissingImages = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+ProjectResourcesAdder.prototype['STATIC_AddAllMissing'] = ProjectResourcesAdder.prototype.STATIC_AddAllMissing = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
   var self = this.ptr;
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ProjectResourcesAdder_STATIC_AddAllMissingImages_1(self, arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  _emscripten_bind_ProjectResourcesAdder_STATIC_AddAllMissing_2(self, arg0, arg1);
 };;
 
-ProjectResourcesAdder.prototype['STATIC_GetAllUselessImages'] = ProjectResourcesAdder.prototype.STATIC_GetAllUselessImages = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+ProjectResourcesAdder.prototype['STATIC_GetAllUseless'] = ProjectResourcesAdder.prototype.STATIC_GetAllUseless = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
   var self = this.ptr;
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return wrapPointer(_emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessImages_1(self, arg0), VectorString);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return wrapPointer(_emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUseless_2(self, arg0, arg1), VectorString);
 };;
 
-ProjectResourcesAdder.prototype['STATIC_RemoveAllUselessImages'] = ProjectResourcesAdder.prototype.STATIC_RemoveAllUselessImages = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+ProjectResourcesAdder.prototype['STATIC_RemoveAllUseless'] = ProjectResourcesAdder.prototype.STATIC_RemoveAllUseless = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
   var self = this.ptr;
+  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUselessImages_1(self, arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  _emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUseless_2(self, arg0, arg1);
 };;
 
   ProjectResourcesAdder.prototype['__destroy__'] = ProjectResourcesAdder.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {

@@ -972,6 +972,86 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Direction___destroy___0(Direction* sel
   delete self;
 }
 
+// FontResource
+
+FontResource* EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_FontResource_0() {
+  return new FontResource();
+}
+
+Resource* EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_Clone_0(FontResource* self) {
+  return self->Clone();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_SetName_1(FontResource* self, const char* arg0) {
+  self->SetName(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_GetName_0(FontResource* self) {
+  return self->GetName().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_SetKind_1(FontResource* self, const char* arg0) {
+  self->SetKind(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_GetKind_0(FontResource* self) {
+  return self->GetKind().c_str();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_IsUserAdded_0(FontResource* self) {
+  return self->IsUserAdded();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_SetUserAdded_1(FontResource* self, bool arg0) {
+  self->SetUserAdded(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_UseFile_0(FontResource* self) {
+  return self->UseFile();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_SetFile_1(FontResource* self, const char* arg0) {
+  self->SetFile(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_GetFile_0(FontResource* self) {
+  return self->GetFile().c_str();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_GetAbsoluteFile_1(FontResource* self, const Project* arg0) {
+  static gd::String temp;
+  return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_SetMetadata_1(FontResource* self, const char* arg0) {
+  self->SetMetadata(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_GetMetadata_0(FontResource* self) {
+  return self->GetMetadata().c_str();
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_GetProperties_1(FontResource* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_UpdateProperty_3(FontResource* self, const char* arg0, const char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_SerializeTo_1(FontResource* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_UnserializeFrom_1(FontResource* self, const SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource___destroy___0(FontResource* self) {
+  delete self;
+}
+
 // PairStringVariable
 
 PairStringVariable* EMSCRIPTEN_KEEPALIVE emscripten_bind_PairStringVariable_PairStringVariable_0() {
@@ -1666,12 +1746,12 @@ float EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetCharacterSize_0(TextObj
   return self->GetCharacterSize();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_SetFontFilename_1(TextObject* self, const char* arg0) {
-  self->SetFontFilename(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_SetFontName_1(TextObject* self, const char* arg0) {
+  self->SetFontName(arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetFontFilename_0(TextObject* self) {
-  return self->GetFontFilename().c_str();
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_GetFontName_0(TextObject* self) {
+  return self->GetFontName().c_str();
 }
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_TextObject_IsBold_0(TextObject* self) {
@@ -1851,20 +1931,6 @@ temp.clear(); for(auto it = self->begin(); it != self->end();++it) { temp.push_b
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_MapStringString___destroy___0(MapStringString* self) {
-  delete self;
-}
-
-// ImagesUsedInventorizer
-
-ImagesUsedInventorizer* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImagesUsedInventorizer_ImagesUsedInventorizer_0() {
-  return new ImagesUsedInventorizer();
-}
-
-SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImagesUsedInventorizer_GetAllUsedImages_0(ImagesUsedInventorizer* self) {
-  return &self->GetAllUsedImages();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ImagesUsedInventorizer___destroy___0(ImagesUsedInventorizer* self) {
   delete self;
 }
 
@@ -3753,6 +3819,32 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject_UnserializeFrom_2(Text
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_TextEntryObject___destroy___0(TextEntryObject* self) {
+  delete self;
+}
+
+// ResourcesInUseHelper
+
+ResourcesInUseHelper* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesInUseHelper_ResourcesInUseHelper_0() {
+  return new ResourcesInUseHelper();
+}
+
+SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesInUseHelper_GetAllImages_0(ResourcesInUseHelper* self) {
+  return &self->GetAllImages();
+}
+
+SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesInUseHelper_GetAllAudios_0(ResourcesInUseHelper* self) {
+  return &self->GetAllAudios();
+}
+
+SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesInUseHelper_GetAllFonts_0(ResourcesInUseHelper* self) {
+  return &self->GetAllFonts();
+}
+
+SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesInUseHelper_GetAll_1(ResourcesInUseHelper* self, const char* arg0) {
+  return &self->GetAll(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ResourcesInUseHelper___destroy___0(ResourcesInUseHelper* self) {
   delete self;
 }
 
@@ -6112,17 +6204,17 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper___destroy___0(
 
 // ProjectResourcesAdder
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_AddAllMissingImages_1(ProjectResourcesAdder* self, Project* arg0) {
-  self->STATIC_AddAllMissingImages(*arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_AddAllMissing_2(ProjectResourcesAdder* self, Project* arg0, const char* arg1) {
+  self->STATIC_AddAllMissing(*arg0, arg1);
 }
 
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUselessImages_1(ProjectResourcesAdder* self, Project* arg0) {
+VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_GetAllUseless_2(ProjectResourcesAdder* self, Project* arg0, const char* arg1) {
   static VectorString temp;
-  return (temp = self->STATIC_GetAllUselessImages(*arg0), &temp);
+  return (temp = self->STATIC_GetAllUseless(*arg0, arg1), &temp);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUselessImages_1(ProjectResourcesAdder* self, Project* arg0) {
-  self->STATIC_RemoveAllUselessImages(*arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAllUseless_2(ProjectResourcesAdder* self, Project* arg0, const char* arg1) {
+  self->STATIC_RemoveAllUseless(*arg0, arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder___destroy___0(ProjectResourcesAdder* self) {

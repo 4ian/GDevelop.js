@@ -673,6 +673,31 @@ interface AudioResource {
     void UnserializeFrom([Const, Ref] SerializerElement element);
 };
 
+interface FontResource {
+    void FontResource();
+
+    //Inherited from Resource:
+    Resource Clone();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetKind([Const] DOMString kind);
+    [Const, Ref] DOMString GetKind();
+    boolean IsUserAdded();
+    void SetUserAdded(boolean yes);
+    boolean UseFile();
+    void SetFile([Const] DOMString file);
+    [Const, Ref] DOMString GetFile();
+    [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
+    void SetMetadata([Const] DOMString metadata);
+    [Const, Ref] DOMString GetMetadata();
+
+    [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
 interface InitialInstance {
     void InitialInstance();
 
@@ -1579,9 +1604,9 @@ interface AbstractFileSystemJS {
 };
 
 interface ProjectResourcesAdder {
-    void STATIC_AddAllMissingImages([Ref] Project project);
-    [Value] VectorString STATIC_GetAllUselessImages([Ref] Project project);
-    void STATIC_RemoveAllUselessImages([Ref] Project project);
+    void STATIC_AddAllMissing([Ref] Project project, [Const] DOMString resourceType);
+    [Value] VectorString STATIC_GetAllUseless([Ref] Project project, [Const] DOMString resourceType);
+    void STATIC_RemoveAllUseless([Ref] Project project, [Const] DOMString resourceType);
 };
 
 interface ArbitraryEventsWorker {
@@ -1644,10 +1669,13 @@ interface ResourcesMergingHelper {
     [Ref] MapStringString GetAllResourcesOldAndNewFilename();
 };
 
-interface ImagesUsedInventorizer {
-    void ImagesUsedInventorizer();
+interface ResourcesInUseHelper {
+    void ResourcesInUseHelper();
 
-    [Ref] SetString GetAllUsedImages();
+    [Ref] SetString GetAllImages();
+    [Ref] SetString GetAllAudios();
+    [Ref] SetString GetAllFonts();
+    [Ref] SetString GetAll([Const] DOMString resourceType);
 };
 
 interface LayoutEditorCanvasOptions {
@@ -1830,8 +1858,8 @@ interface TextObject {
     [Const, Ref] DOMString GetString();
     void SetCharacterSize(float size);
     float GetCharacterSize();
-    void SetFontFilename([Const] DOMString string);
-    [Const, Ref] DOMString GetFontFilename();
+    void SetFontName([Const] DOMString string);
+    [Const, Ref] DOMString GetFontName();
     boolean IsBold();
     void SetBold(boolean enable);
     boolean IsItalic();

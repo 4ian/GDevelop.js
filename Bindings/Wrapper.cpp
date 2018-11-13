@@ -40,7 +40,7 @@
 #include <GDCore/IDE/Events/EventsListUnfolder.h>
 #include <GDCore/IDE/Project/ArbitraryResourceWorker.h>
 #include <GDCore/IDE/Project/ResourcesMergingHelper.h>
-#include <GDCore/IDE/Project/ImagesUsedInventorizer.h>
+#include <GDCore/IDE/Project/ResourcesInUseHelper.h>
 #include <GDCore/IDE/Project/ProjectResourcesAdder.h>
 #include <GDCore/IDE/WholeProjectRefactorer.h>
 
@@ -452,9 +452,9 @@ typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
 #define STATIC_FromJSON(x) FromJSON(gd::String(x))
 #define STATIC_IsObject IsObject
 #define STATIC_Get Get
-#define STATIC_AddAllMissingImages AddAllMissingImages
-#define STATIC_GetAllUselessImages GetAllUselessImages
-#define STATIC_RemoveAllUselessImages RemoveAllUselessImages
+#define STATIC_AddAllMissing AddAllMissing
+#define STATIC_GetAllUseless GetAllUseless
+#define STATIC_RemoveAllUseless RemoveAllUseless
 
 #define STATIC_GetExtensionAndBehaviorMetadata GetExtensionAndBehaviorMetadata
 #define STATIC_GetExtensionAndObjectMetadata GetExtensionAndObjectMetadata
