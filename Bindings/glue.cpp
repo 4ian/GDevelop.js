@@ -1549,6 +1549,12 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project___destroy___0(Project* self) {
   delete self;
 }
 
+// ExpressionParser2NodeWorker
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParser2NodeWorker___destroy___0(ExpressionParser2NodeWorker* self) {
+  delete self;
+}
+
 // Layer
 
 Layer* EMSCRIPTEN_KEEPALIVE emscripten_bind_Layer_Layer_0() {
@@ -2001,6 +2007,20 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExtensionAndInstructionMetadata___dest
   delete self;
 }
 
+// ExpressionCodeGenerator
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerator_STATIC_UseOldExpressionParser_1(ExpressionCodeGenerator* self, bool arg0) {
+  self->STATIC_UseOldExpressionParser(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerator_STATIC_IsUsingOldExpressionParser_0(ExpressionCodeGenerator* self) {
+  return self->STATIC_IsUsingOldExpressionParser();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionCodeGenerator___destroy___0(ExpressionCodeGenerator* self) {
+  delete self;
+}
+
 // LinkEvent
 
 LinkEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_LinkEvent_0() {
@@ -2437,6 +2457,16 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_UnserializeFrom_
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer___destroy___0(ObjectGroupsContainer* self) {
+  delete self;
+}
+
+// ExpressionNode
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionNode_Visit_1(ExpressionNode* self, ExpressionParser2NodeWorker* arg0) {
+  self->Visit(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionNode___destroy___0(ExpressionNode* self) {
   delete self;
 }
 
@@ -2916,6 +2946,36 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata___destroy___0(Inst
   delete self;
 }
 
+// VectorPoint
+
+VectorPoint* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_VectorPoint_0() {
+  return new VectorPoint();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_push_back_1(VectorPoint* self, const Point* arg0) {
+  self->push_back(*arg0);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_size_0(VectorPoint* self) {
+  return self->size();
+}
+
+Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_at_1(VectorPoint* self, unsigned int arg0) {
+  return &self->at(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_WRAPPED_set_2(VectorPoint* self, unsigned int arg0, const Point* arg1) {
+  self->WRAPPED_set(arg0, *arg1);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_clear_0(VectorPoint* self) {
+  self->clear();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint___destroy___0(VectorPoint* self) {
+  delete self;
+}
+
 // InitialInstanceFunctor
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_InitialInstanceFunctor___destroy___0(InitialInstanceFunctor* self) {
@@ -3015,6 +3075,16 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsCodeEvent___destroy___0(gdjs::JsCode
   delete self;
 }
 
+// UniquePtrExpressionNode
+
+ExpressionNode* EMSCRIPTEN_KEEPALIVE emscripten_bind_UniquePtrExpressionNode_get_0(UniquePtrExpressionNode* self) {
+  return self->get();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_UniquePtrExpressionNode___destroy___0(UniquePtrExpressionNode* self) {
+  delete self;
+}
+
 // EventsSearchResult
 
 bool EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsSearchResult_IsEventsListValid_0(EventsSearchResult* self) {
@@ -3048,6 +3118,20 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryEventsWorker_Launch_1(Arbitra
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryEventsWorker___destroy___0(ArbitraryEventsWorker* self) {
+  delete self;
+}
+
+// ExpressionValidator
+
+ExpressionValidator* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionValidator_ExpressionValidator_0() {
+  return new ExpressionValidator();
+}
+
+const VectorExpressionParserDiagnostic* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionValidator_GetErrors_0(ExpressionValidator* self) {
+  return &self->GetErrors();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionValidator___destroy___0(ExpressionValidator* self) {
   delete self;
 }
 
@@ -5164,33 +5248,40 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectMetadata___destroy___0(ObjectMet
   delete self;
 }
 
-// VectorPoint
+// ExpressionParser2
 
-VectorPoint* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_VectorPoint_0() {
-  return new VectorPoint();
+ExpressionParser2* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParser2_ExpressionParser2_3(const Platform* arg0, const ObjectsContainer* arg1, const ObjectsContainer* arg2) {
+  return new ExpressionParser2(*arg0, *arg1, *arg2);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_push_back_1(VectorPoint* self, const Point* arg0) {
-  self->push_back(*arg0);
+UniquePtrExpressionNode* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParser2_ParseExpression_2(ExpressionParser2* self, const char* arg0, const char* arg1) {
+  static UniquePtrExpressionNode temp;
+  return (temp = self->ParseExpression(arg0, arg1), &temp);
 }
 
-unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_size_0(VectorPoint* self) {
-  return self->size();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParser2___destroy___0(ExpressionParser2* self) {
+  delete self;
 }
 
-Point* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_at_1(VectorPoint* self, unsigned int arg0) {
-  return &self->at(arg0);
+// ExpressionParserDiagnostic
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParserDiagnostic_IsError_0(ExpressionParserDiagnostic* self) {
+  return self->IsError();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_WRAPPED_set_2(VectorPoint* self, unsigned int arg0, const Point* arg1) {
-  self->WRAPPED_set(arg0, *arg1);
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParserDiagnostic_GetMessage_0(ExpressionParserDiagnostic* self) {
+  return self->GetMessage().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint_clear_0(VectorPoint* self) {
-  self->clear();
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParserDiagnostic_GetStartPosition_0(ExpressionParserDiagnostic* self) {
+  return self->GetStartPosition();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorPoint___destroy___0(VectorPoint* self) {
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParserDiagnostic_GetEndPosition_0(ExpressionParserDiagnostic* self) {
+  return self->GetEndPosition();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionParserDiagnostic___destroy___0(ExpressionParserDiagnostic* self) {
   delete self;
 }
 
@@ -6261,6 +6352,20 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder_STATIC_RemoveAll
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ProjectResourcesAdder___destroy___0(ProjectResourcesAdder* self) {
+  delete self;
+}
+
+// VectorExpressionParserDiagnostic
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorExpressionParserDiagnostic_size_0(VectorExpressionParserDiagnostic* self) {
+  return self->size();
+}
+
+const ExpressionParserDiagnostic* EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorExpressionParserDiagnostic_at_1(VectorExpressionParserDiagnostic* self, unsigned int arg0) {
+  return self->at(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorExpressionParserDiagnostic___destroy___0(VectorExpressionParserDiagnostic* self) {
   delete self;
 }
 

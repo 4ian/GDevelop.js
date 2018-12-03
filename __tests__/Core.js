@@ -2185,6 +2185,126 @@ describe('libGD.js', function() {
     });
   });
 
+  describe('gd.ExpressionParser2 and gd.ExpressionValidator', function() {
+    let project = null;
+    let layout = null;
+    beforeAll(() => {
+      project = new gd.ProjectHelper.createNewGDJSProject();
+      layout = project.insertNewLayout('Scene', 0);
+      layout.insertNewObject(project, 'Sprite', 'MySpriteObject', 0);
+    });
+
+    function testExpression(type, 
+      expression,
+      expectedError,
+      expectedErrorPosition
+    ) {
+      const parser = new gd.ExpressionParser2(
+        gd.JsPlatform.get(),
+        project,
+        layout
+      );
+      const expressionNode = parser.parseExpression(type, expression).get();
+
+      const expressionValidator = new gd.ExpressionValidator();
+      expressionNode.visit(expressionValidator);
+      if (expectedError) {
+        expect(expressionValidator.getErrors().size()).toBe(1);
+        expect(
+          expressionValidator
+            .getErrors()
+            .at(0)
+            .getMessage()
+        ).toBe(expectedError);
+        if (expectedErrorPosition)
+          expect(
+            expressionValidator
+              .getErrors()
+              .at(0)
+              .getStartPosition()
+          ).toBe(expectedErrorPosition);
+      } else {
+        expect(expressionValidator.getErrors().size()).toBe(0);
+      }
+
+      expressionValidator.delete();
+      parser.delete();
+    }
+
+    it('can parse valid expressions', function() {
+      testExpression('number', '1+1');
+      testExpression('number', '2-3');
+      testExpression('number', '4/5');
+      testExpression('number', '6*7');
+      testExpression('number', '8 + 9');
+      testExpression('number', '10 +    11');
+      testExpression('number', '12 +    13 - 14');
+      testExpression('number', '  15 +    16 - 17   ');
+      testExpression('number', '.14');
+      testExpression('number', '3.');
+    });
+
+    it('report errors in invalid expressions', function() {
+      testExpression('number', 
+        '1//2',
+        'You must enter a number or a valid expression call.',
+        2
+      );
+      testExpression('number', 'bad expression', 'You must enter a number.', 0);
+      testExpression('number', 
+        '1 + test()',
+        "Cannot find an expression with this name: test\nDouble check that you've not made any typo in the name.",
+        4
+      );
+      testExpression('number', 
+        '3..14',
+        'No operator found. Did you forget to enter an operator (like +, -, * or /) between numbers or expressions?',
+        2
+      );
+    });
+
+    it('can parse valid expressions with free functions', function() {
+      testExpression('number', '1+sin(3.14)');
+      testExpression('number', 'abs(-5)');
+      testExpression('number', 'abs(-5) + cos(sin(3))');
+      testExpression('number', 'atan2(-5, 3)');
+      testExpression('number', 'MouseX("", 0) + 1');
+    });
+
+    it('can report errors when using too much arguments', function() {
+      testExpression('number', 
+        'abs(-5, 3)',
+        "This parameter was not expected by this expression. Remove it or verify that you've entered the proper expression name."
+      );
+      testExpression('number', 
+        'MouseX("", 0, 0) + 1',
+        "This parameter was not expected by this expression. Remove it or verify that you've entered the proper expression name."
+      );
+    });
+
+    it('can parse valid expressions with free functions having optional parameters', function() {
+      testExpression('number', 'MouseX() + 1');
+      testExpression('number', 'MouseX("") + 1');
+    });
+
+    it('can parse expressions with objects functions', function() {
+      testExpression('number', 'MySpriteObject.X()');
+      testExpression('number', 'MySpriteObject.X() + 1');
+      testExpression('number', 'MySpriteObject.PointX(Point)');
+    });
+
+    it('can report errors when using too much arguments in object functions', function() {
+      testExpression('number', 
+        'MySpriteObject.PointX(Point, 2)',
+        'This parameter was not expected by this expression. Remove it or verify that you\'ve entered the proper expression name.'
+      );
+    });
+
+    it('can parse arguments being expressions', function() {
+      testExpression('number', 'MouseX(VariableString(myVariable), 0) + 1');
+    });
+  });
+
   describe('gd.Vector2f', function() {
     describe('gd.VectorVector2f', function() {
       it('can be used to manipulate a vector of gd.Vector2f', function() {

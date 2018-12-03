@@ -1528,6 +1528,48 @@ interface CallbacksForExpressionCorrectnessTesting {
     unsigned long GetFirstErrorPosition();
 };
 
+interface ExpressionParserDiagnostic {
+    boolean IsError();
+    [Const, Ref] DOMString GetMessage();
+    unsigned long GetStartPosition();
+    unsigned long GetEndPosition();
+};
+
+interface VectorExpressionParserDiagnostic {
+    unsigned long size();
+    [Const] ExpressionParserDiagnostic at(unsigned long index);
+};
+
+interface ExpressionParser2NodeWorker {
+};
+
+interface ExpressionValidator {
+    void ExpressionValidator();
+
+    [Const, Ref] VectorExpressionParserDiagnostic GetErrors();
+
+    //Inherited from ExpressionParser2NodeWorker:
+};
+
+interface ExpressionNode {
+    void Visit([Ref] ExpressionParser2NodeWorker worker);
+};
+
+interface UniquePtrExpressionNode {
+    ExpressionNode get();
+};
+
+interface ExpressionParser2 {
+    void ExpressionParser2([Const, Ref] Platform platform, [Const, Ref] ObjectsContainer globalObjectsContainer, [Const, Ref] ObjectsContainer objectsContainer);
+
+    [Value] UniquePtrExpressionNode ParseExpression([Const] DOMString type, [Const] DOMString expression);
+};
+
+interface ExpressionCodeGenerator {
+    void STATIC_UseOldExpressionParser(boolean enable);
+    boolean STATIC_IsUsingOldExpressionParser();
+};
+
 enum EventsFunction_FunctionType {
   "EventsFunction::Action",
   "EventsFunction::Condition",
