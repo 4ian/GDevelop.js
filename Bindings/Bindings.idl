@@ -570,6 +570,8 @@ interface PropertyDescriptor {
     [Const, Ref] DOMString GetType();
     [Ref] PropertyDescriptor AddExtraInfo([Const] DOMString type);
     [Value] VectorString GetExtraInfo();
+    [Ref] PropertyDescriptor SetLabel([Const] DOMString label);
+    [Const, Ref] DOMString GetLabel();
 };
 
 interface MapStringPropertyDescriptor {
