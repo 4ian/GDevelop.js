@@ -2132,6 +2132,19 @@ Project.prototype['GetMainWindowDefaultHeight'] = Project.prototype.GetMainWindo
   return _emscripten_bind_Project_GetMainWindowDefaultHeight_0(self);
 };;
 
+Project.prototype['SetScaleMode'] = Project.prototype.SetScaleMode = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_Project_SetScaleMode_1(self, arg0);
+};;
+
+Project.prototype['GetScaleMode'] = Project.prototype.GetScaleMode = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_Project_GetScaleMode_0(self));
+};;
+
 Project.prototype['SetSizeOnStartupMode'] = Project.prototype.SetSizeOnStartupMode = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
@@ -10208,6 +10221,19 @@ PropertyDescriptor.prototype['SetType'] = PropertyDescriptor.prototype.SetType =
 PropertyDescriptor.prototype['GetType'] = PropertyDescriptor.prototype.GetType = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_PropertyDescriptor_GetType_0(self));
+};;
+
+PropertyDescriptor.prototype['SetLabel'] = PropertyDescriptor.prototype.SetLabel = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_PropertyDescriptor_SetLabel_1(self, arg0), PropertyDescriptor);
+};;
+
+PropertyDescriptor.prototype['GetLabel'] = PropertyDescriptor.prototype.GetLabel = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_PropertyDescriptor_GetLabel_0(self));
 };;
 
 PropertyDescriptor.prototype['AddExtraInfo'] = PropertyDescriptor.prototype.AddExtraInfo = /** @suppress {undefinedVars, duplicate} */function(arg0) {

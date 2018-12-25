@@ -279,6 +279,8 @@ interface Project {
     long GetMainWindowDefaultWidth();
     void SetDefaultHeight(long height);
     long GetMainWindowDefaultHeight();
+    void SetScaleMode([Const] DOMString scaleMode);
+    [Const, Ref] DOMString GetScaleMode();
     void SetSizeOnStartupMode([Const] DOMString orientation);
     [Const, Ref] DOMString GetSizeOnStartupMode();
     long GetMaximumFPS();
@@ -568,6 +570,8 @@ interface PropertyDescriptor {
     [Const, Ref] DOMString GetValue();
     [Ref] PropertyDescriptor SetType([Const] DOMString type);
     [Const, Ref] DOMString GetType();
+    [Ref] PropertyDescriptor SetLabel([Const] DOMString label);
+    [Const, Ref] DOMString GetLabel();
     [Ref] PropertyDescriptor AddExtraInfo([Const] DOMString type);
     [Value] VectorString GetExtraInfo();
 };

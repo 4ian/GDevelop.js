@@ -1273,6 +1273,14 @@ int EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetMainWindowDefaultHeight_0(Pr
   return self->GetMainWindowDefaultHeight();
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetScaleMode_1(Project* self, const char* arg0) {
+  self->SetScaleMode(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_GetScaleMode_0(Project* self) {
+  return self->GetScaleMode().c_str();
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Project_SetSizeOnStartupMode_1(Project* self, const char* arg0) {
   self->SetSizeOnStartupMode(arg0);
 }
@@ -6160,6 +6168,14 @@ PropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_PropertyDescriptor_SetT
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PropertyDescriptor_GetType_0(PropertyDescriptor* self) {
   return self->GetType().c_str();
+}
+
+PropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_PropertyDescriptor_SetLabel_1(PropertyDescriptor* self, const char* arg0) {
+  return &self->SetLabel(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_PropertyDescriptor_GetLabel_0(PropertyDescriptor* self) {
+  return self->GetLabel().c_str();
 }
 
 PropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_PropertyDescriptor_AddExtraInfo_1(PropertyDescriptor* self, const char* arg0) {
