@@ -420,6 +420,7 @@ interface gdObject {
     // /!\ We need to call it gdObject to avoid messing up with javascript Object
     //     global in glue.js!
     void gdObject([Const] DOMString name);
+    // [Value] UniquePtrObject Clone(); Not exposed
 
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
@@ -446,10 +447,15 @@ interface gdObject {
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
 };
 
+interface UniquePtrObject {
+    gdObject get();
+    gdObject release();
+};
+
 [JSImplementation="gdObject"]
 interface ObjectJsImplementation {
     void ObjectJsImplementation([Const] DOMString name);
-    //ObjectJsImplementation Clone(); Not exposed
+    [Value] UniquePtrObject Clone();
 
     [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
     boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);

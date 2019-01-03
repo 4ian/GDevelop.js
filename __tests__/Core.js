@@ -1132,7 +1132,7 @@ describe('libGD.js', function() {
   });
 
   describe('gd.ObjectJsImplementation', function() {
-    it('can declare a gd.ObjectJsImplementation and pass sanity checks', function() {
+    const createSampleObjectJsImplementation = () => {
       var myObject = new gd.ObjectJsImplementation();
       myObject.updateProperty = function(content, propertyName, newValue) {
         if (propertyName === 'My first property') {
@@ -1212,6 +1212,12 @@ describe('libGD.js', function() {
         return properties;
       };
 
+      return myObject;
+    };
+
+    it('can create a gd.ObjectJsImplementation and pass sanity checks', function() {
+      const myObject = createSampleObjectJsImplementation();
+
       try {
         expect(
           gd.ProjectHelper.sanityCheckObjectProperty(
@@ -1248,6 +1254,69 @@ describe('libGD.js', function() {
           'Exception caught while launching sanityCheckObject on a gd.ObjectJsImplementation.'
         );
       }
+    });
+
+    it('can clone a gd.ObjectJsImplementation', function() {
+      const project = gd.ProjectHelper.createNewGDJSProject();
+      const object1 = createSampleObjectJsImplementation();
+      object1.updateProperty('My first property', 'test1', project);
+      const object2 = object1.clone().release();
+      const object3 = object1.clone().release();
+
+      {
+        const propertiesObject1 = object1.getProperties(project);
+        expect(propertiesObject1.has('My first property'));
+        expect(
+          propertiesObject1.get('My first property').getValue() == 'test1'
+        );
+        const propertiesObject2 = object2.getProperties(project);
+        expect(propertiesObject2.has('My first property'));
+        expect(
+          propertiesObject2.get('My first property').getValue() == 'test1'
+        );
+      }
+
+      {
+        object1.updateProperty('My first property', 'updated value', project);
+        const propertiesObject1 = object1.getProperties(project);
+        expect(propertiesObject1.has('My first property'));
+        expect(
+          propertiesObject1.get('My first property').getValue() ==
+            'updated value'
+        );
+        const propertiesObject2 = object2.getProperties(project);
+        expect(propertiesObject2.has('My first property'));
+        expect(
+          propertiesObject2.get('My first property').getValue() == 'test1'
+        );
+      }
+
+      {
+        object2.updateProperty(
+          'My first property',
+          'updated value object 2',
+          project
+        );
+        const propertiesObject1 = object1.getProperties(project);
+        expect(propertiesObject1.has('My first property'));
+        expect(
+          propertiesObject1.get('My first property').getValue() ==
+            'updated value'
+        );
+        const propertiesObject2 = object2.getProperties(project);
+        expect(propertiesObject2.has('My first property'));
+        expect(
+          propertiesObject2.get('My first property').getValue() ==
+            'updated value object 2'
+        );
+        const propertiesObject3 = object3.getProperties(project);
+        expect(propertiesObject3.has('My first property'));
+        expect(
+          propertiesObject3.get('My first property').getValue() == 'test1'
+        );
+      }
+
+      project.delete();
     });
   });
 

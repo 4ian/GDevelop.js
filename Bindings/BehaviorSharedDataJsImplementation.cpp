@@ -9,27 +9,22 @@
 
 using namespace gd;
 
-std::shared_ptr<gd::BehaviorsSharedData> BehaviorSharedDataJsImplementation::Clone()
-    const {
+std::shared_ptr<gd::BehaviorsSharedData>
+BehaviorSharedDataJsImplementation::Clone() const {
   BehaviorSharedDataJsImplementation* clone =
       new BehaviorSharedDataJsImplementation(*this);
 
-  // Copy the references to the implementations of the functions
+  // Copy the references to the JS implementations of the functions (because we
+  // want an object cloned from C++ to retain the functions implemented in JS).
   EM_ASM_INT(
       {
-        Module['getCache'](
-            Module['BehaviorSharedDataJsImplementation'])[$0] = {};
-        Module['getCache'](
-            Module['BehaviorSharedDataJsImplementation'])[$0]['ptr'] = $0;
-        Module['getCache'](
-            Module['BehaviorSharedDataJsImplementation'])[$0]['getProperties'] =
-            Module['getCache'](
-                Module['BehaviorSharedDataJsImplementation'])[$1]
-                                                             ['getProperties'];
-        Module['getCache'](Module['BehaviorSharedDataJsImplementation'])
-            [$0]['updateProperty'] = Module['getCache'](
-                Module['BehaviorSharedDataJsImplementation'])[$1]
-                                                             ['updateProperty'];
+        var clone = Module['wrapPointer'](
+            $0, Module['BehaviorSharedDataJsImplementation']);
+        var self = Module['wrapPointer'](
+            $1, Module['BehaviorSharedDataJsImplementation']);
+
+        clone['getProperties'] = self['getProperties'];
+        clone['updateProperty'] = self['updateProperty'];
       },
       (int)clone,
       (int)this);

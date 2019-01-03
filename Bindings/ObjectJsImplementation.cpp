@@ -12,27 +12,18 @@ using namespace gd;
 std::unique_ptr<gd::Object> ObjectJsImplementation::Clone() const {
   ObjectJsImplementation* clone = new ObjectJsImplementation(*this);
 
-  // Copy the references to the implementations of the functions
+  // Copy the references to the JS implementations of the functions (because we
+  // want an object cloned from C++ to retain the functions implemented in JS).
   EM_ASM_INT(
       {
-        Module['getCache'](Module['ObjectJsImplementation'])[$0] = {};
-        Module['getCache'](Module['ObjectJsImplementation'])[$0]['ptr'] = $0;
-        Module['getCache'](
-            Module['ObjectJsImplementation'])[$0]['getProperties'] =
-            Module['getCache'](
-                Module['ObjectJsImplementation'])[$1]['getProperties'];
-        Module['getCache'](
-            Module['ObjectJsImplementation'])[$0]['updateProperty'] =
-            Module['getCache'](
-                Module['ObjectJsImplementation'])[$1]['updateProperty'];
-        Module['getCache'](Module['ObjectJsImplementation'])
-            [$0]['getInitialInstanceProperties'] =
-                Module['getCache'](Module['ObjectJsImplementation'])
-                    [$1]['getInitialInstanceProperties'];
-        Module['getCache'](Module['ObjectJsImplementation'])
-            [$0]['updateInitialInstanceProperty'] =
-                Module['getCache'](Module['ObjectJsImplementation'])
-                    [$1]['updateInitialInstanceProperty'];
+        var clone = Module['wrapPointer']($0, Module['ObjectJsImplementation']);
+        var self = Module['wrapPointer']($1, Module['ObjectJsImplementation']);
+        clone['getProperties'] = self['getProperties'];
+        clone['updateProperty'] = self['updateProperty'];
+        clone['getInitialInstanceProperties'] =
+            self['getInitialInstanceProperties'];
+        clone['updateInitialInstanceProperty'] =
+            self['updateInitialInstanceProperty'];
       },
       (int)clone,
       (int)this);
