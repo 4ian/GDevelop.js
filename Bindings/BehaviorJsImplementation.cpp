@@ -12,19 +12,17 @@ using namespace gd;
 BehaviorJsImplementation* BehaviorJsImplementation::Clone() const {
   BehaviorJsImplementation* clone = new BehaviorJsImplementation(*this);
 
-  // Copy the references to the implementations of the functions
+  // Copy the references to the JS implementations of the functions (because we
+  // want an object cloned from C++ to retain the functions implemented in JS).
   EM_ASM_INT(
       {
-        Module['getCache'](Module['BehaviorJsImplementation'])[$0] = {};
-        Module['getCache'](Module['BehaviorJsImplementation'])[$0]['ptr'] = $0;
-        Module['getCache'](
-            Module['BehaviorJsImplementation'])[$0]['getProperties'] =
-            Module['getCache'](
-                Module['BehaviorJsImplementation'])[$1]['getProperties'];
-        Module['getCache'](
-            Module['BehaviorJsImplementation'])[$0]['updateProperty'] =
-            Module['getCache'](
-                Module['BehaviorJsImplementation'])[$1]['updateProperty'];
+        var clone =
+            Module['wrapPointer']($0, Module['BehaviorJsImplementation']);
+        var self =
+            Module['wrapPointer']($1, Module['BehaviorJsImplementation']);
+
+        clone['getProperties'] = self['getProperties'];
+        clone['updateProperty'] = self['updateProperty'];
       },
       (int)clone,
       (int)this);

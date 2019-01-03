@@ -1791,6 +1791,11 @@ ObjectJsImplementation.prototype.__class__ = ObjectJsImplementation;
 ObjectJsImplementation.__cache__ = {};
 Module['ObjectJsImplementation'] = ObjectJsImplementation;
 
+ObjectJsImplementation.prototype['Clone'] = ObjectJsImplementation.prototype.Clone = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ObjectJsImplementation_Clone_0(self), UniquePtrObject);
+};;
+
 ObjectJsImplementation.prototype['GetProperties'] = ObjectJsImplementation.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
@@ -3352,68 +3357,146 @@ ExtensionAndInstructionMetadata.prototype['GetMetadata'] = ExtensionAndInstructi
   var self = this.ptr;
   _emscripten_bind_ExtensionAndInstructionMetadata___destroy___0(self);
 };
-// ExternalLayout
-/** @suppress {undefinedVars, duplicate} */function ExternalLayout() {
-  this.ptr = _emscripten_bind_ExternalLayout_ExternalLayout_0();
-  getCache(ExternalLayout)[this.ptr] = this;
+// LinkEvent
+/** @suppress {undefinedVars, duplicate} */function LinkEvent() {
+  this.ptr = _emscripten_bind_LinkEvent_LinkEvent_0();
+  getCache(LinkEvent)[this.ptr] = this;
 };;
-ExternalLayout.prototype = Object.create(WrapperObject.prototype);
-ExternalLayout.prototype.constructor = ExternalLayout;
-ExternalLayout.prototype.__class__ = ExternalLayout;
-ExternalLayout.__cache__ = {};
-Module['ExternalLayout'] = ExternalLayout;
+LinkEvent.prototype = Object.create(WrapperObject.prototype);
+LinkEvent.prototype.constructor = LinkEvent;
+LinkEvent.prototype.__class__ = LinkEvent;
+LinkEvent.__cache__ = {};
+Module['LinkEvent'] = LinkEvent;
 
-ExternalLayout.prototype['SetName'] = ExternalLayout.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+LinkEvent.prototype['SetTarget'] = LinkEvent.prototype.SetTarget = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_ExternalLayout_SetName_1(self, arg0);
+  _emscripten_bind_LinkEvent_SetTarget_1(self, arg0);
 };;
 
-ExternalLayout.prototype['GetName'] = ExternalLayout.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
+LinkEvent.prototype['GetTarget'] = LinkEvent.prototype.GetTarget = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_ExternalLayout_GetName_0(self));
+  return Pointer_stringify(_emscripten_bind_LinkEvent_GetTarget_0(self));
 };;
 
-ExternalLayout.prototype['SetAssociatedLayout'] = ExternalLayout.prototype.SetAssociatedLayout = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+LinkEvent.prototype['GetIncludeConfig'] = LinkEvent.prototype.GetIncludeConfig = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_LinkEvent_GetIncludeConfig_0(self);
+};;
+
+LinkEvent.prototype['SetIncludeAllEvents'] = LinkEvent.prototype.SetIncludeAllEvents = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_LinkEvent_SetIncludeAllEvents_0(self);
+};;
+
+LinkEvent.prototype['SetIncludeEventsGroup'] = LinkEvent.prototype.SetIncludeEventsGroup = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_ExternalLayout_SetAssociatedLayout_1(self, arg0);
+  _emscripten_bind_LinkEvent_SetIncludeEventsGroup_1(self, arg0);
 };;
 
-ExternalLayout.prototype['GetAssociatedLayout'] = ExternalLayout.prototype.GetAssociatedLayout = /** @suppress {undefinedVars, duplicate} */function() {
+LinkEvent.prototype['GetEventsGroupName'] = LinkEvent.prototype.GetEventsGroupName = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_ExternalLayout_GetAssociatedLayout_0(self));
+  return Pointer_stringify(_emscripten_bind_LinkEvent_GetEventsGroupName_0(self));
 };;
 
-ExternalLayout.prototype['GetInitialInstances'] = ExternalLayout.prototype.GetInitialInstances = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_ExternalLayout_GetInitialInstances_0(self), InitialInstancesContainer);
-};;
-
-ExternalLayout.prototype['GetAssociatedSettings'] = ExternalLayout.prototype.GetAssociatedSettings = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_ExternalLayout_GetAssociatedSettings_0(self), LayoutEditorCanvasOptions);
-};;
-
-ExternalLayout.prototype['SerializeTo'] = ExternalLayout.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+LinkEvent.prototype['SetIncludeStartAndEnd'] = LinkEvent.prototype.SetIncludeStartAndEnd = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ExternalLayout_SerializeTo_1(self, arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_LinkEvent_SetIncludeStartAndEnd_2(self, arg0, arg1);
 };;
 
-ExternalLayout.prototype['UnserializeFrom'] = ExternalLayout.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+LinkEvent.prototype['GetIncludeStart'] = LinkEvent.prototype.GetIncludeStart = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_LinkEvent_GetIncludeStart_0(self);
+};;
+
+LinkEvent.prototype['GetIncludeEnd'] = LinkEvent.prototype.GetIncludeEnd = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_LinkEvent_GetIncludeEnd_0(self);
+};;
+
+LinkEvent.prototype['Clone'] = LinkEvent.prototype.Clone = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_LinkEvent_Clone_0(self), LinkEvent);
+};;
+
+LinkEvent.prototype['GetType'] = LinkEvent.prototype.GetType = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_LinkEvent_GetType_0(self));
+};;
+
+LinkEvent.prototype['SetType'] = LinkEvent.prototype.SetType = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_LinkEvent_SetType_1(self, arg0);
+};;
+
+LinkEvent.prototype['IsExecutable'] = LinkEvent.prototype.IsExecutable = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_LinkEvent_IsExecutable_0(self));
+};;
+
+LinkEvent.prototype['CanHaveSubEvents'] = LinkEvent.prototype.CanHaveSubEvents = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_LinkEvent_CanHaveSubEvents_0(self));
+};;
+
+LinkEvent.prototype['HasSubEvents'] = LinkEvent.prototype.HasSubEvents = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_LinkEvent_HasSubEvents_0(self));
+};;
+
+LinkEvent.prototype['GetSubEvents'] = LinkEvent.prototype.GetSubEvents = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_LinkEvent_GetSubEvents_0(self), EventsList);
+};;
+
+LinkEvent.prototype['IsDisabled'] = LinkEvent.prototype.IsDisabled = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_LinkEvent_IsDisabled_0(self));
+};;
+
+LinkEvent.prototype['SetDisabled'] = LinkEvent.prototype.SetDisabled = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ExternalLayout_UnserializeFrom_1(self, arg0);
+  _emscripten_bind_LinkEvent_SetDisabled_1(self, arg0);
 };;
 
-  ExternalLayout.prototype['__destroy__'] = ExternalLayout.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+LinkEvent.prototype['IsFolded'] = LinkEvent.prototype.IsFolded = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  _emscripten_bind_ExternalLayout___destroy___0(self);
+  return !!(_emscripten_bind_LinkEvent_IsFolded_0(self));
+};;
+
+LinkEvent.prototype['SetFolded'] = LinkEvent.prototype.SetFolded = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_LinkEvent_SetFolded_1(self, arg0);
+};;
+
+LinkEvent.prototype['SerializeTo'] = LinkEvent.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_LinkEvent_SerializeTo_1(self, arg0);
+};;
+
+LinkEvent.prototype['UnserializeFrom'] = LinkEvent.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_LinkEvent_UnserializeFrom_2(self, arg0, arg1);
+};;
+
+  LinkEvent.prototype['__destroy__'] = LinkEvent.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_LinkEvent___destroy___0(self);
 };
 // WhileEvent
 /** @suppress {undefinedVars, duplicate} */function WhileEvent() {
@@ -5633,6 +5716,28 @@ VectorEventsFunction.prototype['clear'] = VectorEventsFunction.prototype.clear =
   VectorEventsFunction.prototype['__destroy__'] = VectorEventsFunction.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_VectorEventsFunction___destroy___0(self);
+};
+// UniquePtrObject
+function UniquePtrObject() { throw "cannot construct a UniquePtrObject, no constructor in IDL" }
+UniquePtrObject.prototype = Object.create(WrapperObject.prototype);
+UniquePtrObject.prototype.constructor = UniquePtrObject;
+UniquePtrObject.prototype.__class__ = UniquePtrObject;
+UniquePtrObject.__cache__ = {};
+Module['UniquePtrObject'] = UniquePtrObject;
+
+UniquePtrObject.prototype['get'] = UniquePtrObject.prototype.get = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_UniquePtrObject_get_0(self), gdObject);
+};;
+
+UniquePtrObject.prototype['release'] = UniquePtrObject.prototype.release = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_UniquePtrObject_release_0(self), gdObject);
+};;
+
+  UniquePtrObject.prototype['__destroy__'] = UniquePtrObject.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_UniquePtrObject___destroy___0(self);
 };
 // ShapePainterObject
 /** @suppress {undefinedVars, duplicate} */function ShapePainterObject(arg0) {
@@ -9795,146 +9900,68 @@ EventsListUnfolder.prototype['STATIC_UnfoldWhenContaining'] = EventsListUnfolder
   var self = this.ptr;
   _emscripten_bind_EventsListUnfolder___destroy___0(self);
 };
-// LinkEvent
-/** @suppress {undefinedVars, duplicate} */function LinkEvent() {
-  this.ptr = _emscripten_bind_LinkEvent_LinkEvent_0();
-  getCache(LinkEvent)[this.ptr] = this;
+// ExternalLayout
+/** @suppress {undefinedVars, duplicate} */function ExternalLayout() {
+  this.ptr = _emscripten_bind_ExternalLayout_ExternalLayout_0();
+  getCache(ExternalLayout)[this.ptr] = this;
 };;
-LinkEvent.prototype = Object.create(WrapperObject.prototype);
-LinkEvent.prototype.constructor = LinkEvent;
-LinkEvent.prototype.__class__ = LinkEvent;
-LinkEvent.__cache__ = {};
-Module['LinkEvent'] = LinkEvent;
+ExternalLayout.prototype = Object.create(WrapperObject.prototype);
+ExternalLayout.prototype.constructor = ExternalLayout;
+ExternalLayout.prototype.__class__ = ExternalLayout;
+ExternalLayout.__cache__ = {};
+Module['ExternalLayout'] = ExternalLayout;
 
-LinkEvent.prototype['SetTarget'] = LinkEvent.prototype.SetTarget = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+ExternalLayout.prototype['SetName'] = ExternalLayout.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_LinkEvent_SetTarget_1(self, arg0);
+  _emscripten_bind_ExternalLayout_SetName_1(self, arg0);
 };;
 
-LinkEvent.prototype['GetTarget'] = LinkEvent.prototype.GetTarget = /** @suppress {undefinedVars, duplicate} */function() {
+ExternalLayout.prototype['GetName'] = ExternalLayout.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_LinkEvent_GetTarget_0(self));
+  return Pointer_stringify(_emscripten_bind_ExternalLayout_GetName_0(self));
 };;
 
-LinkEvent.prototype['GetIncludeConfig'] = LinkEvent.prototype.GetIncludeConfig = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return _emscripten_bind_LinkEvent_GetIncludeConfig_0(self);
-};;
-
-LinkEvent.prototype['SetIncludeAllEvents'] = LinkEvent.prototype.SetIncludeAllEvents = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  _emscripten_bind_LinkEvent_SetIncludeAllEvents_0(self);
-};;
-
-LinkEvent.prototype['SetIncludeEventsGroup'] = LinkEvent.prototype.SetIncludeEventsGroup = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+ExternalLayout.prototype['SetAssociatedLayout'] = ExternalLayout.prototype.SetAssociatedLayout = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_LinkEvent_SetIncludeEventsGroup_1(self, arg0);
+  _emscripten_bind_ExternalLayout_SetAssociatedLayout_1(self, arg0);
 };;
 
-LinkEvent.prototype['GetEventsGroupName'] = LinkEvent.prototype.GetEventsGroupName = /** @suppress {undefinedVars, duplicate} */function() {
+ExternalLayout.prototype['GetAssociatedLayout'] = ExternalLayout.prototype.GetAssociatedLayout = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_LinkEvent_GetEventsGroupName_0(self));
+  return Pointer_stringify(_emscripten_bind_ExternalLayout_GetAssociatedLayout_0(self));
 };;
 
-LinkEvent.prototype['SetIncludeStartAndEnd'] = LinkEvent.prototype.SetIncludeStartAndEnd = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+ExternalLayout.prototype['GetInitialInstances'] = ExternalLayout.prototype.GetInitialInstances = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_LinkEvent_SetIncludeStartAndEnd_2(self, arg0, arg1);
+  return wrapPointer(_emscripten_bind_ExternalLayout_GetInitialInstances_0(self), InitialInstancesContainer);
 };;
 
-LinkEvent.prototype['GetIncludeStart'] = LinkEvent.prototype.GetIncludeStart = /** @suppress {undefinedVars, duplicate} */function() {
+ExternalLayout.prototype['GetAssociatedSettings'] = ExternalLayout.prototype.GetAssociatedSettings = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  return _emscripten_bind_LinkEvent_GetIncludeStart_0(self);
+  return wrapPointer(_emscripten_bind_ExternalLayout_GetAssociatedSettings_0(self), LayoutEditorCanvasOptions);
 };;
 
-LinkEvent.prototype['GetIncludeEnd'] = LinkEvent.prototype.GetIncludeEnd = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return _emscripten_bind_LinkEvent_GetIncludeEnd_0(self);
-};;
-
-LinkEvent.prototype['Clone'] = LinkEvent.prototype.Clone = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_LinkEvent_Clone_0(self), LinkEvent);
-};;
-
-LinkEvent.prototype['GetType'] = LinkEvent.prototype.GetType = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_LinkEvent_GetType_0(self));
-};;
-
-LinkEvent.prototype['SetType'] = LinkEvent.prototype.SetType = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_LinkEvent_SetType_1(self, arg0);
-};;
-
-LinkEvent.prototype['IsExecutable'] = LinkEvent.prototype.IsExecutable = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_LinkEvent_IsExecutable_0(self));
-};;
-
-LinkEvent.prototype['CanHaveSubEvents'] = LinkEvent.prototype.CanHaveSubEvents = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_LinkEvent_CanHaveSubEvents_0(self));
-};;
-
-LinkEvent.prototype['HasSubEvents'] = LinkEvent.prototype.HasSubEvents = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_LinkEvent_HasSubEvents_0(self));
-};;
-
-LinkEvent.prototype['GetSubEvents'] = LinkEvent.prototype.GetSubEvents = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_LinkEvent_GetSubEvents_0(self), EventsList);
-};;
-
-LinkEvent.prototype['IsDisabled'] = LinkEvent.prototype.IsDisabled = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_LinkEvent_IsDisabled_0(self));
-};;
-
-LinkEvent.prototype['SetDisabled'] = LinkEvent.prototype.SetDisabled = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+ExternalLayout.prototype['SerializeTo'] = ExternalLayout.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_LinkEvent_SetDisabled_1(self, arg0);
+  _emscripten_bind_ExternalLayout_SerializeTo_1(self, arg0);
 };;
 
-LinkEvent.prototype['IsFolded'] = LinkEvent.prototype.IsFolded = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return !!(_emscripten_bind_LinkEvent_IsFolded_0(self));
-};;
-
-LinkEvent.prototype['SetFolded'] = LinkEvent.prototype.SetFolded = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+ExternalLayout.prototype['UnserializeFrom'] = ExternalLayout.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_LinkEvent_SetFolded_1(self, arg0);
+  _emscripten_bind_ExternalLayout_UnserializeFrom_1(self, arg0);
 };;
 
-LinkEvent.prototype['SerializeTo'] = LinkEvent.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  ExternalLayout.prototype['__destroy__'] = ExternalLayout.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_LinkEvent_SerializeTo_1(self, arg0);
-};;
-
-LinkEvent.prototype['UnserializeFrom'] = LinkEvent.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_LinkEvent_UnserializeFrom_2(self, arg0, arg1);
-};;
-
-  LinkEvent.prototype['__destroy__'] = LinkEvent.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  _emscripten_bind_LinkEvent___destroy___0(self);
+  _emscripten_bind_ExternalLayout___destroy___0(self);
 };
 // ExtensionAndBehaviorMetadata
 function ExtensionAndBehaviorMetadata() { throw "cannot construct a ExtensionAndBehaviorMetadata, no constructor in IDL" }

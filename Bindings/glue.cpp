@@ -1076,6 +1076,11 @@ ObjectJsImplementation* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectJsImplementat
   return new ObjectJsImplementation(arg0);
 }
 
+UniquePtrObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectJsImplementation_Clone_0(ObjectJsImplementation* self) {
+  static UniquePtrObject temp;
+  return (temp = self->Clone(), &temp);
+}
+
 MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectJsImplementation_GetProperties_1(ObjectJsImplementation* self, Project* arg0) {
   static MapStringPropertyDescriptor temp;
   return (temp = self->GetProperties(*arg0), &temp);
@@ -1996,45 +2001,101 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExtensionAndInstructionMetadata___dest
   delete self;
 }
 
-// ExternalLayout
+// LinkEvent
 
-ExternalLayout* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_ExternalLayout_0() {
-  return new ExternalLayout();
+LinkEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_LinkEvent_0() {
+  return new LinkEvent();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_SetName_1(ExternalLayout* self, const char* arg0) {
-  self->SetName(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetTarget_1(LinkEvent* self, const char* arg0) {
+  self->SetTarget(arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetName_0(ExternalLayout* self) {
-  return self->GetName().c_str();
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetTarget_0(LinkEvent* self) {
+  return self->GetTarget().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_SetAssociatedLayout_1(ExternalLayout* self, const char* arg0) {
-  self->SetAssociatedLayout(arg0);
+int EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetIncludeConfig_0(LinkEvent* self) {
+  return self->GetIncludeConfig();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetAssociatedLayout_0(ExternalLayout* self) {
-  return self->GetAssociatedLayout().c_str();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetIncludeAllEvents_0(LinkEvent* self) {
+  self->SetIncludeAllEvents();
 }
 
-InitialInstancesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetInitialInstances_0(ExternalLayout* self) {
-  return &self->GetInitialInstances();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetIncludeEventsGroup_1(LinkEvent* self, const char* arg0) {
+  self->SetIncludeEventsGroup(arg0);
 }
 
-LayoutEditorCanvasOptions* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetAssociatedSettings_0(ExternalLayout* self) {
-  return &self->GetAssociatedSettings();
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetEventsGroupName_0(LinkEvent* self) {
+  return self->GetEventsGroupName().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_SerializeTo_1(ExternalLayout* self, SerializerElement* arg0) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetIncludeStartAndEnd_2(LinkEvent* self, unsigned int arg0, unsigned int arg1) {
+  self->SetIncludeStartAndEnd(arg0, arg1);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetIncludeStart_0(LinkEvent* self) {
+  return self->GetIncludeStart();
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetIncludeEnd_0(LinkEvent* self) {
+  return self->GetIncludeEnd();
+}
+
+LinkEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_Clone_0(LinkEvent* self) {
+  return self->Clone();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetType_0(LinkEvent* self) {
+  return self->GetType().c_str();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetType_1(LinkEvent* self, const char* arg0) {
+  self->SetType(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_IsExecutable_0(LinkEvent* self) {
+  return self->IsExecutable();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_CanHaveSubEvents_0(LinkEvent* self) {
+  return self->CanHaveSubEvents();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_HasSubEvents_0(LinkEvent* self) {
+  return self->HasSubEvents();
+}
+
+EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetSubEvents_0(LinkEvent* self) {
+  return &self->GetSubEvents();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_IsDisabled_0(LinkEvent* self) {
+  return self->IsDisabled();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetDisabled_1(LinkEvent* self, bool arg0) {
+  self->SetDisabled(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_IsFolded_0(LinkEvent* self) {
+  return self->IsFolded();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetFolded_1(LinkEvent* self, bool arg0) {
+  self->SetFolded(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SerializeTo_1(LinkEvent* self, SerializerElement* arg0) {
   self->SerializeTo(*arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_UnserializeFrom_1(ExternalLayout* self, const SerializerElement* arg0) {
-  self->UnserializeFrom(*arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_UnserializeFrom_2(LinkEvent* self, Project* arg0, const SerializerElement* arg1) {
+  self->UnserializeFrom(*arg0, *arg1);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout___destroy___0(ExternalLayout* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent___destroy___0(LinkEvent* self) {
   delete self;
 }
 
@@ -3427,6 +3488,20 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsFunction_clear_0(VectorEve
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VectorEventsFunction___destroy___0(VectorEventsFunction* self) {
+  delete self;
+}
+
+// UniquePtrObject
+
+gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_UniquePtrObject_get_0(UniquePtrObject* self) {
+  return self->get();
+}
+
+gdObject* EMSCRIPTEN_KEEPALIVE emscripten_bind_UniquePtrObject_release_0(UniquePtrObject* self) {
+  return self->release();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_UniquePtrObject___destroy___0(UniquePtrObject* self) {
   delete self;
 }
 
@@ -5905,101 +5980,45 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsListUnfolder___destroy___0(Event
   delete self;
 }
 
-// LinkEvent
+// ExternalLayout
 
-LinkEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_LinkEvent_0() {
-  return new LinkEvent();
+ExternalLayout* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_ExternalLayout_0() {
+  return new ExternalLayout();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetTarget_1(LinkEvent* self, const char* arg0) {
-  self->SetTarget(arg0);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_SetName_1(ExternalLayout* self, const char* arg0) {
+  self->SetName(arg0);
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetTarget_0(LinkEvent* self) {
-  return self->GetTarget().c_str();
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetName_0(ExternalLayout* self) {
+  return self->GetName().c_str();
 }
 
-int EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetIncludeConfig_0(LinkEvent* self) {
-  return self->GetIncludeConfig();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_SetAssociatedLayout_1(ExternalLayout* self, const char* arg0) {
+  self->SetAssociatedLayout(arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetIncludeAllEvents_0(LinkEvent* self) {
-  self->SetIncludeAllEvents();
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetAssociatedLayout_0(ExternalLayout* self) {
+  return self->GetAssociatedLayout().c_str();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetIncludeEventsGroup_1(LinkEvent* self, const char* arg0) {
-  self->SetIncludeEventsGroup(arg0);
+InitialInstancesContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetInitialInstances_0(ExternalLayout* self) {
+  return &self->GetInitialInstances();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetEventsGroupName_0(LinkEvent* self) {
-  return self->GetEventsGroupName().c_str();
+LayoutEditorCanvasOptions* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_GetAssociatedSettings_0(ExternalLayout* self) {
+  return &self->GetAssociatedSettings();
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetIncludeStartAndEnd_2(LinkEvent* self, unsigned int arg0, unsigned int arg1) {
-  self->SetIncludeStartAndEnd(arg0, arg1);
-}
-
-unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetIncludeStart_0(LinkEvent* self) {
-  return self->GetIncludeStart();
-}
-
-unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetIncludeEnd_0(LinkEvent* self) {
-  return self->GetIncludeEnd();
-}
-
-LinkEvent* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_Clone_0(LinkEvent* self) {
-  return self->Clone();
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetType_0(LinkEvent* self) {
-  return self->GetType().c_str();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetType_1(LinkEvent* self, const char* arg0) {
-  self->SetType(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_IsExecutable_0(LinkEvent* self) {
-  return self->IsExecutable();
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_CanHaveSubEvents_0(LinkEvent* self) {
-  return self->CanHaveSubEvents();
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_HasSubEvents_0(LinkEvent* self) {
-  return self->HasSubEvents();
-}
-
-EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_GetSubEvents_0(LinkEvent* self) {
-  return &self->GetSubEvents();
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_IsDisabled_0(LinkEvent* self) {
-  return self->IsDisabled();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetDisabled_1(LinkEvent* self, bool arg0) {
-  self->SetDisabled(arg0);
-}
-
-bool EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_IsFolded_0(LinkEvent* self) {
-  return self->IsFolded();
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SetFolded_1(LinkEvent* self, bool arg0) {
-  self->SetFolded(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_SerializeTo_1(LinkEvent* self, SerializerElement* arg0) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_SerializeTo_1(ExternalLayout* self, SerializerElement* arg0) {
   self->SerializeTo(*arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent_UnserializeFrom_2(LinkEvent* self, Project* arg0, const SerializerElement* arg1) {
-  self->UnserializeFrom(*arg0, *arg1);
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout_UnserializeFrom_1(ExternalLayout* self, const SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
 }
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_LinkEvent___destroy___0(LinkEvent* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ExternalLayout___destroy___0(ExternalLayout* self) {
   delete self;
 }
 

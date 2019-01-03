@@ -107,6 +107,7 @@
         gd.asAdMobObject = function(evt) { return gd.castObject(evt, gd.AdMobObject); }
         gd.asTextEntryObject = function(evt) { return gd.castObject(evt, gd.TextEntryObject); }
         gd.asParticleEmitterObject = function(evt) { return gd.castObject(evt, gd.ParticleEmitterObject); }
+        gd.asObjectJsImplementation = function(evt) { return gd.castObject(evt, gd.ObjectJsImplementation); }
 
         gd.asImageResource = function(evt) { return gd.castObject(evt, gd.ImageResource); }
 
