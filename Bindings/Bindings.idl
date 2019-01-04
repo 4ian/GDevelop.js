@@ -802,6 +802,8 @@ interface SerializerElement {
     [Ref] SerializerElement GetChild([Const] DOMString str);
     void WRAPPED_SetChild([Const] DOMString str, [Const, Ref] SerializerElement element);
     boolean HasChild([Const] DOMString str);
+
+    void ConsiderAsArray();
 };
 
 interface Serializer {
