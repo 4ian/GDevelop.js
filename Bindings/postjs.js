@@ -130,6 +130,7 @@
             } else if (typeof object === 'boolean') {
                 element.setBool(object);
             } else if (Array.isArray(object)) {
+                element.considerAsArray();
                 for(var i = 0;i<object.length;++i) {
                     var item = element.addChild("");
                     gd.Serializer._fromJSObject(object[i], item);

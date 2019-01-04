@@ -4123,6 +4123,16 @@ SerializerElement.prototype['WRAPPED_SetDouble'] = SerializerElement.prototype.W
   _emscripten_bind_SerializerElement_WRAPPED_SetDouble_1(self, arg0);
 };;
 
+SerializerElement.prototype['ConsiderAsArray'] = SerializerElement.prototype.ConsiderAsArray = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_SerializerElement_ConsiderAsArray_0(self);
+};;
+
+SerializerElement.prototype['ConsideredAsArray'] = SerializerElement.prototype.ConsideredAsArray = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_SerializerElement_ConsideredAsArray_0(self));
+};;
+
 SerializerElement.prototype['AddChild'] = SerializerElement.prototype.AddChild = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();

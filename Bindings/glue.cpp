@@ -2457,6 +2457,14 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_WRAPPED_SetDouble_1(
   self->WRAPPED_SetDouble(arg0);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_ConsiderAsArray_0(SerializerElement* self) {
+  self->ConsiderAsArray();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_ConsideredAsArray_0(SerializerElement* self) {
+  return self->ConsideredAsArray();
+}
+
 SerializerElement* EMSCRIPTEN_KEEPALIVE emscripten_bind_SerializerElement_AddChild_1(SerializerElement* self, const char* arg0) {
   return &self->AddChild(arg0);
 }

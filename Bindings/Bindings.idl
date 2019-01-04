@@ -798,6 +798,9 @@ interface SerializerElement {
     void WRAPPED_SetInt(long value);
     void WRAPPED_SetDouble(float value);
 
+    void ConsiderAsArray();
+    boolean ConsideredAsArray();
+
     [Ref] SerializerElement AddChild([Const] DOMString str);
     [Ref] SerializerElement GetChild([Const] DOMString str);
     void WRAPPED_SetChild([Const] DOMString str, [Const, Ref] SerializerElement element);
