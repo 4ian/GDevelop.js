@@ -2170,12 +2170,12 @@ describe('libGD.js', function() {
     it('can parse expressions with objects functions', function() {
       testMathExpression('MySpriteObject.X()');
       testMathExpression('MySpriteObject.X() + 1');
-      testMathExpression('MySpriteObject.PointX(Point)');
+      testMathExpression('MySpriteObject.PointX(\"Point\")');
     });
 
     it('can report errors when using too much arguments in object functions', function() {
       testMathExpression(
-        'MySpriteObject.PointX(Point, 2)',
+        'MySpriteObject.PointX(\"Point\", 2)',
         'Incorrect number of parameters Expected (maximum) :2'
       );
     });
@@ -2290,12 +2290,12 @@ describe('libGD.js', function() {
     it('can parse expressions with objects functions', function() {
       testExpression('number', 'MySpriteObject.X()');
       testExpression('number', 'MySpriteObject.X() + 1');
-      testExpression('number', 'MySpriteObject.PointX(Point)');
+      testExpression('number', 'MySpriteObject.PointX(\"Point\")');
     });
 
     it('can report errors when using too much arguments in object functions', function() {
       testExpression('number', 
-        'MySpriteObject.PointX(Point, 2)',
+        'MySpriteObject.PointX(\"Point\", 2)',
         'This parameter was not expected by this expression. Remove it or verify that you\'ve entered the proper expression name.'
       );
     });
