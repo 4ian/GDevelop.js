@@ -2170,12 +2170,12 @@ describe('libGD.js', function() {
     it('can parse expressions with objects functions', function() {
       testMathExpression('MySpriteObject.X()');
       testMathExpression('MySpriteObject.X() + 1');
-      testMathExpression('MySpriteObject.PointX(\"Point\")');
+      testMathExpression('MySpriteObject.PointX("Point")');
     });
 
     it('can report errors when using too much arguments in object functions', function() {
       testMathExpression(
-        'MySpriteObject.PointX(\"Point\", 2)',
+        'MySpriteObject.PointX("Point", 2)',
         'Incorrect number of parameters Expected (maximum) :2'
       );
     });
@@ -2194,7 +2194,8 @@ describe('libGD.js', function() {
       layout.insertNewObject(project, 'Sprite', 'MySpriteObject', 0);
     });
 
-    function testExpression(type, 
+    function testExpression(
+      type,
       expression,
       expectedError,
       expectedErrorPosition
@@ -2245,21 +2246,30 @@ describe('libGD.js', function() {
     });
 
     it('report errors in invalid expressions', function() {
-      testExpression('number', 
+      testExpression(
+        'number',
         '1//2',
         'You must enter a number or a valid expression call.',
         2
       );
       testExpression('number', 'bad expression', 'You must enter a number.', 0);
-      testExpression('number', 
+      testExpression(
+        'number',
         '1 + test()',
         "Cannot find an expression with this name: test\nDouble check that you've not made any typo in the name.",
         4
       );
-      testExpression('number', 
+      testExpression(
+        'number',
         '3..14',
         'No operator found. Did you forget to enter an operator (like +, -, * or /) between numbers or expressions?',
         2
+      );
+      testExpression(
+        'string',
+        '="Mynewscene"',
+        'You must enter a text (between quotes) or a valid expression call.',
+        0
       );
     });
 
@@ -2272,11 +2282,13 @@ describe('libGD.js', function() {
     });
 
     it('can report errors when using too much arguments', function() {
-      testExpression('number', 
+      testExpression(
+        'number',
         'abs(-5, 3)',
         "This parameter was not expected by this expression. Remove it or verify that you've entered the proper expression name."
       );
-      testExpression('number', 
+      testExpression(
+        'number',
         'MouseX("", 0, 0) + 1',
         "This parameter was not expected by this expression. Remove it or verify that you've entered the proper expression name."
       );
@@ -2290,13 +2302,14 @@ describe('libGD.js', function() {
     it('can parse expressions with objects functions', function() {
       testExpression('number', 'MySpriteObject.X()');
       testExpression('number', 'MySpriteObject.X() + 1');
-      testExpression('number', 'MySpriteObject.PointX(\"Point\")');
+      testExpression('number', 'MySpriteObject.PointX("Point")');
     });
 
     it('can report errors when using too much arguments in object functions', function() {
-      testExpression('number', 
-        'MySpriteObject.PointX(\"Point\", 2)',
-        'This parameter was not expected by this expression. Remove it or verify that you\'ve entered the proper expression name.'
+      testExpression(
+        'number',
+        'MySpriteObject.PointX("Point", 2)',
+        "This parameter was not expected by this expression. Remove it or verify that you've entered the proper expression name."
       );
     });
 
