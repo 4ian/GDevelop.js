@@ -19,6 +19,10 @@
 #include <GDCore/Serialization/SerializerElement.h>
 
 #include <GDCore/Events/Parsers/ExpressionParser.h>
+#include <GDCore/Events/Parsers/ExpressionParser2.h>
+#include <GDCore/Events/Parsers/ExpressionParser2Node.h>
+#include <GDCore/IDE/Events/ExpressionValidator.h>
+#include <GDCore/Events/CodeGeneration/ExpressionCodeGenerator.h>
 #include <GDCore/Extensions/Metadata/MetadataProvider.h>
 #include <GDCore/Extensions/Metadata/ParameterMetadataTools.h>
 #include <GDCore/Project/EventsFunction.h>
@@ -384,6 +388,8 @@ typedef gd::Object gdObject;  // To avoid clashing javascript Object in glue.js
 typedef ParticleEmitterObject::RendererType ParticleEmitterObject_RendererType;
 typedef EventsFunction::FunctionType EventsFunction_FunctionType;
 typedef std::unique_ptr<gd::Object> UniquePtrObject;
+typedef std::unique_ptr<ExpressionNode> UniquePtrExpressionNode;
+typedef std::vector<gd::ExpressionParserDiagnostic*> VectorExpressionParserDiagnostic;
 
 typedef ExtensionAndMetadata<BehaviorMetadata> ExtensionAndBehaviorMetadata;
 typedef ExtensionAndMetadata<ObjectMetadata> ExtensionAndObjectMetadata;
@@ -526,6 +532,9 @@ typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
 #define STATIC_GetNamespaceSeparator GetNamespaceSeparator
 #define STATIC_RenameEventsFunctionsExtension RenameEventsFunctionsExtension
 #define STATIC_RenameEventsFunction RenameEventsFunction
+
+#define STATIC_UseOldExpressionParser UseOldExpressionParser
+#define STATIC_IsUsingOldExpressionParser IsUsingOldExpressionParser
 
 // We postfix some methods with "At" as Javascript does not support overloading
 #define GetLayoutAt GetLayout

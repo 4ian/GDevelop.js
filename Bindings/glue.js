@@ -2597,6 +2597,18 @@ Project.prototype['GetObjectGroups'] = Project.prototype.GetObjectGroups = /** @
   var self = this.ptr;
   _emscripten_bind_Project___destroy___0(self);
 };
+// ExpressionParser2NodeWorker
+function ExpressionParser2NodeWorker() { throw "cannot construct a ExpressionParser2NodeWorker, no constructor in IDL" }
+ExpressionParser2NodeWorker.prototype = Object.create(WrapperObject.prototype);
+ExpressionParser2NodeWorker.prototype.constructor = ExpressionParser2NodeWorker;
+ExpressionParser2NodeWorker.prototype.__class__ = ExpressionParser2NodeWorker;
+ExpressionParser2NodeWorker.__cache__ = {};
+Module['ExpressionParser2NodeWorker'] = ExpressionParser2NodeWorker;
+
+  ExpressionParser2NodeWorker.prototype['__destroy__'] = ExpressionParser2NodeWorker.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ExpressionParser2NodeWorker___destroy___0(self);
+};
 // Layer
 /** @suppress {undefinedVars, duplicate} */function Layer() {
   this.ptr = _emscripten_bind_Layer_Layer_0();
@@ -3357,6 +3369,29 @@ ExtensionAndInstructionMetadata.prototype['GetMetadata'] = ExtensionAndInstructi
   var self = this.ptr;
   _emscripten_bind_ExtensionAndInstructionMetadata___destroy___0(self);
 };
+// ExpressionCodeGenerator
+function ExpressionCodeGenerator() { throw "cannot construct a ExpressionCodeGenerator, no constructor in IDL" }
+ExpressionCodeGenerator.prototype = Object.create(WrapperObject.prototype);
+ExpressionCodeGenerator.prototype.constructor = ExpressionCodeGenerator;
+ExpressionCodeGenerator.prototype.__class__ = ExpressionCodeGenerator;
+ExpressionCodeGenerator.__cache__ = {};
+Module['ExpressionCodeGenerator'] = ExpressionCodeGenerator;
+
+ExpressionCodeGenerator.prototype['STATIC_UseOldExpressionParser'] = ExpressionCodeGenerator.prototype.STATIC_UseOldExpressionParser = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ExpressionCodeGenerator_STATIC_UseOldExpressionParser_1(self, arg0);
+};;
+
+ExpressionCodeGenerator.prototype['STATIC_IsUsingOldExpressionParser'] = ExpressionCodeGenerator.prototype.STATIC_IsUsingOldExpressionParser = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_ExpressionCodeGenerator_STATIC_IsUsingOldExpressionParser_0(self));
+};;
+
+  ExpressionCodeGenerator.prototype['__destroy__'] = ExpressionCodeGenerator.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ExpressionCodeGenerator___destroy___0(self);
+};
 // LinkEvent
 /** @suppress {undefinedVars, duplicate} */function LinkEvent() {
   this.ptr = _emscripten_bind_LinkEvent_LinkEvent_0();
@@ -4047,6 +4082,24 @@ ObjectGroupsContainer.prototype['UnserializeFrom'] = ObjectGroupsContainer.proto
   ObjectGroupsContainer.prototype['__destroy__'] = ObjectGroupsContainer.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_ObjectGroupsContainer___destroy___0(self);
+};
+// ExpressionNode
+function ExpressionNode() { throw "cannot construct a ExpressionNode, no constructor in IDL" }
+ExpressionNode.prototype = Object.create(WrapperObject.prototype);
+ExpressionNode.prototype.constructor = ExpressionNode;
+ExpressionNode.prototype.__class__ = ExpressionNode;
+ExpressionNode.__cache__ = {};
+Module['ExpressionNode'] = ExpressionNode;
+
+ExpressionNode.prototype['Visit'] = ExpressionNode.prototype.Visit = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_ExpressionNode_Visit_1(self, arg0);
+};;
+
+  ExpressionNode.prototype['__destroy__'] = ExpressionNode.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ExpressionNode___destroy___0(self);
 };
 // ResourcesMergingHelper
 /** @suppress {undefinedVars, duplicate} */function ResourcesMergingHelper(arg0) {
@@ -4831,6 +4884,50 @@ InstructionMetadata.prototype['GetCodeExtraInformation'] = InstructionMetadata.p
   var self = this.ptr;
   _emscripten_bind_InstructionMetadata___destroy___0(self);
 };
+// VectorPoint
+/** @suppress {undefinedVars, duplicate} */function VectorPoint() {
+  this.ptr = _emscripten_bind_VectorPoint_VectorPoint_0();
+  getCache(VectorPoint)[this.ptr] = this;
+};;
+VectorPoint.prototype = Object.create(WrapperObject.prototype);
+VectorPoint.prototype.constructor = VectorPoint;
+VectorPoint.prototype.__class__ = VectorPoint;
+VectorPoint.__cache__ = {};
+Module['VectorPoint'] = VectorPoint;
+
+VectorPoint.prototype['push_back'] = VectorPoint.prototype.push_back = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VectorPoint_push_back_1(self, arg0);
+};;
+
+VectorPoint.prototype['size'] = VectorPoint.prototype.size = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_VectorPoint_size_0(self);
+};;
+
+VectorPoint.prototype['at'] = VectorPoint.prototype.at = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_VectorPoint_at_1(self, arg0), Point);
+};;
+
+VectorPoint.prototype['WRAPPED_set'] = VectorPoint.prototype.WRAPPED_set = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_VectorPoint_WRAPPED_set_2(self, arg0, arg1);
+};;
+
+VectorPoint.prototype['clear'] = VectorPoint.prototype.clear = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorPoint_clear_0(self);
+};;
+
+  VectorPoint.prototype['__destroy__'] = VectorPoint.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorPoint___destroy___0(self);
+};
 // InitialInstanceFunctor
 function InitialInstanceFunctor() { throw "cannot construct a InitialInstanceFunctor, no constructor in IDL" }
 InitialInstanceFunctor.prototype = Object.create(WrapperObject.prototype);
@@ -4977,6 +5074,23 @@ JsCodeEvent.prototype['UnserializeFrom'] = JsCodeEvent.prototype.UnserializeFrom
   var self = this.ptr;
   _emscripten_bind_JsCodeEvent___destroy___0(self);
 };
+// UniquePtrExpressionNode
+function UniquePtrExpressionNode() { throw "cannot construct a UniquePtrExpressionNode, no constructor in IDL" }
+UniquePtrExpressionNode.prototype = Object.create(WrapperObject.prototype);
+UniquePtrExpressionNode.prototype.constructor = UniquePtrExpressionNode;
+UniquePtrExpressionNode.prototype.__class__ = UniquePtrExpressionNode;
+UniquePtrExpressionNode.__cache__ = {};
+Module['UniquePtrExpressionNode'] = UniquePtrExpressionNode;
+
+UniquePtrExpressionNode.prototype['get'] = UniquePtrExpressionNode.prototype.get = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_UniquePtrExpressionNode_get_0(self), ExpressionNode);
+};;
+
+  UniquePtrExpressionNode.prototype['__destroy__'] = UniquePtrExpressionNode.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_UniquePtrExpressionNode___destroy___0(self);
+};
 // EventsSearchResult
 function EventsSearchResult() { throw "cannot construct a EventsSearchResult, no constructor in IDL" }
 EventsSearchResult.prototype = Object.create(WrapperObject.prototype);
@@ -5031,6 +5145,26 @@ ArbitraryEventsWorker.prototype['Launch'] = ArbitraryEventsWorker.prototype.Laun
   ArbitraryEventsWorker.prototype['__destroy__'] = ArbitraryEventsWorker.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_ArbitraryEventsWorker___destroy___0(self);
+};
+// ExpressionValidator
+/** @suppress {undefinedVars, duplicate} */function ExpressionValidator() {
+  this.ptr = _emscripten_bind_ExpressionValidator_ExpressionValidator_0();
+  getCache(ExpressionValidator)[this.ptr] = this;
+};;
+ExpressionValidator.prototype = Object.create(WrapperObject.prototype);
+ExpressionValidator.prototype.constructor = ExpressionValidator;
+ExpressionValidator.prototype.__class__ = ExpressionValidator;
+ExpressionValidator.__cache__ = {};
+Module['ExpressionValidator'] = ExpressionValidator;
+
+ExpressionValidator.prototype['GetErrors'] = ExpressionValidator.prototype.GetErrors = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ExpressionValidator_GetErrors_0(self), VectorExpressionParserDiagnostic);
+};;
+
+  ExpressionValidator.prototype['__destroy__'] = ExpressionValidator.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ExpressionValidator___destroy___0(self);
 };
 // BehaviorJsImplementation
 /** @suppress {undefinedVars, duplicate} */function BehaviorJsImplementation() {
@@ -8525,49 +8659,65 @@ ObjectMetadata.prototype['AddIncludeFile'] = ObjectMetadata.prototype.AddInclude
   var self = this.ptr;
   _emscripten_bind_ObjectMetadata___destroy___0(self);
 };
-// VectorPoint
-/** @suppress {undefinedVars, duplicate} */function VectorPoint() {
-  this.ptr = _emscripten_bind_VectorPoint_VectorPoint_0();
-  getCache(VectorPoint)[this.ptr] = this;
-};;
-VectorPoint.prototype = Object.create(WrapperObject.prototype);
-VectorPoint.prototype.constructor = VectorPoint;
-VectorPoint.prototype.__class__ = VectorPoint;
-VectorPoint.__cache__ = {};
-Module['VectorPoint'] = VectorPoint;
-
-VectorPoint.prototype['push_back'] = VectorPoint.prototype.push_back = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_VectorPoint_push_back_1(self, arg0);
-};;
-
-VectorPoint.prototype['size'] = VectorPoint.prototype.size = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return _emscripten_bind_VectorPoint_size_0(self);
-};;
-
-VectorPoint.prototype['at'] = VectorPoint.prototype.at = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return wrapPointer(_emscripten_bind_VectorPoint_at_1(self, arg0), Point);
-};;
-
-VectorPoint.prototype['WRAPPED_set'] = VectorPoint.prototype.WRAPPED_set = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
-  var self = this.ptr;
+// ExpressionParser2
+/** @suppress {undefinedVars, duplicate} */function ExpressionParser2(arg0, arg1, arg2) {
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  _emscripten_bind_VectorPoint_WRAPPED_set_2(self, arg0, arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  this.ptr = _emscripten_bind_ExpressionParser2_ExpressionParser2_3(arg0, arg1, arg2);
+  getCache(ExpressionParser2)[this.ptr] = this;
+};;
+ExpressionParser2.prototype = Object.create(WrapperObject.prototype);
+ExpressionParser2.prototype.constructor = ExpressionParser2;
+ExpressionParser2.prototype.__class__ = ExpressionParser2;
+ExpressionParser2.__cache__ = {};
+Module['ExpressionParser2'] = ExpressionParser2;
+
+ExpressionParser2.prototype['ParseExpression'] = ExpressionParser2.prototype.ParseExpression = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  return wrapPointer(_emscripten_bind_ExpressionParser2_ParseExpression_2(self, arg0, arg1), UniquePtrExpressionNode);
 };;
 
-VectorPoint.prototype['clear'] = VectorPoint.prototype.clear = /** @suppress {undefinedVars, duplicate} */function() {
+  ExpressionParser2.prototype['__destroy__'] = ExpressionParser2.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  _emscripten_bind_VectorPoint_clear_0(self);
+  _emscripten_bind_ExpressionParser2___destroy___0(self);
+};
+// ExpressionParserDiagnostic
+function ExpressionParserDiagnostic() { throw "cannot construct a ExpressionParserDiagnostic, no constructor in IDL" }
+ExpressionParserDiagnostic.prototype = Object.create(WrapperObject.prototype);
+ExpressionParserDiagnostic.prototype.constructor = ExpressionParserDiagnostic;
+ExpressionParserDiagnostic.prototype.__class__ = ExpressionParserDiagnostic;
+ExpressionParserDiagnostic.__cache__ = {};
+Module['ExpressionParserDiagnostic'] = ExpressionParserDiagnostic;
+
+ExpressionParserDiagnostic.prototype['IsError'] = ExpressionParserDiagnostic.prototype.IsError = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_ExpressionParserDiagnostic_IsError_0(self));
 };;
 
-  VectorPoint.prototype['__destroy__'] = VectorPoint.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+ExpressionParserDiagnostic.prototype['GetMessage'] = ExpressionParserDiagnostic.prototype.GetMessage = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  _emscripten_bind_VectorPoint___destroy___0(self);
+  return Pointer_stringify(_emscripten_bind_ExpressionParserDiagnostic_GetMessage_0(self));
+};;
+
+ExpressionParserDiagnostic.prototype['GetStartPosition'] = ExpressionParserDiagnostic.prototype.GetStartPosition = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ExpressionParserDiagnostic_GetStartPosition_0(self);
+};;
+
+ExpressionParserDiagnostic.prototype['GetEndPosition'] = ExpressionParserDiagnostic.prototype.GetEndPosition = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_ExpressionParserDiagnostic_GetEndPosition_0(self);
+};;
+
+  ExpressionParserDiagnostic.prototype['__destroy__'] = ExpressionParserDiagnostic.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ExpressionParserDiagnostic___destroy___0(self);
 };
 // Layout
 /** @suppress {undefinedVars, duplicate} */function Layout() {
@@ -10372,6 +10522,29 @@ ProjectResourcesAdder.prototype['STATIC_RemoveAllUseless'] = ProjectResourcesAdd
   ProjectResourcesAdder.prototype['__destroy__'] = ProjectResourcesAdder.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_ProjectResourcesAdder___destroy___0(self);
+};
+// VectorExpressionParserDiagnostic
+function VectorExpressionParserDiagnostic() { throw "cannot construct a VectorExpressionParserDiagnostic, no constructor in IDL" }
+VectorExpressionParserDiagnostic.prototype = Object.create(WrapperObject.prototype);
+VectorExpressionParserDiagnostic.prototype.constructor = VectorExpressionParserDiagnostic;
+VectorExpressionParserDiagnostic.prototype.__class__ = VectorExpressionParserDiagnostic;
+VectorExpressionParserDiagnostic.__cache__ = {};
+Module['VectorExpressionParserDiagnostic'] = VectorExpressionParserDiagnostic;
+
+VectorExpressionParserDiagnostic.prototype['size'] = VectorExpressionParserDiagnostic.prototype.size = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return _emscripten_bind_VectorExpressionParserDiagnostic_size_0(self);
+};;
+
+VectorExpressionParserDiagnostic.prototype['at'] = VectorExpressionParserDiagnostic.prototype.at = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_VectorExpressionParserDiagnostic_at_1(self, arg0), ExpressionParserDiagnostic);
+};;
+
+  VectorExpressionParserDiagnostic.prototype['__destroy__'] = VectorExpressionParserDiagnostic.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_VectorExpressionParserDiagnostic___destroy___0(self);
 };
 // JsPlatform
 function JsPlatform() { throw "cannot construct a JsPlatform, no constructor in IDL" }
