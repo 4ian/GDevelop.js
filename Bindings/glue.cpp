@@ -2223,6 +2223,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Platform_RemoveExtension_1(Platform* s
   self->RemoveExtension(arg0);
 }
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_Platform_ReloadBuiltinExtensions_0(Platform* self) {
+  self->ReloadBuiltinExtensions();
+}
+
 const VectorPlatformExtension* EMSCRIPTEN_KEEPALIVE emscripten_bind_Platform_GetAllPlatformExtensions_0(Platform* self) {
   return &self->GetAllPlatformExtensions();
 }
@@ -6405,6 +6409,10 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_JsPlatform_IsExtensionLoaded_1(JsPlatf
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsPlatform_RemoveExtension_1(JsPlatform* self, const char* arg0) {
   self->RemoveExtension(arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_JsPlatform_ReloadBuiltinExtensions_0(JsPlatform* self) {
+  self->ReloadBuiltinExtensions();
 }
 
 const VectorPlatformExtension* EMSCRIPTEN_KEEPALIVE emscripten_bind_JsPlatform_GetAllPlatformExtensions_0(JsPlatform* self) {
