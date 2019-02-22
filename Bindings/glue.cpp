@@ -5988,16 +5988,83 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Sprite___destroy___0(Sprite* self) {
   delete self;
 }
 
-// ArbitraryResourceWorkerJS
+// VideoResource
 
-ArbitraryResourceWorkerJS* EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS_ArbitraryResourceWorkerJS_0() {
-  return new ArbitraryResourceWorkerJS();
+VideoResource* EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_VideoResource_0() {
+  return new VideoResource();
 }
 
+Resource* EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_Clone_0(VideoResource* self) {
+  return self->Clone();
+}
 
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_SetName_1(VideoResource* self, const char* arg0) {
+  self->SetName(arg0);
+}
 
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_GetName_0(VideoResource* self) {
+  return self->GetName().c_str();
+}
 
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(ArbitraryResourceWorkerJS* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_SetKind_1(VideoResource* self, const char* arg0) {
+  self->SetKind(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_GetKind_0(VideoResource* self) {
+  return self->GetKind().c_str();
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_IsUserAdded_0(VideoResource* self) {
+  return self->IsUserAdded();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_SetUserAdded_1(VideoResource* self, bool arg0) {
+  self->SetUserAdded(arg0);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_UseFile_0(VideoResource* self) {
+  return self->UseFile();
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_SetFile_1(VideoResource* self, const char* arg0) {
+  self->SetFile(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_GetFile_0(VideoResource* self) {
+  return self->GetFile().c_str();
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_GetAbsoluteFile_1(VideoResource* self, const Project* arg0) {
+  static gd::String temp;
+  return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_SetMetadata_1(VideoResource* self, const char* arg0) {
+  self->SetMetadata(arg0);
+}
+
+const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_GetMetadata_0(VideoResource* self) {
+  return self->GetMetadata().c_str();
+}
+
+MapStringPropertyDescriptor* EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_GetProperties_1(VideoResource* self, Project* arg0) {
+  static MapStringPropertyDescriptor temp;
+  return (temp = self->GetProperties(*arg0), &temp);
+}
+
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_UpdateProperty_3(VideoResource* self, const char* arg0, const char* arg1, Project* arg2) {
+  return self->UpdateProperty(arg0, arg1, *arg2);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_SerializeTo_1(VideoResource* self, SerializerElement* arg0) {
+  self->SerializeTo(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_UnserializeFrom_1(VideoResource* self, const SerializerElement* arg0) {
+  self->UnserializeFrom(*arg0);
+}
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource___destroy___0(VideoResource* self) {
   delete self;
 }
 
@@ -6646,6 +6713,19 @@ unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ParserCallbacks_GetFirstErrorP
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParserCallbacks___destroy___0(ParserCallbacks* self) {
+  delete self;
+}
+
+// ArbitraryResourceWorkerJS
+
+ArbitraryResourceWorkerJS* EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS_ArbitraryResourceWorkerJS_0() {
+  return new ArbitraryResourceWorkerJS();
+}
+
+
+
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(ArbitraryResourceWorkerJS* self) {
   delete self;
 }
 

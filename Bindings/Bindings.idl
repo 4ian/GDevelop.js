@@ -709,6 +709,31 @@ interface FontResource {
     void UnserializeFrom([Const, Ref] SerializerElement element);
 };
 
+interface VideoResource {
+    void VideoResource();
+
+    //Inherited from Resource:
+    Resource Clone();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetKind([Const] DOMString kind);
+    [Const, Ref] DOMString GetKind();
+    boolean IsUserAdded();
+    void SetUserAdded(boolean yes);
+    boolean UseFile();
+    void SetFile([Const] DOMString file);
+    [Const, Ref] DOMString GetFile();
+    [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
+    void SetMetadata([Const] DOMString metadata);
+    [Const, Ref] DOMString GetMetadata();
+
+    [Value] MapStringPropertyDescriptor GetProperties([Ref] Project project);
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
 interface InitialInstance {
     void InitialInstance();
 

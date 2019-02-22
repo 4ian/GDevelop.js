@@ -9884,44 +9884,128 @@ Sprite.prototype['SetCustomCollisionMask'] = Sprite.prototype.SetCustomCollision
   var self = this.ptr;
   _emscripten_bind_Sprite___destroy___0(self);
 };
-// ArbitraryResourceWorkerJS
-/** @suppress {undefinedVars, duplicate} */function ArbitraryResourceWorkerJS() {
-  this.ptr = _emscripten_bind_ArbitraryResourceWorkerJS_ArbitraryResourceWorkerJS_0();
-  getCache(ArbitraryResourceWorkerJS)[this.ptr] = this;
+// VideoResource
+/** @suppress {undefinedVars, duplicate} */function VideoResource() {
+  this.ptr = _emscripten_bind_VideoResource_VideoResource_0();
+  getCache(VideoResource)[this.ptr] = this;
 };;
-ArbitraryResourceWorkerJS.prototype = Object.create(ArbitraryResourceWorker.prototype);
-ArbitraryResourceWorkerJS.prototype.constructor = ArbitraryResourceWorkerJS;
-ArbitraryResourceWorkerJS.prototype.__class__ = ArbitraryResourceWorkerJS;
-ArbitraryResourceWorkerJS.__cache__ = {};
-Module['ArbitraryResourceWorkerJS'] = ArbitraryResourceWorkerJS;
+VideoResource.prototype = Object.create(WrapperObject.prototype);
+VideoResource.prototype.constructor = VideoResource;
+VideoResource.prototype.__class__ = VideoResource;
+VideoResource.__cache__ = {};
+Module['VideoResource'] = VideoResource;
 
-ArbitraryResourceWorkerJS.prototype['ExposeImage'] = ArbitraryResourceWorkerJS.prototype.ExposeImage = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+VideoResource.prototype['Clone'] = VideoResource.prototype.Clone = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_VideoResource_Clone_0(self), Resource);
+};;
+
+VideoResource.prototype['SetName'] = VideoResource.prototype.SetName = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeImage_1(self, arg0);
+  _emscripten_bind_VideoResource_SetName_1(self, arg0);
 };;
 
-ArbitraryResourceWorkerJS.prototype['ExposeShader'] = ArbitraryResourceWorkerJS.prototype.ExposeShader = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+VideoResource.prototype['GetName'] = VideoResource.prototype.GetName = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VideoResource_GetName_0(self));
+};;
+
+VideoResource.prototype['SetKind'] = VideoResource.prototype.SetKind = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeShader_1(self, arg0);
+  _emscripten_bind_VideoResource_SetKind_1(self, arg0);
 };;
 
-ArbitraryResourceWorkerJS.prototype['ExposeFile'] = ArbitraryResourceWorkerJS.prototype.ExposeFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+VideoResource.prototype['GetKind'] = VideoResource.prototype.GetKind = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VideoResource_GetKind_0(self));
+};;
+
+VideoResource.prototype['IsUserAdded'] = VideoResource.prototype.IsUserAdded = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_VideoResource_IsUserAdded_0(self));
+};;
+
+VideoResource.prototype['SetUserAdded'] = VideoResource.prototype.SetUserAdded = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VideoResource_SetUserAdded_1(self, arg0);
+};;
+
+VideoResource.prototype['UseFile'] = VideoResource.prototype.UseFile = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return !!(_emscripten_bind_VideoResource_UseFile_0(self));
+};;
+
+VideoResource.prototype['SetFile'] = VideoResource.prototype.SetFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeFile_1(self, arg0);
+  _emscripten_bind_VideoResource_SetFile_1(self, arg0);
 };;
 
-  ArbitraryResourceWorkerJS.prototype['__destroy__'] = ArbitraryResourceWorkerJS.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+VideoResource.prototype['GetFile'] = VideoResource.prototype.GetFile = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  _emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(self);
+  return Pointer_stringify(_emscripten_bind_VideoResource_GetFile_0(self));
+};;
+
+VideoResource.prototype['GetAbsoluteFile'] = VideoResource.prototype.GetAbsoluteFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return Pointer_stringify(_emscripten_bind_VideoResource_GetAbsoluteFile_1(self, arg0));
+};;
+
+VideoResource.prototype['SetMetadata'] = VideoResource.prototype.SetMetadata = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_VideoResource_SetMetadata_1(self, arg0);
+};;
+
+VideoResource.prototype['GetMetadata'] = VideoResource.prototype.GetMetadata = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VideoResource_GetMetadata_0(self));
+};;
+
+VideoResource.prototype['GetProperties'] = VideoResource.prototype.GetProperties = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  return wrapPointer(_emscripten_bind_VideoResource_GetProperties_1(self, arg0), MapStringPropertyDescriptor);
+};;
+
+VideoResource.prototype['UpdateProperty'] = VideoResource.prototype.UpdateProperty = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  else arg1 = ensureString(arg1);
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  return !!(_emscripten_bind_VideoResource_UpdateProperty_3(self, arg0, arg1, arg2));
+};;
+
+VideoResource.prototype['SerializeTo'] = VideoResource.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VideoResource_SerializeTo_1(self, arg0);
+};;
+
+VideoResource.prototype['UnserializeFrom'] = VideoResource.prototype.UnserializeFrom = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VideoResource_UnserializeFrom_1(self, arg0);
+};;
+
+  VideoResource.prototype['__destroy__'] = VideoResource.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_VideoResource___destroy___0(self);
 };
 // EventsContextAnalyzer
 /** @suppress {undefinedVars, duplicate} */function EventsContextAnalyzer(arg0, arg1, arg2) {
@@ -11070,6 +11154,45 @@ ParserCallbacks.prototype['GetFirstErrorPosition'] = ParserCallbacks.prototype.G
   ParserCallbacks.prototype['__destroy__'] = ParserCallbacks.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_ParserCallbacks___destroy___0(self);
+};
+// ArbitraryResourceWorkerJS
+/** @suppress {undefinedVars, duplicate} */function ArbitraryResourceWorkerJS() {
+  this.ptr = _emscripten_bind_ArbitraryResourceWorkerJS_ArbitraryResourceWorkerJS_0();
+  getCache(ArbitraryResourceWorkerJS)[this.ptr] = this;
+};;
+ArbitraryResourceWorkerJS.prototype = Object.create(ArbitraryResourceWorker.prototype);
+ArbitraryResourceWorkerJS.prototype.constructor = ArbitraryResourceWorkerJS;
+ArbitraryResourceWorkerJS.prototype.__class__ = ArbitraryResourceWorkerJS;
+ArbitraryResourceWorkerJS.__cache__ = {};
+Module['ArbitraryResourceWorkerJS'] = ArbitraryResourceWorkerJS;
+
+ArbitraryResourceWorkerJS.prototype['ExposeImage'] = ArbitraryResourceWorkerJS.prototype.ExposeImage = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeImage_1(self, arg0);
+};;
+
+ArbitraryResourceWorkerJS.prototype['ExposeShader'] = ArbitraryResourceWorkerJS.prototype.ExposeShader = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeShader_1(self, arg0);
+};;
+
+ArbitraryResourceWorkerJS.prototype['ExposeFile'] = ArbitraryResourceWorkerJS.prototype.ExposeFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeFile_1(self, arg0);
+};;
+
+  ArbitraryResourceWorkerJS.prototype['__destroy__'] = ArbitraryResourceWorkerJS.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(self);
 };
 // VectorVector2f
 /** @suppress {undefinedVars, duplicate} */function VectorVector2f() {
