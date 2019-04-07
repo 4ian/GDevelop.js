@@ -1340,6 +1340,9 @@ describe('libGD.js', function() {
       expect(container.has('Group2')).toBe(true);
       expect(container.has('Group3')).toBe(true);
       expect(container.has('Group4')).toBe(false);
+      expect(container.get('Group1').getName()).toBe('Group1');
+      expect(container.get('Group2').getName()).toBe('Group2');
+      expect(container.get('Group3').getName()).toBe('Group3');
       expect(container.count()).toBe(3);
     });
 
@@ -2408,6 +2411,14 @@ describe('libGD.js', function() {
   });
 
   describe('gd.ParameterMetadataTools', function() {
+    it('can tell the type of a parameter', function() {
+      expect(gd.ParameterMetadata.isObject('object')).toBe(true);
+      expect(gd.ParameterMetadata.isObject('objectPtr')).toBe(true);
+      expect(gd.ParameterMetadata.isObject('123')).toBe(false);
+      expect(gd.ParameterMetadata.isBehavior('behavior')).toBe(true);
+      expect(gd.ParameterMetadata.isBehavior('behavior34234')).toBe(false);
+    });
+
     it('can create an object container from parameters', function() {
       const project = gd.ProjectHelper.createNewGDJSProject();
 
@@ -2466,6 +2477,52 @@ describe('libGD.js', function() {
       );
 
       project.delete();
+    });
+
+    it('can give the previous object parameter', function() {
+      const parameters = new gd.VectorParameterMetadata();
+      const parameter1 = new gd.ParameterMetadata();
+      parameter1.setType('objectList');
+      const parameter2 = new gd.ParameterMetadata();
+      parameter2.setType('behavior');
+      const parameter3 = new gd.ParameterMetadata();
+      parameter3.setType('objectList');
+      const parameter4 = new gd.ParameterMetadata();
+      parameter4.setType('string');
+      const parameter5 = new gd.ParameterMetadata();
+      parameter5.setType('objectvar');
+      const parameter6 = new gd.ParameterMetadata();
+      parameter6.setType('objectvar');
+
+      parameters.push_back(parameter1);
+      parameters.push_back(parameter2);
+      parameters.push_back(parameter3);
+      parameters.push_back(parameter4);
+      parameters.push_back(parameter5);
+      parameters.push_back(parameter6);
+
+      objectsContainer = new gd.ObjectsContainer();
+      expect(
+        gd.ParameterMetadataTools.getObjectParameterIndexFor(parameters, 0)
+      ).toBe(-1);
+      expect(
+        gd.ParameterMetadataTools.getObjectParameterIndexFor(parameters, 1)
+      ).toBe(0);
+      expect(
+        gd.ParameterMetadataTools.getObjectParameterIndexFor(parameters, 2)
+      ).toBe(0);
+      expect(
+        gd.ParameterMetadataTools.getObjectParameterIndexFor(parameters, 3)
+      ).toBe(2);
+      expect(
+        gd.ParameterMetadataTools.getObjectParameterIndexFor(parameters, 4)
+      ).toBe(2);
+      expect(
+        gd.ParameterMetadataTools.getObjectParameterIndexFor(parameters, 5)
+      ).toBe(2);
+      expect(
+        gd.ParameterMetadataTools.getObjectParameterIndexFor(parameters, 999)
+      ).toBe(-1);
     });
   });
 

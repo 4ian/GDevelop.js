@@ -4,6 +4,7 @@
 
 
 
+
 class InitialInstanceJSFunctor : public InitialInstanceJSFunctorWrapper {
 public:
   void invoke(InitialInstance* arg0) {
@@ -21,7 +22,6 @@ public:
     }, (int)this);
   }
 };
-
 
 
 extern "C" {
@@ -701,6 +701,10 @@ EventsList* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_GetEvents_0(Even
 
 VectorParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_GetParameters_0(EventsFunction* self) {
   return &self->GetParameters();
+}
+
+ObjectGroupsContainer* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_GetObjectGroups_0(EventsFunction* self) {
+  return &self->GetObjectGroups();
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunction_SerializeTo_1(EventsFunction* self, SerializerElement* arg0) {
@@ -2384,6 +2388,19 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_SpriteObject___destroy___0(SpriteObjec
   delete self;
 }
 
+// ArbitraryResourceWorkerJS
+
+ArbitraryResourceWorkerJS* EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS_ArbitraryResourceWorkerJS_0() {
+  return new ArbitraryResourceWorkerJS();
+}
+
+
+
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(ArbitraryResourceWorkerJS* self) {
+  delete self;
+}
+
 // HighestZOrderFinder
 
 HighestZOrderFinder* EMSCRIPTEN_KEEPALIVE emscripten_bind_HighestZOrderFinder_HighestZOrderFinder_0() {
@@ -2426,6 +2443,10 @@ ObjectGroup* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_InsertNe
 
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_Count_0(ObjectGroupsContainer* self) {
   return self->Count();
+}
+
+ObjectGroup* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_Get_1(ObjectGroupsContainer* self, const char* arg0) {
+  return &self->Get(arg0);
 }
 
 ObjectGroup* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectGroupsContainer_GetAt_1(ObjectGroupsContainer* self, unsigned int arg0) {
@@ -2608,6 +2629,10 @@ ParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata_GetPa
 
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata_GetParametersCount_0(ExpressionMetadata* self) {
   return self->GetParametersCount();
+}
+
+const VectorParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata_GetParameters_0(ExpressionMetadata* self) {
+  return &self->GetParameters();
 }
 
 ExpressionMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_ExpressionMetadata_SetHidden_0(ExpressionMetadata* self) {
@@ -2892,6 +2917,10 @@ ParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_GetP
 
 unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_GetParametersCount_0(InstructionMetadata* self) {
   return self->GetParametersCount();
+}
+
+const VectorParameterMetadata* EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_GetParameters_0(InstructionMetadata* self) {
+  return &self->GetParameters();
 }
 
 int EMSCRIPTEN_KEEPALIVE emscripten_bind_InstructionMetadata_GetUsageComplexity_0(InstructionMetadata* self) {
@@ -3543,6 +3572,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_StandardEvent___destroy___0(StandardEv
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadataTools_STATIC_ParametersToObjectsContainer_3(ParameterMetadataTools* self, Project* arg0, const VectorParameterMetadata* arg1, ObjectsContainer* arg2) {
   self->STATIC_ParametersToObjectsContainer(*arg0, *arg1, *arg2);
+}
+
+unsigned int EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadataTools_STATIC_GetObjectParameterIndexFor_2(ParameterMetadataTools* self, const VectorParameterMetadata* arg0, unsigned int arg1) {
+  return self->STATIC_GetObjectParameterIndexFor(*arg0, arg1);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadataTools___destroy___0(ParameterMetadataTools* self) {
@@ -5164,6 +5197,10 @@ bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_STATIC_IsObject_1(Pa
   return self->STATIC_IsObject(arg0);
 }
 
+bool EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata_STATIC_IsBehavior_1(ParameterMetadata* self, const char* arg0) {
+  return self->STATIC_IsBehavior(arg0);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParameterMetadata___destroy___0(ParameterMetadata* self) {
   delete self;
 }
@@ -5717,12 +5754,16 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_Animation___destroy___0(Animation* sel
 
 // EventsContext
 
-const SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsContext_GetObjectOrGroupNames_0(EventsContext* self) {
-  return &self->GetObjectOrGroupNames();
+const SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsContext_GetReferencedObjectOrGroupNames_0(EventsContext* self) {
+  return &self->GetReferencedObjectOrGroupNames();
 }
 
 const SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsContext_GetObjectNames_0(EventsContext* self) {
   return &self->GetObjectNames();
+}
+
+const SetString* EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsContext_GetBehaviorNamesOfObjectOrGroup_1(EventsContext* self, const char* arg0) {
+  return &self->GetBehaviorNamesOfObjectOrGroup(arg0);
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsContext___destroy___0(EventsContext* self) {
@@ -6716,16 +6757,13 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ParserCallbacks___destroy___0(ParserCa
   delete self;
 }
 
-// ArbitraryResourceWorkerJS
+// EventsFunctionTools
 
-ArbitraryResourceWorkerJS* EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS_ArbitraryResourceWorkerJS_0() {
-  return new ArbitraryResourceWorkerJS();
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionTools_STATIC_EventsFunctionToObjectsContainer_3(EventsFunctionTools* self, Project* arg0, const EventsFunction* arg1, ObjectsContainer* arg2) {
+  self->STATIC_EventsFunctionToObjectsContainer(*arg0, *arg1, *arg2);
 }
 
-
-
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(ArbitraryResourceWorkerJS* self) {
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_EventsFunctionTools___destroy___0(EventsFunctionTools* self) {
   delete self;
 }
 

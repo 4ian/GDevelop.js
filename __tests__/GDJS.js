@@ -126,15 +126,15 @@ describe('libGD.js - GDJS related tests', function() {
       expect(code).toMatch('function(runtimeScene, eventsFunctionContext)');
       expect(code).toMatch('var eventsFunctionContext =');
 
-      // Check that the parameters, with th (optional) context of the parent function,
+      // Check that the parameters, with the (optional) context of the parent function,
       // are all here
       expect(code).toMatch(
         'function(runtimeScene, MyObject, MyNumber, MySprite, MyString, parentEventsFunctionContext)'
       );
 
       // ...and objects should be able to get queried...
-      expect(code).toMatch('gdjs.objectsListsToArray(MyObject);');
-      expect(code).toMatch('gdjs.objectsListsToArray(MySprite);');
+      expect(code).toMatch('\"MyObject\": MyObject');
+      expect(code).toMatch('\"MySprite\": MySprite');
 
       // ...and arguments should be able to get queried too:
       expect(code).toMatch('if (argName === "MyNumber") return MyNumber;');
@@ -162,6 +162,86 @@ describe('libGD.js - GDJS related tests', function() {
       expect(code).toMatch('getVariables().get("ObjectVariable")).add(42)');
 
       condition.delete();
+      action.delete();
+    });
+    it('can generate code for a layout with generateEventsFunctionCode, with groups', function() {
+      const project = new gd.ProjectHelper.createNewGDJSProject();
+
+      const includeFiles = new gd.SetString();
+      const eventsFunction = new gd.EventsFunction();
+
+      // Create a function accepting 2 parameters:
+      const parameters = eventsFunction.getParameters();
+      const parameter1 = new gd.ParameterMetadata();
+      parameter1.setType('objectList');
+      parameter1.setName('MyObject');
+      parameter1.setDescription('The first object to be used');
+      const parameter2 = new gd.ParameterMetadata();
+      parameter2.setType('objectList');
+      parameter2.setName('MySprite');
+      parameter2.setDescription('The second object to be used, a sprite');
+      parameter2.setExtraInfo('Sprite');
+      parameters.push_back(parameter1);
+      parameters.push_back(parameter2);
+
+      // And with a group:
+      const group = eventsFunction.getObjectGroups().insertNew("MyGroup", 0);
+      group.addObject("MyObject");
+      group.addObject("MySprite");
+
+      // Create a repeat event with...
+      const eventsList = eventsFunction.getEvents();
+
+      const evt = eventsList.insertNewEvent(
+        project,
+        'BuiltinCommonInstructions::Repeat',
+        0
+      );
+      gd.asRepeatEvent(evt).setRepeatExpression('5+4+3+2+1');
+
+      // ...an action to update a variable of the group of objects
+      const action = new gd.Instruction();
+      action.setType('ModVarObjet');
+      action.setParametersCount(4);
+      action.setParameter(0, 'MyGroup');
+      action.setParameter(1, 'ObjectVariable');
+      action.setParameter(2, '+');
+      action.setParameter(3, '42');
+      gd.asRepeatEvent(evt)
+        .getActions()
+        .insert(action, 0);
+
+
+      const namespace = 'gdjs.eventsFunction.myTest';
+      const code = gd.EventsCodeGenerator.generateEventsFunctionCode(
+        project,
+        eventsFunction,
+        namespace,
+        includeFiles,
+        true
+      );
+
+      // Check that the function name is properly generated
+      expect(code).toMatch(namespace + '.func = function(');
+
+      // Check that the context for the events function is here...
+      expect(code).toMatch('function(runtimeScene, eventsFunctionContext)');
+      expect(code).toMatch('var eventsFunctionContext =');
+
+      // Check that the parameters, with the (optional) context of the parent function,
+      // are all here
+      expect(code).toMatch(
+        'function(runtimeScene, MyObject, MySprite, parentEventsFunctionContext)'
+      );
+
+      // ...and objects should be able to get queried...
+      expect(code).toMatch('\"MyObject\": MyObject');
+      expect(code).toMatch('\"MySprite\": MySprite');
+
+      // Variables of both MyObject and MySprite should have 42 added:
+      expect(code).toMatch('GDMyObjectObjects2[i].getVariables().get("ObjectVariable")).add(42)');
+      expect(code).toMatch('GDMySpriteObjects2[i].getVariables().get("ObjectVariable")).add(42)');
+
       action.delete();
     });
   });

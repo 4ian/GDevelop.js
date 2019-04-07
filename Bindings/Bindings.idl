@@ -207,6 +207,7 @@ interface ObjectGroupsContainer {
     [Ref] ObjectGroup Insert([Const, Ref] ObjectGroup objectGroup, unsigned long position);
     [Ref] ObjectGroup InsertNew([Const] DOMString name, unsigned long position);
     unsigned long Count();
+    [Ref] ObjectGroup Get([Const] DOMString name);
     [Ref] ObjectGroup GetAt(unsigned long index);
     void Clear();
     void Remove([Const] DOMString name);
@@ -938,6 +939,7 @@ interface InstructionMetadata {
     boolean CanHaveSubInstructions();
     [Ref] ParameterMetadata GetParameter(unsigned long index);
     unsigned long GetParametersCount();
+    [Const, Ref] VectorParameterMetadata GetParameters();
     long GetUsageComplexity();
     boolean IsHidden();
 
@@ -967,6 +969,7 @@ interface ExpressionMetadata {
     boolean IsShown();
     [Ref] ParameterMetadata GetParameter(unsigned long id);
     unsigned long GetParametersCount();
+    [Const, Ref] VectorParameterMetadata GetParameters();
 
     [Ref] ExpressionMetadata SetHidden();
     [Ref] ExpressionMetadata SetGroup([Const] DOMString str); //TODO: check if useful
@@ -1000,6 +1003,7 @@ interface ParameterMetadata {
     [Const, Ref] DOMString GetDefaultValue();
     [Ref] ParameterMetadata SetDefaultValue([Const] DOMString defaultValue_);
     boolean STATIC_IsObject([Const] DOMString param);
+    boolean STATIC_IsBehavior([Const] DOMString param);
 };
 
 interface VectorParameterMetadata {
@@ -1015,6 +1019,11 @@ interface VectorParameterMetadata {
 
 interface ParameterMetadataTools {
     void STATIC_ParametersToObjectsContainer([Ref] Project project, [Const, Ref] VectorParameterMetadata parameters, [Ref] ObjectsContainer outputObjectsContainer);
+    unsigned long STATIC_GetObjectParameterIndexFor([Const, Ref] VectorParameterMetadata parameters, unsigned long parameterIndex);
+};
+
+interface EventsFunctionTools {
+    void STATIC_EventsFunctionToObjectsContainer([Ref] Project project, [Const, Ref] EventsFunction eventsFunction, [Ref] ObjectsContainer outputObjectsContainer);
 };
 
 interface ObjectMetadata {
@@ -1619,6 +1628,7 @@ interface EventsFunction {
 
     [Ref] EventsList GetEvents();
     [Ref] VectorParameterMetadata GetParameters();
+    [Ref] ObjectGroupsContainer GetObjectGroups();
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
@@ -1720,8 +1730,9 @@ interface InstructionsTypeRenamer {
 };
 
 interface EventsContext {
-    [Const, Ref] SetString GetObjectOrGroupNames();
+    [Const, Ref] SetString GetReferencedObjectOrGroupNames();
     [Const, Ref] SetString GetObjectNames();
+    [Const, Ref] SetString GetBehaviorNamesOfObjectOrGroup([Const] DOMString objectOrGroupName);
 };
 
 interface EventsContextAnalyzer {

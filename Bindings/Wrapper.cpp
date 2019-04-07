@@ -28,6 +28,7 @@
 #include <GDCore/Project/EventsFunction.h>
 #include <GDCore/Project/EventsFunctionsExtension.h>
 #include <GDCore/IDE/AbstractFileSystem.h>
+#include <GDCore/IDE/EventsFunctionTools.h>
 #include <GDCore/IDE/Dialogs/LayoutEditorCanvas/LayoutEditorCanvasOptions.h>
 #include <GDCore/IDE/Dialogs/ObjectListDialogsHelper.h>
 #include <GDCore/IDE/Dialogs/PropertyDescriptor.h>
@@ -458,6 +459,7 @@ typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
 #define STATIC_ToJSON ToJSON
 #define STATIC_FromJSON(x) FromJSON(gd::String(x))
 #define STATIC_IsObject IsObject
+#define STATIC_IsBehavior IsBehavior
 #define STATIC_Get Get
 #define STATIC_AddAllMissing AddAllMissing
 #define STATIC_GetAllUseless GetAllUseless
@@ -527,7 +529,9 @@ typedef ExtensionAndMetadata<ExpressionMetadata> ExtensionAndExpressionMetadata;
 #define STATIC_SearchInEvents SearchInEvents
 #define STATIC_UnfoldWhenContaining UnfoldWhenContaining
 
+#define STATIC_EventsFunctionToObjectsContainer EventsFunctionToObjectsContainer
 #define STATIC_ParametersToObjectsContainer ParametersToObjectsContainer
+#define STATIC_GetObjectParameterIndexFor GetObjectParameterIndexFor
 
 #define STATIC_GetNamespaceSeparator GetNamespaceSeparator
 #define STATIC_RenameEventsFunctionsExtension RenameEventsFunctionsExtension

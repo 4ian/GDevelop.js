@@ -1200,6 +1200,11 @@ EventsFunction.prototype['GetParameters'] = EventsFunction.prototype.GetParamete
   return wrapPointer(_emscripten_bind_EventsFunction_GetParameters_0(self), VectorParameterMetadata);
 };;
 
+EventsFunction.prototype['GetObjectGroups'] = EventsFunction.prototype.GetObjectGroups = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_EventsFunction_GetObjectGroups_0(self), ObjectGroupsContainer);
+};;
+
 EventsFunction.prototype['SerializeTo'] = EventsFunction.prototype.SerializeTo = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
@@ -3955,6 +3960,45 @@ SpriteObject.prototype['UnserializeFrom'] = SpriteObject.prototype.UnserializeFr
   var self = this.ptr;
   _emscripten_bind_SpriteObject___destroy___0(self);
 };
+// ArbitraryResourceWorkerJS
+/** @suppress {undefinedVars, duplicate} */function ArbitraryResourceWorkerJS() {
+  this.ptr = _emscripten_bind_ArbitraryResourceWorkerJS_ArbitraryResourceWorkerJS_0();
+  getCache(ArbitraryResourceWorkerJS)[this.ptr] = this;
+};;
+ArbitraryResourceWorkerJS.prototype = Object.create(ArbitraryResourceWorker.prototype);
+ArbitraryResourceWorkerJS.prototype.constructor = ArbitraryResourceWorkerJS;
+ArbitraryResourceWorkerJS.prototype.__class__ = ArbitraryResourceWorkerJS;
+ArbitraryResourceWorkerJS.__cache__ = {};
+Module['ArbitraryResourceWorkerJS'] = ArbitraryResourceWorkerJS;
+
+ArbitraryResourceWorkerJS.prototype['ExposeImage'] = ArbitraryResourceWorkerJS.prototype.ExposeImage = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeImage_1(self, arg0);
+};;
+
+ArbitraryResourceWorkerJS.prototype['ExposeShader'] = ArbitraryResourceWorkerJS.prototype.ExposeShader = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeShader_1(self, arg0);
+};;
+
+ArbitraryResourceWorkerJS.prototype['ExposeFile'] = ArbitraryResourceWorkerJS.prototype.ExposeFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeFile_1(self, arg0);
+};;
+
+  ArbitraryResourceWorkerJS.prototype['__destroy__'] = ArbitraryResourceWorkerJS.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  _emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(self);
+};
 // HighestZOrderFinder
 /** @suppress {undefinedVars, duplicate} */function HighestZOrderFinder() {
   this.ptr = _emscripten_bind_HighestZOrderFinder_HighestZOrderFinder_0();
@@ -4026,6 +4070,14 @@ ObjectGroupsContainer.prototype['InsertNew'] = ObjectGroupsContainer.prototype.I
 ObjectGroupsContainer.prototype['Count'] = ObjectGroupsContainer.prototype.Count = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return _emscripten_bind_ObjectGroupsContainer_Count_0(self);
+};;
+
+ObjectGroupsContainer.prototype['Get'] = ObjectGroupsContainer.prototype.Get = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_ObjectGroupsContainer_Get_1(self, arg0), ObjectGroup);
 };;
 
 ObjectGroupsContainer.prototype['GetAt'] = ObjectGroupsContainer.prototype.GetAt = /** @suppress {undefinedVars, duplicate} */function(arg0) {
@@ -4353,6 +4405,11 @@ ExpressionMetadata.prototype['GetParameter'] = ExpressionMetadata.prototype.GetP
 ExpressionMetadata.prototype['GetParametersCount'] = ExpressionMetadata.prototype.GetParametersCount = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return _emscripten_bind_ExpressionMetadata_GetParametersCount_0(self);
+};;
+
+ExpressionMetadata.prototype['GetParameters'] = ExpressionMetadata.prototype.GetParameters = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_ExpressionMetadata_GetParameters_0(self), VectorParameterMetadata);
 };;
 
 ExpressionMetadata.prototype['SetHidden'] = ExpressionMetadata.prototype.SetHidden = /** @suppress {undefinedVars, duplicate} */function() {
@@ -4796,6 +4853,11 @@ InstructionMetadata.prototype['GetParameter'] = InstructionMetadata.prototype.Ge
 InstructionMetadata.prototype['GetParametersCount'] = InstructionMetadata.prototype.GetParametersCount = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return _emscripten_bind_InstructionMetadata_GetParametersCount_0(self);
+};;
+
+InstructionMetadata.prototype['GetParameters'] = InstructionMetadata.prototype.GetParameters = /** @suppress {undefinedVars, duplicate} */function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_InstructionMetadata_GetParameters_0(self), VectorParameterMetadata);
 };;
 
 InstructionMetadata.prototype['GetUsageComplexity'] = InstructionMetadata.prototype.GetUsageComplexity = /** @suppress {undefinedVars, duplicate} */function() {
@@ -5806,6 +5868,13 @@ ParameterMetadataTools.prototype['STATIC_ParametersToObjectsContainer'] = Parame
   if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
   if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
   _emscripten_bind_ParameterMetadataTools_STATIC_ParametersToObjectsContainer_3(self, arg0, arg1, arg2);
+};;
+
+ParameterMetadataTools.prototype['STATIC_GetObjectParameterIndexFor'] = ParameterMetadataTools.prototype.STATIC_GetObjectParameterIndexFor = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  return _emscripten_bind_ParameterMetadataTools_STATIC_GetObjectParameterIndexFor_2(self, arg0, arg1);
 };;
 
   ParameterMetadataTools.prototype['__destroy__'] = ParameterMetadataTools.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
@@ -8465,6 +8534,14 @@ ParameterMetadata.prototype['STATIC_IsObject'] = ParameterMetadata.prototype.STA
   return !!(_emscripten_bind_ParameterMetadata_STATIC_IsObject_1(self, arg0));
 };;
 
+ParameterMetadata.prototype['STATIC_IsBehavior'] = ParameterMetadata.prototype.STATIC_IsBehavior = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return !!(_emscripten_bind_ParameterMetadata_STATIC_IsBehavior_1(self, arg0));
+};;
+
   ParameterMetadata.prototype['__destroy__'] = ParameterMetadata.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_ParameterMetadata___destroy___0(self);
@@ -9463,14 +9540,22 @@ EventsContext.prototype.__class__ = EventsContext;
 EventsContext.__cache__ = {};
 Module['EventsContext'] = EventsContext;
 
-EventsContext.prototype['GetObjectOrGroupNames'] = EventsContext.prototype.GetObjectOrGroupNames = /** @suppress {undefinedVars, duplicate} */function() {
+EventsContext.prototype['GetReferencedObjectOrGroupNames'] = EventsContext.prototype.GetReferencedObjectOrGroupNames = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  return wrapPointer(_emscripten_bind_EventsContext_GetObjectOrGroupNames_0(self), SetString);
+  return wrapPointer(_emscripten_bind_EventsContext_GetReferencedObjectOrGroupNames_0(self), SetString);
 };;
 
 EventsContext.prototype['GetObjectNames'] = EventsContext.prototype.GetObjectNames = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return wrapPointer(_emscripten_bind_EventsContext_GetObjectNames_0(self), SetString);
+};;
+
+EventsContext.prototype['GetBehaviorNamesOfObjectOrGroup'] = EventsContext.prototype.GetBehaviorNamesOfObjectOrGroup = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_EventsContext_GetBehaviorNamesOfObjectOrGroup_1(self, arg0), SetString);
 };;
 
   EventsContext.prototype['__destroy__'] = EventsContext.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
@@ -11155,44 +11240,25 @@ ParserCallbacks.prototype['GetFirstErrorPosition'] = ParserCallbacks.prototype.G
   var self = this.ptr;
   _emscripten_bind_ParserCallbacks___destroy___0(self);
 };
-// ArbitraryResourceWorkerJS
-/** @suppress {undefinedVars, duplicate} */function ArbitraryResourceWorkerJS() {
-  this.ptr = _emscripten_bind_ArbitraryResourceWorkerJS_ArbitraryResourceWorkerJS_0();
-  getCache(ArbitraryResourceWorkerJS)[this.ptr] = this;
-};;
-ArbitraryResourceWorkerJS.prototype = Object.create(ArbitraryResourceWorker.prototype);
-ArbitraryResourceWorkerJS.prototype.constructor = ArbitraryResourceWorkerJS;
-ArbitraryResourceWorkerJS.prototype.__class__ = ArbitraryResourceWorkerJS;
-ArbitraryResourceWorkerJS.__cache__ = {};
-Module['ArbitraryResourceWorkerJS'] = ArbitraryResourceWorkerJS;
+// EventsFunctionTools
+function EventsFunctionTools() { throw "cannot construct a EventsFunctionTools, no constructor in IDL" }
+EventsFunctionTools.prototype = Object.create(WrapperObject.prototype);
+EventsFunctionTools.prototype.constructor = EventsFunctionTools;
+EventsFunctionTools.prototype.__class__ = EventsFunctionTools;
+EventsFunctionTools.__cache__ = {};
+Module['EventsFunctionTools'] = EventsFunctionTools;
 
-ArbitraryResourceWorkerJS.prototype['ExposeImage'] = ArbitraryResourceWorkerJS.prototype.ExposeImage = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+EventsFunctionTools.prototype['STATIC_EventsFunctionToObjectsContainer'] = EventsFunctionTools.prototype.STATIC_EventsFunctionToObjectsContainer = /** @suppress {undefinedVars, duplicate} */function(arg0, arg1, arg2) {
   var self = this.ptr;
-  ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeImage_1(self, arg0);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg2 && typeof arg2 === 'object') arg2 = arg2.ptr;
+  _emscripten_bind_EventsFunctionTools_STATIC_EventsFunctionToObjectsContainer_3(self, arg0, arg1, arg2);
 };;
 
-ArbitraryResourceWorkerJS.prototype['ExposeShader'] = ArbitraryResourceWorkerJS.prototype.ExposeShader = /** @suppress {undefinedVars, duplicate} */function(arg0) {
+  EventsFunctionTools.prototype['__destroy__'] = EventsFunctionTools.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeShader_1(self, arg0);
-};;
-
-ArbitraryResourceWorkerJS.prototype['ExposeFile'] = ArbitraryResourceWorkerJS.prototype.ExposeFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_ArbitraryResourceWorkerJS_ExposeFile_1(self, arg0);
-};;
-
-  ArbitraryResourceWorkerJS.prototype['__destroy__'] = ArbitraryResourceWorkerJS.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  _emscripten_bind_ArbitraryResourceWorkerJS___destroy___0(self);
+  _emscripten_bind_EventsFunctionTools___destroy___0(self);
 };
 // VectorVector2f
 /** @suppress {undefinedVars, duplicate} */function VectorVector2f() {
