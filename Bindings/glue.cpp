@@ -1022,11 +1022,6 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_GetFile_0(FontReso
   return self->GetFile().c_str();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_GetAbsoluteFile_1(FontResource* self, const Project* arg0) {
-  static gd::String temp;
-  return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
-}
-
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_FontResource_SetMetadata_1(FontResource* self, const char* arg0) {
   self->SetMetadata(arg0);
 }
@@ -3881,11 +3876,6 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_GetFile_0(AudioRe
   return self->GetFile().c_str();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_GetAbsoluteFile_1(AudioResource* self, const Project* arg0) {
-  static gd::String temp;
-  return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
-}
-
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_AudioResource_SetMetadata_1(AudioResource* self, const char* arg0) {
   self->SetMetadata(arg0);
 }
@@ -4742,11 +4732,6 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_SetFile_1(ImageResource*
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetFile_0(ImageResource* self) {
   return self->GetFile().c_str();
-}
-
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_GetAbsoluteFile_1(ImageResource* self, const Project* arg0) {
-  static gd::String temp;
-  return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_ImageResource_SetMetadata_1(ImageResource* self, const char* arg0) {
@@ -6075,11 +6060,6 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_GetFile_0(VideoRe
   return self->GetFile().c_str();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_GetAbsoluteFile_1(VideoResource* self, const Project* arg0) {
-  static gd::String temp;
-  return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
-}
-
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_VideoResource_SetMetadata_1(VideoResource* self, const char* arg0) {
   self->SetMetadata(arg0);
 }
@@ -6285,11 +6265,6 @@ const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetFile_0(Resource* se
   return self->GetFile().c_str();
 }
 
-const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_GetAbsoluteFile_1(Resource* self, const Project* arg0) {
-  static gd::String temp;
-  return (temp = self->GetAbsoluteFile(*arg0), temp.c_str());
-}
-
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_Resource_SetMetadata_1(Resource* self, const char* arg0) {
   self->SetMetadata(arg0);
 }
@@ -6418,33 +6393,6 @@ VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_PropertyDescriptor_GetExtraIn
 }
 
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_PropertyDescriptor___destroy___0(PropertyDescriptor* self) {
-  delete self;
-}
-
-// ObjectListDialogsHelper
-
-ObjectListDialogsHelper* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_ObjectListDialogsHelper_2(const Project* arg0, const Layout* arg1) {
-  return new ObjectListDialogsHelper(*arg0, *arg1);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetSearchText_1(ObjectListDialogsHelper* self, const char* arg0) {
-  self->SetSearchText(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetAllowedObjectType_1(ObjectListDialogsHelper* self, const char* arg0) {
-  self->SetAllowedObjectType(arg0);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_SetGroupsAllowed_1(ObjectListDialogsHelper* self, bool arg0) {
-  self->SetGroupsAllowed(arg0);
-}
-
-VectorString* EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper_GetMatchingObjects_0(ObjectListDialogsHelper* self) {
-  static VectorString temp;
-  return (temp = self->GetMatchingObjects(), &temp);
-}
-
-void EMSCRIPTEN_KEEPALIVE emscripten_bind_ObjectListDialogsHelper___destroy___0(ObjectListDialogsHelper* self) {
   delete self;
 }
 

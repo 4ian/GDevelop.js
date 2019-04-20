@@ -30,7 +30,6 @@
 #include <GDCore/IDE/AbstractFileSystem.h>
 #include <GDCore/IDE/EventsFunctionTools.h>
 #include <GDCore/IDE/Dialogs/LayoutEditorCanvas/LayoutEditorCanvasOptions.h>
-#include <GDCore/IDE/Dialogs/ObjectListDialogsHelper.h>
 #include <GDCore/IDE/Dialogs/PropertyDescriptor.h>
 #include <GDCore/IDE/Events/ArbitraryEventsWorker.h>
 #include <GDCore/IDE/Events/InstructionsTypeRenamer.h>

@@ -606,7 +606,6 @@ interface Resource {
     boolean UseFile();
     void SetFile([Const] DOMString file);
     [Const, Ref] DOMString GetFile();
-    [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
     void SetMetadata([Const] DOMString metadata);
     [Const, Ref] DOMString GetMetadata();
 
@@ -649,7 +648,6 @@ interface ImageResource {
     boolean UseFile();
     void SetFile([Const] DOMString file);
     [Const, Ref] DOMString GetFile();
-    [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
     void SetMetadata([Const] DOMString metadata);
     [Const, Ref] DOMString GetMetadata();
 
@@ -674,7 +672,6 @@ interface AudioResource {
     boolean UseFile();
     void SetFile([Const] DOMString file);
     [Const, Ref] DOMString GetFile();
-    [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
     void SetMetadata([Const] DOMString metadata);
     [Const, Ref] DOMString GetMetadata();
 
@@ -699,7 +696,6 @@ interface FontResource {
     boolean UseFile();
     void SetFile([Const] DOMString file);
     [Const, Ref] DOMString GetFile();
-    [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
     void SetMetadata([Const] DOMString metadata);
     [Const, Ref] DOMString GetMetadata();
 
@@ -724,7 +720,6 @@ interface VideoResource {
     boolean UseFile();
     void SetFile([Const] DOMString file);
     [Const, Ref] DOMString GetFile();
-    [Const, Value] DOMString GetAbsoluteFile([Const, Ref] Project project);
     void SetMetadata([Const] DOMString metadata);
     [Const, Ref] DOMString GetMetadata();
 
@@ -843,15 +838,6 @@ interface SerializerElement {
 interface Serializer {
     [Const, Value] DOMString STATIC_ToJSON([Const, Ref] SerializerElement element);
     [Value] SerializerElement STATIC_FromJSON([Const] DOMString json);
-};
-
-interface ObjectListDialogsHelper {
-    void ObjectListDialogsHelper([Const, Ref] Project p, [Const, Ref] Layout l);
-
-    void SetSearchText([Const] DOMString search);
-    void SetAllowedObjectType([Const] DOMString type);
-    void SetGroupsAllowed(boolean enable);
-    [Value] VectorString GetMatchingObjects();
 };
 
 interface InstructionsList {

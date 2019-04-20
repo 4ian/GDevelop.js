@@ -1705,12 +1705,6 @@ FontResource.prototype['GetFile'] = FontResource.prototype.GetFile = /** @suppre
   return Pointer_stringify(_emscripten_bind_FontResource_GetFile_0(self));
 };;
 
-FontResource.prototype['GetAbsoluteFile'] = FontResource.prototype.GetAbsoluteFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return Pointer_stringify(_emscripten_bind_FontResource_GetAbsoluteFile_1(self, arg0));
-};;
-
 FontResource.prototype['SetMetadata'] = FontResource.prototype.SetMetadata = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
@@ -6375,12 +6369,6 @@ AudioResource.prototype['GetFile'] = AudioResource.prototype.GetFile = /** @supp
   return Pointer_stringify(_emscripten_bind_AudioResource_GetFile_0(self));
 };;
 
-AudioResource.prototype['GetAbsoluteFile'] = AudioResource.prototype.GetAbsoluteFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return Pointer_stringify(_emscripten_bind_AudioResource_GetAbsoluteFile_1(self, arg0));
-};;
-
 AudioResource.prototype['SetMetadata'] = AudioResource.prototype.SetMetadata = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
@@ -7846,12 +7834,6 @@ ImageResource.prototype['SetFile'] = ImageResource.prototype.SetFile = /** @supp
 ImageResource.prototype['GetFile'] = ImageResource.prototype.GetFile = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   return Pointer_stringify(_emscripten_bind_ImageResource_GetFile_0(self));
-};;
-
-ImageResource.prototype['GetAbsoluteFile'] = ImageResource.prototype.GetAbsoluteFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return Pointer_stringify(_emscripten_bind_ImageResource_GetAbsoluteFile_1(self, arg0));
 };;
 
 ImageResource.prototype['SetMetadata'] = ImageResource.prototype.SetMetadata = /** @suppress {undefinedVars, duplicate} */function(arg0) {
@@ -10040,12 +10022,6 @@ VideoResource.prototype['GetFile'] = VideoResource.prototype.GetFile = /** @supp
   return Pointer_stringify(_emscripten_bind_VideoResource_GetFile_0(self));
 };;
 
-VideoResource.prototype['GetAbsoluteFile'] = VideoResource.prototype.GetAbsoluteFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return Pointer_stringify(_emscripten_bind_VideoResource_GetAbsoluteFile_1(self, arg0));
-};;
-
 VideoResource.prototype['SetMetadata'] = VideoResource.prototype.SetMetadata = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
@@ -10380,12 +10356,6 @@ Resource.prototype['GetFile'] = Resource.prototype.GetFile = /** @suppress {unde
   return Pointer_stringify(_emscripten_bind_Resource_GetFile_0(self));
 };;
 
-Resource.prototype['GetAbsoluteFile'] = Resource.prototype.GetAbsoluteFile = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  return Pointer_stringify(_emscripten_bind_Resource_GetAbsoluteFile_1(self, arg0));
-};;
-
 Resource.prototype['SetMetadata'] = Resource.prototype.SetMetadata = /** @suppress {undefinedVars, duplicate} */function(arg0) {
   var self = this.ptr;
   ensureCache.prepare();
@@ -10613,50 +10583,6 @@ PropertyDescriptor.prototype['GetExtraInfo'] = PropertyDescriptor.prototype.GetE
   PropertyDescriptor.prototype['__destroy__'] = PropertyDescriptor.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
   var self = this.ptr;
   _emscripten_bind_PropertyDescriptor___destroy___0(self);
-};
-// ObjectListDialogsHelper
-/** @suppress {undefinedVars, duplicate} */function ObjectListDialogsHelper(arg0, arg1) {
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  this.ptr = _emscripten_bind_ObjectListDialogsHelper_ObjectListDialogsHelper_2(arg0, arg1);
-  getCache(ObjectListDialogsHelper)[this.ptr] = this;
-};;
-ObjectListDialogsHelper.prototype = Object.create(WrapperObject.prototype);
-ObjectListDialogsHelper.prototype.constructor = ObjectListDialogsHelper;
-ObjectListDialogsHelper.prototype.__class__ = ObjectListDialogsHelper;
-ObjectListDialogsHelper.__cache__ = {};
-Module['ObjectListDialogsHelper'] = ObjectListDialogsHelper;
-
-ObjectListDialogsHelper.prototype['SetSearchText'] = ObjectListDialogsHelper.prototype.SetSearchText = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_ObjectListDialogsHelper_SetSearchText_1(self, arg0);
-};;
-
-ObjectListDialogsHelper.prototype['SetAllowedObjectType'] = ObjectListDialogsHelper.prototype.SetAllowedObjectType = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_ObjectListDialogsHelper_SetAllowedObjectType_1(self, arg0);
-};;
-
-ObjectListDialogsHelper.prototype['SetGroupsAllowed'] = ObjectListDialogsHelper.prototype.SetGroupsAllowed = /** @suppress {undefinedVars, duplicate} */function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_ObjectListDialogsHelper_SetGroupsAllowed_1(self, arg0);
-};;
-
-ObjectListDialogsHelper.prototype['GetMatchingObjects'] = ObjectListDialogsHelper.prototype.GetMatchingObjects = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  return wrapPointer(_emscripten_bind_ObjectListDialogsHelper_GetMatchingObjects_0(self), VectorString);
-};;
-
-  ObjectListDialogsHelper.prototype['__destroy__'] = ObjectListDialogsHelper.prototype.__destroy__ = /** @suppress {undefinedVars, duplicate} */function() {
-  var self = this.ptr;
-  _emscripten_bind_ObjectListDialogsHelper___destroy___0(self);
 };
 // ProjectResourcesAdder
 function ProjectResourcesAdder() { throw "cannot construct a ProjectResourcesAdder, no constructor in IDL" }
