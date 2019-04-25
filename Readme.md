@@ -1,3 +1,7 @@
+# ℹ️ This repository is out-dated, it's now [integrated in GDevelop source code](https://github.com/4ian/GDevelop/tree/master/GDevelop.js) 
+
+> Please take a look at the [latest version here in GDevelop source code](https://github.com/4ian/GDevelop/tree/master/GDevelop.js).
+
 GDevelop.js
 ===========
 
